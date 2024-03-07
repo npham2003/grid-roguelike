@@ -30,5 +30,6 @@
     {"name":"RF_Green_Forest_A4","order":2,"path":"sprites/RF_Green_Forest_A4/RF_Green_Forest_A4.yy",},
     {"name":"RF_Green_Forest_A5","order":3,"path":"sprites/RF_Green_Forest_A5/RF_Green_Forest_A5.yy",},
     {"name":"RF_Green_Forest_B","order":4,"path":"sprites/RF_Green_Forest_B/RF_Green_Forest_B.yy",},
+    {"name":"TestSpritePushGirlYea","order":7,"path":"sprites/TestSpritePushGirlYea/TestSpritePushGirlYea.yy",},
   ],
 }

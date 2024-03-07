@@ -51,6 +51,7 @@
     {"id":{"name":"RF_Green_Forest_A4","path":"sprites/RF_Green_Forest_A4/RF_Green_Forest_A4.yy",},},
     {"id":{"name":"RF_Green_Forest_A5","path":"sprites/RF_Green_Forest_A5/RF_Green_Forest_A5.yy",},},
     {"id":{"name":"RF_Green_Forest_B","path":"sprites/RF_Green_Forest_B/RF_Green_Forest_B.yy",},},
+    {"id":{"name":"TestSpritePushGirlYea","path":"sprites/TestSpritePushGirlYea/TestSpritePushGirlYea.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
