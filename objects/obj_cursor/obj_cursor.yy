@@ -11,8 +11,8 @@
   "name":"obj_cursor",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Battle System Control",
+    "path":"folders/Objects/Battle System Control.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -5,6 +5,8 @@
     {"name":"Fonts","order":7,"path":"folders/Fonts.yy",},
     {"name":"Notes","order":13,"path":"folders/Notes.yy",},
     {"name":"Objects","order":9,"path":"folders/Objects.yy",},
+    {"name":"Battle System Control","order":3,"path":"folders/Objects/Battle System Control.yy",},
+    {"name":"Enemies","order":4,"path":"folders/Objects/Enemies.yy",},
     {"name":"Particle Systems","order":15,"path":"folders/Particle Systems.yy",},
     {"name":"Paths","order":4,"path":"folders/Paths.yy",},
     {"name":"Rooms","order":10,"path":"folders/Rooms.yy",},
@@ -20,7 +22,6 @@
   ],
   "ResourceOrderSettings":[
     {"name":"obj_gridCreator","order":1,"path":"objects/obj_gridCreator/obj_gridCreator.yy",},
-    {"name":"obj_cursor","order":2,"path":"objects/obj_cursor/obj_cursor.yy",},
     {"name":"fighterDead","order":1,"path":"sprites/fighterDead/fighterDead.yy",},
     {"name":"firekeeper","order":2,"path":"sprites/firekeeper/firekeeper.yy",},
     {"name":"healer","order":3,"path":"sprites/healer/healer.yy",},
