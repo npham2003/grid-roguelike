@@ -1,1 +1,3 @@
 #macro CELLSIZE 48
+#macro CELLWIDTH 100
+#macro CELLHEIGHT 50
