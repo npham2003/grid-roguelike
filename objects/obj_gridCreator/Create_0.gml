@@ -1,4 +1,4 @@
-gridHoriz = 0; //horizonal size of grid
-gridVert = 0; //vertical size of grid
+gridHoriz = 0 * CELLSIZE; //horizonal size of grid
+gridVert = 0 * CELLSIZE; //vertical size of grid
 
-mp_grid_create(CELLSIZE/2, CELLSIZE/2, gridHoriz, gridVert, CELLSIZE, CELLSIZE);
+battleGrid = ds_grid_create(gridHoriz, gridVert);
