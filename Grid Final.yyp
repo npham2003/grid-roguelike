@@ -59,6 +59,7 @@
     {"id":{"name":"RF_Green_Forest_A5","path":"sprites/RF_Green_Forest_A5/RF_Green_Forest_A5.yy",},},
     {"id":{"name":"RF_Green_Forest_B","path":"sprites/RF_Green_Forest_B/RF_Green_Forest_B.yy",},},
     {"id":{"name":"spr_player_tile","path":"sprites/spr_player_tile/spr_player_tile.yy",},},
+    {"id":{"name":"spr_player","path":"sprites/spr_player/spr_player.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",

@@ -33,5 +33,6 @@
     {"name":"RF_Green_Forest_A5","order":3,"path":"sprites/RF_Green_Forest_A5/RF_Green_Forest_A5.yy",},
     {"name":"RF_Green_Forest_B","order":4,"path":"sprites/RF_Green_Forest_B/RF_Green_Forest_B.yy",},
     {"name":"spr_player_tile","order":2,"path":"sprites/spr_player_tile/spr_player_tile.yy",},
+    {"name":"spr_player","order":3,"path":"sprites/spr_player/spr_player.yy",},
   ],
 }
