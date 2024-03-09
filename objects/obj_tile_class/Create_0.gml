@@ -14,3 +14,12 @@ is_empty = function(){
 	return _is_empty;
 }
 
+set_entity = function(_entity_pointer){
+	_entity_on_tile = _entity_pointer;
+	_is_empty = false;
+}
+
+remove_entity = function(){
+	_entity_on_tile = pointer_null;
+	_is_empty = true;
+}

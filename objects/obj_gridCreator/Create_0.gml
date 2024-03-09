@@ -20,7 +20,11 @@ get_coordinates = function(_x_value, _y_value){
 
 move_entity = function(_prev_x,_prev_y,_new_x,_new_y){
 	var _entity_pointer = battle_grid[_prev_x][_prev_y]._entity_on_tile;
-	battle_grid[_new_x][_new_y]._entity_on_tile = _entity_pointer;
-	battle_grid[_prev_x][_prev_y]._entity_on_tile = pointer_null;
+	if(!battle_grid[_prev_x][_prev_y]._is_empty){
+		battle_grid[_new_x][_new_y]._entity_on_tile = _entity_pointer;
+		battle_grid[_prev_x][_prev_y]._entity_on_tile = pointer_null;
+		battle_grid[_prev_x][_prev_y]._is_empty = true;
+		battle_grid[_new_x][_new_y]._is_empty = false;
+	}
 }
 
