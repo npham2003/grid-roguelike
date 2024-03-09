@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"EntityData",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"EntityData",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

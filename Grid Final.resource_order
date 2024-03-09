@@ -22,7 +22,9 @@
   ],
   "ResourceOrderSettings":[
     {"name":"obj_gridCreator","order":1,"path":"objects/obj_gridCreator/obj_gridCreator.yy",},
+    {"name":"obj_battleControl","order":2,"path":"objects/obj_battleControl/obj_battleControl.yy",},
     {"name":"GridTest","order":1,"path":"rooms/GridTest/GridTest.yy",},
+    {"name":"EntityData","order":2,"path":"scripts/EntityData/EntityData.yy",},
     {"name":"GridCoOrdinates","order":1,"path":"scripts/GridCoOrdinates/GridCoOrdinates.yy",},
     {"name":"fighterDead","order":1,"path":"sprites/fighterDead/fighterDead.yy",},
     {"name":"firekeeper","order":2,"path":"sprites/firekeeper/firekeeper.yy",},
