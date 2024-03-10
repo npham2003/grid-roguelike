@@ -64,7 +64,7 @@ global.enemies = {
 		mp: 0,
 		mpMax: 0,
 		strength: 4,
-		sprites: { idle: sBat, attack: sBatAttack},
+		//sprites: { idle: sBat, attack: sBatAttack},
 		actions: [],
 		AIscript : function()
 		{
