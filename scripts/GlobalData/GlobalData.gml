@@ -1,24 +1,27 @@
 //Action Library
-#region action library
 global.actionLibrary = {
-	name: "baseAttack",
-	description: "placeholder",
-	subMenu: 0, //does it show up on screen or is it in a submenu
-	userAnimation: "attack",
-	//effectSprite: baseAttack,
-	func: function(_user, _targets) {
-		var _damage = 0; //math function here
+	baseAttack: {
+		name: "baseAttack", //probably redundant to have a name but keep it
+		description: "placeholder",
+		subMenu: 0, //does it show up on screen or is it in a submenu
+		userAnimation: "attack",
+		//effectSprite: baseAttack,
+		func: function(_user, _targets) {
+			var _damage = 0; //math function here
+		},
+		getCoord: function(_centerCoord) { //_centerCoord returns a list [x,y]
+			//return 2d array of all coordinates affected
+		}
 	},
-	getCoord: function(_centerCoord) { //_centerCoord returns a list [x,y]
-		//return 2d array of all coordinates affected
+	beam: {
+		name: "Beam", //copy formatting above
 	}
 }
-#endregion
+
 
 //Player(s) Data
-#region player
 global.players = [
-	{
+	{ //l'cifure
 		name: "L'Cifure",
 		hp: 89,
 		hpMax: 89,
@@ -28,15 +31,14 @@ global.players = [
 		//sprites : { idle: lc_idle, attack: lc_attack, defend: lc_defend, down: lc_down},
 		actions : []
 	},
-	{
+	{ //new member
 		name: "put new party member here", //refer to example above
 	}
 ]
-#endregion
+
 
 
 //Enemy Data
-#region enemies
 global.enemies = {
 	slimeG: 
 	{
@@ -46,7 +48,7 @@ global.enemies = {
 		mp: 0,
 		mpMax: 0,
 		strength: 5,
-		sprites: { idle: sSlime, attack: sSlimeAttack},
+		//sprites: { idle: sSlime, attack: sSlimeAttack},
 		actions: [],
 		AIscript : function()
 		{
@@ -70,4 +72,3 @@ global.enemies = {
 		}
 	}
 }
-#endregion
