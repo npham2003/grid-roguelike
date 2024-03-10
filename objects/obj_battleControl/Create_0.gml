@@ -13,6 +13,7 @@ rountCount = 0;
 currentUser = noone;
 currentAction = -1;
 currentTargets = [];
+battleWaitTimeFrames = 30;
 
 acting = false;
 #endregion
@@ -61,10 +62,11 @@ function BattleStateSelectAction() {
 }
 
 function BeginAction(_user, _action, _position) {
-	battleState = BattleStatePerformAction();
 	currentUser = _user;
 	currentAction = _action;
 	currentTargets = _position;
+	battleState = BattleStatePerformAction(currentUser);
+	
 	
 	if (!is_array(currentTargets)){
 			currentTargets = [currentTargets];
@@ -83,13 +85,14 @@ function BeginAction(_user, _action, _position) {
 	
 }
 
-function BattleStatePerformAction() {
+function BattleStatePerformAction(currentUser) {
 	if (currentUser.acting) {
 		if(currentUser.image_index >= currentUser.image_number - 1) {
-			with (currenUser) {
-				sprite_index = sprites.idle;
-				image_index = -1;
-				acting = false;
+			with (currentUser) {
+				// commented out for testing
+				//sprite_index = sprites.idle;
+				//image_index = -1;
+				currentUser.acting = false;
 			}
 			
 			if (variable_struct_exists(currentAction, "effectSprite")) {
