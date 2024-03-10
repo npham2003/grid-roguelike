@@ -54,7 +54,8 @@ function BattleStateSelectAction() {
 	
 	//position = cursor.getCenterCoord();
 	position = [0,0];
-	BeginAction(_unit.id, global.actionLibrary.baseAttack, variable_struct_get(global.actionLibrary.baseAttack, getCoord(position)));
+	
+	BeginAction(_unit.id, global.actionLibrary.baseAttack, global.actionLibrary.baseAttack.getCoord(position));
 	
 	
 }
@@ -83,7 +84,7 @@ function BeginAction(_user, _action, _position) {
 }
 
 function BattleStatePerformAction() {
-	if (currentUster.acting) {
+	if (currentUser.acting) {
 		if(currentUser.image_index >= currentUser.image_number - 1) {
 			with (currenUser) {
 				sprite_index = sprites.idle;
