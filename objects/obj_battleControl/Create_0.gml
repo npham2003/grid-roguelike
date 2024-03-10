@@ -20,7 +20,7 @@ acting = false;
 #region spawns
 //spawn player(s) on Unit layer
 for (var i = 0; i < array_length(global.players); i++) {
-	partyUnits[i] = instance_create_layer(x, y, "Units", global.party[i]);
+	partyUnits[i] = instance_create_layer(x, y, "Units", obj_player, global.players[i]);
 	array_push(units, partyUnits[i]);
 }
 
@@ -30,14 +30,15 @@ for (var i = 0; i < array_length(global.players); i++) {
 //levelEnemies is 2d arr where each inner arr is [object, x, y]
 enemySpawn = function(levelEnemies) {
 	for (var i = 0; i < array_length(levelEnemies); i++) {
-		enemyUnits[i] = instance_create_layer(levelEnemies[i][1], levelEnemies[i][2], "Units", levelEnemies[i][0]);
+		enemyUnits[i] = instance_create_layer(levelEnemies[i][1], levelEnemies[i][2], "Units", obj_parent_enemy, levelEnemies[i][0]);
 		array_push(units, enemyUnits[i]);
 	}
 }
 #endregion
 
-setTurnOrder = array_sort(units, function(inst1, inst2) {
-		return inst1.speed >= inst2.speed;
+unitTurnOrder = units;
+array_sort(unitTurnOrder, function(inst1, inst2) {
+		return variable_struct_get(inst1, _speed) >= variable_struct_get(inst2,speed);
 	}
 );
 
@@ -51,14 +52,19 @@ function BattleStateSelectAction() {
 		exit;
 	}
 	
-	position = cursor.getCenterCoord();
-	BeginAction(_unit.id, global.actionLibrary.attack, global.actionLibrary.attack.getCoord(position));
+	//position = cursor.getCenterCoord();
+	position = [0,0];
+	BeginAction(_unit.id, global.actionLibrary.baseAttack, variable_struct_get(global.actionLibrary.baseAttack, getCoord(position)));
+	
+	
 }
 
 function BeginAction(_user, _action, _position) {
+	battleState = BattleStatePerformAction();
 	currentUser = _user;
 	currentAction = _action;
 	currentTargets = _position;
+	
 	if (!is_array(currentTargets)){
 			currentTargets = [currentTargets];
 		}
@@ -74,7 +80,6 @@ function BeginAction(_user, _action, _position) {
 			}
 	}
 	
-	battleState = BattleStateVictoryCheck();
 }
 
 function BattleStatePerformAction() {

@@ -11,6 +11,7 @@ global.actionLibrary = {
 		},
 		getCoord: function(_centerCoord) { //_centerCoord returns a list [x,y]
 			//return 2d array of all coordinates affected
+			return [[0,0], [0,1]];
 		}
 	},
 	beam: {
@@ -28,12 +29,13 @@ global.players = [
 		tp: 10,
 		tpMax: 15,
 		strength: 6,
+		_speed: 5,
 		//sprites : { idle: lc_idle, attack: lc_attack, defend: lc_defend, down: lc_down},
 		actions : []
-	},
-	{ //new member
-		name: "put new party member here", //refer to example above
 	}
+	//{ //new member
+	//	name: "put new party member here", //refer to example above
+	//}
 ]
 
 
@@ -48,6 +50,7 @@ global.enemies = {
 		mp: 0,
 		mpMax: 0,
 		strength: 5,
+		_speed: 1,
 		//sprites: { idle: sSlime, attack: sSlimeAttack},
 		actions: [],
 		AIscript : function()
@@ -64,6 +67,7 @@ global.enemies = {
 		mp: 0,
 		mpMax: 0,
 		strength: 4,
+		_speed: 2,
 		//sprites: { idle: sBat, attack: sBatAttack},
 		actions: [],
 		AIscript : function()
