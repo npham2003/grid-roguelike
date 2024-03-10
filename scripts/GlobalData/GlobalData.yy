@@ -1,9 +1,9 @@
 {
   "$GMScript":"",
-  "%Name":"EntityData",
+  "%Name":"GlobalData",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"EntityData",
+  "name":"GlobalData",
   "parent":{
     "name":"Scripts",
     "path":"folders/Scripts.yy",

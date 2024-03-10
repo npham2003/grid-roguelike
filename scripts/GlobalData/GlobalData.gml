@@ -3,11 +3,14 @@
 global.actionLibrary = {
 	name: "baseAttack",
 	description: "placeholder",
-	subMenu: 0,
+	subMenu: 0, //does it show up on screen or is it in a submenu
 	userAnimation: "attack",
-	effectSprite: baseAttack,
+	//effectSprite: baseAttack,
 	func: function(_user, _targets) {
 		var _damage = 0; //math function here
+	},
+	getCoord: function(_centerCoord) { //_centerCoord returns a list [x,y]
+		//return 2d array of all coordinates affected
 	}
 }
 #endregion
@@ -22,8 +25,11 @@ global.players = [
 		tp: 10,
 		tpMax: 15,
 		strength: 6,
-		sprites : { idle: lc_idle, attack: lc_attack, defend: lc_defend, down: lc_down},
+		//sprites : { idle: lc_idle, attack: lc_attack, defend: lc_defend, down: lc_down},
 		actions : []
+	},
+	{
+		name: "put new party member here", //refer to example above
 	}
 ]
 #endregion

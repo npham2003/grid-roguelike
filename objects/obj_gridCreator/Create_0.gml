@@ -1,9 +1,5 @@
-
-
-
-
-gridHoriz = 10 ; //horizonal size of grid
-gridVert = 5 ; //vertical size of grid
+gridHoriz = GRIDWIDTH;
+gridVert = GRIDHEIGHT;
 
 battle_grid = ds_grid_create(gridHoriz, gridVert);
 

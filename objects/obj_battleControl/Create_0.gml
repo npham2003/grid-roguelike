@@ -1,5 +1,6 @@
 #region variables
 grid = instance_find(obj_gridCreator, 0);
+cursor = instance_find(obj_cursor, 0);
 
 units = [];
 turn = 0;
@@ -8,9 +9,12 @@ unitRenderOrder = [];
 
 
 turnCount = 0;
+rountCount = 0;
 currentUser = noone;
 currentAction = -1;
 currentTargets = [];
+
+acting = false;
 #endregion
 
 #region spawns
@@ -41,30 +45,80 @@ setTurnOrder = array_sort(units, function(inst1, inst2) {
 function BattleStateSelectAction() {
 	var _unit = unitTurnOrder[turn];
 	
+	//check if user esists and is alive
 	if (!instance_exists(_unit)) || (_unit.hp <= 0) {
 		battleState = BattleStateVictoryCheck();
 		exit;
 	}
 	
-	BeginAction(_unit.id, global.actionLibrary.attack);
+	position = cursor.getCenterCoord();
+	BeginAction(_unit.id, global.actionLibrary.attack, global.actionLibrary.attack.getCoord(position));
 }
 
-function BeginAction(_user, _action) {
+function BeginAction(_user, _action, _position) {
+	currentUser = _user;
+	currentAction = _action;
+	currentTargets = _position;
+	if (!is_array(currentTargets)){
+			currentTargets = [currentTargets];
+		}
 	
+	battleWaitTimeRemaining = battleWaitTimeFrames;//animation buffer
+	
+	with (_user) {
+		acting = true;
+		//play user animation if defined
+		if (!is_undefined(_action[$"userAnimation"])) && (!is_undefined(_user.sprites[$ _action.userAnimation])) {
+				//sprite_index = sprite[ $ _action.userAnimation]; //commented out for now bc its throwing errors at me
+				image_index = 0;
+			}
+	}
+	
+	battleState = BattleStateVictoryCheck();
 }
 
 function BattleStatePerformAction() {
+	if (currentUster.acting) {
+		if(currentUser.image_index >= currentUser.image_number - 1) {
+			with (currenUser) {
+				sprite_index = sprites.idle;
+				image_index = -1;
+				acting = false;
+			}
+			
+			if (variable_struct_exists(currentAction, "effectSprite")) {
+				//play effect over every targeted cell
+				//for(var i = 0; i < array_length(currentAction.getCoord())
+			}
+			//finish sprite shit later
+			//else ()
+			
+			currentAction.func(currentUser, currentTargets);
+		}
+	}
 	
+	else {
+		//if (!instance_exists(oBattleEffect) {
+		//	
+		//}
+	}
 }
 
 function BattleStateVictoryCheck() {
-	
+	battleStat = BattleStateTurnProgession();
 }
 
 function BattleStateTurnProgession() {
+	turnCount++;
+	turn++;
 	
+	if (turn > array_length(unitTurnOrder) -1) {
+		turn = 0;
+		rountCount++;
+	}
+	
+	battleState = BattleStateSelectAction();
 }
 
-#endregion
-
 battleState = BattleStateSelectAction();
+#endregion
