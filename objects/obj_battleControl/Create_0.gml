@@ -49,7 +49,7 @@ function BattleStateSelectAction() {
 	
 	//check if user esists and is alive
 	if (!instance_exists(_unit)) || (_unit.hp <= 0) {
-		battleState = BattleStateVictoryCheck();
+		battleState = BattleStateVictoryCheck;
 		exit;
 	}
 	
@@ -65,7 +65,7 @@ function BeginAction(_user, _action, _position) {
 	currentUser = _user;
 	currentAction = _action;
 	currentTargets = _position;
-	battleState = BattleStatePerformAction(currentUser);
+	battleState = BattleStatePerformAction;
 	
 	
 	if (!is_array(currentTargets)){
@@ -77,22 +77,22 @@ function BeginAction(_user, _action, _position) {
 	with (_user) {
 		acting = true;
 		//play user animation if defined
-		if (!is_undefined(_action[$"userAnimation"])) && (!is_undefined(_user.sprites[$ _action.userAnimation])) {
-				//sprite_index = sprite[ $ _action.userAnimation]; //commented out for now bc its throwing errors at me
-				image_index = 0;
-			}
+		//if (!is_undefined(_action[$"userAnimation"])) && (!is_undefined(_user.sprites[$ _action.userAnimation])) {
+		//		//sprite_index = sprite[ $ _action.userAnimation]; //commented out for now bc its throwing errors at me
+		//		image_index = 0;
+		//	}
 	}
 	
 }
 
-function BattleStatePerformAction(currentUser) {
+function BattleStatePerformAction() {
 	if (currentUser.acting) {
 		if(currentUser.image_index >= currentUser.image_number - 1) {
 			with (currentUser) {
 				// commented out for testing
 				//sprite_index = sprites.idle;
 				//image_index = -1;
-				currentUser.acting = false;
+				acting = false;
 			}
 			
 			if (variable_struct_exists(currentAction, "effectSprite")) {
@@ -114,7 +114,7 @@ function BattleStatePerformAction(currentUser) {
 }
 
 function BattleStateVictoryCheck() {
-	battleStat = BattleStateTurnProgession();
+	battleState = BattleStateTurnProgession;
 }
 
 function BattleStateTurnProgession() {
@@ -126,8 +126,8 @@ function BattleStateTurnProgession() {
 		rountCount++;
 	}
 	
-	battleState = BattleStateSelectAction();
+	battleState = BattleStateSelectAction;
 }
 
-battleState = BattleStateSelectAction();
+battleState = BattleStateSelectAction;
 #endregion
