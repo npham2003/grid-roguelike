@@ -1,55 +1,58 @@
-function Menu(_x, _y, _options, _description = -1, _width = undefined, _height = undefined){
-	with (instance_create_depth(_x, _y, -99999, obj_Menu)) {
-		options = _options;
+// Makes a menu, options provided in the form [["name", function, argument], [...]]
+function Menu(_x,_y,_options,_description = -1, _width = undefined, _height = undefined)
+{
+	with (instance_create_depth(_x, _y, -99999, oMenu)) {
+		options = _options;	
 		description = _description;
-		var _optionscount = array_length(_options);
+		var _optionsCount = array_length(_options)
 		visibleOptionsMax = _optionsCount;
 		
-		//size
+		//Set up size
 		xmargin = 10;
-		ymargin = 8;
+		ymargin = 8
 		draw_set_font(fnM5x7);
 		heightLine = 12;
 		
-		//auto width
+		//Auto width
 		if (_width == undefined) {
 			width = 1;
-			
-			if (description != -1) {
-				width = max(width, string_width(_description));
-			}
+			if (_description != -1) width = max(width,string_width(_description));
 			
 			for (var i = 0; i < _optionsCount; i++) {
 				width = max(width, string_width(_options[i][0]));
 			}
-			widthFull = width + xmargin *2;
+			
+			widthFull = width + xmargin * 2;
 		}
 		else widthFull = _width;
 		
+		//Auto height
 		if (_height == undefined) {
 			height = heightLine * (_optionsCount + !(description == -1));
-			heightFull = height + ymargin *2;
+			heightFull = height + ymargin * 2;
 		}
+		
 		else {
-			heightFull = _height;
-			//scrolling
-			if (heightLine * (__optionsCount + !(description = -1)) > +height = (ymargin * 2)) {
+			heightFull = _height;	
+			//scrolling?
+			if (heightLine * (_optionsCount + !(description == -1)) > _height - (ymargin * 2)) {
 				scrolling = true;
-				visibleOptionsMax = (_height - ymargin * 2) / heightLine;
+				visibleOptionsMax = (_height - ymargin * 2) div heightLine;
 			}
 		}
 	}
 }
 
-function subMenu(_options) {
-	optionsAbove[subMenuLevel] = optinos;
+function SubMenu(_options) {
+	//store old options in array and increase submenu level
+	optionsAbove[subMenuLevel] = options
 	subMenuLevel++;
 	options = _options;
 	hover = 0;
 }
 
-function menuGoBack() {
+function MenuGoBack() {
 	subMenuLevel--;
 	options = optionsAbove[subMenuLevel];
-	hovver = 0;
+	hover = 0;
 }
