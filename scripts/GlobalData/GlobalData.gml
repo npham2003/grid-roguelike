@@ -1,7 +1,7 @@
 //Action Library
 global.actionLibrary = {
 	baseAttack: {
-		name: "baseAttack", //probably redundant to have a name but keep it
+		name: "Base Attack", //probably redundant to have a name but keep it
 		description: "placeholder",
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
