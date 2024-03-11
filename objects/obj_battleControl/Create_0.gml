@@ -37,7 +37,9 @@ enemySpawn = function(levelEnemies) {
 		show_debug_message(enemyUnits[i].name);
 	}
 }
-enemySpawn([[global.enemies.bat, 6, 2]]);
+
+var coordinates = obj_gridCreator.get_coordinates(8,2);
+enemySpawn([[global.enemies.bat, coordinates[0], coordinates[1]]]);
 #endregion
 
 unitTurnOrder = units;

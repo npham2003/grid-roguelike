@@ -30,8 +30,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_player_tile",
-    "path":"sprites/spr_player_tile/spr_player_tile.yy",
+    "name":"spr_dummy",
+    "path":"sprites/spr_dummy/spr_dummy.yy",
   },
   "spriteMaskId":null,
   "visible":true,
