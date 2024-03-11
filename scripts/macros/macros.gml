@@ -1,3 +1,6 @@
 #macro CELLSIZE 48
 #macro CELLWIDTH 100
 #macro CELLHEIGHT 50
+
+#macro GRIDWIDTH 10
+#macro GRIDHEIGHT 5

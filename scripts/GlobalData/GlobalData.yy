@@ -1,9 +1,9 @@
 {
   "$GMScript":"",
-  "%Name":"Macros",
+  "%Name":"GlobalData",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"Macros",
+  "name":"GlobalData",
   "parent":{
     "name":"Scripts",
     "path":"folders/Scripts.yy",
