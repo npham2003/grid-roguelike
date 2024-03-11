@@ -7,3 +7,9 @@ alarm[0] = 60;
 
 // start with the player deselected.
 global.p_select = false;
+
+
+//return CENTER coordinate selected
+getCenterCoord = function() {
+	return [x,y];
+}
