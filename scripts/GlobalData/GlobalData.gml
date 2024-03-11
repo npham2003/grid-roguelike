@@ -31,7 +31,7 @@ global.players = [
 		strength: 6,
 		_speed: 5,
 		//sprites : { idle: lc_idle, attack: lc_attack, defend: lc_defend, down: lc_down},
-		actions : []
+		actions : [global.actionLibrary.baseAttack]
 	}
 	//{ //new member
 	//	name: "put new party member here", //refer to example above
@@ -52,7 +52,7 @@ global.enemies = {
 		strength: 5,
 		_speed: 1,
 		//sprites: { idle: sSlime, attack: sSlimeAttack},
-		actions: [],
+		actions: [global.actionLibrary.baseAttack],
 		AIscript : function()
 		{
 			//enemy turn ai goes here
@@ -69,7 +69,7 @@ global.enemies = {
 		strength: 4,
 		_speed: 2,
 		//sprites: { idle: sBat, attack: sBatAttack},
-		actions: [],
+		actions: [global.actionLibrary.baseAttack],
 		AIscript : function()
 		{
 			//enemy turn ai goes here

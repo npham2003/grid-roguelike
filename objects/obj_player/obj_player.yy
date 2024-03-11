@@ -30,7 +30,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"fighter",
+    "path":"sprites/fighter/fighter.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

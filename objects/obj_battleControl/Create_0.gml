@@ -23,6 +23,7 @@ acting = false;
 for (var i = 0; i < array_length(global.players); i++) {
 	partyUnits[i] = instance_create_layer(x, y, "Units", obj_player, global.players[i]);
 	array_push(units, partyUnits[i]);
+	show_debug_message(partyUnits[i].name);
 }
 
 
@@ -33,8 +34,10 @@ enemySpawn = function(levelEnemies) {
 	for (var i = 0; i < array_length(levelEnemies); i++) {
 		enemyUnits[i] = instance_create_layer(levelEnemies[i][1], levelEnemies[i][2], "Units", obj_parent_enemy, levelEnemies[i][0]);
 		array_push(units, enemyUnits[i]);
+		show_debug_message(enemyUnits[i].name);
 	}
 }
+enemySpawn([[obj_parent_enemy, 6, 2]]);
 #endregion
 
 unitTurnOrder = units;
@@ -57,7 +60,9 @@ function BattleStateSelectAction() {
 	position = [0,0];
 	
 	BeginAction(_unit.id, global.actionLibrary.baseAttack, global.actionLibrary.baseAttack.getCoord(position));
-	
+	//show_debug_message(str(_unit.id));
+	//show_debug_message(str(global.actionLibrary.baseAttack));
+	//show_debug_message(str(global.actionLibrary.baseAttack.getCoord(position)));
 	
 }
 
