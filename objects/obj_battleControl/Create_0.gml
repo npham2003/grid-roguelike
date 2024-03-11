@@ -37,12 +37,12 @@ enemySpawn = function(levelEnemies) {
 		show_debug_message(enemyUnits[i].name);
 	}
 }
-enemySpawn([[obj_parent_enemy, 6, 2]]);
+enemySpawn([[global.enemies.bat, 6, 2]]);
 #endregion
 
 unitTurnOrder = units;
 array_sort(unitTurnOrder, function(inst1, inst2) {
-		return variable_struct_get(inst1, _speed) >= variable_struct_get(inst2,speed);
+		return (inst1.unitSpeed >= inst2.unitSpeed);
 	}
 );
 
