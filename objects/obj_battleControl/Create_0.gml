@@ -15,16 +15,21 @@ currentAction = -1;
 currentTargets = [];
 battleWaitTimeFrames = 30;
 
+
 acting = false;
 #endregion
 
 #region spawns
 //spawn player(s) on Unit layer
 for (var i = 0; i < array_length(global.players); i++) {
-	//var coordinates = obj_gridCreator.get_coordinates()
-	partyUnits[i] = instance_create_layer(x, y, "Units", obj_player, global.players[i]);
+	var coordinates = obj_gridCreator.get_coordinates(2,2);
+	partyUnits[i] = instance_create_layer(coordinates[0], coordinates[1], "Units", obj_player, global.players[i]);
+	obj_gridCreator.battle_grid[2][2].set_entity(obj_player);
 	array_push(units, partyUnits[i]);
 	show_debug_message(partyUnits[i].name);
+	//obj_gridCreator.highlighted_tiles(2,2,2);
+	//show_debug_message(string(array_length(obj_gridCreator.highlighted)));
+	//show_debug_message(string(obj_gridCreator.highlighted[7]._x_coord));
 }
 
 
