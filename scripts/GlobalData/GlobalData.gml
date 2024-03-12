@@ -1,13 +1,14 @@
 //Action Library
 global.actionLibrary = {
 	baseAttack: {
-		name: "baseAttack", //probably redundant to have a name but keep it
+		name: "Base Attack", //probably redundant to have a name but keep it
 		description: "placeholder",
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
 		func: function(_user, _targets) {
 			var _damage = 0; //math function here
+			//BattleChangeHP(_targets);
 		},
 		getCoord: function(_centerCoord) { //_centerCoord returns a list [x,y]
 			//return 2d array of all coordinates affected
