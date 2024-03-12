@@ -27,9 +27,9 @@ for (var i = 0; i < array_length(global.players); i++) {
 	obj_gridCreator.battle_grid[2][2].set_entity(obj_player);
 	array_push(units, partyUnits[i]);
 	show_debug_message(partyUnits[i].name);
-	//obj_gridCreator.highlighted_tiles(2,2,2);
-	//show_debug_message(string(array_length(obj_gridCreator.highlighted)));
-	//show_debug_message(string(obj_gridCreator.highlighted[7]._x_coord));
+	obj_gridCreator.highlighted_move(2,2,2);
+	//show_debug_message(string(array_length(obj_gridCreator.highlighted_move_array)));
+	//show_debug_message(string(obj_gridCreator.highlighted_move_array[7]._x_coord));
 }
 
 
