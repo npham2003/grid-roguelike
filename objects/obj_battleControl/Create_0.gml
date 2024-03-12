@@ -20,9 +20,9 @@ acting = false;
 
 #region spawns
 //spawn player(s) on Unit layer
+var temp_coordinates = obj_gridCreator.get_coordinates(2,2);
 for (var i = 0; i < array_length(global.players); i++) {
-	//var coordinates = obj_gridCreator.get_coordinates()
-	partyUnits[i] = instance_create_layer(x, y, "Units", obj_player, global.players[i]);
+	partyUnits[i] = instance_create_layer(temp_coordinates[0], temp_coordinates[1], "Units", obj_player, global.players[i]);
 	array_push(units, partyUnits[i]);
 	show_debug_message(partyUnits[i].name);
 }
@@ -41,6 +41,10 @@ enemySpawn = function(levelEnemies) {
 
 var coordinates = obj_gridCreator.get_coordinates(8,2);
 enemySpawn([[global.enemies.bat, coordinates[0], coordinates[1]]]);
+show_debug_message(temp_coordinates[0]);
+show_debug_message(temp_coordinates[1]);
+show_debug_message(coordinates[0]);
+show_debug_message(coordinates[1]);
 #endregion
 
 unitTurnOrder = units;
