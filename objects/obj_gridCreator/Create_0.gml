@@ -24,3 +24,12 @@ move_entity = function(_prev_x,_prev_y,_new_x,_new_y){
 	}
 }
 
+for (var i = 0; i< gridHoriz;i++){
+	for (var j = 0; j < gridVert;j++){
+		var coordinates = get_coordinates(i,j);
+		var _tile = instance_create_layer(coordinates[0],coordinates[1],"Tiles",obj_tile_class);
+		battle_grid[i][j]=_tile;
+		
+		battle_grid[i][j].set_coords(i,j);
+	}
+}

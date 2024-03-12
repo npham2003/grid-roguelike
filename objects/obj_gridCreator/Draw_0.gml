@@ -11,11 +11,6 @@ for (var i = 0; i< gridHoriz;i++){
 		}else{
 			draw_sprite(spr_grid_enemy_side,0, x + (i*100), y + (j*50));
 		}
-		var coordinates = get_coordinates(i,j);
-		var _tile = instance_create_layer(coordinates[0],coordinates[1],"Tiles",obj_tile_class);
-		battle_grid[i][j]=_tile;
-		
-		battle_grid[i][j].set_coords(i,j);
 	}
 }
 
