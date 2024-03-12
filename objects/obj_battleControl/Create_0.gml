@@ -21,6 +21,7 @@ acting = false;
 #region spawns
 //spawn player(s) on Unit layer
 for (var i = 0; i < array_length(global.players); i++) {
+	//var coordinates = obj_gridCreator.get_coordinates()
 	partyUnits[i] = instance_create_layer(x, y, "Units", obj_player, global.players[i]);
 	array_push(units, partyUnits[i]);
 	show_debug_message(partyUnits[i].name);
@@ -114,9 +115,12 @@ function BattleStatePerformAction() {
 	}
 	
 	else {
-		//if (!instance_exists(oBattleEffect) {
-		//	
-		//}
+		if (!instance_exists(obj_battleEffect)) {
+			battleWaitTimeRemaining--;
+			if (battleWaitTimeRemaining <= 0) {
+				battleState = BattleStateVictoryCheck;
+			}
+		}
 	}
 }
 
