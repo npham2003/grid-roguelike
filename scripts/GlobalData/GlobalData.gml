@@ -46,6 +46,7 @@ global.enemies = {
 	slimeG: 
 	{
 		name: "Slime",
+		obj: obj_slime,
 		hp: 30,
 		hpMax: 30,
 		mp: 0,
@@ -63,6 +64,7 @@ global.enemies = {
 	bat: 
 	{
 		name: "Bat",
+		obj: obj_bat,
 		hp: 15,
 		hpMax: 15,
 		mp: 0,

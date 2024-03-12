@@ -38,7 +38,7 @@ for (var i = 0; i < array_length(global.players); i++) {
 //levelEnemies is 2d arr where each inner arr is [object, x, y]
 enemySpawn = function(levelEnemies) {
 	for (var i = 0; i < array_length(levelEnemies); i++) {
-		enemyUnits[i] = instance_create_layer(levelEnemies[i][1], levelEnemies[i][2], "Units", obj_parent_enemy, levelEnemies[i][0]);
+		enemyUnits[i] = instance_create_layer(levelEnemies[i][1], levelEnemies[i][2], "Units", levelEnemies[i][0].obj, levelEnemies[i][0]);
 		array_push(units, enemyUnits[i]);
 		show_debug_message(enemyUnits[i].name);
 	}
