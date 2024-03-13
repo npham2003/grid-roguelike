@@ -1,6 +1,6 @@
-if (test_ready) { // TEMP TESTING BOOL
-BattleStateSelectAction();
-}
-BattleStateVictoryCheck(); // to be honest i don't think i got the turn-based logic down perfectly yet
-BattleStateTurnProgession();
-test_ready = false;
+//if (test_ready) { // TEMP TESTING BOOL
+battleState();
+//show_debug_message(currentUser.name);
+//show_debug_message(turnCount);
+//}
+//test_ready = false;

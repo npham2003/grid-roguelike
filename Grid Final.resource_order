@@ -31,6 +31,7 @@
     {"name":"obj_gridCreator","order":1,"path":"objects/obj_gridCreator/obj_gridCreator.yy",},
     {"name":"obj_Menu","order":3,"path":"objects/obj_Menu/obj_Menu.yy",},
     {"name":"obj_slime","order":1,"path":"objects/obj_slime/obj_slime.yy",},
+    {"name":"obj_music","order":6,"path":"objects/obj_music/obj_music.yy",},
     {"name":"GridTest","order":1,"path":"rooms/GridTest/GridTest.yy",},
     {"name":"GlobalData","order":2,"path":"scripts/GlobalData/GlobalData.yy",},
     {"name":"GridCoOrdinates","order":1,"path":"scripts/GridCoOrdinates/GridCoOrdinates.yy",},
