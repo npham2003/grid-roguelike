@@ -48,9 +48,10 @@
     {"name":"sPointer","order":1,"path":"sprites/sPointer/sPointer.yy",},
     {"name":"spr_bat_idle","order":1,"path":"sprites/spr_bat_idle/spr_bat_idle.yy",},
     {"name":"spr_dummy","order":6,"path":"sprites/spr_dummy/spr_dummy.yy",},
-    {"name":"spr_player","order":9,"path":"sprites/spr_player/spr_player.yy",},
     {"name":"spr_grid_enemy_side","order":4,"path":"sprites/spr_grid_enemy_side/spr_grid_enemy_side.yy",},
+    {"name":"spr_grid_move_highlight","order":10,"path":"sprites/spr_grid_move_highlight/spr_grid_move_highlight.yy",},
     {"name":"spr_grid_player_side","order":3,"path":"sprites/spr_grid_player_side/spr_grid_player_side.yy",},
     {"name":"spr_player_tile","order":2,"path":"sprites/spr_player_tile/spr_player_tile.yy",},
+    {"name":"spr_player","order":9,"path":"sprites/spr_player/spr_player.yy",},
   ],
 }

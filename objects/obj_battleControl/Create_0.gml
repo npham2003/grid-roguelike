@@ -1,3 +1,4 @@
+
 #region variables
 grid = instance_find(obj_gridCreator, 0);
 cursor = instance_find(obj_cursor, 0);
@@ -29,6 +30,9 @@ for (var i = 0; i < array_length(global.players); i++) {
 	array_push(units, partyUnits[i]);
 	
 	show_debug_message(partyUnits[i].name);
+	
+	partyUnits[i].moveSpeed=global.players[0].playerSpeed;
+	show_debug_message(partyUnits[i].moveSpeed);
 	//show_debug_message(string(array_length(obj_gridCreator.highlighted_move_array)));
 	//show_debug_message(string(obj_gridCreator.highlighted_move_array[7]._x_coord));
 }
@@ -138,6 +142,10 @@ function BattleStateVictoryCheck() {
 function BattleStateTurnProgession() {
 	turnCount++;
 	turn++;
+	// comment this out later
+	turn=0;	
+	
+	
 	
 	if (turn > array_length(unitTurnOrder) -1) {
 		turn = 0;
