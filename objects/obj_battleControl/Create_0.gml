@@ -28,7 +28,7 @@ for (var i = 0; i < array_length(global.players); i++) {
 	partyUnits[i] = instance_create_layer(coordinates[0], coordinates[1], "Units", obj_player, global.players[i]);
 	obj_gridCreator.battle_grid[3][2].set_entity(obj_player);
 	array_push(units, partyUnits[i]);
-	partyUnits[i].unitSpeed=2;
+	partyUnits[i].moveSpeed=2;
 	show_debug_message(partyUnits[i].name);
 	//show_debug_message(string(array_length(obj_gridCreator.highlighted_move_array)));
 	//show_debug_message(string(obj_gridCreator.highlighted_move_array[7]._x_coord));
