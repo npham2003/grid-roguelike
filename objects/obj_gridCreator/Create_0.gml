@@ -37,7 +37,7 @@ reset_highlights = function(){
 
 highlighted_move = function(_center_x,_center_y,_range){
 	
-	
+	reset_highlights();
 	for(var i=-_range;i<=_range;i++){
 		for(var j = -(_range-abs(i));j<=_range-abs(i);j++){
 			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT){
