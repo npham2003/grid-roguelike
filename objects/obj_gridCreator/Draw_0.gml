@@ -18,5 +18,5 @@ for (var i = 0; i< gridHoriz;i++){
 }
 
 
-var coordinates = get_coordinates(1,1);
+//var coordinates = get_coordinates(1,1);
 //draw_sprite(fighter,0,coordinates[0],coordinates[1]);
