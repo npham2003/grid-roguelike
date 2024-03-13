@@ -26,8 +26,18 @@ move_entity = function(_prev_x,_prev_y,_new_x,_new_y){
 	}
 }
 
-highlighted_move = function(_center_x,_center_y,_range){
+reset_highlights = function(){
 	highlighted_move_array = [];
+	for (var i = 0; i< gridHoriz;i++){
+		for (var j = 0; j < gridVert;j++){
+			battle_grid[i][j]._move_highlight=false;
+		}
+	}
+}
+
+highlighted_move = function(_center_x,_center_y,_range){
+	
+	
 	for(var i=-_range;i<=_range;i++){
 		for(var j = -(_range-abs(i));j<=_range-abs(i);j++){
 			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT){
@@ -40,13 +50,7 @@ highlighted_move = function(_center_x,_center_y,_range){
 	return highlighted_move_array;
 }
 
-reset_highlights = function(){
-	for (var i = 0; i< gridHoriz;i++){
-		for (var j = 0; j < gridVert;j++){
-			battle_grid[i][j]._move_highlight=false;
-		}
-	}
-}
+
 
 for (var i = 0; i< gridHoriz;i++){
 	for (var j = 0; j < gridVert;j++){
