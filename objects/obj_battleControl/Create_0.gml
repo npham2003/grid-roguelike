@@ -15,19 +15,20 @@ currentAction = -1;
 currentTargets = [];
 battleWaitTimeFrames = 30;
 
-
+test_ready = false; // TEMP TEST VAR
 acting = false;
 #endregion
 
+show_debug_message(obj_player);
 #region spawns
 //spawn player(s) on Unit layer
 for (var i = 0; i < array_length(global.players); i++) {
-	var coordinates = obj_gridCreator.get_coordinates(2,2);
+	var coordinates = obj_gridCreator.get_coordinates(3,2);
 	partyUnits[i] = instance_create_layer(coordinates[0], coordinates[1], "Units", obj_player, global.players[i]);
-	obj_gridCreator.battle_grid[2][2].set_entity(obj_player);
+	obj_gridCreator.battle_grid[3][2].set_entity(obj_player);
 	array_push(units, partyUnits[i]);
+	
 	show_debug_message(partyUnits[i].name);
-	obj_gridCreator.highlighted_move(2,2,2);
 	//show_debug_message(string(array_length(obj_gridCreator.highlighted_move_array)));
 	//show_debug_message(string(obj_gridCreator.highlighted_move_array[7]._x_coord));
 }
@@ -79,7 +80,7 @@ function BeginAction(_user, _action, _position) {
 	currentAction = _action;
 	currentTargets = _position;
 	battleState = BattleStatePerformAction;
-	
+	_user.CheckTiles();
 	
 	if (!is_array(currentTargets)){
 			currentTargets = [currentTargets];
@@ -89,6 +90,7 @@ function BeginAction(_user, _action, _position) {
 	
 	with (_user) {
 		acting = true;
+		is_acting = true;
 		//play user animation if defined
 		//if (!is_undefined(_action[$"userAnimation"])) && (!is_undefined(_user.sprites[$ _action.userAnimation])) {
 		//		//sprite_index = sprite[ $ _action.userAnimation]; //commented out for now bc its throwing errors at me

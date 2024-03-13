@@ -30,7 +30,7 @@ global.players = [
 		tp: 10,
 		tpMax: 15,
 		strength: 6,
-		_speed: 5,
+		playerSpeed: 2,
 		//sprites : { idle: lc_idle, attack: lc_attack, defend: lc_defend, down: lc_down},
 		actions : [global.actionLibrary.baseAttack]
 	}
