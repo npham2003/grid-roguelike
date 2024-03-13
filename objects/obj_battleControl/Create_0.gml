@@ -15,16 +15,21 @@ currentAction = -1;
 currentTargets = [];
 battleWaitTimeFrames = 30;
 
+
 acting = false;
 #endregion
 
 #region spawns
 //spawn player(s) on Unit layer
-var temp_coordinates = obj_gridCreator.get_coordinates(2,2);
 for (var i = 0; i < array_length(global.players); i++) {
-	partyUnits[i] = instance_create_layer(temp_coordinates[0], temp_coordinates[1], "Units", obj_player, global.players[i]);
+	var coordinates = obj_gridCreator.get_coordinates(2,2);
+	partyUnits[i] = instance_create_layer(coordinates[0], coordinates[1], "Units", obj_player, global.players[i]);
+	obj_gridCreator.battle_grid[2][2].set_entity(obj_player);
 	array_push(units, partyUnits[i]);
 	show_debug_message(partyUnits[i].name);
+	obj_gridCreator.highlighted_move(2,2,2);
+	//show_debug_message(string(array_length(obj_gridCreator.highlighted_move_array)));
+	//show_debug_message(string(obj_gridCreator.highlighted_move_array[7]._x_coord));
 }
 
 
@@ -33,7 +38,7 @@ for (var i = 0; i < array_length(global.players); i++) {
 //levelEnemies is 2d arr where each inner arr is [object, x, y]
 enemySpawn = function(levelEnemies) {
 	for (var i = 0; i < array_length(levelEnemies); i++) {
-		enemyUnits[i] = instance_create_layer(levelEnemies[i][1], levelEnemies[i][2], "Units", obj_parent_enemy, levelEnemies[i][0]);
+		enemyUnits[i] = instance_create_layer(levelEnemies[i][1], levelEnemies[i][2], "Units", levelEnemies[i][0].obj, levelEnemies[i][0]);
 		array_push(units, enemyUnits[i]);
 		show_debug_message(enemyUnits[i].name);
 	}
@@ -41,10 +46,6 @@ enemySpawn = function(levelEnemies) {
 
 var coordinates = obj_gridCreator.get_coordinates(8,2);
 enemySpawn([[global.enemies.bat, coordinates[0], coordinates[1]]]);
-show_debug_message(temp_coordinates[0]);
-show_debug_message(temp_coordinates[1]);
-show_debug_message(coordinates[0]);
-show_debug_message(coordinates[1]);
 #endregion
 
 unitTurnOrder = units;

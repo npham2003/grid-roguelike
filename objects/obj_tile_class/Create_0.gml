@@ -10,9 +10,6 @@ set_coords = function(_x_coordinate, _y_coordinate){
 	_y_coord = _y_coordinate;
 }
 
-is_empty = function(){
-	return _is_empty;
-}
 
 set_entity = function(_entity_pointer){
 	_entity_on_tile = _entity_pointer;
