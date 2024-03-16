@@ -42,8 +42,7 @@ global.players = [
 
 
 //Enemy Data
-global.enemies = {
-	slimeG: 
+global.enemies = [
 	{
 		name: "Slime",
 		obj: obj_slime,
@@ -53,15 +52,13 @@ global.enemies = {
 		mpMax: 0,
 		strength: 5,
 		_speed: 1,
-		//sprites: { idle: sSlime, attack: sSlimeAttack},
+		sprites: { idle: spr_slime_idle },
 		actions: [global.actionLibrary.baseAttack],
 		AIscript : function()
 		{
 			//enemy turn ai goes here
 		}
-	}
-	,
-	bat: 
+	},
 	{
 		name: "Bat",
 		obj: obj_bat,
@@ -71,11 +68,11 @@ global.enemies = {
 		mpMax: 0,
 		strength: 4,
 		_speed: 2,
-		//sprites: { idle: sBat, attack: sBatAttack},
+		sprites: { idle: spr_bat_idle },
 		actions: [global.actionLibrary.baseAttack],
 		AIscript : function()
 		{
 			//enemy turn ai goes here
 		}
 	}
-}
+]

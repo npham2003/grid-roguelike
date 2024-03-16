@@ -1,2 +1,2 @@
 /// @description basic attack
-script_execute_ext(global.actionLibrary.baseAttack.func, []);
+//script_execute_ext(global.actionLibrary.baseAttack.func, []);
