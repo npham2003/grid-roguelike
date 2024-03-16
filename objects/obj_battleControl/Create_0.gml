@@ -24,7 +24,7 @@ for (var i = 0; i < array_length(player_data); i++) {
 	var coord = obj_gridCreator.get_coordinates(player_data[i].grid[0], player_data[i].grid[1]);
 	
 	var var_struct = variable_clone(player_data[i].info);
-	var_struct.grid = player_data[i].grid;
+	var_struct.grid_pos = player_data[i].grid;
 	
 	var unit = instance_create_layer(
 		coord[0], coord[1], "Units", obj_player, var_struct);
@@ -49,7 +49,7 @@ for (var i = 0; i < array_length(enemy_data); i++) {
 	var coord = obj_gridCreator.get_coordinates(enemy_data[i].grid[0], enemy_data[i].grid[1]);
 	
 	var var_struct = variable_clone(enemy_data[i].info);
-	var_struct.grid = enemy_data[i].grid;
+	var_struct.grid_pos = enemy_data[i].grid;
 	
 	var unit = instance_create_layer(
 		coord[0], coord[1], "Units", obj_parent_enemy, var_struct);

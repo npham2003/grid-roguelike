@@ -58,6 +58,7 @@ switch (state) {
 		
 		if (key_Space_pressed) {
 			change_state(BattleState.PlayerMoving);
+			unit.show_moveable_grids();
 		}
 		else if (jkl_pressed) {
 			change_state(BattleState.PlayerAiming);
@@ -81,13 +82,28 @@ switch (state) {
 		var unit = player_units[player_order];
 		
 		if (wasd_pressed) {
-			show_debug_message(unit.name + ": moving");
+			//show_debug_message(unit.name + ": moving");
+			if (key_W_pressed) {
+				unit.move_up();
+			}
+			else if (key_A_pressed) {
+				unit.move_left();
+			}
+			else if (key_S_pressed) {
+				unit.move_down();
+			}
+			else if (key_D_pressed) {
+				unit.move_right();
+			}
+			show_debug_message("Move to ({0},{1})", unit.grid_pos[0], unit.grid_pos[1]);
 		}
 		else if (jkl_pressed) {
+			unit.confirm_move();
 			change_state(BattleState.PlayerAiming);
 		}
 		else if (key_Enter_pressed) {
-			show_debug_message(unit.name + ": confirm moving");
+			//show_debug_message(unit.name + ": confirm moving");
+			unit.confirm_move();
 			change_state(BattleState.PlayerWaitingAction);
 		}
 
