@@ -4,6 +4,12 @@ gridVert = GRIDHEIGHT;
 battle_grid = ds_grid_create(gridHoriz, gridVert);
 
 highlighted_move_array=[];
+highlighted_attack_array=[];
+highlighted_target_array=[];
+
+_target_transparency=0.5;
+
+_more_visible=true;
 
 
 // get co-ordinates for the middle of the tile at (x,y)
@@ -26,7 +32,7 @@ move_entity = function(_prev_x,_prev_y,_new_x,_new_y){
 	}
 }
 
-reset_highlights = function(){
+reset_highlights_move = function(){
 	highlighted_move_array = [];
 	for (var i = 0; i< gridHoriz;i++){
 		for (var j = 0; j < gridVert;j++){
@@ -35,9 +41,27 @@ reset_highlights = function(){
 	}
 }
 
+reset_highlights_attack = function(){
+	highlighted_attack_array = [];
+	for (var i = 0; i< gridHoriz;i++){
+		for (var j = 0; j < gridVert;j++){
+			battle_grid[i][j]._attack_highlight=false;
+		}
+	}
+}
+
+reset_highlights_target = function(){
+	highlighted_target_array = [];
+	for (var i = 0; i< gridHoriz;i++){
+		for (var j = 0; j < gridVert;j++){
+			battle_grid[i][j]._target_highlight=false;
+		}
+	}
+}
+
 highlighted_move = function(_center_x,_center_y,_range){
 	
-	reset_highlights();
+	reset_highlights_move();
 	for(var i = -_range; i <= _range; i++){
 		for(var j = -(_range-abs(i)); j <= _range - abs(i); j++){
 			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT){
@@ -50,6 +74,110 @@ highlighted_move = function(_center_x,_center_y,_range){
 	return highlighted_move_array;
 }
 
+highlighted_attack_circle = function(_center_x,_center_y,_range){
+	
+	reset_highlights_attack();
+	for(var i = -_range; i <= _range; i++){
+		for(var j = -(_range-abs(i)); j <= _range - abs(i); j++){
+			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT){
+				array_push(highlighted_attack_array,battle_grid[_center_x+i][_center_y+j]);
+				battle_grid[_center_x+i][_center_y+j]._attack_highlight=true;
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}
+		}
+	}
+	return highlighted_attack_array;
+}
+
+highlighted_attack_line_pierce = function(_center_x,_center_y){
+	
+	reset_highlights_attack();
+	var j=-1;
+		while(_center_x+j<GRIDWIDTH){
+			j+=1;
+			if(_center_x+j>=0 && _center_x+j<GRIDWIDTH && _center_y>=0 && _center_y<GRIDHEIGHT){
+				array_push(highlighted_attack_array,battle_grid[_center_x+j][_center_y]);
+				battle_grid[_center_x+j][_center_y]._attack_highlight=true;
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}else{
+				break;	
+			}
+		}
+	
+	return highlighted_attack_array;
+}
+
+highlighted_attack_line = function(_center_x,_center_y){
+	
+	reset_highlights_attack();
+	var j=-1;
+		while(battle_grid[_center_x+j][_center_y]._is_empty){
+			j+=1;
+			if(_center_x+j>=0 && _center_x+j<GRIDWIDTH && _center_y>=0 && _center_y<GRIDHEIGHT){
+				array_push(highlighted_attack_array,battle_grid[_center_x+j][_center_y]);
+				battle_grid[_center_x+j][_center_y]._attack_highlight=true;
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}else{
+				break;	
+			}
+		}
+	
+	return highlighted_attack_array;
+}
+
+
+highlighted_target_circle = function(_center_x,_center_y,_range){
+	
+	reset_highlights_target();
+	for(var i = -_range; i <= _range; i++){
+		for(var j = -(_range-abs(i)); j <= _range - abs(i); j++){
+			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT){
+				array_push(highlighted_target_array,battle_grid[_center_x+i][_center_y+j]);
+				battle_grid[_center_x+i][_center_y+j]._target_highlight=true;
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}
+		}
+	}
+	return highlighted_target_array;
+}
+
+highlighted_target_cross = function(_center_x,_center_y,_range){
+	
+	reset_highlights_target();
+	for(var i = -_range; i <= _range; i++){
+			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH){
+				array_push(highlighted_target_array,battle_grid[_center_x+i][_center_y]);
+				battle_grid[_center_x+i][_center_y]._target_highlight=true;
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}
+	}
+	for(var i = -_range; i <= _range; i++){
+			if(_center_y+i>=0 && _center_y+i<GRIDHEIGHT){
+				array_push(highlighted_target_array,battle_grid[_center_x][_center_y+i]);
+				battle_grid[_center_x][_center_y+i]._target_highlight=true;
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}
+	}
+	return highlighted_target_array;
+}
+
+highlighted_target_line_pierce = function(_center_x,_center_y){
+	
+	reset_highlights_target();
+	var j=-1;
+		while(_center_x+j<GRIDWIDTH){
+			j+=1;
+			if(_center_x+j>=0 && _center_x+j<GRIDWIDTH && _center_y>=0 && _center_y<GRIDHEIGHT){
+				array_push(highlighted_target_array,battle_grid[_center_x+j][_center_y]);
+				battle_grid[_center_x+j][_center_y]._target_highlight=true;
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}else{
+				break;	
+			}
+		}
+	
+	return highlighted_attack_array;
+}
 
 
 for (var i = 0; i< gridHoriz;i++){
@@ -62,5 +190,8 @@ for (var i = 0; i< gridHoriz;i++){
 		battle_grid[i][j]._is_empty=true;
 		battle_grid[i][j].set_coords(i,j);
 		battle_grid[i][j]._move_highlight = false;
+		battle_grid[i][j]._target_highlight = false;
+		battle_grid[i][j]._attack_highlight = false;
+		
 	}
 }

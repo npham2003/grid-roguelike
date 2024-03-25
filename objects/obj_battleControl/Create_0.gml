@@ -48,6 +48,7 @@ var enemy_data = [
 for (var i = 0; i < array_length(enemy_data); i++) {
 	var coord = obj_gridCreator.get_coordinates(enemy_data[i].grid[0], enemy_data[i].grid[1]);
 	
+	obj_gridCreator.battle_grid[enemy_data[i].grid[0]][enemy_data[i].grid[1]]._is_empty=false;
 	var var_struct = variable_clone(enemy_data[i].info);
 	var_struct.grid_pos = enemy_data[i].grid;
 	
