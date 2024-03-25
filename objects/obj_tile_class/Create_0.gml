@@ -11,6 +11,8 @@ var _attack_highlight = false;
 
 var _target_highlight = false;
 
+var _danger_highlight = false;
+
 set_coords = function(_x_coordinate, _y_coordinate){
 	_x_coord = _x_coordinate;
 	_y_coord = _y_coordinate;
