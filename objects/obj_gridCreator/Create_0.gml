@@ -6,6 +6,7 @@ battle_grid = ds_grid_create(gridHoriz, gridVert);
 highlighted_move_array=[];
 highlighted_attack_array=[];
 highlighted_target_array=[];
+highlighted_enemy_target_array=[];
 
 _target_transparency=0.5;
 
@@ -55,6 +56,15 @@ reset_highlights_target = function(){
 	for (var i = 0; i< gridHoriz;i++){
 		for (var j = 0; j < gridVert;j++){
 			battle_grid[i][j]._target_highlight=false;
+		}
+	}
+}
+
+reset_highlights_enemy = function(){
+	highlighted_enemy_target_array = [];
+	for (var i = 0; i< gridHoriz;i++){
+		for (var j = 0; j < gridVert;j++){
+			battle_grid[i][j]._danger_highlight=false;
 		}
 	}
 }
@@ -179,6 +189,59 @@ highlighted_target_line_pierce = function(_center_x,_center_y){
 	return highlighted_attack_array;
 }
 
+highlighted_enemy_target_circle = function(_center_x,_center_y,_range){
+	
+	
+	for(var i = -_range; i <= _range; i++){
+		for(var j = -(_range-abs(i)); j <= _range - abs(i); j++){
+			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT){
+				array_push(highlighted_enemy_target_array,battle_grid[_center_x+i][_center_y+j]);
+				battle_grid[_center_x+i][_center_y+j]._danger_highlight=true;
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}
+		}
+	}
+	return highlighted_enemy_target_array;
+}
+
+highlighted_enemy_target_cross = function(_center_x,_center_y,_range){
+	
+	
+	for(var i = -_range; i <= _range; i++){
+			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH){
+				array_push(highlighted_target_array,battle_grid[_center_x+i][_center_y]);
+				battle_grid[_center_x+i][_center_y]._danger_highlight=true;
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}
+	}
+	for(var i = -_range; i <= _range; i++){
+			if(_center_y+i>=0 && _center_y+i<GRIDHEIGHT){
+				array_push(highlighted_target_array,battle_grid[_center_x][_center_y+i]);
+				battle_grid[_center_x][_center_y+i]._danger_highlight=true;
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}
+	}
+	return highlighted_enemy_target_array;
+}
+
+highlighted_enemy_target_line_pierce = function(_center_x,_center_y){
+	
+	
+	var j=-1;
+		while(_center_x+j<GRIDWIDTH){
+			j+=1;
+			if(_center_x+j>=0 && _center_x+j<GRIDWIDTH && _center_y>=0 && _center_y<GRIDHEIGHT){
+				array_push(highlighted_target_array,battle_grid[_center_x+j][_center_y]);
+				battle_grid[_center_x+j][_center_y]._danger_highlight=true;
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}else{
+				break;	
+			}
+		}
+	
+	return highlighted_enemy_target_array;
+}
+
 
 for (var i = 0; i< gridHoriz;i++){
 	for (var j = 0; j < gridVert;j++){
@@ -192,6 +255,7 @@ for (var i = 0; i< gridHoriz;i++){
 		battle_grid[i][j]._move_highlight = false;
 		battle_grid[i][j]._target_highlight = false;
 		battle_grid[i][j]._attack_highlight = false;
+		battle_grid[i][j]._danger_highlight = false;
 		
 	}
 }
