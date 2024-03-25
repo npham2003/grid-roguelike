@@ -155,6 +155,9 @@ switch (state) {
 		enemy_order += 1;
 		if (enemy_order >= array_length(enemy_units)) {
 			enemy_order = 0;
+			
+			obj_gridCreator.reset_highlights_enemy();
+			
 			change_state(BattleState.EnemyAiming);
 		}
 	

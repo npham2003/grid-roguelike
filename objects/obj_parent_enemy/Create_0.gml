@@ -5,6 +5,7 @@ show_debug_message("{0}: [{1},{2}]", name, grid_pos[0], grid_pos[1]);
 // set entity on the grid
 obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile = id;
 
+action = pointer_null;
 target = noone;
 attack_ready = false;
 
@@ -15,7 +16,7 @@ function find_target() {
 }
 
 function aim() {
-	var action = actions[0];
+	action = actions[0];
 	var target_pos = target.grid_pos;
 	attack_ready = false;
 	
@@ -31,16 +32,21 @@ function aim() {
 		}
 		
 		// todo: check availability
-		if (est_pos[0] > 4 && est_pos[0] < 10 && est_pos[1] > 0 && est_pos[1] < 5 && 
+		if (est_pos[0] > 4 && est_pos[0] < 10 && est_pos[1] >= 0 && est_pos[1] < 5 && 
 		obj_gridCreator.battle_grid[est_pos[0]][est_pos[1]]._is_empty) {
 			// Move to est_pos
 			obj_gridCreator.move_entity(grid_pos[0], grid_pos[1], est_pos[0], est_pos[1]);
 			grid_pos[0] = est_pos[0];
 			grid_pos[1] = est_pos[1];
-			attack_ready = true;
+			
 			var coord = obj_gridCreator.get_coordinates(grid_pos[0], grid_pos[1]);
 			x = coord[0];
 			y = coord[1];
+			
+			set_danger_highlights();
+			
+			attack_ready = true;
+			
 			show_debug_message("{0} move to {1}", name, est_pos);
 			break;
 		}
@@ -48,6 +54,14 @@ function aim() {
 	
 	if (attack_ready) {
 		show_debug_message("{0} is ready to attack", name);
+	}
+}
+
+function set_danger_highlights() {
+	for (var i = 0; i < array_length(action.range); i++) {
+		var attack_x = grid_pos[0] + action.range[i][0];
+		var attack_y = grid_pos[1] + action.range[i][1];
+		obj_gridCreator.battle_grid[attack_x][attack_y]._danger_highlight = true;
 	}
 }
 
