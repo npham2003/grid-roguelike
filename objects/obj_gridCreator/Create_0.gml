@@ -209,14 +209,14 @@ highlighted_enemy_target_cross = function(_center_x,_center_y,_range){
 	
 	for(var i = -_range; i <= _range; i++){
 			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH){
-				array_push(highlighted_target_array,battle_grid[_center_x+i][_center_y]);
+				array_push(highlighted_enemy_target_array,battle_grid[_center_x+i][_center_y]);
 				battle_grid[_center_x+i][_center_y]._danger_highlight=true;
 				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
 			}
 	}
 	for(var i = -_range; i <= _range; i++){
 			if(_center_y+i>=0 && _center_y+i<GRIDHEIGHT){
-				array_push(highlighted_target_array,battle_grid[_center_x][_center_y+i]);
+				array_push(highlighted_enemy_target_array,battle_grid[_center_x][_center_y+i]);
 				battle_grid[_center_x][_center_y+i]._danger_highlight=true;
 				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
 			}
@@ -231,7 +231,7 @@ highlighted_enemy_target_line_pierce = function(_center_x,_center_y){
 		while(_center_x+j<GRIDWIDTH){
 			j+=1;
 			if(_center_x+j>=0 && _center_x+j<GRIDWIDTH && _center_y>=0 && _center_y<GRIDHEIGHT){
-				array_push(highlighted_target_array,battle_grid[_center_x+j][_center_y]);
+				array_push(highlighted_enemy_target_array,battle_grid[_center_x+j][_center_y]);
 				battle_grid[_center_x+j][_center_y]._danger_highlight=true;
 				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
 			}else{
