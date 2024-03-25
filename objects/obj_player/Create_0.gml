@@ -11,6 +11,7 @@ function show_moveable_grids() {
 	//moveable_grids = obj_gridCreator.get_moveable_grids(grid_pos, move_range);
 	prev_grid = [grid_pos[0], grid_pos[1]];
 	moveable_grids = obj_gridCreator.highlighted_move(grid_pos[0], grid_pos[1], move_range);	
+	//moveable_grids = obj_gridCreator.highlighted_target_line_pierce(grid_pos[0], grid_pos[1]);
 }
 
 function move_up() {
