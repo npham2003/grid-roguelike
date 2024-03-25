@@ -60,5 +60,5 @@ function move_right() {
 
 function confirm_move() {
 	//obj_gridCreator.move_entity(prev_grid[0], prev_grid[1], grid_pos[0], grid_pos[1]);
-	obj_gridCreator.reset_highlights();
+	obj_gridCreator.reset_highlights_move();
 }

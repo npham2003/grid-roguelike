@@ -54,7 +54,6 @@ for (var i = 0; i < array_length(enemy_data); i++) {
 	
 	var unit = instance_create_layer(
 		coord[0], coord[1], "Units", obj_parent_enemy, var_struct);
-	unit.grid = enemy_data[i].grid;
 		
 	array_push(enemy_units, unit);
 }

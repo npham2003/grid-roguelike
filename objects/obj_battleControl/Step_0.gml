@@ -28,7 +28,8 @@ switch (state) {
 	case BattleState.EnemyAiming:
 		
 		var unit = enemy_units[enemy_order];
-		show_debug_message(unit.name + ": aiming");
+		unit.find_target();
+		unit.aim();
 		
 		enemy_order += 1;
 		if (enemy_order >= array_length(enemy_units))
@@ -147,8 +148,9 @@ switch (state) {
 	case BattleState.EnemyTakingAction:
 		
 		var unit = enemy_units[enemy_order];
-		
-		show_debug_message(unit.name + ": taking action");
+		if (unit.attack_ready) {
+			unit.attack();
+		}
 		
 		enemy_order += 1;
 		if (enemy_order >= array_length(enemy_units)) {
