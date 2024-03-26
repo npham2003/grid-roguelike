@@ -44,6 +44,11 @@ switch (state) {
 #region Player Preparing
 	case BattleState.PlayerPreparing:
 		
+		for (var i = 0; i < array_length(player_units); i++) {
+			player_units[i].has_moved = false;
+			player_units[i].has_attacked = false;
+		}
+		
 		// todo: gain TP
 		
 		change_state(BattleState.PlayerWaitingAction);
@@ -55,14 +60,30 @@ switch (state) {
 	case BattleState.PlayerWaitingAction:
 		// WASD to move, JKL to use skills, Tab to switch units, Enter to end player turn
 		
+		// If all units have attacked, end player's turn
+		var has_all_attacked = true;
+		for (var i = 0; i < array_length(player_units); i++) {
+			if (!player_units[i].has_attacked) {
+				has_all_attacked = false;
+			}
+		}
+		if (has_all_attacked) {
+			change_state(BattleState.EnemyTakingAction);
+			break;
+		}
+		
 		var unit = player_units[player_order];
 		
 		if (key_Space_pressed) {
-			change_state(BattleState.PlayerMoving);
-			unit.show_moveable_grids();
+			if (!unit.has_moved && !unit.has_attacked) {
+				change_state(BattleState.PlayerMoving);
+				unit.show_moveable_grids();
+			}
 		}
 		else if (jkl_pressed) {
-			change_state(BattleState.PlayerAiming);
+			if (!unit.has_attacked) {
+				change_state(BattleState.PlayerAiming);
+			}
 		}
 		else if (key_Tab_pressed) {
 			player_order += 1;
@@ -103,8 +124,8 @@ switch (state) {
 			change_state(BattleState.PlayerAiming);
 		}
 		else if (key_Enter_pressed) {
-			//show_debug_message(unit.name + ": confirm moving");
 			unit.confirm_move();
+			unit.has_moved = true;
 			change_state(BattleState.PlayerWaitingAction);
 		}
 
@@ -121,6 +142,7 @@ switch (state) {
 		}
 		else if (key_Enter_pressed) {
 			show_debug_message(unit.name + ": confirm action");
+			unit.has_attacked = true;
 			change_state(BattleState.PlayerTakingAction);
 		}
 		
