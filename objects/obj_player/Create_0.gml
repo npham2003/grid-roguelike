@@ -7,6 +7,9 @@ show_debug_message("{0}: [{1}, {2}]", name, grid_pos[0], grid_pos[1]);
 
 // todo: set entity on the grid
 
+has_moved = false;
+has_attacked = false;
+
 function show_moveable_grids() {
 	//moveable_grids = obj_gridCreator.get_moveable_grids(grid_pos, move_range);
 	prev_grid = [grid_pos[0], grid_pos[1]];
