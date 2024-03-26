@@ -131,7 +131,7 @@ highlighted_attack_line = function(_center_x,_center_y){
 				break;	
 			}
 			j+=1;
-			if( _center_x+j<GRIDWIDTH){
+			if( _center_x+j>=GRIDWIDTH){
 				break;
 			}
 		}
