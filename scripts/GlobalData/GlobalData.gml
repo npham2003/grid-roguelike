@@ -20,6 +20,16 @@ global.actionLibrary = {
 	}
 }
 
+global.enemyActions = {
+	melee: {
+		name: "melee",
+		range: [[-1, 0], [-2, 0]]
+	},
+	ranged_attack: {
+		name: "ranged attack",
+		range: [[-3, 0], [-4, 0], [-5, 0], [-2, 0], [-1, 0]]
+	}
+}
 
 //Player(s) Data
 global.players = [
@@ -53,11 +63,7 @@ global.enemies = [
 		strength: 5,
 		_speed: 1,
 		sprites: { idle: spr_slime_idle },
-		actions: [global.actionLibrary.baseAttack],
-		AIscript : function()
-		{
-			//enemy turn ai goes here
-		}
+		actions: [global.enemyActions.melee],
 	},
 	{
 		name: "Bat",
@@ -69,10 +75,6 @@ global.enemies = [
 		strength: 4,
 		_speed: 2,
 		sprites: { idle: spr_bat_idle },
-		actions: [global.actionLibrary.baseAttack],
-		AIscript : function()
-		{
-			//enemy turn ai goes here
-		}
+		actions: [global.enemyActions.ranged_attack],
 	}
 ]
