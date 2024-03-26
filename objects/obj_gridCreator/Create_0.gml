@@ -121,8 +121,9 @@ highlighted_attack_line = function(_center_x,_center_y){
 	
 	reset_highlights_attack();
 	var j=0;
-		while(battle_grid[_center_x+j][_center_y]._is_empty){
-			
+		var j=-1;
+		while(_center_x+j<GRIDWIDTH){
+			j+=1;
 			if(_center_x+j>=0 && _center_x+j<GRIDWIDTH && _center_y>=0 && _center_y<GRIDHEIGHT){
 				array_push(highlighted_attack_array,battle_grid[_center_x+j][_center_y]);
 				battle_grid[_center_x+j][_center_y]._attack_highlight=true;
@@ -130,8 +131,7 @@ highlighted_attack_line = function(_center_x,_center_y){
 			}else{
 				break;	
 			}
-			j+=1;
-			if( _center_x+j>=GRIDWIDTH){
+			if(!battle_grid[_center_x+j][_center_y]._is_empty){
 				break;
 			}
 		}
