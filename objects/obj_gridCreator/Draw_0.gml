@@ -21,7 +21,7 @@ for (var i = 0; i< gridHoriz;i++){
 			draw_sprite_ext(spr_grid_target_highlight, image_index, x + (i*100), y + (j*50), image_xscale, image_yscale, image_angle, image_blend, _target_transparency);
 		}
 		if(obj_gridCreator.battle_grid[i][j]._danger_highlight){
-			draw_sprite_ext(spr_grid_danger_highlight, image_index, x + (i*100), y + (j*50), image_xscale, image_yscale, image_angle, image_blend, 1);
+			draw_sprite_ext(spr_grid_danger_highlight, image_index, x + (i*100), y + (j*50), image_xscale, image_yscale, image_angle, image_blend, 0.5);
 		}
 	}
 }
