@@ -135,6 +135,26 @@ highlighted_attack_line = function(_center_x,_center_y){
 	return highlighted_attack_array;
 }
 
+highlighted_attack_line_range = function(_center_x,_center_y,_range){ //editable range for skills
+	
+	reset_highlights_attack();
+	var j=-1;
+	var i=0;
+		while(battle_grid[_center_x+j][_center_y]._is_empty && i < _range){
+			j+=1;
+			if(_center_x+j>=0 && _center_x+j<GRIDWIDTH && _center_y>=0 && _center_y<GRIDHEIGHT){
+				array_push(highlighted_attack_array,battle_grid[_center_x+j][_center_y]);
+				battle_grid[_center_x+j][_center_y]._attack_highlight=true;
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+				i+=1;
+			}else{
+				break;	
+			}
+		}
+	
+	return highlighted_attack_array;
+}
+
 
 highlighted_target_circle = function(_center_x,_center_y,_range){
 	

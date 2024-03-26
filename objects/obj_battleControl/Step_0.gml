@@ -44,6 +44,11 @@ switch (state) {
 #region Player Preparing
 	case BattleState.PlayerPreparing:
 		
+		for (var i = 0; i < array_length(player_units); i++) {
+			player_units[i].has_moved = false;
+			player_units[i].has_attacked = false;
+		}
+		
 		// todo: gain TP
 		
 		change_state(BattleState.PlayerWaitingAction);
@@ -55,14 +60,40 @@ switch (state) {
 	case BattleState.PlayerWaitingAction:
 		// WASD to move, JKL to use skills, Tab to switch units, Enter to end player turn
 		
+		// If all units have attacked, end player's turn
+		var has_all_attacked = true;
+		for (var i = 0; i < array_length(player_units); i++) {
+			if (!player_units[i].has_attacked) {
+				has_all_attacked = false;
+			}
+		}
+		if (has_all_attacked) {
+			change_state(BattleState.EnemyTakingAction);
+			break;
+		}
+		
 		var unit = player_units[player_order];
 		
 		if (key_Space_pressed) {
-			change_state(BattleState.PlayerMoving);
-			unit.show_moveable_grids();
+			if (!unit.has_moved && !unit.has_attacked) {
+				change_state(BattleState.PlayerMoving);
+				unit.show_moveable_grids();
+			}
 		}
 		else if (jkl_pressed) {
+			if (!unit.has_attacked) {
+				if (key_J_pressed) {
+				unit.skill_used = 0;
+			}
+			else if (key_K_pressed) {
+				unit.skill_used = 1;
+			}
+			else if (key_L_pressed) {
+				unit.skill_used = 2;
+			}
+			unit.skill_complete = false;
 			change_state(BattleState.PlayerAiming);
+			}
 		}
 		else if (key_Tab_pressed) {
 			player_order += 1;
@@ -98,13 +129,23 @@ switch (state) {
 			}
 			show_debug_message("Move to ({0},{1})", unit.grid_pos[0], unit.grid_pos[1]);
 		}
-		else if (jkl_pressed) {
+		else if (jkl_pressed) { // eventually should modify depending on tp amount, maybe use lastkey fn?
+			if (key_J_pressed) {
+				unit.skill_used = 0;
+			}
+			else if (key_K_pressed) {
+				unit.skill_used = 1;
+			}
+			else if (key_L_pressed) {
+				unit.skill_used = 2;
+			}
 			unit.confirm_move();
+			unit.skill_complete = false;
 			change_state(BattleState.PlayerAiming);
 		}
 		else if (key_Enter_pressed) {
-			//show_debug_message(unit.name + ": confirm moving");
 			unit.confirm_move();
+			unit.has_moved = true;
 			change_state(BattleState.PlayerWaitingAction);
 		}
 
@@ -115,14 +156,35 @@ switch (state) {
 	case BattleState.PlayerAiming:
 	
 		var unit = player_units[player_order];
-		
-		if (wasd_pressed) {
-			show_debug_message(unit.name + ": aiming");
-		}
-		else if (key_Enter_pressed) {
-			show_debug_message(unit.name + ": confirm action");
+		if (unit.skill_used == 0) {
+			unit.baseattack();
+			if (unit.skill_complete) {
+			unit.has_attacked = true;
+			unit.skill_complete = false;
 			change_state(BattleState.PlayerTakingAction);
+			}
 		}
+		else if (unit.skill_used == 1) {
+			unit.skill1();
+			if (unit.skill_complete) {
+			unit.has_attacked = true;
+			unit.skill_complete = false;
+			change_state(BattleState.PlayerTakingAction);
+			}
+		}
+		else if (unit.skill_used == 2) {
+			unit.skill2();
+			if (unit.skill_complete) {
+			unit.has_attacked = true;
+			unit.skill_complete = false;
+			change_state(BattleState.PlayerTakingAction);
+			}
+		}			
+		//if (key_Enter_pressed) {
+		//	show_debug_message(unit.name + ": confirm action");
+		//	unit.has_attacked = true;
+		//	change_state(BattleState.PlayerTakingAction);
+		//}
 		
 		break;
 #endregion

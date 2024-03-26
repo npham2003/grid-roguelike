@@ -21,5 +21,5 @@
   "sampleRate":44100,
   "soundFile":"bgm_battleOfRuins.mp3",
   "type":1,
-  "volume":0.3,
+  "volume":0.1,
 }
