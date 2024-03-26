@@ -43,8 +43,6 @@ function aim() {
 			x = coord[0];
 			y = coord[1];
 			
-			set_danger_highlights();
-			
 			attack_ready = true;
 			
 			show_debug_message("{0} move to {1}", name, est_pos);
@@ -53,6 +51,7 @@ function aim() {
 	}
 	
 	if (attack_ready) {
+		set_danger_highlights();
 		show_debug_message("{0} is ready to attack", name);
 	}
 }
