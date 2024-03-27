@@ -144,15 +144,17 @@ highlighted_attack_line_range = function(_center_x,_center_y,_range){ //editable
 	reset_highlights_attack();
 	var j=-1;
 	var i=0;
-		while(battle_grid[_center_x+j][_center_y]._is_empty && i < _range){
+		while(_center_x+j<GRIDWIDTH){
 			j+=1;
-			if(_center_x+j>=0 && _center_x+j<GRIDWIDTH && _center_y>=0 && _center_y<GRIDHEIGHT){
+			if(_center_x+j>=0 && _center_x+j<GRIDWIDTH && _center_y>=0 && _center_y<GRIDHEIGHT && j<_range){
 				array_push(highlighted_attack_array,battle_grid[_center_x+j][_center_y]);
 				battle_grid[_center_x+j][_center_y]._attack_highlight=true;
 				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
-				i+=1;
 			}else{
 				break;	
+			}
+			if(!battle_grid[_center_x+j][_center_y]._is_empty){
+				break;
 			}
 		}
 	
