@@ -9,6 +9,9 @@ action = pointer_null;
 target = noone;
 attack_ready = false;
 
+is_moving = false;
+sprite_moving_speed = 5;
+
 function find_target() {
 	var available_targets = obj_battleControl.player_units;
 	target = available_targets[irandom(array_length(available_targets) - 1)];
@@ -27,6 +30,7 @@ function aim() {
 		
 		if (est_pos[0] == grid_pos[0] && est_pos[1] == grid_pos[1]) {
 			// No need to move
+			set_danger_highlights();
 			attack_ready = true;
 			break;
 		}
@@ -34,26 +38,29 @@ function aim() {
 		// todo: check availability
 		if (est_pos[0] > 4 && est_pos[0] < 10 && est_pos[1] >= 0 && est_pos[1] < 5 && 
 		obj_gridCreator.battle_grid[est_pos[0]][est_pos[1]]._is_empty) {
-			// Move to est_pos
-			obj_gridCreator.move_entity(grid_pos[0], grid_pos[1], est_pos[0], est_pos[1]);
-			grid_pos[0] = est_pos[0];
-			grid_pos[1] = est_pos[1];
 			
-			var coord = obj_gridCreator.get_coordinates(grid_pos[0], grid_pos[1]);
-			x = coord[0];
-			y = coord[1];
-			
+			move(est_pos[0], est_pos[1]);
 			attack_ready = true;
-			
-			show_debug_message("{0} move to {1}", name, est_pos);
 			break;
 		}
 	}
 	
 	if (attack_ready) {
-		set_danger_highlights();
 		show_debug_message("{0} is ready to attack", name);
 	}
+}
+
+function move(new_x, new_y) {
+	// Move to est_pos
+	obj_gridCreator.move_entity(grid_pos[0], grid_pos[1], new_x, new_y);
+	grid_pos[0] = new_x;
+	grid_pos[1] = new_y;
+	
+	is_moving = true;
+	obj_battleControl.in_animation = true;
+	//var coord = obj_gridCreator.get_coordinates(grid_pos[0], grid_pos[1]);
+	//x = coord[0];
+	//y = coord[1];
 }
 
 function set_danger_highlights() {
