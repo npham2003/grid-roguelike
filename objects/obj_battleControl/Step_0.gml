@@ -65,7 +65,8 @@ switch (state) {
 	case BattleState.PlayerWaitingAction:
 		// WASD to move, JKL to use skills, Tab to switch units, Enter to end player turn
 		// If all units have attacked, end player's turn
-		obj_info_panel.set_text("Space - Select Unit\nEnter - End Turn");
+		var unit = player_units[player_order];
+		obj_info_panel.set_text("Space - Move Unit\nJ - "+unit.skill_names[0]+"\nK - "+unit.skill_names[1]+"\nL - "+unit.skill_names[2]+"\nEnter - End Turn");
 		var has_all_attacked = true;
 		for (var i = 0; i < array_length(player_units); i++) {
 			if (!player_units[i].has_attacked) {
@@ -77,7 +78,7 @@ switch (state) {
 			break;
 		}
 		
-		var unit = player_units[player_order];
+		
 		
 		if (key_Space_pressed) {
 			if (!unit.has_moved && !unit.has_attacked) {
