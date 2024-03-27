@@ -146,7 +146,7 @@ switch (state) {
 	case BattleState.PlayerMoving:
 		var unit = player_units[player_order];
 		
-		obj_info_panel.set_text("WASD - Move\nJ - "+unit.skill_names[0]+"\nK - "+unit.skill_names[1]+"\nL - "+unit.skill_names[2]+"\nEnter - Do Nothing");
+		obj_info_panel.set_text("WASD - Move\nJ - "+unit.skill_names[0]+"\nK - "+unit.skill_names[1]+"\nL - "+unit.skill_names[2]+"\nEnter - Do Nothing\nTab - Back");
 		
 		if (wasd_pressed) {
 			//show_debug_message(unit.name + ": moving");
@@ -222,12 +222,13 @@ switch (state) {
 	
 		var unit = player_units[player_order];
 		if(unit.skill_back){
+			show_debug_message("hi");
 			change_state(BattleState.PlayerMoving);
+			unit.show_moveable_grids_prev();
 			unit.has_attacked = false;
 			unit.skill_back = false;
 			
-		}
-		if (unit.skill_used == 0) {
+		}else if (unit.skill_used == 0) {
 			unit.baseattack();
 			if (unit.skill_complete) {
 				tp_current -= unit.actions[0].cost;
