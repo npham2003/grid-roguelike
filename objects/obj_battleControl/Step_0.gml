@@ -36,13 +36,16 @@ switch (state) {
 		var unit = enemy_units[enemy_order];
 		unit.find_target();
 		unit.aim();
-		
-		enemy_order += 1;
-		if (enemy_order >= array_length(enemy_units))
-		{
-			enemy_order = 0;
-			change_state(BattleState.PlayerPreparing);
+		obj_info_panel.set_text(unit.name+" is aiming");
+		if(unit.attack_ready && !in_animation){
+			enemy_order += 1;
+			if (enemy_order >= array_length(enemy_units))
+			{
+				enemy_order = 0;
+				change_state(BattleState.PlayerPreparing);
+			}
 		}
+		
 		
 		break;
 #endregion
@@ -145,7 +148,8 @@ switch (state) {
 #region Player Moving
 	case BattleState.PlayerMoving:
 		var unit = player_units[player_order];
-		obj_info_panel.set_text("WASD - Move\nJ - "+unit.skill_names[0]+"\nK - "+unit.skill_names[1]+"\nL - "+unit.skill_names[2]+"\nEnter - Do Nothing");
+		
+		obj_info_panel.set_text("WASD - Move\nJ - "+unit.skill_names[0]+"\nK - "+unit.skill_names[1]+"\nL - "+unit.skill_names[2]+"\nEnter - Do Nothing\nTab - Back");
 		
 		if (wasd_pressed) {
 			//show_debug_message(unit.name + ": moving");
@@ -161,8 +165,13 @@ switch (state) {
 			else if (key_D_pressed) {
 				unit.move_right();
 			}
+			
 			show_debug_message("Move to ({0},{1})", unit.grid_pos[0], unit.grid_pos[1]);
 		}
+		else if (key_Tab_pressed){
+				unit.back_move();
+				change_state(BattleState.PlayerWaitingAction);
+			}
 		else if (jkl_pressed) { // optimize eventually
 			if (!unit.has_attacked) {
 				if (key_J_pressed) {
@@ -215,7 +224,14 @@ switch (state) {
 	case BattleState.PlayerAiming:
 	
 		var unit = player_units[player_order];
-		if (unit.skill_used == 0) {
+		if(unit.skill_back){
+			show_debug_message("hi");
+			change_state(BattleState.PlayerMoving);
+			unit.show_moveable_grids_prev();
+			unit.has_attacked = false;
+			unit.skill_back = false;
+			
+		}else if (unit.skill_used == 0) {
 			unit.baseattack();
 			if (unit.skill_complete) {
 				tp_current -= unit.actions[0].cost;
@@ -241,7 +257,9 @@ switch (state) {
 				unit.skill_complete = false;
 				change_state(BattleState.PlayerTakingAction);
 			}
-		}			
+		}
+		
+		
 		//if (key_Enter_pressed) {
 		//	show_debug_message(unit.name + ": confirm action");
 		//	unit.has_attacked = true;
