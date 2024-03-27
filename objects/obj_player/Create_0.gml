@@ -75,7 +75,7 @@ function confirm_move() {
 function baseattack() {
 	action = actions[0];
 	skill_range = obj_gridCreator.highlighted_attack_line(grid_pos[0], grid_pos[1]);
-	if (keyboard_check_pressed(vk_enter)) {
+	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
 		for (var i = 0; i < array_length(skill_range); i++) {
 			if (!skill_range[i]._is_empty) {
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
@@ -91,7 +91,7 @@ function baseattack() {
 function skill1() {
 	action = actions[1];
 	skill_range = obj_gridCreator.highlighted_attack_line_pierce(grid_pos[0], grid_pos[1]);
-	if (keyboard_check_pressed(vk_enter)) {
+	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 		for (var i = 0; i < array_length(skill_range); i++) {
 			if (!skill_range[i]._is_empty) {
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
@@ -120,7 +120,7 @@ function skill2() {
 	else if (keyboard_check_pressed(ord("D")) && skill_coords[0] < grid_pos[0]+4) { // a bunch of this is hardcoded atm
 		skill_coords[0] += 1;
 	}
-	if (keyboard_check_pressed(vk_enter)) {
+	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
 		for (var i = 0; i < array_length(skill_range_aux); i++) {
 			if (!skill_range_aux[i]._is_empty) {
 				show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
