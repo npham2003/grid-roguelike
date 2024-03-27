@@ -115,6 +115,7 @@ switch (state) {
 					}
 			}
 				if (enough_tp) {
+					unit.confirm_move();
 					unit.skill_complete = false;
 					enough_tp = false;
 					change_state(BattleState.PlayerAiming);
@@ -186,6 +187,7 @@ switch (state) {
 					}
 			}
 				if (enough_tp) {
+					unit.confirm_move();
 					unit.skill_complete = false;
 					enough_tp = false;
 					change_state(BattleState.PlayerAiming);
