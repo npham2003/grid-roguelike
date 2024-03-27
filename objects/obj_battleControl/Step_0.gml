@@ -36,13 +36,16 @@ switch (state) {
 		var unit = enemy_units[enemy_order];
 		unit.find_target();
 		unit.aim();
-		
-		enemy_order += 1;
-		if (enemy_order >= array_length(enemy_units))
-		{
-			enemy_order = 0;
-			change_state(BattleState.PlayerPreparing);
+		obj_info_panel.set_text(unit.name+" is aiming");
+		if(unit.attack_ready && !in_animation){
+			enemy_order += 1;
+			if (enemy_order >= array_length(enemy_units))
+			{
+				enemy_order = 0;
+				change_state(BattleState.PlayerPreparing);
+			}
 		}
+		
 		
 		break;
 #endregion

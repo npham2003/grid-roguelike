@@ -97,7 +97,7 @@ function back_move(){
 
 function baseattack() {
 	action = actions[0];
-	obj_info_panel.set_text("Cost: "+string(actions[0].cost)+"\n"+skill_descriptions[0]+"\nWASD - Aim\nJ - Confirm\nKL - Back");
+	obj_info_panel.set_text("Cost: "+string(actions[0].cost)+"\n"+skill_descriptions[0]+"\nWASD - Aim\nJ - Confirm\nTab - Back");
 	skill_range = obj_gridCreator.highlighted_target_straight(grid_pos[0], grid_pos[1]);
 	
 	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
@@ -111,7 +111,7 @@ function baseattack() {
 		}
 		skill_complete = true;
 		skill_range = obj_gridCreator.reset_highlights_target();
-	}else if(keyboard_check_pressed(ord("K")) || keyboard_check_pressed(ord("L"))){
+	}else if(keyboard_check_pressed(vk_tab)){
 		skill_back = true;
 		skill_range = obj_gridCreator.reset_highlights_target();
 		
@@ -125,7 +125,7 @@ function skill1() {
 	}
 	action = actions[1];
 	skill_range = obj_gridCreator.highlighted_target_line_pierce(grid_pos[0]+1, grid_pos[1]);
-	obj_info_panel.set_text("Cost: "+string(actions[1].cost)+"\n"+skill_descriptions[1]+"\nWASD - Aim\nK - Confirm\nJL - Back");
+	obj_info_panel.set_text("Cost: "+string(actions[1].cost)+"\n"+skill_descriptions[1]+"\nWASD - Aim\nK - Confirm\nTab - Back");
 	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 		audio_play_sound(sfx_blast, 0, false);
 		for (var i = 0; i < array_length(skill_range); i++) {
@@ -139,7 +139,7 @@ function skill1() {
 		play_sound = false;
 		skill_range = obj_gridCreator.reset_highlights_target();
 	show_debug_message(action.name);
-	}else if(keyboard_check_pressed(ord("J")) || keyboard_check_pressed(ord("L"))){
+	}else if(keyboard_check_pressed(vk_tab)){
 		skill_back = true;
 		skill_range = obj_gridCreator.reset_highlights_target();
 		play_sound = false;
@@ -154,7 +154,7 @@ function skill2() {
 	skill_init = true;
 	audio_play_sound(sfx_mortar_windup, 0, false);
 	}
-	obj_info_panel.set_text("Cost: "+string(actions[2].cost)+"\n"+skill_descriptions[2]+"\nWASD - Aim\nL - Confirm\nJK - Back");
+	obj_info_panel.set_text("Cost: "+string(actions[2].cost)+"\n"+skill_descriptions[2]+"\nWASD - Aim\nL - Confirm\nTab - Back");
 	skill_range = obj_gridCreator.highlighted_attack_line_range(grid_pos[0], grid_pos[1], 5);
 	skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
 	if (keyboard_check_pressed(ord("A")) && skill_coords[0] > grid_pos[0]) {
@@ -179,7 +179,7 @@ function skill2() {
 		skill_complete = true;
 		skill_init = false;
 		show_debug_message(action.name);
-		}else if(keyboard_check_pressed(ord("K")) || keyboard_check_pressed(ord("J"))){
+		}else if(keyboard_check_pressed(vk_tab)){
 		skill_back = true;
 		skill_range = obj_gridCreator.reset_highlights_target();
 		skill_range = obj_gridCreator.reset_highlights_attack();
