@@ -29,6 +29,10 @@ switch (state) {
 #region Enemy Aiming
 	case BattleState.EnemyAiming:
 		
+		if (in_animation) {
+			break;
+		}
+		
 		var unit = enemy_units[enemy_order];
 		unit.find_target();
 		unit.aim();

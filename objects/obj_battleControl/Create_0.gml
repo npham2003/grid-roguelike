@@ -12,6 +12,8 @@ enemy_order = 0;
 tp_max = 10;
 tp_current = 4;
 
+in_animation = false;
+
 #region Spawns
 
 // Spawn player units
