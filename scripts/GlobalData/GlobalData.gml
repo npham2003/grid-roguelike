@@ -66,8 +66,8 @@ global.enemyActions = {
 global.players = [
 	{ //l'cifure
 		name: "L'Cifure",
-		hp: 89,
-		hpMax: 89,
+		hp: 5,
+		hpMax: 5,
 		tp: 10,
 		tpMax: 15,
 		strength: 6,
@@ -87,8 +87,8 @@ global.enemies = [
 	{
 		name: "Slime",
 		obj: obj_slime,
-		hp: 30,
-		hpMax: 30,
+		hp: 1,
+		hpMax: 1,
 		mp: 0,
 		mpMax: 0,
 		strength: 5,
@@ -99,8 +99,8 @@ global.enemies = [
 	{
 		name: "Bat",
 		obj: obj_bat,
-		hp: 15,
-		hpMax: 15,
+		hp: 1,
+		hpMax: 1,
 		mp: 0,
 		mpMax: 0,
 		strength: 4,
