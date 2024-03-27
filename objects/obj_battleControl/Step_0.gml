@@ -14,6 +14,8 @@ var key_Space_pressed = keyboard_check_pressed(vk_space);
 var wasd_pressed = key_A_pressed || key_W_pressed || key_S_pressed || key_D_pressed;
 var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed;
 
+var enough_tp = false;
+
 
 // Note that these routines are called each frame
 switch (state) {
@@ -49,7 +51,10 @@ switch (state) {
 			player_units[i].has_attacked = false;
 		}
 		
-		// todo: gain TP
+		if (tp_current < tp_max) {
+		tp_current++;	
+		}	
+		show_debug_message("CURRENT TP: " + string(tp_current));
 		
 		change_state(BattleState.PlayerWaitingAction);
 	
@@ -59,7 +64,6 @@ switch (state) {
 #region Player Waiting Action
 	case BattleState.PlayerWaitingAction:
 		// WASD to move, JKL to use skills, Tab to switch units, Enter to end player turn
-		
 		// If all units have attacked, end player's turn
 		var has_all_attacked = true;
 		for (var i = 0; i < array_length(player_units); i++) {
@@ -80,19 +84,41 @@ switch (state) {
 				unit.show_moveable_grids();
 			}
 		}
-		else if (jkl_pressed) {
+		else if (jkl_pressed) { // optimize eventually
 			if (!unit.has_attacked) {
 				if (key_J_pressed) {
-				unit.skill_used = 0;
+					if (tp_current >= unit.actions[0].cost) {
+						unit.skill_used = 0;
+						enough_tp = true;
+					}
+					else {
+						audio_play_sound(sfx_no_tp, 0, false);
+					}
+				
 			}
 			else if (key_K_pressed) {
+				if (tp_current >= unit.actions[1].cost) {
 				unit.skill_used = 1;
+				enough_tp = true;
+				}
+				else {
+						audio_play_sound(sfx_no_tp, 0, false);
+					}
 			}
 			else if (key_L_pressed) {
+				if (tp_current >= unit.actions[2].cost) {
 				unit.skill_used = 2;
+				enough_tp = true;
+				}
+				else {
+						audio_play_sound(sfx_no_tp, 0, false);
+					}
 			}
-			unit.skill_complete = false;
-			change_state(BattleState.PlayerAiming);
+				if (enough_tp) {
+					unit.skill_complete = false;
+					enough_tp = false;
+					change_state(BattleState.PlayerAiming);
+				}
 			}
 		}
 		else if (key_Tab_pressed) {
@@ -129,19 +155,42 @@ switch (state) {
 			}
 			show_debug_message("Move to ({0},{1})", unit.grid_pos[0], unit.grid_pos[1]);
 		}
-		else if (jkl_pressed) { // eventually should modify depending on tp amount, maybe use lastkey fn?
-			if (key_J_pressed) {
-				unit.skill_used = 0;
+		else if (jkl_pressed) { // optimize eventually
+			if (!unit.has_attacked) {
+				if (key_J_pressed) {
+					if (tp_current >= unit.actions[0].cost) {
+						unit.skill_used = 0;
+						enough_tp = true;
+					}
+					else {
+						audio_play_sound(sfx_no_tp, 0, false);
+					}
+				
 			}
 			else if (key_K_pressed) {
+				if (tp_current >= unit.actions[1].cost) {
 				unit.skill_used = 1;
+				enough_tp = true;
+				}
+				else {
+						audio_play_sound(sfx_no_tp, 0, false);
+					}
 			}
 			else if (key_L_pressed) {
+				if (tp_current >= unit.actions[2].cost) {
 				unit.skill_used = 2;
+				enough_tp = true;
+				}
+				else {
+						audio_play_sound(sfx_no_tp, 0, false);
+					}
 			}
-			unit.confirm_move();
-			unit.skill_complete = false;
-			change_state(BattleState.PlayerAiming);
+				if (enough_tp) {
+					unit.skill_complete = false;
+					enough_tp = false;
+					change_state(BattleState.PlayerAiming);
+				}
+			}
 		}
 		else if (key_Enter_pressed) {
 			unit.confirm_move();
@@ -159,25 +208,28 @@ switch (state) {
 		if (unit.skill_used == 0) {
 			unit.baseattack();
 			if (unit.skill_complete) {
-			unit.has_attacked = true;
-			unit.skill_complete = false;
-			change_state(BattleState.PlayerTakingAction);
+				tp_current -= unit.actions[0].cost;
+				unit.has_attacked = true;
+				unit.skill_complete = false;
+				change_state(BattleState.PlayerTakingAction);
 			}
 		}
 		else if (unit.skill_used == 1) {
 			unit.skill1();
 			if (unit.skill_complete) {
-			unit.has_attacked = true;
-			unit.skill_complete = false;
-			change_state(BattleState.PlayerTakingAction);
+				tp_current -= unit.actions[1].cost;
+				unit.has_attacked = true;
+				unit.skill_complete = false;
+				change_state(BattleState.PlayerTakingAction);
 			}
 		}
 		else if (unit.skill_used == 2) {
 			unit.skill2();
 			if (unit.skill_complete) {
-			unit.has_attacked = true;
-			unit.skill_complete = false;
-			change_state(BattleState.PlayerTakingAction);
+				tp_current -= unit.actions[2].cost;
+				unit.has_attacked = true;
+				unit.skill_complete = false;
+				change_state(BattleState.PlayerTakingAction);
 			}
 		}			
 		//if (key_Enter_pressed) {

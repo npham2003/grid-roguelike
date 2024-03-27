@@ -6,6 +6,7 @@ skill_range_aux = [];
 skill_coords = [];
 skill_complete = false;
 skill_init = false;
+play_sound = false; // temp var, will change later
 prev_grid = [];
 
 show_debug_message("{0}: [{1}, {2}]", name, grid_pos[0], grid_pos[1]);
@@ -76,6 +77,7 @@ function baseattack() {
 	action = actions[0];
 	skill_range = obj_gridCreator.highlighted_attack_line(grid_pos[0], grid_pos[1]);
 	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+		audio_play_sound(sfx_base_laser, 0, false);
 		for (var i = 0; i < array_length(skill_range); i++) {
 			if (!skill_range[i]._is_empty) {
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
@@ -89,9 +91,14 @@ function baseattack() {
 }
 
 function skill1() {
+	if (!play_sound) {
+	audio_play_sound(sfx_beam_windup, 0, false);
+	play_sound = true;
+	}
 	action = actions[1];
 	skill_range = obj_gridCreator.highlighted_attack_line_pierce(grid_pos[0], grid_pos[1]);
 	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
+		audio_play_sound(sfx_blast, 0, false);
 		for (var i = 0; i < array_length(skill_range); i++) {
 			if (!skill_range[i]._is_empty) {
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
@@ -100,6 +107,7 @@ function skill1() {
 			}
 		}
 		skill_complete = true;
+		play_sound = false;
 		skill_range = obj_gridCreator.reset_highlights_attack();
 	show_debug_message(action.name);
 	}
@@ -111,16 +119,20 @@ function skill2() {
 	skill_coords[0] = grid_pos[0] + 4;
 	skill_coords[1] = grid_pos[1];
 	skill_init = true;
+	audio_play_sound(sfx_mortar_windup, 0, false);
 	}
 	skill_range = obj_gridCreator.highlighted_attack_line_range(grid_pos[0], grid_pos[1], 5);
 	skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
 	if (keyboard_check_pressed(ord("A")) && skill_coords[0] > grid_pos[0]) {
+		audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 		skill_coords[0] -= 1;
 	}
 	else if (keyboard_check_pressed(ord("D")) && skill_coords[0] < grid_pos[0]+4) { // a bunch of this is hardcoded atm
+		audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 		skill_coords[0] += 1;
 	}
 	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
+		audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 		for (var i = 0; i < array_length(skill_range_aux); i++) {
 			if (!skill_range_aux[i]._is_empty) {
 				show_debug_message(skill_range_aux[i]._entity_on_tile.hp);

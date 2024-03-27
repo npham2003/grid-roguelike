@@ -3,6 +3,7 @@ global.actionLibrary = {
 	baseAttack: {
 		name: "Base Attack", //probably redundant to have a name but keep it
 		description: "placeholder",
+		cost: 1,
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -18,6 +19,7 @@ global.actionLibrary = {
 	beam: {
 		name: "Beam", //probably redundant to have a name but keep it
 		description: "placeholder",
+		cost: 3,
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -33,6 +35,7 @@ global.actionLibrary = {
 	mortar: {
 		name: "Mortar", //probably redundant to have a name but keep it
 		description: "placeholder",
+		cost: 6,
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
