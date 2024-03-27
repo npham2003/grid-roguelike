@@ -8,6 +8,10 @@ player_order = 0;
 // Current order of enemy unit in action
 enemy_order = 0;
 
+// maybe these are in the wrong spot? but anyway yea
+tp_max = 10;
+tp_current = 4;
+
 #region Spawns
 
 // Spawn player units

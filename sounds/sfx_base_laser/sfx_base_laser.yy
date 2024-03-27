@@ -1,6 +1,6 @@
 {
   "$GMSound":"",
-  "%Name":"bgm_battleOfRuins",
+  "%Name":"sfx_base_laser",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -9,8 +9,8 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":169.11673,
-  "name":"bgm_battleOfRuins",
+  "duration":0.731429,
+  "name":"sfx_base_laser",
   "parent":{
     "name":"Sounds",
     "path":"folders/Sounds.yy",
@@ -19,7 +19,7 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"bgm_battleOfRuins.mp3",
-  "type":1,
-  "volume":0.1,
+  "soundFile":"sfx_base_laser.mp3",
+  "type":0,
+  "volume":1.0,
 }

@@ -120,7 +120,6 @@ highlighted_attack_line_pierce = function(_center_x,_center_y){
 highlighted_attack_line = function(_center_x,_center_y){
 	
 	reset_highlights_attack();
-	var j=0;
 		var j=-1;
 		while(_center_x+j<GRIDWIDTH){
 			j+=1;
@@ -139,6 +138,44 @@ highlighted_attack_line = function(_center_x,_center_y){
 	return highlighted_attack_array;
 }
 
+highlighted_attack_line_range = function(_center_x,_center_y,_range){ //editable range for skills
+	
+	reset_highlights_attack();
+	var j=-1;
+	var i=0;
+		while(_center_x+j<GRIDWIDTH  && j<_range){
+			j+=1;
+			if(_center_x+j>=0 && _center_x+j<GRIDWIDTH && _center_y>=0 && _center_y<GRIDHEIGHT && j<_range){
+				array_push(highlighted_attack_array,battle_grid[_center_x+j][_center_y]);
+				battle_grid[_center_x+j][_center_y]._attack_highlight=true;
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}else{
+				break;	
+			}
+
+		}
+	
+	return highlighted_attack_array;
+}
+
+highlighted_target_straight = function(_center_x,_center_y){
+	
+	reset_highlights_target();
+	var j=0;
+	while(_center_x+j<GRIDWIDTH){
+		
+		if(!battle_grid[_center_x+j][_center_y]._is_empty){
+			
+			array_push(highlighted_target_array,battle_grid[_center_x+j][_center_y]);
+			battle_grid[_center_x+j][_center_y]._target_highlight=true;
+			break;
+		}
+		j+=1;
+	}
+	
+	
+	return highlighted_target_array;
+}
 
 highlighted_target_circle = function(_center_x,_center_y,_range){
 	
