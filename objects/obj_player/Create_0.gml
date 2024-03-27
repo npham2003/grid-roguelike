@@ -10,6 +10,9 @@ play_sound = false; // temp var, will change later
 prev_grid = [];
 skill_names = ["Base Attack", "Beam", "Mortar"];
 skill_descriptions=["Hits the first target in a row", "Hits all targets in a row", "Hits a target in front and damages all adjacent units"];
+skill_back = false;
+
+var return_coords;
 
 show_debug_message("{0}: [{1}, {2}]", name, grid_pos[0], grid_pos[1]);
 
@@ -75,6 +78,15 @@ function confirm_move() {
 	obj_gridCreator.reset_highlights_move();
 }
 
+function back_move(){
+	
+	grid_pos=prev_grid;
+	return_coords = obj_gridCreator.get_coordinates(grid_pos[0],grid_pos[1]);
+	x=return_coords[0];
+	y=return_coords[1];
+	obj_gridCreator.reset_highlights_move();
+}
+
 function baseattack() {
 	action = actions[0];
 	obj_info_panel.set_text("Cost: "+string(actions[0].cost)+"\n"+skill_descriptions[0]+"\nWASD - Aim\nJ - Confirm");
@@ -91,6 +103,11 @@ function baseattack() {
 		}
 		skill_complete = true;
 		skill_range = obj_gridCreator.reset_highlights_target();
+	}else if(keyboard_check_pressed(ord("K")) || keyboard_check_pressed(ord("L"))){
+		skill_back = false;
+		skill_range = obj_gridCreator.reset_highlights_target();
+		
+		
 	}
 }
 

@@ -145,6 +145,7 @@ switch (state) {
 #region Player Moving
 	case BattleState.PlayerMoving:
 		var unit = player_units[player_order];
+		
 		obj_info_panel.set_text("WASD - Move\nJ - "+unit.skill_names[0]+"\nK - "+unit.skill_names[1]+"\nL - "+unit.skill_names[2]+"\nEnter - Do Nothing");
 		
 		if (wasd_pressed) {
@@ -161,8 +162,13 @@ switch (state) {
 			else if (key_D_pressed) {
 				unit.move_right();
 			}
+			
 			show_debug_message("Move to ({0},{1})", unit.grid_pos[0], unit.grid_pos[1]);
 		}
+		else if (key_Tab_pressed){
+				unit.back_move();
+				change_state(BattleState.PlayerWaitingAction);
+			}
 		else if (jkl_pressed) { // optimize eventually
 			if (!unit.has_attacked) {
 				if (key_J_pressed) {
@@ -215,6 +221,12 @@ switch (state) {
 	case BattleState.PlayerAiming:
 	
 		var unit = player_units[player_order];
+		if(unit.skill_back){
+			change_state(BattleState.PlayerMoving);
+			unit.has_attacked = false;
+			unit.skill_back = false;
+			
+		}
 		if (unit.skill_used == 0) {
 			unit.baseattack();
 			if (unit.skill_complete) {
@@ -241,7 +253,9 @@ switch (state) {
 				unit.skill_complete = false;
 				change_state(BattleState.PlayerTakingAction);
 			}
-		}			
+		}
+		
+		
 		//if (key_Enter_pressed) {
 		//	show_debug_message(unit.name + ": confirm action");
 		//	unit.has_attacked = true;
