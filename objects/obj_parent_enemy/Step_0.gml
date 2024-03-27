@@ -1,5 +1,4 @@
 
-
 //if (is_moving) {
 //	for (var j = 0; j < moveSpeed; j++)
 //	{

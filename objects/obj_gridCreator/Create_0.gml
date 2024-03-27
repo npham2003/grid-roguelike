@@ -120,7 +120,6 @@ highlighted_attack_line_pierce = function(_center_x,_center_y){
 highlighted_attack_line = function(_center_x,_center_y){
 	
 	reset_highlights_attack();
-	var j=0;
 		var j=-1;
 		while(_center_x+j<GRIDWIDTH){
 			j+=1;
@@ -144,7 +143,7 @@ highlighted_attack_line_range = function(_center_x,_center_y,_range){ //editable
 	reset_highlights_attack();
 	var j=-1;
 	var i=0;
-		while(battle_grid[_center_x+j][_center_y]._is_empty && i < _range){
+		while(_center_x+j<GRIDWIDTH && i < _range){
 			j+=1;
 			if(_center_x+j>=0 && _center_x+j<GRIDWIDTH && _center_y>=0 && _center_y<GRIDHEIGHT){
 				array_push(highlighted_attack_array,battle_grid[_center_x+j][_center_y]);
