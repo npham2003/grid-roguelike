@@ -163,12 +163,16 @@ highlighted_target_straight = function(_center_x,_center_y){
 	reset_highlights_target();
 	var j=0;
 	while(_center_x+j<GRIDWIDTH){
+		
 		if(!battle_grid[_center_x+j][_center_y]._is_empty){
+			
 			array_push(highlighted_target_array,battle_grid[_center_x+j][_center_y]);
-				battle_grid[_center_x][_center_y]._target_highlight=true;
-				break;
+			battle_grid[_center_x+j][_center_y]._target_highlight=true;
+			break;
 		}
+		j+=1;
 	}
+	
 	
 	return highlighted_target_array;
 }

@@ -90,7 +90,7 @@ function baseattack() {
 			}
 		}
 		skill_complete = true;
-		skill_range = obj_gridCreator.reset_highlights_attack();
+		skill_range = obj_gridCreator.reset_highlights_target();
 	}
 }
 
@@ -113,7 +113,7 @@ function skill1() {
 		}
 		skill_complete = true;
 		play_sound = false;
-		skill_range = obj_gridCreator.reset_highlights_attack();
+		skill_range = obj_gridCreator.reset_highlights_target();
 	show_debug_message(action.name);
 	}
 }

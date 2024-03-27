@@ -8,4 +8,4 @@ draw_text_transformed(x+1050, y, "TP: " + string(obj_battleControl.tp_current), 
 
 
 
-draw_text_ext(x+20, y, _text, 30, 1000);
+draw_text_ext(x+20, y, _text, 40, 1000);
