@@ -199,6 +199,7 @@ switch (state) {
 		else if (key_Enter_pressed) {
 			unit.confirm_move();
 			unit.has_moved = true;
+			unit.has_attacked = true;
 			change_state(BattleState.PlayerWaitingAction);
 		}
 
