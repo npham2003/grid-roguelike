@@ -33,21 +33,19 @@ switch (state) {
 			break;
 		}
 		
-		;
-		if(!in_animation){
-			var unit = enemy_units[enemy_order];
-			unit.find_target();
-			unit.aim();
-			obj_info_panel.set_text(unit.name+" is aiming")
-			enemy_order += 1;
-			if (enemy_order >= array_length(enemy_units))
-			{
-				enemy_order = 0;
-				change_state(BattleState.PlayerPreparing);
-			}
+		if (enemy_order >= array_length(enemy_units))
+		{
+			enemy_order = 0;
+			change_state(BattleState.PlayerPreparing);
+			break;
 		}
 		
+		var unit = enemy_units[enemy_order];
+		unit.find_target();
+		unit.aim();
+		obj_info_panel.set_text(unit.name+" is aiming");
 		
+		enemy_order += 1;
 		break;
 #endregion
 

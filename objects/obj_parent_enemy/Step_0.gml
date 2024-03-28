@@ -20,6 +20,8 @@ if (is_moving) {
 		}
 	}
 	else {
+		attack_ready = true;
+		show_debug_message("{0} is ready to attack", name);
 		set_danger_highlights();
 		is_moving = false;
 		obj_battleControl.in_animation = false;
