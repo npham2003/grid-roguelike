@@ -33,11 +33,13 @@ switch (state) {
 			break;
 		}
 		
-		var unit = enemy_units[enemy_order];
-		unit.find_target();
-		unit.aim();
-		obj_info_panel.set_text(unit.name+" is aiming");
+		;
 		if(!in_animation){
+			var unit = enemy_units[enemy_order];
+			show_debug_message("{0} aiming",enemy_order);
+			unit.find_target();
+			unit.aim();
+			obj_info_panel.set_text(unit.name+" is aiming")
 			enemy_order += 1;
 			if (enemy_order >= array_length(enemy_units))
 			{

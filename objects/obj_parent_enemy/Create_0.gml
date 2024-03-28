@@ -73,6 +73,7 @@ function move(new_x, new_y) {
 }
 
 function set_danger_highlights() {
+	show_debug_message("aiming");
 	for (var i = 0; i < array_length(action.range); i++) {
 		var attack_x = grid_pos[0] + action.range[i][0];
 		var attack_y = grid_pos[1] + action.range[i][1];
@@ -85,6 +86,7 @@ function set_danger_highlights() {
 		}
 		obj_gridCreator.battle_grid[attack_x][attack_y]._danger_highlight = true;
 		obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number+=1;
+		show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
 	
 	}
 }
@@ -101,8 +103,8 @@ function remove_danger_highlights() {
 			continue;
 		}
 		obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number-=1;
-		
-		if(obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number==0){
+		show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
+		if(obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number<=0){
 			obj_gridCreator.battle_grid[attack_x][attack_y]._danger_highlight = false;
 		}
 	}
