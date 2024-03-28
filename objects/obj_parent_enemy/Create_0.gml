@@ -41,6 +41,7 @@ function aim() {
 			// No need to move
 			set_danger_highlights();
 			attack_ready = true;
+			show_debug_message("{0} is ready to attack", name);
 			break;
 		}
 		
@@ -49,13 +50,8 @@ function aim() {
 		obj_gridCreator.battle_grid[est_pos[0]][est_pos[1]]._is_empty) {
 			
 			move(est_pos[0], est_pos[1]);
-			attack_ready = true;
 			break;
 		}
-	}
-	
-	if (attack_ready) {
-		show_debug_message("{0} is ready to attack", name);
 	}
 }
 
