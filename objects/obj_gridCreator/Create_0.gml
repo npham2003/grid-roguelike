@@ -23,6 +23,13 @@ get_coordinates = function(_x_value, _y_value){
 	return coordinates;
 }
 
+remove_entity = function(_x_value, _y_value){
+	
+	battle_grid[_x_value][_y_value]._is_empty=true;
+	battle_grid[_x_value][_y_value]._entity_on_tile=pointer_null;
+	
+}
+
 move_entity = function(_prev_x,_prev_y,_new_x,_new_y){
 	var _entity_pointer = battle_grid[_prev_x][_prev_y]._entity_on_tile;
 	if(!battle_grid[_prev_x][_prev_y]._is_empty){
@@ -56,6 +63,7 @@ reset_highlights_target = function(){
 	for (var i = 0; i< gridHoriz;i++){
 		for (var j = 0; j < gridVert;j++){
 			battle_grid[i][j]._target_highlight=false;
+			battle_grid[i][j]._danger_number=0;
 		}
 	}
 }

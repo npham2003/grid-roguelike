@@ -276,13 +276,30 @@ switch (state) {
 		
 		show_debug_message(unit.name + ": taking action");
 		
-		if (check_battle_end()) {
-			change_state(BattleState.BattleEnd);
+		
+		
+		var enemy_unit = enemy_units[enemy_order];
+		if (enemy_unit.hp<=0){
+			enemy_unit.despawn();
+			instance_destroy(enemy_unit);
+			array_delete(enemy_units, enemy_order, 1);
+			enemy_order-=1;
+			if(array_length(enemy_units)==0){
+				change_state(BattleState.BattleEnd);
+			}
 		}
-		else {
-			change_state(BattleState.PlayerWaitingAction);
+		
+		enemy_order += 1;
+		if (enemy_order >= array_length(enemy_units)) {
+			enemy_order = 0;
+			if (check_battle_end()) {
+				change_state(BattleState.BattleEnd);
+			}
+			else {
+				change_state(BattleState.PlayerWaitingAction);
+			}
 		}
-	
+		
 		break;
 #endregion
 

@@ -1,17 +1,19 @@
-var _x_coord = 0;
-var _y_coord = 0;
+_x_coord = 0;
+_y_coord = 0;
 
-var _is_empty = true;
+_is_empty = true;
 
-var _entity_on_tile = pointer_null;
+_entity_on_tile = pointer_null;
 
-var _move_highlight = false;
+_move_highlight = false;
 
-var _attack_highlight = false;
+_attack_highlight = false;
 
-var _target_highlight = false;
+_target_highlight = false;
 
-var _danger_highlight = false;
+_danger_highlight = false;
+
+_danger_number = 0;
 
 set_coords = function(_x_coordinate, _y_coordinate){
 	_x_coord = _x_coordinate;

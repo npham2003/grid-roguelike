@@ -106,6 +106,7 @@ function baseattack() {
 			if (!skill_range[i]._is_empty) {
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
 				skill_range[i]._entity_on_tile.hp -= 1; // temp var until we get shit moving
+				
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
 			}
 		}
@@ -132,6 +133,7 @@ function skill1() {
 			if (!skill_range[i]._is_empty) {
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
 				skill_range[i]._entity_on_tile.hp -= 1; // temp var until we get shit moving
+				
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
 			}
 		}

@@ -11,6 +11,8 @@ attack_ready = false;
 
 is_moving = false;
 sprite_moving_speed = 5;
+transparency=1;
+is_dead = false;
 
 function find_target() {
 	var available_targets = obj_battleControl.player_units;
@@ -82,9 +84,36 @@ function set_danger_highlights() {
 			continue;
 		}
 		obj_gridCreator.battle_grid[attack_x][attack_y]._danger_highlight = true;
+		obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number+=1;
+	
+	}
+}
+
+function remove_danger_highlights() {
+	for (var i = 0; i < array_length(action.range); i++) {
+		var attack_x = grid_pos[0] + action.range[i][0];
+		var attack_y = grid_pos[1] + action.range[i][1];
+		
+		if (attack_x < 0 || attack_x >= GRIDWIDTH) {
+			continue;
+		}
+		if (attack_y < 0 || attack_y >= GRIDHEIGHT) {
+			continue;
+		}
+		obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number-=1;
+		
+		if(obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number==0){
+			obj_gridCreator.battle_grid[attack_x][attack_y]._danger_highlight = false;
+		}
 	}
 }
 
 function attack() {
 	show_debug_message("{0} is attacking", name);
+}
+
+function despawn(){
+	is_dead=true;
+	obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
+	remove_danger_highlights();
 }
