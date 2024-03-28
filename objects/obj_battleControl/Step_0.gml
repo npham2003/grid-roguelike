@@ -284,9 +284,6 @@ switch (state) {
 			instance_destroy(enemy_unit);
 			array_delete(enemy_units, enemy_order, 1);
 			enemy_order-=1;
-			if(array_length(enemy_units)==0){
-				change_state(BattleState.BattleEnd);
-			}
 		}
 		
 		enemy_order += 1;

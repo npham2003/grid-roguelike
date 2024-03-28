@@ -235,7 +235,7 @@ highlighted_target_line_pierce = function(_center_x,_center_y){
 			}
 		}
 	
-	return highlighted_attack_array;
+	return highlighted_target_array;
 }
 
 highlighted_enemy_target_circle = function(_center_x,_center_y,_range){
