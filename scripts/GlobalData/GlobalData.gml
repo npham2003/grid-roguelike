@@ -54,11 +54,18 @@ global.actionLibrary = {
 global.enemyActions = {
 	melee: {
 		name: "melee",
-		range: [[-1, 0], [-2, 0]]
+		range: [
+			[-1, 0], [-1, -1], [-1, 1],
+			[-2, 0], [-2, -1], [-2, 1],
+			[-3, 0]
+		]
 	},
 	ranged_attack: {
 		name: "ranged attack",
-		range: [[-3, 0], [-4, 0], [-5, 0], [-2, 0], [-1, 0]]
+		range: [
+			[-5, 0], [-6, 0], [-7, 0], [-8, 0], [-9, 0],
+			[-4, 0], [-3, 0], [-2, 0], [-1, 0]
+		]
 	}
 }
 

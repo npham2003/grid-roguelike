@@ -28,6 +28,13 @@ function aim() {
 	for (var i = 0; i < array_length(action.range); i++) {
 		var est_pos = [target_pos[0] - action.range[i][0], target_pos[1] - action.range[i][1]];
 		
+		if (est_pos[0] < 0 || est_pos[0] >= GRIDWIDTH) {
+			continue;
+		}
+		if (est_pos[1] < 0 || est_pos[1] >= GRIDHEIGHT) {
+			continue;
+		}
+		
 		if (est_pos[0] == grid_pos[0] && est_pos[1] == grid_pos[1]) {
 			// No need to move
 			set_danger_highlights();
@@ -67,6 +74,13 @@ function set_danger_highlights() {
 	for (var i = 0; i < array_length(action.range); i++) {
 		var attack_x = grid_pos[0] + action.range[i][0];
 		var attack_y = grid_pos[1] + action.range[i][1];
+		
+		if (attack_x < 0 || attack_x >= GRIDWIDTH) {
+			continue;
+		}
+		if (attack_y < 0 || attack_y >= GRIDHEIGHT) {
+			continue;
+		}
 		obj_gridCreator.battle_grid[attack_x][attack_y]._danger_highlight = true;
 	}
 }
