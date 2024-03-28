@@ -63,7 +63,7 @@ reset_highlights_target = function(){
 	for (var i = 0; i< gridHoriz;i++){
 		for (var j = 0; j < gridVert;j++){
 			battle_grid[i][j]._target_highlight=false;
-			battle_grid[i][j]._danger_number=0;
+			
 		}
 	}
 }
@@ -73,6 +73,7 @@ reset_highlights_enemy = function(){
 	for (var i = 0; i< gridHoriz;i++){
 		for (var j = 0; j < gridVert;j++){
 			battle_grid[i][j]._danger_highlight=false;
+			battle_grid[i][j]._danger_number=0;
 		}
 	}
 }
@@ -309,6 +310,6 @@ for (var i = 0; i< gridHoriz;i++){
 		battle_grid[i][j]._target_highlight = false;
 		battle_grid[i][j]._attack_highlight = false;
 		battle_grid[i][j]._danger_highlight = false;
-		
+		battle_grid[i][j]._danger_number = 0;
 	}
 }

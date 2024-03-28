@@ -114,5 +114,5 @@ function change_state(new_state) {
 
 function check_battle_end() {
 	// todo
-	return false;
+	return array_length(enemy_units)==0;
 }

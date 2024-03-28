@@ -36,7 +36,6 @@ switch (state) {
 		;
 		if(!in_animation){
 			var unit = enemy_units[enemy_order];
-			show_debug_message("{0} aiming",enemy_order);
 			unit.find_target();
 			unit.aim();
 			obj_info_panel.set_text(unit.name+" is aiming")
@@ -77,6 +76,10 @@ switch (state) {
 		var unit = player_units[player_order];
 		obj_info_panel.set_text("Space - Move Unit\nJ - "+unit.skill_names[0]+"\nK - "+unit.skill_names[1]+"\nL - "+unit.skill_names[2]+"\nEnter - End Turn");
 		var has_all_attacked = true;
+		if(check_battle_end()){
+			change_state(BattleState.BattleEnd);
+			break;
+		}
 		for (var i = 0; i < array_length(player_units); i++) {
 			if (!player_units[i].has_attacked) {
 				has_all_attacked = false;
@@ -283,7 +286,7 @@ switch (state) {
 		var enemy_unit = enemy_units[enemy_order];
 		if (enemy_unit.hp<=0){
 			enemy_unit.despawn();
-			instance_destroy(enemy_unit);
+			
 			array_delete(enemy_units, enemy_order, 1);
 			enemy_order-=1;
 		}

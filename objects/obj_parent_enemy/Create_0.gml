@@ -73,7 +73,6 @@ function move(new_x, new_y) {
 }
 
 function set_danger_highlights() {
-	show_debug_message("aiming");
 	for (var i = 0; i < array_length(action.range); i++) {
 		var attack_x = grid_pos[0] + action.range[i][0];
 		var attack_y = grid_pos[1] + action.range[i][1];
@@ -87,11 +86,29 @@ function set_danger_highlights() {
 		obj_gridCreator.battle_grid[attack_x][attack_y]._danger_highlight = true;
 		obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number+=1;
 		show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
+		
+	}
+	
+}
+
+function danger_debug() {
+	for (var i = 0; i < array_length(action.range); i++) {
+		var attack_x = grid_pos[0] + action.range[i][0];
+		var attack_y = grid_pos[1] + action.range[i][1];
+		
+		if (attack_x < 0 || attack_x >= GRIDWIDTH) {
+			continue;
+		}
+		if (attack_y < 0 || attack_y >= GRIDHEIGHT) {
+			continue;
+		}
+		show_debug_message("Before: ({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
 	
 	}
 }
 
 function remove_danger_highlights() {
+	danger_debug();
 	for (var i = 0; i < array_length(action.range); i++) {
 		var attack_x = grid_pos[0] + action.range[i][0];
 		var attack_y = grid_pos[1] + action.range[i][1];
