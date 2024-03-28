@@ -108,7 +108,7 @@ function danger_debug() {
 }
 
 function remove_danger_highlights() {
-	danger_debug();
+
 	for (var i = 0; i < array_length(action.range); i++) {
 		var attack_x = grid_pos[0] + action.range[i][0];
 		var attack_y = grid_pos[1] + action.range[i][1];
@@ -120,7 +120,7 @@ function remove_danger_highlights() {
 			continue;
 		}
 		obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number-=1;
-		show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
+		//show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
 		if(obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number<=0){
 			obj_gridCreator.battle_grid[attack_x][attack_y]._danger_highlight = false;
 		}
