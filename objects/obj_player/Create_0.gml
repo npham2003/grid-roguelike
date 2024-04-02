@@ -153,18 +153,35 @@ function skill2() {
 	skill_coords[0] = grid_pos[0] + 4;
 	skill_coords[1] = grid_pos[1];
 	skill_init = true;
+	range = 3;
 	audio_play_sound(sfx_mortar_windup, 0, false);
 	}
 	obj_info_panel.set_text("Cost: "+string(actions[2].cost)+"\n"+skill_descriptions[2]+"\nWASD - Aim\nL - Confirm\nTab - Back");
-	skill_range = obj_gridCreator.highlighted_attack_line_range(grid_pos[0], grid_pos[1], 5);
+	skill_range = obj_gridCreator.highlighted_attack_circle(grid_pos[0], grid_pos[1], range);
 	skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
-	if (keyboard_check_pressed(ord("A")) && skill_coords[0] > grid_pos[0]) {
-		audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-		skill_coords[0] -= 1;
+	if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+		if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
+			audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+			skill_coords[0] -= 1;
+		}
 	}
-	else if (keyboard_check_pressed(ord("D")) && skill_coords[0] < grid_pos[0]+4) { // a bunch of this is hardcoded atm
-		audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-		skill_coords[0] += 1;
+	if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz) { // a bunch of this is hardcoded atm
+		if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
+			audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+			skill_coords[0] += 1;
+		}
+	}
+	if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert) { // a bunch of this is hardcoded atm
+		if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
+			audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+			skill_coords[1] += 1;
+		}
+	}
+	if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+		if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
+			audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+			skill_coords[1] -= 1;
+		}
 	}
 	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
 		audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
