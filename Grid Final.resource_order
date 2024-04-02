@@ -55,6 +55,7 @@
     {"name":"RF_Green_Forest_A5","order":3,"path":"sprites/RF_Green_Forest_A5/RF_Green_Forest_A5.yy",},
     {"name":"RF_Green_Forest_B","order":4,"path":"sprites/RF_Green_Forest_B/RF_Green_Forest_B.yy",},
     {"name":"sPointer","order":1,"path":"sprites/sPointer/sPointer.yy",},
+    {"name":"spr_bat_attack","order":4,"path":"sprites/spr_bat_attack/spr_bat_attack.yy",},
     {"name":"spr_bat_idle","order":3,"path":"sprites/spr_bat_idle/spr_bat_idle.yy",},
     {"name":"spr_dummy","order":6,"path":"sprites/spr_dummy/spr_dummy.yy",},
     {"name":"spr_grid_attack_highlight","order":11,"path":"sprites/spr_grid_attack_highlight/spr_grid_attack_highlight.yy",},
@@ -66,9 +67,9 @@
     {"name":"spr_info_panel","order":15,"path":"sprites/spr_info_panel/spr_info_panel.yy",},
     {"name":"spr_player_tile","order":2,"path":"sprites/spr_player_tile/spr_player_tile.yy",},
     {"name":"spr_player","order":9,"path":"sprites/spr_player/spr_player.yy",},
+    {"name":"spr_player_dead","order":16,"path":"sprites/spr_player_dead/spr_player_dead.yy",},
     {"name":"spr_slime_attack","order":2,"path":"sprites/spr_slime_attack/spr_slime_attack.yy",},
     {"name":"spr_slime_idle","order":1,"path":"sprites/spr_slime_idle/spr_slime_idle.yy",},
     {"name":"Sprite26","order":14,"path":"sprites/Sprite26/Sprite26.yy",},
-    {"name":"spr_bat_attack","order":4,"path":"sprites/spr_bat_attack/spr_bat_attack.yy",},
   ],
 }

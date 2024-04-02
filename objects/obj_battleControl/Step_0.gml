@@ -22,6 +22,11 @@ switch (state) {
 	
 #region Battle Start
 	case BattleState.BattleStart:
+		for (var i = 0; i < array_length(player_units); i++) {
+			if(player_units[i].hp<=0){
+				player_units[i].hp=1;
+			}
+		}
 		change_state(BattleState.EnemyAiming);
 		break;
 #endregion
@@ -53,8 +58,12 @@ switch (state) {
 	case BattleState.PlayerPreparing:
 		
 		for (var i = 0; i < array_length(player_units); i++) {
-			player_units[i].has_moved = false;
-			player_units[i].has_attacked = false;
+			if(player_units[i].hp>0){
+				player_units[i].has_moved = false;
+				player_units[i].has_attacked = false;
+			}else{
+				player_units[i].hp=0;
+			}
 		}
 		
 		if (tp_current < tp_max) {
@@ -317,7 +326,11 @@ switch (state) {
 			if (enemy_order >= array_length(enemy_units)) {
 				enemy_order = 0;
 				obj_gridCreator.reset_highlights_enemy();
-				change_state(BattleState.EnemyAiming);
+				if (check_battle_end()) {
+					change_state(BattleState.BattleEnd);
+				}else{
+					change_state(BattleState.EnemyAiming);
+				}
 				break;
 			}
 		
@@ -343,6 +356,7 @@ switch (state) {
 				checking_death=false;
 			}
 		}
+		
 		break;
 #endregion
 
