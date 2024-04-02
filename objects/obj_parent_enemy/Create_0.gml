@@ -53,6 +53,10 @@ function aim() {
 			break;
 		}
 	}
+	set_danger_highlights();
+	attack_ready = true;
+	show_debug_message("{0} is ready to attack", name);
+	
 }
 
 function move(new_x, new_y) {
