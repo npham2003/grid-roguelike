@@ -150,10 +150,11 @@ function skill1() {
 function skill2() {
 	action = actions[2];
 	if (!skill_init) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
-	skill_coords[0] = grid_pos[0] + 4;
+	range = 3;
+	skill_coords[0] = grid_pos[0] + range;
 	skill_coords[1] = grid_pos[1];
 	skill_init = true;
-	range = 3;
+	
 	audio_play_sound(sfx_mortar_windup, 0, false);
 	}
 	obj_info_panel.set_text("Cost: "+string(actions[2].cost)+"\n"+skill_descriptions[2]+"\nWASD - Aim\nL - Confirm\nTab - Back");
