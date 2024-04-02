@@ -306,19 +306,23 @@ switch (state) {
 #region Enemy Taking Action
 	case BattleState.EnemyTakingAction:
 		
+		if (in_animation) {
+			break;
+		}
+		
+		if (enemy_order >= array_length(enemy_units)) {
+			enemy_order = 0;
+			obj_gridCreator.reset_highlights_enemy();
+			change_state(BattleState.EnemyAiming);
+			break;
+		}
+		
 		var unit = enemy_units[enemy_order];
 		if (unit.attack_ready) {
 			unit.attack();
 		}
 		
 		enemy_order += 1;
-		if (enemy_order >= array_length(enemy_units)) {
-			enemy_order = 0;
-			
-			obj_gridCreator.reset_highlights_enemy();
-			
-			change_state(BattleState.EnemyAiming);
-		}
 	
 		break;
 #endregion

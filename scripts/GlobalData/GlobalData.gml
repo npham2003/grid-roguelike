@@ -100,7 +100,7 @@ global.enemies = [
 		mpMax: 0,
 		strength: 5,
 		_speed: 1,
-		sprites: { idle: spr_slime_idle },
+		sprites: { idle: spr_slime_idle, attack: spr_slime_attack },
 		actions: [global.enemyActions.melee],
 	},
 	{
@@ -112,7 +112,7 @@ global.enemies = [
 		mpMax: 0,
 		strength: 4,
 		_speed: 2,
-		sprites: { idle: spr_bat_idle },
+		sprites: { idle: spr_bat_idle, attack: spr_bat_attack },
 		actions: [global.enemyActions.ranged_attack],
 	}
 ]
