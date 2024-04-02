@@ -72,8 +72,10 @@ switch (state) {
 		// WASD to move, JKL to use skills, Tab to switch units, Enter to end player turn
 		// If all units have attacked, end player's turn
 		var unit = player_units[player_order];
+		unit.prev_grid = [unit.grid_pos[0], unit.grid_pos[1]];
 		obj_info_panel.set_text("Space - Move Unit\nJ - "+unit.skill_names[0]+"\nK - "+unit.skill_names[1]+"\nL - "+unit.skill_names[2]+"\nEnter - End Turn");
 		var has_all_attacked = true;
+		show_debug_message(string(unit.hp)+" HP");
 		if(check_battle_end()){
 			change_state(BattleState.BattleEnd);
 			break;
@@ -281,17 +283,17 @@ switch (state) {
 		
 		
 		
-		var enemy_unit = enemy_units[enemy_order];
+		var enemy_unit = enemy_units[enemy_check_death];
 		if (enemy_unit.hp<=0){
 			enemy_unit.despawn();
 			
-			array_delete(enemy_units, enemy_order, 1);
-			enemy_order-=1;
+			array_delete(enemy_units, enemy_check_death, 1);
+			enemy_check_death-=1;
 		}
 		
-		enemy_order += 1;
-		if (enemy_order >= array_length(enemy_units)) {
-			enemy_order = 0;
+		enemy_check_death += 1;
+		if (enemy_check_death >= array_length(enemy_units)) {
+			enemy_check_death = 0;
 			if (check_battle_end()) {
 				change_state(BattleState.BattleEnd);
 			}
@@ -310,20 +312,37 @@ switch (state) {
 			break;
 		}
 		
-		if (enemy_order >= array_length(enemy_units)) {
-			enemy_order = 0;
-			obj_gridCreator.reset_highlights_enemy();
-			change_state(BattleState.EnemyAiming);
-			break;
-		}
 		
-		var unit = enemy_units[enemy_order];
-		if (unit.attack_ready) {
-			unit.attack();
-		}
+		if(!checking_death){
+			if (enemy_order >= array_length(enemy_units)) {
+				enemy_order = 0;
+				obj_gridCreator.reset_highlights_enemy();
+				change_state(BattleState.EnemyAiming);
+				break;
+			}
 		
-		enemy_order += 1;
-	
+			var unit = enemy_units[enemy_order];
+			if (unit.attack_ready) {
+				unit.attack();
+			}
+		
+			checking_death=true;
+		}else{
+			var enemy_unit = enemy_units[enemy_check_death];
+			if (enemy_unit.hp<=0){
+				enemy_unit.despawn();
+			
+				array_delete(enemy_units, enemy_check_death, 1);
+				enemy_check_death-=1;
+			}
+		
+			enemy_check_death += 1;
+			if (enemy_check_death >= array_length(enemy_units)) {
+				enemy_check_death = 0;
+				enemy_order+=1;
+				checking_death=false;
+			}
+		}
 		break;
 #endregion
 
