@@ -120,5 +120,11 @@ function change_state(new_state) {
 
 function check_battle_end() {
 	// todo
-	return array_length(enemy_units)==0;
+	result = true;
+	for (var i =0;i<array_length(player_units);i++){
+		if(player_units[i].hp>0){
+			result=false;
+		}
+	}
+	return array_length(enemy_units)==0||result;
 }

@@ -79,7 +79,7 @@ global.players = [
 		tpMax: 15,
 		strength: 6,
 		playerSpeed: 2,
-		//sprites : { idle: lc_idle, attack: lc_attack, defend: lc_defend, down: lc_down},
+		sprites : { idle: spr_player, dead: spr_player_dead},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.beam, global.actionLibrary.mortar]
 	}
 	//{ //new member
