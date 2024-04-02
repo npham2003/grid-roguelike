@@ -129,7 +129,7 @@ function attack() {
 	sprite_index = sprites.attack;
 	image_index = 0;
 	obj_battleControl.in_animation = true;
-	
+	audio_play_sound(sounds.attack, 0, false);
 }
 
 function display_target_highlights(){
