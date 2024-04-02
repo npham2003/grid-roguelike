@@ -14,6 +14,9 @@ tp_current = 4;
 
 in_animation = false;
 
+enemy_check_death = 0;
+checking_death = false;
+
 #region Spawns
 
 // Spawn player units
@@ -28,6 +31,7 @@ var player_data = [
 
 for (var i = 0; i < array_length(player_data); i++) {
 	var coord = obj_gridCreator.get_coordinates(player_data[i].grid[0], player_data[i].grid[1]);
+	obj_gridCreator.battle_grid[player_data[i].grid[0]][player_data[i].grid[1]]._is_empty=false;
 	
 	var var_struct = variable_clone(player_data[i].info);
 	var_struct.grid_pos = player_data[i].grid;
@@ -36,6 +40,7 @@ for (var i = 0; i < array_length(player_data); i++) {
 		coord[0], coord[1], "Units", obj_player, var_struct);
 	
 	array_push(player_units, unit);
+	obj_gridCreator.battle_grid[player_data[i].grid[0]][player_data[i].grid[1]]._entity_on_tile=unit;
 }
 
 // Spawn enemies
@@ -62,6 +67,7 @@ for (var i = 0; i < array_length(enemy_data); i++) {
 		coord[0], coord[1], "Units", obj_parent_enemy, var_struct);
 		
 	array_push(enemy_units, unit);
+	obj_gridCreator.battle_grid[enemy_data[i].grid[0]][enemy_data[i].grid[1]]._entity_on_tile=unit;
 }
 #endregion
 

@@ -28,6 +28,7 @@ if (is_moving) {
 	}
 	
 }
+
 if(is_dead){
 	if(image_alpha==0){
 		instance_destroy();
