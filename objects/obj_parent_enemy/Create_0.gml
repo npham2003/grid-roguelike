@@ -125,6 +125,9 @@ function remove_danger_highlights() {
 
 function attack() {
 	show_debug_message("{0} is attacking", name);
+	sprite_index = sprites.attack;
+	image_index = 0;
+	obj_battleControl.in_animation = true;
 }
 
 function despawn(){
