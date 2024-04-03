@@ -118,7 +118,6 @@ global.players = [
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.beam, global.actionLibrary.charge,  global.actionLibrary.mortar],
 		ally: true,
 		tpGain: 1
-		ally: true
 	}
 	//{ //new member
 	//	name: "put new party member here", //refer to example above
