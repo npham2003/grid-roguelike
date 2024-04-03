@@ -94,7 +94,9 @@ function move_right() {
 function confirm_move() {
 	obj_gridCreator.remove_entity(prev_grid[0],prev_grid[1]);
 	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile=self;
+	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._is_empty=false;
 	obj_gridCreator.reset_highlights_move();
+	
 	
 }
 
@@ -186,7 +188,7 @@ function skill3() {
 	audio_play_sound(sfx_mortar_windup, 0, false);
 	
 	}
-	obj_info_panel.set_text("Cost: "+string(actions[3].cost)+"\n"+skill_descriptions[3]+"\nWASD - Aim\n; - Confirm\nTab - Back");
+	obj_info_panel.set_text("Cost: "+string(actions[3].cost)+"\n"+actions[3].description+"\nWASD - Aim\n; - Confirm\nTab - Back");
 	skill_range = obj_gridCreator.highlighted_attack_circle(grid_pos[0], grid_pos[1], range);
 	skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
 	obj_cursor.movable_tiles=skill_range;
