@@ -6,7 +6,7 @@ expansionLimit = 1;
 
 #region location
 imgX = 200;
-imgY = 660;
+imgY = 670;
 
 rootX = imgX;
 menuX = [rootX, rootX, rootX, rootX, rootX];
@@ -26,4 +26,8 @@ _tpBorder = #6ccf48;
 
 _characterPrimary = #0cac87; //change per party member later
 _characterSecondary = #386467;
+#endregion
+
+#region control
+currCharSprite = spr_temp_Akeha;
 #endregion

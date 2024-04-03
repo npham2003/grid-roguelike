@@ -22,6 +22,7 @@
     {"name":"UI","order":5,"path":"folders/Sprites/UI.yy",},
     {"name":"Front","order":13,"path":"folders/Sprites/UI/Front.yy",},
     {"name":"Grid","order":12,"path":"folders/Sprites/UI/Grid.yy",},
+    {"name":"Back","order":14,"path":"folders/Sprites/UI/Back.yy",},
     {"name":"Tile Sets","order":2,"path":"folders/Tile Sets.yy",},
     {"name":"Timelines","order":8,"path":"folders/Timelines.yy",},
   ],
@@ -48,6 +49,7 @@
     {"name":"sfx_mortar_windup","order":5,"path":"sounds/sfx_mortar_windup/sfx_mortar_windup.yy",},
     {"name":"sfx_no_tp","order":1,"path":"sounds/sfx_no_tp/sfx_no_tp.yy",},
     {"name":"sfx_slime_attack","order":7,"path":"sounds/sfx_slime_attack/sfx_slime_attack.yy",},
+    {"name":"aspectBar","order":1,"path":"sprites/aspectBar/aspectBar.yy",},
     {"name":"fighterDead","order":1,"path":"sprites/fighterDead/fighterDead.yy",},
     {"name":"firekeeper","order":2,"path":"sprites/firekeeper/firekeeper.yy",},
     {"name":"healer","order":3,"path":"sprites/healer/healer.yy",},
@@ -79,5 +81,6 @@
     {"name":"spr_slime_attack","order":2,"path":"sprites/spr_slime_attack/spr_slime_attack.yy",},
     {"name":"spr_slime_idle","order":1,"path":"sprites/spr_slime_idle/spr_slime_idle.yy",},
     {"name":"spr_temp_Akeha","order":7,"path":"sprites/spr_temp_Akeha/spr_temp_Akeha.yy",},
+    {"name":"gradient","order":2,"path":"sprites/gradient/gradient.yy",},
   ],
 }
