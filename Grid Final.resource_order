@@ -62,6 +62,7 @@
     {"name":"spr_bat_idle","order":3,"path":"sprites/spr_bat_idle/spr_bat_idle.yy",},
     {"name":"spr_button_outline","order":2,"path":"sprites/spr_button_outline/spr_button_outline.yy",},
     {"name":"spr_diamond_base","order":1,"path":"sprites/spr_diamond_base/spr_diamond_base.yy",},
+    {"name":"spr_diamond_mask","order":4,"path":"sprites/spr_diamond_mask/spr_diamond_mask.yy",},
     {"name":"spr_diamond_outline","order":3,"path":"sprites/spr_diamond_outline/spr_diamond_outline.yy",},
     {"name":"spr_dummy","order":6,"path":"sprites/spr_dummy/spr_dummy.yy",},
     {"name":"spr_grid_attack_highlight","order":1,"path":"sprites/spr_grid_attack_highlight/spr_grid_attack_highlight.yy",},

@@ -95,6 +95,7 @@
     {"id":{"name":"spr_button_outline","path":"sprites/spr_button_outline/spr_button_outline.yy",},},
     {"id":{"name":"spr_cursor","path":"sprites/spr_cursor/spr_cursor.yy",},},
     {"id":{"name":"spr_diamond_base","path":"sprites/spr_diamond_base/spr_diamond_base.yy",},},
+    {"id":{"name":"spr_diamond_mask","path":"sprites/spr_diamond_mask/spr_diamond_mask.yy",},},
     {"id":{"name":"spr_diamond_outline","path":"sprites/spr_diamond_outline/spr_diamond_outline.yy",},},
     {"id":{"name":"spr_dummy","path":"sprites/spr_dummy/spr_dummy.yy",},},
     {"id":{"name":"spr_grid_attack_highlight","path":"sprites/spr_grid_attack_highlight/spr_grid_attack_highlight.yy",},},
