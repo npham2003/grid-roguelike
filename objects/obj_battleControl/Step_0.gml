@@ -6,13 +6,14 @@ var key_D_pressed = keyboard_check_pressed(ord("D"));
 var key_J_pressed = keyboard_check_pressed(ord("J"));
 var key_K_pressed = keyboard_check_pressed(ord("K"));
 var key_L_pressed = keyboard_check_pressed(ord("L"));
+var key_semi_pressed = keyboard_check_pressed(186);
 
 var key_Enter_pressed = keyboard_check_pressed(vk_enter);
 var key_Tab_pressed = keyboard_check_pressed(vk_tab);
 var key_Space_pressed = keyboard_check_pressed(vk_space);
 
 var wasd_pressed = key_A_pressed || key_W_pressed || key_S_pressed || key_D_pressed;
-var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed;
+var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_semi_pressed;
 
 var enough_tp = false;
 
@@ -110,7 +111,7 @@ switch (state) {
 		
 		if(unit!=pointer_null){
 			if(unit.ally){
-				obj_info_panel.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.skill_names[0]+"\nK - "+unit.skill_names[1]+"\nL - "+unit.skill_names[2]+"\nEnter - End Turn");
+				obj_info_panel.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.skill_names[0]+"\nK - "+unit.skill_names[1]+"\nL - "+unit.skill_names[2]+"\n; - "+unit.skill_names[3]+"\nEnter - End Turn");
 				unit.prev_grid = [unit.grid_pos[0], unit.grid_pos[1]];
 				unit.preview_moveable_grids();
 				if (key_Space_pressed) {
@@ -148,21 +149,30 @@ switch (state) {
 						else {
 								audio_play_sound(sfx_no_tp, 0, false);
 							}
+					}else if (key_semi_pressed) {
+						if (tp_current >= unit.actions[3].cost) {
+						unit.skill_used = 3;
+						enough_tp = true;
+						}
+						else {
+								audio_play_sound(sfx_no_tp, 0, false);
+							}
 					}
 						if (enough_tp) {
 							
 							unit.skill_complete = false;
 							enough_tp = false;
 							change_state(BattleState.PlayerAiming);
+							obj_gridCreator.reset_highlights_cursor();
 						}
 					}
 				}
 				else if (key_Tab_pressed) {
-					player_order += 1;
-					if (player_order >= array_length(player_units)) {
-						player_order = 0;
-					}
-					show_debug_message("Switch to next player unit");
+					//player_order += 1;
+					//if (player_order >= array_length(player_units)) {
+					//	player_order = 0;
+					//}
+					//show_debug_message("Switch to next player unit");
 				}
 				else if (key_Enter_pressed) {
 					change_state(BattleState.EnemyTakingAction);
@@ -179,7 +189,7 @@ switch (state) {
 	case BattleState.PlayerMoving:
 		var unit = player_units[player_order];
 		
-		obj_info_panel.set_text("WASD - Move\nJ - "+unit.skill_names[0]+"\nK - "+unit.skill_names[1]+"\nL - "+unit.skill_names[2]+"\nEnter - Do Nothing\nTab - Back");
+		obj_info_panel.set_text("WASD - Move\nJ - "+unit.skill_names[0]+"\nK - "+unit.skill_names[1]+"\nL - "+unit.skill_names[2]+"\n; - "+unit.skill_names[3]+"\nEnter - Do Nothing\nTab - Back");
 		
 		if (wasd_pressed) {
 			//show_debug_message(unit.name + ": moving");
@@ -228,6 +238,15 @@ switch (state) {
 			else if (key_L_pressed) {
 				if (tp_current >= unit.actions[2].cost) {
 				unit.skill_used = 2;
+				enough_tp = true;
+				}
+				else {
+						audio_play_sound(sfx_no_tp, 0, false);
+					}
+			}
+			else if (key_semi_pressed) {
+				if (tp_current >= unit.actions[3].cost) {
+				unit.skill_used = 3;
 				enough_tp = true;
 				}
 				else {
@@ -286,6 +305,15 @@ switch (state) {
 			unit.skill2();
 			if (unit.skill_complete) {
 				tp_current -= unit.actions[2].cost;
+				unit.has_attacked = true;
+				unit.skill_complete = false;
+				change_state(BattleState.PlayerTakingAction);
+			}
+		}
+		else if (unit.skill_used == 3) {
+			unit.skill3();
+			if (unit.skill_complete) {
+				tp_current -= unit.actions[3].cost;
 				unit.has_attacked = true;
 				unit.skill_complete = false;
 				change_state(BattleState.PlayerTakingAction);

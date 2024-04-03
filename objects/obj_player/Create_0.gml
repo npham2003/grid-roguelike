@@ -8,8 +8,8 @@ skill_complete = false;
 skill_init = false;
 play_sound = false; // temp var, will change later
 prev_grid = [];
-skill_names = ["Base Attack", "Beam", "Mortar"];
-skill_descriptions=["Hits the first target in a row", "Hits all targets in a row", "Hits a target in front and damages all adjacent units"];
+skill_names = ["Base Attack", "Beam", "Charge", "Mortar"];
+skill_descriptions=["Hits the first target in a row", "Hits all targets in a row", "Gain 2 TP","Hits a target in front and damages all adjacent units"];
 skill_back = false;
 
 var return_coords;
@@ -166,7 +166,7 @@ function skill1() {
 	}
 }
 
-function skill2() {
+function skill3() {
 	action = actions[2];
 	if (!skill_init) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 	range = 3;
@@ -176,7 +176,7 @@ function skill2() {
 	
 	audio_play_sound(sfx_mortar_windup, 0, false);
 	}
-	obj_info_panel.set_text("Cost: "+string(actions[2].cost)+"\n"+skill_descriptions[2]+"\nWASD - Aim\nL - Confirm\nTab - Back");
+	obj_info_panel.set_text("Cost: "+string(actions[3].cost)+"\n"+skill_descriptions[3]+"\nWASD - Aim\n; - Confirm\nTab - Back");
 	skill_range = obj_gridCreator.highlighted_attack_circle(grid_pos[0], grid_pos[1], range);
 	skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
 	obj_cursor.movable_tiles=skill_range;
@@ -205,7 +205,7 @@ function skill2() {
 			skill_coords[1] -= 1;
 		}
 	}
-	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
+	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(186)) {
 		audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 		for (var i = 0; i < array_length(skill_range_aux); i++) {
 			if (!skill_range_aux[i]._is_empty) {
@@ -225,6 +225,28 @@ function skill2() {
 		skill_range = obj_gridCreator.reset_highlights_target();
 		skill_range = obj_gridCreator.reset_highlights_attack();
 		skill_init = false;
+		
+	}
+}
+
+function skill2() {
+	action = actions[0];
+	obj_info_panel.set_text("Cost: "+string(actions[2].cost)+"\n"+skill_descriptions[2]+"\nL - Confirm\nTab - Back");
+	skill_range = [obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]];
+	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._target_highlight=true;
+	obj_cursor.movable_tiles=skill_range;
+	
+	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
+		obj_battleControl.tp_current+=2;
+		if(obj_battleControl.tp_current>obj_battleControl.tp_max){
+			obj_battleControl.tp_current=obj_battleControl.tp_max;
+		}
+		skill_complete = true;
+		skill_range = obj_gridCreator.reset_highlights_target();
+		
+	}else if(keyboard_check_pressed(vk_tab)){
+		skill_back = true;
+		skill_range = obj_gridCreator.reset_highlights_target();
 		
 	}
 }
