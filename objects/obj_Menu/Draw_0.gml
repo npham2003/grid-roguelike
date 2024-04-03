@@ -15,6 +15,10 @@ draw_sprite_ext(spr_diamond_outline, 0, imgX, imgY, _sb,_sb, 0, _characterPrimar
 
 //draw_sprite_ext(spr_temp_Akeha, 0, imgX, imgY-20, -0.55, 0.55, 0, c_white, 1);
 
+#region tp
+draw_text_transformed(x, y, "TP: " + string(obj_battleControl.tp_current), 1, 1, 0);
+#endregion
+
 #region draw character
 
 gpu_set_blendenable(false);
