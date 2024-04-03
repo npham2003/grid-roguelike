@@ -122,7 +122,8 @@ global.enemies = [
 		sprites: { idle: spr_slime_idle, attack: spr_slime_attack },
 		actions: [global.enemyActions.melee],
 		sounds: { attack: sfx_slime_attack },
-		ally: false
+		ally: false,
+		gold: 50
 	},
 	{
 		name: "Bat",
@@ -136,6 +137,47 @@ global.enemies = [
 		sprites: { idle: spr_bat_idle, attack: spr_bat_attack },
 		actions: [global.enemyActions.ranged_attack],
 		sounds: { attack: sfx_bat_attack },
-		ally: false
+		ally: false,
+		gold: 100
 	}
+]
+
+//Encounters
+global.encounters = [
+	[
+		{
+			info: global.enemies[1],
+			grid: [8, 3]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 2]
+		}
+		
+	],
+	[
+		{
+			info: global.enemies[0],
+			grid: [8, 1]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 2]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 3]
+		}
+	],
+	[
+		{
+			info: global.enemies[1],
+			grid: [8, 1]
+		},
+		{
+			info: global.enemies[1],
+			grid: [8, 3]
+		}
+	],
+
 ]

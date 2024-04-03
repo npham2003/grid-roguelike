@@ -96,7 +96,9 @@ function move_right() {
 function confirm_move() {
 	obj_gridCreator.remove_entity(prev_grid[0],prev_grid[1]);
 	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile=self;
+	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._is_empty=false;
 	obj_gridCreator.reset_highlights_move();
+	
 	
 }
 

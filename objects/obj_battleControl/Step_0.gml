@@ -35,6 +35,8 @@ switch (state) {
 				
 			}
 		}
+		var random_battle = irandom(array_length(global.encounters)-1);
+		spawn_enemies(global.encounters[random_battle]);
 		change_state(BattleState.EnemyAiming);
 		break;
 #endregion
@@ -44,21 +46,22 @@ switch (state) {
 		
 		if (in_animation) {
 			break;
+		}else{
+		
+			if (enemy_order >= array_length(enemy_units))
+			{
+				enemy_order = 0;
+				change_state(BattleState.PlayerPreparing);
+				break;
+			}
+			show_debug_message(string(enemy_order));
+			var unit = enemy_units[enemy_order];
+			unit.find_target();
+			unit.aim();
+			obj_info_panel.set_text(unit.name+" is aiming");
+		
+			enemy_order += 1;
 		}
-		
-		if (enemy_order >= array_length(enemy_units))
-		{
-			enemy_order = 0;
-			change_state(BattleState.PlayerPreparing);
-			break;
-		}
-		
-		var unit = enemy_units[enemy_order];
-		unit.find_target();
-		unit.aim();
-		obj_info_panel.set_text(unit.name+" is aiming");
-		
-		enemy_order += 1;
 		break;
 #endregion
 
@@ -406,6 +409,17 @@ switch (state) {
 			}
 		}
 		
+		break;
+#endregion
+
+#region Battle End
+	case BattleState.BattleEnd:
+		if(in_animation){
+			break;
+		}
+		gold+=battle_gold;
+		obj_gridCreator.reset_highlights_enemy();
+		change_state(BattleState.BattleStart);
 		break;
 #endregion
 
