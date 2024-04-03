@@ -1,6 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
-draw_sprite_ext(spr_info_panel, image_index, x, y, 10, 6, image_angle, image_blend, 1);
+//draw_sprite_ext(spr_info_panel, image_index, x, y, 10, 6, image_angle, image_blend, 1);
 
 draw_set_font(fnt_chiaro); 
 

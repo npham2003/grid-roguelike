@@ -116,7 +116,8 @@ switch (state) {
 		
 		if(unit!=pointer_null){
 			if(unit.ally){
-				obj_info_panel.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
+				//obj_info_panel.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
+				obj_info_panel.set_text("WASD - Move Cursor     Space - Select Unit     Enter - End Turn");
 				unit.prev_grid = [unit.grid_pos[0], unit.grid_pos[1]];
 				if(!unit.has_moved && !unit.has_attacked){
 					unit.preview_moveable_grids();
@@ -197,7 +198,9 @@ switch (state) {
 	case BattleState.PlayerMoving:
 		
 		if(unit!=pointer_null){
-			obj_info_panel.set_text("WASD - Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
+			//obj_info_panel.set_text("WASD - Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
+			obj_info_panel.set_text("WASD - Move Cursor     Space - Select Unit\nEnter - Do Nothing     Tab - Back");
+			
 		
 			if (wasd_pressed) {
 				//show_debug_message(unit.name + ": moving");
