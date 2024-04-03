@@ -219,7 +219,7 @@ function skill3() {
 			if (!skill_range_aux[i]._is_empty) {
 				show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
 				skill_range_aux[i]._entity_on_tile.hp -= _damage; // temp var until we get shit moving
-				obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, _damage);
+				obj_battleEffect.show_damage(skill_range_aux[i]._entity_on_tile, _damage);
 				show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
 			}
 		}
