@@ -110,8 +110,7 @@ function back_move(){
 
 function baseattack() {
 	action = actions[0];
-	is_attacking = true;
-	obj_info_panel.set_text("Cost: "+string(actions[0].cost)+"\n"+actions[0].description+"\nWASD - Aim\nJ - Confirm\nTab - Back");
+	obj_info_panel.set_text("WASD - Aim     Enter - Confirm     Tab - Back\nHits the first target in a row\nCost: "+string(actions[0].cost));
 	skill_range = obj_gridCreator.highlighted_target_straight(grid_pos[0]+1, grid_pos[1]);
 	obj_cursor.movable_tiles=skill_range;
 	
@@ -148,12 +147,13 @@ function skill1() {
 	var _damage = action.damage;
 	skill_range = obj_gridCreator.highlighted_target_line_pierce(grid_pos[0]+1, grid_pos[1]);
 	obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]];
-	obj_info_panel.set_text("Cost: "+string(actions[1].cost)+"\n"+actions[1].description+"\nWASD - Aim\nK - Confirm\nTab - Back");
+	obj_info_panel.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+string(actions[1].description)+"\nCost: "+string(actions[1].cost));
 	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 		audio_play_sound(sfx_blast, 0, false);
 		for (var i = 0; i < array_length(skill_range); i++) {
 			if (!skill_range[i]._is_empty) {
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
+				skill_range[i]._entity_on_tile.hp -= _damage;
 				obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, _damage);
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
 			}
@@ -183,7 +183,7 @@ function skill3() {
 	
 	audio_play_sound(sfx_mortar_windup, 0, false);
 	}
-	obj_info_panel.set_text("Cost: "+string(actions[3].cost)+"\n"+actions[3].description+"\nWASD - Aim\n; - Confirm\nTab - Back");
+	obj_info_panel.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+string(actions[3].description)+"\nCost: "+string(actions[3].cost));
 	skill_range = obj_gridCreator.highlighted_attack_circle(grid_pos[0], grid_pos[1], range);
 	skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
 	obj_cursor.movable_tiles=skill_range;
@@ -217,6 +217,7 @@ function skill3() {
 		for (var i = 0; i < array_length(skill_range_aux); i++) {
 			if (!skill_range_aux[i]._is_empty) {
 				show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
+				skill_range_aux[i]._entity_on_tile.hp -= _damage;
 				obj_battleEffect.show_damage(skill_range_aux[i]._entity_on_tile, _damage);
 				show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
 			}
@@ -240,7 +241,7 @@ function skill3() {
 
 function skill2() {
 	action = actions[2];
-	obj_info_panel.set_text("Cost: "+string(actions[2].cost)+"\n"+actions[2].description+"\nL - Confirm\nTab - Back");
+	obj_info_panel.set_text("WASD - Aim     L - Confirm     Tab - Back\n"+string(actions[2].description)+"\nCost: "+string(actions[2].cost));
 	skill_range = [obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]];
 	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._target_highlight=true;
 	obj_cursor.movable_tiles=skill_range;

@@ -86,6 +86,7 @@ switch (state) {
 		
 		change_state(BattleState.PlayerWaitingAction);
 		obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
+		obj_cursor.reset_cursor(player_units[0].grid_pos[0],player_units[0].grid_pos[1]);
 	
 		break;
 #endregion
@@ -116,6 +117,7 @@ switch (state) {
 		
 		if(unit!=pointer_null){
 			if(unit.ally){
+				obj_menu.open_menu();
 				//obj_info_panel.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
 				obj_info_panel.set_text("WASD - Move Cursor     Space - Select Unit     Enter - End Turn");
 				unit.prev_grid = [unit.grid_pos[0], unit.grid_pos[1]];
@@ -184,9 +186,11 @@ switch (state) {
 				}
 				
 			}else{
-				
+				obj_menu.close_menu();
 				unit.display_target_highlights();
 			}
+		}else{
+			obj_menu.close_menu();
 		}
 		if(key_Enter_pressed){
 			change_state(BattleState.EnemyTakingAction);
@@ -199,7 +203,7 @@ switch (state) {
 		
 		if(unit!=pointer_null){
 			//obj_info_panel.set_text("WASD - Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
-			obj_info_panel.set_text("WASD - Move Cursor     Space - Select Unit\nEnter - Do Nothing     Tab - Back");
+			obj_info_panel.set_text("WASD - Move     Enter - Do Nothing     Tab - Back");
 			
 		
 			if (wasd_pressed) {
@@ -355,7 +359,7 @@ switch (state) {
 #region Player Taking Action
 	case BattleState.PlayerTakingAction:
 	
-		unit = obj_gridCreator.battle_grid[obj_cursor.current_x][obj_cursor.current_y]._entity_on_tile;;
+		
 		
 		show_debug_message(unit.name + ": taking action");
 		
@@ -391,7 +395,7 @@ switch (state) {
 		if (in_animation) {
 			break;
 		}
-		
+		obj_menu.close_menu();
 		
 		if(!checking_death){
 			if (enemy_order >= array_length(enemy_units)) {

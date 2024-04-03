@@ -4,3 +4,8 @@ function show_damage(_object, _damage) { // show damage
 		damage_num = _damage;
 	}
 }
+
+function health_bar(health_x, health_y, percentage){
+	draw_healthbar(health_x, health_y, health_x+20, health_y, percentage, c_white, c_red, c_red, 0, true, true)
+	
+}

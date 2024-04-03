@@ -14,6 +14,7 @@ sprite_moving_speed = 5;
 transparency=1;
 is_dead = false;
 
+//healthbar_y = y-40;
 
 function find_target() {
 	var available_targets = obj_battleControl.player_units;
