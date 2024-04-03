@@ -1,0 +1,1 @@
+draw_sprite_ext(gradient, 0, 0, 128, 22, 9, 0, global._playerTurnBottom, 1);
