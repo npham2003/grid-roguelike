@@ -86,6 +86,7 @@ switch (state) {
 		
 		change_state(BattleState.PlayerWaitingAction);
 		obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
+		obj_cursor.reset_cursor(player_units[0].grid_pos[0],player_units[0].grid_pos[1]);
 	
 		break;
 #endregion
@@ -394,7 +395,7 @@ switch (state) {
 		if (in_animation) {
 			break;
 		}
-		
+		obj_menu.close_menu();
 		
 		if(!checking_death){
 			if (enemy_order >= array_length(enemy_units)) {

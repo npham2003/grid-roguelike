@@ -9,7 +9,7 @@ for (var i = 4; i >= 0; i--) {
 
 //draw_set_color(_secondary);
 
-var _sb = 20;
+var _sb = 15;
 draw_sprite_ext(spr_diamond_base, 0, imgX, imgY, _sb,_sb, 0, global._primary, 1);
 draw_sprite_ext(spr_diamond_outline, 0, imgX, imgY, _sb,_sb, 0, global._characterPrimary, 1);
 //draw_rectangle(imgX-150, imgY-150, imgX+160, imgY+100, true);

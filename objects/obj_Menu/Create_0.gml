@@ -7,9 +7,9 @@ open = true;
 
 #region location
 imgX = 200;
-imgY = 670;
+imgY = 690;
 
-rootX = imgX;
+rootX = imgX+50;
 menuX = [rootX, rootX, rootX, rootX, rootX];
 rootY = imgY + 32;
 menuY = [rootY, rootY, rootY, rootY, rootY];
