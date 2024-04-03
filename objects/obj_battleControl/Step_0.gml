@@ -181,15 +181,14 @@ switch (state) {
 					//}
 					//show_debug_message("Switch to next player unit");
 				}
-				else if (key_Enter_pressed) {
-					unit.confirm_move();
-					unit.has_moved=true;
-					unit.has_attacked=true;
-				}
+				
 			}else{
 				
 				unit.display_target_highlights();
 			}
+		}
+		if(key_Enter_pressed){
+			change_state(BattleState.EnemyTakingAction);
 		}
 		break;
 #endregion
