@@ -199,7 +199,7 @@ switch (state) {
 		
 		if(unit!=pointer_null){
 			//obj_info_panel.set_text("WASD - Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
-			obj_info_panel.set_text("WASD - Move Cursor     Space - Select Unit\nEnter - Do Nothing     Tab - Back");
+			obj_info_panel.set_text("WASD - Move     Enter - Do Nothing     Tab - Back");
 			
 		
 			if (wasd_pressed) {
@@ -355,7 +355,7 @@ switch (state) {
 #region Player Taking Action
 	case BattleState.PlayerTakingAction:
 	
-		unit = obj_gridCreator.battle_grid[obj_cursor.current_x][obj_cursor.current_y]._entity_on_tile;;
+		
 		
 		show_debug_message(unit.name + ": taking action");
 		
