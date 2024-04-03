@@ -131,8 +131,8 @@ global.enemies = [
 	{
 		name: "Slime",
 		obj: obj_slime,
-		hp: 5,
-		hpMax: 5,
+		hp: 2,
+		hpMax: 2,
 		mp: 0,
 		mpMax: 0,
 		strength: 5,
@@ -146,8 +146,8 @@ global.enemies = [
 	{
 		name: "Bat",
 		obj: obj_bat,
-		hp: 3,
-		hpMax: 3,
+		hp: 1,
+		hpMax: 1,
 		mp: 0,
 		mpMax: 0,
 		strength: 4,
