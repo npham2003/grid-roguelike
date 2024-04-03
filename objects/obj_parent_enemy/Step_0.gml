@@ -21,7 +21,7 @@ if (is_moving) {
 	}
 	else {
 		attack_ready = true;
-		
+		set_danger_highlights();
 		
 		is_moving = false;
 		obj_battleControl.in_animation = false;

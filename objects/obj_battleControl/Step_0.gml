@@ -417,9 +417,18 @@ switch (state) {
 		if(in_animation){
 			break;
 		}
-		gold+=battle_gold;
-		obj_gridCreator.reset_highlights_enemy();
-		change_state(BattleState.BattleStart);
+		if(array_length(enemy_units)==0){
+			gold+=battle_gold;
+			obj_gridCreator.reset_highlights_enemy();
+			change_state(BattleState.BattleStart);
+		}else{
+			if(keyboard_check_pressed(vk_anykey)){
+				obj_gridCreator.reset_highlights_cursor();
+				obj_info_panel.set_text("Press any key to restart");
+				room_restart();
+			}
+			
+		}
 		break;
 #endregion
 
