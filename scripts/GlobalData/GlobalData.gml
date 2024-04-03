@@ -130,7 +130,7 @@ global.players = [
 global.enemies = [
 	{
 		name: "Slime",
-		obj: obj_slime,
+		
 		hp: 5,
 		hpMax: 5,
 		mp: 0,
@@ -145,7 +145,7 @@ global.enemies = [
 	},
 	{
 		name: "Bat",
-		obj: obj_bat,
+	
 		hp: 3,
 		hpMax: 3,
 		mp: 0,
