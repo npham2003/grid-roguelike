@@ -205,13 +205,11 @@ switch (state) {
 				obj_cursor.reset_cursor(unit.grid_pos[0], unit.grid_pos[1]);
 			}
 		else if (jkl_pressed) { // optimize eventually
-			
 			if (!unit.has_attacked) {
 				if (key_J_pressed) {
 					if (tp_current >= unit.actions[0].cost) {
 						unit.skill_used = 0;
 						enough_tp = true;
-						obj_gridCreator.reset_highlights_move();
 					}
 					else {
 						audio_play_sound(sfx_no_tp, 0, false);
@@ -222,7 +220,6 @@ switch (state) {
 				if (tp_current >= unit.actions[1].cost) {
 				unit.skill_used = 1;
 				enough_tp = true;
-				obj_gridCreator.reset_highlights_move();
 				}
 				else {
 						audio_play_sound(sfx_no_tp, 0, false);
@@ -232,14 +229,13 @@ switch (state) {
 				if (tp_current >= unit.actions[2].cost) {
 				unit.skill_used = 2;
 				enough_tp = true;
-				obj_gridCreator.reset_highlights_move();
 				}
 				else {
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
 			}
 				if (enough_tp) {
-					
+					unit.confirm_move();
 					unit.skill_complete = false;
 					enough_tp = false;
 					change_state(BattleState.PlayerAiming);

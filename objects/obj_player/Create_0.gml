@@ -100,7 +100,7 @@ function confirm_move() {
 }
 
 function back_move(){
-	
+	obj_gridCreator.move_entity(grid_pos[0], grid_pos[1], prev_grid[0], prev_grid[1]);
 	grid_pos=prev_grid;
 	return_coords = obj_gridCreator.get_coordinates(grid_pos[0],grid_pos[1]);
 	x=return_coords[0];
@@ -126,7 +126,7 @@ function baseattack() {
 		}
 		skill_complete = true;
 		skill_range = obj_gridCreator.reset_highlights_target();
-		confirm_move();
+		
 	}else if(keyboard_check_pressed(vk_tab)){
 		skill_back = true;
 		skill_range = obj_gridCreator.reset_highlights_target();
@@ -152,7 +152,7 @@ function skill1() {
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
 			}
 		}
-		confirm_move();
+		
 		skill_complete = true;
 		play_sound = false;
 		skill_range = obj_gridCreator.reset_highlights_target();
@@ -212,7 +212,7 @@ function skill2() {
 				show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
 			}
 		}
-		confirm_move();
+		
 		skill_range = obj_gridCreator.reset_highlights_attack();
 		skill_range_aux = obj_gridCreator.reset_highlights_target();
 		skill_complete = true;
