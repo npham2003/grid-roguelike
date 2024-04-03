@@ -80,7 +80,8 @@ global.players = [
 		strength: 6,
 		playerSpeed: 2,
 		sprites : { idle: spr_player, dead: spr_player_dead},
-		actions : [global.actionLibrary.baseAttack, global.actionLibrary.beam, global.actionLibrary.mortar]
+		actions : [global.actionLibrary.baseAttack, global.actionLibrary.beam, global.actionLibrary.mortar],
+		ally: true
 	}
 	//{ //new member
 	//	name: "put new party member here", //refer to example above
@@ -102,7 +103,8 @@ global.enemies = [
 		_speed: 1,
 		sprites: { idle: spr_slime_idle, attack: spr_slime_attack },
 		actions: [global.enemyActions.melee],
-		sounds: { attack: sfx_slime_attack }
+		sounds: { attack: sfx_slime_attack },
+		ally: false
 	},
 	{
 		name: "Bat",
@@ -115,6 +117,7 @@ global.enemies = [
 		_speed: 2,
 		sprites: { idle: spr_bat_idle, attack: spr_bat_attack },
 		actions: [global.enemyActions.ranged_attack],
-		sounds: { attack: sfx_bat_attack }
+		sounds: { attack: sfx_bat_attack },
+		ally: false
 	}
 ]
