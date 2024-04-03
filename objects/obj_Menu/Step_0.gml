@@ -6,10 +6,15 @@ for (var i = 0; i < 4; i++) {
 	optionAlpha = lerp(optionAlpha, state, 0.1);
 }
 
-if keyboard_check_pressed(vk_right) {
+
+if (state <= expansionLimit) {
 	state += 1;
 }
 
-if keyboard_check_pressed(vk_left) {
-	state -= 1;
-}
+//if keyboard_check_pressed(vk_right) {
+//	state += 1;
+//}
+
+//if keyboard_check_pressed(vk_left) {
+//	state -= 1;
+//}
