@@ -131,6 +131,7 @@ switch (state) {
 					}
 				}
 				else if (jkl_pressed) { // optimize eventually
+					obj_gridCreator.reset_highlights_cursor();
 					if (!unit.has_attacked) {
 						if (key_J_pressed) {
 							if (tp_current >= unit.actions[0].cost) {
@@ -230,6 +231,7 @@ switch (state) {
 					obj_cursor.reset_cursor(unit.grid_pos[0], unit.grid_pos[1]);
 				}
 			else if (jkl_pressed) { // optimize eventually
+				obj_gridCreator.reset_highlights_cursor();
 				if (!unit.has_attacked) {
 					if (key_J_pressed) {
 						if (tp_current >= unit.actions[0].cost) {
