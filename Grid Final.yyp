@@ -65,6 +65,7 @@
     {"id":{"name":"obj_slime","path":"objects/obj_slime/obj_slime.yy",},},
     {"id":{"name":"obj_tile_class","path":"objects/obj_tile_class/obj_tile_class.yy",},},
     {"id":{"name":"obj_draw_bg","path":"objects/obj_draw_bg/obj_draw_bg.yy",},},
+    {"id":{"name":"obj_damage_number","path":"objects/obj_damage_number/obj_damage_number.yy",},},
     {"id":{"name":"GridTest","path":"rooms/GridTest/GridTest.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"GlobalData","path":"scripts/GlobalData/GlobalData.yy",},},

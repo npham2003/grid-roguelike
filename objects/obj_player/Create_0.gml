@@ -116,13 +116,14 @@ function baseattack() {
 	skill_range = obj_gridCreator.highlighted_target_straight(grid_pos[0]+1, grid_pos[1]);
 	obj_cursor.movable_tiles=skill_range;
 	
+	var _damage = action.damage;
 	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
 		audio_play_sound(sfx_base_laser, 0, false);
 		for (var i = 0; i < array_length(skill_range); i++) {
 			if (!skill_range[i]._is_empty) {
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
-				skill_range[i]._entity_on_tile.hp -= 1; // temp var until we get shit moving
-				
+				skill_range[i]._entity_on_tile.hp -= _damage; // temp var until we get shit moving
+				obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, _damage);
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
 			}
 		}
@@ -145,12 +146,17 @@ function skill1() {
 	skill_range = obj_gridCreator.highlighted_target_line_pierce(grid_pos[0]+1, grid_pos[1]);
 	obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]];
 	obj_info_panel.set_text("Cost: "+string(actions[1].cost)+"\n"+actions[1].description+"\nWASD - Aim\nK - Confirm\nTab - Back");
+	//obj_info_panel.set_text("Cost: "+string(actions[1].cost)+"\n"+skill_descriptions[1]+"\nWASD - Aim\nK - Confirm\nTab - Back");
+	
+	var _damage = action.damage;
+	
 	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 		audio_play_sound(sfx_blast, 0, false);
 		for (var i = 0; i < array_length(skill_range); i++) {
 			if (!skill_range[i]._is_empty) {
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
-				skill_range[i]._entity_on_tile.hp -= 1; // temp var until we get shit moving
+				skill_range[i]._entity_on_tile.hp -= _damage; // temp var until we get shit moving
+				obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, _damage);
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
 			}
 		}
@@ -175,6 +181,7 @@ function skill3() {
 	skill_init = true;
 	
 	audio_play_sound(sfx_mortar_windup, 0, false);
+	
 	}
 	obj_info_panel.set_text("Cost: "+string(actions[3].cost)+"\n"+actions[3].description+"\nWASD - Aim\n; - Confirm\nTab - Back");
 	skill_range = obj_gridCreator.highlighted_attack_circle(grid_pos[0], grid_pos[1], range);
@@ -205,12 +212,14 @@ function skill3() {
 			skill_coords[1] -= 1;
 		}
 	}
+
 	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(186)) {
 		audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 		for (var i = 0; i < array_length(skill_range_aux); i++) {
 			if (!skill_range_aux[i]._is_empty) {
 				show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
-				skill_range_aux[i]._entity_on_tile.hp -= 1; // temp var until we get shit moving
+				skill_range_aux[i]._entity_on_tile.hp -= _damage; // temp var until we get shit moving
+				obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, _damage);
 				show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
 			}
 		}

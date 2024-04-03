@@ -39,6 +39,7 @@
     {"name":"obj_music","order":4,"path":"objects/obj_music/obj_music.yy",},
     {"name":"obj_slime","order":1,"path":"objects/obj_slime/obj_slime.yy",},
     {"name":"obj_draw_bg","order":7,"path":"objects/obj_draw_bg/obj_draw_bg.yy",},
+    {"name":"obj_damage_number","order":8,"path":"objects/obj_damage_number/obj_damage_number.yy",},
     {"name":"GridTest","order":1,"path":"rooms/GridTest/GridTest.yy",},
     {"name":"GlobalData","order":2,"path":"scripts/GlobalData/GlobalData.yy",},
     {"name":"GridCoOrdinates","order":1,"path":"scripts/GridCoOrdinates/GridCoOrdinates.yy",},
