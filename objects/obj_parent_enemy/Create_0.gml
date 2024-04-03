@@ -77,16 +77,20 @@ function calculate_util(test_x, test_y) {
 				util+=1;
 			}
 			if(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.ally){
-				util+=1;
+				util+=2;
 			}else{
-				util-=1;
+				util-=3;
 			}
 		}
-		if(obj_gridCreator.battle_grid[test_x][test_y]._danger_number>0){
-			util-=2;
+		
+		if(attack_x<5){
+			util+=1;	
 		}
 		//show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
 		
+	}
+	if(obj_gridCreator.battle_grid[test_x][test_y]._danger_number>0){
+		util-=2;
 	}
 	return util;
 	
