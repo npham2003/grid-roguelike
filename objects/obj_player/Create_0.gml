@@ -212,7 +212,8 @@ function skill3() {
 			skill_coords[1] -= 1;
 		}
 	}
-
+	
+	var _damage = action.damage;
 	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(186)) {
 		audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 		for (var i = 0; i < array_length(skill_range_aux); i++) {
@@ -240,7 +241,7 @@ function skill3() {
 
 function skill2() {
 	action = actions[0];
-	obj_info_panel.set_text("Cost: "+string(actions[2].cost)+"\n"+actions[2].description+"\nL - Confirm\nTab - Back");
+	obj_info_panel.set_text("Cost: "+string(actions[2].cost)+"\n"+skill_descriptions[2]+"\nL - Confirm\nTab - Back");
 	skill_range = [obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]];
 	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._target_highlight=true;
 	obj_cursor.movable_tiles=skill_range;
