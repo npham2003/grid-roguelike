@@ -6,6 +6,7 @@ skill_range_aux = [];
 skill_coords = [];
 skill_complete = false;
 skill_init = false;
+new_coords = obj_gridCreator.get_coordinates(grid_pos[0], grid_pos[1]);
 play_sound = false; // temp var, will change later
 is_attacking = false;
 prev_grid = [];
@@ -52,7 +53,6 @@ function move_up() {
 	for (var i = 0; i < array_length(moveable_grids); i++) {
 		if (grid_pos[1] > 0 
 			&& moveable_grids[i] == obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1] - 1]) {
-		y -= CELLHEIGHT; // eventually make it so that we move to the tile coord, not manually move
 		grid_pos[1] -= 1;
 		break;
 		}
@@ -63,7 +63,6 @@ function move_down() {
 	for (var i = 0; i < array_length(moveable_grids); i++) {
 		if (grid_pos[1] < GRIDHEIGHT - 1
 			&& moveable_grids[i] == obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1] + 1]) {
-			y += CELLHEIGHT;
 			grid_pos[1] += 1;
 			break;
 		}
@@ -74,7 +73,6 @@ function move_left() {
 	for (var i = 0; i < array_length(moveable_grids); i++) {
 		if (grid_pos[0] > 0 
 			&& moveable_grids[i] == obj_gridCreator.battle_grid[grid_pos[0] - 1][grid_pos[1]]) {
-			x -= CELLWIDTH;
 			grid_pos[0] -= 1;
 			break;
 		}
@@ -85,7 +83,6 @@ function move_right() {
 	for (var i = 0; i < array_length(moveable_grids); i++) {
 		if (grid_pos[0] < (GRIDWIDTH / 2 - 1)
 			&& moveable_grids[i] == obj_gridCreator.battle_grid[grid_pos[0] + 1][grid_pos[1]]) {
-			x += CELLWIDTH;
 			grid_pos[0] += 1;
 			break;
 		}
@@ -113,6 +110,7 @@ function back_move(){
 
 function baseattack() {
 	action = actions[0];
+	is_attacking = true;
 	obj_info_panel.set_text("Cost: "+string(actions[0].cost)+"\n"+actions[0].description+"\nWASD - Aim\nJ - Confirm\nTab - Back");
 	skill_range = obj_gridCreator.highlighted_target_straight(grid_pos[0]+1, grid_pos[1]);
 	obj_cursor.movable_tiles=skill_range;
@@ -127,10 +125,12 @@ function baseattack() {
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
 			}
 		}
+		is_attacking = false;
 		skill_complete = true;
 		skill_range = obj_gridCreator.reset_highlights_target();
 		
 	}else if(keyboard_check_pressed(vk_tab)){
+		is_attacking = false;
 		skill_back = true;
 		skill_range = obj_gridCreator.reset_highlights_target();
 		
@@ -142,6 +142,7 @@ function skill1() {
 	audio_play_sound(sfx_beam_windup, 0, false);
 	play_sound = true;
 	}
+	is_attacking = true;
 	action = actions[1];
 	skill_range = obj_gridCreator.highlighted_target_line_pierce(grid_pos[0]+1, grid_pos[1]);
 	obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]];
@@ -155,12 +156,13 @@ function skill1() {
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
 			}
 		}
-		
+		is_attacking = false;
 		skill_complete = true;
 		play_sound = false;
 		skill_range = obj_gridCreator.reset_highlights_target();
 	show_debug_message(action.name);
 	}else if(keyboard_check_pressed(vk_tab)){
+		is_attacking = false;
 		skill_back = true;
 		skill_range = obj_gridCreator.reset_highlights_target();
 		play_sound = false;
@@ -174,6 +176,7 @@ function skill3() {
 	skill_coords[0] = grid_pos[0] + range;
 	skill_coords[1] = grid_pos[1];
 	skill_init = true;
+	is_attacking = true;
 	
 	audio_play_sound(sfx_mortar_windup, 0, false);
 	}
@@ -216,12 +219,14 @@ function skill3() {
 			}
 		}
 		
+		is_attacking = false;
 		skill_range = obj_gridCreator.reset_highlights_attack();
 		skill_range_aux = obj_gridCreator.reset_highlights_target();
 		skill_complete = true;
 		skill_init = false;
 		show_debug_message(action.name);
 		}else if(keyboard_check_pressed(vk_tab)){
+		is_attacking = false;
 		skill_back = true;
 		skill_range = obj_gridCreator.reset_highlights_target();
 		skill_range = obj_gridCreator.reset_highlights_attack();
