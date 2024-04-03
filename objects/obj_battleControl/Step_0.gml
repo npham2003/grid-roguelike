@@ -298,7 +298,7 @@ switch (state) {
 #region Player Aiming
 	case BattleState.PlayerAiming:
 	
-		unit = obj_gridCreator.battle_grid[obj_cursor.current_x][obj_cursor.current_y]._entity_on_tile;
+		
 		if(unit.skill_back){
 			change_state(BattleState.PlayerMoving);
 			unit.show_moveable_grids_prev();
