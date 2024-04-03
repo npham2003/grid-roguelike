@@ -39,7 +39,7 @@ if(open){
 	#region hp
 	var pc;
 	pc = (obj_player.hp / obj_player.hpMax) * 100;
-	draw_healthbar(menuX[0]+20, menuY[0]+3, 500, menuY[0]-3, pc, global._primary, global._characterSecondary, global._characterSecondary, 0, true, true)
+	draw_healthbar(menuX[0]-70, menuY[0]+3, 550, menuY[0]-3, pc, global._primary, global._characterSecondary, global._characterSecondary, 0, true, true)
 	draw_text_transformed(menuX[0]+50, menuY[0]-10, string(obj_player.hp)+"/"+string(obj_player.hpMax), 0.8, 0.8, 0);
 	//draw_text_transformed(menuX[0]+50, menuY[0]-35, "HP: " + string(obj_player.hp), 0.8, 0.8, 0);
 	#endregion
