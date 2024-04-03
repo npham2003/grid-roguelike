@@ -41,6 +41,7 @@ for (var i = 0; i < array_length(player_data); i++) {
 	
 	array_push(player_units, unit);
 	obj_gridCreator.battle_grid[player_data[i].grid[0]][player_data[i].grid[1]]._entity_on_tile=unit;
+	
 }
 
 // Spawn enemies
@@ -69,6 +70,10 @@ for (var i = 0; i < array_length(enemy_data); i++) {
 	array_push(enemy_units, unit);
 	obj_gridCreator.battle_grid[enemy_data[i].grid[0]][enemy_data[i].grid[1]]._entity_on_tile=unit;
 }
+
+obj_cursor.movable_tiles=obj_gridCreator.battle_grid;
+
+
 #endregion
 
 enum BattleState {

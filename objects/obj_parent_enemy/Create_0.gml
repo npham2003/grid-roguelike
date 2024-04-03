@@ -150,7 +150,27 @@ function display_target_highlights(){
 		
 		//show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
 		
-		obj_gridCreator.battle_grid[attack_x][attack_y]._target_highlight = true;
+		obj_gridCreator.battle_grid[attack_x][attack_y]._danger_cursor = true;
+		
+	}
+}
+
+
+function remove_target_highlights(){
+	for (var i = 0; i < array_length(action.range); i++) {
+		var attack_x = grid_pos[0] + action.range[i][0];
+		var attack_y = grid_pos[1] + action.range[i][1];
+		
+		if (attack_x < 0 || attack_x >= GRIDWIDTH) {
+			continue;
+		}
+		if (attack_y < 0 || attack_y >= GRIDHEIGHT) {
+			continue;
+		}
+		
+		//show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
+		
+		obj_gridCreator.battle_grid[attack_x][attack_y]._danger_cursor = false;
 		
 	}
 }
@@ -171,11 +191,14 @@ function do_damage(){
 		//show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
 		
 		if(!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty){
+			show_debug_message("("+string(attack_x)+","+string(attack_y)+")")
+			show_debug_message(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile==pointer_null);
 			obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.hp-=1;
 
 		}
 		
 	}
+	remove_target_highlights();
 	
 }
 

@@ -15,6 +15,10 @@ _danger_highlight = false;
 
 _danger_number = 0;
 
+_move_cursor = false;
+
+_danger_cursor = false;
+
 set_coords = function(_x_coordinate, _y_coordinate){
 	_x_coord = _x_coordinate;
 	_y_coord = _y_coordinate;
