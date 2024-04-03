@@ -2,6 +2,7 @@ gridHoriz = GRIDWIDTH;
 gridVert = GRIDHEIGHT;
 
 battle_grid = ds_grid_create(gridHoriz, gridVert);
+battle_grid_flattened=[];
 
 highlighted_move_array=[];
 highlighted_attack_array=[];
@@ -24,7 +25,6 @@ get_coordinates = function(_x_value, _y_value){
 }
 
 remove_entity = function(_x_value, _y_value){
-	
 	battle_grid[_x_value][_y_value]._is_empty=true;
 	battle_grid[_x_value][_y_value]._entity_on_tile=pointer_null;
 	
@@ -302,14 +302,6 @@ for (var i = 0; i< gridHoriz;i++){
 		var coordinates = get_coordinates(i,j);
 		var _tile = instance_create_layer(coordinates[0],coordinates[1],"Tiles",obj_tile_class);
 		battle_grid[i][j]=_tile;
-		battle_grid[i][j]._x_coord=i;
-		battle_grid[i][j]._y_coord=j;
-		battle_grid[i][j]._is_empty=true;
-		battle_grid[i][j].set_coords(i,j);
-		battle_grid[i][j]._move_highlight = false;
-		battle_grid[i][j]._target_highlight = false;
-		battle_grid[i][j]._attack_highlight = false;
-		battle_grid[i][j]._danger_highlight = false;
-		battle_grid[i][j]._danger_number = 0;
+		array_push(battle_grid_flattened,_tile);
 	}
 }

@@ -24,6 +24,8 @@ has_attacked = false;
 function show_moveable_grids() {
 	//moveable_grids = obj_gridCreator.get_moveable_grids(grid_pos, move_range);
 	prev_grid = [grid_pos[0], grid_pos[1]];
+	show_debug_message(grid_pos[0]);
+	show_debug_message(grid_pos[1]);
 	moveable_grids = obj_gridCreator.highlighted_move(grid_pos[0], grid_pos[1], move_range);	
 	//moveable_grids = obj_gridCreator.highlighted_attack_line(0, grid_pos[1]);
 
@@ -82,8 +84,9 @@ function move_right() {
 }
 
 function confirm_move() {
-	//obj_gridCreator.move_entity(prev_grid[0], prev_grid[1], grid_pos[0], grid_pos[1]);
+	obj_gridCreator.move_entity(prev_grid[0], prev_grid[1], grid_pos[0], grid_pos[1]);
 	obj_gridCreator.reset_highlights_move();
+	
 }
 
 function back_move(){
