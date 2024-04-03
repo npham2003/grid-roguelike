@@ -300,7 +300,6 @@ switch (state) {
 	
 		unit = obj_gridCreator.battle_grid[obj_cursor.current_x][obj_cursor.current_y]._entity_on_tile;
 		if(unit.skill_back){
-			show_debug_message("hi");
 			change_state(BattleState.PlayerMoving);
 			unit.show_moveable_grids_prev();
 			unit.has_attacked = false;

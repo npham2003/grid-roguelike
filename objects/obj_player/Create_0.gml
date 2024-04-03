@@ -171,7 +171,7 @@ function skill1() {
 }
 
 function skill3() {
-	action = actions[2];
+	action = actions[3];
 	var _damage = action.damage;
 	if (!skill_init) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 	range = 3;
@@ -238,7 +238,7 @@ function skill3() {
 }
 
 function skill2() {
-	action = actions[0];
+	action = actions[2];
 	obj_info_panel.set_text("Cost: "+string(actions[2].cost)+"\n"+actions[2].description+"\nL - Confirm\nTab - Back");
 	skill_range = [obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]];
 	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._target_highlight=true;
