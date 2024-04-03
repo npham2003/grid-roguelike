@@ -100,7 +100,7 @@ global.players = [
 		tpMax: 15,
 		strength: 6,
 		playerSpeed: 2,
-		sprites : { idle: spr_player, dead: spr_player_dead},
+		sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.beam, global.actionLibrary.charge,  global.actionLibrary.mortar],
 		ally: true
 	}
