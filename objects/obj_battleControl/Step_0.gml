@@ -110,7 +110,7 @@ switch (state) {
 		
 		if(unit!=pointer_null){
 			if(unit.ally){
-				obj_info_panel.set_text("Space - Move Unit\nJ - "+unit.skill_names[0]+"\nK - "+unit.skill_names[1]+"\nL - "+unit.skill_names[2]+"\nEnter - End Turn");
+				obj_info_panel.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.skill_names[0]+"\nK - "+unit.skill_names[1]+"\nL - "+unit.skill_names[2]+"\nEnter - End Turn");
 				unit.prev_grid = [unit.grid_pos[0], unit.grid_pos[1]];
 				unit.preview_moveable_grids();
 				if (key_Space_pressed) {
