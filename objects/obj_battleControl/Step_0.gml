@@ -116,6 +116,7 @@ switch (state) {
 		
 		if(unit!=pointer_null){
 			if(unit.ally){
+				obj_menu.open_menu();
 				//obj_info_panel.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
 				obj_info_panel.set_text("WASD - Move Cursor     Space - Select Unit     Enter - End Turn");
 				unit.prev_grid = [unit.grid_pos[0], unit.grid_pos[1]];
@@ -184,9 +185,11 @@ switch (state) {
 				}
 				
 			}else{
-				
+				obj_menu.close_menu();
 				unit.display_target_highlights();
 			}
+		}else{
+			obj_menu.close_menu();
 		}
 		if(key_Enter_pressed){
 			change_state(BattleState.EnemyTakingAction);

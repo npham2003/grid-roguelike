@@ -7,6 +7,12 @@ for (var i = 0; i < 5; i++) {
 }
 
 
-if (state <= expansionLimit) {
-	state += 0.5;
+if(open){
+	if (state <= expansionLimit) {
+		state += 0.5;
+	}
+}else{
+	if (state >= expansionLimit) {
+		state -= 0.5;
+	}
 }

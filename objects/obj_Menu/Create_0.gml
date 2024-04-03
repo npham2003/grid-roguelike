@@ -3,6 +3,7 @@
 
 state = 0;
 expansionLimit = 1.3;
+open = true;
 
 #region location
 imgX = 200;
@@ -24,3 +25,13 @@ optionAlpha = 0;
 currCharSprite = spr_temp_Akeha;
 
 #endregion
+
+close_menu = function(){
+	open = false;
+	expansionLimit=0;
+}
+
+open_menu = function(){
+	open = true;
+	expansionLimit=1.3;
+}

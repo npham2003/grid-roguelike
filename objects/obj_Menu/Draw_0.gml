@@ -25,31 +25,32 @@ draw_text_transformed(60, 20, "G: "+ string(obj_battleControl.gold), 1, 1, 0);
 draw_text_transformed(x, y, "TP: " + string(obj_battleControl.tp_current), 1, 1, 0);
 #endregion
 
-#region hp
-var pc;
-pc = (obj_player.hp / obj_player.hpMax) * 100;
-draw_healthbar(menuX[0]+20, menuY[0]+3, 500, menuY[0]-3, pc, global._primary, global._characterSecondary, global._characterSecondary, 0, true, true)
-draw_text_transformed(menuX[0]+50, menuY[0]-10, string(obj_player.hp)+"/"+string(obj_player.hpMax), 0.8, 0.8, 0);
-//draw_text_transformed(menuX[0]+50, menuY[0]-35, "HP: " + string(obj_player.hp), 0.8, 0.8, 0);
+if(open){
+	#region hp
+	var pc;
+	pc = (obj_player.hp / obj_player.hpMax) * 100;
+	draw_healthbar(menuX[0]+20, menuY[0]+3, 500, menuY[0]-3, pc, global._primary, global._characterSecondary, global._characterSecondary, 0, true, true)
+	draw_text_transformed(menuX[0]+50, menuY[0]-10, string(obj_player.hp)+"/"+string(obj_player.hpMax), 0.8, 0.8, 0);
+	//draw_text_transformed(menuX[0]+50, menuY[0]-35, "HP: " + string(obj_player.hp), 0.8, 0.8, 0);
 
-#endregion
+	#endregion
 
-#region first
-draw_text_transformed(menuX[1]+65, menuY[1]-35, "Base Atk: J", 0.8, 0.8, 0);
-#endregion
+	#region first
+	draw_text_transformed(menuX[1]+65, menuY[1]-35, "Base Atk: J", 0.8, 0.8, 0);
+	#endregion
 
-#region second
-draw_text_transformed(menuX[2]+80, menuY[2]-35, "Beam: K", 0.8, 0.8, 0);
-#endregion
+	#region second
+	draw_text_transformed(menuX[2]+80, menuY[2]-35, "Beam: K", 0.8, 0.8, 0);
+	#endregion
 
-#region third
-draw_text_transformed(menuX[3]+80, menuY[3]-35, "Charge: L", 0.8, 0.8, 0);
-#endregion
+	#region third
+	draw_text_transformed(menuX[3]+80, menuY[3]-35, "Charge: L", 0.8, 0.8, 0);
+	#endregion
 
-#region fourth
-draw_text_transformed(menuX[4]+80, menuY[4]-35, "Mortar: ;", 0.8, 0.8, 0);
-#endregion
-
+	#region fourth
+	draw_text_transformed(menuX[4]+80, menuY[4]-35, "Mortar: ;", 0.8, 0.8, 0);
+	#endregion
+}
 #region draw character
 
 gpu_set_blendenable(false);
