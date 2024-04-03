@@ -1,6 +1,6 @@
 position = obj_gridCreator.get_coordinates(current_x,current_y);
-x = lerp(x, position[0]-CELLWIDTH/2, 0.4);
-y = lerp(y, position[1]-CELLHEIGHT/2, 0.4);
+x=position[0]-CELLWIDTH/2;
+y=position[1]-CELLHEIGHT/2;
 
 
 
