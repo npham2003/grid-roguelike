@@ -21,6 +21,14 @@ optionAlpha = 0;
 _primary = #d1a578;
 _secondary = #1cc6e0;
 
+_playerTurnTop = #194DD0;
+//_playerTurnMiddle = 
+_playerTurnBottom = #148d95;
+
+_enemyTurnTop = #da7066;
+_enemyTurnMiddle = #cd5075;
+_enemyTurnBottom = #665d6c;
+
 _tpBar = #a4cda4;
 _tpBorder = #6ccf48;
 
