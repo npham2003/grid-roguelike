@@ -260,9 +260,21 @@ switch (state) {
 					unit.skill_used = 3;
 					enough_tp = true;
 					}
-					else {
-							audio_play_sound(sfx_no_tp, 0, false);
-						}
+			}
+			else if (key_semi_pressed) {
+				if (tp_current >= unit.actions[3].cost) {
+				unit.skill_used = 3;
+				enough_tp = true;
+				}
+				else {
+						audio_play_sound(sfx_no_tp, 0, false);
+					}
+			}
+				if (enough_tp) {
+					unit.confirm_move();
+					unit.skill_complete = false;
+					enough_tp = false;
+					change_state(BattleState.PlayerAiming);
 				}
 					if (enough_tp) {
 						unit.confirm_move();

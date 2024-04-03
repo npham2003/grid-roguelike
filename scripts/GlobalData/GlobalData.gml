@@ -7,6 +7,7 @@ global.actionLibrary = {
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
+		damage: 1, // temp damage, until i figure out how to do this damage function thing
 		func: function(_user, _targets) {
 			var _damage = 1; //math function here
 			//BattleChangeHP(_targets);
@@ -23,6 +24,7 @@ global.actionLibrary = {
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
+		damage: 2, // temp damage, until i figure out how to do this damage function thing
 		func: function(_user, _targets) {
 			var _damage = 1; //math function here
 			//BattleChangeHP(_targets);
@@ -39,6 +41,7 @@ global.actionLibrary = {
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
+		damage: 4, // temp damage, until i figure out how to do this damage function thing
 		func: function(_user, _targets) {
 			var _damage = 1; //math function here
 			//BattleChangeHP(_targets);
@@ -97,7 +100,7 @@ global.players = [
 		tpMax: 15,
 		strength: 6,
 		playerSpeed: 2,
-		sprites : { idle: spr_player, dead: spr_player_dead},
+		sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.beam, global.actionLibrary.charge,  global.actionLibrary.mortar],
 		ally: true,
 		tpGain: 1
@@ -128,8 +131,8 @@ global.enemies = [
 	{
 		name: "Slime",
 		obj: obj_slime,
-		hp: 1,
-		hpMax: 1,
+		hp: 5,
+		hpMax: 5,
 		mp: 0,
 		mpMax: 0,
 		strength: 5,
@@ -143,8 +146,8 @@ global.enemies = [
 	{
 		name: "Bat",
 		obj: obj_bat,
-		hp: 1,
-		hpMax: 1,
+		hp: 3,
+		hpMax: 3,
 		mp: 0,
 		mpMax: 0,
 		strength: 4,
