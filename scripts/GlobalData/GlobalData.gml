@@ -2,7 +2,7 @@
 global.actionLibrary = {
 	baseAttack: {
 		name: "Base Attack", //probably redundant to have a name but keep it
-		description: "Hits the first target in a row",
+		description: "Does 1 damage to the first target in a row",
 		cost: 1,
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -19,7 +19,7 @@ global.actionLibrary = {
 	},
 	beam: {
 		name: "Beam", //probably redundant to have a name but keep it
-		description: "Hits all targets in a row",
+		description: "Does 2 damage to all targets in a row",
 		cost: 3,
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -54,7 +54,7 @@ global.actionLibrary = {
 	},
 	charge: {
 		name: "Charge", //probably redundant to have a name but keep it
-		description: "Gain 2 TP",
+		description: "Gain 1 TP",
 		cost: 0,
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -124,8 +124,8 @@ global.players = [
 global.enemies = [
 	{
 		name: "Slime",
-		hp: 5,
-		hpMax: 5,
+		hp: 2,
+		hpMax: 2,
 		healthbar_offset: -30,
 		sprites: { idle: spr_slime_idle, attack: spr_slime_attack },
 		actions: [global.enemyActions.melee],
@@ -135,8 +135,8 @@ global.enemies = [
 	},
 	{
 		name: "Bat",
-		hp: 3,
-		hpMax: 3,
+		hp: 1,
+		hpMax: 1,
 		healthbar_offset: -40,
 		sprites: { idle: spr_bat_idle, attack: spr_bat_attack },
 		actions: [global.enemyActions.ranged_attack],

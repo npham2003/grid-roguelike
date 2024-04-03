@@ -247,7 +247,7 @@ function skill2() {
 	obj_cursor.movable_tiles=skill_range;
 	
 	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
-		obj_battleControl.tp_current+=2;
+		obj_battleControl.tp_current+=1;
 		if(obj_battleControl.tp_current>obj_battleControl.tp_max){
 			obj_battleControl.tp_current=obj_battleControl.tp_max;
 		}
