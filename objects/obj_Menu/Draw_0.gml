@@ -20,6 +20,26 @@ draw_sprite_ext(spr_diamond_outline, 0, imgX, imgY, _sb,_sb, 0, global._characte
 draw_text_transformed(x, y, "TP: " + string(obj_battleControl.tp_current), 1, 1, 0);
 #endregion
 
+#region hp
+draw_text_transformed(menuX[0]+50, menuY[0]-50, "HP: " + string(obj_player.hp), 0.5, 0.5, 0);
+#endregion
+
+#region first
+draw_text_transformed(menuX[1]+50, menuY[1]-50, "Base Attack: J", 0.5, 0.5, 0);
+#endregion
+
+#region second
+draw_text_transformed(menuX[2]+70, menuY[2]-50, "Beam: K", 0.5, 0.5, 0);
+#endregion
+
+#region third
+draw_text_transformed(menuX[3]+70, menuY[3]-50, "Charge: L", 0.5, 0.5, 0);
+#endregion
+
+#region fourth
+draw_text_transformed(menuX[4]+70, menuY[4]-50, "Mortar: ;", 0.5, 0.5, 0);
+#endregion
+
 #region draw character
 
 gpu_set_blendenable(false);
