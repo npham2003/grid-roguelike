@@ -14,48 +14,120 @@ sprite_moving_speed = 5;
 transparency=1;
 is_dead = false;
 
+
 function find_target() {
 	var available_targets = obj_battleControl.player_units;
 	target = available_targets[irandom(array_length(available_targets) - 1)];
 	show_debug_message("{0}'s target: {1}", name, target.name);
 }
 
-function aim() {
-	action = actions[0];
-	var target_pos = target.grid_pos;
-	attack_ready = false;
+//function aim() {
+//	action = actions[0];
+//	var target_pos = target.grid_pos;
+//	attack_ready = false;
 	
-	show_debug_message("{0}: {1}", name, action.name);
+//	show_debug_message("{0}: {1}", name, action.name);
 	
-	for (var i = 0; i < array_length(action.range); i++) {
-		var est_pos = [target_pos[0] - action.range[i][0], target_pos[1] - action.range[i][1]];
+//	for (var i = 0; i < array_length(action.range); i++) {
+//		var est_pos = [target_pos[0] - action.range[i][0], target_pos[1] - action.range[i][1]];
 		
-		if (est_pos[0] < 0 || est_pos[0] >= GRIDWIDTH) {
-			continue;
-		}
-		if (est_pos[1] < 0 || est_pos[1] >= GRIDHEIGHT) {
-			continue;
-		}
+//		if (est_pos[0] < 0 || est_pos[0] >= GRIDWIDTH) {
+//			continue;
+//		}
+//		if (est_pos[1] < 0 || est_pos[1] >= GRIDHEIGHT) {
+//			continue;
+//		}
 		
-		if (est_pos[0] == grid_pos[0] && est_pos[1] == grid_pos[1]) {
-			// No need to move
-			set_danger_highlights();
-			attack_ready = true;
-			show_debug_message("{0} is ready to attack", name);
-			break;
-		}
+//		if (est_pos[0] == grid_pos[0] && est_pos[1] == grid_pos[1]) {
+//			// No need to move
+//			set_danger_highlights();
+//			attack_ready = true;
+//			show_debug_message("{0} is ready to attack", name);
+//			break;
+//		}
 		
-		// todo: check availability
-		if (est_pos[0] > 4 && est_pos[0] < 10 && est_pos[1] >= 0 && est_pos[1] < 5 && 
-		obj_gridCreator.battle_grid[est_pos[0]][est_pos[1]]._is_empty) {
+//		// todo: check availability
+//		if (est_pos[0] > 4 && est_pos[0] < 10 && est_pos[1] >= 0 && est_pos[1] < 5 && 
+//		obj_gridCreator.battle_grid[est_pos[0]][est_pos[1]]._is_empty) {
 			
-			move(est_pos[0], est_pos[1]);
-			break;
+//			move(est_pos[0], est_pos[1]);
+//			break;
+//		}
+//	}
+	
+	
+//}
+
+function calculate_util(test_x, test_y) {
+	util=0;
+	for (var i = 0; i < array_length(action.range); i++) {
+		var attack_x = test_x+action.range[i][0];
+		var attack_y = test_y+action.range[i][1];
+		
+		if (attack_x < 0 || attack_x >= GRIDWIDTH) {
+			continue;
 		}
+		if (attack_y < 0 || attack_y >= GRIDHEIGHT) {
+			continue;
+		}
+		
+		if(!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty){
+			show_debug_message("something is on tile "+string(attack_x)+", "+string(attack_y));
+			if(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile==target){
+				util+=1;
+			}
+			if(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.ally){
+				util+=2;
+			}else{
+				util-=3;
+			}
+		}
+		
+		if(attack_x<5){
+			util+=1;	
+		}
+		//show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
+		
 	}
-	set_danger_highlights();
-	attack_ready = true;
-	show_debug_message("{0} is ready to attack", name);
+	if(obj_gridCreator.battle_grid[test_x][test_y]._danger_number>0){
+		util-=2;
+	}
+	return util;
+	
+}
+
+function aim(){
+	
+		action = actions[0];
+		var target_pos = target.grid_pos;
+		attack_ready = false;
+		show_debug_message("{0}: {1}", name, action.name);
+		max_util=-999;
+		potential_positions = [];
+		for(i=5;i<10;i++){
+			for(j=0;j<5;j++){
+				if(obj_gridCreator.battle_grid[i][j]._is_empty){
+					util=calculate_util(i,j);
+					if(util>=max_util){
+						if(util>max_util){
+							potential_positions=[];
+						}
+						max_util=util;
+				
+						array_push(potential_positions,[i,j]);
+					}
+				}
+			}
+		}
+		show_debug_message(string(potential_positions));
+		show_debug_message("{0} has max util {1}", name, max_util);
+		position = irandom(array_length(potential_positions)-1);
+		move(potential_positions[position][0],potential_positions[position][1]);
+		set_danger_highlights();
+		attack_ready = true;
+		show_debug_message("{0} is ready to attack", name);
+	
+	
 	
 }
 
@@ -108,7 +180,7 @@ function danger_debug() {
 }
 
 function remove_danger_highlights() {
-	
+	danger_debug();
 	for (var i = 0; i < array_length(action.range); i++) {
 		var attack_x = grid_pos[0] + action.range[i][0];
 		var attack_y = grid_pos[1] + action.range[i][1];

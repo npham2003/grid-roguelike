@@ -48,7 +48,25 @@ global.actionLibrary = {
 			// I DON'T UNDERSTAND THIS NGL
 			return [[0,0], [0,1]];
 		}
+	},
+	charge: {
+		name: "Charge", //probably redundant to have a name but keep it
+		description: "placeholder",
+		cost: 0,
+		subMenu: 0, //does it show up on screen or is it in a submenu
+		userAnimation: "attack",
+		//effectSprite: baseAttack,
+		func: function(_user, _targets) {
+			var _damage = 1; //math function here
+			//BattleChangeHP(_targets);
+		},
+		getCoord: function(_centerCoord) { //_centerCoord returns a list [x,y]
+			//return 2d array of all coordinates affected
+			// I DON'T UNDERSTAND THIS NGL
+			return [[0,0], [0,1]];
+		}
 	}
+	
 }
 
 global.enemyActions = {
@@ -80,7 +98,7 @@ global.players = [
 		strength: 6,
 		playerSpeed: 2,
 		sprites : { idle: spr_player, dead: spr_player_dead},
-		actions : [global.actionLibrary.baseAttack, global.actionLibrary.beam, global.actionLibrary.mortar],
+		actions : [global.actionLibrary.baseAttack, global.actionLibrary.beam, global.actionLibrary.charge,  global.actionLibrary.mortar],
 		ally: true
 	}
 	//{ //new member
@@ -104,7 +122,8 @@ global.enemies = [
 		sprites: { idle: spr_slime_idle, attack: spr_slime_attack },
 		actions: [global.enemyActions.melee],
 		sounds: { attack: sfx_slime_attack },
-		ally: false
+		ally: false,
+		gold: 50
 	},
 	{
 		name: "Bat",
@@ -118,6 +137,47 @@ global.enemies = [
 		sprites: { idle: spr_bat_idle, attack: spr_bat_attack },
 		actions: [global.enemyActions.ranged_attack],
 		sounds: { attack: sfx_bat_attack },
-		ally: false
+		ally: false,
+		gold: 100
 	}
+]
+
+//Encounters
+global.encounters = [
+	[
+		{
+			info: global.enemies[1],
+			grid: [8, 3]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 2]
+		}
+		
+	],
+	[
+		{
+			info: global.enemies[0],
+			grid: [8, 1]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 2]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 3]
+		}
+	],
+	[
+		{
+			info: global.enemies[1],
+			grid: [8, 1]
+		},
+		{
+			info: global.enemies[1],
+			grid: [8, 3]
+		}
+	],
+
 ]
