@@ -2,7 +2,7 @@
 global.actionLibrary = {
 	baseAttack: {
 		name: "Base Attack", //probably redundant to have a name but keep it
-		description: "Hits the first target in a row",
+		description: "placeholder",
 		cost: 1,
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -19,7 +19,7 @@ global.actionLibrary = {
 	},
 	beam: {
 		name: "Beam", //probably redundant to have a name but keep it
-		description: "Hits all targets in a row",
+		description: "placeholder",
 		cost: 3,
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -36,7 +36,7 @@ global.actionLibrary = {
 	},
 	mortar: {
 		name: "Mortar", //probably redundant to have a name but keep it
-		description: "Hits a target in front and damages all adjacent units",
+		description: "placeholder",
 		cost: 6,
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -54,7 +54,7 @@ global.actionLibrary = {
 	},
 	charge: {
 		name: "Charge", //probably redundant to have a name but keep it
-		description: "Gain 2 TP",
+		description: "placeholder",
 		cost: 0,
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -102,22 +102,7 @@ global.players = [
 		playerSpeed: 2,
 		sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.beam, global.actionLibrary.charge,  global.actionLibrary.mortar],
-		ally: true,
-		tpGain: 1
-		
-	},
-	{ //l'cifure
-		name: "L'Cifure",
-		hp: 5,
-		hpMax: 5,
-		tp: 10,
-		tpMax: 15,
-		strength: 6,
-		playerSpeed: 2,
-		sprites : { idle: spr_player, dead: spr_player_dead},
-		actions : [global.actionLibrary.baseAttack, global.actionLibrary.beam, global.actionLibrary.charge,  global.actionLibrary.mortar],
-		ally: true,
-		tpGain: 1
+		ally: true
 	}
 	//{ //new member
 	//	name: "put new party member here", //refer to example above
@@ -140,8 +125,7 @@ global.enemies = [
 		sprites: { idle: spr_slime_idle, attack: spr_slime_attack },
 		actions: [global.enemyActions.melee],
 		sounds: { attack: sfx_slime_attack },
-		ally: false,
-		gold: 50
+		ally: false
 	},
 	{
 		name: "Bat",
@@ -155,47 +139,6 @@ global.enemies = [
 		sprites: { idle: spr_bat_idle, attack: spr_bat_attack },
 		actions: [global.enemyActions.ranged_attack],
 		sounds: { attack: sfx_bat_attack },
-		ally: false,
-		gold: 100
+		ally: false
 	}
-]
-
-//Encounters
-global.encounters = [
-	[
-		{
-			info: global.enemies[1],
-			grid: [8, 3]
-		},
-		{
-			info: global.enemies[0],
-			grid: [8, 2]
-		}
-		
-	],
-	[
-		{
-			info: global.enemies[0],
-			grid: [8, 1]
-		},
-		{
-			info: global.enemies[0],
-			grid: [8, 2]
-		},
-		{
-			info: global.enemies[0],
-			grid: [8, 3]
-		}
-	],
-	[
-		{
-			info: global.enemies[1],
-			grid: [8, 1]
-		},
-		{
-			info: global.enemies[1],
-			grid: [8, 3]
-		}
-	],
-
 ]

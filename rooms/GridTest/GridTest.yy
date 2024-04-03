@@ -11,8 +11,7 @@
     {"name":"inst_3AFED69F","path":"rooms/GridTest/GridTest.yy",},
     {"name":"inst_3555AC7C","path":"rooms/GridTest/GridTest.yy",},
     {"name":"inst_4D60EEFF","path":"rooms/GridTest/GridTest.yy",},
-    {"name":"inst_5F6E0845","path":"rooms/GridTest/GridTest.yy",},
-    {"name":"inst_42F31575","path":"rooms/GridTest/GridTest.yy",},
+    {"name":"inst_52F63E0D","path":"rooms/GridTest/GridTest.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -56,7 +55,7 @@
   },
   "sequenceId":null,
   "views":[
-    {"hborder":32,"hport":768,"hspeed":-1,"hview":768,"inherit":false,"objectId":null,"vborder":32,"visible":true,"vspeed":-1,"wport":1366,"wview":1366,"xport":0,"xview":0,"yport":0,"yview":0,},
+    {"hborder":32,"hport":768,"hspeed":-1,"hview":768,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":1366,"wview":1366,"xport":0,"xview":0,"yport":0,"yview":0,},
     {"hborder":32,"hport":768,"hspeed":-1,"hview":768,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":1366,"wview":1366,"xport":0,"xview":0,"yport":0,"yview":0,},
     {"hborder":32,"hport":768,"hspeed":-1,"hview":768,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":1366,"wview":1366,"xport":0,"xview":0,"yport":0,"yview":0,},
     {"hborder":32,"hport":768,"hspeed":-1,"hview":768,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":1366,"wview":1366,"xport":0,"xview":0,"yport":0,"yview":0,},
@@ -68,7 +67,7 @@
   "viewSettings":{
     "clearDisplayBuffer":true,
     "clearViewBackground":false,
-    "enableViews":true,
+    "enableViews":false,
     "inheritViewSettings":false,
   },
   "volume":1.0,

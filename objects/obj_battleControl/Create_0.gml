@@ -16,9 +16,6 @@ in_animation = false;
 
 enemy_check_death = 0;
 checking_death = false;
-gold = 0;
-battle_gold = 0;
-unit = pointer_null;
 
 #region Spawns
 
@@ -39,7 +36,7 @@ for (var i = 0; i < array_length(player_data); i++) {
 	var var_struct = variable_clone(player_data[i].info);
 	var_struct.grid_pos = player_data[i].grid;
 	
-	unit = instance_create_layer(
+	var unit = instance_create_layer(
 		coord[0], coord[1], "Units", obj_player, var_struct);
 	
 	array_push(player_units, unit);
@@ -59,24 +56,19 @@ var enemy_data = [
 	}
 ];
 
-randomize();
 
-spawn_enemies = function(enemy_data){
-	battle_gold=0;
-	for (var i = 0; i < array_length(enemy_data); i++) {
-		var coord = obj_gridCreator.get_coordinates(enemy_data[i].grid[0], enemy_data[i].grid[1]);
+for (var i = 0; i < array_length(enemy_data); i++) {
+	var coord = obj_gridCreator.get_coordinates(enemy_data[i].grid[0], enemy_data[i].grid[1]);
 	
-		obj_gridCreator.battle_grid[enemy_data[i].grid[0]][enemy_data[i].grid[1]]._is_empty=false;
-		var var_struct = variable_clone(enemy_data[i].info);
-		var_struct.grid_pos = enemy_data[i].grid;
+	obj_gridCreator.battle_grid[enemy_data[i].grid[0]][enemy_data[i].grid[1]]._is_empty=false;
+	var var_struct = variable_clone(enemy_data[i].info);
+	var_struct.grid_pos = enemy_data[i].grid;
 	
-		var unit = instance_create_layer(
-			coord[0], coord[1], "Units", obj_parent_enemy, var_struct);
+	var unit = instance_create_layer(
+		coord[0], coord[1], "Units", obj_parent_enemy, var_struct);
 		
-		array_push(enemy_units, unit);
-		obj_gridCreator.battle_grid[enemy_data[i].grid[0]][enemy_data[i].grid[1]]._entity_on_tile=unit;
-		battle_gold+=unit.gold;
-	}
+	array_push(enemy_units, unit);
+	obj_gridCreator.battle_grid[enemy_data[i].grid[0]][enemy_data[i].grid[1]]._entity_on_tile=unit;
 }
 
 obj_cursor.movable_tiles=obj_gridCreator.battle_grid;

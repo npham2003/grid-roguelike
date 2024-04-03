@@ -35,8 +35,6 @@ switch (state) {
 				
 			}
 		}
-		var random_battle = irandom(array_length(global.encounters)-1);
-		spawn_enemies(global.encounters[random_battle]);
 		change_state(BattleState.EnemyAiming);
 		break;
 #endregion
@@ -46,22 +44,21 @@ switch (state) {
 		
 		if (in_animation) {
 			break;
-		}else{
-		
-			if (enemy_order >= array_length(enemy_units))
-			{
-				enemy_order = 0;
-				change_state(BattleState.PlayerPreparing);
-				break;
-			}
-			show_debug_message(string(enemy_order));
-			unit = enemy_units[enemy_order];
-			unit.find_target();
-			unit.aim();
-			obj_info_panel.set_text(unit.name+" is aiming");
-		
-			enemy_order += 1;
 		}
+		
+		if (enemy_order >= array_length(enemy_units))
+		{
+			enemy_order = 0;
+			change_state(BattleState.PlayerPreparing);
+			break;
+		}
+		
+		var unit = enemy_units[enemy_order];
+		unit.find_target();
+		unit.aim();
+		obj_info_panel.set_text(unit.name+" is aiming");
+		
+		enemy_order += 1;
 		break;
 #endregion
 
@@ -72,15 +69,13 @@ switch (state) {
 			if(player_units[i].hp>0){
 				player_units[i].has_moved = false;
 				player_units[i].has_attacked = false;
-				tp_current+=player_units[i].tpGain;
 			}else{
 				player_units[i].hp=0;
 			}
-			
 		}
 		
-		if (tp_current > tp_max) {
-		tp_current=tp_max;	
+		if (tp_current < tp_max) {
+		tp_current++;	
 		}	
 		show_debug_message("CURRENT TP: " + string(tp_current));
 		
@@ -95,7 +90,7 @@ switch (state) {
 		
 		// WASD to move, JKL to use skills, Tab to switch units, Enter to end player turn
 		// If all units have attacked, end player's turn
-		unit = obj_gridCreator.battle_grid[obj_cursor.current_x][obj_cursor.current_y]._entity_on_tile;
+		var unit = obj_gridCreator.battle_grid[obj_cursor.current_x][obj_cursor.current_y]._entity_on_tile;
 		
 		
 		var has_all_attacked = true;
@@ -116,12 +111,9 @@ switch (state) {
 		
 		if(unit!=pointer_null){
 			if(unit.ally){
-				//obj_info_panel.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
-				obj_info_panel.set_text("WASD - Move Cursor     Space - Select Unit     Enter - End Turn");
+				obj_info_panel.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.skill_names[0]+"\nK - "+unit.skill_names[1]+"\nL - "+unit.skill_names[2]+"\n; - "+unit.skill_names[3]+"\nEnter - End Turn");
 				unit.prev_grid = [unit.grid_pos[0], unit.grid_pos[1]];
-				if(!unit.has_moved && !unit.has_attacked){
-					unit.preview_moveable_grids();
-				}
+				unit.preview_moveable_grids();
 				if (key_Space_pressed) {
 					if (!unit.has_moved && !unit.has_attacked) {
 						change_state(BattleState.PlayerMoving);
@@ -182,111 +174,108 @@ switch (state) {
 					//}
 					//show_debug_message("Switch to next player unit");
 				}
-				
+				else if (key_Enter_pressed) {
+					change_state(BattleState.EnemyTakingAction);
+				}
 			}else{
 				
 				unit.display_target_highlights();
 			}
-		}
-		if(key_Enter_pressed){
-			change_state(BattleState.EnemyTakingAction);
 		}
 		break;
 #endregion
 
 #region Player Moving
 	case BattleState.PlayerMoving:
+		var unit = player_units[player_order];
 		
-		if(unit!=pointer_null){
-			//obj_info_panel.set_text("WASD - Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
-			obj_info_panel.set_text("WASD - Move Cursor     Space - Select Unit\nEnter - Do Nothing     Tab - Back");
-			
+		obj_info_panel.set_text("WASD - Move\nJ - "+unit.skill_names[0]+"\nK - "+unit.skill_names[1]+"\nL - "+unit.skill_names[2]+"\n; - "+unit.skill_names[3]+"\nEnter - Do Nothing\nTab - Back");
 		
-			if (wasd_pressed) {
-				//show_debug_message(unit.name + ": moving");
-				if (key_W_pressed) {
-					unit.move_up();
-				}
-				else if (key_A_pressed) {
-					unit.move_left();
-				}
-				else if (key_S_pressed) {
-					unit.move_down();
-				}
-				else if (key_D_pressed) {
-					unit.move_right();
-				}
+		if (wasd_pressed) {
+			//show_debug_message(unit.name + ": moving");
+			if (key_W_pressed) {
+				unit.move_up();
+			}
+			else if (key_A_pressed) {
+				unit.move_left();
+			}
+			else if (key_S_pressed) {
+				unit.move_down();
+			}
+			else if (key_D_pressed) {
+				unit.move_right();
+			}
 			
-				show_debug_message("Move to ({0},{1})", unit.grid_pos[0], unit.grid_pos[1]);
-			}
-			else if (key_Tab_pressed){
-					unit.back_move();
-					change_state(BattleState.PlayerWaitingAction);
-					obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
-					obj_cursor.reset_cursor(unit.grid_pos[0], unit.grid_pos[1]);
-				}
-			else if (jkl_pressed) { // optimize eventually
-				if (!unit.has_attacked) {
-					if (key_J_pressed) {
-						if (tp_current >= unit.actions[0].cost) {
-							unit.skill_used = 0;
-							enough_tp = true;
-						}
-						else {
-							audio_play_sound(sfx_no_tp, 0, false);
-						}
-				
-				}
-				else if (key_K_pressed) {
-					if (tp_current >= unit.actions[1].cost) {
-					unit.skill_used = 1;
-					enough_tp = true;
-					}
-					else {
-							audio_play_sound(sfx_no_tp, 0, false);
-						}
-				}
-				else if (key_L_pressed) {
-					if (tp_current >= unit.actions[2].cost) {
-					unit.skill_used = 2;
-					enough_tp = true;
-					}
-					else {
-							audio_play_sound(sfx_no_tp, 0, false);
-						}
-				}
-				else if (key_semi_pressed) {
-					if (tp_current >= unit.actions[3].cost) {
-					unit.skill_used = 3;
-					enough_tp = true;
-					}
-					else {
-							audio_play_sound(sfx_no_tp, 0, false);
-						}
-				}
-					if (enough_tp) {
-						unit.confirm_move();
-						unit.skill_complete = false;
-						enough_tp = false;
-						change_state(BattleState.PlayerAiming);
-					}
-				}
-			}
-			else if (key_Enter_pressed) {
-				unit.confirm_move();
-				unit.has_moved = true;
-				unit.has_attacked = true;
+			show_debug_message("Move to ({0},{1})", unit.grid_pos[0], unit.grid_pos[1]);
+		}
+		else if (key_Tab_pressed){
+				unit.back_move();
 				change_state(BattleState.PlayerWaitingAction);
 				obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
+				obj_cursor.reset_cursor(unit.grid_pos[0], unit.grid_pos[1]);
+			}
+		else if (jkl_pressed) { // optimize eventually
+			if (!unit.has_attacked) {
+				if (key_J_pressed) {
+					if (tp_current >= unit.actions[0].cost) {
+						unit.skill_used = 0;
+						enough_tp = true;
+					}
+					else {
+						audio_play_sound(sfx_no_tp, 0, false);
+					}
+				
+			}
+			else if (key_K_pressed) {
+				if (tp_current >= unit.actions[1].cost) {
+				unit.skill_used = 1;
+				enough_tp = true;
+				}
+				else {
+						audio_play_sound(sfx_no_tp, 0, false);
+					}
+			}
+			else if (key_L_pressed) {
+				if (tp_current >= unit.actions[2].cost) {
+				unit.skill_used = 2;
+				enough_tp = true;
+				}
+				else {
+						audio_play_sound(sfx_no_tp, 0, false);
+					}
+			}
+			else if (key_semi_pressed) {
+				if (tp_current >= unit.actions[3].cost) {
+				unit.skill_used = 3;
+				enough_tp = true;
+				}
+				else {
+						audio_play_sound(sfx_no_tp, 0, false);
+					}
+			}
+				if (enough_tp) {
+					unit.confirm_move();
+					unit.skill_complete = false;
+					enough_tp = false;
+					change_state(BattleState.PlayerAiming);
+				}
 			}
 		}
+		else if (key_Enter_pressed) {
+			unit.confirm_move();
+			unit.has_moved = true;
+			unit.has_attacked = true;
+			change_state(BattleState.PlayerWaitingAction);
+			obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
+		}
+
 		break;
 #endregion
 
 #region Player Aiming
 	case BattleState.PlayerAiming:
 	
-		unit = obj_gridCreator.battle_grid[obj_cursor.current_x][obj_cursor.current_y]._entity_on_tile;
+		var unit = player_units[player_order];
 		if(unit.skill_back){
 			show_debug_message("hi");
 			change_state(BattleState.PlayerMoving);
@@ -344,7 +333,7 @@ switch (state) {
 #region Player Taking Action
 	case BattleState.PlayerTakingAction:
 	
-		unit = obj_gridCreator.battle_grid[obj_cursor.current_x][obj_cursor.current_y]._entity_on_tile;;
+		var unit = player_units[player_order];
 		
 		show_debug_message(unit.name + ": taking action");
 		
@@ -394,7 +383,7 @@ switch (state) {
 				break;
 			}
 		
-			unit = enemy_units[enemy_order];
+			var unit = enemy_units[enemy_order];
 			if (unit.attack_ready) {
 				unit.attack();
 			}
@@ -417,26 +406,6 @@ switch (state) {
 			}
 		}
 		
-		break;
-#endregion
-
-#region Battle End
-	case BattleState.BattleEnd:
-		if(in_animation){
-			break;
-		}
-		if(array_length(enemy_units)==0){
-			gold+=battle_gold;
-			obj_gridCreator.reset_highlights_enemy();
-			change_state(BattleState.BattleStart);
-		}else{
-			if(keyboard_check_pressed(vk_anykey)){
-				obj_gridCreator.reset_highlights_cursor();
-				obj_info_panel.set_text("Press any key to restart");
-				room_restart();
-			}
-			
-		}
 		break;
 #endregion
 
