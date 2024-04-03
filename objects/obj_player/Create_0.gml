@@ -175,7 +175,7 @@ function skill1() {
 }
 
 function skill3() {
-	action = actions[2];
+	action = actions[3];
 	is_attacking = true;
 	if (!skill_init) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 	range = 3;
@@ -216,14 +216,13 @@ function skill3() {
 		}
 	}
 	
-	var _damage = action.damage;
 	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(186)) {
 		audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 		for (var i = 0; i < array_length(skill_range_aux); i++) {
 			if (!skill_range_aux[i]._is_empty) {
 				show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
-				skill_range_aux[i]._entity_on_tile.hp -= _damage; // temp var until we get shit moving
-				obj_battleEffect.show_damage(skill_range_aux[i]._entity_on_tile, _damage);
+				skill_range_aux[i]._entity_on_tile.hp -= action.damage; // temp var until we get shit moving
+				obj_battleEffect.show_damage(skill_range_aux[i]._entity_on_tile, action.damage);
 				show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
 			}
 		}
@@ -245,14 +244,14 @@ function skill3() {
 }
 
 function skill2() {
-	action = actions[0];
+	action = actions[2];
 	obj_info_panel.set_text("Cost: "+string(actions[2].cost)+"\n"+skill_descriptions[2]+"\nL - Confirm\nTab - Back");
 	skill_range = [obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]];
 	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._target_highlight=true;
 	obj_cursor.movable_tiles=skill_range;
 	
 	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
-		obj_battleControl.tp_current+=2;
+		obj_battleControl.tp_current+=1;
 		if(obj_battleControl.tp_current>obj_battleControl.tp_max){
 			obj_battleControl.tp_current=obj_battleControl.tp_max;
 		}
