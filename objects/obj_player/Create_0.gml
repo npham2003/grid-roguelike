@@ -8,8 +8,6 @@ skill_complete = false;
 skill_init = false;
 play_sound = false; // temp var, will change later
 prev_grid = [];
-skill_names = ["Base Attack", "Beam", "Charge", "Mortar"];
-skill_descriptions=["Hits the first target in a row", "Hits all targets in a row", "Gain 2 TP","Hits a target in front and damages all adjacent units"];
 skill_back = false;
 
 var return_coords;
@@ -114,7 +112,7 @@ function back_move(){
 
 function baseattack() {
 	action = actions[0];
-	obj_info_panel.set_text("Cost: "+string(actions[0].cost)+"\n"+skill_descriptions[0]+"\nWASD - Aim\nJ - Confirm\nTab - Back");
+	obj_info_panel.set_text("Cost: "+string(actions[0].cost)+"\n"+actions[0].description+"\nWASD - Aim\nJ - Confirm\nTab - Back");
 	skill_range = obj_gridCreator.highlighted_target_straight(grid_pos[0]+1, grid_pos[1]);
 	obj_cursor.movable_tiles=skill_range;
 	
@@ -146,7 +144,7 @@ function skill1() {
 	action = actions[1];
 	skill_range = obj_gridCreator.highlighted_target_line_pierce(grid_pos[0]+1, grid_pos[1]);
 	obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]];
-	obj_info_panel.set_text("Cost: "+string(actions[1].cost)+"\n"+skill_descriptions[1]+"\nWASD - Aim\nK - Confirm\nTab - Back");
+	obj_info_panel.set_text("Cost: "+string(actions[1].cost)+"\n"+actions[1].description+"\nWASD - Aim\nK - Confirm\nTab - Back");
 	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 		audio_play_sound(sfx_blast, 0, false);
 		for (var i = 0; i < array_length(skill_range); i++) {
@@ -178,7 +176,7 @@ function skill3() {
 	
 	audio_play_sound(sfx_mortar_windup, 0, false);
 	}
-	obj_info_panel.set_text("Cost: "+string(actions[3].cost)+"\n"+skill_descriptions[3]+"\nWASD - Aim\n; - Confirm\nTab - Back");
+	obj_info_panel.set_text("Cost: "+string(actions[3].cost)+"\n"+actions[3].description+"\nWASD - Aim\n; - Confirm\nTab - Back");
 	skill_range = obj_gridCreator.highlighted_attack_circle(grid_pos[0], grid_pos[1], range);
 	skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
 	obj_cursor.movable_tiles=skill_range;
@@ -233,7 +231,7 @@ function skill3() {
 
 function skill2() {
 	action = actions[0];
-	obj_info_panel.set_text("Cost: "+string(actions[2].cost)+"\n"+skill_descriptions[2]+"\nL - Confirm\nTab - Back");
+	obj_info_panel.set_text("Cost: "+string(actions[2].cost)+"\n"+actions[2].description+"\nL - Confirm\nTab - Back");
 	skill_range = [obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]];
 	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._target_highlight=true;
 	obj_cursor.movable_tiles=skill_range;

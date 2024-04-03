@@ -18,6 +18,7 @@ enemy_check_death = 0;
 checking_death = false;
 gold = 0;
 battle_gold = 0;
+unit = pointer_null;
 
 #region Spawns
 
@@ -38,7 +39,7 @@ for (var i = 0; i < array_length(player_data); i++) {
 	var var_struct = variable_clone(player_data[i].info);
 	var_struct.grid_pos = player_data[i].grid;
 	
-	var unit = instance_create_layer(
+	unit = instance_create_layer(
 		coord[0], coord[1], "Units", obj_player, var_struct);
 	
 	array_push(player_units, unit);
