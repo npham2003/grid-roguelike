@@ -112,6 +112,7 @@ switch (state) {
 			if(unit.ally){
 				obj_info_panel.set_text("Space - Move Unit\nJ - "+unit.skill_names[0]+"\nK - "+unit.skill_names[1]+"\nL - "+unit.skill_names[2]+"\nEnter - End Turn");
 				unit.prev_grid = [unit.grid_pos[0], unit.grid_pos[1]];
+				unit.preview_moveable_grids();
 				if (key_Space_pressed) {
 					if (!unit.has_moved && !unit.has_attacked) {
 						change_state(BattleState.PlayerMoving);
@@ -149,7 +150,7 @@ switch (state) {
 							}
 					}
 						if (enough_tp) {
-							unit.confirm_move();
+							
 							unit.skill_complete = false;
 							enough_tp = false;
 							change_state(BattleState.PlayerAiming);
@@ -204,11 +205,13 @@ switch (state) {
 				obj_cursor.reset_cursor(unit.grid_pos[0], unit.grid_pos[1]);
 			}
 		else if (jkl_pressed) { // optimize eventually
+			
 			if (!unit.has_attacked) {
 				if (key_J_pressed) {
 					if (tp_current >= unit.actions[0].cost) {
 						unit.skill_used = 0;
 						enough_tp = true;
+						obj_gridCreator.reset_highlights_move();
 					}
 					else {
 						audio_play_sound(sfx_no_tp, 0, false);
@@ -219,6 +222,7 @@ switch (state) {
 				if (tp_current >= unit.actions[1].cost) {
 				unit.skill_used = 1;
 				enough_tp = true;
+				obj_gridCreator.reset_highlights_move();
 				}
 				else {
 						audio_play_sound(sfx_no_tp, 0, false);
@@ -228,13 +232,14 @@ switch (state) {
 				if (tp_current >= unit.actions[2].cost) {
 				unit.skill_used = 2;
 				enough_tp = true;
+				obj_gridCreator.reset_highlights_move();
 				}
 				else {
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
 			}
 				if (enough_tp) {
-					unit.confirm_move();
+					
 					unit.skill_complete = false;
 					enough_tp = false;
 					change_state(BattleState.PlayerAiming);
@@ -319,6 +324,7 @@ switch (state) {
 		}
 		
 		enemy_check_death += 1;
+		
 		if (enemy_check_death >= array_length(enemy_units)) {
 			enemy_check_death = 0;
 			if (check_battle_end()) {

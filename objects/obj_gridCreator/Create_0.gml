@@ -12,6 +12,7 @@ highlighted_enemy_target_array=[];
 _target_transparency=0.5;
 
 _more_visible=true;
+_moving = false;
 
 
 // get co-ordinates for the middle of the tile at (x,y)
@@ -32,9 +33,10 @@ remove_entity = function(_x_value, _y_value){
 
 move_entity = function(_prev_x,_prev_y,_new_x,_new_y){
 	var _entity_pointer = battle_grid[_prev_x][_prev_y]._entity_on_tile;
-	if(!battle_grid[_prev_x][_prev_y]._is_empty){
-		battle_grid[_new_x][_new_y]._entity_on_tile = _entity_pointer;
+	if(!battle_grid[_prev_x][_prev_y]._is_empty ){
 		battle_grid[_prev_x][_prev_y]._entity_on_tile = pointer_null;
+		battle_grid[_new_x][_new_y]._entity_on_tile = _entity_pointer;
+		
 		battle_grid[_prev_x][_prev_y]._is_empty = true;
 		battle_grid[_new_x][_new_y]._is_empty = false;
 	}
@@ -78,6 +80,17 @@ reset_highlights_enemy = function(){
 	}
 }
 
+
+reset_highlights_cursor = function(){
+	highlighted_enemy_target_array = [];
+	for (var i = 0; i< gridHoriz;i++){
+		for (var j = 0; j < gridVert;j++){
+			battle_grid[i][j]._danger_cursor=false;
+			battle_grid[i][j]._move_cursor=false;
+		}
+	}
+}
+
 highlighted_move = function(_center_x,_center_y,_range){
 	
 	reset_highlights_move();
@@ -86,6 +99,21 @@ highlighted_move = function(_center_x,_center_y,_range){
 			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT){
 				array_push(highlighted_move_array,battle_grid[_center_x+i][_center_y+j]);
 				battle_grid[_center_x+i][_center_y+j]._move_highlight=true;
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}
+		}
+	}
+	return highlighted_move_array;
+}
+
+highlighted_move_cursor = function(_center_x,_center_y,_range){
+	
+	
+	for(var i = -_range; i <= _range; i++){
+		for(var j = -(_range-abs(i)); j <= _range - abs(i); j++){
+			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT){
+				array_push(highlighted_move_array,battle_grid[_center_x+i][_center_y+j]);
+				battle_grid[_center_x+i][_center_y+j]._move_cursor=true;
 				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
 			}
 		}

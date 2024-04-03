@@ -150,7 +150,7 @@ function display_target_highlights(){
 		
 		//show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
 		
-		obj_gridCreator.battle_grid[attack_x][attack_y]._target_highlight = true;
+		obj_gridCreator.battle_grid[attack_x][attack_y]._danger_cursor = true;
 		
 	}
 }
@@ -170,7 +170,7 @@ function remove_target_highlights(){
 		
 		//show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
 		
-		obj_gridCreator.battle_grid[attack_x][attack_y]._target_highlight = false;
+		obj_gridCreator.battle_grid[attack_x][attack_y]._danger_cursor = false;
 		
 	}
 }
@@ -192,12 +192,13 @@ function do_damage(){
 		
 		if(!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty){
 			show_debug_message("("+string(attack_x)+","+string(attack_y)+")")
-			show_debug_message(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.name)
+			show_debug_message(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile==pointer_null);
 			obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.hp-=1;
 
 		}
 		
 	}
+	remove_target_highlights();
 	
 }
 
