@@ -16,12 +16,21 @@ draw_sprite_ext(spr_diamond_outline, 0, imgX, imgY, _sb,_sb, 0, global._characte
 
 //draw_sprite_ext(spr_temp_Akeha, 0, imgX, imgY-20, -0.55, 0.55, 0, c_white, 1);
 
+#region gold
+
+draw_text_transformed(60, 20, "G: "+ string(obj_battleControl.gold), 1, 1, 0);
+#endregion
+
 #region tp
 draw_text_transformed(x, y, "TP: " + string(obj_battleControl.tp_current), 1, 1, 0);
 #endregion
 
 #region hp
-draw_text_transformed(menuX[0]+50, menuY[0]-35, "HP: " + string(obj_player.hp), 0.8, 0.8, 0);
+var pc;
+pc = (obj_player.hp / obj_player.hpMax) * 100;
+draw_healthbar(menuX[0]+20, menuY[0]+3, 500, menuY[0]-3, pc, global._primary, global._characterSecondary, global._characterSecondary, 0, true, true)
+//draw_text_transformed(menuX[0]+50, menuY[0]-35, "HP: " + string(obj_player.hp), 0.8, 0.8, 0);
+
 #endregion
 
 #region first
