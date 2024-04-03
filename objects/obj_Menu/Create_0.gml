@@ -2,14 +2,14 @@
 // You can write your code in this editor
 
 state = 0;
-expansionLimit = 1.3;
+expansionLimit = 1;
 open = true;
 
 #region location
 imgX = 200;
 imgY = 680;
 
-rootX = imgX+50;
+rootX = imgX+150;
 menuX = [rootX, rootX, rootX, rootX, rootX];
 rootY = imgY + 20;
 menuY = [rootY, rootY, rootY, rootY, rootY];
