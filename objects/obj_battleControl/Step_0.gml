@@ -72,13 +72,15 @@ switch (state) {
 			if(player_units[i].hp>0){
 				player_units[i].has_moved = false;
 				player_units[i].has_attacked = false;
+				tp_current+=player_units[i].tpGain;
 			}else{
 				player_units[i].hp=0;
 			}
+			
 		}
 		
-		if (tp_current < tp_max) {
-		tp_current++;	
+		if (tp_current > tp_max) {
+		tp_current=tp_max;	
 		}	
 		show_debug_message("CURRENT TP: " + string(tp_current));
 		

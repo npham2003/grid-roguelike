@@ -99,7 +99,9 @@ global.players = [
 		playerSpeed: 2,
 		sprites : { idle: spr_player, dead: spr_player_dead},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.beam, global.actionLibrary.charge,  global.actionLibrary.mortar],
-		ally: true
+		ally: true,
+		tpGain: 1
+		
 	},
 	{ //l'cifure
 		name: "L'Cifure",
@@ -111,7 +113,8 @@ global.players = [
 		playerSpeed: 2,
 		sprites : { idle: spr_player, dead: spr_player_dead},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.beam, global.actionLibrary.charge,  global.actionLibrary.mortar],
-		ally: true
+		ally: true,
+		tpGain: 1
 	}
 	//{ //new member
 	//	name: "put new party member here", //refer to example above
