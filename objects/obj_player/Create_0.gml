@@ -153,6 +153,7 @@ function skill1() {
 		for (var i = 0; i < array_length(skill_range); i++) {
 			if (!skill_range[i]._is_empty) {
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
+				skill_range[i]._entity_on_tile.hp -= _damage;
 				obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, _damage);
 				show_debug_message(skill_range[i]._entity_on_tile.hp);
 			}
@@ -216,6 +217,7 @@ function skill3() {
 		for (var i = 0; i < array_length(skill_range_aux); i++) {
 			if (!skill_range_aux[i]._is_empty) {
 				show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
+				skill_range_aux[i]._entity_on_tile.hp -= _damage;
 				obj_battleEffect.show_damage(skill_range_aux[i]._entity_on_tile, _damage);
 				show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
 			}
