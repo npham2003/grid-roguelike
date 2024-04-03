@@ -29,6 +29,10 @@ var player_data = [
 	{
 		info: global.players[0],
 		grid: [3, 2]		
+	},
+	{
+		info: global.players[1],
+		grid: [3, 3]		
 	}
 ];
 

@@ -116,7 +116,9 @@ switch (state) {
 			if(unit.ally){
 				obj_info_panel.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
 				unit.prev_grid = [unit.grid_pos[0], unit.grid_pos[1]];
-				unit.preview_moveable_grids();
+				if(!unit.has_moved && !unit.has_attacked){
+					unit.preview_moveable_grids();
+				}
 				if (key_Space_pressed) {
 					if (!unit.has_moved && !unit.has_attacked) {
 						change_state(BattleState.PlayerMoving);
@@ -178,7 +180,9 @@ switch (state) {
 					//show_debug_message("Switch to next player unit");
 				}
 				else if (key_Enter_pressed) {
-					change_state(BattleState.EnemyTakingAction);
+					unit.confirm_move();
+					unit.has_moved=true;
+					unit.has_attacked=true;
 				}
 			}else{
 				
