@@ -152,9 +152,9 @@ global.actionLibrary = {
 							_target = skill_range[i]._entity_on_tile;
 							show_debug_message(string(skill_range[i]._y_coord)+" and "+string(unit.grid_pos[1]));
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
-							//skill_range[i]._entity_on_tile.hp -= _damage;
+							skill_range[i]._entity_on_tile.hp -= _damage;
 							
-							//obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, _damage);
+							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, _damage);
 							skill_range[i]._entity_on_tile.push_back(1);
 							show_debug_message(_target.hp);
 						}
