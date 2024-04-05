@@ -312,7 +312,7 @@ switch (state) {
 			unit.skill_back = false;
 			
 		}else if (unit.skill_used == 0) {
-			unit.test();
+			unit.actions[0].skillFunctions.base(unit);
 			if (unit.skill_complete) {
 				tp_current -= unit.actions[0].cost;
 				unit.has_attacked = true;
@@ -321,7 +321,7 @@ switch (state) {
 			}
 		}
 		else if (unit.skill_used == 1) {
-			unit.skill1();
+			unit.actions[1].skillFunctions.base(unit);
 			if (unit.skill_complete) {
 				tp_current -= unit.actions[1].cost;
 				unit.has_attacked = true;

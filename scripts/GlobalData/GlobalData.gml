@@ -13,14 +13,14 @@ global.actionLibrary = {
 			//BattleChangeHP(_targets);
 		},
 		skillFunctions: {
-			base: function(){
+			base: function(unit){
 				
-				action = actions[0];
-				obj_info_panel.set_text("WASD - Aim     Enter - Confirm     Tab - Back\nHits the first target in a row\nCost: "+string(actions[0].cost));
-				skill_range = obj_gridCreator.highlighted_target_straight(grid_pos[0]+1, grid_pos[1]);
+				unit.action = unit.actions[unit.skill_used];
+				obj_info_panel.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+string(unit.actions[unit.skill_used].description)+"\nCost: "+string(unit.actions[unit.skill_used].cost));
+				skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=skill_range;
 	
-				var _damage = action.damage;
+				var _damage = unit.action.damage;
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
 					audio_play_sound(sfx_base_laser, 0, false);
 					for (var i = 0; i < array_length(skill_range); i++) {
@@ -31,13 +31,13 @@ global.actionLibrary = {
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
 						}
 					}
-					is_attacking = false;
-					skill_complete = true;
+					unit.is_attacking = false;
+					unit.skill_complete = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
 		
 				}else if(keyboard_check_pressed(vk_tab)){
-					is_attacking = false;
-					skill_back = true;
+					unit.is_attacking = false;
+					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
 		
 				}
@@ -56,9 +56,41 @@ global.actionLibrary = {
 			var _damage = 1; //math function here
 			//BattleChangeHP(_targets);
 		},
-		getCoord: function(_centerCoord) { //_centerCoord returns a list [x,y]
-			//return 2d array of all coordinates affected
-			return [[0,0], [0,1]];
+		skillFunctions: {
+			base: function(unit){
+				
+				if (!unit.play_sound) {
+					audio_play_sound(sfx_beam_windup, 0, false);
+					unit.play_sound = true;
+				}
+				unit.is_attacking = true;
+				unit.action = unit.actions[unit.skill_used];
+				var _damage = unit.action.damage;
+				skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
+				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
+				obj_info_panel.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+string(unit.actions[unit.skill_used].description)+"\nCost: "+string(unit.actions[unit.skill_used].cost));
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
+					audio_play_sound(sfx_blast, 0, false);
+					for (var i = 0; i < array_length(skill_range); i++) {
+						if (!skill_range[i]._is_empty) {
+							show_debug_message(skill_range[i]._entity_on_tile.hp);
+							skill_range[i]._entity_on_tile.hp -= _damage;
+							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, _damage);
+							show_debug_message(skill_range[i]._entity_on_tile.hp);
+						}
+					}
+					unit.is_attacking = false;
+					unit.skill_complete = true;
+					unit.play_sound = false;
+					unit.skill_range = obj_gridCreator.reset_highlights_target();
+					show_debug_message(unit.action.name);
+				}else if(keyboard_check_pressed(vk_tab)){
+					unit.is_attacking = false;
+					unit.skill_back = true;
+					skill_range = obj_gridCreator.reset_highlights_target();
+					unit.play_sound = false;
+				}
+			}
 		}
 	},
 	mortar: {
