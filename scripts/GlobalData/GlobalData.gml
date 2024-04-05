@@ -1,9 +1,9 @@
 //Action Library
 global.actionLibrary = {
 	baseAttack: {
-		name: "Base Attack", //probably redundant to have a name but keep it
-		description: "Does 1 damage to the first target in a row",
-		cost: 1,
+		name: ["Base Attack"], //probably redundant to have a name but keep it
+		description: ["Does 1 damage to the first target in a row"],
+		cost: [1],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -16,7 +16,6 @@ global.actionLibrary = {
 			base: function(unit){
 				
 				unit.action = unit.actions[unit.skill_used];
-				obj_info_panel.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+string(unit.actions[unit.skill_used].description)+"\nCost: "+string(unit.actions[unit.skill_used].cost));
 				skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=skill_range;
 	
@@ -45,9 +44,9 @@ global.actionLibrary = {
 		}
 	},
 	beam: {
-		name: "Beam", //probably redundant to have a name but keep it
-		description: "Does 2 damage to all targets in a row",
-		cost: 3,
+		name: ["Beam", "Big Beam"], //probably redundant to have a name but keep it
+		description: ["Does 2 damage to all targets in a row", "Does 2 damage to all targets in surrounding rows. Double damage if target is in the same row"],
+		cost: [3, 6],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -68,7 +67,7 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
-				obj_info_panel.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+string(unit.actions[unit.skill_used].description)+"\nCost: "+string(unit.actions[unit.skill_used].cost));
+				
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 					audio_play_sound(sfx_blast, 0, false);
 					for (var i = 0; i < array_length(skill_range); i++) {
@@ -103,7 +102,6 @@ global.actionLibrary = {
 				
 				skill_range = array_concat(obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]),obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]+1),obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]-1));
 				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
-				obj_info_panel.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+string(unit.actions[unit.skill_used].description)+"\nCost: "+string(unit.actions[unit.skill_used].cost));
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 					audio_play_sound(sfx_blast, 0, false);
 					for (var i = 0; i < array_length(skill_range); i++) {
@@ -136,9 +134,9 @@ global.actionLibrary = {
 		}
 	},
 	mortar: {
-		name: "Mortar", //probably redundant to have a name but keep it
-		description: "Hits a target in front and damages all adjacent units",
-		cost: 6,
+		name: ["Mortar"], //probably redundant to have a name but keep it
+		description: ["Hits a target in front and damages all adjacent units"],
+		cost: [6],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -161,7 +159,6 @@ global.actionLibrary = {
 	
 					audio_play_sound(sfx_mortar_windup, 0, false);
 				}
-				obj_info_panel.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+string(unit.actions[unit.skill_used].description)+"\nCost: "+string(unit.actions[unit.skill_used].cost));
 				skill_range = obj_gridCreator.highlighted_attack_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
 				skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
@@ -219,9 +216,9 @@ global.actionLibrary = {
 		}
 	},
 	charge: {
-		name: "Charge", //probably redundant to have a name but keep it
-		description: "Gain 1 TP",
-		cost: 0,
+		name: ["Charge"], //probably redundant to have a name but keep it
+		description: ["Gain 1 TP"],
+		cost: [0],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -232,7 +229,6 @@ global.actionLibrary = {
 		skillFunctions: {
 			base: function(unit){
 				unit.action = unit.actions[2];
-				obj_info_panel.set_text("WASD - Aim     L - Confirm     Tab - Back\n"+string(unit.actions[unit.skill_used].description)+"\nCost: "+string(unit.actions[unit.skill_used].cost));
 				skill_range = [obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
 				obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._target_highlight=true;
 				obj_cursor.movable_tiles=skill_range;

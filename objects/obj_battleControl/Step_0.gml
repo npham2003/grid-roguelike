@@ -134,7 +134,7 @@ switch (state) {
 					obj_gridCreator.reset_highlights_cursor();
 					if (!unit.has_attacked) {
 						if (key_J_pressed) {
-							if (tp_current >= unit.actions[0].cost) {
+							if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
 								unit.skill_used = 0;
 								enough_tp = true;
 							}
@@ -144,7 +144,7 @@ switch (state) {
 				
 						}
 						else if (key_K_pressed) {
-							if (tp_current >= unit.actions[1].cost) {
+							if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
 							unit.skill_used = 1;
 							enough_tp = true;
 							}
@@ -153,7 +153,7 @@ switch (state) {
 								}
 						}
 						else if (key_L_pressed) {
-							if (tp_current >= unit.actions[2].cost) {
+							if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
 							unit.skill_used = 2;
 							enough_tp = true;
 							}
@@ -161,7 +161,7 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}else if (key_semi_pressed) {
-							if (tp_current >= unit.actions[3].cost) {
+							if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
 							unit.skill_used = 3;
 							enough_tp = true;
 							}
@@ -234,7 +234,7 @@ switch (state) {
 				obj_gridCreator.reset_highlights_cursor();
 				if (!unit.has_attacked) {
 					if (key_J_pressed) {
-						if (tp_current >= unit.actions[0].cost) {
+						if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
 							unit.skill_used = 0;
 							enough_tp = true;
 						}
@@ -244,7 +244,7 @@ switch (state) {
 				
 				}
 				else if (key_K_pressed) {
-					if (tp_current >= unit.actions[1].cost) {
+					if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
 					unit.skill_used = 1;
 					enough_tp = true;
 					}
@@ -253,7 +253,7 @@ switch (state) {
 						}
 				}
 				else if (key_L_pressed) {
-					if (tp_current >= unit.actions[2].cost) {
+					if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
 					unit.skill_used = 2;
 					enough_tp = true;
 					}
@@ -262,20 +262,14 @@ switch (state) {
 						}
 				}
 				else if (key_semi_pressed) {
-					if (tp_current >= unit.actions[3].cost) {
+					if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
 					unit.skill_used = 3;
 					enough_tp = true;
-					}
-			}
-			else if (key_semi_pressed) {
-				if (tp_current >= unit.actions[3].cost) {
-				unit.skill_used = 3;
-				enough_tp = true;
-				}
-				else {
+					}else {
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
 			}
+			
 				if (enough_tp) {
 					unit.confirm_move();
 					unit.skill_complete = false;
@@ -312,78 +306,86 @@ switch (state) {
 			unit.skill_back = false;
 			
 		}else{
+			
+			obj_info_panel.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]])+"\nCost: "+string(unit.actions[unit.skill_used].cost[unit.upgrades[unit.skill_used]]));
+			if (unit.skill_complete) {
+				tp_current -= unit.actions[unit.skill_used].cost[unit.upgrades[unit.skill_used]];
+				unit.has_attacked = true;
+				
+				change_state(BattleState.PlayerTakingAction);
+			}
 			switch(unit.upgrades[unit.skill_used]){
 				case 0:
+					
 					unit.actions[unit.skill_used].skillFunctions.base(unit);
-					if (unit.skill_complete) {
-						tp_current -= unit.actions[unit.skill_used].cost;
-						unit.has_attacked = true;
-						unit.skill_complete = false;
-						change_state(BattleState.PlayerTakingAction);
-					}
+					
 					break;
 				case 1:
 					unit.actions[unit.skill_used].skillFunctions.upgrade1(unit);
-					if (unit.skill_complete) {
-						tp_current -= unit.actions[unit.skill_used].cost;
-						unit.has_attacked = true;
-						unit.skill_complete = false;
-						change_state(BattleState.PlayerTakingAction);
-					}
+					
 					break;
 				}
-				
 		}
-		if (jkl_pressed) { // optimize eventually
-		obj_gridCreator.reset_highlights_cursor();
-		obj_gridCreator.reset_highlights_target();
-		obj_gridCreator.reset_highlights_attack();
-		if (!unit.has_attacked) {
-			if (key_J_pressed) {
-				if (tp_current >= unit.actions[0].cost) {
-					unit.skill_used = 0;
-					enough_tp = true;
-				}
-				else {
-					audio_play_sound(sfx_no_tp, 0, false);
-				}
+		enough_tp=false;
+					if (!unit.has_attacked) {
+						if (key_J_pressed&&unit.skill_used!=0) {
+							obj_gridCreator.reset_highlights_cursor();
+							obj_gridCreator.reset_highlights_attack();
+							obj_gridCreator.reset_highlights_target();
+							if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
+								unit.skill_used = 0;
+								enough_tp = true;
+							}
+							else {
+								audio_play_sound(sfx_no_tp, 0, false);
+							}
 				
-			}
-			else if (key_K_pressed) {
-				if (tp_current >= unit.actions[1].cost) {
-				unit.skill_used = 1;
-				enough_tp = true;
-				}
-				else {
-						audio_play_sound(sfx_no_tp, 0, false);
-					}
-			}
-			else if (key_L_pressed) {
-				if (tp_current >= unit.actions[2].cost) {
-				unit.skill_used = 2;
-				enough_tp = true;
-				}
-				else {
-						audio_play_sound(sfx_no_tp, 0, false);
-					}
-			}else if (key_semi_pressed) {
-				if (tp_current >= unit.actions[3].cost) {
-				unit.skill_used = 3;
-				enough_tp = true;
-				}
-				else {
-						audio_play_sound(sfx_no_tp, 0, false);
-					}
-			}
-				if (enough_tp) {
+						}
+						else if (key_K_pressed&&unit.skill_used!=1) {
+							obj_gridCreator.reset_highlights_cursor();
+							obj_gridCreator.reset_highlights_attack();
+							obj_gridCreator.reset_highlights_target();
+							if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
+							unit.skill_used = 1;
+							enough_tp = true;
+							}
+							else {
+									audio_play_sound(sfx_no_tp, 0, false);
+								}
+						}
+						else if (key_L_pressed&&unit.skill_used!=2) {
+							obj_gridCreator.reset_highlights_cursor();
+							obj_gridCreator.reset_highlights_attack();
+							obj_gridCreator.reset_highlights_target();
+							if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
+							unit.skill_used = 2;
+							enough_tp = true;
+							}
+							else {
+									audio_play_sound(sfx_no_tp, 0, false);
+								}
+						}else if (key_semi_pressed&&unit.skill_used!=3) {
+							obj_gridCreator.reset_highlights_cursor();
+							obj_gridCreator.reset_highlights_attack();
+							obj_gridCreator.reset_highlights_target();
+							if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
+							unit.skill_used = 3;
+							enough_tp = true;
+							}
+							else {
+									audio_play_sound(sfx_no_tp, 0, false);
+								}
+						}
+							if (enough_tp) {
 							
-					unit.skill_complete = false;
-					enough_tp = false;
-					change_state(BattleState.PlayerAiming);
-					obj_gridCreator.reset_highlights_cursor();
-				}
-			}
-		}
+								unit.skill_complete = false;
+								enough_tp = false;
+								change_state(BattleState.PlayerAiming);
+								obj_gridCreator.reset_highlights_cursor();
+							}
+						}
+				
+		
 		
 		
 		
@@ -404,7 +406,9 @@ switch (state) {
 		show_debug_message(unit.name + ": taking action");
 		
 		
-		
+		obj_gridCreator.reset_highlights_cursor();
+		obj_gridCreator.reset_highlights_attack();
+		obj_gridCreator.reset_highlights_target();
 		var enemy_unit = enemy_units[enemy_check_death];
 		if (enemy_unit.hp<=0){
 			enemy_unit.despawn();
