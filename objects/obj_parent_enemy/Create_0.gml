@@ -73,7 +73,7 @@ function calculate_util(test_x, test_y) {
 		}
 		
 		if(!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty){
-			show_debug_message("something is on tile "+string(attack_x)+", "+string(attack_y));
+			//show_debug_message("something is on tile "+string(attack_x)+", "+string(attack_y));
 			if(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile==target){
 				util+=1;
 			}
@@ -130,8 +130,8 @@ function aim(){
 				}
 			}
 		}
-		show_debug_message(string(potential_positions));
-		show_debug_message("{0} has max util {1}", name, max_util);
+		//show_debug_message(string(potential_positions));
+		//show_debug_message("{0} has max util {1}", name, max_util);
 		position = irandom(array_length(potential_positions)-1);
 		move(potential_positions[position][0],potential_positions[position][1]);
 		

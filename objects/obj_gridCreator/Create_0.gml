@@ -197,7 +197,7 @@ highlighted_attack_line_range = function(_center_x,_center_y,_range){ //editable
 
 highlighted_target_straight = function(_center_x,_center_y){
 	
-	reset_highlights_target();
+	highlighted_target_array=[];
 	var j=0;
 	while(_center_x+j<GRIDWIDTH){
 		
@@ -216,7 +216,7 @@ highlighted_target_straight = function(_center_x,_center_y){
 
 highlighted_target_circle = function(_center_x,_center_y,_range){
 	
-	reset_highlights_target();
+	highlighted_target_array=[];
 	for(var i = -_range; i <= _range; i++){
 		for(var j = -(_range-abs(i)); j <= _range - abs(i); j++){
 			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT){
@@ -231,7 +231,7 @@ highlighted_target_circle = function(_center_x,_center_y,_range){
 
 highlighted_target_cross = function(_center_x,_center_y,_range){
 	
-	reset_highlights_target();
+	highlighted_target_array=[];
 	for(var i = -_range; i <= _range; i++){
 			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH){
 				array_push(highlighted_target_array,battle_grid[_center_x+i][_center_y]);
@@ -251,7 +251,7 @@ highlighted_target_cross = function(_center_x,_center_y,_range){
 
 highlighted_target_line_pierce = function(_center_x,_center_y){
 	
-	reset_highlights_target();
+	highlighted_target_array=[];
 	var j=-1;
 		while(_center_x+j<GRIDWIDTH){
 			j+=1;
@@ -330,6 +330,7 @@ for (var i = 0; i< gridHoriz;i++){
 		var coordinates = get_coordinates(i,j);
 		var _tile = instance_create_layer(coordinates[0],coordinates[1],"Tiles",obj_tile_class);
 		battle_grid[i][j]=_tile;
+		_tile.set_coords(i,j);
 		array_push(battle_grid_flattened,_tile);
 	}
 }
