@@ -107,9 +107,9 @@ global.actionLibrary = {
 		},
 		skillFunctions: {
 			base: function(unit){
-				skill_coords=[];
-				unit.action = actions[unit.skill_used];
-				var _damage = action.damage;
+				
+				unit.action = unit.actions[unit.skill_used];
+				var _damage = unit.action.damage;
 				if (!unit.skill_init) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 					unit.range = 3;
 					skill_coords[0] = unit.grid_pos[0] + unit.range;
@@ -164,7 +164,7 @@ global.actionLibrary = {
 					skill_range_aux = obj_gridCreator.reset_highlights_target();
 					unit.skill_complete = true;
 					unit.skill_init = false;
-					show_debug_message(action.name);
+					show_debug_message(unit.action.name);
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
 					unit.skill_back = true;
