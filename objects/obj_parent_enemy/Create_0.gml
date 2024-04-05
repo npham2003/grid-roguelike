@@ -314,6 +314,78 @@ function push_back(squares){
 		hp-=1;
 		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]].entity_on_tile,1);
 		obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]].entity_on_tile.hp-=1;
+		
+	}
+}
+
+function push_forward(squares){
+	if(squares==0){
+		return;
+	}
+	
+	if(grid_pos[0]==0 || grid_pos[0]==5){
+		obj_battleEffect.show_damage(self,1);
+		hp-=1;
 		display_target_highlights();
+		return;
+	}
+	if(obj_gridCreator.battle_grid[grid_pos[0]-1][grid_pos[1]]._is_empty){
+		remove_danger_highlights();
+		move(grid_pos[0]-1,grid_pos[1]);
+		push_back(squares-1);
+	}else{
+		obj_battleEffect.show_damage(self,1);
+		hp-=1;
+		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]-1][grid_pos[1]].entity_on_tile,1);
+		obj_gridCreator.battle_grid[grid_pos[0]-1][grid_pos[1]].entity_on_tile.hp-=1;
+		
+	}
+}
+
+function push_up(squares){
+	if(squares==0){
+		return;
+	}
+	
+	if(grid_pos[0]==0 || grid_pos[1]==0){
+		obj_battleEffect.show_damage(self,1);
+		hp-=1;
+		display_target_highlights();
+		return;
+	}
+	if(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]-1]._is_empty){
+		remove_danger_highlights();
+		move(grid_pos[0],grid_pos[1]-1);
+		push_up(squares-1);
+	}else{
+		obj_battleEffect.show_damage(self,1);
+		hp-=1;
+		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]-1].entity_on_tile,1);
+		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]-1].entity_on_tile.hp-=1;
+		
+	}
+}
+
+function push_down(squares){
+	if(squares==0){
+		return;
+	}
+	
+	if(grid_pos[0]==0 || grid_pos[1]==GRIDHEIGHT-1){
+		obj_battleEffect.show_damage(self,1);
+		hp-=1;
+		display_target_highlights();
+		return;
+	}
+	if(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]+1]._is_empty){
+		remove_danger_highlights();
+		move(grid_pos[0],grid_pos[1]+1);
+		push_down(squares-1);
+	}else{
+		obj_battleEffect.show_damage(self,1);
+		hp-=1;
+		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]+1].entity_on_tile,1);
+		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]+1].entity_on_tile.hp-=1;
+		
 	}
 }

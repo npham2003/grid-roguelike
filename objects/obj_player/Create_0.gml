@@ -11,7 +11,7 @@ play_sound = false; // temp var, will change later
 is_attacking = false;
 prev_grid = [];
 skill_back = false;
-upgrades =[0,2,0,0];
+upgrades =[0,2,0,2];
 
 var return_coords;
 

@@ -35,6 +35,6 @@ if(is_dead){
 		instance_destroy();
 		obj_battleControl.in_animation=false;
 	}
-	image_alpha-=0.05;
+	image_alpha-=0.01;
 	
 }

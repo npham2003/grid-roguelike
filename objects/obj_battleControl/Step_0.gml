@@ -37,6 +37,7 @@ switch (state) {
 		}
 		var random_battle = irandom(array_length(global.encounters)-1);
 		spawn_enemies(global.encounters[random_battle]);
+		//spawn_enemies(global.encounters[3]);
 		
 		change_state(BattleState.EnemyAiming);
 		break;
@@ -428,10 +429,12 @@ switch (state) {
 		if (enemy_check_death >= array_length(enemy_units)) {
 			enemy_check_death = 0;
 			if (check_battle_end()) {
+				unit.is_attacking = false;
 				change_state(BattleState.BattleEnd);
 			}
 			else {
 				change_state(BattleState.PlayerWaitingAction);
+				unit.is_attacking = false;
 				obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
 			}
 		}
