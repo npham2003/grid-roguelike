@@ -44,9 +44,9 @@ global.actionLibrary = {
 		}
 	},
 	beam: {
-		name: ["Beam", "Big Beam"], //probably redundant to have a name but keep it
-		description: ["Does 2 damage to all targets in a row", "Does 2 damage to all targets in surrounding rows. Double damage if target is in the same row"],
-		cost: [3, 6],
+		name: ["Beam", "Big Beam", "Repel Beam"], 
+		description: ["Does 2 damage to all targets in a row", "Does 2 damage to all targets in surrounding rows. Double damage if target is in the same row", "Does 2 damage to all targets in a row and pushes them back 1 tile."],
+		cost: [3, 6, 4],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -123,7 +123,7 @@ global.actionLibrary = {
 					unit.skill_complete = true;
 					unit.play_sound = false;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
-					show_debug_message(unit.action.name+" upgrade 1");
+					
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
 					unit.skill_back = true;
@@ -131,7 +131,9 @@ global.actionLibrary = {
 					unit.play_sound = false;
 				}
 			}
+			
 		}
+			
 	},
 	mortar: {
 		name: ["Mortar"], //probably redundant to have a name but keep it

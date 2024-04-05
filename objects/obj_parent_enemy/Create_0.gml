@@ -293,3 +293,22 @@ function despawn(){
 	obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
 	remove_danger_highlights();
 }
+
+function push_back(squares){
+	if(squares==0 || grid_pos[0]==GRIDWIDTH-1){
+		return;
+	}
+	if(grid_pos[0]==0){
+		obj_battleEffect.show_damage(self,1);
+		return;
+	}
+	if(obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]]._is_empty){
+		move(grid_pos[0]+1,grid_pos[1]);
+		push_back(squares-1);
+	}else{
+		obj_battleEffect.show_damage(self,1);
+		hp-=1;
+		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]].entity_on_tile,1);
+		obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]].entity_on_tile.hp-=1;
+	}
+}

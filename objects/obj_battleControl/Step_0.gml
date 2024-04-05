@@ -324,6 +324,11 @@ switch (state) {
 					unit.actions[unit.skill_used].skillFunctions.upgrade1(unit);
 					
 					break;
+				
+				case 2:
+					unit.actions[unit.skill_used].skillFunctions.upgrade2(unit);
+					
+					break;
 				}
 		}
 		enough_tp=false;
