@@ -295,14 +295,18 @@ function despawn(){
 }
 
 function push_back(squares){
-	if(squares==0 || grid_pos[0]==GRIDWIDTH-1){
+	if(squares==0){
 		return;
 	}
-	if(grid_pos[0]==0){
+	
+	if(grid_pos[0]==0 || grid_pos[0]==GRIDWIDTH-1){
 		obj_battleEffect.show_damage(self,1);
+		hp-=1;
+		display_target_highlights();
 		return;
 	}
 	if(obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]]._is_empty){
+		remove_danger_highlights();
 		move(grid_pos[0]+1,grid_pos[1]);
 		push_back(squares-1);
 	}else{
@@ -310,5 +314,6 @@ function push_back(squares){
 		hp-=1;
 		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]].entity_on_tile,1);
 		obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]].entity_on_tile.hp-=1;
+		display_target_highlights();
 	}
 }

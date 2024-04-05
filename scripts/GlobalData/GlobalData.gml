@@ -99,8 +99,8 @@ global.actionLibrary = {
 				unit.is_attacking = true;
 				unit.action = unit.actions[unit.skill_used];
 				var _damage = unit.action.damage;
-				
 				skill_range = array_concat(obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]),obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]+1),obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]-1));
+
 				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 					audio_play_sound(sfx_blast, 0, false);
@@ -117,6 +117,46 @@ global.actionLibrary = {
 							skill_range[i]._entity_on_tile.hp -= _damage;
 							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, _damage);
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
+						}
+					}
+					unit.is_attacking = false;
+					unit.skill_complete = true;
+					unit.play_sound = false;
+					unit.skill_range = obj_gridCreator.reset_highlights_target();
+					
+				}else if(keyboard_check_pressed(vk_tab)){
+					unit.is_attacking = false;
+					unit.skill_back = true;
+					skill_range = obj_gridCreator.reset_highlights_target();
+					unit.play_sound = false;
+				}
+			},
+			upgrade2: function(unit){
+				
+				if (!unit.play_sound) {
+					audio_play_sound(sfx_beam_windup, 0, false);
+					unit.play_sound = true;
+				}
+				unit.is_attacking = true;
+				unit.action = unit.actions[unit.skill_used];
+				var _damage = unit.action.damage;
+				
+				skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
+				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
+					audio_play_sound(sfx_blast, 0, false);
+					for (var i = array_length(skill_range)-1; i >= 0; i--) {
+						
+						
+						if (!skill_range[i]._is_empty) {
+							_target = skill_range[i]._entity_on_tile;
+							show_debug_message(string(skill_range[i]._y_coord)+" and "+string(unit.grid_pos[1]));
+							show_debug_message(skill_range[i]._entity_on_tile.hp);
+							//skill_range[i]._entity_on_tile.hp -= _damage;
+							
+							//obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, _damage);
+							skill_range[i]._entity_on_tile.push_back(1);
+							show_debug_message(_target.hp);
 						}
 					}
 					unit.is_attacking = false;
@@ -364,6 +404,12 @@ global.encounters = [
 		{
 			info: global.enemies[1],
 			grid: [8, 3]
+		}
+	],
+	[
+		{
+			info: global.enemies[1],
+			grid: [9, 2]
 		}
 	],
 

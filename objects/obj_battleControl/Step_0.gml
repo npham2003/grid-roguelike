@@ -37,6 +37,7 @@ switch (state) {
 		}
 		var random_battle = irandom(array_length(global.encounters)-1);
 		spawn_enemies(global.encounters[random_battle]);
+		
 		change_state(BattleState.EnemyAiming);
 		break;
 #endregion
