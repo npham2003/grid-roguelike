@@ -117,6 +117,16 @@ function aim(){
 				
 						array_push(potential_positions,[i,j]);
 					}
+				}else if(obj_gridCreator.battle_grid[i][j]._entity_on_tile==self){
+					util=calculate_util(i,j);
+					if(util>=max_util){
+						if(util>max_util){
+							potential_positions=[];
+						}
+						max_util=util;
+				
+						array_push(potential_positions,[i,j]);
+					}
 				}
 			}
 		}
@@ -134,10 +144,12 @@ function aim(){
 
 function move(new_x, new_y) {
 	// Move to est_pos
-	obj_gridCreator.move_entity(grid_pos[0], grid_pos[1], new_x, new_y);
+	obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
+	
 	grid_pos[0] = new_x;
 	grid_pos[1] = new_y;
-	
+	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._is_empty=false;
+	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile=self;
 	is_moving = true;
 	obj_battleControl.in_animation = true;
 	//var coord = obj_gridCreator.get_coordinates(grid_pos[0], grid_pos[1]);

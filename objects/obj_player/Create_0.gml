@@ -100,6 +100,7 @@ function confirm_move() {
 
 function back_move(){
 	
+	obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
 	grid_pos=prev_grid;
 	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile=self;
 	return_coords = obj_gridCreator.get_coordinates(grid_pos[0],grid_pos[1]);
@@ -136,6 +137,8 @@ function baseattack() {
 		
 	}
 }
+
+test = actions[0].skillFunctions.base;
 
 function skill1() {
 	if (!play_sound) {

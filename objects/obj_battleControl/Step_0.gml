@@ -312,7 +312,7 @@ switch (state) {
 			unit.skill_back = false;
 			
 		}else if (unit.skill_used == 0) {
-			unit.baseattack();
+			unit.test();
 			if (unit.skill_complete) {
 				tp_current -= unit.actions[0].cost;
 				unit.has_attacked = true;
