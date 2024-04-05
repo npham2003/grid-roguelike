@@ -105,10 +105,75 @@ global.actionLibrary = {
 			var _damage = 1; //math function here
 			//BattleChangeHP(_targets);
 		},
-		getCoord: function(_centerCoord) { //_centerCoord returns a list [x,y]
-			//return 2d array of all coordinates affected
-			// I DON'T UNDERSTAND THIS NGL
-			return [[0,0], [0,1]];
+		skillFunctions: {
+			base: function(unit){
+				skill_coords=[];
+				unit.action = actions[unit.skill_used];
+				var _damage = action.damage;
+				if (!unit.skill_init) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
+					unit.range = 3;
+					skill_coords[0] = unit.grid_pos[0] + unit.range;
+					skill_coords[1] = unit.grid_pos[1];
+					unit.skill_init = true;
+					unit.is_attacking = true;
+	
+					audio_play_sound(sfx_mortar_windup, 0, false);
+				}
+				obj_info_panel.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+string(unit.actions[unit.skill_used].description)+"\nCost: "+string(unit.actions[unit.skill_used].cost));
+				skill_range = obj_gridCreator.highlighted_attack_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
+				skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
+				obj_cursor.movable_tiles=skill_range;
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[0] -= 1;
+					}
+				}
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[0] += 1;
+					}
+				}
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[1] += 1;
+					}
+				}
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[1] -= 1;
+					}
+				}
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(186)) {
+					audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
+					for (var i = 0; i < array_length(skill_range_aux); i++) {
+						if (!skill_range_aux[i]._is_empty) {
+							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
+							skill_range_aux[i]._entity_on_tile.hp -= _damage;
+							obj_battleEffect.show_damage(skill_range_aux[i]._entity_on_tile, _damage);
+							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
+						}
+					}
+		
+					unit.is_attacking = false;
+					skill_range = obj_gridCreator.reset_highlights_attack();
+					skill_range_aux = obj_gridCreator.reset_highlights_target();
+					unit.skill_complete = true;
+					unit.skill_init = false;
+					show_debug_message(action.name);
+				}else if(keyboard_check_pressed(vk_tab)){
+					unit.is_attacking = false;
+					unit.skill_back = true;
+					unit.skill_range = obj_gridCreator.reset_highlights_target();
+					unit.skill_range = obj_gridCreator.reset_highlights_attack();
+					unit.skill_init = false;
+		
+				}
+			}
 		}
 	},
 	charge: {
@@ -122,10 +187,29 @@ global.actionLibrary = {
 			var _damage = 1; //math function here
 			//BattleChangeHP(_targets);
 		},
-		getCoord: function(_centerCoord) { //_centerCoord returns a list [x,y]
-			//return 2d array of all coordinates affected
-			// I DON'T UNDERSTAND THIS NGL
-			return [[0,0], [0,1]];
+		skillFunctions: {
+			base: function(unit){
+				unit.action = unit.actions[2];
+				obj_info_panel.set_text("WASD - Aim     L - Confirm     Tab - Back\n"+string(unit.actions[unit.skill_used].description)+"\nCost: "+string(unit.actions[unit.skill_used].cost));
+				skill_range = [obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
+				obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._target_highlight=true;
+				obj_cursor.movable_tiles=skill_range;
+	
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
+					obj_battleControl.tp_current+=1;
+					if(obj_battleControl.tp_current>obj_battleControl.tp_max){
+						obj_battleControl.tp_current=obj_battleControl.tp_max;
+					}
+					unit.skill_complete = true;
+					unit.skill_range = obj_gridCreator.reset_highlights_target();
+		
+				}else if(keyboard_check_pressed(vk_tab)){
+					unit.skill_back = true;
+					unit.skill_range = obj_gridCreator.reset_highlights_target();
+		
+				}
+				
+			}
 		}
 	}
 	
