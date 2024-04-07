@@ -407,9 +407,9 @@ global.actionLibrary = {
 		}
 	},
 	charge: {
-		name: ["Charge"], //probably redundant to have a name but keep it
-		description: ["Gain 1 TP"],
-		cost: [0],
+		name: ["Charge", "Long Charge"], //probably redundant to have a name but keep it
+		description: ["Gain 1 TP", "Gain 3 TP but move back to your original position"],
+		cost: [0, 0],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -435,6 +435,35 @@ global.actionLibrary = {
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
+		
+				}
+				
+			},
+			upgrade1: function(unit){
+				unit.action = unit.actions[2];
+				
+				if (!unit.skill_init) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
+					unit.back_move();
+					unit.skill_init = true;
+					
+				}
+				skill_range = [obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
+				obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._target_highlight=true;
+				obj_cursor.movable_tiles=skill_range;
+				obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
+					obj_battleControl.tp_current+=3;
+					if(obj_battleControl.tp_current>obj_battleControl.tp_max){
+						obj_battleControl.tp_current=obj_battleControl.tp_max;
+					}
+					unit.skill_complete = true;
+					unit.skill_range = obj_gridCreator.reset_highlights_target();
+					unit.skill_init = false;
+					
+				}else if(keyboard_check_pressed(vk_tab)){
+					unit.skill_back = true;
+					unit.skill_range = obj_gridCreator.reset_highlights_target();
+					unit.skill_init = false;
 		
 				}
 				

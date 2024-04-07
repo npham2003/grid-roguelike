@@ -9,9 +9,9 @@ skill_init = false;
 new_coords = obj_gridCreator.get_coordinates(grid_pos[0], grid_pos[1]);
 play_sound = false; // temp var, will change later
 is_attacking = false;
-prev_grid = [];
+prev_grid = [0,0];
 skill_back = false;
-upgrades =[0,2,0,2];
+upgrades =[0,2,1,2];
 
 var return_coords;
 
@@ -100,9 +100,10 @@ function confirm_move() {
 }
 
 function back_move(){
-	
+	show_debug_message("Move from ({0},{1}) back to ({2},{3})", grid_pos[0], grid_pos[1], prev_grid[0], prev_grid[1]);
 	obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
-	grid_pos=prev_grid;
+	grid_pos[0]=prev_grid[0];
+	grid_pos[1]=prev_grid[1];
 	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile=self;
 	return_coords = obj_gridCreator.get_coordinates(grid_pos[0],grid_pos[1]);
 	x=return_coords[0];
