@@ -445,7 +445,7 @@ switch (state) {
 		if(array_length(enemy_units)==0){
 			gold+=battle_gold;
 			obj_gridCreator.reset_highlights_enemy();
-			change_state(BattleState.BattleStart);
+			change_state(BattleState.PlayerUpgrade);
 		}else{
 			if(keyboard_check_pressed(vk_anykey)){
 				obj_gridCreator.reset_highlights_cursor();
@@ -453,6 +453,14 @@ switch (state) {
 				room_restart();
 			}
 			
+		}
+		break;
+#endregion
+
+#region
+	case BattleState.PlayerUpgrade:
+		if (key_Enter_pressed) {
+			change_state(BattleState.BattleStart);
 		}
 		break;
 #endregion

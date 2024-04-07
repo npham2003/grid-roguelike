@@ -94,6 +94,7 @@ enum BattleState {
 	PlayerTakingAction,
 	EnemyTakingAction,
 	BattleEnd,
+	PlayerUpgrade
 };
 
 state = BattleState.BattleStart;
@@ -126,6 +127,9 @@ function change_state(new_state) {
 			break;
 		case BattleState.BattleEnd:
 			show_debug_message("Change to state Battle End");
+			break;
+		case BattleState.PlayerUpgrade:
+			show_debug_message("Change to state Player Upgrade");
 			break;
 	};
 	
