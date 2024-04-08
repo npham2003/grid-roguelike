@@ -51,10 +51,10 @@ for (var i = skills - 1; i >= 0; i--) {
 
 #region draw diamond
 //// draw diamond
-//var _sb = 15;
-////draw_sprite_ext(spr_diamond_base, 0, imgX, imgY, _sb,_sb, 0, global._primary, 1);
-////draw_sprite_ext(spr_diamond_outline, 0, imgX, imgY, _sb,_sb, 0, global._characterPrimary, 1);
-////draw_rectangle(imgX-150, imgY-150, imgX+160, imgY+100, true);
+//var portraitScale = 15;
+//draw_sprite_ext(spr_diamond_base, 0, imgX, imgY, portraitScale,portraitScale, 0, global._primary, 1);
+//draw_sprite_ext(spr_diamond_outline, 0, imgX, imgY, portraitScale,portraitScale, 0, global._characterPrimary, 1);
+draw_rectangle(imgX-150, imgY-150, imgX+160, imgY+100, true);
 
 
 draw_set_color(c_black);
@@ -66,8 +66,6 @@ draw_set_color(global._primary);
 draw_primitive_begin(pr_trianglestrip);
 draw_vertices(make_diamond(imgX,imgY,playerDim));
 draw_primitive_end();
-draw_set_color(c_red);
-//draw_text(playerX[_j],playerY[_j],_j);
 #endregion
 
 #region gold
@@ -108,26 +106,30 @@ if (open) {
 }
 
 
-//#region draw character
+#region draw character
 
-//gpu_set_blendenable(false);
-//gpu_set_colorwriteenable(false, false, false, true);
-//draw_set_alpha(0);
-//draw_rectangle(imgX-150, imgY-150, imgX+160, imgY+100, false); //invisible rectangle
+gpu_set_blendenable(false);
+gpu_set_colorwriteenable(false, false, false, true);
+draw_set_alpha(0);
+draw_rectangle(imgX-150, imgY-150, imgX+160, imgY+100, false); //invisible rectangle
 
-////mask
-//draw_set_alpha(1);
-//draw_sprite_ext(spr_diamond_base, 0, imgX, imgY, playerDim, playerDim, 0, c_white, 1);
-//gpu_set_blendenable(true);
-//gpu_set_colorwriteenable(true, true, true, true);
+//mask
+draw_set_alpha(1);
+//draw_sprite_ext(spr_diamond_base, 0, imgX, imgY, portraitScale, portraitScale, 0, c_white, 1);
+draw_set_color(c_white);
+draw_primitive_begin(pr_trianglestrip);
+draw_vertices(make_diamond(imgX,imgY,playerDim));
+draw_primitive_end();
 
-////draw over mask
-//gpu_set_blendmode_ext(bm_dest_alpha, bm_inv_dest_alpha);
-//gpu_set_alphatestenable(true);
-////draw_sprite_ext(spr_temp_Akeha_under, 0, imgX, imgY-20, -0.55, 0.55, 0, c_white, 1);
-//draw_sprite_ext(currCharSprite, 0, imgX, imgY-20, -0.55, 0.55, 0, c_white, 1);
-//gpu_set_alphatestenable(false);
-//gpu_set_blendmode(bm_normal);
+gpu_set_blendenable(true);
+gpu_set_colorwriteenable(true, true, true, true);
 
-//#endregion
+//draw over mask
+gpu_set_blendmode_ext(bm_dest_alpha, bm_inv_dest_alpha);
+gpu_set_alphatestenable(true);
+draw_sprite_ext(currCharSprite, 0, imgX, imgY-20, -0.55, 0.55, 0, c_white, 1);
+gpu_set_alphatestenable(false);
+gpu_set_blendmode(bm_normal);
+
+#endregion
 
