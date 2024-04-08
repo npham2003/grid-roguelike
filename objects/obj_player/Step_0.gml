@@ -10,3 +10,5 @@ if(hp<=0){
 new_coords = obj_gridCreator.get_coordinates(grid_pos[0],grid_pos[1]);
 x = lerp(x, new_coords[0], 0.4);
 y = lerp(y, new_coords[1], 0.4);
+
+//show_debug_message("Current: ({0},{1}) Prev: ({2},{3})", grid_pos[0], grid_pos[1], prev_grid[0], prev_grid[1]);

@@ -75,6 +75,7 @@ spawn_enemies = function(enemy_data){
 		
 		array_push(enemy_units, unit);
 		obj_gridCreator.battle_grid[enemy_data[i].grid[0]][enemy_data[i].grid[1]]._entity_on_tile=unit;
+		unit.grid_pos=[enemy_data[i].grid[0],enemy_data[i].grid[1]];
 		battle_gold+=unit.gold;
 	}
 }

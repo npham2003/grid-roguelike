@@ -13,6 +13,7 @@ is_moving = false;
 sprite_moving_speed = 5;
 transparency=1;
 is_dead = false;
+shield = 0;
 
 //healthbar_y = y-40;
 
@@ -73,7 +74,7 @@ function calculate_util(test_x, test_y) {
 		}
 		
 		if(!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty){
-			show_debug_message("something is on tile "+string(attack_x)+", "+string(attack_y));
+			//show_debug_message("something is on tile "+string(attack_x)+", "+string(attack_y));
 			if(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile==target){
 				util+=1;
 			}
@@ -117,11 +118,21 @@ function aim(){
 				
 						array_push(potential_positions,[i,j]);
 					}
+				}else if(obj_gridCreator.battle_grid[i][j]._entity_on_tile==self){
+					util=calculate_util(i,j);
+					if(util>=max_util){
+						if(util>max_util){
+							potential_positions=[];
+						}
+						max_util=util;
+				
+						array_push(potential_positions,[i,j]);
+					}
 				}
 			}
 		}
-		show_debug_message(string(potential_positions));
-		show_debug_message("{0} has max util {1}", name, max_util);
+		//show_debug_message(string(potential_positions));
+		//show_debug_message("{0} has max util {1}", name, max_util);
 		position = irandom(array_length(potential_positions)-1);
 		move(potential_positions[position][0],potential_positions[position][1]);
 		
@@ -134,10 +145,12 @@ function aim(){
 
 function move(new_x, new_y) {
 	// Move to est_pos
-	obj_gridCreator.move_entity(grid_pos[0], grid_pos[1], new_x, new_y);
+	obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
+	
 	grid_pos[0] = new_x;
 	grid_pos[1] = new_y;
-	
+	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._is_empty=false;
+	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile=self;
 	is_moving = true;
 	obj_battleControl.in_animation = true;
 	//var coord = obj_gridCreator.get_coordinates(grid_pos[0], grid_pos[1]);
@@ -266,8 +279,8 @@ function do_damage(){
 		if(!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty){
 			show_debug_message("("+string(attack_x)+","+string(attack_y)+")")
 			show_debug_message(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile==pointer_null);
-			obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.hp-=1;
-			obj_battleEffect.show_damage(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile, 1);
+			obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.damage(1);
+			
 
 		}
 		
@@ -276,8 +289,115 @@ function do_damage(){
 	
 }
 
+function damage(damage_value){
+	if(shield>0){
+		shield-=1;
+		obj_battleEffect.shield_damage(self, 1);
+	}else{
+		hp-=damage_value;
+		obj_battleEffect.show_damage(self, damage_value);
+	}
+	
+}
+
 function despawn(){
 	is_dead=true;
 	obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
 	remove_danger_highlights();
+}
+
+function push_back(squares){
+	if(squares==0){
+		return;
+	}
+	
+	if(grid_pos[0]==0 || grid_pos[0]==GRIDWIDTH-1){
+		obj_battleEffect.show_damage(self,1);
+		hp-=1;
+		display_target_highlights();
+		return;
+	}
+	if(obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]]._is_empty){
+		remove_danger_highlights();
+		move(grid_pos[0]+1,grid_pos[1]);
+		push_back(squares-1);
+	}else{
+		obj_battleEffect.show_damage(self,1);
+		hp-=1;
+		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]].entity_on_tile,1);
+		obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]].entity_on_tile.hp-=1;
+		
+	}
+}
+
+function push_forward(squares){
+	if(squares==0){
+		return;
+	}
+	
+	if(grid_pos[0]==0 || grid_pos[0]==5){
+		obj_battleEffect.show_damage(self,1);
+		hp-=1;
+		display_target_highlights();
+		return;
+	}
+	if(obj_gridCreator.battle_grid[grid_pos[0]-1][grid_pos[1]]._is_empty){
+		remove_danger_highlights();
+		move(grid_pos[0]-1,grid_pos[1]);
+		push_back(squares-1);
+	}else{
+		obj_battleEffect.show_damage(self,1);
+		hp-=1;
+		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]-1][grid_pos[1]].entity_on_tile,1);
+		obj_gridCreator.battle_grid[grid_pos[0]-1][grid_pos[1]].entity_on_tile.hp-=1;
+		
+	}
+}
+
+function push_up(squares){
+	if(squares==0){
+		return;
+	}
+	
+	if(grid_pos[0]==0 || grid_pos[1]==0){
+		obj_battleEffect.show_damage(self,1);
+		hp-=1;
+		display_target_highlights();
+		return;
+	}
+	if(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]-1]._is_empty){
+		remove_danger_highlights();
+		move(grid_pos[0],grid_pos[1]-1);
+		push_up(squares-1);
+	}else{
+		obj_battleEffect.show_damage(self,1);
+		hp-=1;
+		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]-1].entity_on_tile,1);
+		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]-1].entity_on_tile.hp-=1;
+		
+	}
+}
+
+function push_down(squares){
+	if(squares==0){
+		return;
+	}
+	
+	if(grid_pos[0]==0 || grid_pos[1]==GRIDHEIGHT-1){
+		obj_battleEffect.show_damage(self,1);
+		hp-=1;
+		display_target_highlights();
+		return;
+	}
+	if(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]+1]._is_empty){
+		remove_danger_highlights();
+		move(grid_pos[0],grid_pos[1]+1);
+		push_down(squares-1);
+	}else{
+		obj_battleEffect.show_damage(self,1);
+		hp-=1;
+		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]+1].entity_on_tile,1);
+		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]+1].entity_on_tile.hp-=1;
+		
+	}
 }
