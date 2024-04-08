@@ -25,8 +25,7 @@ global.actionLibrary = {
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
-							skill_range[i]._entity_on_tile.hp -= _damage; // temp var until we get shit moving
-							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, _damage);
+							skill_range[i]._entity_on_tile.damage(_damage); // temp var until we get shit moving
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
 						}
 					}
@@ -73,8 +72,7 @@ global.actionLibrary = {
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
-							skill_range[i]._entity_on_tile.hp -= _damage;
-							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, _damage);
+							skill_range[i]._entity_on_tile.damage(_damage);
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
 						}
 					}
@@ -114,8 +112,7 @@ global.actionLibrary = {
 						if (!skill_range[i]._is_empty) {
 							show_debug_message(string(skill_range[i]._y_coord)+" and "+string(unit.grid_pos[1]));
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
-							skill_range[i]._entity_on_tile.hp -= _damage;
-							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, _damage);
+							skill_range[i]._entity_on_tile.damage(_damage);
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
 						}
 					}
@@ -152,9 +149,7 @@ global.actionLibrary = {
 							_target = skill_range[i]._entity_on_tile;
 							show_debug_message(string(skill_range[i]._y_coord)+" and "+string(unit.grid_pos[1]));
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
-							skill_range[i]._entity_on_tile.hp -= _damage;
-							
-							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, _damage);
+							skill_range[i]._entity_on_tile.damage(_damage);
 							skill_range[i]._entity_on_tile.push_back(1);
 							show_debug_message(_target.hp);
 						}
@@ -234,8 +229,7 @@ global.actionLibrary = {
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
 						if (!skill_range_aux[i]._is_empty) {
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
-							skill_range_aux[i]._entity_on_tile.hp -= _damage;
-							obj_battleEffect.show_damage(skill_range_aux[i]._entity_on_tile, _damage);
+							skill_range[i]._entity_on_tile.damage(_damage);
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
 						}
 					}
@@ -302,8 +296,7 @@ global.actionLibrary = {
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
 						if (!skill_range_aux[i]._is_empty) {
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
-							skill_range_aux[i]._entity_on_tile.hp -= _damage;
-							obj_battleEffect.show_damage(skill_range_aux[i]._entity_on_tile, _damage);
+							skill_range[i]._entity_on_tile.damage(_damage);
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
 						}
 					}
@@ -374,8 +367,7 @@ global.actionLibrary = {
 								_damage = unit.action.damage
 							}
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
-							skill_range_aux[i]._entity_on_tile.hp -= _damage;
-							obj_battleEffect.show_damage(skill_range_aux[i]._entity_on_tile, _damage);
+							skill_range[i]._entity_on_tile.damage(_damage);
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
 							if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1]&&!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1]._is_empty){
 								skill_range_aux[i]._entity_on_tile.push_up(1);
@@ -407,9 +399,9 @@ global.actionLibrary = {
 		}
 	},
 	charge: {
-		name: ["Charge", "Long Charge"], //probably redundant to have a name but keep it
-		description: ["Gain 1 TP", "Gain 3 TP but move back to your original position"],
-		cost: [0, 0],
+		name: ["Charge", "Long Charge", "Parry"], //probably redundant to have a name but keep it
+		description: ["Gain 1 TP", "Gain 3 TP but move back to your original position", "Protect yourself from the next attack that hits you"],
+		cost: [0, 0, 2],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -467,7 +459,25 @@ global.actionLibrary = {
 		
 				}
 				
-			}
+			},
+			upgrade2: function(unit){
+				unit.action = unit.actions[2];
+				skill_range = [obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
+				obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._target_highlight=true;
+				obj_cursor.movable_tiles=skill_range;
+	
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
+					unit.shield+=1;
+					unit.skill_complete = true;
+					unit.skill_range = obj_gridCreator.reset_highlights_target();
+		
+				}else if(keyboard_check_pressed(vk_tab)){
+					unit.skill_back = true;
+					unit.skill_range = obj_gridCreator.reset_highlights_target();
+		
+				}
+				
+			},
 		}
 	}
 	

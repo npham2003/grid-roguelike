@@ -11,7 +11,8 @@ play_sound = false; // temp var, will change later
 is_attacking = false;
 prev_grid = [0,0];
 skill_back = false;
-upgrades =[0,2,1,2];
+upgrades =[0,0,0,0];
+shield = 0;
 
 var return_coords;
 
@@ -111,3 +112,12 @@ function back_move(){
 	obj_gridCreator.reset_highlights_move();
 }
 
+function damage(damage_value){
+	if(shield>0){
+		shield-=1;
+		obj_battleEffect.shield_damage(self, 1);
+	}else{
+		hp-=damage_value;
+		obj_battleEffect.show_damage(self, damage_value);
+	}
+}

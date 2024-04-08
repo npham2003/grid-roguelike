@@ -13,6 +13,7 @@ is_moving = false;
 sprite_moving_speed = 5;
 transparency=1;
 is_dead = false;
+shield = 0;
 
 //healthbar_y = y-40;
 
@@ -278,13 +279,24 @@ function do_damage(){
 		if(!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty){
 			show_debug_message("("+string(attack_x)+","+string(attack_y)+")")
 			show_debug_message(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile==pointer_null);
-			obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.hp-=1;
-			obj_battleEffect.show_damage(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile, 1);
+			obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.damage(1);
+			
 
 		}
 		
 	}
 	remove_target_highlights();
+	
+}
+
+function damage(damage_value){
+	if(shield>0){
+		shield-=1;
+		obj_battleEffect.shield_damage(self, 1);
+	}else{
+		hp-=damage_value;
+		obj_battleEffect.show_damage(self, damage_value);
+	}
 	
 }
 
