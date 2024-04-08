@@ -6,6 +6,6 @@
     {"name":"obj_shield_damage_number","order":3,"path":"objects/obj_shield_damage_number/obj_shield_damage_number.yy",},
     {"name":"obj_draw_bg","order":1,"path":"objects/obj_draw_bg/obj_draw_bg.yy",},
     {"name":"obj_info_panel","order":2,"path":"objects/obj_info_panel/obj_info_panel.yy",},
-    {"name":"obj_menu","order":3,"path":"objects/obj_menu/obj_menu.yy",},
+    {"name":"obj_menu","order":4,"path":"objects/obj_menu/obj_menu.yy",},
   ],
 }

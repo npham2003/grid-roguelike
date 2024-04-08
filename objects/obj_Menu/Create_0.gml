@@ -4,6 +4,7 @@
 state = 0;
 expansionLimit = 1;
 open = true;
+_text = "Hi";
 
 #region location
 imgX = 200;
@@ -34,4 +35,11 @@ close_menu = function(){
 open_menu = function(){
 	open = true;
 	expansionLimit=1.3;
+}
+
+
+set_text = function(_new_text){
+	
+	_text=_new_text;
+	
 }

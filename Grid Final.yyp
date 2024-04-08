@@ -71,7 +71,6 @@
     {"id":{"name":"GridTest","path":"rooms/GridTest/GridTest.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"GlobalData","path":"scripts/GlobalData/GlobalData.yy",},},
-    {"id":{"name":"GridCoOrdinates","path":"scripts/GridCoOrdinates/GridCoOrdinates.yy",},},
     {"id":{"name":"Macros","path":"scripts/Macros/Macros.yy",},},
     {"id":{"name":"bgm_battleOfRuins","path":"sounds/bgm_battleOfRuins/bgm_battleOfRuins.yy",},},
     {"id":{"name":"sfx_base_laser","path":"sounds/sfx_base_laser/sfx_base_laser.yy",},},

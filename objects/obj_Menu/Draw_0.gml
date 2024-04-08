@@ -14,11 +14,16 @@ for (var i = 4; i >= 0; i--) {
 draw_text_transformed(60, 20, "G: "+ string(obj_battleControl.gold), 1, 1, 0);
 #endregion
 
+#region skill details
+draw_set_font(fnt_chiaro);
+draw_text_ext(x+20, y, _text, 40, 1000);
+#endregion
+
 #region tp
 draw_text_transformed(x, y, "TP: " + string(obj_battleControl.tp_current), 1, 1, 0);
 #endregion
 
-if(open){
+if (open) {
 
 	#region fourth
 	draw_text_transformed(menuX[4]+80, menuY[4]-35, player_unit.actions[3].name[player_unit.upgrades[3]]+": L", 0.8, 0.8, 0);
@@ -45,6 +50,8 @@ if(open){
 	#endregion
 }
 
+
+// draw diamond
 var _sb = 15;
 draw_sprite_ext(spr_diamond_base, 0, imgX, imgY, _sb,_sb, 0, global._primary, 1);
 draw_sprite_ext(spr_diamond_outline, 0, imgX, imgY, _sb,_sb, 0, global._characterPrimary, 1);
