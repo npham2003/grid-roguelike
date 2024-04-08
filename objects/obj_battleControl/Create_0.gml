@@ -10,7 +10,7 @@ enemy_order = 0;
 
 // maybe these are in the wrong spot? but anyway yea
 tp_max = 10;
-tp_current = 4;
+tp_current = 6;
 
 in_animation = false;
 
@@ -43,6 +43,8 @@ for (var i = 0; i < array_length(player_data); i++) {
 		coord[0], coord[1], "Units", obj_player, var_struct);
 	
 	array_push(player_units, unit);
+	unit.prev_grid[0] = unit.grid_pos[0];
+	unit.prev_grid[1] = unit.grid_pos[1];
 	obj_gridCreator.battle_grid[player_data[i].grid[0]][player_data[i].grid[1]]._entity_on_tile=unit;
 	
 }

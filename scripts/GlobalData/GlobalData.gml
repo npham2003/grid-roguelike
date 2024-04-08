@@ -229,7 +229,7 @@ global.actionLibrary = {
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
 						if (!skill_range_aux[i]._is_empty) {
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
-							skill_range[i]._entity_on_tile.damage(_damage);
+							skill_range_aux[i]._entity_on_tile.damage(_damage);
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
 						}
 					}
@@ -255,6 +255,7 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				if (!unit.skill_init) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 					unit.range = 3;
+					
 					skill_coords[0] = unit.grid_pos[0] + unit.range;
 					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_init = true;
@@ -296,7 +297,7 @@ global.actionLibrary = {
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
 						if (!skill_range_aux[i]._is_empty) {
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
-							skill_range[i]._entity_on_tile.damage(_damage);
+							skill_range_aux[i]._entity_on_tile.damage(_damage);
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
 						}
 					}
@@ -367,7 +368,7 @@ global.actionLibrary = {
 								_damage = unit.action.damage
 							}
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
-							skill_range[i]._entity_on_tile.damage(_damage);
+							skill_range_aux[i]._entity_on_tile.damage(_damage);
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
 							if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1]&&!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1]._is_empty){
 								skill_range_aux[i]._entity_on_tile.push_up(1);
