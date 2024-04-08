@@ -20,7 +20,7 @@ global.actionLibrary = {
 				obj_cursor.movable_tiles=skill_range;
 	
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("H"))) {
 					audio_play_sound(sfx_base_laser, 0, false);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
@@ -67,7 +67,7 @@ global.actionLibrary = {
 				skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
 				
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
 					audio_play_sound(sfx_blast, 0, false);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
@@ -100,7 +100,7 @@ global.actionLibrary = {
 				skill_range = array_concat(obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]),obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]+1),obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]-1));
 
 				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
 					audio_play_sound(sfx_blast, 0, false);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						
@@ -140,7 +140,7 @@ global.actionLibrary = {
 				
 				skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
 					audio_play_sound(sfx_blast, 0, false);
 					for (var i = array_length(skill_range)-1; i >= 0; i--) {
 						
@@ -224,7 +224,7 @@ global.actionLibrary = {
 						skill_coords[1] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(186)) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
 					audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
 						if (!skill_range_aux[i]._is_empty) {
@@ -292,7 +292,7 @@ global.actionLibrary = {
 						skill_coords[1] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(186)) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
 					audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
 						if (!skill_range_aux[i]._is_empty) {
@@ -358,7 +358,7 @@ global.actionLibrary = {
 						skill_coords[1] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(186)) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
 					audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
 						if (!skill_range_aux[i]._is_empty) {
@@ -417,7 +417,7 @@ global.actionLibrary = {
 				obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._target_highlight=true;
 				obj_cursor.movable_tiles=skill_range;
 	
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 					obj_battleControl.tp_current+=1;
 					if(obj_battleControl.tp_current>obj_battleControl.tp_max){
 						obj_battleControl.tp_current=obj_battleControl.tp_max;
@@ -444,7 +444,7 @@ global.actionLibrary = {
 				obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._target_highlight=true;
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 					obj_battleControl.tp_current+=3;
 					if(obj_battleControl.tp_current>obj_battleControl.tp_max){
 						obj_battleControl.tp_current=obj_battleControl.tp_max;
@@ -467,7 +467,7 @@ global.actionLibrary = {
 				obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._target_highlight=true;
 				obj_cursor.movable_tiles=skill_range;
 	
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 					unit.shield+=1;
 					unit.skill_complete = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();

@@ -21,19 +21,19 @@ draw_text_transformed(x, y, "TP: " + string(obj_battleControl.tp_current), 1, 1,
 if(open){
 
 	#region fourth
-	draw_text_transformed(menuX[4]+80, menuY[4]-35, player_unit.actions[3].name[player_unit.upgrades[3]]+": ;", 0.8, 0.8, 0);
+	draw_text_transformed(menuX[4]+80, menuY[4]-35, player_unit.actions[3].name[player_unit.upgrades[3]]+": L", 0.8, 0.8, 0);
 	#endregion
 
 	#region third
-	draw_text_transformed(menuX[3]+80, menuY[3]-35, player_unit.actions[2].name[player_unit.upgrades[2]]+": L", 0.8, 0.8, 0);
+	draw_text_transformed(menuX[3]+80, menuY[3]-35, player_unit.actions[2].name[player_unit.upgrades[2]]+": K", 0.8, 0.8, 0);
 	#endregion
 
 	#region second
-	draw_text_transformed(menuX[2]+80, menuY[2]-35, player_unit.actions[1].name[player_unit.upgrades[1]]+": K", 0.8, 0.8, 0);
+	draw_text_transformed(menuX[2]+80, menuY[2]-35, player_unit.actions[1].name[player_unit.upgrades[1]]+": J", 0.8, 0.8, 0);
 	#endregion
 
 	#region first
-	draw_text_transformed(menuX[1]+65, menuY[1]-35, player_unit.actions[0].name[player_unit.upgrades[0]]+": J", 0.8, 0.8, 0);
+	draw_text_transformed(menuX[1]+65, menuY[1]-35, player_unit.actions[0].name[player_unit.upgrades[0]]+": H", 0.8, 0.8, 0);
 	#endregion
 	
 	#region hp

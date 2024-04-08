@@ -6,14 +6,14 @@ var key_D_pressed = keyboard_check_pressed(ord("D"));
 var key_J_pressed = keyboard_check_pressed(ord("J"));
 var key_K_pressed = keyboard_check_pressed(ord("K"));
 var key_L_pressed = keyboard_check_pressed(ord("L"));
-var key_semi_pressed = keyboard_check_pressed(186);
+var key_H_pressed = keyboard_check_pressed(ord("H"));
 
 var key_Enter_pressed = keyboard_check_pressed(vk_enter);
 var key_Tab_pressed = keyboard_check_pressed(vk_tab);
 var key_Space_pressed = keyboard_check_pressed(vk_space);
 
 var wasd_pressed = key_A_pressed || key_W_pressed || key_S_pressed || key_D_pressed;
-var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_semi_pressed;
+var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_H_pressed;
 
 var enough_tp = false;
 
@@ -136,7 +136,7 @@ switch (state) {
 				else if (jkl_pressed) { // optimize eventually
 					obj_gridCreator.reset_highlights_cursor();
 					if (!unit.has_attacked) {
-						if (key_J_pressed) {
+						if (key_H_pressed) {
 							if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
 								unit.skill_used = 0;
 								enough_tp = true;
@@ -146,7 +146,7 @@ switch (state) {
 							}
 				
 						}
-						else if (key_K_pressed) {
+						else if (key_J_pressed) {
 							if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
 							unit.skill_used = 1;
 							enough_tp = true;
@@ -155,7 +155,7 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						else if (key_L_pressed) {
+						else if (key_K_pressed) {
 							if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
 							unit.skill_used = 2;
 							enough_tp = true;
@@ -163,7 +163,8 @@ switch (state) {
 							else {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
-						}else if (key_semi_pressed) {
+						}else if (key_L_pressed) {
+							show_debug_message("hi");
 							if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
 							unit.skill_used = 3;
 							enough_tp = true;
@@ -236,7 +237,7 @@ switch (state) {
 			else if (jkl_pressed) { // optimize eventually
 				obj_gridCreator.reset_highlights_cursor();
 				if (!unit.has_attacked) {
-					if (key_J_pressed) {
+					if (key_H_pressed) {
 						if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
 							unit.skill_used = 0;
 							enough_tp = true;
@@ -246,7 +247,7 @@ switch (state) {
 						}
 				
 				}
-				else if (key_K_pressed) {
+				else if (key_J_pressed) {
 					if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
 					unit.skill_used = 1;
 					enough_tp = true;
@@ -255,7 +256,7 @@ switch (state) {
 							audio_play_sound(sfx_no_tp, 0, false);
 						}
 				}
-				else if (key_L_pressed) {
+				else if (key_K_pressed) {
 					if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
 					unit.skill_used = 2;
 					enough_tp = true;
@@ -264,7 +265,7 @@ switch (state) {
 							audio_play_sound(sfx_no_tp, 0, false);
 						}
 				}
-				else if (key_semi_pressed) {
+				else if (key_L_pressed) {
 					if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
 					unit.skill_used = 3;
 					enough_tp = true;
@@ -338,7 +339,7 @@ switch (state) {
 		}
 		enough_tp=false;
 					if (!unit.has_attacked) {
-						if (key_J_pressed&&unit.skill_used!=0) {
+						if (key_H_pressed&&unit.skill_used!=0) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -351,7 +352,7 @@ switch (state) {
 							}
 				
 						}
-						else if (key_K_pressed&&unit.skill_used!=1) {
+						else if (key_J_pressed&&unit.skill_used!=1) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -363,7 +364,7 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						else if (key_L_pressed&&unit.skill_used!=2) {
+						else if (key_K_pressed&&unit.skill_used!=2) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -374,7 +375,7 @@ switch (state) {
 							else {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
-						}else if (key_semi_pressed&&unit.skill_used!=3) {
+						}else if (key_L_pressed&&unit.skill_used!=3) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
