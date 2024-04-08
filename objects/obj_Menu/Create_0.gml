@@ -21,7 +21,7 @@ optionAlpha = 0;
 
 #region control
 
-
+player_unit = obj_player;
 currCharSprite = spr_temp_Akeha;
 
 #endregion
