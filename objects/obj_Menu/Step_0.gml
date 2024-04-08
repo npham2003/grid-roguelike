@@ -2,7 +2,7 @@
 // You can write your code in this editor
 
 for (var i = 0; i < skills; ++i) {
-	menuX[i] = lerp(menuX[i], rootX + i * spacing * state + state * 50, 0.2);
+	menuX[i] = lerp(menuX[i], rootX + i * spacing * state + state * 200, 0.2);
 	optionAlpha = lerp(optionAlpha, state, 0.1);
 }
 
@@ -12,5 +12,5 @@ if (open) {
 	state = 1;
 }
 else {
-	state = 1;
+	state = 0;
 }

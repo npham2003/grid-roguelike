@@ -15,20 +15,23 @@ rootY = imgY + 32;
 menuX = [rootX, rootX, rootX, rootX, rootX];
 menuY = [rootY, rootY, rootY, rootY, rootY];
 
+portraitScale = 0.55;
+playerScale = 15;
+playerDim = sprite_get_height(spr_diamond_base) * playerScale/2;
+
 optionAlpha = 0;
 optionRadius = 40;
-spacing = 200;
+spacing = 150;
 
-tpRadius = 32;
-tpBorder = 5;
+border = 5;
 tpRadius = 40;
 #endregion
-
 
 #region control
 
 player_unit = obj_player;
 currCharSprite = spr_temp_Akeha;
+tpCost = [0, 1, 5, 7, 12];
 
 
 close_menu = function(){
@@ -59,11 +62,17 @@ make_tp = function(_x, _y, _spacing, _len) {
 	var _bars =  _len/5;
 	var _rem =  _len%5;
 	
-	for (var j = 0; j < _bars; ++j) {
-		for (var i = 0; i < 5; ++i) {
+	var _lines = _bars + _rem;
+	
+		for (var i = 0; i < _len; ++i) {
+			if (_bars > 0) {
+				if (i != 0 && i%5 == 0) {
+					
+				}
+			}
 			_res[i] = [_x + i*_spacing, _y - _spacing*(i%2)];
 		}
-	}
+
 	return _res;
 	
 }
