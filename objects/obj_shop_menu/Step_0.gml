@@ -23,6 +23,13 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 			selector_pos[1]=1;
 		}
 	}
+	if(keyboard_check_pressed(vk_enter)){
+		if(menu_level==0){
+			if(selector_pos[0]==0&&selector_pos[0]){
+				menu_level=1;
+			}
+		}
+	}
 }else{
 	alpha = lerp(alpha,0,0.05);
 	actual_x=lerp(actual_x,2500,0.05);

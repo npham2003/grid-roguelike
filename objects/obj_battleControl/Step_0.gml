@@ -24,6 +24,7 @@ switch (state) {
 #region Battle Start
 	case BattleState.BattleStart:
 		for (var i = 0; i < array_length(player_units); i++) {
+			player_units[i].attack_bonus=0;
 			if(player_units[i].hp<=0){
 				player_units[i].hp=1;
 			}
@@ -39,7 +40,7 @@ switch (state) {
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
 		
-		change_state(BattleState.EnemyAiming);
+		change_state(BattleState.PlayerUpgrade);
 		break;
 #endregion
 	
@@ -80,7 +81,7 @@ switch (state) {
 			}
 			
 		}
-		
+		tp_current+=tp_bonus;
 		if (tp_current > tp_max) {
 		tp_current=tp_max;	
 		}	
@@ -497,6 +498,7 @@ switch (state) {
 
 #region Battle End
 	case BattleState.BattleEnd:
+		tp_bonus=0;
 		if(in_animation){
 			break;
 		}
@@ -517,7 +519,7 @@ switch (state) {
 
 #region
 	case BattleState.PlayerUpgrade:
-		if (key_Enter_pressed) {
+		if (key_Tab_pressed) {
 			change_state(BattleState.BattleStart);
 		}
 		break;
