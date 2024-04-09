@@ -41,6 +41,9 @@ visualize = function(){
 			}else{
 				row_string = string_concat(row_string,"[-]");
 			}
+			if(j==4){
+				row_string = string_concat(row_string," | ");
+			}
 		}
 		show_debug_message(row_string);
 	}
