@@ -40,7 +40,7 @@ switch (state) {
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
 		
-		change_state(BattleState.PlayerUpgrade);
+		change_state(BattleState.EnemyAiming);
 		break;
 #endregion
 	
@@ -521,6 +521,7 @@ switch (state) {
 	case BattleState.PlayerUpgrade:
 		if (key_Tab_pressed) {
 			change_state(BattleState.BattleStart);
+			obj_shop_menu.new_party_member();
 		}
 		break;
 #endregion

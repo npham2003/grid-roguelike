@@ -23,3 +23,8 @@ attack_up = function(){
 		obj_battleControl.player_units[i].attack_bonus+=1;
 	}
 }
+
+new_party_member = function(){
+	var member = irandom(array_length(global.players)-1);
+	obj_battleControl.spawn_unit(global.players[member]);
+}

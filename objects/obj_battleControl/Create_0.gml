@@ -32,14 +32,6 @@ var player_data = [
 	{
 		info: global.players[0],
 		grid: [3, 2]		
-	},
-	{
-		info: global.players[0],
-		grid: [3, 3]		
-	},
-	{
-		info: global.players[0],
-		grid: [3, 4]		
 	}
 ];
 
@@ -58,6 +50,26 @@ for (var i = 0; i < array_length(player_data); i++) {
 	unit.prev_grid[1] = unit.grid_pos[1];
 	unit.upgrades = [0,i,i,i];
 	obj_gridCreator.battle_grid[player_data[i].grid[0]][player_data[i].grid[1]]._entity_on_tile=unit;
+	
+}
+
+spawn_unit = function(new_unit){
+	
+	var empty_tile = obj_gridCreator.find_empty_tile_ally(2,2,5);
+	var coord = obj_gridCreator.get_coordinates(empty_tile._x_coord, empty_tile._y_coord);
+	empty_tile._is_empty=false;
+	
+	var var_struct = variable_clone(new_unit);
+	var_struct.grid_pos = [empty_tile._x_coord, empty_tile._y_coord];
+	
+	unit = instance_create_layer(
+		coord[0], coord[1], "Units", obj_player, var_struct);
+	
+	array_push(player_units, unit);
+	unit.prev_grid[0] = unit.grid_pos[0];
+	unit.prev_grid[1] = unit.grid_pos[1];
+	unit.upgrades = [0,2,2,2];
+	empty_tile._entity_on_tile=unit;
 	
 }
 
