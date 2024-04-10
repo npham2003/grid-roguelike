@@ -1,12 +1,13 @@
 
-if(obj_battleControl.state==BattleState.PlayerUpgrade){
+if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	draw_set_color(c_black);
 	draw_set_alpha(alpha/2);
 	draw_rectangle(0, 0, room_width, room_height, false);
 	draw_sprite_ext(spr_shop_menu_border, image_index, actual_x, y, image_xscale, image_yscale, image_angle, image_blend, alpha);
-	for(i = 0;i<4;i++){
-		for(j=0;j<2;j++){
-			if(selector_pos[0]==i&&selector_pos[1]==j){
+	
+	for (i = 0; i<4; i++){
+		for (j=0; j<2; j++){
+			if (selector_pos[0] == i && selector_pos[1] == j){
 				draw_rectangle_colour(actual_x+(200*i)+125, y+(175*j)+37.5, actual_x+(200*i)+275, y+(175*j)+187.5, c_white, c_white, c_white, c_white, false);
 				draw_sprite_ext(spr_shop_menu_border, image_index, actual_x+(200*i)-50, y+(175*j)-50, 0.2, 0.2, image_angle, image_blend, alpha);
 				draw_set_alpha(1);
@@ -15,11 +16,13 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 				draw_text_ext_transformed(actual_x+(200*i)-40, y+(175*j)-50, descriptor_text[j][i], 40, 360, 0.5, 0.5, image_angle);
 				draw_set_color(c_black);
 				draw_set_alpha(alpha/2);
+				
 			}else{
 				draw_rectangle_colour(actual_x+(200*i)+125, y+(175*j)+37.5, actual_x+(200*i)+275, y+(175*j)+187.5, c_white, c_white, c_white, c_white, true);
 			}
 		}
-		if(menu_level==1 && i<array_length(obj_battleControl.player_units)){
+		
+		if ( menu_level == 1 && i < array_length(obj_battleControl.player_units)){
 			var _sb = 10;
 			draw_sprite_ext(spr_diamond_base, 0, actual_x+(200*i)+200, y+500, _sb,_sb, 0, global._primary, 1);
 			draw_sprite_ext(spr_diamond_outline, 0, actual_x+(200*i)+200, y+500, _sb,_sb, 0, global._characterPrimary, 1);

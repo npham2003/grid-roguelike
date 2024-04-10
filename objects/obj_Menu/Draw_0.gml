@@ -54,7 +54,7 @@ for (var i = skills - 1; i >= 0; i--) {
 //var portraitScale = 15;
 //draw_sprite_ext(spr_diamond_base, 0, imgX, imgY, portraitScale,portraitScale, 0, global._primary, 1);
 //draw_sprite_ext(spr_diamond_outline, 0, imgX, imgY, portraitScale,portraitScale, 0, global._characterPrimary, 1);
-draw_rectangle(imgX-150, imgY-150, imgX+160, imgY+100, true);
+//draw_rectangle(imgX-150, imgY-150, imgX+160, imgY+100, true);
 
 
 draw_set_color(c_black);
@@ -67,16 +67,6 @@ draw_primitive_begin(pr_trianglestrip);
 draw_vertices(make_diamond(imgX,imgY,playerDim));
 draw_primitive_end();
 #endregion
-
-#region gold
-draw_text_transformed(60, 20, "G: "+ string(obj_battleControl.gold), 1, 1, 0);
-#endregion
-
-#region skill details
-draw_set_font(fnt_chiaro);
-draw_text_ext(148, 128, _text, 40, 1000);
-#endregion
-
 
 if (open) {
 
@@ -134,3 +124,11 @@ gpu_set_blendmode(bm_normal);
 
 #endregion
 
+#region gold
+draw_text_transformed(60, 20, "G: "+ string(obj_battleControl.gold), 1, 1, 0);
+#endregion
+
+#region skill details
+draw_set_font(fnt_chiaro);
+draw_text_ext(148, 128, _text, 40, 1000);
+#endregion
