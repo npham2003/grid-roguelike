@@ -483,8 +483,8 @@ global.actionLibrary = {
 	},
 	minefield: {
 		name: ["Minefield", "Violent Field", "Quick Blast"], //probably redundant to have a name but keep it
-		description: ["Places a trap in a 3x3 area. Any units in the area take 3 damage at the end of their turn.", "Places a trap in a 3x3 area. Any units in the area take 5 damage at the end of their turn.", "Hits all units in a 3x3 area for 4 damage."],
-		cost: [3, 4, 6],
+		description: ["Places a trap in a 3x3 area. Any units in the area take 3 damage at the end of their turn.", "Places a trap in a 5x5 area. Any units in the area take 1 damage at the end of their turn.", "Hits all units in a 3x3 area for 4 damage."],
+		cost: [3, 6, 6],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -570,7 +570,7 @@ global.actionLibrary = {
 					audio_play_sound(sfx_mortar_windup, 0, false);
 				}
 				skill_range = obj_gridCreator.highlighted_attack_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
-				skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],1);
+				skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],2);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
 				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
@@ -711,6 +711,16 @@ global.enemyActions = {
 			[0, -1], [0, 0], [0, 1], 
 			[1, -1], [1, 0], [1, 1]
 		]
+	},
+	center_big_square: {
+		name: "big square explosion",
+		range: [
+			[-2, -2], [-2, -1], [-2, 0], [-2, 1], [-2, 2],
+			[-1, -2], [-1, -1], [-1, 0], [-1, 1], [-1, 2],
+			[0, -2], [0, -1], [0, 0], [0, 1], [0, 2],
+			[1, -2], [1, -1], [1, 0], [1, 1], [1, 2],
+			[2, -2], [2, -1], [2, 0], [2, 1], [2, 2]
+		]
 	}
 }
 
@@ -791,12 +801,12 @@ global.obstacles = [
 		turns_remaining: 3,
 		turns_max: 3,
 		sprites: { idle: spr_slime_idle, attack: spr_slime_attack },
-		actions: [global.enemyActions.center_square],
+		actions: [global.enemyActions.center_big_square],
 		sounds: { attack: sfx_slime_attack },
 		ally: false,
 		hp: 999,
 		healthbar_offset: -30,
-		strength: 5
+		strength: 1
 	},
 	
 ]
