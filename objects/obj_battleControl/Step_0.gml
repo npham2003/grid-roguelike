@@ -24,6 +24,7 @@ switch (state) {
 #region Battle Start
 	case BattleState.BattleStart:
 		for (var i = 0; i < array_length(player_units); i++) {
+			player_units[i].attack_bonus=0;
 			if(player_units[i].hp<=0){
 				player_units[i].hp=1;
 			}
@@ -80,7 +81,7 @@ switch (state) {
 			}
 			
 		}
-		
+		tp_current+=tp_bonus;
 		if (tp_current > tp_max) {
 		tp_current=tp_max;	
 		}	
@@ -130,6 +131,7 @@ switch (state) {
 				if (key_Space_pressed) {
 					if (!unit.has_moved && !unit.has_attacked) {
 						change_state(BattleState.PlayerMoving);
+						obj_gridCreator.remove_entity(unit.grid_pos[0],unit.grid_pos[1]);
 						unit.show_moveable_grids();
 					}
 				}
@@ -234,7 +236,7 @@ switch (state) {
 					obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
 					obj_cursor.reset_cursor(unit.grid_pos[0], unit.grid_pos[1]);
 				}
-			else if (jkl_pressed) { // optimize eventually
+			else if (jkl_pressed && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) { // optimize eventually
 				obj_gridCreator.reset_highlights_cursor();
 				if (!unit.has_attacked) {
 					if (key_H_pressed) {
@@ -290,7 +292,7 @@ switch (state) {
 					}
 				}
 			}
-			else if (key_Enter_pressed) {
+			else if (key_Enter_pressed && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) {
 				unit.confirm_move();
 				unit.has_moved = true;
 				unit.has_attacked = true;
@@ -310,6 +312,8 @@ switch (state) {
 			unit.show_moveable_grids_prev();
 			unit.has_attacked = false;
 			unit.skill_back = false;
+			unit.back_aim();
+			
 			
 		}else{
 			
@@ -494,6 +498,7 @@ switch (state) {
 
 #region Battle End
 	case BattleState.BattleEnd:
+		tp_bonus=0;
 		if(in_animation){
 			break;
 		}
@@ -514,8 +519,9 @@ switch (state) {
 
 #region
 	case BattleState.PlayerUpgrade:
-		if (key_Enter_pressed) {
+		if (key_Tab_pressed) {
 			change_state(BattleState.BattleStart);
+			obj_shop_menu.new_party_member();
 		}
 		break;
 #endregion

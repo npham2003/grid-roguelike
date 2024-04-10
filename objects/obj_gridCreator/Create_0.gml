@@ -31,6 +31,24 @@ remove_entity = function(_x_value, _y_value){
 	
 }
 
+visualize = function(){
+	show_debug_message("Grid Viewer");
+	for(i=0;i<array_length(battle_grid[0]);i++){
+		var row_string="";
+		for(j=0; j<array_length(battle_grid);j++){
+			if(battle_grid[j][i]._is_empty){
+				row_string = string_concat(row_string,"[ ]");
+			}else{
+				row_string = string_concat(row_string,"[-]");
+			}
+			if(j==4){
+				row_string = string_concat(row_string," | ");
+			}
+		}
+		show_debug_message(row_string);
+	}
+}
+
 move_entity = function(_prev_x,_prev_y,_new_x,_new_y){
 	var _entity_pointer = battle_grid[_prev_x][_prev_y]._entity_on_tile;
 	if(!battle_grid[_prev_x][_prev_y]._is_empty ){
@@ -104,6 +122,35 @@ highlighted_move = function(_center_x,_center_y,_range){
 		}
 	}
 	return highlighted_move_array;
+}
+
+find_empty_tile_ally = function(_center_x,_center_y,_range){
+	
+	if(_range<0){
+		return pointer_null;
+	}
+	if(_range==0 && battle_grid[_center_x][_center_y]._is_empty){
+		return battle_grid[_center_x][_center_y];
+	}
+	show_debug_message("Range: "+string(_range));
+	_temp = find_empty_tile_ally(_center_x,_center_y,_range-1);
+	if(_temp!=pointer_null){
+		return _temp;
+	}
+	
+	for(var i = -_range; i <= _range; i++){
+		for(var j = -(_range-abs(i)); j <= _range - abs(i); j++){
+			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT &&_center_x+i<5){
+				if(battle_grid[_center_x+i][_center_y+j]._is_empty){
+					return battle_grid[_center_x+i][_center_y+j];
+				}
+				
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}
+		}
+	}
+	return pointer_null;
+	
 }
 
 highlighted_move_cursor = function(_center_x,_center_y,_range){

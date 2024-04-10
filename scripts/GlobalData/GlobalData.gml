@@ -25,7 +25,7 @@ global.actionLibrary = {
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
-							skill_range[i]._entity_on_tile.damage(_damage); // temp var until we get shit moving
+							skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus); // temp var until we get shit moving
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
 						}
 					}
@@ -72,7 +72,7 @@ global.actionLibrary = {
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
-							skill_range[i]._entity_on_tile.damage(_damage);
+							skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus);
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
 						}
 					}
@@ -112,7 +112,7 @@ global.actionLibrary = {
 						if (!skill_range[i]._is_empty) {
 							show_debug_message(string(skill_range[i]._y_coord)+" and "+string(unit.grid_pos[1]));
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
-							skill_range[i]._entity_on_tile.damage(_damage);
+							skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus);
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
 						}
 					}
@@ -149,7 +149,7 @@ global.actionLibrary = {
 							_target = skill_range[i]._entity_on_tile;
 							show_debug_message(string(skill_range[i]._y_coord)+" and "+string(unit.grid_pos[1]));
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
-							skill_range[i]._entity_on_tile.damage(_damage);
+							skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus);
 							skill_range[i]._entity_on_tile.push_back(1);
 							show_debug_message(_target.hp);
 						}
@@ -229,7 +229,7 @@ global.actionLibrary = {
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
 						if (!skill_range_aux[i]._is_empty) {
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
-							skill_range_aux[i]._entity_on_tile.damage(_damage);
+							skill_range_aux[i]._entity_on_tile.damage(_damage+unit.attack_bonus);
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
 						}
 					}
@@ -297,7 +297,7 @@ global.actionLibrary = {
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
 						if (!skill_range_aux[i]._is_empty) {
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
-							skill_range_aux[i]._entity_on_tile.damage(_damage);
+							skill_range_aux[i]._entity_on_tile.damage(_damage+unit.attack_bonus);
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
 						}
 					}
@@ -368,7 +368,7 @@ global.actionLibrary = {
 								_damage = unit.action.damage
 							}
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
-							skill_range_aux[i]._entity_on_tile.damage(_damage);
+							skill_range_aux[i]._entity_on_tile.damage(_damage+unit.attack_bonus);
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
 							if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1]&&!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1]._is_empty){
 								skill_range_aux[i]._entity_on_tile.push_up(1);
@@ -512,7 +512,8 @@ global.players = [
 		sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.beam, global.actionLibrary.charge,  global.actionLibrary.mortar],
 		ally: true,
-		tpGain: 1
+		tpGain: 1,
+		portrait: spr_temp_Akeha
 		
 	},
 	{ //l'cifure
@@ -523,7 +524,8 @@ global.players = [
 		sprites : { idle: spr_player, dead: spr_player_dead},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.beam, global.actionLibrary.charge,  global.actionLibrary.mortar],
 		ally: true,
-		tpGain: 1
+		tpGain: 1,
+		portrait: spr_temp_Akeha
 	}
 	//{ //new member
 	//	name: "put new party member here", //refer to example above

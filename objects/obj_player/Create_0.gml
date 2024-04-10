@@ -13,6 +13,7 @@ prev_grid = [0,0];
 skill_back = false;
 upgrades =[0,2,1,1];
 shield = 0;
+attack_bonus = 0;
 
 var return_coords;
 
@@ -106,10 +107,23 @@ function back_move(){
 	grid_pos[0]=prev_grid[0];
 	grid_pos[1]=prev_grid[1];
 	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile=self;
+	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._is_empty=false;
 	return_coords = obj_gridCreator.get_coordinates(grid_pos[0],grid_pos[1]);
 	x=return_coords[0];
 	y=return_coords[1];
 	obj_gridCreator.reset_highlights_move();
+}
+
+
+function back_aim(){
+	show_debug_message("Move from ({0},{1}) back to ({2},{3})", grid_pos[0], grid_pos[1], prev_grid[0], prev_grid[1]);
+	obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
+	obj_gridCreator.battle_grid[prev_grid[0]][prev_grid[1]]._entity_on_tile=self;
+	return_coords = obj_gridCreator.get_coordinates(grid_pos[0],grid_pos[1]);
+	x=return_coords[0];
+	y=return_coords[1];
+	show_moveable_grids_prev();
+	
 }
 
 function damage(damage_value){

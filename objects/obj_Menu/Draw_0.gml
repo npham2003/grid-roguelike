@@ -127,7 +127,8 @@ gpu_set_colorwriteenable(true, true, true, true);
 //draw over mask
 gpu_set_blendmode_ext(bm_dest_alpha, bm_inv_dest_alpha);
 gpu_set_alphatestenable(true);
-draw_sprite_ext(currCharSprite, 0, imgX, imgY-20, -0.55, 0.55, 0, c_white, 1);
+//draw_sprite_ext(spr_temp_Akeha_under, 0, imgX, imgY-20, -0.55, 0.55, 0, c_white, 1);
+draw_sprite_ext(player_unit.portrait, 0, imgX, imgY-20, -0.55, 0.55, 0, c_white, 1);
 gpu_set_alphatestenable(false);
 gpu_set_blendmode(bm_normal);
 
