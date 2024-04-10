@@ -287,6 +287,21 @@ highlighted_target_circle = function(_center_x,_center_y,_range){
 	return highlighted_target_array;
 }
 
+highlighted_target_square = function(_center_x,_center_y,_range){
+	
+	highlighted_target_array=[];
+	for(var i = -_range; i <= _range; i++){
+		for(var j = -_range; j <= _range; j++){
+			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT){
+				array_push(highlighted_target_array,battle_grid[_center_x+i][_center_y+j]);
+				battle_grid[_center_x+i][_center_y+j]._target_highlight=true;
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}
+		}
+	}
+	return highlighted_target_array;
+}
+
 highlighted_target_cross = function(_center_x,_center_y,_range){
 	
 	highlighted_target_array=[];
