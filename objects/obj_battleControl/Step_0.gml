@@ -67,7 +67,7 @@ switch (state) {
 			unit = enemy_units[enemy_order];
 			unit.find_target();
 			unit.aim();
-			obj_info_panel.set_text(unit.name+" is aiming");
+			obj_menu.set_text(unit.name+" is aiming");
 		
 			enemy_order += 1;
 		}
@@ -129,8 +129,8 @@ switch (state) {
 			if(unit.ally){
 				obj_menu.open_menu();
 				obj_menu.player_unit=unit;
-				//obj_info_panel.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
-				obj_info_panel.set_text("WASD - Move Cursor     Space - Select Unit     Enter - End Turn");
+				//obj_menu.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
+				obj_menu.set_text("WASD - Move Cursor     Space - Select Unit     Enter - End Turn");
 				
 				if(!unit.has_moved && !unit.has_attacked){
 					unit.preview_moveable_grids();
@@ -217,8 +217,8 @@ switch (state) {
 	case BattleState.PlayerMoving:
 		
 		if(unit!=pointer_null){
-			//obj_info_panel.set_text("WASD - Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
-			obj_info_panel.set_text("WASD - Move     Enter - Do Nothing     Tab - Back");
+			//obj_menu.set_text("WASD - Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
+			obj_menu.set_text("WASD - Move     Enter - Do Nothing     Tab - Back");
 			
 		
 			if (wasd_pressed) {
@@ -325,7 +325,7 @@ switch (state) {
 			
 		}else{
 			
-			obj_info_panel.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]])+"\nCost: "+string(unit.actions[unit.skill_used].cost[unit.upgrades[unit.skill_used]]));
+			obj_menu.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]])+"\nCost: "+string(unit.actions[unit.skill_used].cost[unit.upgrades[unit.skill_used]]));
 			if (unit.skill_complete) {
 				tp_current -= unit.actions[unit.skill_used].cost[unit.upgrades[unit.skill_used]];
 				unit.has_attacked = true;
@@ -522,7 +522,7 @@ switch (state) {
 		}else{
 			if(keyboard_check_pressed(vk_anykey)){
 				obj_gridCreator.reset_highlights_cursor();
-				obj_info_panel.set_text("Press any key to restart");
+				obj_menu.set_text("Press any key to restart");
 				room_restart();
 			}
 			

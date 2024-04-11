@@ -9,4 +9,4 @@ draw_set_font(fnt_chiaro);
 
 
 
-draw_text_ext(x+20, y, _text, 40, 1000);
+draw_text_ext(128+20, 128, _text, 40, 1000);
