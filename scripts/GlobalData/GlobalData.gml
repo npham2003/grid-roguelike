@@ -1268,14 +1268,14 @@ global.players = [
 	},
 	{ //l'cifure
 		name: "Oktavia",
-		hp: 5,
-		hpMax: 5,
+		hp: 3,
+		hpMax: 3,
 		playerSpeed: 2,
 		sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.minefield, global.actionLibrary.mover,  global.actionLibrary.swap],
 		ally: true,
-		tpGain: 1,
-		portrait: spr_temp_Akeha
+		tpGain: 2,
+		portrait: spr_temp_Hunter
 	}
 	//{ //new member
 	//	name: "put new party member here", //refer to example above

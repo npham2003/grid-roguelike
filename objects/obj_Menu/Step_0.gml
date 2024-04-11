@@ -11,8 +11,14 @@ if(open){
 	if (state <= expansionLimit) {
 		state += 0.5;
 	}
+	if(portraitAlpha<1){
+		portraitAlpha+=0.05;
+	}
 }else{
 	if (state >= expansionLimit) {
 		state -= 0.5;
+	}
+	if(portraitAlpha>0){
+		portraitAlpha-=0.05;
 	}
 }

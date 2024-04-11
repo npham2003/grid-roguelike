@@ -16,6 +16,8 @@ menuY = [rootY, rootY, rootY, rootY, rootY];
 
 spacing = 100;
 optionAlpha = 0;
+
+portraitAlpha=1;
 #endregion
 
 
