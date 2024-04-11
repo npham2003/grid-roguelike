@@ -36,11 +36,11 @@ switch (state) {
 				
 			}
 		}
-		for (var i = 0; i < array_length(board_obstacles); i++) {
-			board_obstacles[i].despawn();
-			array_delete(board_obstacles,i,1);
-			i-=1;
-		}
+		//for (var i = 0; i < array_length(board_obstacles); i++) {
+		//	board_obstacles[i].despawn();
+		//	array_delete(board_obstacles,i,1);
+		//	i-=1;
+		//}
 		//var random_battle = irandom(array_length(global.encounters)-1);
 		random_battle=1;
 		spawn_enemies(global.encounters[random_battle]);
