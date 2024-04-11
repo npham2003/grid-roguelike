@@ -49,6 +49,24 @@ visualize = function(){
 	}
 }
 
+visualize_danger = function(){
+	show_debug_message("Grid Viewer");
+	for(i=0;i<array_length(battle_grid[0]);i++){
+		var row_string="";
+		for(j=0; j<array_length(battle_grid);j++){
+			
+			row_string = string_concat(row_string,"[",string(battle_grid[j][i]._danger_number),"]");
+			
+			
+			
+			if(j==4){
+				row_string = string_concat(row_string," | ");
+			}
+		}
+		show_debug_message(row_string);
+	}
+}
+
 move_entity = function(_prev_x,_prev_y,_new_x,_new_y){
 	var _entity_pointer = battle_grid[_prev_x][_prev_y]._entity_on_tile;
 	if(!battle_grid[_prev_x][_prev_y]._is_empty ){

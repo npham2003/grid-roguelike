@@ -14,6 +14,7 @@ sprite_moving_speed = 5;
 transparency=1;
 is_dead = false;
 shield = 0;
+began_push=false;
 
 //healthbar_y = y-40;
 
@@ -308,6 +309,7 @@ function despawn(){
 
 function push_back(squares){
 	if(squares==0){
+		began_push=false;
 		return;
 	}
 	
@@ -318,7 +320,10 @@ function push_back(squares){
 		return;
 	}
 	if(obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]]._is_empty){
-		remove_danger_highlights();
+		if(!began_push){
+			remove_danger_highlights();
+			began_push=true;
+		}
 		move(grid_pos[0]+1,grid_pos[1]);
 		push_back(squares-1);
 	}else{
@@ -332,6 +337,7 @@ function push_back(squares){
 
 function push_forward(squares){
 	if(squares==0){
+		began_push=false;
 		return;
 	}
 	
@@ -342,7 +348,10 @@ function push_forward(squares){
 		return;
 	}
 	if(obj_gridCreator.battle_grid[grid_pos[0]-1][grid_pos[1]]._is_empty){
-		remove_danger_highlights();
+		if(!began_push){
+			remove_danger_highlights();
+			began_push=true;
+		}
 		move(grid_pos[0]-1,grid_pos[1]);
 		push_back(squares-1);
 	}else{
@@ -356,6 +365,7 @@ function push_forward(squares){
 
 function push_up(squares){
 	if(squares==0){
+		began_push=false;
 		return;
 	}
 	
@@ -366,7 +376,10 @@ function push_up(squares){
 		return;
 	}
 	if(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]-1]._is_empty){
-		remove_danger_highlights();
+		if(!began_push){
+			remove_danger_highlights();
+			began_push=true;
+		}
 		move(grid_pos[0],grid_pos[1]-1);
 		push_up(squares-1);
 	}else{
@@ -380,7 +393,9 @@ function push_up(squares){
 
 function push_down(squares){
 	if(squares==0){
+		began_push=false;
 		return;
+		
 	}
 	
 	if(grid_pos[0]==0 || grid_pos[1]==GRIDHEIGHT-1){
@@ -390,7 +405,10 @@ function push_down(squares){
 		return;
 	}
 	if(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]+1]._is_empty){
-		remove_danger_highlights();
+		if(!began_push){
+			remove_danger_highlights();
+			began_push=true;
+		}
 		move(grid_pos[0],grid_pos[1]+1);
 		push_down(squares-1);
 	}else{

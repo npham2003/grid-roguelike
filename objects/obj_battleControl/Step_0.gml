@@ -41,7 +41,8 @@ switch (state) {
 			array_delete(board_obstacles,i,1);
 			i-=1;
 		}
-		var random_battle = irandom(array_length(global.encounters)-1);
+		//var random_battle = irandom(array_length(global.encounters)-1);
+		random_battle=1;
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
 		
