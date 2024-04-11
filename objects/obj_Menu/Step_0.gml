@@ -19,3 +19,4 @@ if(open){
 	if(portraitAlpha>0){
 		portraitAlpha-=0.05;
 	}
+}
