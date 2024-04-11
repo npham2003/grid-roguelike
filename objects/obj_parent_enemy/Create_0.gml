@@ -313,25 +313,30 @@ function push_back(squares){
 		began_push=false;
 		return;
 	}
-	
+	if(!began_push){
+		obj_battleEffect.push_animation(self,0);
+	}
 	if(grid_pos[0]==0 || grid_pos[0]==GRIDWIDTH-1){
 		obj_battleEffect.show_damage(self,1);
 		hp-=1;
 		display_target_highlights();
+		began_push=false;
 		return;
 	}
 	if(obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]]._is_empty){
 		if(!began_push){
 			remove_danger_highlights();
 			began_push=true;
+			
 		}
+		
 		move(grid_pos[0]+1,grid_pos[1]);
 		push_back(squares-1);
 	}else{
 		obj_battleEffect.show_damage(self,1);
 		hp-=1;
-		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]].entity_on_tile,1);
-		obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]].entity_on_tile.hp-=1;
+		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]]._entity_on_tile,1);
+		obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]]._entity_on_tile.hp-=1;
 		
 	}
 }
@@ -341,10 +346,13 @@ function push_forward(squares){
 		began_push=false;
 		return;
 	}
-	
+	if(!began_push){
+		obj_battleEffect.push_animation(self,2);
+	}
 	if(grid_pos[0]==0 || grid_pos[0]==5){
 		obj_battleEffect.show_damage(self,1);
 		hp-=1;
+		began_push=false;
 		display_target_highlights();
 		return;
 	}
@@ -352,14 +360,15 @@ function push_forward(squares){
 		if(!began_push){
 			remove_danger_highlights();
 			began_push=true;
+			obj_battleEffect.push_animation(self,2);
 		}
 		move(grid_pos[0]-1,grid_pos[1]);
 		push_back(squares-1);
 	}else{
 		obj_battleEffect.show_damage(self,1);
 		hp-=1;
-		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]-1][grid_pos[1]].entity_on_tile,1);
-		obj_gridCreator.battle_grid[grid_pos[0]-1][grid_pos[1]].entity_on_tile.hp-=1;
+		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]-1][grid_pos[1]]._entity_on_tile,1);
+		obj_gridCreator.battle_grid[grid_pos[0]-1][grid_pos[1]]._entity_on_tile.hp-=1;
 		
 	}
 }
@@ -369,25 +378,30 @@ function push_up(squares){
 		began_push=false;
 		return;
 	}
-	
+	if(!began_push){
+		obj_battleEffect.push_animation(self,1);
+	}
 	if(grid_pos[0]==0 || grid_pos[1]==0){
 		obj_battleEffect.show_damage(self,1);
 		hp-=1;
 		display_target_highlights();
+		began_push=false;
 		return;
 	}
 	if(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]-1]._is_empty){
 		if(!began_push){
 			remove_danger_highlights();
 			began_push=true;
+			
+			obj_battleEffect.push_animation(self,1);
 		}
 		move(grid_pos[0],grid_pos[1]-1);
 		push_up(squares-1);
 	}else{
 		obj_battleEffect.show_damage(self,1);
 		hp-=1;
-		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]-1].entity_on_tile,1);
-		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]-1].entity_on_tile.hp-=1;
+		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]-1]._entity_on_tile,1);
+		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]-1]._entity_on_tile.hp-=1;
 		
 	}
 }
@@ -398,7 +412,9 @@ function push_down(squares){
 		return;
 		
 	}
-	
+	if(!began_push){
+		obj_battleEffect.push_animation(self,3);
+	}
 	if(grid_pos[0]==0 || grid_pos[1]==GRIDHEIGHT-1){
 		obj_battleEffect.show_damage(self,1);
 		hp-=1;
@@ -409,14 +425,15 @@ function push_down(squares){
 		if(!began_push){
 			remove_danger_highlights();
 			began_push=true;
+			obj_battleEffect.push_animation(self,3);
 		}
 		move(grid_pos[0],grid_pos[1]+1);
 		push_down(squares-1);
 	}else{
 		obj_battleEffect.show_damage(self,1);
 		hp-=1;
-		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]+1].entity_on_tile,1);
-		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]+1].entity_on_tile.hp-=1;
+		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]+1]._entity_on_tile,1);
+		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]+1]._entity_on_tile.hp-=1;
 		
 	}
 }

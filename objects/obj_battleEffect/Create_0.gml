@@ -17,9 +17,46 @@ function health_bar(health_x, health_y, percentage){
 	
 }
 
-function hit_animation(_object) { // show damage
+hit_anim_index=[spr_hit, spr_explosion, spr_hit_electric, spr_charge, spr_defend, spr_push];
+
+function hit_animation(_object, index) { // show damage
 	var current_coords = obj_gridCreator.get_coordinates(_object.grid_pos[0],_object.grid_pos[1]);
+	var animation = hit_anim_index[index];
 	with instance_create_layer(current_coords[0], current_coords[1], "DamageNumber", obj_hit_animation) {
+		sprite_index=animation;
+	}
+}
+
+function hit_animation_coordinates(_x, _y, index) { // show damage
+	var current_coords = obj_gridCreator.get_coordinates(_x,_y);
+	var animation = hit_anim_index[index];
+	with instance_create_layer(current_coords[0], current_coords[1], "DamageNumber", obj_hit_animation) {
+		sprite_index=animation;
+	}
+}
+
+function push_animation(_object, _rotation) { // show damage
+	var current_coords = obj_gridCreator.get_coordinates(_object.grid_pos[0],_object.grid_pos[1]);
+	var x_scale = 1;
+	var y_scale = 1;
+	var _angle = 0;
+	switch(_rotation){
+		case 1:
+			_angle=90;
+			break;
+		case 2:
+			x_scale=-1;
+			break;
+		case 3:
+			_angle=90;
+			x_scale=-1;
+			break;
+	}
+	with instance_create_layer(current_coords[0], current_coords[1], "DamageNumber", obj_hit_animation) {
+		sprite_index=spr_push;
+		image_angle=_angle;
 		
+		image_xscale=x_scale;
+		image_yscale=y_scale;
 	}
 }

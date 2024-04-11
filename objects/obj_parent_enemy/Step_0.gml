@@ -39,3 +39,9 @@ if(is_dead){
 	show_debug_message(string(image_alpha));
 	
 }
+if(began_push){
+	
+	sprite_moving_speed=25;
+}else{
+	sprite_moving_speed=5;
+}
