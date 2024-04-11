@@ -14,7 +14,9 @@ sprite_moving_speed = 5;
 transparency=1;
 is_dead = false;
 shield = 0;
-began_push=false;
+
+began_push = false;
+hitting_who = false;
 
 //healthbar_y = y-40;
 
@@ -102,42 +104,15 @@ function calculate_util(test_x, test_y) {
 function aim(){
 	
 		action = actions[0];
-		var target_pos = target.grid_pos;
+		
 		attack_ready = false;
 		show_debug_message("{0}: {1}", name, action.name);
-		max_util=-999;
-		potential_positions = [];
-		for(i=5;i<10;i++){
-			for(j=0;j<5;j++){
-				if(obj_gridCreator.battle_grid[i][j]._is_empty){
-					util=calculate_util(i,j);
-					if(util>=max_util){
-						if(util>max_util){
-							potential_positions=[];
-						}
-						max_util=util;
-				
-						array_push(potential_positions,[i,j]);
-					}
-				}else if(obj_gridCreator.battle_grid[i][j]._entity_on_tile==self){
-					util=calculate_util(i,j);
-					if(util>=max_util){
-						if(util>max_util){
-							potential_positions=[];
-						}
-						max_util=util;
-				
-						array_push(potential_positions,[i,j]);
-					}
-				}
-			}
-		}
+		
 		//show_debug_message(string(potential_positions));
-		//show_debug_message("{0} has max util {1}", name, max_util);
-		position = irandom(array_length(potential_positions)-1);
-		move(potential_positions[position][0],potential_positions[position][1]);
 		
 		
+		set_danger_highlights();
+		attack_ready = true;
 		show_debug_message("{0} is ready to attack", name);
 	
 	
@@ -214,13 +189,14 @@ function remove_danger_highlights() {
 	}
 }
 
-function attack() {
+function attack(ally) {
 	show_debug_message("{0} is attacking", name);
 	display_target_highlights();
 	sprite_index = sprites.attack;
 	image_index = 0;
 	obj_battleControl.in_animation = true;
 	audio_play_sound(sounds.attack, 0, false);
+	hitting_who = ally;
 }
 
 function display_target_highlights(){
@@ -278,26 +254,24 @@ function do_damage(){
 		//show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
 		
 		if(!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty){
-			show_debug_message("("+string(attack_x)+","+string(attack_y)+")")
-			show_debug_message(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile==pointer_null);
-			obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.damage(1);
+			if(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.ally == hitting_who && !array_contains(obj_battleControl.board_obstacles,obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile)){
+				show_debug_message("("+string(attack_x)+","+string(attack_y)+")")
+				show_debug_message(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile==pointer_null);
+				obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.damage(strength);
+			}
 			
 
 		}
 		
 	}
+	
+	show_debug_message("{0} has {1} turns left", name, turns_remaining);
 	remove_target_highlights();
 	
 }
 
 function damage(damage_value){
-	if(shield>0){
-		shield-=1;
-		obj_battleEffect.shield_damage(self, 1);
-	}else{
-		hp-=damage_value;
-		obj_battleEffect.show_damage(self, damage_value);
-	}
+	
 	
 }
 

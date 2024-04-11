@@ -20,8 +20,13 @@ playerScale = 15;
 playerDim = sprite_get_height(spr_diamond_base) * playerScale/2;
 
 optionAlpha = 0;
+
+
+portraitAlpha=1;
+
 optionRadius = 40;
 spacing = 150;
+
 
 border = 5;
 tpRadius = 40;

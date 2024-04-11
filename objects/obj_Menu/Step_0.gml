@@ -8,9 +8,14 @@ for (var i = 0; i < skills; ++i) {
 
 expandAnim = lerp(expandAnim, state, 0.2);
 
-if (open) {
+
+if(open){
 	state = 1;
-}
-else {
+	if(portraitAlpha<1){
+		portraitAlpha+=0.05;
+	}
+}else{
 	state = 0;
-}
+	if(portraitAlpha>0){
+		portraitAlpha-=0.05;
+	}

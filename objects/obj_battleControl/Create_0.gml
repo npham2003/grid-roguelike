@@ -3,6 +3,8 @@ player_units = [];
 // Array of enemy instances
 enemy_units = [];
 
+board_obstacles = [];
+
 // Current order of player unit in action
 player_order = 0;
 // Current order of enemy unit in action
@@ -23,6 +25,9 @@ gold = 0;
 battle_gold = 0;
 unit = pointer_null;
 
+board_obstacle_order = 0;
+obstacle = pointer_null;
+
 #region Spawns
 
 // Spawn player units
@@ -30,8 +35,12 @@ unit = pointer_null;
 // Temp struct for player data, may move to a config file or generate dynamically in the future
 var player_data = [
 	{
-		info: global.players[0],
+		info: global.players[1],
 		grid: [3, 2]		
+	},
+	{
+		info: global.players[0],
+		grid: [0, 2]		
 	}
 ];
 
@@ -48,7 +57,7 @@ for (var i = 0; i < array_length(player_data); i++) {
 	array_push(player_units, unit);
 	unit.prev_grid[0] = unit.grid_pos[0];
 	unit.prev_grid[1] = unit.grid_pos[1];
-	unit.upgrades = [0,i,i,i];
+	unit.upgrades = [0,1,1,2];
 	obj_gridCreator.battle_grid[player_data[i].grid[0]][player_data[i].grid[1]]._entity_on_tile=unit;
 	
 }
@@ -106,6 +115,28 @@ spawn_enemies = function(enemy_data){
 	}
 }
 
+
+spawn_obstacle = function(obstacle, grid_pos){
+	
+	
+		var coord = obj_gridCreator.get_coordinates(grid_pos[0], grid_pos[1]);
+	
+		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._is_empty=false;
+		var var_struct = variable_clone(obstacle);
+		var_struct.grid_pos=[grid_pos[0],grid_pos[1]];
+	
+		var unit = instance_create_layer(
+			coord[0], coord[1], "Units", obj_board_obstacle, var_struct);
+		
+		array_push(board_obstacles, unit);
+		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile=unit;
+		
+		unit.grid_pos=[grid_pos[0],grid_pos[1]];
+		unit.aim();
+		
+	
+}
+
 obj_cursor.movable_tiles=obj_gridCreator.battle_grid;
 
 
@@ -121,7 +152,9 @@ enum BattleState {
 	PlayerTakingAction,
 	EnemyTakingAction,
 	BattleEnd,
-	PlayerUpgrade
+	PlayerUpgrade,
+	PlayerBoardObstacle,
+	EnemyBoardObstacle
 };
 
 state = BattleState.BattleStart;
