@@ -26,6 +26,7 @@ global.actionLibrary = {
 						if (!skill_range[i]._is_empty) {
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
 							skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus); // temp var until we get shit moving
+							obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile);
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
 						}
 					}

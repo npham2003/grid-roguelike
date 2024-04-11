@@ -6,15 +6,17 @@
   "ResourceOrderSettings":[
     {"name":"obj_board_obstacle","order":1,"path":"objects/obj_board_obstacle/obj_board_obstacle.yy",},
     {"name":"obj_draw_bg","order":1,"path":"objects/obj_draw_bg/obj_draw_bg.yy",},
+    {"name":"obj_hit_animation","order":5,"path":"objects/obj_hit_animation/obj_hit_animation.yy",},
     {"name":"obj_info_panel","order":2,"path":"objects/obj_info_panel/obj_info_panel.yy",},
     {"name":"obj_menu","order":3,"path":"objects/obj_menu/obj_menu.yy",},
     {"name":"obj_shield_damage_number","order":3,"path":"objects/obj_shield_damage_number/obj_shield_damage_number.yy",},
     {"name":"obj_shop_menu","order":4,"path":"objects/obj_shop_menu/obj_shop_menu.yy",},
     {"name":"spr_big_bomb","order":1,"path":"sprites/spr_big_bomb/spr_big_bomb.yy",},
+    {"name":"spr_big_explosion","order":4,"path":"sprites/spr_big_explosion/spr_big_explosion.yy",},
     {"name":"spr_bomb","order":3,"path":"sprites/spr_bomb/spr_bomb.yy",},
     {"name":"spr_explosion","order":2,"path":"sprites/spr_explosion/spr_explosion.yy",},
-    {"name":"spr_big_explosion","order":4,"path":"sprites/spr_big_explosion/spr_big_explosion.yy",},
     {"name":"spr_grid_support_highlight","order":1,"path":"sprites/spr_grid_support_highlight/spr_grid_support_highlight.yy",},
     {"name":"spr_temp_Hunter","order":1,"path":"sprites/spr_temp_Hunter/spr_temp_Hunter.yy",},
+    {"name":"spr_hit","order":7,"path":"sprites/spr_hit/spr_hit.yy",},
   ],
 }
