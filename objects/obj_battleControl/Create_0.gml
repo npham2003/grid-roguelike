@@ -37,6 +37,10 @@ var player_data = [
 	{
 		info: global.players[1],
 		grid: [3, 2]		
+	},
+	{
+		info: global.players[0],
+		grid: [0, 2]		
 	}
 ];
 
@@ -53,7 +57,7 @@ for (var i = 0; i < array_length(player_data); i++) {
 	array_push(player_units, unit);
 	unit.prev_grid[0] = unit.grid_pos[0];
 	unit.prev_grid[1] = unit.grid_pos[1];
-	unit.upgrades = [0,1,1,i];
+	unit.upgrades = [0,1,1,2];
 	obj_gridCreator.battle_grid[player_data[i].grid[0]][player_data[i].grid[1]]._entity_on_tile=unit;
 	
 }

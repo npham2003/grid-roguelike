@@ -15,6 +15,8 @@ _danger_highlight = false;
 
 _danger_number = 0;
 
+_support_highlight = false;
+
 _move_cursor = false;
 
 _danger_cursor = false;

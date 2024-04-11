@@ -355,6 +355,7 @@ switch (state) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
+							obj_gridCreator.reset_highlights_support();
 							if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
 								unit.skill_used = 0;
 								enough_tp = true;
@@ -368,6 +369,7 @@ switch (state) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
+							obj_gridCreator.reset_highlights_support();
 							if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
 							unit.skill_used = 1;
 							enough_tp = true;
@@ -380,6 +382,7 @@ switch (state) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
+							obj_gridCreator.reset_highlights_support();
 							if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
 							unit.skill_used = 2;
 							enough_tp = true;
@@ -391,6 +394,7 @@ switch (state) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
+							obj_gridCreator.reset_highlights_support();
 							if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
 							unit.skill_used = 3;
 							enough_tp = true;
@@ -432,6 +436,7 @@ switch (state) {
 		obj_gridCreator.reset_highlights_cursor();
 		obj_gridCreator.reset_highlights_attack();
 		obj_gridCreator.reset_highlights_target();
+		obj_gridCreator.reset_highlights_support();
 		var enemy_unit = enemy_units[enemy_check_death];
 		if (enemy_unit.hp<=0){
 			enemy_unit.despawn();
