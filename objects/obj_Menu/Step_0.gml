@@ -1,18 +1,16 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-for (var i = 0; i < 5; i++) {
-	menuX[i] = lerp(menuX[i], rootX + i * spacing * state + state * 50, 0.2);
+for (var i = 0; i < skills; ++i) {
+	menuX[i] = lerp(menuX[i], rootX + i * spacing * state + state * 200, 0.2);
 	optionAlpha = lerp(optionAlpha, state, 0.1);
 }
 
+expandAnim = lerp(expandAnim, state, 0.2);
 
-if(open){
-	if (state <= expansionLimit) {
-		state += 0.5;
-	}
-}else{
-	if (state >= expansionLimit) {
-		state -= 0.5;
-	}
+if (open) {
+	state = 1;
+}
+else {
+	state = 0;
 }
