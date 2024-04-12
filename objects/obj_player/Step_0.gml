@@ -16,10 +16,10 @@ if(teleporting==0){
 	//obj_battleEffect.hit_animation_coordinates(prev_grid[0], prev_grid[1], 6);
 	teleporting=2;
 }else if (teleporting==2){
-	image_alpha-=0.05;
-	image_yscale+=0.05;
+	image_alpha-=0.2;
+	image_yscale=lerp(image_yscale,5,0.2);
 	
-	image_xscale-=0.05;
+	image_xscale=lerp(image_xscale,0,0.2);
 	
 	if(image_alpha<=0){
 		teleporting=3;
@@ -31,9 +31,10 @@ if(teleporting==0){
 	teleporting=4;
 	//obj_battleEffect.hit_animation(self, 7);
 }else if (teleporting==4){
-	image_alpha+=0.05;
-	image_yscale-=0.05;
-	image_xscale+=0.05;
+	image_alpha+=0.2;
+	image_yscale=lerp(image_yscale,1,0.2);
+	
+	image_xscale=lerp(image_xscale,1,0.2);
 	if(image_alpha>=1){
 		teleporting=0;
 		image_yscale=1;
