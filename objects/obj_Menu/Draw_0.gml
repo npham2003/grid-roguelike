@@ -104,7 +104,7 @@ draw_set_alpha(0);
 draw_rectangle(imgX-150, imgY-150, imgX+160, imgY+100, false); //invisible rectangle
 
 //mask
-draw_set_alpha(1);
+draw_set_alpha(portraitAlpha);
 //draw_sprite_ext(spr_diamond_base, 0, imgX, imgY, portraitScale, portraitScale, 0, c_white, 1);
 draw_set_color(c_white);
 draw_primitive_begin(pr_trianglestrip);
@@ -116,11 +116,18 @@ gpu_set_colorwriteenable(true, true, true, true);
 
 //draw over mask
 gpu_set_blendmode_ext(bm_dest_alpha, bm_inv_dest_alpha);
+//gpu_set_blendmode_ext_sepalpha(bm_dest_alpha, bm_inv_src_alpha, portraitAlpha, bm_inv_src_alpha);
+
+//gpu_set_blendmode_ext_sepalpha(portraitAlpha, portraitAlpha, portraitAlpha, portraitAlpha);
 gpu_set_alphatestenable(true);
 //draw_sprite_ext(spr_temp_Akeha_under, 0, imgX, imgY-20, -0.55, 0.55, 0, c_white, 1);
 draw_sprite_ext(player_unit.portrait, 0, imgX, imgY-20, -0.55, 0.55, 0, c_white, portraitAlpha);
 gpu_set_alphatestenable(false);
+draw_set_alpha(1);
 gpu_set_blendmode(bm_normal);
+
+
+
 
 #endregion
 

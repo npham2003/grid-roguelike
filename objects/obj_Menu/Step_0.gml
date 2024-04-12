@@ -12,11 +12,11 @@ expandAnim = lerp(expandAnim, state, 0.2);
 if(open){
 	state = 1;
 	if(portraitAlpha<1){
-		portraitAlpha+=0.05;
+		portraitAlpha+=0.1;
 	}
 }else{
 	state = 0;
 	if(portraitAlpha>0){
-		portraitAlpha-=0.05;
+		portraitAlpha-=0.1;
 	}
 }

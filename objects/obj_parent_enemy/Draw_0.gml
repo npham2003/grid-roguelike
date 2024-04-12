@@ -1,5 +1,5 @@
-draw_sprite(self.sprite_index, self.image_index, x, y);
 
+draw_sprite_ext(self.sprite_index, self.image_index, x, y, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
 var pc;
 pc = (self.hp / self.hpMax) * 100;
 //obj_battleEffect.health_bar(x,y,pc);
