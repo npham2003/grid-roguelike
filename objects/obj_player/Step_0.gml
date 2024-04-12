@@ -13,10 +13,14 @@ if(teleporting==0){
 	x = lerp(x, new_coords[0], 0.4);
 	y = lerp(y, new_coords[1], 0.4);
 }else if (teleporting==1){
-	obj_battleEffect.hit_animation_coordinates(prev_grid[0], prev_grid[1], 6);
+	//obj_battleEffect.hit_animation_coordinates(prev_grid[0], prev_grid[1], 6);
 	teleporting=2;
 }else if (teleporting==2){
-	image_alpha-=0.02;
+	image_alpha-=0.05;
+	image_yscale+=0.05;
+	
+	image_xscale-=0.05;
+	
 	if(image_alpha<=0){
 		teleporting=3;
 	}
@@ -25,11 +29,15 @@ if(teleporting==0){
 	x = new_coords[0];
 	y = new_coords[1];
 	teleporting=4;
-	obj_battleEffect.hit_animation(self, 7);
+	//obj_battleEffect.hit_animation(self, 7);
 }else if (teleporting==4){
-	image_alpha+=0.02;
+	image_alpha+=0.05;
+	image_yscale-=0.05;
+	image_xscale+=0.05;
 	if(image_alpha>=1){
 		teleporting=0;
+		image_yscale=1;
+		image_xscale=1;
 	}
 	prev_grid[0]=grid_pos[0];
 	prev_grid[1]=grid_pos[1];
