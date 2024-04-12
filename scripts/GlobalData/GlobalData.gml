@@ -18,7 +18,7 @@ global.actionLibrary = {
 				unit.action = unit.actions[unit.skill_used];
 				skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=skill_range;
-				if(array_length(skill_range)>0){
+				if(array_length(skill_range)>0 && !unit.skill_complete){
 					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
 				}
 				var _damage = unit.action.damage;
@@ -35,6 +35,7 @@ global.actionLibrary = {
 					unit.is_attacking = false;
 					unit.skill_complete = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
+					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
 		
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
@@ -332,7 +333,7 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				if (!unit.skill_init) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 					unit.range = 3;
-					skill_coords[0] = unit.grid_pos[0] + unit.range;
+					skill_coords[0] = unit.grid_pos[0];
 					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_init = true;
 					unit.is_attacking = true;
@@ -720,7 +721,7 @@ global.actionLibrary = {
 				unit.action = unit.actions[unit.skill_used];
 				skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=skill_range;
-				if(array_length(skill_range)>0){
+				if(array_length(skill_range)>0 && !unit.skill_complete){
 					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
 				}
 				if (keyboard_check_pressed(ord("A"))) {
@@ -762,6 +763,7 @@ global.actionLibrary = {
 					unit.is_attacking = false;
 					unit.skill_complete = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
+					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
 		
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
@@ -775,7 +777,7 @@ global.actionLibrary = {
 				unit.action = unit.actions[unit.skill_used];
 				skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=skill_range;
-				if(array_length(skill_range)>0){
+				if(array_length(skill_range)>0 && !unit.skill_complete){
 					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
 				}
 				if (keyboard_check_pressed(ord("A"))) {
@@ -816,6 +818,7 @@ global.actionLibrary = {
 					unit.is_attacking = false;
 					unit.skill_complete = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
+					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
 		
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
@@ -829,7 +832,7 @@ global.actionLibrary = {
 				unit.action = unit.actions[unit.skill_used];
 				skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=skill_range;
-				if(array_length(skill_range)>0){
+				if(array_length(skill_range)>0 && !unit.skill_complete){
 					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
 				}
 				if (keyboard_check_pressed(ord("A"))) {
@@ -874,7 +877,7 @@ global.actionLibrary = {
 					unit.is_attacking = false;
 					unit.skill_complete = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
-		
+					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
 					unit.skill_back = true;
