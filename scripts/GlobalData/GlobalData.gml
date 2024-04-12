@@ -18,7 +18,9 @@ global.actionLibrary = {
 				unit.action = unit.actions[unit.skill_used];
 				skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=skill_range;
-	
+				if(array_length(skill_range)>0){
+					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
+				}
 				var _damage = unit.action.damage;
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("H"))) {
 					audio_play_sound(sfx_base_laser, 0, false);
@@ -718,6 +720,9 @@ global.actionLibrary = {
 				unit.action = unit.actions[unit.skill_used];
 				skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=skill_range;
+				if(array_length(skill_range)>0){
+					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
+				}
 				if (keyboard_check_pressed(ord("A"))) {
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 1;
@@ -770,6 +775,9 @@ global.actionLibrary = {
 				unit.action = unit.actions[unit.skill_used];
 				skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=skill_range;
+				if(array_length(skill_range)>0){
+					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
+				}
 				if (keyboard_check_pressed(ord("A"))) {
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 1;
@@ -821,6 +829,9 @@ global.actionLibrary = {
 				unit.action = unit.actions[unit.skill_used];
 				skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=skill_range;
+				if(array_length(skill_range)>0){
+					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
+				}
 				if (keyboard_check_pressed(ord("A"))) {
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 1;
@@ -900,7 +911,7 @@ global.actionLibrary = {
 					unit.skill_progress = 1;
 					unit.is_attacking = true;
 					skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],0);
-					audio_play_sound(sfx_mortar_windup, 0, false);
+					audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
 				}
 				skill_range = obj_gridCreator.highlighted_support_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
 				
@@ -939,6 +950,7 @@ global.actionLibrary = {
 					if(unit.skill_progress==1){
 						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+								audio_play_sound(sfx_teleport_select, 0, false, 1);
 								unit.skill_progress=2;
 								array_push(skill_range_aux,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]);
 							}else{
@@ -951,16 +963,20 @@ global.actionLibrary = {
 					else if(unit.skill_progress==2){
 						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+								audio_play_sound(sfx_teleport, 0, false, 1);
 								temp = skill_range_aux[0]._entity_on_tile;
 								skill_range_aux[0]._entity_on_tile = skill_range_aux[1]._entity_on_tile;
 								skill_range_aux[1]._entity_on_tile = temp;
+								
+								skill_range_aux[1]._entity_on_tile.teleporting = 1;
+								skill_range_aux[0]._entity_on_tile.teleporting = 1;
+								
+								
 								temp = skill_range_aux[0]._entity_on_tile.grid_pos;
 								skill_range_aux[0]._entity_on_tile.grid_pos = skill_range_aux[1]._entity_on_tile.grid_pos;
 								skill_range_aux[1]._entity_on_tile.grid_pos= temp;
 								
-								temp = skill_range_aux[0]._entity_on_tile.prev_grid;
-								skill_range_aux[0]._entity_on_tile.prev_grid = skill_range_aux[1]._entity_on_tile.prev_grid;
-								skill_range_aux[1]._entity_on_tile.prev_grid= temp;
+								
 								
 								unit.is_attacking = false;
 								skill_range = obj_gridCreator.reset_highlights_support();
@@ -1013,7 +1029,7 @@ global.actionLibrary = {
 					unit.skill_progress = 1;
 					unit.is_attacking = true;
 					skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],0);
-					audio_play_sound(sfx_mortar_windup, 0, false);
+					audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
 				}
 				if(unit.skill_progress==1){
 					skill_range = obj_gridCreator.highlighted_support_circle(unit.grid_pos[0], unit.grid_pos[1], 1);
@@ -1059,6 +1075,7 @@ global.actionLibrary = {
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
 								unit.skill_progress=2;
 								array_push(skill_range_aux,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]);
+								audio_play_sound(sfx_teleport_select, 0, false, 1);
 							}else{
 								audio_play_sound(sfx_no_tp, 0, false);
 							}
@@ -1069,13 +1086,14 @@ global.actionLibrary = {
 					else if(unit.skill_progress==2){
 						if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 							if(skill_coords[0]<5){
-								
+								audio_play_sound(sfx_teleport, 0, false, 1);
 								skill_range_aux[0]._entity_on_tile.grid_pos = [skill_range_aux[1]._x_coord,skill_range_aux[1]._y_coord];
-								skill_range_aux[0]._entity_on_tile.prev_grid=[skill_range_aux[1]._x_coord,skill_range_aux[1]._y_coord];
+								
 								skill_range_aux[1]._entity_on_tile = skill_range_aux[0]._entity_on_tile;
 								skill_range_aux[0]._entity_on_tile = pointer_null;
 								skill_range_aux[0]._is_empty = true;
 								skill_range_aux[1]._is_empty = false;
+								skill_range_aux[1]._entity_on_tile.teleporting = 1;
 
 								unit.is_attacking = false;
 								skill_range = obj_gridCreator.reset_highlights_support();
@@ -1127,7 +1145,7 @@ global.actionLibrary = {
 					unit.skill_progress = 1;
 					unit.is_attacking = true;
 					skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],0);
-					audio_play_sound(sfx_mortar_windup, 0, false);
+					audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
 				}
 				if(unit.skill_progress==2){
 					skill_range = obj_gridCreator.highlighted_support_circle(unit.grid_pos[0], unit.grid_pos[1], 1);
@@ -1171,6 +1189,7 @@ global.actionLibrary = {
 					if(unit.skill_progress==1){
 						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+								audio_play_sound(sfx_teleport_selec, 0, false, 1);
 								unit.skill_progress=2;
 								array_push(skill_range_aux,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]);
 								skill_coords[0]=unit.grid_pos[0];
@@ -1185,14 +1204,14 @@ global.actionLibrary = {
 					else if(unit.skill_progress==2){
 						if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 							if(skill_coords[0]<5){
-								
+								audio_play_sound(sfx_teleport, 0, false, 1);
 								skill_range_aux[0]._entity_on_tile.grid_pos = [skill_range_aux[1]._x_coord,skill_range_aux[1]._y_coord];
-								skill_range_aux[0]._entity_on_tile.prev_grid=[skill_range_aux[1]._x_coord,skill_range_aux[1]._y_coord];
+								
 								skill_range_aux[1]._entity_on_tile = skill_range_aux[0]._entity_on_tile;
 								skill_range_aux[0]._entity_on_tile = pointer_null;
 								skill_range_aux[0]._is_empty = true;
 								skill_range_aux[1]._is_empty = false;
-
+								skill_range_aux[1]._entity_on_tile.teleporting = 1;
 								unit.is_attacking = false;
 								skill_range = obj_gridCreator.reset_highlights_support();
 								skill_range_aux = obj_gridCreator.reset_highlights_target();

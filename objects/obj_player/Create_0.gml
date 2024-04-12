@@ -17,6 +17,7 @@ attack_bonus = 0;
 skill_progress = 0;
 skill_option = 0;
 began_push=false;
+teleporting = 0;
 
 var return_coords;
 
