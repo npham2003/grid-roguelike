@@ -44,8 +44,8 @@ switch (state) {
 		//	array_delete(board_obstacles,i,1);
 		//	i-=1;
 		//}
-		//var random_battle = irandom(array_length(global.encounters)-1);
-		random_battle=3;
+		var random_battle = irandom(array_length(global.encounters)-1);
+		//random_battle=3;
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
 		
@@ -196,11 +196,10 @@ switch (state) {
 						}
 				}
 				else if (key_Tab_pressed) {
-					//player_order += 1;
-					//if (player_order >= array_length(player_units)) {
-					//	player_order = 0;
-					//}
-					//show_debug_message("Switch to next player unit");
+					for(i = 1;i<array_length(unit.upgrades);i++){
+						unit.upgrades[i]+=1;
+						unit.upgrades[i]=unit.upgrades[i]%3;
+					}
 				}
 				
 			}else{
