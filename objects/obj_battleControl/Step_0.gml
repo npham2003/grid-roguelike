@@ -248,6 +248,7 @@ switch (state) {
 					obj_cursor.reset_cursor(unit.grid_pos[0], unit.grid_pos[1]);
 				}
 			else if (jkl_pressed && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) { // optimize eventually
+				show_debug_message("hi");
 				obj_gridCreator.reset_highlights_cursor();
 				if (!unit.has_attacked) {
 					if (key_H_pressed) {
@@ -294,13 +295,7 @@ switch (state) {
 					enough_tp = false;
 					change_state(BattleState.PlayerAiming);
 				}
-					if (enough_tp) {
-						unit.confirm_move();
-						unit.skill_complete = false;
-						unit.skill_init = false;
-						enough_tp = false;
-						change_state(BattleState.PlayerAiming);
-					}
+					
 				}
 			}
 			else if (key_Enter_pressed && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) {
