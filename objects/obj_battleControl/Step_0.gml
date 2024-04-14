@@ -131,7 +131,7 @@ switch (state) {
 				obj_menu.player_unit=unit;
 				//obj_menu.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
 				obj_menu.set_text("WASD - Move Cursor     Space - Select Unit     Enter - End Turn");
-				
+				unit.prev_grid=[unit.grid_pos[0],unit.grid_pos[1]];
 				if(!unit.has_moved && !unit.has_attacked){
 					unit.preview_moveable_grids();
 				}
