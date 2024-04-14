@@ -21,6 +21,8 @@ _move_cursor = false;
 
 _danger_cursor = false;
 
+_push_arrow = pointer_null;
+
 set_coords = function(_x_coordinate, _y_coordinate){
 	_x_coord = _x_coordinate;
 	_y_coord = _y_coordinate;
@@ -35,4 +37,10 @@ set_entity = function(_entity_pointer){
 remove_entity = function(){
 	_entity_on_tile = pointer_null;
 	_is_empty = true;
+}
+
+push_preview= function(_option){
+	if(_option==1){
+	
+	}
 }

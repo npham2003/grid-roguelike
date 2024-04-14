@@ -18,6 +18,7 @@ global.actionLibrary = {
 				unit.action = unit.actions[unit.skill_used];
 				skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=skill_range;
+				unit.is_attacking = true;
 				if(array_length(skill_range)>0 && !unit.skill_complete){
 					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
 				}
@@ -139,12 +140,20 @@ global.actionLibrary = {
 				if (!unit.play_sound) {
 					audio_play_sound(sfx_beam_windup, 0, false);
 					unit.play_sound = true;
+					for(i=0;i<array_length(skill_range);i++){
+					
+						if(!skill_range[i]._is_empty){
+							obj_battleEffect.push_preview(skill_range[0],0);
+						}
+					}
 				}
 				unit.is_attacking = true;
 				unit.action = unit.actions[unit.skill_used];
 				var _damage = unit.action.damage;
 				
 				skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
+				
+				
 				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
 					audio_play_sound(sfx_blast, 0, false);
@@ -165,11 +174,15 @@ global.actionLibrary = {
 					unit.skill_complete = true;
 					unit.play_sound = false;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
+					obj_battleEffect.remove_push_preview();
+					
 					
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
+					obj_battleEffect.remove_push_preview();
+					
 					unit.play_sound = false;
 				}
 			}
@@ -329,6 +342,7 @@ global.actionLibrary = {
 			},
 			upgrade2: function(unit){
 				obj_gridCreator.reset_highlights_target();
+				
 				unit.action = unit.actions[unit.skill_used];
 				var _damage = unit.action.damage;
 				if (!unit.skill_init) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
@@ -337,13 +351,34 @@ global.actionLibrary = {
 					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_init = true;
 					unit.is_attacking = true;
-	
+					skill_range = obj_gridCreator.highlighted_attack_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
+					skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
 					audio_play_sound(sfx_mortar_windup, 0, false);
+					obj_battleEffect.remove_push_preview();
+					for (var i = 0; i < array_length(skill_range_aux); i++) {
+						if (!skill_range_aux[i]._is_empty) {
+							
+							if(skill_coords[1]-1>=0){
+								if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1]){
+									obj_battleEffect.push_preview(skill_range_aux[i],3);
+								}
+							}
+							if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1]){
+								obj_battleEffect.push_preview(skill_range_aux[i],2);
+							}
+							if(skill_coords[0]-1>=0){
+								if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]]){
+									obj_battleEffect.push_preview(skill_range_aux[i],1);
+								}
+							}
+							if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]]){
+								obj_battleEffect.push_preview(skill_range_aux[i],0);
+							}
+							
+						}
+					}
 				}
-				skill_range = obj_gridCreator.highlighted_attack_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
-				skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
-				obj_cursor.movable_tiles=skill_range;
-				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				
 				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
@@ -366,6 +401,35 @@ global.actionLibrary = {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
+					}
+				}
+				skill_range = obj_gridCreator.highlighted_attack_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
+				skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
+				obj_cursor.movable_tiles=skill_range;
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if(keyboard_check_pressed(vk_anykey)){
+					obj_battleEffect.remove_push_preview();
+					for (var i = 0; i < array_length(skill_range_aux); i++) {
+						if (!skill_range_aux[i]._is_empty) {
+							
+							if(skill_coords[1]-1>=0){
+								if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1]){
+									obj_battleEffect.push_preview(skill_range_aux[i],3);
+								}
+							}
+							if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1]){
+								obj_battleEffect.push_preview(skill_range_aux[i],2);
+							}
+							if(skill_coords[0]-1>=0){
+								if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]]){
+									obj_battleEffect.push_preview(skill_range_aux[i],1);
+								}
+							}
+							if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]]){
+								obj_battleEffect.push_preview(skill_range_aux[i],0);
+							}
+							
+						}
 					}
 				}
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
@@ -721,24 +785,46 @@ global.actionLibrary = {
 				unit.action = unit.actions[unit.skill_used];
 				skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=skill_range;
+				if(!unit.skill_init){
+					if(array_length(skill_range)>0){
+						obj_battleEffect.push_preview(skill_range[0],0);
+					}
+					unit.skill_init=true;
+				}
 				if(array_length(skill_range)>0 && !unit.skill_complete){
 					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
 				}
 				if (keyboard_check_pressed(ord("A"))) {
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 1;
+					obj_battleEffect.remove_push_preview();
+					if(array_length(skill_range)>0){
+						obj_battleEffect.push_preview(skill_range[0],1);
+					}
 				}
 				else if (keyboard_check_pressed(ord("D"))) { // a bunch of this is hardcoded atm
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 0;
+					obj_battleEffect.remove_push_preview();
+					if(array_length(skill_range)>0){
+						obj_battleEffect.push_preview(skill_range[0],0);
+					}
 				}
 				else if (keyboard_check_pressed(ord("S"))) { // a bunch of this is hardcoded atm
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 2;
+					obj_battleEffect.remove_push_preview();
+					if(array_length(skill_range)>0){
+						obj_battleEffect.push_preview(skill_range[0],2);
+					}
 				}
 				else if (keyboard_check_pressed(ord("W"))) { // a bunch of this is hardcoded atm
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 3;
+					obj_battleEffect.remove_push_preview();
+					if(array_length(skill_range)>0){
+						obj_battleEffect.push_preview(skill_range[0],3);
+					}
 				}
 				var _damage = unit.action.damage;
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
@@ -764,11 +850,17 @@ global.actionLibrary = {
 					unit.skill_complete = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
 					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
+					unit.skill_init=false;
+					obj_battleEffect.remove_push_preview();
+					
 		
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
+					unit.skill_init=false;
+					obj_battleEffect.remove_push_preview();
+				
 		
 				}
 			},
@@ -777,24 +869,46 @@ global.actionLibrary = {
 				unit.action = unit.actions[unit.skill_used];
 				skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=skill_range;
+				if(!unit.skill_init){
+					if(array_length(skill_range)>0){
+						obj_battleEffect.push_preview(skill_range[0],0);
+					}
+					unit.skill_init=true;
+				}
 				if(array_length(skill_range)>0 && !unit.skill_complete){
 					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
 				}
 				if (keyboard_check_pressed(ord("A"))) {
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 1;
+					obj_battleEffect.remove_push_preview();
+					if(array_length(skill_range)>0){
+						obj_battleEffect.push_preview(skill_range[0],1);
+					}
 				}
 				else if (keyboard_check_pressed(ord("D"))) { // a bunch of this is hardcoded atm
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 0;
+					obj_battleEffect.remove_push_preview();
+					if(array_length(skill_range)>0){
+						obj_battleEffect.push_preview(skill_range[0],0);
+					}
 				}
 				else if (keyboard_check_pressed(ord("S"))) { // a bunch of this is hardcoded atm
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 2;
+					obj_battleEffect.remove_push_preview();
+					if(array_length(skill_range)>0){
+						obj_battleEffect.push_preview(skill_range[0],2);
+					}
 				}
 				else if (keyboard_check_pressed(ord("W"))) { // a bunch of this is hardcoded atm
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 3;
+					obj_battleEffect.remove_push_preview();
+					if(array_length(skill_range)>0){
+						obj_battleEffect.push_preview(skill_range[0],3);
+					}
 				}
 				var _damage = unit.action.damage;
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
@@ -819,12 +933,15 @@ global.actionLibrary = {
 					unit.skill_complete = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
 					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
-		
+					obj_battleEffect.remove_push_preview();
+					unit.skill_init=false;
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
-		
+					obj_battleEffect.remove_push_preview();
+					unit.skill_init=false;
+					
 				}
 			},
 			upgrade2: function(unit){
@@ -832,24 +949,46 @@ global.actionLibrary = {
 				unit.action = unit.actions[unit.skill_used];
 				skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=skill_range;
+				if(!unit.skill_init){
+					if(array_length(skill_range)>0){
+						obj_battleEffect.push_preview(skill_range[0],0);
+					}
+					unit.skill_init=true;
+				}
 				if(array_length(skill_range)>0 && !unit.skill_complete){
 					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
 				}
 				if (keyboard_check_pressed(ord("A"))) {
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 1;
+					obj_battleEffect.remove_push_preview();
+					if(array_length(skill_range)>0){
+						obj_battleEffect.push_preview(skill_range[0],1);
+					}
 				}
 				else if (keyboard_check_pressed(ord("D"))) { // a bunch of this is hardcoded atm
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 0;
+					obj_battleEffect.remove_push_preview();
+					if(array_length(skill_range)>0){
+						obj_battleEffect.push_preview(skill_range[0],0);
+					}
 				}
 				else if (keyboard_check_pressed(ord("S"))) { // a bunch of this is hardcoded atm
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 2;
+					obj_battleEffect.remove_push_preview();
+					if(array_length(skill_range)>0){
+						obj_battleEffect.push_preview(skill_range[0],2);
+					}
 				}
 				else if (keyboard_check_pressed(ord("W"))) { // a bunch of this is hardcoded atm
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 3;
+					obj_battleEffect.remove_push_preview();
+					if(array_length(skill_range)>0){
+						obj_battleEffect.push_preview(skill_range[0],3);
+					}
 				}
 				var _damage = unit.action.damage;
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
@@ -878,10 +1017,15 @@ global.actionLibrary = {
 					unit.skill_complete = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
 					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
+					obj_battleEffect.remove_push_preview();
+					unit.skill_init=false;
+					
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
+					obj_battleEffect.remove_push_preview();
+					unit.skill_init=false;
 		
 				}
 			}

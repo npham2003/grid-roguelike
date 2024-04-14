@@ -42,7 +42,7 @@ switch (state) {
 		//	i-=1;
 		//}
 		//var random_battle = irandom(array_length(global.encounters)-1);
-		random_battle=1;
+		random_battle=3;
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
 		
@@ -107,7 +107,7 @@ switch (state) {
 		// If all units have attacked, end player's turn
 		unit = obj_gridCreator.battle_grid[obj_cursor.current_x][obj_cursor.current_y]._entity_on_tile;
 		
-		
+		obj_battleEffect.remove_push_preview();
 		var has_all_attacked = true;
 		
 		if(check_battle_end()){
@@ -437,6 +437,7 @@ switch (state) {
 		obj_gridCreator.reset_highlights_attack();
 		obj_gridCreator.reset_highlights_target();
 		obj_gridCreator.reset_highlights_support();
+		obj_battleEffect.remove_push_preview();
 		var enemy_unit = enemy_units[enemy_check_death];
 		if (enemy_unit.hp<=0){
 			enemy_unit.despawn();
