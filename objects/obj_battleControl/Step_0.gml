@@ -132,6 +132,7 @@ switch (state) {
 			if(unit.ally){
 				obj_menu.open_menu();
 				obj_menu.player_unit=unit;
+				obj_menu.tpCost=[0,unit.actions[0].cost[unit.upgrades[0]],unit.actions[1].cost[unit.upgrades[1]],unit.actions[2].cost[unit.upgrades[2]],unit.actions[3].cost[unit.upgrades[3]]];
 				//obj_menu.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
 				obj_menu.set_text("WASD - Move Cursor     Space - Select Unit     Enter - End Turn");
 				unit.prev_grid=[unit.grid_pos[0],unit.grid_pos[1]];

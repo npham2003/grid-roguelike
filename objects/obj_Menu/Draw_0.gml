@@ -35,7 +35,7 @@ for (var i = skills - 1; i >= 0; i--) {
 	draw_primitive_end();
 	#endregion
 
-	var _pips = make_tp(menuX[i] - expandAnim*150, menuY[i] + 20*expandAnim, 12*expandAnim, tpCost[i]);
+	var _pips = make_tp(menuX[i] - expandAnim*150 + 40, menuY[i] + 20*expandAnim, 12*expandAnim, tpCost[i]);
 
 	draw_set_color(global._characterSecondary);
 	for (var j = 0; j < array_length(_pips); j++){
