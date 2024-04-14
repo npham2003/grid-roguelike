@@ -17,8 +17,11 @@ var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_H_press
 
 var enough_tp = false;
 
+if (transition_count > 0) {
+	transition_count--;
+	return;
+}
 
-// Note that these routines are called each frame
 switch (state) {
 	
 #region Battle Start

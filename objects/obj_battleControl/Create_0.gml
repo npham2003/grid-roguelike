@@ -16,7 +16,7 @@ tp_current = 6;
 tp_bonus=0;
 
 in_animation = false;
-
+transition_count = 0;
 
 
 enemy_check_death = 0;
@@ -167,9 +167,11 @@ function change_state(new_state) {
 	switch (new_state) {
 		case BattleState.EnemyAiming:
 			show_debug_message("Change to state Enemy Aiming");
+			transition_count = 120;
 			break;
 		case BattleState.PlayerPreparing:
 			show_debug_message("Change to state Player Preparing");
+			transition_count = 120;
 			break;
 		case BattleState.PlayerWaitingAction:
 			show_debug_message("Change to state Player Waiting Action");
@@ -185,9 +187,11 @@ function change_state(new_state) {
 			break;
 		case BattleState.EnemyTakingAction:
 			show_debug_message("Change to state Enemy Taking Action");
+			transition_count = 120;
 			break;
 		case BattleState.BattleEnd:
 			show_debug_message("Change to state Battle End");
+			transition_count = 120;
 			break;
 		case BattleState.PlayerUpgrade:
 			show_debug_message("Change to state Player Upgrade");
