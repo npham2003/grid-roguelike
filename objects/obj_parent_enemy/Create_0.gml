@@ -136,7 +136,7 @@ function aim(){
 		//show_debug_message(string(potential_positions));
 		//show_debug_message("{0} has max util {1}", name, max_util);
 		position = irandom(array_length(potential_positions)-1);
-		//move(potential_positions[position][0],potential_positions[position][1]);
+		move(potential_positions[position][0],potential_positions[position][1]);
 		
 		
 		show_debug_message("{0} is ready to attack", name);
