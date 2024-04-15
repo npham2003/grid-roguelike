@@ -10,8 +10,8 @@ if (confirm) {
 var _buttonScale = 5;
 for (var i = skills - 1; i >= 0; i--) {
 	
-	if (i == select-1 && select-1 > 0) select_anim = lerp(select_anim, select_shift*-1, 0.2);
-	if (i == select && select>0) select_anim = lerp(select_anim, select_shift, 0.2);
+	//if (i == select-1 && select-1 > 0) select_anim = lerp(select_anim, select_shift*-1, 0.2);
+	//if (i == select && select>0) select_anim = lerp(select_anim, select_shift, 0.2);
 	
 	#region setup
 	var _border = border;
@@ -197,10 +197,10 @@ draw_text_ext(148, 128, _text, 40, 1000);
 #endregion
 
 #region turn banner
-var turn = "";
-if (playerTurn && !enemyTurn) turn = "PLAYER TURN";
-if (!playerTurn && enemyTurn) turn = "ENEMY TURN";
+
+if (obj_battleControl.state==BattleState.EnemyTakingAction) turn = "ENEMY TURN";
+if (obj_battleControl.state==BattleState.PlayerWaitingAction) turn = "PLAYER TURN";
 draw_rectangle_colour(room_width/2-200, 400, room_width/2+200, 200, global._secondary, global._secondary, global._secondary, global._secondary, false);
-draw_set_color(global.primary);
+draw_set_color(global._primary);
 draw_text_transformed(room_width/2, 300, turn, 1, 1, 0);
 #endregion
