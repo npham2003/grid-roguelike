@@ -104,7 +104,7 @@ for (var i = 0; i < array_length(_pips); ++i){
 
 
 var _pips = make_tp(rootX+120, rootY-70, 15, obj_battleControl.tp_current, false);
-show_debug_message(string(obj_battleControl.tp_current));
+//show_debug_message(string(obj_battleControl.tp_current));
 for (var i = 0; i < array_length(_pips); ++i){
 	draw_primitive_begin(pr_trianglestrip);
 	draw_set_color(global._tpBorder);
@@ -114,13 +114,17 @@ for (var i = 0; i < array_length(_pips); ++i){
 	draw_primitive_end();
 }
 
-for (var i = array_length(_pips)-1; i >= obj_battleControl.tp_current; --i){
-	draw_primitive_begin(pr_trianglestrip);
-	draw_set_color(c_white);
-	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 6));
-	draw_primitive_end();
+if(obj_battleControl.state==BattleState.PlayerAiming){
+	for (var i = array_length(_pips)-1; i > array_length(_pips)-1-player_unit.actions[player_unit.skill_used].cost[player_unit.upgrades[player_unit.skill_used]]; --i){
+		draw_primitive_begin(pr_trianglestrip);
+		
+		draw_set_color(c_white);
+		draw_set_alpha(tp_opacity);
+		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 5));
+		draw_primitive_end();
+	}
 }
-
+draw_set_alpha(1);
 #endregion
 
 #region draw diamond

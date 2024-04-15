@@ -20,3 +20,15 @@ if(open){
 		portraitAlpha-=0.1;
 	}
 }
+
+if(tp_opacity_increase){
+	tp_opacity+=0.01;
+}else{
+	tp_opacity-=0.01;
+}
+if(tp_opacity>=1){
+	tp_opacity_increase=false;
+}
+if(tp_opacity<=0.5){
+	tp_opacity_increase=true;
+}

@@ -9,6 +9,9 @@ open = true;
 select = 0;
 confirm = false;
 
+tp_opacity_increase=true;
+tp_opacity=0;
+
 #region location & size
 imgX = 200;
 imgY = 680;
