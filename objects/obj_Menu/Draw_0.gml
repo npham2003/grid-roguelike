@@ -47,7 +47,7 @@ for (var i = skills - 1; i >= 0; i--) {
 	draw_primitive_end();
 	#endregion
 
-	var _pips = make_tp(menuX[i] - expandAnim*150 + 40, menuY[i] + 20*expandAnim, 12*expandAnim, tpCost[i]);
+	var _pips = make_tp(menuX[i] - expandAnim*150 + 40, menuY[i] + 20*expandAnim, 10*expandAnim, tpCost[i]);
 
 	draw_set_color(global._characterSecondary);
 	for (var j = 0; j < array_length(_pips); j++){
@@ -88,32 +88,15 @@ draw_vertices(make_diamond(imgX,imgY,playerDim));
 draw_primitive_end();
 #endregion
 
-if (open) {
 
-	#region fourth
-	//draw_text_transformed(menuX[4]+80, menuY[4]-35, player_unit.actions[3].name[player_unit.upgrades[3]]+": L", 0.8, 0.8, 0);
-	#endregion
+#region hp
+var pc;
+pc = (player_unit.hp / player_unit.hpMax) * 100;
+//draw_healthbar(menuX[0]-70, menuY[0]+3, 550, menuY[0]-3, pc, global._primary, global._characterSecondary, global._characterSecondary, 0, true, true)
+//draw_text_transformed(menuX[0]+50, menuY[0]-10, string(player_unit.hp)+"/"+string(player_unit.hpMax), 0.8, 0.8, 0);
+//draw_text_transformed(menuX[0]+50, menuY[0]-35, "HP: " + string(obj_player.hp), 0.8, 0.8, 0);
+#endregion
 
-	#region third
-	//draw_text_transformed(menuX[3]+80, menuY[3]-35, player_unit.actions[2].name[player_unit.upgrades[2]]+": K", 0.8, 0.8, 0);
-	#endregion
-
-	#region second
-	//draw_text_transformed(menuX[2]+80, menuY[2]-35, player_unit.actions[1].name[player_unit.upgrades[1]]+": J", 0.8, 0.8, 0);
-	#endregion
-
-	#region first
-	//draw_text_transformed(menuX[1]+65, menuY[1]-35, player_unit.actions[0].name[player_unit.upgrades[0]]+": H", 0.8, 0.8, 0);
-	#endregion
-	
-	#region hp
-	var pc;
-	pc = (player_unit.hp / player_unit.hpMax) * 100;
-	//draw_healthbar(menuX[0]-70, menuY[0]+3, 550, menuY[0]-3, pc, global._primary, global._characterSecondary, global._characterSecondary, 0, true, true)
-	//draw_text_transformed(menuX[0]+50, menuY[0]-10, string(player_unit.hp)+"/"+string(player_unit.hpMax), 0.8, 0.8, 0);
-	//draw_text_transformed(menuX[0]+50, menuY[0]-35, "HP: " + string(obj_player.hp), 0.8, 0.8, 0);
-	#endregion
-}
 
 
 #region draw character
