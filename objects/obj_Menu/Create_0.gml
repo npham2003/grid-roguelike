@@ -1,12 +1,11 @@
-/// @description Insert description here
-// You can write your code in this editor
-
 state = 0;
 skills = 5;
 _text = "";
 
 open = true;
-select = 0;
+//select = 0;
+playerTurn = false;
+enemyTurn = true;
 confirm = false;
 
 tp_opacity_increase=true;

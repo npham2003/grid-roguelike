@@ -82,7 +82,8 @@ switch (state) {
 
 #region Player Preparing
 	case BattleState.PlayerPreparing:
-		
+		obj_menu.playerTurn = true;
+		obj_menu.enemyTurn = false;
 		for (var i = 0; i < array_length(player_units); i++) {
 			if(player_units[i].hp>0){
 				player_units[i].has_moved = false;
@@ -474,7 +475,8 @@ switch (state) {
 
 #region Enemy Taking Action
 	case BattleState.EnemyTakingAction:
-		
+		obj_menu.playerTurn = false;
+		obj_menu.enemyTurn = true;
 		if (in_animation) {
 			break;
 		}

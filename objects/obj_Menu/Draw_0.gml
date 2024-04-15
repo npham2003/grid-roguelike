@@ -197,5 +197,10 @@ draw_text_ext(148, 128, _text, 40, 1000);
 #endregion
 
 #region turn banner
-
+var turn = "";
+if (playerTurn && !enemyTurn) turn == "PLAYER TURN";
+if (!playerTurn && enemyTurn) turn == "ENEMY TURN";
+draw_rectangle_colour(room_width/2-200, 400, room_width/2+200, 200, global._secondary global._secondary, global._secondary, global._secondary, false);
+draw_set_color(global.primary);
+draw_text_transformed(room_width/2, 300, turn, 1, 1, 0);
 #endregion
