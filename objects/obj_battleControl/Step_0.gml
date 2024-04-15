@@ -248,6 +248,7 @@ switch (state) {
 				show_debug_message("Move to ({0},{1})", unit.grid_pos[0], unit.grid_pos[1]);
 			}
 			else if (key_Tab_pressed){
+					obj_menu.select = 0;
 					unit.back_move();
 					change_state(BattleState.PlayerWaitingAction);
 					obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
@@ -320,6 +321,7 @@ switch (state) {
 	
 		
 		if(unit.skill_back){
+			obj_menu.set_select(0);
 			change_state(BattleState.PlayerMoving);
 			unit.show_moveable_grids_prev();
 			unit.has_attacked = false;

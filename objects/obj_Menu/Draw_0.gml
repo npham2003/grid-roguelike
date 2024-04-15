@@ -9,12 +9,9 @@ if (confirm) {
 
 var _buttonScale = 5;
 for (var i = skills - 1; i >= 0; i--) {
-	#region select placement
-	show_debug_message(string(select));
 	
 	if (i == select-1 && select-1 > 0) select_anim = lerp(select_anim, select_shift*-1, 0.2);
 	if (i == select && select>0) select_anim = lerp(select_anim, select_shift, 0.2);
-	#endregion
 	
 	#region setup
 	var _border = border;

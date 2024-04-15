@@ -33,3 +33,8 @@ if(tp_opacity>=1){
 if(tp_opacity<=0.5){
 	tp_opacity_increase=true;
 }
+
+
+if (select == 0) {
+	select_anim = lerp(select_anim, 0, 0.2);
+}
