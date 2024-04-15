@@ -6,12 +6,19 @@ var _buttonScale = 5;
 for (var i = skills - 1; i >= 0; i--) {
 	#region setup
 	var _border = border;
-	var _outline = [
+	var _outline1 = [
 		[rootX, rootY-(tpRadius+_border)],
 		[rootX, rootY+(tpRadius+_border)],
 		[menuX[i], rootY-(tpRadius+_border)],
 		[menuX[i], rootY+(tpRadius+_border)],
 		[menuX[i]+(tpRadius+_border), rootY]
+	]
+	var _outline2 = [
+		[rootX, rootY-(tpRadius+_border*2)],
+		[rootX, rootY+(tpRadius+_border*2)],
+		[menuX[i], rootY-(tpRadius+_border*2)],
+		[menuX[i], rootY+(tpRadius+_border*2)],
+		[menuX[i]+(tpRadius+_border*2), rootY]
 	]
 	_border = 0;
 	var _button = [
@@ -26,7 +33,12 @@ for (var i = skills - 1; i >= 0; i--) {
 	#region draw buttons
 	draw_set_color(c_black);
 	draw_primitive_begin(pr_trianglestrip);
-	draw_vertices(_outline);
+	draw_vertices(_outline2);
+	draw_primitive_end();
+	
+	draw_set_color(global._characterPrimary);
+	draw_primitive_begin(pr_trianglestrip);
+	draw_vertices(_outline1);
 	draw_primitive_end();
 	
 	draw_set_color(global._primary);
@@ -40,9 +52,12 @@ for (var i = skills - 1; i >= 0; i--) {
 	draw_set_color(global._characterSecondary);
 	for (var j = 0; j < array_length(_pips); j++){
 		draw_primitive_begin(pr_trianglestrip);
-		draw_vertices(make_diamond(_pips[j][0],_pips[j][1], 10* expandAnim));
+		draw_vertices(make_diamond(_pips[j][0],_pips[j][1], 7*expandAnim));
 		draw_primitive_end();
 	}
+	
+	draw_set_color(global._characterSecondary);
+	if i < 4 draw_text_transformed(menuX[i]+50, menuY[i]-35, player_unit.actions[i].name[player_unit.upgrades[i]]+ ": " +global.controls[i], 0.5, 0.5, 0);
 	
 	//draw_sprite_ext(spr_button_base, 0, menuX[i], menuY[i], _buttonScale, _buttonScale, 0, global._primary, optionAlpha);
 	//draw_sprite_ext(spr_button_outline, 0, menuX[i], menuY[i], _buttonScale, _buttonScale, 0, global._characterPrimary, optionAlpha);
@@ -58,6 +73,11 @@ for (var i = skills - 1; i >= 0; i--) {
 
 
 draw_set_color(c_black);
+draw_primitive_begin(pr_trianglestrip);
+draw_vertices(make_diamond(imgX,imgY,playerDim+10));
+draw_primitive_end();
+
+draw_set_color(global._characterPrimary);
 draw_primitive_begin(pr_trianglestrip);
 draw_vertices(make_diamond(imgX,imgY,playerDim+5));
 draw_primitive_end();

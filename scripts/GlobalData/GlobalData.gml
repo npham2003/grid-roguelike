@@ -1,3 +1,5 @@
+global.controls = ["H", "J", "K", "L"];
+
 //Action Library
 global.actionLibrary = {
 	baseAttack: {
