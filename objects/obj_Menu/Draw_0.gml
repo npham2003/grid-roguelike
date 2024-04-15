@@ -89,12 +89,16 @@ for (var i = 0; i < array_length(_pips); ++i){
 	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 15));
 	//draw_set_color(global._tpBorder);
 	//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 12));
+	draw_primitive_end();
+	draw_primitive_begin(pr_trianglestrip);
+	
 	draw_set_color(c_black);
+	
 	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 10));
 	//draw_set_color(global._tpBorder);
 	//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 6));
 	//draw_set_color(global._tpBar);
-	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 5));
+	//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 5));
 	draw_primitive_end();
 }
 
