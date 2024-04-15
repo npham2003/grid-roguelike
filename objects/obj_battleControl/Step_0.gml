@@ -331,7 +331,7 @@ switch (state) {
 			
 		}else{
 			
-			obj_menu.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]])+"\nCost: "+string(unit.actions[unit.skill_used].cost[unit.upgrades[unit.skill_used]]));
+			obj_menu.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+""+string(unit.actions[unit.skill_used].name[unit.upgrades[unit.skill_used]])+"\n"+string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
 			if (unit.skill_complete) {
 				tp_current -= unit.actions[unit.skill_used].cost[unit.upgrades[unit.skill_used]];
 				unit.has_attacked = true;
