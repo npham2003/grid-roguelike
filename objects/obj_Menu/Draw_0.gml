@@ -9,29 +9,36 @@ if (confirm) {
 
 var _buttonScale = 5;
 for (var i = skills - 1; i >= 0; i--) {
+	#region select placement
+	show_debug_message(string(select));
+	
+	if (i == select-1 && select-1 > 0) select_anim = lerp(select_anim, select_shift*-1, 0.2);
+	if (i == select && select>0) select_anim = lerp(select_anim, select_shift, 0.2);
+	#endregion
+	
 	#region setup
 	var _border = border;
 	var _outline1 = [
 		[rootX, rootY-(tpRadius+_border)],
 		[rootX, rootY+(tpRadius+_border)],
-		[menuX[i], rootY-(tpRadius+_border)],
-		[menuX[i], rootY+(tpRadius+_border)],
-		[menuX[i]+(tpRadius+_border), rootY]
+		[menuX[i]+select_anim, rootY-(tpRadius+_border)],
+		[menuX[i]+select_anim, rootY+(tpRadius+_border)],
+		[menuX[i]+(tpRadius+_border)+select_anim, rootY]
 	]
 	var _outline2 = [
 		[rootX, rootY-(tpRadius+_border*2)],
 		[rootX, rootY+(tpRadius+_border*2)],
-		[menuX[i], rootY-(tpRadius+_border*2)],
-		[menuX[i], rootY+(tpRadius+_border*2)],
-		[menuX[i]+(tpRadius+_border*2), rootY]
+		[menuX[i]+select_anim, rootY-(tpRadius+_border*2)],
+		[menuX[i]+select_anim, rootY+(tpRadius+_border*2)],
+		[menuX[i]+(tpRadius+_border*2)+select_anim, rootY]
 	]
 	_border = 0;
 	var _button = [
 		[rootX, rootY-(tpRadius+_border)],
 		[rootX, rootY+(tpRadius+_border)],
-		[menuX[i], rootY-(tpRadius+_border)],
-		[menuX[i], rootY+(tpRadius+_border)],
-		[menuX[i]+(tpRadius+_border), rootY]
+		[menuX[i]+select_anim, rootY-(tpRadius+_border)],
+		[menuX[i]+select_anim, rootY+(tpRadius+_border)],
+		[menuX[i]+(tpRadius+_border)+select_anim, rootY]
 	]
 	#endregion
 	
@@ -86,7 +93,7 @@ for (var i = 0; i < array_length(_pips); ++i){
 	//draw_set_color(global._tpBorder);
 	//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 10*expandAnim));
 	draw_set_color(global._tpBar);
-	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 15));
+	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 18));
 	//draw_set_color(global._tpBorder);
 	//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 12));
 	draw_primitive_end();
@@ -94,7 +101,7 @@ for (var i = 0; i < array_length(_pips); ++i){
 	
 	draw_set_color(c_black);
 	
-	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 10));
+	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 12));
 	//draw_set_color(global._tpBorder);
 	//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 6));
 	//draw_set_color(global._tpBar);
@@ -118,7 +125,7 @@ if(obj_battleControl.state==BattleState.PlayerAiming){
 	for (var i = array_length(_pips)-1; i > array_length(_pips)-1-player_unit.actions[player_unit.skill_used].cost[player_unit.upgrades[player_unit.skill_used]]; --i){
 		draw_primitive_begin(pr_trianglestrip);
 		
-		draw_set_color(c_white);
+		draw_set_color(c_black);
 		draw_set_alpha(tp_opacity);
 		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 5));
 		draw_primitive_end();
@@ -190,4 +197,8 @@ draw_text_transformed(75, 20, "G    "+ string(obj_battleControl.gold), 0.8, 0.8,
 #region skill details
 draw_set_font(fnt_chiaro);
 draw_text_ext(148, 128, _text, 40, 1000);
+#endregion
+
+#region turn banner
+
 #endregion

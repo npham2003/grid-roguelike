@@ -154,6 +154,7 @@ switch (state) {
 					if (!unit.has_attacked) {
 						if (key_H_pressed) {
 							if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
+								obj_menu.set_select(1);
 								unit.skill_used = 0;
 								enough_tp = true;
 							}
@@ -164,8 +165,9 @@ switch (state) {
 						}
 						else if (key_J_pressed) {
 							if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
-							unit.skill_used = 1;
-							enough_tp = true;
+								obj_menu.set_select(2);
+								unit.skill_used = 1;
+								enough_tp = true;
 							}
 							else {
 									audio_play_sound(sfx_no_tp, 0, false);
@@ -173,17 +175,18 @@ switch (state) {
 						}
 						else if (key_K_pressed) {
 							if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
-							unit.skill_used = 2;
-							enough_tp = true;
+								obj_menu.set_select(3);
+								unit.skill_used = 2;
+								enough_tp = true;
 							}
 							else {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}else if (key_L_pressed) {
-							show_debug_message("hi");
 							if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
-							unit.skill_used = 3;
-							enough_tp = true;
+								obj_menu.set_select(4);
+								unit.skill_used = 3;
+								enough_tp = true;
 							}
 							else {
 									audio_play_sound(sfx_no_tp, 0, false);

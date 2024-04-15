@@ -18,6 +18,8 @@ imgY = 680;
 
 rootX = imgX+20;
 rootY = imgY + 32;
+select_shift = 50;
+select_anim = 0;
 menuX = [rootX, rootX, rootX, rootX, rootX];
 menuY = [rootY, rootY, rootY, rootY, rootY];
 
@@ -59,6 +61,9 @@ set_text = function(_new_text){
 	_text = _new_text;
 }
 
+set_select = function(_option) {
+	select = _option;
+}
 #endregion
 
 #region draw helpers
@@ -101,10 +106,7 @@ draw_vertices = function(vertices){
 
 #endregion
 
-#region FUNCTIONS
-selectResize = function() {
-	
-}
+#region functions
 
 #endregion
 
