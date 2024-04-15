@@ -146,7 +146,7 @@ function set_danger_highlights() {
 			continue;
 		}
 		obj_gridCreator.battle_grid[attack_x][attack_y]._danger_highlight = true;
-		obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number+=1;
+		obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number += 1;
 		//show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
 		
 	}
@@ -192,6 +192,7 @@ function remove_danger_highlights() {
 function attack(ally) {
 	show_debug_message("{0} is attacking", name);
 	display_target_highlights();
+	remove_danger_highlights()
 	sprite_index = sprites.attack;
 	image_index = 0;
 	obj_battleControl.in_animation = true;

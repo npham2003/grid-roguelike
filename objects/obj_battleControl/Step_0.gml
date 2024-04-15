@@ -44,6 +44,9 @@ switch (state) {
 		//	array_delete(board_obstacles,i,1);
 		//	i-=1;
 		//}
+		for(i=0;i<array_length(board_obstacles);i++){
+			board_obstacles[i].aim();
+		}
 		var random_battle = irandom(array_length(global.encounters)-1);
 		//random_battle=3;
 		spawn_enemies(global.encounters[random_battle]);
@@ -229,13 +232,13 @@ switch (state) {
 				if (key_W_pressed) {
 					unit.move_up();
 				}
-				else if (key_A_pressed) {
+				if (key_A_pressed) {
 					unit.move_left();
 				}
-				else if (key_S_pressed) {
+				if (key_S_pressed) {
 					unit.move_down();
 				}
-				else if (key_D_pressed) {
+				if (key_D_pressed) {
 					unit.move_right();
 				}
 			
@@ -473,10 +476,11 @@ switch (state) {
 		if(!checking_death){
 			if (enemy_order >= array_length(enemy_units)) {
 				enemy_order = 0;
-				obj_gridCreator.reset_highlights_enemy();
+				
 				if (check_battle_end()) {
 					change_state(BattleState.BattleEnd);
 				}else{
+					
 					change_state(BattleState.EnemyBoardObstacle);
 				}
 				break;
@@ -558,6 +562,12 @@ switch (state) {
 			obstacle.aim();
 			checking_death=true;
 		}else{
+			if (enemy_check_death >= array_length(enemy_units)) {
+				enemy_check_death = 0;
+				board_obstacle_order+=1;
+				checking_death=false;
+				break;
+			}
 			var enemy_unit = enemy_units[enemy_check_death];
 			if (enemy_unit.hp<=0){
 				enemy_unit.despawn();
@@ -567,11 +577,7 @@ switch (state) {
 			}
 		
 			enemy_check_death += 1;
-			if (enemy_check_death >= array_length(enemy_units)) {
-				enemy_check_death = 0;
-				board_obstacle_order+=1;
-				checking_death=false;
-			}
+			
 		}
 		break;
 #endregion
@@ -587,6 +593,10 @@ switch (state) {
 		if(!checking_death){
 			if (board_obstacle_order >= array_length(board_obstacles)) {
 				board_obstacle_order = 0;
+				obj_gridCreator.reset_highlights_enemy();
+				for(i=0;i<array_length(board_obstacles);i++){
+					board_obstacles[i].aim();
+				}
 				change_state(BattleState.EnemyAiming);
 				break;
 			}
@@ -604,6 +614,12 @@ switch (state) {
 		
 			checking_death=true;
 		}else{
+			if (enemy_check_death >= array_length(enemy_units)) {
+				enemy_check_death = 0;
+				board_obstacle_order+=1;
+				checking_death=false;
+				break;
+			}
 			var enemy_unit = enemy_units[enemy_check_death];
 			if (enemy_unit.hp<=0){
 				enemy_unit.despawn();
@@ -613,11 +629,7 @@ switch (state) {
 			}
 		
 			enemy_check_death += 1;
-			if (enemy_check_death >= array_length(enemy_units)) {
-				enemy_check_death = 0;
-				board_obstacle_order+=1;
-				checking_death=false;
-			}
+			
 		}
 		break;
 #endregion
