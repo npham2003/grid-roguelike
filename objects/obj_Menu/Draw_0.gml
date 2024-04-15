@@ -1,32 +1,53 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+#region confirm
+if (confirm) {
+	
+}
+#endregion
 
 var _buttonScale = 5;
 for (var i = skills - 1; i >= 0; i--) {
+	
+	if (i == select-1 && select-1 > 0) select_anim = lerp(select_anim, select_shift*-1, 0.2);
+	if (i == select && select>0) select_anim = lerp(select_anim, select_shift, 0.2);
+	
 	#region setup
 	var _border = border;
-	var _outline = [
+	var _outline1 = [
 		[rootX, rootY-(tpRadius+_border)],
 		[rootX, rootY+(tpRadius+_border)],
-		[menuX[i], rootY-(tpRadius+_border)],
-		[menuX[i], rootY+(tpRadius+_border)],
-		[menuX[i]+(tpRadius+_border), rootY]
+		[menuX[i]+select_anim, rootY-(tpRadius+_border)],
+		[menuX[i]+select_anim, rootY+(tpRadius+_border)],
+		[menuX[i]+(tpRadius+_border)+select_anim, rootY]
+	]
+	var _outline2 = [
+		[rootX, rootY-(tpRadius+_border*2)],
+		[rootX, rootY+(tpRadius+_border*2)],
+		[menuX[i]+select_anim, rootY-(tpRadius+_border*2)],
+		[menuX[i]+select_anim, rootY+(tpRadius+_border*2)],
+		[menuX[i]+(tpRadius+_border*2)+select_anim, rootY]
 	]
 	_border = 0;
 	var _button = [
 		[rootX, rootY-(tpRadius+_border)],
 		[rootX, rootY+(tpRadius+_border)],
-		[menuX[i], rootY-(tpRadius+_border)],
-		[menuX[i], rootY+(tpRadius+_border)],
-		[menuX[i]+(tpRadius+_border), rootY]
+		[menuX[i]+select_anim, rootY-(tpRadius+_border)],
+		[menuX[i]+select_anim, rootY+(tpRadius+_border)],
+		[menuX[i]+(tpRadius+_border)+select_anim, rootY]
 	]
 	#endregion
 	
 	#region draw buttons
 	draw_set_color(c_black);
 	draw_primitive_begin(pr_trianglestrip);
-	draw_vertices(_outline);
+	draw_vertices(_outline2);
+	draw_primitive_end();
+	
+	draw_set_color(global._characterPrimary);
+	draw_primitive_begin(pr_trianglestrip);
+	draw_vertices(_outline1);
 	draw_primitive_end();
 	
 	draw_set_color(global._primary);
@@ -34,30 +55,89 @@ for (var i = skills - 1; i >= 0; i--) {
 	draw_vertices(_button);
 	draw_primitive_end();
 	#endregion
-
-	var _pips = make_tp(menuX[i] - expandAnim*150 + 40, menuY[i] + 20*expandAnim, 12*expandAnim, tpCost[i]);
+	
+	#region draw tp
+	var _pips = make_tp(menuX[i] - expandAnim*150 + 60, menuY[i] + 15*expandAnim, 7*expandAnim, tpCost[i], true);
 
 	draw_set_color(global._characterSecondary);
 	for (var j = 0; j < array_length(_pips); j++){
 		draw_primitive_begin(pr_trianglestrip);
-		draw_vertices(make_diamond(_pips[j][0],_pips[j][1], 10* expandAnim));
+		draw_vertices(make_diamond(_pips[j][0],_pips[j][1], 5*expandAnim));
 		draw_primitive_end();
 	}
-	
-	//draw_sprite_ext(spr_button_base, 0, menuX[i], menuY[i], _buttonScale, _buttonScale, 0, global._primary, optionAlpha);
-	//draw_sprite_ext(spr_button_outline, 0, menuX[i], menuY[i], _buttonScale, _buttonScale, 0, global._characterPrimary, optionAlpha);
+	#endregion
+
+	//text
+	//draw_set_color(global._characterSecondary);
+	if i < 4 draw_text_transformed_colour(menuX[i]+50, menuY[i]-35, player_unit.actions[i].name[player_unit.upgrades[i]]+ ": " +global.controls[i], 0.5, 0.5, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
 }
 
 
+#region hp
+if (open) {
+	var pc;
+	pc = (player_unit.hp / player_unit.hpMax) * 100;
+	draw_healthbar(menuX[0]-70, menuY[0]+3, menuX[0], menuY[0]-3, pc, global._primary, global._characterSecondary, global._characterSecondary, 0, true, true)
+	draw_text_transformed(menuX[0]-expandAnim*50, menuY[0], string(player_unit.hp)+"/"+string(player_unit.hpMax), 0.5, 0.5, 0);
+	//draw_text_transformed(menuX[0]+50, menuY[0]-35, "HP: " + string(obj_player.hp), 0.8, 0.8, 0);
+}
+#endregion
+
+#region party tp
+var _pips = make_tp(rootX+120, rootY-70, 15, obj_battleControl.tp_max, false);
+for (var i = 0; i < array_length(_pips); ++i){
+	draw_primitive_begin(pr_trianglestrip);
+	//draw_set_color(global._tpBorder);
+	//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 10*expandAnim));
+	draw_set_color(global._tpBar);
+	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 18));
+	//draw_set_color(global._tpBorder);
+	//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 12));
+	draw_primitive_end();
+	draw_primitive_begin(pr_trianglestrip);
+	
+	draw_set_color(c_black);
+	
+	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 12));
+	//draw_set_color(global._tpBorder);
+	//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 6));
+	//draw_set_color(global._tpBar);
+	//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 5));
+	draw_primitive_end();
+}
+
+
+var _pips = make_tp(rootX+120, rootY-70, 15, obj_battleControl.tp_current, false);
+//show_debug_message(string(obj_battleControl.tp_current));
+for (var i = 0; i < array_length(_pips); ++i){
+	draw_primitive_begin(pr_trianglestrip);
+	draw_set_color(global._tpBorder);
+	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 6));
+	draw_set_color(global._tpBar);
+	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 5));
+	draw_primitive_end();
+}
+
+if(obj_battleControl.state==BattleState.PlayerAiming){
+	for (var i = array_length(_pips)-1; i > array_length(_pips)-1-player_unit.actions[player_unit.skill_used].cost[player_unit.upgrades[player_unit.skill_used]]; --i){
+		draw_primitive_begin(pr_trianglestrip);
+		
+		draw_set_color(c_black);
+		draw_set_alpha(tp_opacity);
+		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 5));
+		draw_primitive_end();
+	}
+}
+draw_set_alpha(1);
+#endregion
+
 #region draw diamond
-//// draw diamond
-//var portraitScale = 15;
-//draw_sprite_ext(spr_diamond_base, 0, imgX, imgY, portraitScale,portraitScale, 0, global._primary, 1);
-//draw_sprite_ext(spr_diamond_outline, 0, imgX, imgY, portraitScale,portraitScale, 0, global._characterPrimary, 1);
-//draw_rectangle(imgX-150, imgY-150, imgX+160, imgY+100, true);
-
-
 draw_set_color(c_black);
+draw_primitive_begin(pr_trianglestrip);
+draw_vertices(make_diamond(imgX,imgY,playerDim+10));
+draw_primitive_end();
+
+draw_set_color(global._characterPrimary);
 draw_primitive_begin(pr_trianglestrip);
 draw_vertices(make_diamond(imgX,imgY,playerDim+5));
 draw_primitive_end();
@@ -68,36 +148,7 @@ draw_vertices(make_diamond(imgX,imgY,playerDim));
 draw_primitive_end();
 #endregion
 
-if (open) {
-
-	#region fourth
-	//draw_text_transformed(menuX[4]+80, menuY[4]-35, player_unit.actions[3].name[player_unit.upgrades[3]]+": L", 0.8, 0.8, 0);
-	#endregion
-
-	#region third
-	//draw_text_transformed(menuX[3]+80, menuY[3]-35, player_unit.actions[2].name[player_unit.upgrades[2]]+": K", 0.8, 0.8, 0);
-	#endregion
-
-	#region second
-	//draw_text_transformed(menuX[2]+80, menuY[2]-35, player_unit.actions[1].name[player_unit.upgrades[1]]+": J", 0.8, 0.8, 0);
-	#endregion
-
-	#region first
-	//draw_text_transformed(menuX[1]+65, menuY[1]-35, player_unit.actions[0].name[player_unit.upgrades[0]]+": H", 0.8, 0.8, 0);
-	#endregion
-	
-	#region hp
-	var pc;
-	pc = (player_unit.hp / player_unit.hpMax) * 100;
-	//draw_healthbar(menuX[0]-70, menuY[0]+3, 550, menuY[0]-3, pc, global._primary, global._characterSecondary, global._characterSecondary, 0, true, true)
-	//draw_text_transformed(menuX[0]+50, menuY[0]-10, string(player_unit.hp)+"/"+string(player_unit.hpMax), 0.8, 0.8, 0);
-	//draw_text_transformed(menuX[0]+50, menuY[0]-35, "HP: " + string(obj_player.hp), 0.8, 0.8, 0);
-	#endregion
-}
-
-
 #region draw character
-
 gpu_set_blendenable(false);
 gpu_set_colorwriteenable(false, false, false, true);
 draw_set_alpha(0);
@@ -132,10 +183,19 @@ gpu_set_blendmode(bm_normal);
 #endregion
 
 #region gold
-draw_text_transformed(60, 20, "G: "+ string(obj_battleControl.gold), 1, 1, 0);
+draw_set_color(global._primary);
+draw_primitive_begin(pr_trianglestrip);
+draw_vertices(make_diamond(87, 53, 30));
+draw_primitive_end();
+draw_set_color(c_white);
+draw_text_transformed(75, 20, "G    "+ string(obj_battleControl.gold), 0.8, 0.8, 0);
 #endregion
 
 #region skill details
 draw_set_font(fnt_chiaro);
 draw_text_ext(148, 128, _text, 40, 1000);
+#endregion
+
+#region turn banner
+
 #endregion

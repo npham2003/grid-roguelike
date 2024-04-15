@@ -1,3 +1,5 @@
+global.controls = ["H", "J", "K", "L"];
+
 //Action Library
 global.actionLibrary = {
 	baseAttack: {
@@ -1447,7 +1449,9 @@ global.players = [
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.beam, global.actionLibrary.charge,  global.actionLibrary.mortar],
 		ally: true,
 		tpGain: 1,
-		portrait: spr_temp_Akeha
+		portrait: spr_temp_Akeha,
+		primary: #0cac87,
+		secondary: #386467
 		
 	},
 	{ //l'cifure
@@ -1459,7 +1463,9 @@ global.players = [
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.minefield, global.actionLibrary.mover,  global.actionLibrary.swap],
 		ally: true,
 		tpGain: 2,
-		portrait: spr_temp_Hunter
+		portrait: spr_temp_Gayle,
+		primary: #0cac87,
+		secondary: #386467
 	}
 	//{ //new member
 	//	name: "put new party member here", //refer to example above

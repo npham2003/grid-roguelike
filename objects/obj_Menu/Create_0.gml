@@ -3,15 +3,23 @@
 
 state = 0;
 skills = 5;
+_text = "";
+
 open = true;
-_text = "Hi";
+select = 0;
+confirm = false;
+
+tp_opacity_increase=true;
+tp_opacity=0;
 
 #region location & size
 imgX = 200;
 imgY = 680;
 
-rootX = imgX;
+rootX = imgX+20;
 rootY = imgY + 32;
+select_shift = 50;
+select_anim = 0;
 menuX = [rootX, rootX, rootX, rootX, rootX];
 menuY = [rootY, rootY, rootY, rootY, rootY];
 
@@ -53,6 +61,9 @@ set_text = function(_new_text){
 	_text = _new_text;
 }
 
+set_select = function(_option) {
+	select = _option;
+}
 #endregion
 
 #region draw helpers
@@ -62,20 +73,25 @@ make_diamond = function(_x, _y, _r) {
 }
 
 //draw tp
-make_tp = function(_x, _y, _spacing, _len) {
+make_tp = function(_x, _y, _spacing, _len, is_rows) {
 	var _res = [];
 	var _bars =  _len/5;
 	var _rem =  _len%5;
+	var _y_offset = 0;
 	
 	var _lines = _bars + _rem;
 	
 		for (var i = 0; i < _len; ++i) {
-			if (_bars > 0) {
+			if (_bars > 0 && is_rows) {
 				if (i != 0 && i%5 == 0) {
-					
+					for(var j = 0; j<array_length(_res);j++){
+						_res[j][1]-=_spacing/3;
+						_y_offset+=_spacing*0.45;
+					}
 				}
 			}
-			_res[i] = [_x + i*_spacing, _y - _spacing*(i%2)];
+			if (is_rows) _res[i] = [_x + (i%5)*_spacing, _y - _spacing*((i%5)%2) + _y_offset];
+			else _res[i] = [_x + (i)*_spacing, _y - _spacing*(i%2) + _y_offset];
 		}
 
 	return _res;
@@ -87,6 +103,10 @@ draw_vertices = function(vertices){
 		draw_vertex(vertices[i][0], vertices[i][1]);
 	}
 }
+
+#endregion
+
+#region functions
 
 #endregion
 

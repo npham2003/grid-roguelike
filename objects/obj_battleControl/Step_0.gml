@@ -154,6 +154,7 @@ switch (state) {
 					if (!unit.has_attacked) {
 						if (key_H_pressed) {
 							if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
+								//obj_menu.set_select(1);
 								unit.skill_used = 0;
 								enough_tp = true;
 							}
@@ -164,8 +165,9 @@ switch (state) {
 						}
 						else if (key_J_pressed) {
 							if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
-							unit.skill_used = 1;
-							enough_tp = true;
+								//obj_menu.set_select(2);
+								unit.skill_used = 1;
+								enough_tp = true;
 							}
 							else {
 									audio_play_sound(sfx_no_tp, 0, false);
@@ -173,17 +175,18 @@ switch (state) {
 						}
 						else if (key_K_pressed) {
 							if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
-							unit.skill_used = 2;
-							enough_tp = true;
+								//obj_menu.set_select(3);
+								unit.skill_used = 2;
+								enough_tp = true;
 							}
 							else {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}else if (key_L_pressed) {
-							show_debug_message("hi");
 							if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
-							unit.skill_used = 3;
-							enough_tp = true;
+								//obj_menu.set_select(4);
+								unit.skill_used = 3;
+								enough_tp = true;
 							}
 							else {
 									audio_play_sound(sfx_no_tp, 0, false);
@@ -245,6 +248,7 @@ switch (state) {
 				show_debug_message("Move to ({0},{1})", unit.grid_pos[0], unit.grid_pos[1]);
 			}
 			else if (key_Tab_pressed){
+					obj_menu.select = 0;
 					unit.back_move();
 					change_state(BattleState.PlayerWaitingAction);
 					obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
@@ -317,6 +321,7 @@ switch (state) {
 	
 		
 		if(unit.skill_back){
+			
 			change_state(BattleState.PlayerMoving);
 			unit.show_moveable_grids_prev();
 			unit.has_attacked = false;
@@ -408,8 +413,10 @@ switch (state) {
 								unit.skill_init= false;
 								unit.skill_complete = false;
 								enough_tp = false;
+								
 								change_state(BattleState.PlayerAiming);
 								obj_gridCreator.reset_highlights_cursor();
+								obj_battleEffect.remove_push_preview();
 							}
 						}
 				

@@ -158,6 +158,7 @@ enum BattleState {
 	EnemyBoardObstacle
 };
 
+//state = BattleState.PlayerUpgrade;
 state = BattleState.BattleStart;
 show_debug_message("Battle Start");
 
