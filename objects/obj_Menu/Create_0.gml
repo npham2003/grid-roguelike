@@ -66,16 +66,20 @@ make_tp = function(_x, _y, _spacing, _len) {
 	var _res = [];
 	var _bars =  _len/5;
 	var _rem =  _len%5;
+	var _y_offset = 0;
 	
 	var _lines = _bars + _rem;
 	
 		for (var i = 0; i < _len; ++i) {
 			if (_bars > 0) {
 				if (i != 0 && i%5 == 0) {
-					
+					for(var j = 0; j<array_length(_res);j++){
+						_res[j][1]-=_spacing/3;
+						_y_offset+=_spacing/3;
+					}
 				}
 			}
-			_res[i] = [_x + i*_spacing, _y - _spacing*(i%2)];
+			_res[i] = [_x + (i%5)*_spacing, _y - _spacing*((i%5)%2) + _y_offset];
 		}
 
 	return _res;
