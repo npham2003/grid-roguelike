@@ -154,7 +154,7 @@ switch (state) {
 					if (!unit.has_attacked) {
 						if (key_H_pressed) {
 							if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
-								obj_menu.set_select(1);
+								//obj_menu.set_select(1);
 								unit.skill_used = 0;
 								enough_tp = true;
 							}
@@ -165,7 +165,7 @@ switch (state) {
 						}
 						else if (key_J_pressed) {
 							if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
-								obj_menu.set_select(2);
+								//obj_menu.set_select(2);
 								unit.skill_used = 1;
 								enough_tp = true;
 							}
@@ -175,7 +175,7 @@ switch (state) {
 						}
 						else if (key_K_pressed) {
 							if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
-								obj_menu.set_select(3);
+								//obj_menu.set_select(3);
 								unit.skill_used = 2;
 								enough_tp = true;
 							}
@@ -184,7 +184,7 @@ switch (state) {
 								}
 						}else if (key_L_pressed) {
 							if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
-								obj_menu.set_select(4);
+								//obj_menu.set_select(4);
 								unit.skill_used = 3;
 								enough_tp = true;
 							}
@@ -321,7 +321,7 @@ switch (state) {
 	
 		
 		if(unit.skill_back){
-			obj_menu.set_select(0);
+			
 			change_state(BattleState.PlayerMoving);
 			unit.show_moveable_grids_prev();
 			unit.has_attacked = false;
