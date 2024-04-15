@@ -1461,7 +1461,7 @@ global.players = [
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.minefield, global.actionLibrary.mover,  global.actionLibrary.swap],
 		ally: true,
 		tpGain: 2,
-		portrait: spr_temp_Hunter
+		portrait: spr_temp_Gayle
 	}
 	//{ //new member
 	//	name: "put new party member here", //refer to example above

@@ -4,13 +4,13 @@
 state = 0;
 skills = 5;
 open = true;
-_text = "Hi";
+_text = "";
 
 #region location & size
 imgX = 200;
 imgY = 680;
 
-rootX = imgX;
+rootX = imgX+20;
 rootY = imgY + 32;
 menuX = [rootX, rootX, rootX, rootX, rootX];
 menuY = [rootY, rootY, rootY, rootY, rootY];
