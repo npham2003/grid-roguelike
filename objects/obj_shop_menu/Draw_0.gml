@@ -1,4 +1,3 @@
-
 if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	
 	// background and border
@@ -20,17 +19,17 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 				
 				//draw text box and text
 				draw_set_alpha(1);
-				draw_rectangle_colour(actual_x+(100*i), y+(175*j)-42, actual_x+(100*i)+200, y+(175*j)+22, c_black, c_black, c_black, c_black, false);
+				draw_rectangle_colour(actual_x+(200*i)+100, y+(175*j)-42, actual_x+(200*i)+300, y+(175*j)+22, c_black, c_black, c_black, c_black, false);
 				draw_set_color(global._primary);
-				draw_text_ext_transformed(actual_x+(100*i)+15, y+(175*j)-50, descriptor_text[j][i], 40, 360, 0.5, 0.5, image_angle);
-				draw_sprite_ext(spr_shop_menu_border, image_index, actual_x+(200*i), y+(175*j)-50, 0.2, 0.2, image_angle, global._primary, alpha);
-				draw_set_color(c_black);
-				
-			}else{
-				
-				//draw empty rectangle
-				draw_rectangle_colour(actual_x+(200*i)+125, y+(175*j)+37.5, actual_x+(200*i)+275, y+(175*j)+187.5, c_white, c_white, c_white, c_white, true);
+				draw_text_ext_transformed(actual_x+(200*i)+115, y+(175*j)-50, descriptor_text[j][i], 40, 360, 0.5, 0.5, image_angle);
+				draw_sprite_ext(spr_shop_menu_border, image_index, actual_x+(200*i)+100, y+(175*j)-50, 0.2, 0.2, image_angle, global._primary, alpha);
 			}
+		
+		//draw empty rectangle
+		draw_set_color(c_white);
+		draw_rectangle(actual_x+(200*i)+125, y+(175*j)+37.5, actual_x+(200*i)+275, y+(175*j)+187.5, true);
+		draw_set_color(c_black);
+		
 		}
 		
 		// if option is selected that requires you to select a character

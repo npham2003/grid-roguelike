@@ -3,8 +3,11 @@
 
 state = 0;
 skills = 5;
-open = true;
 _text = "";
+
+open = true;
+select = 0;
+confirm = false;
 
 #region location & size
 imgX = 200;
@@ -62,7 +65,7 @@ make_diamond = function(_x, _y, _r) {
 }
 
 //draw tp
-make_tp = function(_x, _y, _spacing, _len) {
+make_tp = function(_x, _y, _spacing, _len, is_rows) {
 	var _res = [];
 	var _bars =  _len/5;
 	var _rem =  _len%5;
@@ -71,15 +74,16 @@ make_tp = function(_x, _y, _spacing, _len) {
 	var _lines = _bars + _rem;
 	
 		for (var i = 0; i < _len; ++i) {
-			if (_bars > 0) {
+			if (_bars > 0 && is_rows) {
 				if (i != 0 && i%5 == 0) {
 					for(var j = 0; j<array_length(_res);j++){
 						_res[j][1]-=_spacing/3;
-						_y_offset+=_spacing/3;
+						_y_offset+=_spacing*0.45;
 					}
 				}
 			}
-			_res[i] = [_x + (i%5)*_spacing, _y - _spacing*((i%5)%2) + _y_offset];
+			if (is_rows) _res[i] = [_x + (i%5)*_spacing, _y - _spacing*((i%5)%2) + _y_offset];
+			else _res[i] = [_x + (i)*_spacing, _y - _spacing*(i%2) + _y_offset];
 		}
 
 	return _res;
@@ -90,6 +94,13 @@ draw_vertices = function(vertices){
 	for (var i = 0; i < array_length(vertices); ++i) {
 		draw_vertex(vertices[i][0], vertices[i][1]);
 	}
+}
+
+#endregion
+
+#region FUNCTIONS
+selectResize = function() {
+	
 }
 
 #endregion

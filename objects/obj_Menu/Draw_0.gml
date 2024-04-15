@@ -1,6 +1,11 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+#region confirm
+if (confirm) {
+	
+}
+#endregion
 
 var _buttonScale = 5;
 for (var i = skills - 1; i >= 0; i--) {
@@ -48,12 +53,12 @@ for (var i = skills - 1; i >= 0; i--) {
 	#endregion
 	
 	#region draw tp
-	var _pips = make_tp(menuX[i] - expandAnim*150 + 40, menuY[i] + 20*expandAnim, 10*expandAnim, tpCost[i]);
+	var _pips = make_tp(menuX[i] - expandAnim*150 + 60, menuY[i] + 15*expandAnim, 7*expandAnim, tpCost[i], true);
 
 	draw_set_color(global._characterSecondary);
 	for (var j = 0; j < array_length(_pips); j++){
 		draw_primitive_begin(pr_trianglestrip);
-		draw_vertices(make_diamond(_pips[j][0],_pips[j][1], 7*expandAnim));
+		draw_vertices(make_diamond(_pips[j][0],_pips[j][1], 5*expandAnim));
 		draw_primitive_end();
 	}
 	#endregion
@@ -72,6 +77,46 @@ if (open) {
 	draw_text_transformed(menuX[0]-expandAnim*50, menuY[0], string(player_unit.hp)+"/"+string(player_unit.hpMax), 0.5, 0.5, 0);
 	//draw_text_transformed(menuX[0]+50, menuY[0]-35, "HP: " + string(obj_player.hp), 0.8, 0.8, 0);
 }
+#endregion
+
+#region party tp
+var _pips = make_tp(rootX+120, rootY-70, 15, obj_battleControl.tp_max, false);
+for (var i = 0; i < array_length(_pips); ++i){
+	draw_primitive_begin(pr_trianglestrip);
+	//draw_set_color(global._tpBorder);
+	//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 10*expandAnim));
+	draw_set_color(global._tpBar);
+	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 15));
+	//draw_set_color(global._tpBorder);
+	//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 12));
+	draw_set_color(c_black);
+	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 10));
+	//draw_set_color(global._tpBorder);
+	//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 6));
+	//draw_set_color(global._tpBar);
+	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 5));
+	draw_primitive_end();
+}
+
+
+var _pips = make_tp(rootX+120, rootY-70, 15, obj_battleControl.tp_current, false);
+show_debug_message(string(obj_battleControl.tp_current));
+for (var i = 0; i < array_length(_pips); ++i){
+	draw_primitive_begin(pr_trianglestrip);
+	draw_set_color(global._tpBorder);
+	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 6));
+	draw_set_color(global._tpBar);
+	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 5));
+	draw_primitive_end();
+}
+
+for (var i = array_length(_pips)-1; i >= obj_battleControl.tp_current; --i){
+	draw_primitive_begin(pr_trianglestrip);
+	draw_set_color(c_white);
+	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 6));
+	draw_primitive_end();
+}
+
 #endregion
 
 #region draw diamond
