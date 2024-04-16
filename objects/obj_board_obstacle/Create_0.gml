@@ -16,12 +16,17 @@ is_dead = false;
 shield = 0;
 
 began_push = false;
+
+// this variable is compared to a unit's ally boolean to see if it get shit
 hitting_who = false;
+
+// used for freeze status
 freeze_graphic=pointer_null;
 stall_turns=0;
 
 //healthbar_y = y-40;
 
+// finds a target. not super relevant for board obstacles.
 function find_target() {
 	var available_targets = obj_battleControl.player_units;
 	target = available_targets[irandom(array_length(available_targets) - 1)];
@@ -65,6 +70,7 @@ function find_target() {
 	
 //}
 
+// calculates util of all possible positions
 function calculate_util(test_x, test_y) {
 	util=0;
 	for (var i = 0; i < array_length(action.range); i++) {
@@ -103,6 +109,7 @@ function calculate_util(test_x, test_y) {
 	
 }
 
+// aims attack. does not move and only sets up danger highlights
 function aim(){
 	
 		action = actions[0];
@@ -121,6 +128,7 @@ function aim(){
 	
 }
 
+// moves obstacle. not really used.
 function move(new_x, new_y) {
 	// Move to est_pos
 	obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
@@ -136,6 +144,7 @@ function move(new_x, new_y) {
 	//y = coord[1];
 }
 
+// marks targetted tiles with the danger highlight
 function set_danger_highlights() {
 	for (var i = 0; i < array_length(action.range); i++) {
 		var attack_x = grid_pos[0] + action.range[i][0];
@@ -155,6 +164,7 @@ function set_danger_highlights() {
 	
 }
 
+// prints out danger numbers for targetted tiles
 function danger_debug() {
 	for (var i = 0; i < array_length(action.range); i++) {
 		var attack_x = grid_pos[0] + action.range[i][0];
@@ -171,6 +181,7 @@ function danger_debug() {
 	}
 }
 
+// removes danger highlight from targetted tiles. used for when needing to re-aim or when despawning
 function remove_danger_highlights() {
 	danger_debug();
 	for (var i = 0; i < array_length(action.range); i++) {
@@ -191,6 +202,7 @@ function remove_danger_highlights() {
 	}
 }
 
+// begins the attack and changes who it hits. ally is true if hitting player units, false for enemy
 function attack(ally) {
 	show_debug_message("{0} is attacking", name);
 	display_target_highlights();
@@ -202,6 +214,8 @@ function attack(ally) {
 	hitting_who = ally;
 }
 
+
+// displays targetted tiles with target highlights. used when hovered over or when starting attack
 function display_target_highlights(){
 	for (var i = 0; i < array_length(action.range); i++) {
 		var attack_x = grid_pos[0] + action.range[i][0];
@@ -221,7 +235,7 @@ function display_target_highlights(){
 	}
 }
 
-
+// removes target highlight from targetted tiles
 function remove_target_highlights(){
 	for (var i = 0; i < array_length(action.range); i++) {
 		var attack_x = grid_pos[0] + action.range[i][0];
@@ -241,6 +255,7 @@ function remove_target_highlights(){
 	}
 }
 
+// actually does damage. ignores other obstacles and units with a mismatched ally boolean
 function do_damage(){
 	obj_gridCreator.reset_highlights_target();
 	for (var i = 0; i < array_length(action.range); i++) {
@@ -273,17 +288,20 @@ function do_damage(){
 	
 }
 
+// empty but needed to not cause errors
 function damage(damage_value){
 	
 	
 }
 
+// despawns the obstacle and removes it from the grid
 function despawn(){
 	is_dead=true;
 	obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
 	remove_danger_highlights();
 }
 
+// pushes right
 function push_back(squares){
 	if(squares==0){
 		began_push=false;
@@ -309,7 +327,7 @@ function push_back(squares){
 		move(grid_pos[0]+1,grid_pos[1]);
 		push_back(squares-1);
 	}else{
-		obj_battleEffect.show_damage(self,1,c_red,c_red);
+		obj_battleEffect.show_damage(self,1,c_red);
 		hp-=1;
 		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]]._entity_on_tile,1,c_red);
 		obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]]._entity_on_tile.hp-=1;
@@ -317,6 +335,8 @@ function push_back(squares){
 	}
 }
 
+
+// pushes left
 function push_forward(squares){
 	if(squares==0){
 		began_push=false;
@@ -349,6 +369,7 @@ function push_forward(squares){
 	}
 }
 
+// pushes up
 function push_up(squares){
 	if(squares==0){
 		began_push=false;
@@ -382,6 +403,7 @@ function push_up(squares){
 	}
 }
 
+// pushes down
 function push_down(squares){
 	if(squares==0){
 		began_push=false;

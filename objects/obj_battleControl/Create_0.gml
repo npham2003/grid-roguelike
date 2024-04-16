@@ -48,6 +48,7 @@ var player_data = [
 	}
 ];
 
+// spawns units at the very start
 for (var i = 0; i < array_length(player_data); i++) {
 	var coord = obj_gridCreator.get_coordinates(player_data[i].grid[0], player_data[i].grid[1]);
 	obj_gridCreator.battle_grid[player_data[i].grid[0]][player_data[i].grid[1]]._is_empty=false;
@@ -66,10 +67,11 @@ for (var i = 0; i < array_length(player_data); i++) {
 	
 }
 
+// spawns a new unit
 spawn_unit = function(new_unit){
 	
 	var empty_tile = obj_gridCreator.find_empty_tile_ally(2,2,5);
-	var coord = obj_gridCreator.get_coordinates(empty_tile._x_coord, empty_tile._y_coord);
+	var coord =[empty_tile.x, empty_tile.y];
 	empty_tile._is_empty=false;
 	
 	var var_struct = variable_clone(new_unit);
@@ -98,8 +100,10 @@ var enemy_data = [
 	}
 ];
 
+// needed to randomize seed
 randomize();
 
+// spawns enemies given enemy data. format should be the same as above struct. should be called from global.encounters
 spawn_enemies = function(enemy_data){
 	battle_gold=0;
 	for (var i = 0; i < array_length(enemy_data); i++) {
@@ -122,7 +126,7 @@ spawn_enemies = function(enemy_data){
 	}
 }
 
-
+// spawns an enemy on the ally side of the board. if target tile is not empty it will find a nearby empty one
 spawn_summon_ally_side = function(enemy_data, _summoner){
 	battle_gold=0;
 	for (var i = 0; i < array_length(enemy_data); i++) {
@@ -147,6 +151,7 @@ spawn_summon_ally_side = function(enemy_data, _summoner){
 	}
 }
 
+// spawns a board obstacle. 
 spawn_obstacle = function(obstacle, grid_pos){
 	
 	
