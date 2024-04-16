@@ -206,8 +206,8 @@ var turn = "";
 if (playerTurn && !enemyTurn) turn = "PLAYER TURN";
 if (!playerTurn && enemyTurn) turn = "ENEMY TURN";
 if (playerTurn || enemyTurn) {
-	draw_rectangle_colour(room_width/2-400, 350, room_width/2+400, 250, global._primary, global._primary, global._primary, global._primary, false);
-	draw_set_color(c_white);
-	draw_text_transformed(room_width/2-100, 260, turn, 1, 1, 0);
+	//draw_rectangle_colour(room_width/2-400, 350, room_width/2+400, 250, global._primary, global._primary, global._primary, global._primary, false);
+	//draw_set_color(c_white);
+	//draw_text_transformed(room_width/2-100, 260, turn, 1, 1, 0);
 }
 #endregion
