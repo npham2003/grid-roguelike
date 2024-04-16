@@ -169,7 +169,7 @@ find_empty_tile_ally = function(_center_x,_center_y,_range){
 	
 	for(var i = -_range; i <= _range; i++){
 		for(var j = -(_range-abs(i)); j <= _range - abs(i); j++){
-			show_debug_message("Checking ("+string(_center_x+i)+", "+string(_center_y+j)+") which is ("+string(battle_grid[_center_x+i][_center_y+j]._x_coord)+", "+string(battle_grid[_center_x+i][_center_y+j]._y_coord)+")");
+			//show_debug_message("Checking ("+string(_center_x+i)+", "+string(_center_y+j)+") which is ("+string(battle_grid[_center_x+i][_center_y+j]._x_coord)+", "+string(battle_grid[_center_x+i][_center_y+j]._y_coord)+")");
 			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT &&_center_x+i<5){
 				if(battle_grid[_center_x+i][_center_y+j]._is_empty){
 					return battle_grid[_center_x+i][_center_y+j];
