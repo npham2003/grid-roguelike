@@ -103,23 +103,49 @@ randomize();
 spawn_enemies = function(enemy_data){
 	battle_gold=0;
 	for (var i = 0; i < array_length(enemy_data); i++) {
-		var coord = obj_gridCreator.get_coordinates(enemy_data[i].grid[0], enemy_data[i].grid[1]);
-		if(obj_gridCreator.battle_grid[enemy_data[i].grid[0]][enemy_data[i].grid[1]]._is_empty){
-			obj_gridCreator.battle_grid[enemy_data[i].grid[0]][enemy_data[i].grid[1]]._is_empty=false;
+		var empty_tile = obj_gridCreator.find_empty_tile_enemy(enemy_data[i].grid[0], enemy_data[i].grid[1], 5);
+		var coord =[empty_tile.x, empty_tile.y];
+		show_debug_message("Empty at "+string(coord));
+		
+			obj_gridCreator.battle_grid[empty_tile._x_coord][empty_tile._y_coord]._is_empty=false;
 			var var_struct = variable_clone(enemy_data[i].info);
-			var_struct.grid_pos = enemy_data[i].grid;
+			var_struct.grid_pos = [empty_tile._x_coord,empty_tile._y_coord];
 	
 			var unit = instance_create_layer(
 				coord[0], coord[1], "Units", obj_parent_enemy, var_struct);
 		
 			array_push(enemy_units, unit);
-			obj_gridCreator.battle_grid[enemy_data[i].grid[0]][enemy_data[i].grid[1]]._entity_on_tile=unit;
-			unit.grid_pos=[enemy_data[i].grid[0],enemy_data[i].grid[1]];
+			obj_gridCreator.battle_grid[empty_tile._x_coord][empty_tile._y_coord]._entity_on_tile=unit;
+			unit.grid_pos=[empty_tile._x_coord,empty_tile._y_coord];
 			battle_gold+=unit.gold;
-		}
+		
 	}
 }
 
+
+spawn_summon_ally_side = function(enemy_data, _summoner){
+	battle_gold=0;
+	for (var i = 0; i < array_length(enemy_data); i++) {
+		empty_tile = obj_gridCreator.find_empty_tile_ally(enemy_data[i].grid[0], enemy_data[i].grid[1], 5);
+		var coord =[empty_tile.x, empty_tile.y];
+		show_debug_message("Empty at "+string(coord)+ " which is ("+string(empty_tile._x_coord)+", "+string(empty_tile._y_coord)+")");
+		
+			obj_gridCreator.battle_grid[empty_tile._x_coord][empty_tile._y_coord]._is_empty=false;
+			var var_struct = variable_clone(enemy_data[i].info);
+			var_struct.grid_pos = [empty_tile._x_coord,empty_tile._y_coord];
+	
+			var unit = instance_create_layer(
+				coord[0], coord[1], "Units", obj_parent_enemy, var_struct);
+			with (unit){
+				summoner=_summoner;
+			}
+			array_insert(enemy_units,0,unit);
+			obj_gridCreator.battle_grid[empty_tile._x_coord][empty_tile._y_coord]._entity_on_tile=unit;
+			unit.grid_pos=[empty_tile._x_coord,empty_tile._y_coord];
+			battle_gold+=unit.gold;
+		
+	}
+}
 
 spawn_obstacle = function(obstacle, grid_pos){
 	
