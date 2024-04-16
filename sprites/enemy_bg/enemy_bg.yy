@@ -12,14 +12,14 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"","%Name":"671c79b6-1f75-467f-ae3e-7828a3c1c377","name":"671c79b6-1f75-467f-ae3e-7828a3c1c377","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"","%Name":"fc6caca3-51dd-41a5-aee4-9cbb2879de32","name":"fc6caca3-51dd-41a5-aee4-9cbb2879de32","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":1620,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"4bf8d626-a508-4f63-97a4-85a654b7fe6c","blendMode":0,"displayName":"default","isLocked":false,"name":"4bf8d626-a508-4f63-97a4-85a654b7fe6c","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"852bd694-de8b-4579-9149-010b390e1b9c","blendMode":0,"displayName":"default","isLocked":false,"name":"852bd694-de8b-4579-9149-010b390e1b9c","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"enemy_bg",
   "nineSlice":null,
@@ -69,8 +69,8 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"671c79b6-1f75-467f-ae3e-7828a3c1c377","path":"sprites/enemy_bg/enemy_bg.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"a7a0abc0-af10-483f-b77f-ce7949b74c4b","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"fc6caca3-51dd-41a5-aee4-9cbb2879de32","path":"sprites/enemy_bg/enemy_bg.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"7b2a47b4-28d4-416e-a9bf-2bee0390d317","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

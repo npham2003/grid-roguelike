@@ -3,6 +3,6 @@ colorSwitch = false; //F is player, T is enemy
 
 //currTurnTop
 
-//layer_background_blend(background, global._playerTurnMiddle);
+layer_background_blend(background, global._characterPrimary);
 ////draw_sprite_ext(gradient, 0, 0, 128, 22, 9, 180, global._playerTurnTop, 1);
 //draw_sprite_ext(gradient, 0, 0, 128, 22, 5, 0, global._playerTurnBottom, 1);
