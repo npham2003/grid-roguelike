@@ -71,8 +71,23 @@ switch (state) {
 			}
 			show_debug_message(string(enemy_order));
 			unit = enemy_units[enemy_order];
-			unit.find_target();
-			unit.aim();
+			if(unit.stall_turns>0){
+				unit.stall_turns-=1;
+				obj_battleEffect.show_damage(unit, unit.stall_turns, c_blue);
+				if(unit.stall_turns<=0){
+					unit.freeze_graphic.sprite_index=spr_freeze_out;
+					audio_play_sound(sfx_defreeze, 0, false, 0.5);
+					unit.freeze_graphic.image_speed=1;
+				}
+			}
+			if(unit.stall_turns<0){
+				unit.stall_turns=0;
+			}
+			if(unit.stall_turns==0){
+				
+				unit.find_target();
+				unit.aim();
+			}
 			obj_menu.set_text(unit.name+" is aiming");
 		
 			enemy_order += 1;
@@ -84,13 +99,28 @@ switch (state) {
 	case BattleState.PlayerPreparing:
 		
 		for (var i = 0; i < array_length(player_units); i++) {
-			if(player_units[i].hp>0){
+			if(player_units[i].stall_turns>0){
+				player_units[i].stall_turns-=1;
+				obj_battleEffect.show_damage(player_units[i], player_units[i].stall_turns, c_blue);
+				if(player_units[i].stall_turns<=0){
+					player_units[i].freeze_graphic.sprite_index=spr_freeze_out;
+					player_units[i].freeze_graphic.image_speed=1;
+					audio_play_sound(sfx_defreeze, 0, false, 0.5);
+				}
+			}
+			if(player_units[i].stall_turns<0){
+				player_units[i].stall_turns=0;
+			}
+			
+			
+			if(player_units[i].hp>0 && player_units[i].stall_turns==0){
 				player_units[i].has_moved = false;
 				player_units[i].has_attacked = false;
 				tp_current+=player_units[i].tpGain;
-			}else{
+			}else if(player_units[i].hp<0){
 				player_units[i].hp=0;
 			}
+			
 			
 		}
 		tp_current+=tp_bonus;
@@ -210,7 +240,9 @@ switch (state) {
 				
 			}else{
 				obj_menu.close_menu();
-				unit.display_target_highlights();
+				if(unit.stall_turns==0){
+					unit.display_target_highlights();
+				}
 			}
 		}else{
 			obj_menu.close_menu();
@@ -492,12 +524,12 @@ switch (state) {
 				}
 				break;
 			}
-		
+			
 			unit = enemy_units[enemy_order];
-			if (unit.attack_ready) {
+			if (unit.attack_ready && unit.stall_turns==0) {
 				unit.attack();
 			}
-		
+			
 			checking_death=true;
 		}else{
 			var enemy_unit = enemy_units[enemy_check_death];
@@ -565,8 +597,10 @@ switch (state) {
 			}
 		
 			obstacle = board_obstacles[board_obstacle_order];
-			obstacle.attack(true);
-			obstacle.aim();
+			if(obstacle.stall_turns==0){
+				obstacle.attack(true);
+				obstacle.aim();
+			}
 			checking_death=true;
 		}else{
 			if (enemy_check_death >= array_length(enemy_units)) {
@@ -609,9 +643,22 @@ switch (state) {
 			}
 		
 			obstacle = board_obstacles[board_obstacle_order];
-			obstacle.attack(false);
-			obstacle.aim();
-			obstacle.turns_remaining-=1;
+			if(obstacle.stall_turns==0){
+				obstacle.attack(false);
+				obstacle.aim();
+				obstacle.turns_remaining-=1;
+			}else{
+				obstacle.stall_turns-=1;
+				obj_battleEffect.show_damage(obstacle, obstacle.stall_turns, c_blue);
+				if(obstacle.stall_turns==0){
+					
+					obstacle.freeze_graphic.sprite_index=spr_freeze_out;
+					obstacle.freeze_graphic.image_speed=1;
+					audio_play_sound(sfx_defreeze, 0, false, 0.5);
+			
+				}
+			}
+			
 			if(obstacle.turns_remaining<=0){
 				obstacle.despawn();
 			

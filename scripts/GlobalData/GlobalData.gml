@@ -1399,6 +1399,160 @@ global.actionLibrary = {
 			}
 		}
 	},
+	stall: {
+		name: ["Freeze", "Deep Freeze", "Piercing Freeze"], //probably redundant to have a name but keep it
+		description: ["Prevents the first target in a row from moving for 1 turn", "Prevents the first target in a row from moving for 2 turns", "Prevents all targets in a row from moving for 1 turn"],
+		cost: [2, 4, 4],
+		subMenu: 0, //does it show up on screen or is it in a submenu
+		userAnimation: "attack",
+		//effectSprite: baseAttack,
+		damage: 1, // temp damage, until i figure out how to do this damage function thing
+		func: function(_user, _targets) {
+			var _damage = 1; //math function here
+			//BattleChangeHP(_targets);
+		},
+		skillFunctions: {
+			base: function(unit){
+				
+				unit.action = unit.actions[unit.skill_used];
+				skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
+				obj_cursor.movable_tiles=skill_range;
+				if(!unit.skill_init){
+					unit.skill_init=true;
+				}
+				if(array_length(skill_range)>0 && !unit.skill_complete){
+					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
+				}
+				
+				var _damage = unit.action.damage;
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+					audio_play_sound(sfx_freeze, 0, false, 0.5);
+					for (var i = 0; i < array_length(skill_range); i++) {
+						if (!skill_range[i]._is_empty) {
+							skill_range[i]._entity_on_tile.stall_turns+=1;
+							if(skill_range[i]._entity_on_tile.ally){
+								skill_range[i]._entity_on_tile.has_attacked=true;
+								skill_range[i]._entity_on_tile.has_moved=true;
+							}else{
+								skill_range[i]._entity_on_tile.remove_danger_highlights();
+							}
+							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 1, c_blue);
+							skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
+							
+						}
+					}
+					unit.is_attacking = false;
+					unit.skill_complete = true;
+					skill_range = obj_gridCreator.reset_highlights_target();
+					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
+					unit.skill_init=false;
+					obj_battleEffect.remove_push_preview();
+					
+		
+				}else if(keyboard_check_pressed(vk_tab)){
+					unit.is_attacking = false;
+					unit.skill_back = true;
+					skill_range = obj_gridCreator.reset_highlights_target();
+					unit.skill_init=false;
+					obj_battleEffect.remove_push_preview();
+				
+		
+				}
+			},
+			upgrade1: function(unit){
+				
+				unit.action = unit.actions[unit.skill_used];
+				skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
+				obj_cursor.movable_tiles=skill_range;
+				if(!unit.skill_init){
+					unit.skill_init=true;
+				}
+				if(array_length(skill_range)>0 && !unit.skill_complete){
+					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
+				}
+				
+				var _damage = unit.action.damage;
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+					audio_play_sound(sfx_freeze, 0, false, 0.5);
+					for (var i = 0; i < array_length(skill_range); i++) {
+						if (!skill_range[i]._is_empty) {
+							skill_range[i]._entity_on_tile.stall_turns+=2;
+							if(skill_range[i]._entity_on_tile.ally){
+								skill_range[i]._entity_on_tile.has_attacked=true;
+								skill_range[i]._entity_on_tile.has_moved=true;
+							}else{
+								skill_range[i]._entity_on_tile.remove_danger_highlights();
+							}
+							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 2, c_blue);
+							skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
+						}
+					}
+					unit.is_attacking = false;
+					unit.skill_complete = true;
+					skill_range = obj_gridCreator.reset_highlights_target();
+					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
+					unit.skill_init=false;
+					obj_battleEffect.remove_push_preview();
+					
+		
+				}else if(keyboard_check_pressed(vk_tab)){
+					unit.is_attacking = false;
+					unit.skill_back = true;
+					skill_range = obj_gridCreator.reset_highlights_target();
+					unit.skill_init=false;
+					obj_battleEffect.remove_push_preview();
+				
+		
+				}
+			},
+			upgrade2: function(unit){
+				
+				unit.action = unit.actions[unit.skill_used];
+				skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
+				obj_cursor.movable_tiles=skill_range;
+				if(!unit.skill_init){
+					unit.skill_init=true;
+				}
+				if(array_length(skill_range)>0 && !unit.skill_complete){
+					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
+				}
+				
+				var _damage = unit.action.damage;
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+					audio_play_sound(sfx_freeze, 0, false, 0.5);
+					for (var i = 0; i < array_length(skill_range); i++) {
+						if (!skill_range[i]._is_empty) {
+							skill_range[i]._entity_on_tile.stall_turns+=1;
+							if(skill_range[i]._entity_on_tile.ally){
+								skill_range[i]._entity_on_tile.has_attacked=true;
+								skill_range[i]._entity_on_tile.has_moved=true;
+							}else{
+								skill_range[i]._entity_on_tile.remove_danger_highlights();
+							}
+							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 1, c_blue);
+							skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
+						}
+					}
+					unit.is_attacking = false;
+					unit.skill_complete = true;
+					skill_range = obj_gridCreator.reset_highlights_target();
+					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
+					unit.skill_init=false;
+					obj_battleEffect.remove_push_preview();
+					
+		
+				}else if(keyboard_check_pressed(vk_tab)){
+					unit.is_attacking = false;
+					unit.skill_back = true;
+					skill_range = obj_gridCreator.reset_highlights_target();
+					unit.skill_init=false;
+					obj_battleEffect.remove_push_preview();
+				
+		
+				}
+			},
+		}
+	},
 		
 }
 
@@ -1454,7 +1608,7 @@ global.players = [
 		secondary: #386467
 		
 	},
-	{ //l'cifure
+	{ //oktavia
 		name: "Oktavia",
 		hp: 3,
 		hpMax: 3,
@@ -1464,6 +1618,19 @@ global.players = [
 		ally: true,
 		tpGain: 2,
 		portrait: spr_temp_Gayle,
+		primary: #0cac87,
+		secondary: #386467
+	},
+	{ //l'cifure
+		name: "Angel",
+		hp: 3,
+		hpMax: 3,
+		playerSpeed: 2,
+		sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
+		actions : [global.actionLibrary.baseAttack, global.actionLibrary.stall, global.actionLibrary.mover,  global.actionLibrary.swap],
+		ally: true,
+		tpGain: 3,
+		portrait: spr_temp_Zero,
 		primary: #0cac87,
 		secondary: #386467
 	}
