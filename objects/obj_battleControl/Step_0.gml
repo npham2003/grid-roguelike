@@ -52,6 +52,8 @@ switch (state) {
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
 		
+		obj_menu.enemyTurn = true;
+		obj_menu.playerTurn = false;
 		change_state(BattleState.EnemyAiming);
 		break;
 #endregion

@@ -96,7 +96,7 @@ for (var i = 0; i < array_length(_pips); ++i){
 	draw_primitive_end();
 	draw_primitive_begin(pr_trianglestrip);
 	
-	draw_set_color(c_black);
+	draw_set_color(global._aspect_bars);
 	
 	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 12));
 	//draw_set_color(global._tpBorder);
@@ -183,11 +183,15 @@ gpu_set_blendmode(bm_normal);
 #endregion
 
 #region gold
-draw_set_color(global._primary);
 draw_primitive_begin(pr_trianglestrip);
+draw_set_color(global._primary);
 draw_vertices(make_diamond(87, 53, 30));
 draw_primitive_end();
-draw_set_color(c_white);
+draw_primitive_begin(pr_trianglestrip);
+draw_set_color(global._aspect_bars);
+draw_vertices(make_diamond(87, 53, 25));
+draw_primitive_end();
+draw_set_color(global._primary);
 draw_text_transformed(75, 20, "G    "+ string(obj_battleControl.gold), 0.8, 0.8, 0);
 #endregion
 
@@ -197,10 +201,10 @@ draw_text_ext(148, 128, _text, 40, 1000);
 #endregion
 
 #region turn banner
-
-if (obj_battleControl.state==BattleState.EnemyTakingAction) turn = "ENEMY TURN";
-if (obj_battleControl.state==BattleState.PlayerWaitingAction) turn = "PLAYER TURN";
+var turn = "";
+if (playerTurn && !enemyTurn) turn == "PLAYER TURN";
+if (!playerTurn && enemyTurn) turn == "ENEMY TURN";
 draw_rectangle_colour(room_width/2-200, 400, room_width/2+200, 200, global._secondary, global._secondary, global._secondary, global._secondary, false);
-draw_set_color(global._primary);
+draw_set_color(global.primary);
 draw_text_transformed(room_width/2, 300, turn, 1, 1, 0);
 #endregion
