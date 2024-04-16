@@ -21,6 +21,8 @@
     {"name":"sfx_teleport_select","order":5,"path":"sounds/sfx_teleport_select/sfx_teleport_select.yy",},
     {"name":"sfx_teleport_windup","order":4,"path":"sounds/sfx_teleport_windup/sfx_teleport_windup.yy",},
     {"name":"sfx_teleport","order":6,"path":"sounds/sfx_teleport/sfx_teleport.yy",},
+    {"name":"player_bg","order":2,"path":"sprites/player_bg/player_bg.yy",},
+    {"name":"enemy_bg","order":3,"path":"sprites/enemy_bg/enemy_bg.yy",},
     {"name":"spr_big_bomb","order":1,"path":"sprites/spr_big_bomb/spr_big_bomb.yy",},
     {"name":"spr_big_explosion","order":4,"path":"sprites/spr_big_explosion/spr_big_explosion.yy",},
     {"name":"spr_bomb","order":3,"path":"sprites/spr_bomb/spr_bomb.yy",},

@@ -104,6 +104,8 @@
     {"id":{"name":"healerDead","path":"sprites/healerDead/healerDead.yy",},},
     {"id":{"name":"mage","path":"sprites/mage/mage.yy",},},
     {"id":{"name":"mageDead","path":"sprites/mageDead/mageDead.yy",},},
+    {"id":{"name":"player_bg","path":"sprites/player_bg/player_bg.yy",},},
+    {"id":{"name":"enemy_bg","path":"sprites/enemy_bg/enemy_bg.yy",},},
     {"id":{"name":"playerGrid","path":"sprites/playerGrid/playerGrid.yy",},},
     {"id":{"name":"RF_Green_Forest_A1","path":"sprites/RF_Green_Forest_A1/RF_Green_Forest_A1.yy",},},
     {"id":{"name":"RF_Green_Forest_A2","path":"sprites/RF_Green_Forest_A2/RF_Green_Forest_A2.yy",},},

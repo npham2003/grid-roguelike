@@ -1,7 +1,16 @@
+if (colorSwitch) { //enemy
+	//layer_background_blend(background, global._enemyTurnMiddle);
+	////draw_sprite_ext(gradient, 0, 0, 128, 22, 9, 0, global._enemyTurnTop, 1);
+	//draw_sprite_ext(gradient, 0, 0, 128, 22, 5, 0, global._enemyTurnBottom, 1);
+	draw_sprite_ext(enemy_bg, 0, 0, 0, 0.64, 0.475, 0, c_white, 1);
+}
+else { //player
+	//layer_background_blend(background, global._playerTurnMiddle);
+	////draw_sprite_ext(gradient, 0, 0, 128, 22, 9, 180, global._playerTurnTop, 1);
+	//draw_sprite_ext(gradient, 0, 0, 128, 22, 5, 0, global._playerTurnBottom, 1);
+	draw_sprite_ext(player_bg, 0, 0, 0, 0.64, 0.475, 0, c_white, 1);
+}
 
-
-//draw gradient
-draw_sprite_ext(gradient, 0, 0, 128, 22, 9, 0, global._playerTurnBottom, 1);
 
 #region draw grid
 #endregion

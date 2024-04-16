@@ -6,6 +6,7 @@ open = true;
 playerTurn = false;
 enemyTurn = true;
 
+
 confirm = false;
 
 tp_opacity_increase=true;
