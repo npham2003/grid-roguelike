@@ -21,8 +21,9 @@ began_push=false;
 teleporting = 0;
 stall_turns = 0;
 freeze_graphic=pointer_null;
-just_buffed=false;
-
+attack_buff_recent=false;
+move_buff_recent=false;
+move_bonus_temp=0;
 var return_coords;
 
 show_debug_message("{0}: [{1}, {2}]", name, grid_pos[0], grid_pos[1]);
@@ -37,7 +38,7 @@ function show_moveable_grids() {
 	prev_grid = [grid_pos[0], grid_pos[1]];
 	//show_debug_message(grid_pos[0]);
 	//show_debug_message(grid_pos[1]);
-	moveable_grids = obj_gridCreator.highlighted_move(grid_pos[0], grid_pos[1], move_range);
+	moveable_grids = obj_gridCreator.highlighted_move(grid_pos[0], grid_pos[1], move_range+move_bonus_temp);
 	obj_cursor.movable_tiles=moveable_grids;
 	//moveable_grids = obj_gridCreator.highlighted_attack_line(0, grid_pos[1]);
 
@@ -45,7 +46,7 @@ function show_moveable_grids() {
 
 function preview_moveable_grids() {
 	//moveable_grids = obj_gridCreator.get_moveable_grids(grid_pos, move_range);
-	obj_gridCreator.highlighted_move_cursor(grid_pos[0], grid_pos[1], move_range);	
+	obj_gridCreator.highlighted_move_cursor(grid_pos[0], grid_pos[1], move_range+move_bonus_temp);	
 	//moveable_grids = obj_gridCreator.highlighted_attack_line(0, grid_pos[1]);
 
 }
@@ -53,7 +54,7 @@ function preview_moveable_grids() {
 function show_moveable_grids_prev() {
 	//moveable_grids = obj_gridCreator.get_moveable_grids(grid_pos, move_range);
 	
-	moveable_grids = obj_gridCreator.highlighted_move(prev_grid[0], prev_grid[1], move_range);
+	moveable_grids = obj_gridCreator.highlighted_move(prev_grid[0], prev_grid[1], move_range+move_bonus_temp);
 	obj_cursor.movable_tiles=moveable_grids;
 	obj_cursor.reset_cursor(grid_pos[0],grid_pos[1]);
 	//moveable_grids = obj_gridCreator.highlighted_attack_line(0, grid_pos[1]);

@@ -99,10 +99,19 @@ switch (state) {
 	case BattleState.PlayerPreparing:
 		
 		for (var i = 0; i < array_length(player_units); i++) {
-			show_debug_message(string(i)+" Buffed: "+string(player_units[i].just_buffed));
-			if(!player_units[i].just_buffed && player_units[i].stall_turns==0 && !player_units[i].has_moved && !player_units[i].has_attacked){
-				show_debug_message("reset bonus");
-				player_units[i].attack_bonus_temp=0;
+			show_debug_message(string(i)+" Buffed: "+string(player_units[i].attack_buff_recent));
+			if(player_units[i].stall_turns==0){
+				if(!player_units[i].attack_buff_recent){
+					show_debug_message("reset attack bonus");
+					player_units[i].attack_bonus_temp=0;
+				}
+				player_units[i].attack_buff_recent=false;
+				
+				if(!player_units[i].move_buff_recent){
+					show_debug_message("reset move bonus");
+					player_units[i].move_bonus_temp=0;
+				}
+				player_units[i].move_buff_recent=false;
 			}
 			if(player_units[i].stall_turns>0){
 				player_units[i].stall_turns-=1;
@@ -127,7 +136,7 @@ switch (state) {
 			}
 			
 			
-			player_units[i].just_buffed=false;
+			
 			
 		}
 		tp_current+=tp_bonus;

@@ -15,7 +15,7 @@ function health_bar(health_x, health_y, percentage){
 	
 }
 
-hit_anim_index=[spr_hit, spr_explosion, spr_hit_electric, spr_charge, spr_defend, spr_push, spr_freeze];
+hit_anim_index=[spr_hit, spr_explosion, spr_hit_electric, spr_charge, spr_defend, spr_push, spr_freeze, spr_dance];
 
 function hit_animation(_object, index) { // show damage
 	var current_coords = obj_gridCreator.get_coordinates(_object.grid_pos[0],_object.grid_pos[1]);
