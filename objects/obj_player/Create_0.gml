@@ -14,11 +14,16 @@ skill_back = false;
 upgrades =[0,2,1,1];
 shield = 0;
 attack_bonus = 0;
+attack_bonus_temp = 0;
 skill_progress = 0;
 skill_option = 0;
 began_push=false;
 teleporting = 0;
-
+stall_turns = 0;
+freeze_graphic=pointer_null;
+attack_buff_recent=false;
+move_buff_recent=false;
+move_bonus_temp=0;
 var return_coords;
 
 show_debug_message("{0}: [{1}, {2}]", name, grid_pos[0], grid_pos[1]);
@@ -31,9 +36,9 @@ has_attacked = false;
 function show_moveable_grids() {
 	//moveable_grids = obj_gridCreator.get_moveable_grids(grid_pos, move_range);
 	prev_grid = [grid_pos[0], grid_pos[1]];
-	show_debug_message(grid_pos[0]);
-	show_debug_message(grid_pos[1]);
-	moveable_grids = obj_gridCreator.highlighted_move(grid_pos[0], grid_pos[1], move_range);
+	//show_debug_message(grid_pos[0]);
+	//show_debug_message(grid_pos[1]);
+	moveable_grids = obj_gridCreator.highlighted_move(grid_pos[0], grid_pos[1], move_range+move_bonus_temp);
 	obj_cursor.movable_tiles=moveable_grids;
 	//moveable_grids = obj_gridCreator.highlighted_attack_line(0, grid_pos[1]);
 
@@ -41,7 +46,7 @@ function show_moveable_grids() {
 
 function preview_moveable_grids() {
 	//moveable_grids = obj_gridCreator.get_moveable_grids(grid_pos, move_range);
-	obj_gridCreator.highlighted_move_cursor(grid_pos[0], grid_pos[1], move_range);	
+	obj_gridCreator.highlighted_move_cursor(grid_pos[0], grid_pos[1], move_range+move_bonus_temp);	
 	//moveable_grids = obj_gridCreator.highlighted_attack_line(0, grid_pos[1]);
 
 }
@@ -49,7 +54,7 @@ function preview_moveable_grids() {
 function show_moveable_grids_prev() {
 	//moveable_grids = obj_gridCreator.get_moveable_grids(grid_pos, move_range);
 	
-	moveable_grids = obj_gridCreator.highlighted_move(prev_grid[0], prev_grid[1], move_range);
+	moveable_grids = obj_gridCreator.highlighted_move(prev_grid[0], prev_grid[1], move_range+move_bonus_temp);
 	obj_cursor.movable_tiles=moveable_grids;
 	obj_cursor.reset_cursor(grid_pos[0],grid_pos[1]);
 	//moveable_grids = obj_gridCreator.highlighted_attack_line(0, grid_pos[1]);
@@ -136,10 +141,10 @@ function back_aim(){
 function damage(damage_value){
 	if(shield>0){
 		shield-=1;
-		obj_battleEffect.shield_damage(self, 1);
+		obj_battleEffect.show_damage(self, 1, c_yellow);
 	}else{
 		hp-=damage_value;
-		obj_battleEffect.show_damage(self, damage_value);
+		obj_battleEffect.show_damage(self, damage_value,c_red);
 	}
 }
 
@@ -152,7 +157,7 @@ function push_back(squares){
 		obj_battleEffect.push_animation(self,0);
 	}
 	if(grid_pos[0]==4){
-		obj_battleEffect.show_damage(self,1);
+		obj_battleEffect.show_damage(self,1,c_red);
 		hp-=1;
 		
 		began_push=false;
@@ -171,9 +176,9 @@ function push_back(squares){
 		grid_pos[0]+=1;
 		push_back(squares-1);
 	}else{
-		obj_battleEffect.show_damage(self,1);
+		obj_battleEffect.show_damage(self,1,c_red);
 		hp-=1;
-		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]]._entity_on_tile,1);
+		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]]._entity_on_tile,1,c_red);
 		obj_gridCreator.battle_grid[grid_pos[0]+1][grid_pos[1]]._entity_on_tile.hp-=1;
 		
 	}
@@ -188,7 +193,7 @@ function push_forward(squares){
 		obj_battleEffect.push_animation(self,2);
 	}
 	if(grid_pos[0]==0){
-		obj_battleEffect.show_damage(self,1);
+		obj_battleEffect.show_damage(self,1,c_red);
 		hp-=1;
 		began_push=false;
 		
@@ -206,9 +211,9 @@ function push_forward(squares){
 		grid_pos[0]-=1;
 		push_back(squares-1);
 	}else{
-		obj_battleEffect.show_damage(self,1);
+		obj_battleEffect.show_damage(self,1,c_red);
 		hp-=1;
-		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]-1][grid_pos[1]]._entity_on_tile,1);
+		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]-1][grid_pos[1]]._entity_on_tile,1,c_red);
 		obj_gridCreator.battle_grid[grid_pos[0]-1][grid_pos[1]]._entity_on_tile.hp-=1;
 		
 	}
@@ -223,7 +228,7 @@ function push_up(squares){
 		obj_battleEffect.push_animation(self,1);
 	}
 	if( grid_pos[1]==0){
-		obj_battleEffect.show_damage(self,1);
+		obj_battleEffect.show_damage(self,1,c_red);
 		hp-=1;
 		
 		began_push=false;
@@ -242,9 +247,9 @@ function push_up(squares){
 		grid_pos[1]-=1;
 		push_up(squares-1);
 	}else{
-		obj_battleEffect.show_damage(self,1);
+		obj_battleEffect.show_damage(self,1,c_red);
 		hp-=1;
-		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]-1]._entity_on_tile,1);
+		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]-1]._entity_on_tile,1,c_red);
 		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]-1]._entity_on_tile.hp-=1;
 		
 	}
@@ -260,7 +265,7 @@ function push_down(squares){
 		obj_battleEffect.push_animation(self,3);
 	}
 	if(grid_pos[1]==GRIDHEIGHT-1){
-		obj_battleEffect.show_damage(self,1);
+		obj_battleEffect.show_damage(self,1,c_red);
 		hp-=1;
 		
 		return;
@@ -277,9 +282,9 @@ function push_down(squares){
 		grid_pos[1]+=1;
 		push_down(squares-1);
 	}else{
-		obj_battleEffect.show_damage(self,1);
+		obj_battleEffect.show_damage(self,1,c_red);
 		hp-=1;
-		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]+1]._entity_on_tile,1);
+		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]+1]._entity_on_tile,1,c_red);
 		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]+1]._entity_on_tile.hp-=1;
 		
 	}
