@@ -52,12 +52,16 @@ switch (state) {
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
 		
+		obj_menu.enemyTurn = true;
+		obj_menu.playerTurn = false;
 		change_state(BattleState.EnemyAiming);
 		break;
 #endregion
 	
 #region Enemy Aiming
 	case BattleState.EnemyAiming:
+		obj_menu.playerState = false;
+		obj_menu.enemyState = false;
 		
 		if (in_animation) {
 			break;
@@ -97,6 +101,8 @@ switch (state) {
 
 #region Player Preparing
 	case BattleState.PlayerPreparing:
+		obj_menu.playerState = false;
+		obj_menu.enemyState = false;
 		
 		for (var i = 0; i < array_length(player_units); i++) {
 			show_debug_message(string(i)+" Buffed: "+string(player_units[i].attack_buff_recent));
@@ -387,7 +393,7 @@ switch (state) {
 			
 		}else{
 			
-			obj_menu.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]])+"\nCost: "+string(unit.actions[unit.skill_used].cost[unit.upgrades[unit.skill_used]]));
+			obj_menu.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+""+string(unit.actions[unit.skill_used].name[unit.upgrades[unit.skill_used]])+"\n"+string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
 			if (unit.skill_complete) {
 				tp_current -= unit.actions[unit.skill_used].cost[unit.upgrades[unit.skill_used]];
 				unit.has_attacked = true;
@@ -531,6 +537,8 @@ switch (state) {
 
 #region Enemy Taking Action
 	case BattleState.EnemyTakingAction:
+		obj_menu.playerState = false;
+		obj_menu.enemyState = true;
 		
 		if (in_animation) {
 			break;
@@ -608,7 +616,7 @@ switch (state) {
 
 #region
 	case BattleState.PlayerBoardObstacle:
-	
+		
 		if (in_animation) {
 			break;
 		}
@@ -650,7 +658,9 @@ switch (state) {
 
 #region
 	case BattleState.EnemyBoardObstacle:
-	
+		obj_menu.playerState = false;
+		obj_menu.enemyState = false;
+		
 		if (in_animation) {
 			break;
 		}

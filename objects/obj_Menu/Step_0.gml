@@ -46,6 +46,6 @@ if(tp_opacity<=0.5){
 }
 
 
-if (select == 0) {
-	select_anim = lerp(select_anim, 0, 0.2);
-}
+//if (select == 0) {
+//	select_anim = lerp(select_anim, 0, 0.2);
+//}
