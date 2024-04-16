@@ -26,8 +26,8 @@ switch (state) {
 	
 #region Battle Start
 	case BattleState.BattleStart:
-		obj_menu.enemyTurn = true;
 		obj_menu.playerTurn = false;
+		obj_menu.enemyTurn = true;
 		
 		for (var i = 0; i < array_length(player_units); i++) {
 			player_units[i].attack_bonus=0;
@@ -61,7 +61,7 @@ switch (state) {
 	
 #region Enemy Aiming
 	case BattleState.EnemyAiming:
-		obj_menu.playerTurn = false;
+		obj_menu.playerTurn = true;
 		obj_menu.enemyTurn = false;
 		
 		if (in_animation) {

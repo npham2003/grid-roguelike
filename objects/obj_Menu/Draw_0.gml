@@ -6,21 +6,7 @@ if (confirm) {
 
 var _buttonScale = 5;
 for (var i = skills - 1; i >= 0; i--) {
-	//if(obj_battleControl.state==BattleState.PlayerAiming){
-	//	if(i==player_unit.skill_used){
-	//		menuX[i] = lerp(menuX[i], rootX + i * spacing * state + state * 200 - 50, 0.2);
-	//	}
-	//	else if(i==player_unit.skill_used+1){
-	//		menuX[i] = lerp(menuX[i], rootX + i * spacing * state + state * 200 + 50, 0.2);
-	//	}
-	//	else{
-	//		menuX[i] = lerp(menuX[i], rootX + i * spacing * state + state * 200, 0.2);
-	//	}
-	//}
-	//else{
-	//	menuX[i] = lerp(menuX[i], rootX + i * spacing * state + state * 200, 0.2);
-	//}
-	
+
 	#region setup
 	var _border = border;
 	var _outline1 = [
@@ -76,7 +62,7 @@ for (var i = skills - 1; i >= 0; i--) {
 	#endregion
 
 	//text			player_unit.actions[i].name[player_unit.upgrades[i]]+ ": " +
-	if i < 4 draw_text_transformed_colour(menuX[i+1]-expandAnim*70, menuY[i]-35, global.controls[i], 0.5, 0.5, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+	if i < 4 draw_text_transformed_colour(menuX[i+1]-expandAnim*60, menuY[i]-35, global.controls[i], 0.5, 0.5, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
 }
 
 
