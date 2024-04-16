@@ -45,6 +45,20 @@ if(tp_opacity<=0.5){
 }
 
 
-//if (select == 0) {
-//	select_anim = lerp(select_anim, 0, 0.2);
-//}
+//turn opacity
+if (turn_count <= turn_max) {
+	if(turn_opacity_increase){
+		turn_opacity+=0.05;
+	}else{
+		turn_opacity-=0.05;
+	}
+	if(turn_opacity>=0.8){
+		turn_opacity_increase=false;
+		turn_count++;
+	}
+	if(turn_opacity<=0.5){
+		turn_opacity_increase=true;
+	}
+}
+
+turn_text_anim = lerp(turn_text_anim, 2, 0.2)

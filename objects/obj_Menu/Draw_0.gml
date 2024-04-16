@@ -201,10 +201,13 @@ if (playerTurn && !enemyTurn) turn = "PLAYER TURN";
 if (!playerTurn && enemyTurn) turn = "ENEMY TURN";
 if (playerTurn || enemyTurn) {
 	draw_set_color(global._primary);
-	draw_set_alpha(0.5);
-	draw_rectangle_colour(room_width/2-400, 350, room_width/2+400, 250, global._primary, global._primary, global._primary, global._primary, false);
-	draw_set_color(c_white);
-	draw_set_alpha(1);
-	draw_text_transformed(room_width/2-100, 260, turn, 1, 1, 0);
+	draw_set_alpha(turn_opacity);
+	draw_rectangle_colour(0, 350, room_width, 250, global._aspect_bars, global._aspect_bars, global._aspect_bars, global._aspect_bars, false);
+	draw_set_color(global._primary);
+	draw_set_halign(fa_center);
+	draw_text_transformed(room_width/2, 260, turn, turn_text_anim, 1, 0);
 }
+else turn_count = 0;
+draw_set_alpha(1);
+draw_set_halign(fa_left);
 #endregion

@@ -12,6 +12,12 @@ confirm = false;
 tp_opacity_increase=true;
 tp_opacity=0;
 
+turn_opacity_increase=true;
+turn_opacity=0;
+turn_count = 0;
+turn_max = 5;
+turn_text_anim = 0;
+
 #region location & size
 imgX = 200;
 imgY = 680;
