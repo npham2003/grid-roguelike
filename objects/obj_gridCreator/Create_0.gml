@@ -169,7 +169,37 @@ find_empty_tile_ally = function(_center_x,_center_y,_range){
 	
 	for(var i = -_range; i <= _range; i++){
 		for(var j = -(_range-abs(i)); j <= _range - abs(i); j++){
+			show_debug_message("Checking ("+string(_center_x+i)+", "+string(_center_y+j)+") which is ("+string(battle_grid[_center_x+i][_center_y+j]._x_coord)+", "+string(battle_grid[_center_x+i][_center_y+j]._y_coord)+")");
 			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT &&_center_x+i<5){
+				if(battle_grid[_center_x+i][_center_y+j]._is_empty){
+					return battle_grid[_center_x+i][_center_y+j];
+				}
+				
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}
+		}
+	}
+	return pointer_null;
+	
+}
+
+find_empty_tile_enemy = function(_center_x,_center_y,_range){
+	
+	if(_range<0){
+		return pointer_null;
+	}
+	if(_range==0 && battle_grid[_center_x][_center_y]._is_empty){
+		return battle_grid[_center_x][_center_y];
+	}
+	show_debug_message("Range: "+string(_range));
+	_temp = find_empty_tile_ally(_center_x,_center_y,_range-1);
+	if(_temp!=pointer_null){
+		return _temp;
+	}
+	
+	for(var i = -_range; i <= _range; i++){
+		for(var j = -(_range-abs(i)); j <= _range - abs(i); j++){
+			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT &&_center_x+i>4){
 				if(battle_grid[_center_x+i][_center_y+j]._is_empty){
 					return battle_grid[_center_x+i][_center_y+j];
 				}
@@ -307,6 +337,63 @@ highlighted_target_straight = function(_center_x,_center_y){
 			
 			array_push(highlighted_target_array,battle_grid[_center_x+j][_center_y]);
 			battle_grid[_center_x+j][_center_y]._target_highlight=true;
+			break;
+		}
+		j+=1;
+	}
+	
+	
+	return highlighted_target_array;
+}
+
+highlighted_target_straight_back = function(_center_x,_center_y){
+	
+	highlighted_target_array=[];
+	var j=0;
+	while(_center_x+j>0){
+		
+		if(!battle_grid[_center_x+j][_center_y]._is_empty){
+			
+			array_push(highlighted_target_array,battle_grid[_center_x+j][_center_y]);
+			battle_grid[_center_x+j][_center_y]._target_highlight=true;
+			break;
+		}
+		j-=1;
+	}
+	
+	
+	return highlighted_target_array;
+}
+
+highlighted_target_straight_up = function(_center_x,_center_y){
+	
+	highlighted_target_array=[];
+	var j=0;
+	while(_center_y+j>0){
+		
+		if(!battle_grid[_center_x][_center_y+j]._is_empty){
+			
+			array_push(highlighted_target_array,battle_grid[_center_x+j][_center_y]);
+			battle_grid[_center_x][_center_y+j]._target_highlight=true;
+			break;
+		}
+		j-=1;
+	}
+	
+	
+	return highlighted_target_array;
+}
+
+highlighted_target_straight_down = function(_center_x,_center_y){
+	
+	highlighted_target_array=[];
+	var j=0;
+	while(_center_y+j<GRIDHEIGHT){
+		
+		if(!battle_grid[_center_x][_center_y+j]._is_empty){
+			
+			array_push(highlighted_target_array,battle_grid[_center_x+j][_center_y]);
+			battle_grid[_center_x][_center_y+j]._target_highlight=true;
 			break;
 		}
 		j+=1;

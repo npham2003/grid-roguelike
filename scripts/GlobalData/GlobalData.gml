@@ -5,7 +5,7 @@ global.controls = ["H", "J", "K", "L"];
 global.actionLibrary = {
 	baseAttack: {
 		name: ["Base Attack"], //probably redundant to have a name but keep it
-		description: ["Does 1 damage to the first target in a row"],
+		description: ["Does 1 damage to the first target in any direction"],
 		cost: [1],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -19,11 +19,43 @@ global.actionLibrary = {
 			base: function(unit){
 				
 				unit.action = unit.actions[unit.skill_used];
-				skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
+				if(!unit.skill_init){
+					skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
+					unit.skill_init=true;
+					show_debug_message("basic init");
+				}
+				
 				obj_cursor.movable_tiles=skill_range;
 				unit.is_attacking = true;
 				if(array_length(skill_range)>0 && !unit.skill_complete){
 					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
+				}else{
+					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
+				}
+				if(keyboard_check_pressed(vk_anykey)){
+					obj_gridCreator.reset_highlights_target();
+				}
+				if (keyboard_check_pressed(ord("A"))) {
+					
+					skill_range = obj_gridCreator.highlighted_target_straight_back(unit.grid_pos[0]-1, unit.grid_pos[1]);
+					
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+
+				}
+				if (keyboard_check_pressed(ord("D")) ) { // a bunch of this is hardcoded atm
+					skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+
+				}
+				if (keyboard_check_pressed(ord("S")) ) { // a bunch of this is hardcoded atm
+					skill_range = obj_gridCreator.highlighted_target_straight_down(unit.grid_pos[0], unit.grid_pos[1]+1);
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+
+				}
+				if (keyboard_check_pressed(ord("W"))) { // a bunch of this is hardcoded atm
+					skill_range = obj_gridCreator.highlighted_target_straight_up(unit.grid_pos[0], unit.grid_pos[1]-1);
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+
 				}
 				var _damage = unit.action.damage;
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("H"))) {
@@ -40,10 +72,11 @@ global.actionLibrary = {
 					unit.skill_complete = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
 					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
-		
+					unit.skill_init=false;
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
 					unit.skill_back = true;
+					unit.skill_init=false;
 					skill_range = obj_gridCreator.reset_highlights_target();
 		
 				}
@@ -2157,7 +2190,8 @@ global.enemyActions = {
 			[-2, 0], [-2, -1], [-2, 1],
 			[-3, 0]
 		],
-		type: "normal"
+		type: "normal",
+		damage_type: "normal"
 	},
 	ranged_attack: {
 		name: "ranged attack",
@@ -2165,7 +2199,8 @@ global.enemyActions = {
 			[-5, 0], [-6, 0], [-7, 0], [-8, 0], [-9, 0],
 			[-4, 0], [-3, 0], [-2, 0], [-1, 0]
 		],
-		type: "normal"
+		type: "normal",
+		damage_type: "normal"
 	},
 	center_square: {
 		name: "square explosion",
@@ -2173,7 +2208,9 @@ global.enemyActions = {
 			[-1, -1], [-1, 0], [-1, 1],
 			[0, -1], [0, 0], [0, 1], 
 			[1, -1], [1, 0], [1, 1]
-		]
+		],
+		type: "normal",
+		damage_type: "normal"
 	},
 	center_big_square: {
 		name: "big square explosion",
@@ -2183,14 +2220,37 @@ global.enemyActions = {
 			[0, -2], [0, -1], [0, 0], [0, 1], [0, 2],
 			[1, -2], [1, -1], [1, 0], [1, 1], [1, 2],
 			[2, -2], [2, -1], [2, 0], [2, 1], [2, 2]
-		]
+		],
+		type: "normal",
+		damage_type: "normal"
 	},
 	homing_aoe: {
 		name: "homing aoe",
 		range: [
 			[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]
 		],
-		type: "turret"
+		type: "turret",
+		damage_type: "normal"
+	},
+	summon: {
+		name: "summon",
+		range: [
+			[0, 0]
+		],
+		type: "random_turret",
+		damage_type: "summon"
+	},
+	cross: {
+		name: "cross",
+		range: [
+			[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 0], [9, 0],
+			[-1, 0], [-2, 0], [-3, 0], [-4, 0], [-5, 0], [-6, 0], [-7, 0], [-8, 0], [-9, 0],
+			[0, 1], [0, 2], [0, 3], [0, 4],
+			[0, -1], [0, -2], [0, -3], [0, -4]
+			
+		],
+		type: "turret_no_target",
+		damage_type: "normal"
 	}
 }
 
@@ -2277,6 +2337,28 @@ global.enemies = [
 		sounds: { attack: sfx_bat_attack },
 		ally: false,
 		gold: 100
+	},
+	{
+		name: "Cross",
+		hp: 1,
+		hpMax: 1,
+		healthbar_offset: -40,
+		sprites: { idle: spr_bat_idle, attack: spr_bat_attack },
+		actions: [global.enemyActions.cross],
+		sounds: { attack: sfx_bat_attack },
+		ally: false,
+		gold: 0
+	},
+	{
+		name: "Summoner",
+		hp: 3,
+		hpMax: 3,
+		healthbar_offset: -40,
+		sprites: { idle: spr_bat_idle, attack: spr_bat_attack },
+		actions: [global.enemyActions.summon],
+		sounds: { attack: sfx_bat_attack },
+		ally: false,
+		gold: 200
 	}
 ]
 
@@ -2371,6 +2453,12 @@ global.encounters = [
 	[
 		{
 			info: global.enemies[2],
+			grid: [8, 2]
+		}
+	],
+	[
+		{
+			info: global.enemies[4],
 			grid: [8, 2]
 		}
 	]

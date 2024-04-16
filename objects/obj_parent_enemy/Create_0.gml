@@ -19,6 +19,7 @@ began_push=false;
 stall_turns=0;
 freeze_graphic=pointer_null;
 target_pos=[];
+summoned_units=0;
 
 //healthbar_y = y-40;
 
@@ -148,6 +149,13 @@ function aim(){
 				target_pos=[target_pos[0]-grid_pos[0],target_pos[1]-grid_pos[1]];
 				move(grid_pos[0],grid_pos[1]);
 				break;
+			case "random_turret":
+				target_pos=[irandom_range(0,4)-grid_pos[0],irandom_range(0,4)-grid_pos[1]];
+				move(grid_pos[0],grid_pos[1]);
+				break;
+			case "turret_no_target":
+				move(grid_pos[0],grid_pos[1]);
+				break;
 		
 		}
 		show_debug_message("{0} is ready to attack", name);
@@ -173,12 +181,13 @@ function move(new_x, new_y) {
 
 function set_danger_highlights() {
 	var offset=[];
-	if(action.type=="normal"){
+	if(action.type=="normal" || action.type=="turret_no_target"){
 		offset=[0,0];	
 	}
-	if(action.type=="turret"){
+	if(action.type=="turret" || action.type=="random_turret"){
 		offset=target_pos;	
 	}
+	
 	for (var i = 0; i < array_length(action.range); i++) {
 		var attack_x = grid_pos[0] + offset[0] + action.range[i][0];
 		var attack_y = grid_pos[1] + offset[1] + action.range[i][1];
@@ -199,10 +208,10 @@ function set_danger_highlights() {
 
 function danger_debug() {
 	var offset=[];
-	if(action.type=="normal"){
+	if(action.type=="normal" || action.type=="turret_no_target"){
 		offset=[0,0];	
 	}
-	if(action.type=="turret"){
+	if(action.type=="turret" || action.type=="random_turret"){
 		offset=target_pos;	
 	}
 	for (var i = 0; i < array_length(action.range); i++) {
@@ -223,10 +232,10 @@ function danger_debug() {
 function remove_danger_highlights() {
 	danger_debug();
 	var offset=[];
-	if(action.type=="normal"){
+	if(action.type=="normal" || action.type=="turret_no_target"){
 		offset=[0,0];	
 	}
-	if(action.type=="turret"){
+	if(action.type=="turret" || action.type=="random_turret"){
 		offset=target_pos;	
 	}
 	for (var i = 0; i < array_length(action.range); i++) {
@@ -258,10 +267,10 @@ function attack() {
 
 function display_target_highlights(){
 	var offset=[];
-	if(action.type=="normal"){
+	if(action.type=="normal" || action.type=="turret_no_target"){
 		offset=[0,0];	
 	}
-	if(action.type=="turret"){
+	if(action.type=="turret" || action.type=="random_turret"){
 		offset=target_pos;	
 	}
 	for (var i = 0; i < array_length(action.range); i++) {
@@ -285,10 +294,10 @@ function display_target_highlights(){
 
 function remove_target_highlights(){
 	var offset=[];
-	if(action.type=="normal"){
+	if(action.type=="normal" || action.type=="turret_no_target"){
 		offset=[0,0];	
 	}
-	if(action.type=="turret"){
+	if(action.type=="turret" || action.type=="random_turret"){
 		offset=target_pos;	
 	}
 	for (var i = 0; i < array_length(action.range); i++) {
@@ -311,33 +320,47 @@ function remove_target_highlights(){
 
 function do_damage(){
 	var offset=[];
-	if(action.type=="normal"){
+	if(action.type=="normal" || action.type=="turret_no_target"){
 		offset=[0,0];	
 	}
-	if(action.type=="turret"){
+	if(action.type=="turret" || action.type=="random_turret"){
 		offset=target_pos;	
 	}
-	for (var i = 0; i < array_length(action.range); i++) {
-		var attack_x = grid_pos[0] + offset[0] + action.range[i][0];
-		var attack_y = grid_pos[1] + offset[1] + action.range[i][1];
+	if(action.damage_type=="summon"){
+		var attack_x = grid_pos[0] + offset[0] + action.range[0][0];
+		var attack_y = grid_pos[1] + offset[1] + action.range[0][1];
+		enemy_data = [
+			{
+				info: global.enemies[3],
+				grid: [attack_x, attack_y]
+			}
+		]
+		obj_battleControl.spawn_enemies_on_ally_side_first(enemy_data);
+		obj_battleControl.enemy_order+=1;
+		summoned_units+=1;
+	}else{
+		for (var i = 0; i < array_length(action.range); i++) {
+			var attack_x = grid_pos[0] + offset[0] + action.range[i][0];
+			var attack_y = grid_pos[1] + offset[1] + action.range[i][1];
 		
-		if (attack_x < 0 || attack_x >= GRIDWIDTH) {
-			continue;
-		}
-		if (attack_y < 0 || attack_y >= GRIDHEIGHT) {
-			continue;
-		}
+			if (attack_x < 0 || attack_x >= GRIDWIDTH) {
+				continue;
+			}
+			if (attack_y < 0 || attack_y >= GRIDHEIGHT) {
+				continue;
+			}
 		
-		//show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
+			//show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
 		
-		if(!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty){
-			show_debug_message("("+string(attack_x)+","+string(attack_y)+")")
-			show_debug_message(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile==pointer_null);
-			obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.damage(1);
+			if(!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty){
+				show_debug_message("("+string(attack_x)+","+string(attack_y)+")")
+				show_debug_message(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile==pointer_null);
+				obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.damage(1);
 			
 
-		}
+			}
 		
+		}
 	}
 	remove_target_highlights();
 	
