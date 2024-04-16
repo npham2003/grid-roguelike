@@ -10,8 +10,8 @@ if (confirm) {
 var _buttonScale = 5;
 for (var i = skills - 1; i >= 0; i--) {
 	
-	if (i == select-1 && select-1 > 0) select_anim = lerp(select_anim, select_shift*-1, 0.2);
-	if (i == select && select>0) select_anim = lerp(select_anim, select_shift, 0.2);
+	//if (i == select-1 && select-1 > 0) select_anim = lerp(select_anim, select_shift*-1, 0.2);
+	//if (i == select && select>0) select_anim = lerp(select_anim, select_shift, 0.2);
 	
 	#region setup
 	var _border = border;
@@ -96,7 +96,7 @@ for (var i = 0; i < array_length(_pips); ++i){
 	draw_primitive_end();
 	draw_primitive_begin(pr_trianglestrip);
 	
-	draw_set_color(c_black);
+	draw_set_color(global._aspect_bars);
 	
 	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 12));
 	//draw_set_color(global._tpBorder);
@@ -183,11 +183,16 @@ gpu_set_blendmode(bm_normal);
 #endregion
 
 #region gold
-draw_set_color(global._primary);
 draw_primitive_begin(pr_trianglestrip);
+draw_set_color(global._primary);
 draw_vertices(make_diamond(87, 53, 30));
 draw_primitive_end();
-draw_set_color(c_white);
+draw_primitive_begin(pr_trianglestrip);
+draw_set_color(global._aspect_bars);
+draw_vertices(make_diamond(87, 53, 25));
+draw_primitive_end();
+
+draw_set_color(global._primary);
 draw_text_transformed(75, 20, "G    "+ string(obj_battleControl.gold), 0.8, 0.8, 0);
 #endregion
 
@@ -197,5 +202,12 @@ draw_text_ext(148, 128, _text, 40, 1000);
 #endregion
 
 #region turn banner
-
+var turn = "";
+if (playerTurn && !enemyTurn) turn = "PLAYER TURN";
+if (!playerTurn && enemyTurn) turn = "ENEMY TURN";
+if (playerTurn || enemyTurn) {
+	//draw_rectangle_colour(room_width/2-400, 350, room_width/2+400, 250, global._primary, global._primary, global._primary, global._primary, false);
+	//draw_set_color(c_white);
+	//draw_text_transformed(room_width/2-100, 260, turn, 1, 1, 0);
+}
 #endregion

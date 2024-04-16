@@ -1,12 +1,11 @@
-/// @description Insert description here
-// You can write your code in this editor
-
 state = 0;
 skills = 5;
 _text = "";
 
 open = true;
-select = 0;
+playerTurn = false;
+enemyTurn = true;
+
 confirm = false;
 
 tp_opacity_increase=true;
@@ -23,6 +22,7 @@ select_anim = 0;
 menuX = [rootX, rootX, rootX, rootX, rootX];
 menuY = [rootY, rootY, rootY, rootY, rootY];
 
+//turn = "ENEMY TURN";
 portraitScale = 0.55;
 playerScale = 15;
 playerDim = sprite_get_height(spr_diamond_base) * playerScale/2;
