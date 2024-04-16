@@ -26,6 +26,9 @@ switch (state) {
 	
 #region Battle Start
 	case BattleState.BattleStart:
+		obj_menu.enemyTurn = true;
+		obj_menu.playerTurn = false;
+		
 		for (var i = 0; i < array_length(player_units); i++) {
 			player_units[i].attack_bonus=0;
 			if(player_units[i].hp<=0){
@@ -52,16 +55,14 @@ switch (state) {
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
 		
-		obj_menu.enemyTurn = true;
-		obj_menu.playerTurn = false;
 		change_state(BattleState.EnemyAiming);
 		break;
 #endregion
 	
 #region Enemy Aiming
 	case BattleState.EnemyAiming:
-		obj_menu.playerState = false;
-		obj_menu.enemyState = false;
+		obj_menu.playerTurn = false;
+		obj_menu.enemyTurn = false;
 		
 		if (in_animation) {
 			break;
@@ -101,8 +102,8 @@ switch (state) {
 
 #region Player Preparing
 	case BattleState.PlayerPreparing:
-		obj_menu.playerState = false;
-		obj_menu.enemyState = false;
+		obj_menu.playerTurn = false;
+		obj_menu.enemyTurn = false;
 		
 		for (var i = 0; i < array_length(player_units); i++) {
 			show_debug_message(string(i)+" Buffed: "+string(player_units[i].attack_buff_recent));
@@ -537,8 +538,8 @@ switch (state) {
 
 #region Enemy Taking Action
 	case BattleState.EnemyTakingAction:
-		obj_menu.playerState = false;
-		obj_menu.enemyState = true;
+		obj_menu.playerTurn = false;
+		obj_menu.enemyTurn = true;
 		
 		if (in_animation) {
 			break;
@@ -658,8 +659,8 @@ switch (state) {
 
 #region
 	case BattleState.EnemyBoardObstacle:
-		obj_menu.playerState = false;
-		obj_menu.enemyState = false;
+		obj_menu.playerTurn = false;
+		obj_menu.enemyTurn = false;
 		
 		if (in_animation) {
 			break;

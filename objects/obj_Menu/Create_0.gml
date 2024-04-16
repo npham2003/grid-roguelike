@@ -17,8 +17,8 @@ imgY = 680;
 
 rootX = imgX+20;
 rootY = imgY + 32;
-select_shift = 50;
-select_anim = 0;
+select_shift = 30;
+
 menuX = [rootX, rootX, rootX, rootX, rootX];
 menuY = [rootY, rootY, rootY, rootY, rootY];
 
