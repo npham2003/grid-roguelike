@@ -8,3 +8,5 @@ size = 1;
 
 original_x=x
 original_y=y
+
+color=c_red;
