@@ -191,6 +191,7 @@ draw_text_transformed(75, 20, "G    "+ string(obj_battleControl.gold), 0.8, 0.8,
 
 #region skill details
 draw_set_font(fnt_chiaro);
+draw_set_color(c_white);
 draw_text_ext(148, 100, _text, 40, 1000);
 #endregion
 
@@ -199,8 +200,11 @@ var turn = "";
 if (playerTurn && !enemyTurn) turn = "PLAYER TURN";
 if (!playerTurn && enemyTurn) turn = "ENEMY TURN";
 if (playerTurn || enemyTurn) {
+	draw_set_color(global._primary);
+	draw_set_alpha(0.5);
 	draw_rectangle_colour(room_width/2-400, 350, room_width/2+400, 250, global._primary, global._primary, global._primary, global._primary, false);
 	draw_set_color(c_white);
+	draw_set_alpha(1);
 	draw_text_transformed(room_width/2-100, 260, turn, 1, 1, 0);
 }
 #endregion
