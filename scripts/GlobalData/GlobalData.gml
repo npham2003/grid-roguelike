@@ -2156,14 +2156,16 @@ global.enemyActions = {
 			[-1, 0], [-1, -1], [-1, 1],
 			[-2, 0], [-2, -1], [-2, 1],
 			[-3, 0]
-		]
+		],
+		type: "normal"
 	},
 	ranged_attack: {
 		name: "ranged attack",
 		range: [
 			[-5, 0], [-6, 0], [-7, 0], [-8, 0], [-9, 0],
 			[-4, 0], [-3, 0], [-2, 0], [-1, 0]
-		]
+		],
+		type: "normal"
 	},
 	center_square: {
 		name: "square explosion",
@@ -2182,6 +2184,13 @@ global.enemyActions = {
 			[1, -2], [1, -1], [1, 0], [1, 1], [1, 2],
 			[2, -2], [2, -1], [2, 0], [2, 1], [2, 2]
 		]
+	},
+	homing_aoe: {
+		name: "homing aoe",
+		range: [
+			[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]
+		],
+		type: "turret"
 	}
 }
 
@@ -2254,6 +2263,17 @@ global.enemies = [
 		healthbar_offset: -40,
 		sprites: { idle: spr_bat_idle, attack: spr_bat_attack },
 		actions: [global.enemyActions.ranged_attack],
+		sounds: { attack: sfx_bat_attack },
+		ally: false,
+		gold: 100
+	},
+	{
+		name: "Shooter",
+		hp: 3,
+		hpMax: 3,
+		healthbar_offset: -40,
+		sprites: { idle: spr_bat_idle, attack: spr_bat_attack },
+		actions: [global.enemyActions.homing_aoe],
 		sounds: { attack: sfx_bat_attack },
 		ally: false,
 		gold: 100
@@ -2348,5 +2368,11 @@ global.encounters = [
 			grid: [8, 2]
 		}
 	],
+	[
+		{
+			info: global.enemies[2],
+			grid: [8, 2]
+		}
+	]
 
 ]
