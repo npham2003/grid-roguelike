@@ -99,6 +99,11 @@ switch (state) {
 	case BattleState.PlayerPreparing:
 		
 		for (var i = 0; i < array_length(player_units); i++) {
+			show_debug_message(string(i)+" Buffed: "+string(player_units[i].just_buffed));
+			if(!player_units[i].just_buffed && player_units[i].stall_turns==0 && !player_units[i].has_moved && !player_units[i].has_attacked){
+				show_debug_message("reset bonus");
+				player_units[i].attack_bonus_temp=0;
+			}
 			if(player_units[i].stall_turns>0){
 				player_units[i].stall_turns-=1;
 				obj_battleEffect.show_damage(player_units[i], player_units[i].stall_turns, c_blue);
@@ -121,6 +126,8 @@ switch (state) {
 				player_units[i].hp=0;
 			}
 			
+			
+			player_units[i].just_buffed=false;
 			
 		}
 		tp_current+=tp_bonus;
@@ -249,6 +256,12 @@ switch (state) {
 		}
 		if(key_Enter_pressed){
 			board_obstacle_order = 0;
+			for (var i = 0; i < array_length(player_units); i++) {
+				if(!(player_units[i].has_attacked || player_units[i].has_moved)){
+					player_units[i].attack_bonus_temp=0;
+					
+				}
+			}
 			change_state(BattleState.PlayerBoardObstacle);
 		}
 		break;
@@ -287,7 +300,7 @@ switch (state) {
 					obj_cursor.reset_cursor(unit.grid_pos[0], unit.grid_pos[1]);
 				}
 			else if (jkl_pressed && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) { // optimize eventually
-				show_debug_message("hi");
+				
 				obj_gridCreator.reset_highlights_cursor();
 				if (!unit.has_attacked) {
 					if (key_H_pressed) {
@@ -342,6 +355,8 @@ switch (state) {
 				unit.has_moved = true;
 				unit.has_attacked = true;
 				change_state(BattleState.PlayerWaitingAction);
+				
+				
 				obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
 			}
 		}
@@ -496,6 +511,7 @@ switch (state) {
 			}
 			else {
 				change_state(BattleState.PlayerWaitingAction);
+				
 				unit.is_attacking = false;
 				obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
 			}

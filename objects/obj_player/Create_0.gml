@@ -14,12 +14,14 @@ skill_back = false;
 upgrades =[0,2,1,1];
 shield = 0;
 attack_bonus = 0;
+attack_bonus_temp = 0;
 skill_progress = 0;
 skill_option = 0;
 began_push=false;
 teleporting = 0;
 stall_turns = 0;
 freeze_graphic=pointer_null;
+just_buffed=false;
 
 var return_coords;
 
@@ -33,8 +35,8 @@ has_attacked = false;
 function show_moveable_grids() {
 	//moveable_grids = obj_gridCreator.get_moveable_grids(grid_pos, move_range);
 	prev_grid = [grid_pos[0], grid_pos[1]];
-	show_debug_message(grid_pos[0]);
-	show_debug_message(grid_pos[1]);
+	//show_debug_message(grid_pos[0]);
+	//show_debug_message(grid_pos[1]);
 	moveable_grids = obj_gridCreator.highlighted_move(grid_pos[0], grid_pos[1], move_range);
 	obj_cursor.movable_tiles=moveable_grids;
 	//moveable_grids = obj_gridCreator.highlighted_attack_line(0, grid_pos[1]);
