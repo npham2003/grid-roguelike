@@ -60,6 +60,8 @@ switch (state) {
 	
 #region Enemy Aiming
 	case BattleState.EnemyAiming:
+		obj_menu.playerState = false;
+		obj_menu.enemyState = false;
 		
 		if (in_animation) {
 			break;
@@ -99,6 +101,8 @@ switch (state) {
 
 #region Player Preparing
 	case BattleState.PlayerPreparing:
+		obj_menu.playerState = false;
+		obj_menu.enemyState = false;
 		
 		for (var i = 0; i < array_length(player_units); i++) {
 			show_debug_message(string(i)+" Buffed: "+string(player_units[i].attack_buff_recent));
@@ -533,6 +537,8 @@ switch (state) {
 
 #region Enemy Taking Action
 	case BattleState.EnemyTakingAction:
+		obj_menu.playerState = false;
+		obj_menu.enemyState = true;
 		
 		if (in_animation) {
 			break;
@@ -610,7 +616,7 @@ switch (state) {
 
 #region
 	case BattleState.PlayerBoardObstacle:
-	
+		
 		if (in_animation) {
 			break;
 		}
@@ -652,7 +658,9 @@ switch (state) {
 
 #region
 	case BattleState.EnemyBoardObstacle:
-	
+		obj_menu.playerState = false;
+		obj_menu.enemyState = false;
+		
 		if (in_animation) {
 			break;
 		}
