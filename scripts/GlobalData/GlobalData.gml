@@ -2,6 +2,7 @@ global.controls = ["H", "J", "K", "L"];
 
 //Action Library
 // _damage+unit.attack_bonus+unit.attack_bonus_temp
+// THIS IS THE DAMAGE FORMULA
 global.actionLibrary = {
 	baseAttack: {
 		name: ["Base Attack"], //probably redundant to have a name but keep it
@@ -10,7 +11,7 @@ global.actionLibrary = {
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
-		damage: 1, // temp damage, until i figure out how to do this damage function thing
+		damage: 1, 
 		func: function(_user, _targets) {
 			var _damage = 1; //math function here
 			//BattleChangeHP(_targets);
@@ -20,6 +21,7 @@ global.actionLibrary = {
 				
 				unit.action = unit.actions[unit.skill_used];
 				if(!unit.skill_init){
+					// setup initial target
 					skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
 					unit.skill_init=true;
 					show_debug_message("basic init");
@@ -27,40 +29,41 @@ global.actionLibrary = {
 				
 				obj_cursor.movable_tiles=skill_range;
 				unit.is_attacking = true;
-				if(array_length(skill_range)>0 && !unit.skill_complete){
+				if(array_length(skill_range)>0 && !unit.skill_complete){ // set cursor to target if it hits anything, if not its on the player unit
 					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
 				}else{
 					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
 				}
-				if(keyboard_check_pressed(vk_anykey)){
+				
+				if (keyboard_check_pressed(ord("A"))) { // aiming
 					obj_gridCreator.reset_highlights_target();
-				}
-				if (keyboard_check_pressed(ord("A"))) {
-					
 					skill_range = obj_gridCreator.highlighted_target_straight_back(unit.grid_pos[0]-1, unit.grid_pos[1]);
 					
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 
 				}
 				if (keyboard_check_pressed(ord("D")) ) { // a bunch of this is hardcoded atm
+					obj_gridCreator.reset_highlights_target();
 					skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 
 				}
 				if (keyboard_check_pressed(ord("S")) ) { // a bunch of this is hardcoded atm
+					obj_gridCreator.reset_highlights_target();
 					skill_range = obj_gridCreator.highlighted_target_straight_down(unit.grid_pos[0], unit.grid_pos[1]+1);
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 
 				}
 				if (keyboard_check_pressed(ord("W"))) { // a bunch of this is hardcoded atm
+					obj_gridCreator.reset_highlights_target();
 					skill_range = obj_gridCreator.highlighted_target_straight_up(unit.grid_pos[0], unit.grid_pos[1]-1);
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 
 				}
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("H"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("H"))) { // use the skill
 					audio_play_sound(sfx_base_laser, 0, false);
-					for (var i = 0; i < array_length(skill_range); i++) {
+					for (var i = 0; i < array_length(skill_range); i++) { // do damage
 						if (!skill_range[i]._is_empty) {
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
 							skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus+unit.attack_bonus_temp); // temp var until we get shit moving
@@ -85,12 +88,12 @@ global.actionLibrary = {
 	},
 	beam: {
 		name: ["Beam", "Big Beam", "Repel Beam"], 
-		description: ["Does 2 damage to all targets in a row", "Does 2 damage to all targets in surrounding rows. Double damage if target is in the same row", "Does 2 damage to all targets in a row and pushes them back 1 tile."],
+		description: ["Does 1 damage to all targets in a row", "Does 1 damage to all targets in surrounding rows. Double damage if target is in the same row", "Does 1 damage to all targets in a row and pushes them back 1 tile."],
 		cost: [3, 6, 4],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
-		damage: 2, // temp damage, until i figure out how to do this damage function thing
+		damage: 1, // temp damage, until i figure out how to do this damage function thing
 		func: function(_user, _targets) {
 			var _damage = 1; //math function here
 			//BattleChangeHP(_targets);
@@ -98,7 +101,7 @@ global.actionLibrary = {
 		skillFunctions: {
 			base: function(unit){
 				
-				if (!unit.play_sound) {
+				if (!unit.play_sound) { //play beam sound once
 					audio_play_sound(sfx_beam_windup, 0, false);
 					unit.play_sound = true;
 				}
@@ -108,7 +111,7 @@ global.actionLibrary = {
 				skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
 				
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) { // use the skill
 					audio_play_sound(sfx_blast, 0, false);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
@@ -132,7 +135,7 @@ global.actionLibrary = {
 			},
 			upgrade1: function(unit){
 				
-				if (!unit.play_sound) {
+				if (!unit.play_sound) { // play beam sound
 					audio_play_sound(sfx_beam_windup, 0, false);
 					unit.play_sound = true;
 				}
@@ -146,7 +149,7 @@ global.actionLibrary = {
 					audio_play_sound(sfx_blast, 0, false);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						
-						if(skill_range[i]._y_coord==unit.grid_pos[1]){
+						if(skill_range[i]._y_coord==unit.grid_pos[1]){ // doubles damage if on the same row
 							_damage = unit.action.damage*2;
 						}else{
 							_damage = unit.action.damage;
@@ -173,13 +176,14 @@ global.actionLibrary = {
 			},
 			upgrade2: function(unit){
 				
-				if (!unit.play_sound) {
+				if (!unit.play_sound) { // play sound
 					audio_play_sound(sfx_beam_windup, 0, false);
 					unit.play_sound = true;
-					for(i=0;i<array_length(skill_range);i++){
+					skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
+					for(i=0;i<array_length(skill_range);i++){ // set up push preview
 					
 						if(!skill_range[i]._is_empty){
-							obj_battleEffect.push_preview(skill_range[0],0);
+							obj_battleEffect.push_preview(skill_range[i],0);
 						}
 					}
 				}
@@ -187,11 +191,11 @@ global.actionLibrary = {
 				unit.action = unit.actions[unit.skill_used];
 				var _damage = unit.action.damage;
 				
-				skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
+				
 				
 				
 				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) { // use skill
 					audio_play_sound(sfx_blast, 0, false);
 					for (var i = array_length(skill_range)-1; i >= 0; i--) {
 						
@@ -202,7 +206,7 @@ global.actionLibrary = {
 							show_debug_message(skill_range[i]._entity_on_tile.hp);
 							skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus+unit.attack_bonus_temp);
 							obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile,2);
-							skill_range[i]._entity_on_tile.push_back(1);
+							skill_range[i]._entity_on_tile.push_back(1); // push right 
 							show_debug_message(_target.hp);
 						}
 					}
@@ -233,7 +237,7 @@ global.actionLibrary = {
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
-		damage: 4, // temp damage, until i figure out how to do this damage function thing
+		damage: 1, // temp damage, until i figure out how to do this damage function thing
 		func: function(_user, _targets) {
 			var _damage = 1; //math function here
 			//BattleChangeHP(_targets);
@@ -2343,7 +2347,7 @@ global.enemies = [
 		hp: 1,
 		hpMax: 1,
 		healthbar_offset: -40,
-		sprites: { idle: spr_bat_idle, attack: spr_bat_attack },
+		sprites: { idle: spr_turret_idle, attack: spr_turret_attack },
 		actions: [global.enemyActions.cross],
 		sounds: { attack: sfx_bat_attack },
 		ally: false,
