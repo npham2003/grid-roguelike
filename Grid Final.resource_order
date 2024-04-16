@@ -43,6 +43,8 @@
     {"name":"spr_teleport_out","order":13,"path":"sprites/spr_teleport_out/spr_teleport_out.yy",},
     {"name":"spr_temp_Gayle","order":1,"path":"sprites/spr_temp_Gayle/spr_temp_Gayle.yy",},
     {"name":"spr_temp_Zero","order":2,"path":"sprites/spr_temp_Zero/spr_temp_Zero.yy",},
+    {"name":"spr_turret_attack","order":2,"path":"sprites/spr_turret_attack/spr_turret_attack.yy",},
+    {"name":"spr_turret_idle","order":3,"path":"sprites/spr_turret_idle/spr_turret_idle.yy",},
     {"name":"Sprite56","order":2,"path":"sprites/Sprite56/Sprite56.yy",},
   ],
 }

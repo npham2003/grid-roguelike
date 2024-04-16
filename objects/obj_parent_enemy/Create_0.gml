@@ -367,6 +367,10 @@ function remove_target_highlights(){
 		
 		}
 	}
+	// updates can_summon to make sure we don't summon more than a certain amount at a time
+		if(summoned_units>=summon_max){
+			can_summon=false;
+		}
 }
 
 // does damage during attacks
@@ -398,10 +402,7 @@ function do_damage(){
 		obj_battleControl.enemy_order+=1;
 		summoned_units+=1;
 		
-		// updates can_summon to make sure we don't summon more than a certain amount at a time
-		if(summoned_units>=summon_max){
-			can_summon=false;
-		}
+		
 	}else{
 		
 		// does damage to affected tiles

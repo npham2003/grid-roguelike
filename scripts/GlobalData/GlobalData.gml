@@ -237,7 +237,7 @@ global.actionLibrary = {
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
-		damage: 4, // temp damage, until i figure out how to do this damage function thing
+		damage: 1, // temp damage, until i figure out how to do this damage function thing
 		func: function(_user, _targets) {
 			var _damage = 1; //math function here
 			//BattleChangeHP(_targets);
@@ -2347,7 +2347,7 @@ global.enemies = [
 		hp: 1,
 		hpMax: 1,
 		healthbar_offset: -40,
-		sprites: { idle: spr_bat_idle, attack: spr_bat_attack },
+		sprites: { idle: spr_turret_idle, attack: spr_turret_attack },
 		actions: [global.enemyActions.cross],
 		sounds: { attack: sfx_bat_attack },
 		ally: false,
