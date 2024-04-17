@@ -33,7 +33,6 @@ obstacle = pointer_null;
 // Spawn player units
 
 // Temp struct for player data, may move to a config file or generate dynamically in the future
-
 var player_data = [
 	{
 		info: global.players[1],

@@ -3,7 +3,7 @@ sprite_index = sprites.idle;
 
 show_debug_message("{0}: [{1},{2}]", name, grid_pos[0], grid_pos[1]);
 
-if (instance_exists(obj_battleControl)) { // check for the right object
+if (instance_exists(obj_battleControl)) { // check for whther tutorial or not tutorial exist
 	battlecontrol = obj_battleControl;
 } else {
 	battlecontrol = obj_battleControlTut;

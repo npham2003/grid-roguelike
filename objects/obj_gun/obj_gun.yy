@@ -1,17 +1,16 @@
 {
   "$GMObject":"",
-  "%Name":"obj_gridCreator",
+  "%Name":"obj_gun",
   "eventList":[
     {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_gridCreator",
+  "name":"obj_gun",
   "overriddenProperties":[],
   "parent":{
-    "name":"Battle System Control",
-    "path":"folders/Objects/Battle System Control.yy",
+    "name":"Tutorial",
+    "path":"folders/Objects/Tutorial.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -31,7 +30,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_gun",
+    "path":"sprites/spr_gun/spr_gun.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

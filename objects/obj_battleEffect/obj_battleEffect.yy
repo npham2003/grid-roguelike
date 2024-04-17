@@ -8,8 +8,8 @@
   "name":"obj_battleEffect",
   "overriddenProperties":[],
   "parent":{
-    "name":"Tutorial",
-    "path":"folders/Objects/Tutorial.yy",
+    "name":"Battle System Control",
+    "path":"folders/Objects/Battle System Control.yy",
   },
   "parentObjectId":null,
   "persistent":false,

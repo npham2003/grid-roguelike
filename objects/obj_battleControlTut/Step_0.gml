@@ -57,16 +57,31 @@ switch (state) {
 		//spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
 		
-		obj_menu.enemyTurn = true;
-		obj_menu.playerTurn = false;
+		obj_menuTut.enemyTurn = true;
+		obj_menuTut.playerTurn = false;
 		change_state(BattleState.EnemyAiming);
 		break;
 #endregion
 	
 #region Enemy Aiming
 	case BattleState.EnemyAiming:
-		obj_menu.playerState = false;
-		obj_menu.enemyState = false;
+		obj_menuTut.playerState = false;
+		obj_menuTut.enemyState = false;
+		
+		if (turns_until_gun == 0 && gun_spawned == false) {
+			gun_spawned = true;
+			var coords = obj_gridCreator.get_coordinates(3,1);
+			obj_gridCreator.battle_grid[3][1]._is_empty=false;
+			gun = instance_create_layer(coords[0], coords[1], "Units", obj_gun);
+			gun.grid_pos = [3, 1];
+			obj_gridCreator.battle_grid[3][1]._entity_on_tile=gun
+		}
+		
+		if (gun_spawned == true) {
+			if (player_units[0].grid_pos == gun.grid_pos) {
+				show_debug_message("touch gun");	
+			}
+		}
 		
 		if (in_animation) {
 			break;
@@ -74,8 +89,23 @@ switch (state) {
 		
 			if (enemy_order >= array_length(enemy_units))
 			{
-				enemy_order = 0;
-				change_state(BattleState.PlayerPreparing);
+				
+				if (teachingDamage) {
+					obj_menuTut.enter_text("PRESS ENTER");
+					obj_menuTut.set_text("Well shit, I'm getting assaulted by these bats and I can't do anything about it. At least I can see where they're going to hit via these EXCLAMATION MARKS, and so I can dodge accordingly!");
+					if (key_Enter_pressed) {
+						enemy_order = 0;
+						teachingDamage = false;
+						teachingMovement = true;
+						obj_menuTut.set_text("To move, I have to select myself with SPACE, and move with WASD. Then finalize with ENTER");
+						obj_menuTut.enter_text("");
+						change_state(BattleState.PlayerPreparing);
+					}
+				}
+				else {
+					enemy_order = 0;
+					change_state(BattleState.PlayerPreparing);
+				}
 				break;
 			}
 			show_debug_message(string(enemy_order));
@@ -104,18 +134,24 @@ switch (state) {
 				unit.find_target();
 				unit.aim();
 			}
-			obj_menu.set_text(unit.name+" is aiming");
+			obj_menuTut.set_text(unit.name+" is aiming");
 			
 			// next enemy
 			enemy_order += 1;
 		}
+		
 		break;
+		
 #endregion
 
 #region Player Preparing
 	case BattleState.PlayerPreparing:
-		obj_menu.playerState = false;
-		obj_menu.enemyState = false;
+		obj_menuTut.playerState = false;
+		obj_menuTut.enemyState = false;
+		
+		if (teachingMovement) {
+			obj_menuTut.enter_text("PRESS ENTER");
+		}
 		
 		for (var i = 0; i < array_length(player_units); i++) {
 			
@@ -161,7 +197,9 @@ switch (state) {
 			if(player_units[i].hp>0 && player_units[i].stall_turns==0){
 				player_units[i].has_moved = false;
 				player_units[i].has_attacked = false;
+				if (teachingBasic) { // gain tp once unlock damage
 				tp_current+=player_units[i].tpGain;
+				}
 			}else if(player_units[i].hp<0){
 				player_units[i].hp=0;
 			}
@@ -171,7 +209,7 @@ switch (state) {
 			
 		}
 		// tp bonus 
-		tp_current+=tp_bonus;
+		//tp_current+=tp_bonus;
 		
 		// makes sure you don't go over max tp
 		if (tp_current > tp_max) {
@@ -179,7 +217,22 @@ switch (state) {
 		}	
 		show_debug_message("CURRENT TP: " + string(tp_current));
 		
-		change_state(BattleState.PlayerWaitingAction);
+		
+		
+		
+		if (teachingMovement) {
+					if (key_Enter_pressed) {
+						teachingMovement = false;
+						obj_menuTut.set_text("");
+						obj_menuTut.enter_text("");
+						change_state(BattleState.PlayerWaitingAction);
+					}
+				}
+				else {
+					show_debug_message("Until gun: " + string(turns_until_gun));
+					turns_until_gun += 1;
+					change_state(BattleState.PlayerWaitingAction);
+				}
 		
 		// cursor can move through whole grid
 		obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
@@ -226,14 +279,14 @@ switch (state) {
 			// if unit is player unit
 			if(unit.ally){
 				
-				// open the menu
-				obj_menu.open_menu();
-				obj_menu.player_unit=unit;
+				// open the menuTut
+				obj_menuTut.open_menu();
+				obj_menuTut.player_unit=unit;
 				
-				// set the tpcost array in the menu to match actual costs
-				obj_menu.tpCost=[0,unit.actions[0].cost[unit.upgrades[0]],unit.actions[1].cost[unit.upgrades[1]],unit.actions[2].cost[unit.upgrades[2]],unit.actions[3].cost[unit.upgrades[3]]];
-				//obj_menu.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
-				obj_menu.set_text("WASD - Move Cursor     Space - Select Unit     Enter - End Turn");
+				// set the tpcost array in the menuTut to match actual costs
+				obj_menuTut.tpCost=[0,unit.actions[0].cost[unit.upgrades[0]],unit.actions[1].cost[unit.upgrades[1]],unit.actions[2].cost[unit.upgrades[2]],unit.actions[3].cost[unit.upgrades[3]]];
+				//obj_menuTut.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
+				obj_menuTut.set_text("WASD - Move Cursor     Space - Select Unit     Enter - End Turn");
 				
 				// resets the previous grid position to current position. needed for when getting moved when its not their turn (push or teleport)
 				unit.prev_grid=[unit.grid_pos[0],unit.grid_pos[1]];
@@ -256,7 +309,7 @@ switch (state) {
 					if (!unit.has_attacked) {
 						if (key_H_pressed) {
 							if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
-								//obj_menu.set_select(1);
+								//obj_menuTut.set_select(1);
 								unit.skill_used = 0;
 								enough_tp = true;
 							}
@@ -267,7 +320,7 @@ switch (state) {
 						}
 						else if (key_J_pressed) {
 							if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
-								//obj_menu.set_select(2);
+								//obj_menuTut.set_select(2);
 								unit.skill_used = 1;
 								enough_tp = true;
 							}
@@ -277,7 +330,7 @@ switch (state) {
 						}
 						else if (key_K_pressed) {
 							if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
-								//obj_menu.set_select(3);
+								//obj_menuTut.set_select(3);
 								unit.skill_used = 2;
 								enough_tp = true;
 							}
@@ -286,7 +339,7 @@ switch (state) {
 								}
 						}else if (key_L_pressed) {
 							if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
-								//obj_menu.set_select(4);
+								//obj_menuTut.set_select(4);
 								unit.skill_used = 3;
 								enough_tp = true;
 							}
@@ -311,13 +364,13 @@ switch (state) {
 				}
 				
 			}else{ // enemy unit
-				obj_menu.close_menu();
+				obj_menuTut.close_menu();
 				if(unit.stall_turns==0){
 					unit.display_target_highlights();
 				}
 			}
 		}else{
-			obj_menu.close_menu();
+			obj_menuTut.close_menu();
 		}
 		if(key_Enter_pressed){ // end the turn
 			board_obstacle_order = 0;
@@ -337,8 +390,8 @@ switch (state) {
 		
 		// error handling but unit should always be a player unit here
 		if(unit!=pointer_null){
-			//obj_menu.set_text("WASD - Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
-			obj_menu.set_text("WASD - Move     Enter - Do Nothing     Tab - Back");
+			//obj_menuTut.set_text("WASD - Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
+			obj_menuTut.set_text("WASD - Move     Enter - Do Nothing     Tab - Back");
 			
 			// moving
 			if (wasd_pressed) {
@@ -359,7 +412,7 @@ switch (state) {
 				show_debug_message("Move to ({0},{1})", unit.grid_pos[0], unit.grid_pos[1]);
 			}
 			else if (key_Tab_pressed){ // back button
-					obj_menu.select = 0;
+					obj_menuTut.select = 0;
 					unit.back_move();
 					change_state(BattleState.PlayerWaitingAction);
 					obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
@@ -444,7 +497,7 @@ switch (state) {
 			
 		}else{
 			
-			obj_menu.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+""+string(unit.actions[unit.skill_used].name[unit.upgrades[unit.skill_used]])+"\n"+string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
+			obj_menuTut.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+""+string(unit.actions[unit.skill_used].name[unit.upgrades[unit.skill_used]])+"\n"+string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
 			if (unit.skill_complete) {  // did the skill get used and finish
 
 				tp_current -= unit.actions[unit.skill_used].cost[unit.upgrades[unit.skill_used]];
@@ -591,13 +644,13 @@ switch (state) {
 
 #region Enemy Taking Action
 	case BattleState.EnemyTakingAction:
-		obj_menu.playerState = false;
-		obj_menu.enemyState = true;
+		obj_menuTut.playerState = false;
+		obj_menuTut.enemyState = true;
 		
 		if (in_animation) {
 			break;
 		}
-		obj_menu.close_menu();
+		obj_menuTut.close_menu();
 		
 		// check if enemies have died after every eemy attacks
 		if(!checking_death){
@@ -655,7 +708,7 @@ switch (state) {
 		}else{
 			if(keyboard_check_pressed(vk_anykey)){
 				obj_gridCreator.reset_highlights_cursor();
-				obj_menu.set_text("Press any key to restart");
+				obj_menuTut.set_text("Press any key to restart");
 				room_restart();
 			}
 			
@@ -678,7 +731,7 @@ switch (state) {
 		if (in_animation) {
 			break;
 		}
-		obj_menu.close_menu();
+		obj_menuTut.close_menu();
 		
 		
 		if (board_obstacle_order >= array_length(board_obstacles)) {
@@ -701,13 +754,13 @@ switch (state) {
 
 #region  Obstacles hit enemy units
 	case BattleState.EnemyBoardObstacle:
-		obj_menu.playerState = false;
-		obj_menu.enemyState = false;
+		obj_menuTut.playerState = false;
+		obj_menuTut.enemyState = false;
 		
 		if (in_animation) {
 			break;
 		}
-		obj_menu.close_menu();
+		obj_menuTut.close_menu();
 		
 		// check if enemies have died after every obstacle
 		if(!checking_death){

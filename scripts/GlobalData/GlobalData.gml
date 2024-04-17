@@ -2400,7 +2400,7 @@ global.tutorialenc = [
 	[
 		{
 			info: global.enemies[1],
-			grid: [8, 3]
+			grid: [6, 3]
 		},
 		{
 			info: global.enemies[1],
