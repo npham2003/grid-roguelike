@@ -2318,7 +2318,7 @@ global.enemies = [
 		actions: [global.enemyActions.melee],
 		sounds: { attack: sfx_slime_attack },
 		ally: false,
-		gold: 50
+		gold: 100
 	},
 	{
 		name: "Bat",
@@ -2340,7 +2340,7 @@ global.enemies = [
 		actions: [global.enemyActions.homing_aoe],
 		sounds: { attack: sfx_bat_attack },
 		ally: false,
-		gold: 100
+		gold: 300
 	},
 	{
 		name: "Cross",
@@ -2362,7 +2362,7 @@ global.enemies = [
 		actions: [global.enemyActions.summon],
 		sounds: { attack: sfx_bat_attack },
 		ally: false,
-		gold: 200
+		gold: 500
 	}
 ]
 
@@ -2396,7 +2396,88 @@ global.obstacles = [
 ]
 
 //Encounters
+//global.encounters = [
+//	[
+//		{
+//			info: global.enemies[1],
+//			grid: [8, 3]
+//		},
+//		{
+//			info: global.enemies[0],
+//			grid: [8, 2]
+//		}
+		
+//	],
+//	[
+//		{
+//			info: global.enemies[0],
+//			grid: [8, 1]
+//		},
+//		{
+//			info: global.enemies[0],
+//			grid: [8, 2]
+//		},
+//		{
+//			info: global.enemies[0],
+//			grid: [8, 3]
+//		}
+//	],
+//	[
+//		{
+//			info: global.enemies[1],
+//			grid: [8, 1]
+//		},
+//		{
+//			info: global.enemies[1],
+//			grid: [8, 3]
+//		}
+//	],
+//	[
+//		{
+//			info: global.enemies[1],
+//			grid: [6, 2]
+//		},
+//		{
+//			info: global.enemies[1],
+//			grid: [7, 1]
+//		},
+//		{
+//			info: global.enemies[1],
+//			grid: [7, 3]
+//		},
+//		{
+//			info: global.enemies[1],
+//			grid: [7, 2]
+//		},
+//		{
+//			info: global.enemies[1],
+//			grid: [8, 2]
+//		}
+//	],
+//	[
+//		{
+//			info: global.enemies[2],
+//			grid: [8, 2]
+//		}
+//	],
+//	[
+//		{
+//			info: global.enemies[4],
+//			grid: [8, 2]
+//		}
+//	]
+
+//]
+
 global.encounters = [
+	[
+		{
+			info: global.enemies[0],
+			grid: [8, 1]
+		}
+		
+	],
+	,
 	[
 		{
 			info: global.enemies[1],
@@ -2410,6 +2491,50 @@ global.encounters = [
 	],
 	[
 		{
+			info: global.enemies[1],
+			grid: [8, 1]
+		},
+		{
+			info: global.enemies[1],
+			grid: [8, 3]
+		},
+		{
+			info: global.enemies[1],
+			grid: [8, 2]
+		}
+	],
+	[
+		{
+			info: global.enemies[1],
+			grid: [8, 3]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 2]
+		}
+		
+	],
+	[
+		{
+			info: global.enemies[1],
+			grid: [8, 3]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 2]
+		},
+		{
+			info: global.enemies[1],
+			grid: [7, 3]
+		},
+		{
+			info: global.enemies[1],
+			grid: [6, 3]
+		},
+		
+	],
+	[
+		{
 			info: global.enemies[0],
 			grid: [8, 1]
 		},
@@ -2419,16 +2544,6 @@ global.encounters = [
 		},
 		{
 			info: global.enemies[0],
-			grid: [8, 3]
-		}
-	],
-	[
-		{
-			info: global.enemies[1],
-			grid: [8, 1]
-		},
-		{
-			info: global.enemies[1],
 			grid: [8, 3]
 		}
 	],
@@ -2457,14 +2572,139 @@ global.encounters = [
 	[
 		{
 			info: global.enemies[2],
+			grid: [9, 2]
+		},
+		{
+			info: global.enemies[1],
+			grid: [8, 1]
+		},
+		{
+			info: global.enemies[1],
+			grid: [8, 3]
+		}
+	],
+	
+	[
+		{
+			info: global.enemies[2],
+			grid: [9, 1]
+		},
+		{
+			info: global.enemies[2],
+			grid: [9, 3]
+		}
+		
+	],
+	[
+		
+		{
+			info: global.enemies[2],
+			grid: [8, 2]
+		},
+		{
+			info: global.enemies[2],
+			grid: [8, 0]
+		},
+		{
+			info: global.enemies[2],
+			grid: [8, 4]
+		},
+		
+	],
+	[
+		{
+			info: global.enemies[2],
+			grid: [9, 1]
+		},
+		{
+			info: global.enemies[2],
+			grid: [9, 3]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 1]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 3]
+		},
+	],
+	[
+		{
+			info: global.enemies[4],
+			grid: [9, 2]
+		},
+		{
+			info: global.enemies[1],
+			grid: [7, 3]
+		},
+		{
+			info: global.enemies[1],
+			grid: [7, 2]
+		},
+		{
+			info: global.enemies[1],
 			grid: [8, 2]
 		}
 	],
 	[
 		{
+			info: global.enemies[2],
+			grid: [5, 0]
+		},
+		{
+			info: global.enemies[2],
+			grid: [5, 4]
+		},
+		{
 			info: global.enemies[4],
+			grid: [9, 1]
+		},
+		
+		
+	],
+	[
+		{
+			info: global.enemies[4],
+			grid: [9, 1]
+		},
+		{
+			info: global.enemies[4],
+			grid: [9, 3]
+		},
+		
+	],
+	[
+		{
+			info: global.enemies[4],
+			grid: [9, 1]
+		},
+		{
+			info: global.enemies[0],
+			grid: [7, 3]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 3]
+		},
+		
+	],
+	[
+		{
+			info: global.enemies[4],
+			grid: [9, 1]
+		},
+		{
+			info: global.enemies[4],
+			grid: [9, 3]
+		},
+		{
+			info: global.enemies[2],
 			grid: [8, 2]
-		}
-	]
+		},
+		
+	],
+	
+	
 
 ]

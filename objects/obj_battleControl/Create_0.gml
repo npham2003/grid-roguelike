@@ -21,12 +21,14 @@ transition_count = 0;
 
 enemy_check_death = 0;
 checking_death = false;
-gold = 2000;
+gold = 0;
 battle_gold = 0;
 unit = pointer_null;
 
 board_obstacle_order = 0;
 obstacle = pointer_null;
+
+battle_progress=0;
 
 #region Spawns
 
@@ -194,7 +196,7 @@ enum BattleState {
 };
 
 //state = BattleState.PlayerUpgrade;
-state = BattleState.PlayerUpgrade;
+state = BattleState.BattleStart;
 show_debug_message("Battle Start");
 
 function change_state(new_state) {
