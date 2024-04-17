@@ -46,17 +46,17 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 				if(selector_pos[0]==3&&selector_pos[1]==0&&selectable[3]){ // 1 extra dmg on attacks
 					attack_up();
 				}
-				if(selector_pos[0]==0&&selector_pos[1]==1&&selectable[4]){ // upgrade 1
+				if(selector_pos[0]==0&&selector_pos[1]==1&&selectable[4]){ // upgrade skill 1
 					menu_level=2;
-					new_skill_upgrade=1;
+					skill_select_pos=1;
 				}
-				if(selector_pos[0]==1&&selector_pos[1]==1&&selectable[5]){ // upgrade 2
+				if(selector_pos[0]==1&&selector_pos[1]==1&&selectable[5]){ // upgrade skill 2
 					menu_level=2;
-					new_skill_upgrade=2;
+					skill_select_pos=2;
 				}
-				if(selector_pos[0]==2&&selector_pos[1]==1&&selectable[6]){ // downgrade
+				if(selector_pos[0]==2&&selector_pos[1]==1&&selectable[6]){ // upgrade skill 3
 					menu_level=2;
-					new_skill_upgrade=0;
+					skill_select_pos=3;
 				}
 				if(selector_pos[0]==3&&selector_pos[1]==1&&selectable[7]){ // new party member
 					new_party_member();
@@ -108,7 +108,6 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 			}
 			if(keyboard_check_pressed(vk_enter)){
 				menu_level=3;
-				skill_select_pos=1;
 			}
 			break;
 		case 3:
@@ -116,18 +115,18 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 				menu_level=2;
 			}
 			if (keyboard_check_pressed(ord("S"))) {
-				skill_select_pos+=1;
-				if(skill_select_pos>3){
-					skill_select_pos=1;
+				new_skill_upgrade+=1;
+				if(new_skill_upgrade>2){
+					new_skill_upgrade=0;
 				}
 			}
 			if (keyboard_check_pressed(ord("W"))) {
-				skill_select_pos-=1;
-				if(skill_select_pos<1){
-					skill_select_pos=3;
+				new_skill_upgrade-=1;
+				if(new_skill_upgrade<0){
+					new_skill_upgrade=2;
 				}
 			}
-			if(keyboard_check_pressed(vk_enter) && selectable[skill_select_pos]){
+			if(keyboard_check_pressed(vk_enter) && selectable[new_skill_upgrade]){
 				menu_level=0;
 				upgrade(obj_battleControl.player_units[character_select_pos],skill_select_pos,new_skill_upgrade);
 			}
