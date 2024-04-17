@@ -34,18 +34,18 @@ obstacle = pointer_null;
 
 // Temp struct for player data, may move to a config file or generate dynamically in the future
 var player_data = [
-	{
-		info: global.players[1],
-		grid: [3, 2]		
-	},
+	//{
+	//	info: global.players[1],
+	//	grid: [3, 2]		
+	//},
 	{
 		info: global.players[0],
 		grid: [2, 2]		
 	},
-	{
-		info: global.players[2],
-		grid: [2, 1]		
-	}
+	//{
+	//	info: global.players[2],
+	//	grid: [2, 1]		
+	//}
 ];
 
 // spawns units at the very start
