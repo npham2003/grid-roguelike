@@ -24,7 +24,7 @@ if (is_moving) {
 		set_danger_highlights();
 		
 		is_moving = false;
-		obj_battleControl.in_animation = false;
+		battlecontrol.in_animation = false;
 	}
 	
 }

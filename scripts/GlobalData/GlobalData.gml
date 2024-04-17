@@ -2395,6 +2395,20 @@ global.obstacles = [
 	
 ]
 
+// Encounters specifically for the tutorial
+global.tutorialenc = [
+	[
+		{
+			info: global.enemies[1],
+			grid: [8, 3]
+		},
+		{
+			info: global.enemies[1],
+			grid: [7, 2]
+		}
+	]
+]
+
 //Encounters
 global.encounters = [
 	[

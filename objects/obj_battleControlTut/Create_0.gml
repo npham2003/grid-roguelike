@@ -36,16 +36,8 @@ obstacle = pointer_null;
 
 var player_data = [
 	{
-		info: global.players[1],
-		grid: [3, 2]		
-	},
-	{
 		info: global.players[0],
 		grid: [2, 2]		
-	},
-	{
-		info: global.players[2],
-		grid: [2, 1]		
 	}
 ];
 
@@ -96,7 +88,7 @@ var enemy_data = [
 		grid: [8, 2]
 	},
 	{
-		info: global.enemies[1],
+		info: global.enemies[0],
 		grid: [8, 3]
 	}
 ];
@@ -179,20 +171,20 @@ obj_cursor.movable_tiles=obj_gridCreator.battle_grid;
 
 #endregion
 
-enum BattleState {
-	BattleStart,
-	EnemyAiming,
-	PlayerPreparing,
-	PlayerWaitingAction,
-	PlayerMoving,
-	PlayerAiming,
-	PlayerTakingAction,
-	EnemyTakingAction,
-	BattleEnd,
-	PlayerUpgrade,
-	PlayerBoardObstacle,
-	EnemyBoardObstacle
-};
+//enum BattleState {
+//	BattleStart,
+//	EnemyAiming,
+//	PlayerPreparing,
+//	PlayerWaitingAction,
+//	PlayerMoving,
+//	PlayerAiming,
+//	PlayerTakingAction,
+//	EnemyTakingAction,
+//	BattleEnd,
+//	PlayerUpgrade,
+//	PlayerBoardObstacle,
+//	EnemyBoardObstacle
+//};
 
 //state = BattleState.PlayerUpgrade;
 state = BattleState.BattleStart;

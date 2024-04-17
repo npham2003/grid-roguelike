@@ -1,3 +1,9 @@
+if (instance_exists(obj_battleControl)) { // so that it looks for the right object
+	battlecontrol = obj_battleControl;
+} else {
+	battlecontrol = obj_battleControlTut;
+}
+
 state = 0;
 skills = 5;
 _text = "";

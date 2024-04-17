@@ -84,7 +84,7 @@ if (open) {
 #endregion
 
 #region party tp
-var _pips = make_tp(rootX+120, rootY-70, 15, obj_battleControl.tp_max, false);
+var _pips = make_tp(rootX+120, rootY-70, 15, battlecontrol.tp_max, false);
 for (var i = 0; i < array_length(_pips); ++i){
 	draw_primitive_begin(pr_trianglestrip);
 	//draw_set_color(global._tpBorder);
@@ -107,8 +107,8 @@ for (var i = 0; i < array_length(_pips); ++i){
 }
 
 
-var _pips = make_tp(rootX+120, rootY-70, 15, obj_battleControl.tp_current, false);
-//show_debug_message(string(obj_battleControl.tp_current));
+var _pips = make_tp(rootX+120, rootY-70, 15, battlecontrol.tp_current, false);
+//show_debug_message(string(battlecontrol.tp_current));
 for (var i = 0; i < array_length(_pips); ++i){
 	draw_primitive_begin(pr_trianglestrip);
 	draw_set_color(global._tpBorder);
@@ -118,7 +118,7 @@ for (var i = 0; i < array_length(_pips); ++i){
 	draw_primitive_end();
 }
 
-if(obj_battleControl.state==BattleState.PlayerAiming){
+if(battlecontrol.state==BattleState.PlayerAiming){
 	for (var i = array_length(_pips)-1; i > array_length(_pips)-1-player_unit.actions[player_unit.skill_used].cost[player_unit.upgrades[player_unit.skill_used]]; --i){
 		draw_primitive_begin(pr_trianglestrip);
 		
@@ -193,7 +193,7 @@ draw_vertices(make_diamond(87, 53, 25));
 draw_primitive_end();
 
 draw_set_color(global._primary);
-draw_text_transformed(75, 20, "G    "+ string(obj_battleControl.gold), 0.8, 0.8, 0);
+draw_text_transformed(75, 20, "G    "+ string(battlecontrol.gold), 0.8, 0.8, 0);
 #endregion
 
 #region skill details
