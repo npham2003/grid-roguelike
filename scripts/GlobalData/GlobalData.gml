@@ -2318,7 +2318,7 @@ global.enemies = [
 		actions: [global.enemyActions.melee],
 		sounds: { attack: sfx_slime_attack },
 		ally: false,
-		gold: 100
+		gold: 200
 	},
 	{
 		name: "Bat",
@@ -2477,7 +2477,6 @@ global.encounters = [
 		}
 		
 	],
-	,
 	[
 		{
 			info: global.enemies[1],
