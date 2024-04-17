@@ -18,7 +18,12 @@ var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_H_press
 var enough_tp = false;
 
 if (transition_count > 0) {
-	transition_count--;
+	transition_count-=1;
+	return;
+}
+
+if (transition_count < 0) {
+	
 	return;
 }
 
@@ -26,6 +31,10 @@ switch (state) {
 	
 #region Battle Start
 	case BattleState.BattleStart:
+		
+		obj_menu.set_turn_banner(false);
+		obj_draw_bg.colorSwitch = true;
+		
 		for (var i = 0; i < array_length(player_units); i++) {
 			player_units[i].attack_bonus=0;
 			// revives dead units
@@ -56,16 +65,13 @@ switch (state) {
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
 		
-		obj_menu.enemyTurn = true;
-		obj_menu.playerTurn = false;
 		change_state(BattleState.EnemyAiming);
 		break;
 #endregion
 	
 #region Enemy Aiming
 	case BattleState.EnemyAiming:
-		obj_menu.playerState = false;
-		obj_menu.enemyState = false;
+		
 		
 		if (in_animation) {
 			break;
@@ -108,13 +114,15 @@ switch (state) {
 			// next enemy
 			enemy_order += 1;
 		}
+		
+		obj_draw_bg.colorSwitch = false;
+		
 		break;
 #endregion
 
 #region Player Preparing
 	case BattleState.PlayerPreparing:
-		obj_menu.playerState = false;
-		obj_menu.enemyState = false;
+		
 		
 		for (var i = 0; i < array_length(player_units); i++) {
 			
@@ -590,8 +598,6 @@ switch (state) {
 
 #region Enemy Taking Action
 	case BattleState.EnemyTakingAction:
-		obj_menu.playerState = false;
-		obj_menu.enemyState = true;
 		
 		if (in_animation) {
 			break;
@@ -637,6 +643,8 @@ switch (state) {
 				checking_death=false;
 			}
 		}
+		
+		obj_draw_bg.colorSwitch = true;
 		
 		break;
 #endregion
@@ -700,8 +708,7 @@ switch (state) {
 
 #region  Obstacles hit enemy units
 	case BattleState.EnemyBoardObstacle:
-		obj_menu.playerState = false;
-		obj_menu.enemyState = false;
+		
 		
 		if (in_animation) {
 			break;

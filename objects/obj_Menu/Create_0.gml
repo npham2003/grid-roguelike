@@ -11,25 +11,30 @@ confirm = false;
 tp_opacity_increase=true;
 tp_opacity=0;
 
+turn_opacity_increase=true;
+turn_opacity=50;
+turn_count = 0;
+turn_max = 3;
+turn_text_anim = 0;
+turn_life = 100;
+turn_banner_animation_started=false;
+
 #region location & size
 imgX = 200;
 imgY = 680;
 
 rootX = imgX+20;
 rootY = imgY + 32;
-select_shift = 50;
-select_anim = 0;
+select_shift = 30;
+
 menuX = [rootX, rootX, rootX, rootX, rootX];
 menuY = [rootY, rootY, rootY, rootY, rootY];
 
-//turn = "ENEMY TURN";
 portraitScale = 0.55;
 playerScale = 15;
 playerDim = sprite_get_height(spr_diamond_base) * playerScale/2;
 
 optionAlpha = 0;
-
-
 portraitAlpha=1;
 
 optionRadius = 40;
@@ -104,9 +109,22 @@ draw_vertices = function(vertices){
 	}
 }
 
-#endregion
-
-#region functions
+set_turn_banner = function(player_turn){
+	if(!turn_banner_animation_started){
+		if(player_turn){
+			turn="PLAYER TURN";	
+		}else{
+			turn="ENEMY TURN";
+		}
+		turn_life=100;
+		turn_banner_animation_started=true;
+		turn_opacity=100;
+		turn_count = 0;
+		turn_max = 3;
+		turn_text_anim = 0;
+		turn_life = 100;
+	}
+}
 
 #endregion
 

@@ -8,10 +8,10 @@
 
 global._primary = #d1a578;
 global._secondary = #1cc6e0;
-global._aspect_bars = #1A1713;
+global._aspect_bars = #141414;
 
 global._playerTurnTop = #194DD0;
-//_playerTurnMiddle = 
+global._playerTurnMiddle = #194DD0;
 global._playerTurnBottom = #148d95;
 
 global._enemyTurnTop = #da7066;
