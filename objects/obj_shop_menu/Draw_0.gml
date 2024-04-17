@@ -230,20 +230,50 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 		for(i=1;i<array_length(obj_battleControl.player_units[character_select_pos].actions);i++){
 			var action = obj_battleControl.player_units[character_select_pos].actions[i];
 			var prev_skill = obj_battleControl.player_units[character_select_pos].upgrades[i];
+			
+			if(prev_skill==new_skill_upgrade){
+				selectable[i]=false;	
+			}else{
+				selectable[i]=true;	
+			}
+			
+			
+			if(selectable[i]){
+				draw_set_color(c_white);
+			}else{
+				draw_set_color(c_gray);
+			}
 			draw_sprite_ext(spr_shop_menu_border, image_index, skill_x_start, skill_y_start+(i-1)*250, 0.5, 0.5, image_angle, image_blend, alpha);
-			draw_set_color(c_white);
 			draw_set_alpha(1);
 			draw_text_ext_transformed(skill_x_start+15, skill_y_start+((i-1)*250)+5, action.name[prev_skill], 40, 600, 0.8, 0.8, image_angle);
 			draw_text_ext_transformed(skill_x_start+15, skill_y_start+((i-1)*250)+40, action.description[prev_skill], 40, 600, 0.8, 0.8, image_angle);
 			var _pips = make_tp(skill_x_start+400, skill_y_start+((i-1)*250)+30, 7*obj_menu.expandAnim, action.cost[prev_skill], true);
-
-			draw_set_color(global._characterSecondary);
+			
+			
+			
+			
+			draw_set_color(global._tpBar);
 			for (var j = 0; j < array_length(_pips); j++){
 				draw_primitive_begin(pr_trianglestrip);
 				draw_vertices(make_diamond(_pips[j][0],_pips[j][1], 5*obj_menu.expandAnim));
 				draw_primitive_end();
 			}
-			draw_set_color(c_white)
+			
+			
+			if(i==skill_select_pos){
+				show_debug_message("draw arrow");
+				if(selectable[i]){
+					draw_sprite_ext(spr_right_arrow, image_index, skill_x_start+525, skill_y_start+(i-1)*250+75, 1, 1, image_angle, image_blend, 1);
+				}else{
+					draw_sprite_ext(spr_right_arrow_transparent, image_index, skill_x_start+525, skill_y_start+(i-1)*250+75, 1, 1, image_angle, image_blend, 0.5);
+				}
+			}
+			
+			if(selectable[i]){
+				draw_set_color(c_white);
+			}else{
+				draw_set_color(c_gray);
+			}
 			
 			draw_sprite_ext(spr_shop_menu_border, image_index, skill_x_start+600, skill_y_start+(i-1)*250, 0.5, 0.5, image_angle, image_blend, alpha);
 			draw_text_ext_transformed(skill_x_start+615, skill_y_start+((i-1)*250)+50, action.description[new_skill_upgrade], 40, 600, 0.8, 0.8, image_angle);
@@ -251,7 +281,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 			
 			var _pips = make_tp(skill_x_start+1015, skill_y_start+((i-1)*250)+30, 7*obj_menu.expandAnim, action.cost[new_skill_upgrade], true);
 
-			draw_set_color(global._characterSecondary);
+			draw_set_color(global._tpBar);
 			for (var j = 0; j < array_length(_pips); j++){
 				draw_primitive_begin(pr_trianglestrip);
 				draw_vertices(make_diamond(_pips[j][0],_pips[j][1], 5*obj_menu.expandAnim));

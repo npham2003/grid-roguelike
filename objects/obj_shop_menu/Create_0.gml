@@ -2,7 +2,7 @@ alpha = 0;
 actual_x=2500;
 selector_pos=[0,0]
 character_select_pos=0;
-skill_select_pos=0;
+skill_select_pos=1;
 fill_alpha = 0;
 new_skill_upgrade=0;
 character_spacing=260;
@@ -28,6 +28,17 @@ heal = function(unit){
 
 upgrade = function(unit, skill, path){
 	unit.upgrades[skill]=path;
+	switch(path){
+		case 1:
+			obj_battleControl.gold-=cost[4];
+			break;
+		case 2:
+			obj_battleControl.gold-=cost[5];
+			break;
+		case 0:
+			obj_battleControl.gold-=cost[6];
+			break;
+	}
 }
 
 tp_bonus = function(){

@@ -108,12 +108,28 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 			}
 			if(keyboard_check_pressed(vk_enter)){
 				menu_level=3;
-				skill_select_pos=0;
+				skill_select_pos=1;
 			}
 			break;
 		case 3:
 			if(keyboard_check_pressed(vk_tab)){
 				menu_level=2;
+			}
+			if (keyboard_check_pressed(ord("S"))) {
+				skill_select_pos+=1;
+				if(skill_select_pos>3){
+					skill_select_pos=1;
+				}
+			}
+			if (keyboard_check_pressed(ord("W"))) {
+				skill_select_pos-=1;
+				if(skill_select_pos<1){
+					skill_select_pos=3;
+				}
+			}
+			if(keyboard_check_pressed(vk_enter) && selectable[skill_select_pos]){
+				menu_level=0;
+				upgrade(obj_battleControl.player_units[character_select_pos],skill_select_pos,new_skill_upgrade);
 			}
 		
 	}
