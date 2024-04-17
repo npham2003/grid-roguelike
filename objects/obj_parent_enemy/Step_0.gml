@@ -19,7 +19,7 @@ if (is_moving) {
 			y -= min(sprite_moving_speed, y - target_pos[1]);
 		}
 	}
-	else {
+	if(x==target_pos[0] && y==target_pos[1]) {
 		attack_ready = true;
 		set_danger_highlights();
 		

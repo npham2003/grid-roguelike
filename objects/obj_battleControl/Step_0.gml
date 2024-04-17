@@ -61,7 +61,8 @@ switch (state) {
 		}
 		// chooses a random encounter. set to a value for debugging
 		//var random_battle = irandom(array_length(global.encounters)-1);
-		random_battle=4;
+		//random_battle=4;
+		random_battle=battle_progress;
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
 		
@@ -663,6 +664,10 @@ switch (state) {
 		if(array_length(enemy_units)==0){
 			gold+=battle_gold;
 			obj_gridCreator.reset_highlights_enemy();
+			battle_progress+=1;
+			if(battle_progress==array_length(global.encounters)){
+				battle_progress=0;
+			}
 			change_state(BattleState.PlayerUpgrade);
 		}else{
 			if(keyboard_check_pressed(vk_anykey)){
