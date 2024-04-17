@@ -4,7 +4,6 @@ current_y=0;
 name = "Cursor";
 
 if (instance_exists(obj_battleControl)) {
-	show_debug_message("I EXIST");
 	battlecontrol = obj_battleControl;
 } else {
 	battlecontrol = obj_battleControlTut;

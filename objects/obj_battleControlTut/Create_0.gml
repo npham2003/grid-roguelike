@@ -12,7 +12,7 @@ enemy_order = 0;
 
 // maybe these are in the wrong spot? but anyway yea
 tp_max = 10;
-tp_current = 10;
+tp_current = 2;
 tp_bonus=0;
 
 in_animation = false;
@@ -22,7 +22,7 @@ teachingDamage = true;
 teachingMovement = false;
 turns_until_gun = 0;
 gun_spawned = false;
-gun = pointer_null;
+gun_array = [];
 teachingBasic = false;
 teachingSkills = false;
 
@@ -40,7 +40,6 @@ obstacle = pointer_null;
 // Spawn player units
 
 // Temp struct for player data, may move to a config file or generate dynamically in the future
-
 var player_data = [
 	{
 		info: global.players[0],
@@ -95,7 +94,7 @@ var enemy_data = [
 		grid: [8, 2]
 	},
 	{
-		info: global.enemies[0],
+		info: global.enemies[1],
 		grid: [8, 3]
 	}
 ];
@@ -173,6 +172,24 @@ spawn_obstacle = function(obstacle, grid_pos){
 	
 }
 
+spawn_gun = function(player){
+		if (player.grid_pos[0] == 3 && player.grid_pos[1] == 1) {
+			x_val = 2;
+			y_val = 1;
+		} else {
+			x_val = 3;
+			y_val = 1;
+		}
+		var coord = obj_gridCreator.get_coordinates(x_val,y_val);
+		
+	
+			var unit = instance_create_layer(
+				coord[0], coord[1], "Units", obj_gun);
+				
+			unit.grid_pos=[x_val,y_val];
+			array_insert(gun_array,0,unit);
+}
+
 obj_cursor.movable_tiles=obj_gridCreator.battle_grid;
 
 
@@ -207,7 +224,8 @@ function change_state(new_state) {
 			break;
 		case BattleState.PlayerPreparing:
 			show_debug_message("Change to state Player Preparing");
-			transition_count = 120;
+			obj_menuTut.set_turn_banner(true);
+			transition_count = 100;
 			break;
 		case BattleState.PlayerWaitingAction:
 			show_debug_message("Change to state Player Waiting Action");
@@ -223,7 +241,8 @@ function change_state(new_state) {
 			break;
 		case BattleState.EnemyTakingAction:
 			show_debug_message("Change to state Enemy Taking Action");
-			transition_count = 120;
+			obj_menuTut.set_turn_banner(false);
+			transition_count = 100;
 			break;
 		case BattleState.BattleEnd:
 			show_debug_message("Change to state Battle End");
