@@ -36,7 +36,7 @@ switch (state) {
 		obj_draw_bg.colorSwitch = true;
 		
 		for (var i = 0; i < array_length(player_units); i++) {
-			player_units[i].attack_bonus=0;
+			
 			// revives dead units
 			if(player_units[i].hp<=0){
 				player_units[i].hp=1;
@@ -61,7 +61,7 @@ switch (state) {
 		}
 		// chooses a random encounter. set to a value for debugging
 		//var random_battle = irandom(array_length(global.encounters)-1);
-		random_battle=5;
+		random_battle=4;
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
 		
@@ -305,6 +305,7 @@ switch (state) {
 								unit.skill_init = false;
 								unit.skill_complete = false;
 								enough_tp = false;
+								unit.skill_progress=0;
 								change_state(BattleState.PlayerAiming);
 								obj_gridCreator.reset_highlights_cursor();
 							}
@@ -417,6 +418,7 @@ switch (state) {
 					unit.confirm_move();
 					unit.skill_init = false;
 					unit.skill_complete = false;
+					unit.skill_progress=0;
 					enough_tp = false;
 					change_state(BattleState.PlayerAiming);
 				}
@@ -652,6 +654,9 @@ switch (state) {
 #region Battle End
 	case BattleState.BattleEnd:
 		tp_bonus=0;
+		for (var i = 0; i < array_length(player_units); i++) {
+			player_units[i].attack_bonus=0;
+		}
 		if(in_animation){
 			break;
 		}
@@ -672,10 +677,7 @@ switch (state) {
 
 #region
 	case BattleState.PlayerUpgrade:
-		if (key_Tab_pressed) {
-			change_state(BattleState.BattleStart);
-			
-		}
+		
 		break;
 #endregion
 
