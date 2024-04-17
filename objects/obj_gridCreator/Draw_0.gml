@@ -28,6 +28,10 @@ for (var i = 0; i< gridHoriz;i++){
 		if(obj_gridCreator.battle_grid[i][j]._danger_highlight){
 			draw_sprite_ext(spr_grid_danger_highlight, image_index, x + (i*100), y + (j*50), image_xscale, image_yscale, image_angle, image_blend, 0.5);
 		}
+		if(obj_gridCreator.battle_grid[i][j]._support_highlight){
+			draw_sprite_ext(spr_grid_support_highlight, image_index, x + (i*100), y + (j*50), image_xscale, image_yscale, image_angle, image_blend, 0.5);
+		}
+		
 	}
 }
 

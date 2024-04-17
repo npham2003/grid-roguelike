@@ -8,6 +8,7 @@ highlighted_move_array=[];
 highlighted_attack_array=[];
 highlighted_target_array=[];
 highlighted_enemy_target_array=[];
+highlighted_support_array=[];
 
 _target_transparency=0.5;
 
@@ -29,6 +30,42 @@ remove_entity = function(_x_value, _y_value){
 	battle_grid[_x_value][_y_value]._is_empty=true;
 	battle_grid[_x_value][_y_value]._entity_on_tile=pointer_null;
 	
+}
+
+visualize = function(){
+	show_debug_message("Grid Viewer");
+	for(i=0;i<array_length(battle_grid[0]);i++){
+		var row_string="";
+		for(j=0; j<array_length(battle_grid);j++){
+			if(battle_grid[j][i]._is_empty){
+				row_string = string_concat(row_string,"[ ]");
+			}else{
+				row_string = string_concat(row_string,"[-]");
+			}
+			if(j==4){
+				row_string = string_concat(row_string," | ");
+			}
+		}
+		show_debug_message(row_string);
+	}
+}
+
+visualize_danger = function(){
+	show_debug_message("Grid Viewer");
+	for(i=0;i<array_length(battle_grid[0]);i++){
+		var row_string="";
+		for(j=0; j<array_length(battle_grid);j++){
+			
+			row_string = string_concat(row_string,"[",string(battle_grid[j][i]._danger_number),"]");
+			
+			
+			
+			if(j==4){
+				row_string = string_concat(row_string," | ");
+			}
+		}
+		show_debug_message(row_string);
+	}
 }
 
 move_entity = function(_prev_x,_prev_y,_new_x,_new_y){
@@ -70,6 +107,16 @@ reset_highlights_target = function(){
 	}
 }
 
+reset_highlights_support = function(){
+	highlighted_target_array = [];
+	for (var i = 0; i< gridHoriz;i++){
+		for (var j = 0; j < gridVert;j++){
+			battle_grid[i][j]._support_highlight=false;
+			
+		}
+	}
+}
+
 reset_highlights_enemy = function(){
 	highlighted_enemy_target_array = [];
 	for (var i = 0; i< gridHoriz;i++){
@@ -96,7 +143,7 @@ highlighted_move = function(_center_x,_center_y,_range){
 	reset_highlights_move();
 	for(var i = -_range; i <= _range; i++){
 		for(var j = -(_range-abs(i)); j <= _range - abs(i); j++){
-			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT){
+			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT &&_center_x+i<5){
 				array_push(highlighted_move_array,battle_grid[_center_x+i][_center_y+j]);
 				battle_grid[_center_x+i][_center_y+j]._move_highlight=true;
 				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
@@ -104,6 +151,80 @@ highlighted_move = function(_center_x,_center_y,_range){
 		}
 	}
 	return highlighted_move_array;
+}
+
+find_empty_tile_ally = function(_center_x,_center_y,_range){
+	
+	if(_range<0){
+		return pointer_null;
+	}
+	if(_range==0 && battle_grid[_center_x][_center_y]._is_empty){
+		return battle_grid[_center_x][_center_y];
+	}
+	show_debug_message("Range: "+string(_range));
+	_temp = find_empty_tile_ally(_center_x,_center_y,_range-1);
+	if(_temp!=pointer_null){
+		return _temp;
+	}
+	
+	for(var i = -_range; i <= _range; i++){
+		for(var j = -(_range-abs(i)); j <= _range - abs(i); j++){
+			//show_debug_message("Checking ("+string(_center_x+i)+", "+string(_center_y+j)+") which is ("+string(battle_grid[_center_x+i][_center_y+j]._x_coord)+", "+string(battle_grid[_center_x+i][_center_y+j]._y_coord)+")");
+			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT &&_center_x+i<5){
+				if(battle_grid[_center_x+i][_center_y+j]._is_empty){
+					return battle_grid[_center_x+i][_center_y+j];
+				}
+				
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}
+		}
+	}
+	return pointer_null;
+	
+}
+
+find_empty_tile_enemy = function(_center_x,_center_y,_range){
+	
+	if(_range<0){
+		return pointer_null;
+	}
+	if(_range==0 && battle_grid[_center_x][_center_y]._is_empty){
+		return battle_grid[_center_x][_center_y];
+	}
+	show_debug_message("Range: "+string(_range));
+	_temp = find_empty_tile_ally(_center_x,_center_y,_range-1);
+	if(_temp!=pointer_null){
+		return _temp;
+	}
+	
+	for(var i = -_range; i <= _range; i++){
+		for(var j = -(_range-abs(i)); j <= _range - abs(i); j++){
+			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT &&_center_x+i>4){
+				if(battle_grid[_center_x+i][_center_y+j]._is_empty){
+					return battle_grid[_center_x+i][_center_y+j];
+				}
+				
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}
+		}
+	}
+	return pointer_null;
+	
+}
+
+highlighted_support_circle = function(_center_x,_center_y,_range){
+	
+	highlighted_support_array = [];
+	for(var i = -_range; i <= _range; i++){
+		for(var j = -(_range-abs(i)); j <= _range - abs(i); j++){
+			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT){
+				array_push(highlighted_support_array,battle_grid[_center_x+i][_center_y+j]);
+				battle_grid[_center_x+i][_center_y+j]._support_highlight=true;
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}
+		}
+	}
+	return highlighted_support_array;
 }
 
 highlighted_move_cursor = function(_center_x,_center_y,_range){
@@ -123,7 +244,7 @@ highlighted_move_cursor = function(_center_x,_center_y,_range){
 
 highlighted_attack_circle = function(_center_x,_center_y,_range){
 	
-	reset_highlights_attack();
+	highlighted_attack_array = [];
 	for(var i = -_range; i <= _range; i++){
 		for(var j = -(_range-abs(i)); j <= _range - abs(i); j++){
 			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT){
@@ -138,7 +259,7 @@ highlighted_attack_circle = function(_center_x,_center_y,_range){
 
 highlighted_attack_line_pierce = function(_center_x,_center_y){
 	
-	reset_highlights_attack();
+	highlighted_attack_array = [];
 	var j=-1;
 		while(_center_x+j<GRIDWIDTH){
 			j+=1;
@@ -156,7 +277,7 @@ highlighted_attack_line_pierce = function(_center_x,_center_y){
 
 highlighted_attack_line = function(_center_x,_center_y){
 	
-	reset_highlights_attack();
+	highlighted_attack_array = [];
 		var j=-1;
 		while(_center_x+j<GRIDWIDTH){
 			j+=1;
@@ -177,7 +298,7 @@ highlighted_attack_line = function(_center_x,_center_y){
 
 highlighted_attack_line_range = function(_center_x,_center_y,_range){ //editable range for skills
 	
-	reset_highlights_attack();
+	highlighted_attack_array = [];
 	var j=-1;
 	var i=0;
 		while(_center_x+j<GRIDWIDTH  && j<_range){
@@ -195,9 +316,20 @@ highlighted_attack_line_range = function(_center_x,_center_y,_range){ //editable
 	return highlighted_attack_array;
 }
 
+highlighted_attack_all = function(){
+	highlighted_attack_array = [];
+	for (var i = 0; i< gridHoriz;i++){
+		for (var j = 0; j < gridVert;j++){
+			array_push(highlighted_attack_array,battle_grid[i][j]);
+			battle_grid[i][j]._attack_highlight=true;
+		}
+	}
+	return highlighted_attack_array;
+}
+
 highlighted_target_straight = function(_center_x,_center_y){
 	
-	reset_highlights_target();
+	highlighted_target_array=[];
 	var j=0;
 	while(_center_x+j<GRIDWIDTH){
 		
@@ -214,9 +346,66 @@ highlighted_target_straight = function(_center_x,_center_y){
 	return highlighted_target_array;
 }
 
+highlighted_target_straight_back = function(_center_x,_center_y){
+	
+	highlighted_target_array=[];
+	var j=0;
+	while(_center_x+j>0){
+		
+		if(!battle_grid[_center_x+j][_center_y]._is_empty){
+			
+			array_push(highlighted_target_array,battle_grid[_center_x+j][_center_y]);
+			battle_grid[_center_x+j][_center_y]._target_highlight=true;
+			break;
+		}
+		j-=1;
+	}
+	
+	
+	return highlighted_target_array;
+}
+
+highlighted_target_straight_up = function(_center_x,_center_y){
+	
+	highlighted_target_array=[];
+	var j=0;
+	while(_center_y+j>0){
+		
+		if(!battle_grid[_center_x][_center_y+j]._is_empty){
+			
+			array_push(highlighted_target_array,battle_grid[_center_x+j][_center_y]);
+			battle_grid[_center_x][_center_y+j]._target_highlight=true;
+			break;
+		}
+		j-=1;
+	}
+	
+	
+	return highlighted_target_array;
+}
+
+highlighted_target_straight_down = function(_center_x,_center_y){
+	
+	highlighted_target_array=[];
+	var j=0;
+	while(_center_y+j<GRIDHEIGHT){
+		
+		if(!battle_grid[_center_x][_center_y+j]._is_empty){
+			
+			array_push(highlighted_target_array,battle_grid[_center_x+j][_center_y]);
+			battle_grid[_center_x][_center_y+j]._target_highlight=true;
+			break;
+		}
+		j+=1;
+	}
+	
+	
+	return highlighted_target_array;
+}
+
 highlighted_target_circle = function(_center_x,_center_y,_range){
 	
-	reset_highlights_target();
+	highlighted_target_array=[];
 	for(var i = -_range; i <= _range; i++){
 		for(var j = -(_range-abs(i)); j <= _range - abs(i); j++){
 			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT){
@@ -229,9 +418,24 @@ highlighted_target_circle = function(_center_x,_center_y,_range){
 	return highlighted_target_array;
 }
 
+highlighted_target_square = function(_center_x,_center_y,_range){
+	
+	highlighted_target_array=[];
+	for(var i = -_range; i <= _range; i++){
+		for(var j = -_range; j <= _range; j++){
+			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT){
+				array_push(highlighted_target_array,battle_grid[_center_x+i][_center_y+j]);
+				battle_grid[_center_x+i][_center_y+j]._target_highlight=true;
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}
+		}
+	}
+	return highlighted_target_array;
+}
+
 highlighted_target_cross = function(_center_x,_center_y,_range){
 	
-	reset_highlights_target();
+	highlighted_target_array=[];
 	for(var i = -_range; i <= _range; i++){
 			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH){
 				array_push(highlighted_target_array,battle_grid[_center_x+i][_center_y]);
@@ -251,7 +455,7 @@ highlighted_target_cross = function(_center_x,_center_y,_range){
 
 highlighted_target_line_pierce = function(_center_x,_center_y){
 	
-	reset_highlights_target();
+	highlighted_target_array=[];
 	var j=-1;
 		while(_center_x+j<GRIDWIDTH){
 			j+=1;
@@ -330,6 +534,7 @@ for (var i = 0; i< gridHoriz;i++){
 		var coordinates = get_coordinates(i,j);
 		var _tile = instance_create_layer(coordinates[0],coordinates[1],"Tiles",obj_tile_class);
 		battle_grid[i][j]=_tile;
+		_tile.set_coords(i,j);
 		array_push(battle_grid_flattened,_tile);
 	}
 }

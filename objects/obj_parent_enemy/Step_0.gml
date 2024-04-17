@@ -11,7 +11,7 @@ if (is_moving) {
 			x -= min(sprite_moving_speed, x - target_pos[0]);
 		}
 	}
-	else if (y != target_pos[1]) {
+	if (y != target_pos[1]) {
 		if (y < target_pos[1]) {
 			y += min(sprite_moving_speed, target_pos[1] - y);
 		}
@@ -21,7 +21,7 @@ if (is_moving) {
 	}
 	else {
 		attack_ready = true;
-		
+		set_danger_highlights();
 		
 		is_moving = false;
 		obj_battleControl.in_animation = false;
@@ -30,11 +30,20 @@ if (is_moving) {
 }
 
 if(is_dead){
-	obj_battleControl.in_animation=true;
+	
 	if(image_alpha==0){
 		instance_destroy();
-		obj_battleControl.in_animation=false;
+		
 	}
-	image_alpha-=0.05;
+	// fade out speed
+	image_alpha-=0.01;
+	show_debug_message(string(image_alpha));
 	
+}
+
+// changes speed based on if the enemy is being pushed or not
+if(began_push){
+	sprite_moving_speed=25;
+}else{
+	sprite_moving_speed=5;
 }
