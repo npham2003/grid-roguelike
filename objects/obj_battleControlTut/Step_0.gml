@@ -77,14 +77,15 @@ switch (state) {
 		
 		if (turns_until_gun == 2 && gun_spawned == false) {
 			gun_spawned = true;
-			spawn_gun(player_units[0]);
-		}
-		if (gun_spawned == true && gun_array[0].is_dead == false) {
-			if (player_units[0].grid_pos[0] == gun_array[0].grid_pos[0] && player_units[0].grid_pos[1] == gun_array[0].grid_pos[1]) {
-			gun_array[0].is_dead = true;
 			teachingBasic = true;
-			}
+			//spawn_gun(player_units[0]);
 		}
+		//if (gun_spawned == true && gun_array[0].is_dead == false) {
+		//	if (player_units[0].grid_pos[0] == gun_array[0].grid_pos[0] && player_units[0].grid_pos[1] == gun_array[0].grid_pos[1]) {
+		//	gun_array[0].is_dead = true;
+		//	teachingBasic = true;
+		//	}
+		//}
 		
 		if (in_animation) {
 			break;
@@ -105,7 +106,7 @@ switch (state) {
 				}
 				else if (gun_spawned && teachingBasic == false) {
 					obj_menuTut.enter_text("PRESS ENTER");
-					obj_menuTut.set_text("Is that a gun?? Let's grab it. It's time to FIGHT BACK BABY!");
+					obj_menuTut.set_text("Magically a gun? I guess it's time to FIGHT BACK! Press H to use basic attacks");
 					if (key_Enter_pressed) {
 						enemy_order = 0;
 						obj_menuTut.set_text("");
