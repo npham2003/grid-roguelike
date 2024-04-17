@@ -3,7 +3,7 @@ x = lerp(x, position[0]-CELLWIDTH/2, 0.4);
 y = lerp(y, position[1]-CELLHEIGHT/2, 0.4);
 
 
-if(obj_battleControl.state!=BattleState.EnemyAiming && obj_battleControl.state!=BattleState.EnemyTakingAction && obj_battleControl.state!=BattleState.PlayerUpgrade){
+if(battlecontrol.state!=BattleState.EnemyAiming && battlecontrol.state!=BattleState.EnemyTakingAction && battlecontrol.state!=BattleState.PlayerUpgrade){
 
 	if (keyboard_check_pressed(ord("A"))) {
 		move_cursor(current_x-1,current_y);
