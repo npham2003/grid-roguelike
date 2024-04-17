@@ -61,7 +61,7 @@ switch (state) {
 		}
 		// chooses a random encounter. set to a value for debugging
 		//var random_battle = irandom(array_length(global.encounters)-1);
-		random_battle=5;
+		random_battle=4;
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
 		
@@ -674,10 +674,7 @@ switch (state) {
 
 #region
 	case BattleState.PlayerUpgrade:
-		if (key_Tab_pressed) {
-			change_state(BattleState.BattleStart);
-			
-		}
+		
 		break;
 #endregion
 

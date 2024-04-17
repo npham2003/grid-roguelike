@@ -2276,7 +2276,7 @@ global.players = [
 	},
 	{ //oktavia
 		name: "Oktavia",
-		hp: 3,
+		hp: 2,
 		hpMax: 3,
 		playerSpeed: 2,
 		sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
