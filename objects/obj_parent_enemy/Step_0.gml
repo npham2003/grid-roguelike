@@ -11,7 +11,7 @@ if (is_moving) {
 			x -= min(sprite_moving_speed, x - target_pos[0]);
 		}
 	}
-	if (y != target_pos[1]) {
+	else if (y != target_pos[1]) {
 		if (y < target_pos[1]) {
 			y += min(sprite_moving_speed, target_pos[1] - y);
 		}
