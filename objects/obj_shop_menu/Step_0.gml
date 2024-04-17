@@ -46,9 +46,22 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 				if(selector_pos[0]==3&&selector_pos[1]==0&&selectable[3]){ // 1 extra dmg on attacks
 					attack_up();
 				}
+				if(selector_pos[0]==0&&selector_pos[1]==1&&selectable[4]){ // upgrade 1
+					menu_level=2;
+					new_skill_upgrade=1;
+				}
+				if(selector_pos[0]==1&&selector_pos[1]==1&&selectable[5]){ // upgrade 2
+					menu_level=2;
+					new_skill_upgrade=2;
+				}
+				if(selector_pos[0]==2&&selector_pos[1]==1&&selectable[6]){ // downgrade
+					menu_level=2;
+					new_skill_upgrade=0;
+				}
 				if(selector_pos[0]==3&&selector_pos[1]==1&&selectable[7]){ // new party member
 					new_party_member();
 				}
+				
 			}
 			if(keyboard_check_pressed(vk_tab)){
 				selector_pos=[0,0];
@@ -76,6 +89,33 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 				heal(obj_battleControl.player_units[character_select_pos]);
 			}
 			break;
+		case 2:
+			if (keyboard_check_pressed(ord("A"))) {
+				character_select_pos-=1;
+				
+				if(character_select_pos<0){
+					character_select_pos=array_length(obj_battleControl.player_units)-1;
+				}
+			}
+			if (keyboard_check_pressed(ord("D"))) {
+				character_select_pos+=1;
+				character_select_pos=character_select_pos%array_length(obj_battleControl.player_units);
+				
+			}
+			if(keyboard_check_pressed(vk_tab)){
+				menu_level=0;
+				character_select_pos=0;
+			}
+			if(keyboard_check_pressed(vk_enter)){
+				menu_level=3;
+				skill_select_pos=0;
+			}
+			break;
+		case 3:
+			if(keyboard_check_pressed(vk_tab)){
+				menu_level=2;
+			}
+		
 	}
 }else{
 	alpha = lerp(alpha,0,0.05);
