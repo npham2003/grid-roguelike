@@ -219,7 +219,10 @@ if (turn_banner_animation_started) {
 	draw_text_transformed(room_width/2, 260, turn, turn_text_anim, 1, 0);
 	
 }
-else turn_count = 0;
+else {
+	turn_count = 0;
+	turn_life = 100;
+}
 draw_set_alpha(1);
 draw_set_halign(fa_left);
 #endregion

@@ -3,6 +3,7 @@ for (var i = 0; i < skills; ++i) {
 	if(obj_battleControl.state==BattleState.PlayerAiming){
 		if(i==player_unit.skill_used){
 			menuX[i] = lerp(menuX[i], rootX + i * spacing * state + state * 200 - select_shift, 0.2);
+			
 		}else if(i==player_unit.skill_used+1){
 			menuX[i] = lerp(menuX[i], rootX + i * spacing * state + state * 200 + select_shift, 0.2);
 		}else{
