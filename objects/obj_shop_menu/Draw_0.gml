@@ -36,7 +36,9 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 			}else{
 				selectable[i+j*4]=true;
 			}
-		
+			if(array_length(obj_battleControl.player_units)==4){
+				selectable[7]=false;	
+			}
 		
 		}
 	}

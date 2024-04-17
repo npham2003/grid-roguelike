@@ -41,8 +41,10 @@ attack_up = function(){
 
 // in future maybe implement a way to not get repeats? maybe repeats are ok?
 new_party_member = function(){
+	show_debug_message("new member");
 	var member = irandom(array_length(global.players)-1);
 	obj_battleControl.spawn_unit(global.players[member]);
+	obj_battleControl.gold-=cost[7];
 }
 
 draw_vertices = function(vertices){

@@ -46,6 +46,9 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 				if(selector_pos[0]==3&&selector_pos[1]==0&&selectable[3]){ // 1 extra dmg on attacks
 					attack_up();
 				}
+				if(selector_pos[0]==3&&selector_pos[1]==1&&selectable[7]){ // new party member
+					new_party_member();
+				}
 			}
 			if(keyboard_check_pressed(vk_tab)){
 				selector_pos=[0,0];
