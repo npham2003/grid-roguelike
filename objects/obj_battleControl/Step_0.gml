@@ -305,6 +305,7 @@ switch (state) {
 								unit.skill_init = false;
 								unit.skill_complete = false;
 								enough_tp = false;
+								unit.skill_progress=0;
 								change_state(BattleState.PlayerAiming);
 								obj_gridCreator.reset_highlights_cursor();
 							}
@@ -417,6 +418,7 @@ switch (state) {
 					unit.confirm_move();
 					unit.skill_init = false;
 					unit.skill_complete = false;
+					unit.skill_progress=0;
 					enough_tp = false;
 					change_state(BattleState.PlayerAiming);
 				}
