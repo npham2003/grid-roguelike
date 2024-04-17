@@ -2358,7 +2358,7 @@ global.enemies = [
 		hp: 3,
 		hpMax: 3,
 		healthbar_offset: -40,
-		sprites: { idle: spr_bat_idle, attack: spr_bat_attack },
+		sprites: { idle: spr_summoner_idle, attack: spr_summoner_attack },
 		actions: [global.enemyActions.summon],
 		sounds: { attack: sfx_bat_attack },
 		ally: false,
