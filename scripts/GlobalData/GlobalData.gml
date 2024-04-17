@@ -88,12 +88,12 @@ global.actionLibrary = {
 	},
 	beam: {
 		name: ["Beam", "Big Beam", "Repel Beam"], 
-		description: ["Does 1 damage to all targets in a row", "Does 1 damage to all targets in surrounding rows. Double damage if target is in the same row", "Does 1 damage to all targets in a row and pushes them back 1 tile."],
+		description: ["Does 2 damage to all targets in a row", "Does 2 damage to all targets in surrounding rows. Double damage if target is in the same row", "Does 2 damage to all targets in a row and pushes them back 1 tile."],
 		cost: [3, 6, 4],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
-		damage: 1, // temp damage, until i figure out how to do this damage function thing
+		damage: 2, // temp damage, until i figure out how to do this damage function thing
 		func: function(_user, _targets) {
 			var _damage = 1; //math function here
 			//BattleChangeHP(_targets);
