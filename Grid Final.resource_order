@@ -1,16 +1,12 @@
 {
   "FolderOrderSettings":[],
   "ResourceOrderSettings":[
-
     {"name":"obj_battleEffect","order":2,"path":"objects/obj_battleEffect/obj_battleEffect.yy",},
-    {"name":"obj_cursor","order":1,"path":"objects/obj_cursor/obj_cursor.yy",},
-    {"name":"obj_gridCreator","order":3,"path":"objects/obj_gridCreator/obj_gridCreator.yy",},
-    {"name":"bgm_tutorialBGM","order":1,"path":"sounds/bgm_tutorialBGM/bgm_tutorialBGM.yy",},
-
     {"name":"obj_board_obstacle","order":1,"path":"objects/obj_board_obstacle/obj_board_obstacle.yy",},
+    {"name":"obj_cursor","order":1,"path":"objects/obj_cursor/obj_cursor.yy",},
     {"name":"obj_draw_bg","order":1,"path":"objects/obj_draw_bg/obj_draw_bg.yy",},
+    {"name":"obj_gridCreator","order":3,"path":"objects/obj_gridCreator/obj_gridCreator.yy",},
     {"name":"obj_hit_animation","order":6,"path":"objects/obj_hit_animation/obj_hit_animation.yy",},
-    {"name":"obj_info_panel","order":2,"path":"objects/obj_info_panel/obj_info_panel.yy",},
     {"name":"obj_menu","order":3,"path":"objects/obj_menu/obj_menu.yy",},
     {"name":"obj_push_preview","order":7,"path":"objects/obj_push_preview/obj_push_preview.yy",},
     {"name":"obj_shield_damage_number","order":4,"path":"objects/obj_shield_damage_number/obj_shield_damage_number.yy",},
@@ -24,6 +20,7 @@
     {"name":"sfx_teleport_select","order":5,"path":"sounds/sfx_teleport_select/sfx_teleport_select.yy",},
     {"name":"sfx_teleport_windup","order":4,"path":"sounds/sfx_teleport_windup/sfx_teleport_windup.yy",},
     {"name":"sfx_teleport","order":6,"path":"sounds/sfx_teleport/sfx_teleport.yy",},
+    {"name":"bgm_tutorialBGM","order":1,"path":"sounds/bgm_tutorialBGM/bgm_tutorialBGM.yy",},
     {"name":"enemy_bg","order":3,"path":"sprites/enemy_bg/enemy_bg.yy",},
     {"name":"player_bg","order":2,"path":"sprites/player_bg/player_bg.yy",},
     {"name":"spr_big_bomb","order":1,"path":"sprites/spr_big_bomb/spr_big_bomb.yy",},
@@ -53,6 +50,5 @@
     {"name":"spr_turret_attack","order":2,"path":"sprites/spr_turret_attack/spr_turret_attack.yy",},
     {"name":"spr_turret_idle","order":3,"path":"sprites/spr_turret_idle/spr_turret_idle.yy",},
     {"name":"spr_right_arrow_transparent","order":2,"path":"sprites/spr_right_arrow_transparent/spr_right_arrow_transparent.yy",},
-
   ],
 }
