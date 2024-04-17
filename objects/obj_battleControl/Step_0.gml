@@ -18,7 +18,13 @@ var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_H_press
 var enough_tp = false;
 
 if (transition_count > 0) {
-	transition_count--;
+	transition_count-=1;
+	return;
+}
+
+if (transition_count < 0) {
+	obj_menu.playerTurn= false;
+	obj_menu.enemyTurn= false;
 	return;
 }
 

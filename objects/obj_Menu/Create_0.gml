@@ -6,7 +6,6 @@ open = true;
 playerTurn = false;
 enemyTurn = true;
 
-
 confirm = false;
 
 tp_opacity_increase=true;
@@ -15,8 +14,9 @@ tp_opacity=0;
 turn_opacity_increase=true;
 turn_opacity=0;
 turn_count = 0;
-turn_max = 5;
+turn_max = 3;
 turn_text_anim = 0;
+turn_life = 100;
 
 #region location & size
 imgX = 200;
@@ -29,14 +29,11 @@ select_shift = 30;
 menuX = [rootX, rootX, rootX, rootX, rootX];
 menuY = [rootY, rootY, rootY, rootY, rootY];
 
-//turn = "ENEMY TURN";
 portraitScale = 0.55;
 playerScale = 15;
 playerDim = sprite_get_height(spr_diamond_base) * playerScale/2;
 
 optionAlpha = 0;
-
-
 portraitAlpha=1;
 
 optionRadius = 40;
@@ -110,10 +107,6 @@ draw_vertices = function(vertices){
 		draw_vertex(vertices[i][0], vertices[i][1]);
 	}
 }
-
-#endregion
-
-#region functions
 
 #endregion
 
