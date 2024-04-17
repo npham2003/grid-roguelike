@@ -460,6 +460,8 @@ function despawn(){
 	if(summoner!=pointer_null){
 		summoner.summoned_units-=1;
 	}
+	freeze_graphic.sprite_index=spr_freeze_out;
+	freeze_graphic.image_speed=1;
 }
 
 // push to the right
