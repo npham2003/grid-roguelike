@@ -10,10 +10,10 @@ character_spacing=260;
 skill_x_start = 150;
 skill_y_start = 30;
 
-descriptor_text = ["Heal 1 character for 1 HP","Gain 1 TP","Gain 1 extra TP each turn for 1 battle","Each attack does 1 extra damage for one battle", "Upgrade one skill down path A","Upgrade one skill down path B","Reset a skill back to its default","Gain 1 random party member"];
+descriptor_text = ["Heal 1 character for 1 HP","Gain 1 TP","Gain 1 extra TP each turn for 1 battle","Each attack does 1 extra damage for one battle", "Alter skill 1","Alter skill 2","Alter skill 3","Gain 1 random party member"];
 menu_level=0;
 
-cost = [200, 300, 400, 300, 1000, 1000, 100, 1000];
+cost = [200, 300, 400, 300, 600, 600, 600, 1000];
 
 selectable = [true, true, true, true, true, true, true, true];
 

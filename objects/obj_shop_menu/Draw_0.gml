@@ -140,21 +140,23 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 						//draw_sprite_ext(spr_diamond_base, 0, actual_x+(200*i)+200, y+500, _sb,_sb, 0, global._primary, 1);
 						//draw_sprite_ext(spr_diamond_outline, 0, actual_x+(200*i)+200, y+500, _sb,_sb, 0, global._characterPrimary, 1);
 			
-						if(selector_pos[0]==2){ // checks to see if we are resetting a skill
-							selectable[i]=false;
-							for(j=0;j<array_length(obj_battleControl.player_units[i].upgrades);j++){ // checks to see if there are any skills to reset
-								if(obj_battleControl.player_units[i].upgrades[j]!=0){
+						//if(selector_pos[0]==2){ // checks to see if we are resetting a skill
+						//	selectable[i]=false;
+						//	for(j=0;j<array_length(obj_battleControl.player_units[i].upgrades);j++){ // checks to see if there are any skills to reset
+						//		if(obj_battleControl.player_units[i].upgrades[j]!=0){
 								
-									selectable[i]=true;
-									break;
-								}
-							}
-						}
-						else if(array_contains(obj_battleControl.player_units[i].upgrades, 0)){  //checks if there are any skills to upgrade
-							selectable[i]=true;
-						}else{
-							selectable[i]=false;
-						}
+						//			selectable[i]=true;
+						//			break;
+						//		}
+						//	}
+						//}
+						//else if(array_contains(obj_battleControl.player_units[i].upgrades, 0)){  //checks if there are any skills to upgrade
+						//	selectable[i]=true;
+						//}else{
+						//	selectable[i]=false;
+						//}
+						
+						selectable[i]=true;
 			
 						#region draw diamond
 						draw_set_color(c_black);
@@ -231,45 +233,43 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 		draw_set_color(c_black);
 		draw_set_alpha(1);
 		draw_rectangle(0, 0, room_width, room_height, false);
-		for(i=1;i<array_length(obj_battleControl.player_units[character_select_pos].actions);i++){
-			var action = obj_battleControl.player_units[character_select_pos].actions[i];
-			var prev_skill = obj_battleControl.player_units[character_select_pos].upgrades[i];
+		
+		
+		draw_set_color(c_white);
+		var action = obj_battleControl.player_units[character_select_pos].actions[skill_select_pos];
+		var prev_skill = obj_battleControl.player_units[character_select_pos].upgrades[skill_select_pos];
+		draw_sprite_ext(spr_shop_menu_border, image_index, skill_x_start, skill_y_start+(1)*250, 0.5, 0.5, image_angle, image_blend, alpha);
+		draw_set_alpha(1);
+		draw_text_ext_transformed(skill_x_start+15, skill_y_start+((1)*250)+5, action.name[prev_skill], 40, 600, 0.8, 0.8, image_angle);
+		draw_text_ext_transformed(skill_x_start+15, skill_y_start+((1)*250)+40, action.description[prev_skill], 40, 600, 0.8, 0.8, image_angle);
+		var _pips = make_tp(skill_x_start+400, skill_y_start+((1)*250)+30, 7*obj_menu.expandAnim, action.cost[prev_skill], true);
+	
+		draw_set_color(global._tpBar);
+		for (var j = 0; j < array_length(_pips); j++){
+			draw_primitive_begin(pr_trianglestrip);
+			draw_vertices(make_diamond(_pips[j][0],_pips[j][1], 5*obj_menu.expandAnim));
+			draw_primitive_end();
+		}
+		
+		for(i=0;i<3;i++){
 			
-			if(prev_skill==new_skill_upgrade){
+			
+			if(prev_skill==i){
 				selectable[i]=false;	
 			}else{
 				selectable[i]=true;	
 			}
 			
 			
-			if(selectable[i]){
-				draw_set_color(c_white);
-			}else{
-				draw_set_color(c_gray);
-			}
-			draw_sprite_ext(spr_shop_menu_border, image_index, skill_x_start, skill_y_start+(i-1)*250, 0.5, 0.5, image_angle, image_blend, alpha);
-			draw_set_alpha(1);
-			draw_text_ext_transformed(skill_x_start+15, skill_y_start+((i-1)*250)+5, action.name[prev_skill], 40, 600, 0.8, 0.8, image_angle);
-			draw_text_ext_transformed(skill_x_start+15, skill_y_start+((i-1)*250)+40, action.description[prev_skill], 40, 600, 0.8, 0.8, image_angle);
-			var _pips = make_tp(skill_x_start+400, skill_y_start+((i-1)*250)+30, 7*obj_menu.expandAnim, action.cost[prev_skill], true);
 			
 			
 			
-			
-			draw_set_color(global._tpBar);
-			for (var j = 0; j < array_length(_pips); j++){
-				draw_primitive_begin(pr_trianglestrip);
-				draw_vertices(make_diamond(_pips[j][0],_pips[j][1], 5*obj_menu.expandAnim));
-				draw_primitive_end();
-			}
-			
-			
-			if(i==skill_select_pos){
+			if(i==new_skill_upgrade){
 				show_debug_message("draw arrow");
 				if(selectable[i]){
-					draw_sprite_ext(spr_right_arrow, image_index, skill_x_start+525, skill_y_start+(i-1)*250+75, 1, 1, image_angle, image_blend, 1);
+					draw_sprite_ext(spr_right_arrow, image_index, skill_x_start+525, skill_y_start+(i)*250+75, 1, 1, image_angle, image_blend, 1);
 				}else{
-					draw_sprite_ext(spr_right_arrow_transparent, image_index, skill_x_start+525, skill_y_start+(i-1)*250+75, 1, 1, image_angle, image_blend, 0.5);
+					draw_sprite_ext(spr_right_arrow_transparent, image_index, skill_x_start+525, skill_y_start+(i)*250+75, 1, 1, image_angle, image_blend, 0.5);
 				}
 			}
 			
@@ -279,11 +279,11 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 				draw_set_color(c_gray);
 			}
 			
-			draw_sprite_ext(spr_shop_menu_border, image_index, skill_x_start+600, skill_y_start+(i-1)*250, 0.5, 0.5, image_angle, image_blend, alpha);
-			draw_text_ext_transformed(skill_x_start+615, skill_y_start+((i-1)*250)+50, action.description[new_skill_upgrade], 40, 600, 0.8, 0.8, image_angle);
-			draw_text_ext_transformed(skill_x_start+615, skill_y_start+((i-1)*250)+10, action.name[new_skill_upgrade], 40, 600, 0.8, 0.8, image_angle);
+			draw_sprite_ext(spr_shop_menu_border, image_index, skill_x_start+600, skill_y_start+(i)*250, 0.5, 0.5, image_angle, image_blend, alpha);
+			draw_text_ext_transformed(skill_x_start+615, skill_y_start+((i)*250)+50, action.description[i], 40, 600, 0.8, 0.8, image_angle);
+			draw_text_ext_transformed(skill_x_start+615, skill_y_start+((i)*250)+10, action.name[i], 40, 600, 0.8, 0.8, image_angle);
 			
-			var _pips = make_tp(skill_x_start+1015, skill_y_start+((i-1)*250)+30, 7*obj_menu.expandAnim, action.cost[new_skill_upgrade], true);
+			var _pips = make_tp(skill_x_start+1015, skill_y_start+((i)*250)+30, 7*obj_menu.expandAnim, action.cost[i], true);
 
 			draw_set_color(global._tpBar);
 			for (var j = 0; j < array_length(_pips); j++){
