@@ -36,6 +36,7 @@ attack_up = function(){
 	for(i=0;i<array_length(obj_battleControl.player_units);i++){
 		obj_battleControl.player_units[i].attack_bonus+=1;
 	}
+	obj_battleControl.gold-=cost[3];
 }
 
 // in future maybe implement a way to not get repeats? maybe repeats are ok?

@@ -36,7 +36,7 @@ switch (state) {
 		obj_draw_bg.colorSwitch = true;
 		
 		for (var i = 0; i < array_length(player_units); i++) {
-			player_units[i].attack_bonus=0;
+			
 			// revives dead units
 			if(player_units[i].hp<=0){
 				player_units[i].hp=1;
@@ -654,6 +654,9 @@ switch (state) {
 #region Battle End
 	case BattleState.BattleEnd:
 		tp_bonus=0;
+		for (var i = 0; i < array_length(player_units); i++) {
+			player_units[i].attack_bonus=0;
+		}
 		if(in_animation){
 			break;
 		}

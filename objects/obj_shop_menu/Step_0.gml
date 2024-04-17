@@ -30,18 +30,21 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 				}
 			}
 			if(keyboard_check_pressed(vk_enter) && selectable[selector_pos[0]+selector_pos[1]*4]){
-				if(selector_pos[0]==0&&selector_pos[1]==0){
+				if(selector_pos[0]==0&&selector_pos[1]==0){ // heal
 					menu_level=1;
 				}
-				if(selector_pos[0]==1&&selector_pos[1]==0&&selectable[1]){
+				if(selector_pos[0]==1&&selector_pos[1]==0&&selectable[1]){ // gain 1 tp
 					obj_battleControl.tp_current+=1;
 					obj_battleControl.gold-=cost[1];
 					if(obj_battleControl.tp_current>obj_battleControl.tp_max){
 						obj_battleControl.tp_current=obj_battleControl.tp_max;
 					}
 				}
-				if(selector_pos[0]==2&&selector_pos[1]==0&&selectable[2]){
+				if(selector_pos[0]==2&&selector_pos[1]==0&&selectable[2]){ // 1 extra tp per turn
 					tp_bonus();
+				}
+				if(selector_pos[0]==3&&selector_pos[1]==0&&selectable[3]){ // 1 extra dmg on attacks
+					attack_up();
 				}
 			}
 			if(keyboard_check_pressed(vk_tab)){
