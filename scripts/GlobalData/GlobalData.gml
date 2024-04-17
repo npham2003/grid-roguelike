@@ -88,12 +88,12 @@ global.actionLibrary = {
 	},
 	beam: {
 		name: ["Beam", "Big Beam", "Repel Beam"], 
-		description: ["Does 1 damage to all targets in a row", "Does 1 damage to all targets in surrounding rows. Double damage if target is in the same row", "Does 1 damage to all targets in a row and pushes them back 1 tile."],
+		description: ["Does 2 damage to all targets in a row", "Does 2 damage to all targets in surrounding rows. Double damage if target is in the same row", "Does 2 damage to all targets in a row and pushes them back 1 tile."],
 		cost: [3, 6, 4],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
-		damage: 1, // temp damage, until i figure out how to do this damage function thing
+		damage: 2, // temp damage, until i figure out how to do this damage function thing
 		func: function(_user, _targets) {
 			var _damage = 1; //math function here
 			//BattleChangeHP(_targets);
@@ -1379,7 +1379,7 @@ global.actionLibrary = {
 					if(unit.skill_progress==1){
 						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
-								audio_play_sound(sfx_teleport_selec, 0, false, 1);
+								audio_play_sound(sfx_teleport_select, 0, false, 1);
 								unit.skill_progress=2;
 								array_push(skill_range_aux,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]);
 								skill_coords[0]=unit.grid_pos[0];
@@ -2318,7 +2318,7 @@ global.enemies = [
 		actions: [global.enemyActions.melee],
 		sounds: { attack: sfx_slime_attack },
 		ally: false,
-		gold: 50
+		gold: 200
 	},
 	{
 		name: "Bat",
@@ -2340,7 +2340,7 @@ global.enemies = [
 		actions: [global.enemyActions.homing_aoe],
 		sounds: { attack: sfx_bat_attack },
 		ally: false,
-		gold: 100
+		gold: 300
 	},
 	{
 		name: "Cross",
@@ -2362,7 +2362,7 @@ global.enemies = [
 		actions: [global.enemyActions.summon],
 		sounds: { attack: sfx_bat_attack },
 		ally: false,
-		gold: 200
+		gold: 500
 	}
 ]
 
@@ -2432,7 +2432,87 @@ global.tutorialenc = [
 ]
 
 //Encounters
+//global.encounters = [
+//	[
+//		{
+//			info: global.enemies[1],
+//			grid: [8, 3]
+//		},
+//		{
+//			info: global.enemies[0],
+//			grid: [8, 2]
+//		}
+		
+//	],
+//	[
+//		{
+//			info: global.enemies[0],
+//			grid: [8, 1]
+//		},
+//		{
+//			info: global.enemies[0],
+//			grid: [8, 2]
+//		},
+//		{
+//			info: global.enemies[0],
+//			grid: [8, 3]
+//		}
+//	],
+//	[
+//		{
+//			info: global.enemies[1],
+//			grid: [8, 1]
+//		},
+//		{
+//			info: global.enemies[1],
+//			grid: [8, 3]
+//		}
+//	],
+//	[
+//		{
+//			info: global.enemies[1],
+//			grid: [6, 2]
+//		},
+//		{
+//			info: global.enemies[1],
+//			grid: [7, 1]
+//		},
+//		{
+//			info: global.enemies[1],
+//			grid: [7, 3]
+//		},
+//		{
+//			info: global.enemies[1],
+//			grid: [7, 2]
+//		},
+//		{
+//			info: global.enemies[1],
+//			grid: [8, 2]
+//		}
+//	],
+//	[
+//		{
+//			info: global.enemies[2],
+//			grid: [8, 2]
+//		}
+//	],
+//	[
+//		{
+//			info: global.enemies[4],
+//			grid: [8, 2]
+//		}
+//	]
+
+//]
+
 global.encounters = [
+	[
+		{
+			info: global.enemies[0],
+			grid: [8, 1]
+		}
+		
+	],
 	[
 		{
 			info: global.enemies[1],
@@ -2446,6 +2526,50 @@ global.encounters = [
 	],
 	[
 		{
+			info: global.enemies[1],
+			grid: [8, 1]
+		},
+		{
+			info: global.enemies[1],
+			grid: [8, 3]
+		},
+		{
+			info: global.enemies[1],
+			grid: [8, 2]
+		}
+	],
+	[
+		{
+			info: global.enemies[1],
+			grid: [8, 3]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 2]
+		}
+		
+	],
+	[
+		{
+			info: global.enemies[1],
+			grid: [8, 3]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 2]
+		},
+		{
+			info: global.enemies[1],
+			grid: [7, 3]
+		},
+		{
+			info: global.enemies[1],
+			grid: [6, 3]
+		},
+		
+	],
+	[
+		{
 			info: global.enemies[0],
 			grid: [8, 1]
 		},
@@ -2455,16 +2579,6 @@ global.encounters = [
 		},
 		{
 			info: global.enemies[0],
-			grid: [8, 3]
-		}
-	],
-	[
-		{
-			info: global.enemies[1],
-			grid: [8, 1]
-		},
-		{
-			info: global.enemies[1],
 			grid: [8, 3]
 		}
 	],
@@ -2493,14 +2607,139 @@ global.encounters = [
 	[
 		{
 			info: global.enemies[2],
+			grid: [9, 2]
+		},
+		{
+			info: global.enemies[1],
+			grid: [8, 1]
+		},
+		{
+			info: global.enemies[1],
+			grid: [8, 3]
+		}
+	],
+	
+	[
+		{
+			info: global.enemies[2],
+			grid: [9, 1]
+		},
+		{
+			info: global.enemies[2],
+			grid: [9, 3]
+		}
+		
+	],
+	[
+		
+		{
+			info: global.enemies[2],
+			grid: [8, 2]
+		},
+		{
+			info: global.enemies[2],
+			grid: [8, 0]
+		},
+		{
+			info: global.enemies[2],
+			grid: [8, 4]
+		},
+		
+	],
+	[
+		{
+			info: global.enemies[2],
+			grid: [9, 1]
+		},
+		{
+			info: global.enemies[2],
+			grid: [9, 3]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 1]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 3]
+		},
+	],
+	[
+		{
+			info: global.enemies[4],
+			grid: [9, 2]
+		},
+		{
+			info: global.enemies[1],
+			grid: [7, 3]
+		},
+		{
+			info: global.enemies[1],
+			grid: [7, 2]
+		},
+		{
+			info: global.enemies[1],
 			grid: [8, 2]
 		}
 	],
 	[
 		{
+			info: global.enemies[2],
+			grid: [5, 0]
+		},
+		{
+			info: global.enemies[2],
+			grid: [5, 4]
+		},
+		{
 			info: global.enemies[4],
+			grid: [9, 1]
+		},
+		
+		
+	],
+	[
+		{
+			info: global.enemies[4],
+			grid: [9, 1]
+		},
+		{
+			info: global.enemies[4],
+			grid: [9, 3]
+		},
+		
+	],
+	[
+		{
+			info: global.enemies[4],
+			grid: [9, 1]
+		},
+		{
+			info: global.enemies[0],
+			grid: [7, 3]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 3]
+		},
+		
+	],
+	[
+		{
+			info: global.enemies[4],
+			grid: [9, 1]
+		},
+		{
+			info: global.enemies[4],
+			grid: [9, 3]
+		},
+		{
+			info: global.enemies[2],
 			grid: [8, 2]
-		}
-	]
+		},
+		
+	],
+	
+	
 
 ]
