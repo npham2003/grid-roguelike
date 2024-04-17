@@ -122,10 +122,11 @@ switch (state) {
 						obj_menuTut.enter_text("");
 						change_state(BattleState.PlayerPreparing);
 					}
-				} else if (teachingSkills == true) {
+				} else if (teachingSkills == true && skillTaught == false) {
 					obj_menuTut.enter_text("PRESS ENTER");
 					obj_menuTut.set_text("Skills cost more TP. Use the J and L skills to defeat the enemies. For now, TP will be refreshed every turn, but that is usually not the case.");
 					if (key_Enter_pressed) {
+						skillTaught = true;
 						enemy_order = 0;
 						obj_menuTut.set_text("");
 						obj_menuTut.enter_text("");

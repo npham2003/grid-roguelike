@@ -25,6 +25,7 @@ gun_spawned = false;
 gun_array = [];
 teachingBasic = false;
 teachingSkills = false;
+skillTaught = false;
 
 enemy_check_death = 0;
 checking_death = false;
