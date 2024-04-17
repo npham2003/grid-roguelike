@@ -1,11 +1,12 @@
 if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	
 	// background and border
-	draw_set_color(c_black);
-	draw_set_alpha(alpha*0.7);
-	draw_rectangle(0, 0, room_width, room_height, false);
+	
 	
 	if(menu_level!=3){
+		draw_set_color(c_black);
+		draw_set_alpha(alpha*0.7);
+		draw_rectangle(0, 0, room_width, room_height, false);
 		draw_sprite_ext(spr_shop_menu_border, image_index, actual_x, y, image_xscale, image_yscale, image_angle, image_blend, alpha);
 		for (i = 0; i<4; i++){
 			for (j=0; j<2; j++){
@@ -227,6 +228,9 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	}
 	
 	if(menu_level == 3){
+		draw_set_color(c_black);
+		draw_set_alpha(1);
+		draw_rectangle(0, 0, room_width, room_height, false);
 		for(i=1;i<array_length(obj_battleControl.player_units[character_select_pos].actions);i++){
 			var action = obj_battleControl.player_units[character_select_pos].actions[i];
 			var prev_skill = obj_battleControl.player_units[character_select_pos].upgrades[i];
