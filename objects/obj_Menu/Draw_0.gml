@@ -1,6 +1,3 @@
-/// @description Insert description here
-// You can write your code in this editor
-
 #region confirm
 if (confirm) {
 	
@@ -9,33 +6,30 @@ if (confirm) {
 
 var _buttonScale = 5;
 for (var i = skills - 1; i >= 0; i--) {
-	
-	//if (i == select-1 && select-1 > 0) select_anim = lerp(select_anim, select_shift*-1, 0.2);
-	//if (i == select && select>0) select_anim = lerp(select_anim, select_shift, 0.2);
-	
+
 	#region setup
 	var _border = border;
 	var _outline1 = [
 		[rootX, rootY-(tpRadius+_border)],
 		[rootX, rootY+(tpRadius+_border)],
-		[menuX[i]+select_anim, rootY-(tpRadius+_border)],
-		[menuX[i]+select_anim, rootY+(tpRadius+_border)],
-		[menuX[i]+(tpRadius+_border)+select_anim, rootY]
+		[menuX[i], rootY-(tpRadius+_border)],
+		[menuX[i], rootY+(tpRadius+_border)],
+		[menuX[i]+(tpRadius+_border), rootY]
 	]
 	var _outline2 = [
 		[rootX, rootY-(tpRadius+_border*2)],
 		[rootX, rootY+(tpRadius+_border*2)],
-		[menuX[i]+select_anim, rootY-(tpRadius+_border*2)],
-		[menuX[i]+select_anim, rootY+(tpRadius+_border*2)],
-		[menuX[i]+(tpRadius+_border*2)+select_anim, rootY]
+		[menuX[i], rootY-(tpRadius+_border*2)],
+		[menuX[i], rootY+(tpRadius+_border*2)],
+		[menuX[i]+(tpRadius+_border*2), rootY]
 	]
 	_border = 0;
 	var _button = [
 		[rootX, rootY-(tpRadius+_border)],
 		[rootX, rootY+(tpRadius+_border)],
-		[menuX[i]+select_anim, rootY-(tpRadius+_border)],
-		[menuX[i]+select_anim, rootY+(tpRadius+_border)],
-		[menuX[i]+(tpRadius+_border)+select_anim, rootY]
+		[menuX[i], rootY-(tpRadius+_border)],
+		[menuX[i], rootY+(tpRadius+_border)],
+		[menuX[i]+(tpRadius+_border), rootY]
 	]
 	#endregion
 	
@@ -57,7 +51,7 @@ for (var i = skills - 1; i >= 0; i--) {
 	#endregion
 	
 	#region draw tp
-	var _pips = make_tp(menuX[i] - expandAnim*150 + 60, menuY[i] + 15*expandAnim, 7*expandAnim, tpCost[i], true);
+	var _pips = make_tp(menuX[i] - expandAnim*70, menuY[i] + 15*expandAnim, 7*expandAnim, tpCost[i], true);
 
 	draw_set_color(global._characterSecondary);
 	for (var j = 0; j < array_length(_pips); j++){
@@ -67,9 +61,8 @@ for (var i = skills - 1; i >= 0; i--) {
 	}
 	#endregion
 
-	//text
-	//draw_set_color(global._characterSecondary);
-	if i < 4 draw_text_transformed_colour(menuX[i]+50, menuY[i]-35, player_unit.actions[i].name[player_unit.upgrades[i]]+ ": " +global.controls[i], 0.5, 0.5, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+	//text			player_unit.actions[i].name[player_unit.upgrades[i]]+ ": " +
+	if i < 4 draw_text_transformed_colour(menuX[i+1]-expandAnim*60, menuY[i]-35, global.controls[i], 0.5, 0.5, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
 }
 
 
@@ -198,16 +191,38 @@ draw_text_transformed(75, 20, "G    "+ string(battlecontrol.gold), 0.8, 0.8, 0);
 
 #region skill details
 draw_set_font(fnt_chiaro);
-draw_text_ext(148, 128, _text, 40, 1000);
+draw_set_color(c_white);
+draw_text_ext(148, 100, _text, 40, 1000);
 #endregion
 
 #region turn banner
-var turn = "";
-if (playerTurn && !enemyTurn) turn = "PLAYER TURN";
-if (!playerTurn && enemyTurn) turn = "ENEMY TURN";
-if (playerTurn || enemyTurn) {
-	//draw_rectangle_colour(room_width/2-400, 350, room_width/2+400, 250, global._primary, global._primary, global._primary, global._primary, false);
-	//draw_set_color(c_white);
-	//draw_text_transformed(room_width/2-100, 260, turn, 1, 1, 0);
+
+
+if (turn_banner_animation_started) {
+	turn_life--;
+	show_debug_message(turn_life);
+	draw_set_color(global._primary);
+	
+	if (turn_life > 50) {
+		draw_set_alpha(turn_opacity/100);
+	}
+	else {
+		turn_life--;
+		draw_set_alpha(turn_life/100);
+	}
+	if(turn_life<=0){
+		turn_banner_animation_started=false;	
+	}
+	draw_rectangle_colour(0, 350, room_width, 250, global._aspect_bars, global._aspect_bars, global._aspect_bars, global._aspect_bars, false);
+	draw_set_color(global._primary);
+	draw_set_halign(fa_center);
+	draw_text_transformed(room_width/2, 260, turn, turn_text_anim, 1, 0);
+	
 }
+else {
+	turn_count = 0;
+	turn_life = 100;
+}
+draw_set_alpha(1);
+draw_set_halign(fa_left);
 #endregion

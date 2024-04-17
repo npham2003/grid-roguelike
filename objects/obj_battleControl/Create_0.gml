@@ -208,7 +208,8 @@ function change_state(new_state) {
 			break;
 		case BattleState.PlayerPreparing:
 			show_debug_message("Change to state Player Preparing");
-			transition_count = 120;
+			obj_menu.set_turn_banner(true);
+			transition_count = 100;
 			break;
 		case BattleState.PlayerWaitingAction:
 			show_debug_message("Change to state Player Waiting Action");
@@ -224,7 +225,8 @@ function change_state(new_state) {
 			break;
 		case BattleState.EnemyTakingAction:
 			show_debug_message("Change to state Enemy Taking Action");
-			transition_count = 120;
+			obj_menu.set_turn_banner(false);
+			transition_count = 100;
 			break;
 		case BattleState.BattleEnd:
 			show_debug_message("Change to state Battle End");
