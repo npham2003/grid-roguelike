@@ -337,7 +337,7 @@ switch (state) {
 				else if (teachingBasic == true && jkl_pressed) { //choosing a skill
 					obj_gridCreator.reset_highlights_cursor();
 					if (!unit.has_attacked) {
-						if (key_H_pressed && teachingBasic == true && teachingSkills == false) {
+						if (key_H_pressed && (teachingBasic == true || teachingSkills == true)) {
 							if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
 								//obj_menuTut.set_select(1);
 								unit.skill_used = 0;
