@@ -1,7 +1,8 @@
 //options
+if (obj_battleControlTut.teachingBasic == true) { // open menu once we can basic attack
 for (var i = 0; i < skills; ++i) {
 	
-	if(obj_battleControl.state==BattleState.PlayerAiming){
+	if(obj_battleControlTut.state==BattleState.PlayerAiming){
 		if(i==player_unit.skill_used){
 			menuX[i] = lerp(menuX[i], rootX + i * spacing * state + state * 200 - select_shift, 0.2);
 			
@@ -18,7 +19,7 @@ for (var i = 0; i < skills; ++i) {
 
 expandAnim = lerp(expandAnim, state, 0.2);
 tpCost=[0,player_unit.actions[0].cost[player_unit.upgrades[0]],player_unit.actions[1].cost[player_unit.upgrades[1]],player_unit.actions[2].cost[player_unit.upgrades[2]],player_unit.actions[3].cost[player_unit.upgrades[3]]];
-
+}
 //portrait opacity
 if(open){
 	state = 1;
@@ -46,6 +47,18 @@ if(tp_opacity<=0.5){
 	tp_opacity_increase=true;
 }
 
+//press enter opacity
+if(_enter_opacity_increase){
+	_enter_opacity+=0.01;
+}else{
+	_enter_opacity-=0.01;
+}
+if(_enter_opacity>=1){
+	_enter_opacity_increase=false;
+}
+if(_enter_opacity<=0.5){
+	_enter_opacity_increase=true;
+}
 
 //turn opacity
 if (turn_count <= turn_max) {

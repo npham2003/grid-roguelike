@@ -3,6 +3,12 @@ sprite_index = sprites.idle;
 
 show_debug_message("{0}: [{1},{2}]", name, grid_pos[0], grid_pos[1]);
 
+if (instance_exists(obj_battleControl)) { // check for whther tutorial or not tutorial exist
+	battlecontrol = obj_battleControl;
+} else {
+	battlecontrol = obj_battleControlTut;
+}
+
 // set entity on the grid
 obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile = id;
 
@@ -33,7 +39,7 @@ summoner=pointer_null;
 
 // find a valid target
 function find_target() {
-	var available_targets = obj_battleControl.player_units;
+	var available_targets = battlecontrol.player_units;
 	target = available_targets[irandom(array_length(available_targets) - 1)];
 	show_debug_message("{0}'s target: {1}", name, target.name);
 	target_pos=[target.grid_pos[0],target.grid_pos[1]];
@@ -199,7 +205,7 @@ function move(new_x, new_y) {
 	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._is_empty=false;
 	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile=self;
 	is_moving = true;
-	obj_battleControl.in_animation = true;
+	battlecontrol.in_animation = true;
 	//var coord = obj_gridCreator.get_coordinates(grid_pos[0], grid_pos[1]);
 	//x = coord[0];
 	//y = coord[1];
@@ -302,7 +308,7 @@ function attack() {
 	display_target_highlights();
 	sprite_index = sprites.attack;
 	image_index = 0;
-	obj_battleControl.in_animation = true;
+	battlecontrol.in_animation = true;
 	audio_play_sound(sounds.attack, 0, false);
 }
 
@@ -398,8 +404,8 @@ function do_damage(){
 		]
 		
 		// puts the summon on the player side and sets this enemy as its summoner
-		obj_battleControl.spawn_summon_ally_side(enemy_data, self);
-		obj_battleControl.enemy_order+=1;
+		battlecontrol.spawn_summon_ally_side(enemy_data, self);
+		battlecontrol.enemy_order+=1;
 		summoned_units+=1;
 		
 		
@@ -454,6 +460,8 @@ function despawn(){
 	if(summoner!=pointer_null){
 		summoner.summoned_units-=1;
 	}
+	freeze_graphic.sprite_index=spr_freeze_out;
+	freeze_graphic.image_speed=1;
 }
 
 // push to the right

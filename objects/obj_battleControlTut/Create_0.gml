@@ -12,12 +12,20 @@ enemy_order = 0;
 
 // maybe these are in the wrong spot? but anyway yea
 tp_max = 10;
-tp_current = 6;
+tp_current = 2;
 tp_bonus=0;
-
+room_goto_next();
 in_animation = false;
 transition_count = 0;
 
+teachingDamage = true;
+teachingMovement = false;
+turns_until_gun = 0;
+gun_spawned = false;
+gun_array = [];
+teachingBasic = false;
+teachingSkills = false;
+skillTaught = false;
 
 enemy_check_death = 0;
 checking_death = false;
@@ -28,26 +36,16 @@ unit = pointer_null;
 board_obstacle_order = 0;
 obstacle = pointer_null;
 
-battle_progress=0;
-
 #region Spawns
 
 // Spawn player units
 
 // Temp struct for player data, may move to a config file or generate dynamically in the future
 var player_data = [
-	//{
-	//	info: global.players[1],
-	//	grid: [3, 2]		
-	//},
 	{
-		info: global.players[2],
+		info: global.players[0],
 		grid: [2, 2]		
-	},
-	//{
-	//	info: global.players[2],
-	//	grid: [2, 1]		
-	//}
+	}
 ];
 
 // spawns units at the very start
@@ -175,25 +173,43 @@ spawn_obstacle = function(obstacle, grid_pos){
 	
 }
 
+spawn_gun = function(player){
+		if (player.grid_pos[0] == 3 && player.grid_pos[1] == 1) {
+			x_val = 2;
+			y_val = 1;
+		} else {
+			x_val = 3;
+			y_val = 1;
+		}
+		var coord = obj_gridCreator.get_coordinates(x_val,y_val);
+		
+	
+			var unit = instance_create_layer(
+				coord[0], coord[1], "Units", obj_gun);
+				
+			unit.grid_pos=[x_val,y_val];
+			array_insert(gun_array,0,unit);
+}
+
 obj_cursor.movable_tiles=obj_gridCreator.battle_grid;
 
 
 #endregion
 
-enum BattleState {
-	BattleStart,
-	EnemyAiming,
-	PlayerPreparing,
-	PlayerWaitingAction,
-	PlayerMoving,
-	PlayerAiming,
-	PlayerTakingAction,
-	EnemyTakingAction,
-	BattleEnd,
-	PlayerUpgrade,
-	PlayerBoardObstacle,
-	EnemyBoardObstacle
-};
+//enum BattleState {
+//	BattleStart,
+//	EnemyAiming,
+//	PlayerPreparing,
+//	PlayerWaitingAction,
+//	PlayerMoving,
+//	PlayerAiming,
+//	PlayerTakingAction,
+//	EnemyTakingAction,
+//	BattleEnd,
+//	PlayerUpgrade,
+//	PlayerBoardObstacle,
+//	EnemyBoardObstacle
+//};
 
 //state = BattleState.PlayerUpgrade;
 state = BattleState.BattleStart;
@@ -209,7 +225,7 @@ function change_state(new_state) {
 			break;
 		case BattleState.PlayerPreparing:
 			show_debug_message("Change to state Player Preparing");
-			obj_menu.set_turn_banner(true);
+			obj_menuTut.set_turn_banner(true);
 			transition_count = 100;
 			break;
 		case BattleState.PlayerWaitingAction:
@@ -226,7 +242,7 @@ function change_state(new_state) {
 			break;
 		case BattleState.EnemyTakingAction:
 			show_debug_message("Change to state Enemy Taking Action");
-			obj_menu.set_turn_banner(false);
+			obj_menuTut.set_turn_banner(false);
 			transition_count = 100;
 			break;
 		case BattleState.BattleEnd:
