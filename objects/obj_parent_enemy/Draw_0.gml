@@ -9,4 +9,8 @@ if(stall_turns>0){
 var pc;
 pc = (self.hp / self.hpMax) * 100;
 //obj_battleEffect.health_bar(x,y,pc);
-draw_healthbar(x-10, y+healthbar_offset-1, x+10, y+healthbar_offset+1, pc, c_white, c_red, c_red, 0, true, false)
+draw_healthbar(x-10, y+healthbar_offset-1, x+10, y+healthbar_offset+1, pc, c_white, c_red, c_red, 0, true, false);
+if(freeze_graphic!=pointer_null){
+	freeze_graphic.x=x;
+	freeze_graphic.y=y;
+}
