@@ -33,6 +33,16 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 				if(selector_pos[0]==0&&selector_pos[1]==0){
 					menu_level=1;
 				}
+				if(selector_pos[0]==1&&selector_pos[1]==0&&selectable[1]){
+					obj_battleControl.tp_current+=1;
+					obj_battleControl.gold-=cost[1];
+					if(obj_battleControl.tp_current>obj_battleControl.tp_max){
+						obj_battleControl.tp_current=obj_battleControl.tp_max;
+					}
+				}
+				if(selector_pos[0]==2&&selector_pos[1]==0&&selectable[2]){
+					tp_bonus();
+				}
 			}
 			if(keyboard_check_pressed(vk_tab)){
 				selector_pos=[0,0];

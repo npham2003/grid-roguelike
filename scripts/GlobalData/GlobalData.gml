@@ -1379,7 +1379,7 @@ global.actionLibrary = {
 					if(unit.skill_progress==1){
 						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
-								audio_play_sound(sfx_teleport_selec, 0, false, 1);
+								audio_play_sound(sfx_teleport_select, 0, false, 1);
 								unit.skill_progress=2;
 								array_push(skill_range_aux,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]);
 								skill_coords[0]=unit.grid_pos[0];

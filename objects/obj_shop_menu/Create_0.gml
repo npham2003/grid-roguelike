@@ -29,6 +29,7 @@ upgrade = function(unit, skill, path){
 
 tp_bonus = function(){
 	obj_battleControl.tp_bonus+=1;
+	obj_battleControl.gold-=cost[2];
 }
 
 attack_up = function(){
