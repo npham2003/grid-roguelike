@@ -47,6 +47,18 @@ if(tp_opacity<=0.5){
 	tp_opacity_increase=true;
 }
 
+//press enter opacity
+if(_enter_opacity_increase){
+	_enter_opacity+=0.01;
+}else{
+	_enter_opacity-=0.01;
+}
+if(_enter_opacity>=1){
+	_enter_opacity_increase=false;
+}
+if(_enter_opacity<=0.5){
+	_enter_opacity_increase=true;
+}
 
 //turn opacity
 if (turn_count <= turn_max) {

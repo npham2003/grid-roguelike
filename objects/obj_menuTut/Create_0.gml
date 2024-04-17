@@ -11,6 +11,8 @@ confirm = false;
 
 tp_opacity_increase=true;
 tp_opacity=0;
+_enter_opacity=0;
+_enter_opacity_increase=true;
 
 turn_opacity_increase=true;
 turn_opacity=50;

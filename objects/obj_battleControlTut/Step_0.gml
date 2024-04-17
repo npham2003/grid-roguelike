@@ -112,9 +112,18 @@ switch (state) {
 						obj_menuTut.enter_text("");
 						change_state(BattleState.PlayerPreparing);
 					}
-				} else if (teachingBasic == true) {
+				} else if (teachingBasic == true && teachingSkills == false) {
 					obj_menuTut.enter_text("PRESS ENTER");
-					obj_menuTut.set_text("Attacking costs Technique Points (TP), shown by the squares below. Press H to fire back!");
+					obj_menuTut.set_text("Attacking costs Technique Points (TP), shown by the squares below. You gain 1 TP every turn. Now, press H to fire back!");
+					if (key_Enter_pressed) {
+						enemy_order = 0;
+						obj_menuTut.set_text("");
+						obj_menuTut.enter_text("");
+						change_state(BattleState.PlayerPreparing);
+					}
+				} else if (teachingSkills == true) {
+					obj_menuTut.enter_text("PRESS ENTER");
+					obj_menuTut.set_text("Skills cost more TP. Use the J and L skills to defeat the enemies. For now, TP will be refreshed every turn, but that is usually not the case.");
 					if (key_Enter_pressed) {
 						enemy_order = 0;
 						obj_menuTut.set_text("");
@@ -229,6 +238,9 @@ switch (state) {
 		}
 		// tp bonus 
 		//tp_current+=tp_bonus;
+		if (teachingSkills) {
+			tp_current = 10;
+		}
 		
 		// makes sure you don't go over max tp
 		if (tp_current > tp_max) {
@@ -323,7 +335,7 @@ switch (state) {
 				else if (teachingBasic == true && jkl_pressed) { //choosing a skill
 					obj_gridCreator.reset_highlights_cursor();
 					if (!unit.has_attacked) {
-						if (key_H_pressed) {
+						if (key_H_pressed && teachingBasic == true && teachingSkills == false) {
 							if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
 								//obj_menuTut.set_select(1);
 								unit.skill_used = 0;
@@ -334,7 +346,7 @@ switch (state) {
 							}
 				
 						}
-						else if (key_J_pressed) {
+						else if (key_J_pressed && teachingSkills == true) {
 							if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
 								//obj_menuTut.set_select(2);
 								unit.skill_used = 1;
@@ -344,16 +356,20 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						else if (key_K_pressed) {
-							if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
-								//obj_menuTut.set_select(3);
-								unit.skill_used = 2;
-								enough_tp = true;
-							}
-							else {
-									audio_play_sound(sfx_no_tp, 0, false);
-								}
-						}else if (key_L_pressed) {
+						//else if (key_K_pressed && teachingSkills == true) {
+						//	if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
+						//		//obj_menuTut.set_select(3);
+						//		//unit.skill_used = 2;
+						//		if (tp_current < tp_max) {
+						//			tp_current += 1;
+						//		}
+						//		enough_tp = true;
+						//	}
+						//	else {
+						//			audio_play_sound(sfx_no_tp, 0, false);
+						//		}
+						//}
+						else if (key_L_pressed && teachingSkills == true) {
 							if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
 								//obj_menuTut.set_select(4);
 								unit.skill_used = 3;
@@ -372,12 +388,12 @@ switch (state) {
 							}
 						}
 				}
-				else if (key_Tab_pressed) { // changes upgrades for debugging
-					for(i = 1;i<array_length(unit.upgrades);i++){
-						unit.upgrades[i]+=1;
-						unit.upgrades[i]=unit.upgrades[i]%3;
-					}
-				}
+				//else if (key_Tab_pressed) { // changes upgrades for debugging
+				//	for(i = 1;i<array_length(unit.upgrades);i++){
+				//		unit.upgrades[i]+=1;
+				//		unit.upgrades[i]=unit.upgrades[i]%3;
+				//	}
+				//}
 				
 			}else{ // enemy unit
 				obj_menuTut.close_menu();
@@ -438,7 +454,7 @@ switch (state) {
 				
 				obj_gridCreator.reset_highlights_cursor();
 				if (!unit.has_attacked) {
-					if (key_H_pressed) {
+					if (key_H_pressed && teachingBasic == true && teachingSkills == false) {
 						if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
 							unit.skill_used = 0;
 							enough_tp = true;
@@ -448,7 +464,7 @@ switch (state) {
 						}
 				
 				}
-				else if (key_J_pressed) {
+				else if (key_J_pressed && teachingSkills == true) {
 					if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
 					unit.skill_used = 1;
 					enough_tp = true;
@@ -457,16 +473,19 @@ switch (state) {
 							audio_play_sound(sfx_no_tp, 0, false);
 						}
 				}
-				else if (key_K_pressed) {
-					if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
-					unit.skill_used = 2;
-					enough_tp = true;
-					}
-					else {
-							audio_play_sound(sfx_no_tp, 0, false);
-						}
-				}
-				else if (key_L_pressed) {
+				//else if (key_K_pressed && teachingSkills == true) {
+				//	if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
+				//		if (tp_current < tp_max) {
+				//					tp_current += 1;
+				//				}
+				//	//unit.skill_used = 2;
+				//	enough_tp = true;
+				//	}
+				//	else {
+				//			audio_play_sound(sfx_no_tp, 0, false);
+				//		}
+				//}
+				else if (key_L_pressed && teachingSkills == true) {
 					if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
 					unit.skill_used = 3;
 					enough_tp = true;
@@ -540,7 +559,7 @@ switch (state) {
 		}
 		enough_tp=false;
 					if (!unit.has_attacked) { // swap skills while aiming
-						if (key_H_pressed&&unit.skill_used!=0) {
+						if (key_H_pressed&&unit.skill_used!=0&&teachingBasic == true&&teachingSkills == false) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -554,7 +573,7 @@ switch (state) {
 							}
 				
 						}
-						else if (key_J_pressed&&unit.skill_used!=1) {
+						else if (key_J_pressed&&unit.skill_used!=1&&teachingSkills == true) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -567,19 +586,23 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						else if (key_K_pressed&&unit.skill_used!=2) {
-							obj_gridCreator.reset_highlights_cursor();
-							obj_gridCreator.reset_highlights_attack();
-							obj_gridCreator.reset_highlights_target();
-							obj_gridCreator.reset_highlights_support();
-							if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
-							unit.skill_used = 2;
-							enough_tp = true;
-							}
-							else {
-									audio_play_sound(sfx_no_tp, 0, false);
-								}
-						}else if (key_L_pressed&&unit.skill_used!=3) {
+						//else if (key_K_pressed&&unit.skill_used!=2&&teachingSkills == true) {
+						//	obj_gridCreator.reset_highlights_cursor();
+						//	obj_gridCreator.reset_highlights_attack();
+						//	obj_gridCreator.reset_highlights_target();
+						//	obj_gridCreator.reset_highlights_support();
+						//	if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
+						//	if (tp_current < tp_max) {
+						//			tp_current += 1;
+						//		}
+						//	//unit.skill_used = 2;
+						//	enough_tp = true;
+						//	}
+						//	else {
+						//			audio_play_sound(sfx_no_tp, 0, false);
+						//		}
+						//}
+						else if (key_L_pressed&&unit.skill_used!=3&&teachingSkills == true) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -718,7 +741,6 @@ switch (state) {
 			break;
 		}
 		if(array_length(enemy_units)==0){
-			teachingSkills = true;
 			change_state(BattleState.PlayerUpgrade);
 		}else{
 			if(keyboard_check_pressed(vk_anykey)){
@@ -733,10 +755,33 @@ switch (state) {
 
 #region
 	case BattleState.PlayerUpgrade:
-		if (key_Tab_pressed) {
-			change_state(BattleState.BattleStart);
-			
+		
+		if (teachingBasic == true && teachingSkills == false) {
+					obj_menuTut.enter_text("PRESS ENTER");
+					obj_menuTut.set_text("Nice!! Looks like more monsters are coming, what else can this baby do?");
+					if (key_Enter_pressed) {
+						enemy_order = 0;
+						obj_menuTut.set_text("");
+						obj_menuTut.enter_text("");
+						teachingSkills = true;
+						change_state(BattleState.BattleStart);
+			}
 		}
+		else if (teachingSkills == true) {
+			obj_menuTut.enter_text("PRESS ENTER");
+					obj_menuTut.set_text("Now that I know how to fight, let's save the world!!!!");
+					if (key_Enter_pressed) {
+						obj_menuTut.set_text("");
+						obj_menuTut.enter_text("");
+						audio_stop_sound(bgm_tutorialBGM);
+						room_goto_next();
+					}
+		}
+	
+		//if (key_Tab_pressed) {
+		//	change_state(BattleState.BattleStart);
+			
+		//}
 		break;
 #endregion
 
