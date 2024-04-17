@@ -23,8 +23,7 @@ if (transition_count > 0) {
 }
 
 if (transition_count < 0) {
-	obj_menu.playerTurn= false;
-	obj_menu.enemyTurn= false;
+	
 	return;
 }
 
@@ -32,8 +31,8 @@ switch (state) {
 	
 #region Battle Start
 	case BattleState.BattleStart:
-		obj_menu.playerTurn = false;
-		obj_menu.enemyTurn = true;
+		
+		obj_menu.set_turn_banner(false);
 		obj_draw_bg.colorSwitch = true;
 		
 		for (var i = 0; i < array_length(player_units); i++) {
@@ -72,8 +71,7 @@ switch (state) {
 	
 #region Enemy Aiming
 	case BattleState.EnemyAiming:
-		obj_menu.playerTurn = true;
-		obj_menu.enemyTurn = false;
+		
 		
 		if (in_animation) {
 			break;
@@ -124,8 +122,7 @@ switch (state) {
 
 #region Player Preparing
 	case BattleState.PlayerPreparing:
-		obj_menu.playerTurn = false;
-		obj_menu.enemyTurn = false;
+		
 		
 		for (var i = 0; i < array_length(player_units); i++) {
 			
@@ -601,8 +598,6 @@ switch (state) {
 
 #region Enemy Taking Action
 	case BattleState.EnemyTakingAction:
-		obj_menu.playerTurn = false;
-		obj_menu.enemyTurn = true;
 		
 		if (in_animation) {
 			break;
@@ -713,8 +708,7 @@ switch (state) {
 
 #region  Obstacles hit enemy units
 	case BattleState.EnemyBoardObstacle:
-		obj_menu.playerTurn = false;
-		obj_menu.enemyTurn = false;
+		
 		
 		if (in_animation) {
 			break;

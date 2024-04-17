@@ -12,11 +12,12 @@ tp_opacity_increase=true;
 tp_opacity=0;
 
 turn_opacity_increase=true;
-turn_opacity=0;
+turn_opacity=50;
 turn_count = 0;
 turn_max = 3;
 turn_text_anim = 0;
 turn_life = 100;
+turn_banner_animation_started=false;
 
 #region location & size
 imgX = 200;
@@ -105,6 +106,23 @@ make_tp = function(_x, _y, _spacing, _len, is_rows) {
 draw_vertices = function(vertices){
 	for (var i = 0; i < array_length(vertices); ++i) {
 		draw_vertex(vertices[i][0], vertices[i][1]);
+	}
+}
+
+set_turn_banner = function(player_turn){
+	if(!turn_banner_animation_started){
+		if(player_turn){
+			turn="PLAYER TURN";	
+		}else{
+			turn="ENEMY TURN";
+		}
+		turn_life=100;
+		turn_banner_animation_started=true;
+		turn_opacity=100;
+		turn_count = 0;
+		turn_max = 3;
+		turn_text_anim = 0;
+		turn_life = 100;
 	}
 }
 

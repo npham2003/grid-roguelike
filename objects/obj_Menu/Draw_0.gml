@@ -196,21 +196,23 @@ draw_text_ext(148, 100, _text, 40, 1000);
 #endregion
 
 #region turn banner
-var turn = "";
-if (playerTurn && !enemyTurn) turn = "PLAYER TURN";
-if (!playerTurn && enemyTurn) turn = "ENEMY TURN";
-if (playerTurn || enemyTurn) {
+
+
+if (turn_banner_animation_started) {
 	turn_life--;
+	show_debug_message(turn_life);
 	draw_set_color(global._primary);
 	
 	if (turn_life > 50) {
-		draw_set_alpha(turn_opacity);
+		draw_set_alpha(turn_opacity/100);
 	}
 	else {
 		turn_life--;
 		draw_set_alpha(turn_life/100);
 	}
-	
+	if(turn_life<=0){
+		turn_banner_animation_started=false;	
+	}
 	draw_rectangle_colour(0, 350, room_width, 250, global._aspect_bars, global._aspect_bars, global._aspect_bars, global._aspect_bars, false);
 	draw_set_color(global._primary);
 	draw_set_halign(fa_center);
