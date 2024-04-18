@@ -40,9 +40,11 @@ portraitAlpha=1;
 optionRadius = 40;
 spacing = 150;
 
+confirmRadius = 40;
+confirmX = [850, 1050];
+confirmY = 660;
 
 border = 5;
-tpRadius = 40;
 #endregion
 
 #region control
