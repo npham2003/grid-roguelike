@@ -117,14 +117,14 @@ switch (state) {
 			enemy_order += 1;
 		}
 		
-		obj_draw_bg.colorSwitch = false;
+		//obj_draw_bg.colorSwitch = false;
 		
 		break;
 #endregion
 
 #region Player Preparing
 	case BattleState.PlayerPreparing:
-		
+		obj_draw_bg.colorSwitch = false;
 		
 		for (var i = 0; i < array_length(player_units); i++) {
 			
@@ -717,7 +717,8 @@ switch (state) {
 
 #region  Obstacles hit enemy units
 	case BattleState.EnemyBoardObstacle:
-		
+		obj_menu.set_turn_banner(false);
+		obj_draw_bg.colorSwitch = true;
 		
 		if (in_animation) {
 			break;

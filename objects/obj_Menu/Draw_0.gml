@@ -1,4 +1,53 @@
-
+#region confirm
+if (confirm) {
+	var c_border = border;
+	var c_outline1 = [
+		[confirmX[0]-(confirmRadius+c_border), confirmY],
+		[confirmX[0], confirmY-(confirmRadius+c_border)],
+		[confirmX[0], confirmY+(confirmRadius+c_border)],
+		[confirmX[1], confirmY-(confirmRadius+c_border)],
+		[confirmX[1], confirmY+(confirmRadius+c_border)],
+		[confirmX[1]+(confirmRadius+c_border), confirmY]
+	]
+	var c_outline2 = [
+		[confirmX[0]-(confirmRadius+c_border*2), confirmY],
+		[confirmX[0], confirmY-(confirmRadius+c_border*2)],
+		[confirmX[0], confirmY+(confirmRadius+c_border*2)],
+		[confirmX[1], confirmY-(confirmRadius+c_border*2)],
+		[confirmX[1], confirmY+(confirmRadius+c_border*2)],
+		[confirmX[1]+(confirmRadius+c_border*2), confirmY]
+	]
+	c_border = 0;
+	var c_button = [
+		[confirmX[0]-(confirmRadius+c_border), confirmY],
+		[confirmX[0], confirmY-(confirmRadius+c_border)],
+		[confirmX[0], confirmY+(confirmRadius+c_border)],
+		[confirmX[1], confirmY-(confirmRadius+c_border)],
+		[confirmX[1], confirmY+(confirmRadius+c_border)],
+		[confirmX[1]+(confirmRadius+c_border), confirmY]
+	]
+	
+	draw_set_color(c_black);
+	draw_primitive_begin(pr_trianglestrip);
+	draw_vertices(c_outline2);
+	draw_primitive_end();
+	
+	draw_set_color(global._characterPrimary);
+	draw_primitive_begin(pr_trianglestrip);
+	draw_vertices(c_outline1);
+	draw_primitive_end();
+	
+	draw_set_color(global._primary);
+	draw_primitive_begin(pr_trianglestrip);
+	draw_vertices(c_button);
+	draw_primitive_end();
+	
+	draw_set_color(global._characterSecondary);
+	draw_text_ext_transformed(900, 610, "Confirm: Enter", 30, 100, 0.5, 0.5, 0);
+	
+	//draw_text_color(550, );
+}
+#endregion
 
 var _buttonScale = 5;
 for (var i = skills - 1; i >= 0; i--) {
@@ -66,56 +115,6 @@ for (var i = skills - 1; i >= 0; i--) {
 //draw_set_color(c_white);
 //draw_text_ext_transformed(950, 610, "Confirm: Enter", 30, 100, 0.8, 0.8, 0);
 
-#region confirm
-if (confirm) {
-	var c_border = border;
-	var c_outline1 = [
-		[confirmX[0]-(confirmRadius+c_border), confirmY],
-		[confirmX[0], confirmY-(confirmRadius+c_border)],
-		[confirmX[0], confirmY+(confirmRadius+c_border)],
-		[confirmX[1], confirmY-(confirmRadius+c_border)],
-		[confirmX[1], confirmY+(confirmRadius+c_border)],
-		[confirmX[1]+(confirmRadius+c_border), confirmY]
-	]
-	var c_outline2 = [
-		[confirmX[0]-(confirmRadius+c_border*2), confirmY],
-		[confirmX[0], confirmY-(confirmRadius+c_border*2)],
-		[confirmX[0], confirmY+(confirmRadius+c_border*2)],
-		[confirmX[1], confirmY-(confirmRadius+c_border*2)],
-		[confirmX[1], confirmY+(confirmRadius+c_border*2)],
-		[confirmX[1]+(confirmRadius+c_border*2), confirmY]
-	]
-	c_border = 0;
-	var c_button = [
-		[confirmX[0]-(confirmRadius+c_border), confirmY],
-		[confirmX[0], confirmY-(confirmRadius+c_border)],
-		[confirmX[0], confirmY+(confirmRadius+c_border)],
-		[confirmX[1], confirmY-(confirmRadius+c_border)],
-		[confirmX[1], confirmY+(confirmRadius+c_border)],
-		[confirmX[1]+(confirmRadius+c_border), confirmY]
-	]
-	
-	draw_set_color(c_black);
-	draw_primitive_begin(pr_trianglestrip);
-	draw_vertices(c_outline2);
-	draw_primitive_end();
-	
-	draw_set_color(global._characterPrimary);
-	draw_primitive_begin(pr_trianglestrip);
-	draw_vertices(c_outline1);
-	draw_primitive_end();
-	
-	draw_set_color(global._primary);
-	draw_primitive_begin(pr_trianglestrip);
-	draw_vertices(c_button);
-	draw_primitive_end();
-	#endregion
-	
-	draw_text_ext_transformed(950, 610, "Confirm: Enter", 30, 100, 0.8, 0.8, 0);
-	
-	//draw_text_color(550, );
-}
-#endregion
 
 #region hp
 if (open) {
