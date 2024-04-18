@@ -56,26 +56,26 @@ for (var i = skills - 1; i >= 0; i--) {
 	#region setup
 	var _border = border;
 	var _outline1 = [
-		[rootX, rootY-(tpRadius+_border)],
-		[rootX, rootY+(tpRadius+_border)],
-		[menuX[i], rootY-(tpRadius+_border)],
-		[menuX[i], rootY+(tpRadius+_border)],
-		[menuX[i]+(tpRadius+_border), rootY]
+		[rootX, rootY-(optionRadius+_border)],
+		[rootX, rootY+(optionRadius+_border)],
+		[menuX[i], rootY-(optionRadius+_border)],
+		[menuX[i], rootY+(optionRadius+_border)],
+		[menuX[i]+(optionRadius+_border), rootY]
 	]
 	var _outline2 = [
-		[rootX, rootY-(tpRadius+_border*2)],
-		[rootX, rootY+(tpRadius+_border*2)],
-		[menuX[i], rootY-(tpRadius+_border*2)],
-		[menuX[i], rootY+(tpRadius+_border*2)],
-		[menuX[i]+(tpRadius+_border*2), rootY]
+		[rootX, rootY-(optionRadius+_border*2)],
+		[rootX, rootY+(optionRadius+_border*2)],
+		[menuX[i], rootY-(optionRadius+_border*2)],
+		[menuX[i], rootY+(optionRadius+_border*2)],
+		[menuX[i]+(optionRadius+_border*2), rootY]
 	]
 	_border = 0;
 	var _button = [
-		[rootX, rootY-(tpRadius+_border)],
-		[rootX, rootY+(tpRadius+_border)],
-		[menuX[i], rootY-(tpRadius+_border)],
-		[menuX[i], rootY+(tpRadius+_border)],
-		[menuX[i]+(tpRadius+_border), rootY]
+		[rootX, rootY-(optionRadius+_border)],
+		[rootX, rootY+(optionRadius+_border)],
+		[menuX[i], rootY-(optionRadius+_border)],
+		[menuX[i], rootY+(optionRadius+_border)],
+		[menuX[i]+(optionRadius+_border), rootY]
 	]
 	#endregion
 	
