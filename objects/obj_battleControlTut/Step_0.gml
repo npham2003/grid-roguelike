@@ -525,7 +525,7 @@ switch (state) {
 	
 		
 		if(unit.skill_back){ // if the player presses tab to go back. this is handled in the skill itself
-			obj_menu.confirm = false;
+			obj_menuTut.confirm = false;
 			change_state(BattleState.PlayerMoving);
 			unit.show_moveable_grids_prev();
 			unit.has_attacked = false;
@@ -536,9 +536,9 @@ switch (state) {
 		}else{
 			
 			obj_menuTut.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+""+string(unit.actions[unit.skill_used].name[unit.upgrades[unit.skill_used]])+"\n"+string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
-			obj_menu.confirm = true;
+			obj_menuTut.confirm = true;
 			if (unit.skill_complete) {  // did the skill get used and finish
-				obj_menu.confirm = false;
+				obj_menuTut.confirm = false;
 				tp_current -= unit.actions[unit.skill_used].cost[unit.upgrades[unit.skill_used]];
 				unit.has_attacked = true;
 				
