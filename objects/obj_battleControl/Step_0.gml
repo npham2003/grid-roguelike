@@ -118,14 +118,14 @@ switch (state) {
 			enemy_order += 1;
 		}
 		
-		obj_draw_bg.colorSwitch = false;
+		//obj_draw_bg.colorSwitch = false;
 		
 		break;
 #endregion
 
 #region Player Preparing
 	case BattleState.PlayerPreparing:
-		
+		obj_draw_bg.colorSwitch = false;
 		
 		for (var i = 0; i < array_length(player_units); i++) {
 			
@@ -447,7 +447,7 @@ switch (state) {
 	
 		
 		if(unit.skill_back){ // if the player presses tab to go back. this is handled in the skill itself
-			
+			obj_menu.confirm = false;
 			change_state(BattleState.PlayerMoving);
 			unit.show_moveable_grids_prev();
 			unit.has_attacked = false;
@@ -456,10 +456,11 @@ switch (state) {
 			
 			
 		}else{
-			
 			obj_menu.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+""+string(unit.actions[unit.skill_used].name[unit.upgrades[unit.skill_used]])+"\n"+string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
+			obj_menu.confirm = true;
+			
 			if (unit.skill_complete) {  // did the skill get used and finish
-
+				obj_menu.confirm = false;
 				tp_current -= unit.actions[unit.skill_used].cost[unit.upgrades[unit.skill_used]];
 				unit.has_attacked = true;
 				
@@ -718,7 +719,8 @@ switch (state) {
 
 #region  Obstacles hit enemy units
 	case BattleState.EnemyBoardObstacle:
-		
+		obj_menu.set_turn_banner(false);
+		obj_draw_bg.colorSwitch = true;
 		
 		if (in_animation) {
 			break;

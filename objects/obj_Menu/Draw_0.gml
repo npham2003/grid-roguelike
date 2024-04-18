@@ -1,6 +1,51 @@
 #region confirm
 if (confirm) {
+	var c_border = border;
+	var c_outline1 = [
+		[confirmX[0]-(confirmRadius+c_border), confirmY],
+		[confirmX[0], confirmY-(confirmRadius+c_border)],
+		[confirmX[0], confirmY+(confirmRadius+c_border)],
+		[confirmX[1], confirmY-(confirmRadius+c_border)],
+		[confirmX[1], confirmY+(confirmRadius+c_border)],
+		[confirmX[1]+(confirmRadius+c_border), confirmY]
+	]
+	var c_outline2 = [
+		[confirmX[0]-(confirmRadius+c_border*2), confirmY],
+		[confirmX[0], confirmY-(confirmRadius+c_border*2)],
+		[confirmX[0], confirmY+(confirmRadius+c_border*2)],
+		[confirmX[1], confirmY-(confirmRadius+c_border*2)],
+		[confirmX[1], confirmY+(confirmRadius+c_border*2)],
+		[confirmX[1]+(confirmRadius+c_border*2), confirmY]
+	]
+	c_border = 0;
+	var c_button = [
+		[confirmX[0]-(confirmRadius+c_border), confirmY],
+		[confirmX[0], confirmY-(confirmRadius+c_border)],
+		[confirmX[0], confirmY+(confirmRadius+c_border)],
+		[confirmX[1], confirmY-(confirmRadius+c_border)],
+		[confirmX[1], confirmY+(confirmRadius+c_border)],
+		[confirmX[1]+(confirmRadius+c_border), confirmY]
+	]
 	
+	draw_set_color(c_black);
+	draw_primitive_begin(pr_trianglestrip);
+	draw_vertices(c_outline2);
+	draw_primitive_end();
+	
+	draw_set_color(global._characterPrimary);
+	draw_primitive_begin(pr_trianglestrip);
+	draw_vertices(c_outline1);
+	draw_primitive_end();
+	
+	draw_set_color(global._primary);
+	draw_primitive_begin(pr_trianglestrip);
+	draw_vertices(c_button);
+	draw_primitive_end();
+	
+	draw_set_color(global._characterSecondary);
+	draw_text_ext_transformed(900, 610, "Confirm: Enter", 30, 100, 0.5, 0.5, 0);
+	
+	//draw_text_color(550, );
 }
 #endregion
 
@@ -10,26 +55,26 @@ for (var i = skills - 1; i >= 0; i--) {
 	#region setup
 	var _border = border;
 	var _outline1 = [
-		[rootX, rootY-(tpRadius+_border)],
-		[rootX, rootY+(tpRadius+_border)],
-		[menuX[i], rootY-(tpRadius+_border)],
-		[menuX[i], rootY+(tpRadius+_border)],
-		[menuX[i]+(tpRadius+_border), rootY]
+		[rootX, rootY-(optionRadius+_border)],
+		[rootX, rootY+(optionRadius+_border)],
+		[menuX[i], rootY-(optionRadius+_border)],
+		[menuX[i], rootY+(optionRadius+_border)],
+		[menuX[i]+(optionRadius+_border), rootY]
 	]
 	var _outline2 = [
-		[rootX, rootY-(tpRadius+_border*2)],
-		[rootX, rootY+(tpRadius+_border*2)],
-		[menuX[i], rootY-(tpRadius+_border*2)],
-		[menuX[i], rootY+(tpRadius+_border*2)],
-		[menuX[i]+(tpRadius+_border*2), rootY]
+		[rootX, rootY-(optionRadius+_border*2)],
+		[rootX, rootY+(optionRadius+_border*2)],
+		[menuX[i], rootY-(optionRadius+_border*2)],
+		[menuX[i], rootY+(optionRadius+_border*2)],
+		[menuX[i]+(optionRadius+_border*2), rootY]
 	]
 	_border = 0;
 	var _button = [
-		[rootX, rootY-(tpRadius+_border)],
-		[rootX, rootY+(tpRadius+_border)],
-		[menuX[i], rootY-(tpRadius+_border)],
-		[menuX[i], rootY+(tpRadius+_border)],
-		[menuX[i]+(tpRadius+_border), rootY]
+		[rootX, rootY-(optionRadius+_border)],
+		[rootX, rootY+(optionRadius+_border)],
+		[menuX[i], rootY-(optionRadius+_border)],
+		[menuX[i], rootY+(optionRadius+_border)],
+		[menuX[i]+(optionRadius+_border), rootY]
 	]
 	#endregion
 	
@@ -64,6 +109,11 @@ for (var i = skills - 1; i >= 0; i--) {
 	//text			player_unit.actions[i].name[player_unit.upgrades[i]]+ ": " +
 	if i < 4 draw_text_transformed_colour(menuX[i+1]-expandAnim*60, menuY[i]-35, global.controls[i], 0.5, 0.5, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
 }
+
+//draw_rectangle_colour(850, 620, 1050, 700, c_red, c_white, c_aqua, c_white, true);
+//draw_set_halign(fa_center);
+//draw_set_color(c_white);
+//draw_text_ext_transformed(950, 610, "Confirm: Enter", 30, 100, 0.8, 0.8, 0);
 
 
 #region hp
