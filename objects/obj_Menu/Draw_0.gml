@@ -242,7 +242,7 @@ draw_text_transformed(75, 20, "G    "+ string(obj_battleControl.gold), 0.8, 0.8,
 #region skill details
 draw_set_font(fnt_chiaro);
 draw_set_color(c_white);
-draw_text_ext(148, 100, _text, 40, 1000);
+draw_text_ext(300, 10, _text, 40, 1000);
 #endregion
 
 #region turn banner
