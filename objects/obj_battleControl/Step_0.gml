@@ -62,7 +62,7 @@ switch (state) {
 		// chooses a random encounter. set to a value for debugging
 		//var random_battle = irandom(array_length(global.encounters)-1);
 		//random_battle=4;
-		
+		//battle_progress=10;
 		random_battle=battle_progress;
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
@@ -97,6 +97,7 @@ switch (state) {
 					unit.freeze_graphic.sprite_index=spr_freeze_out;
 					audio_play_sound(sfx_defreeze, 0, false, 0.5);
 					unit.freeze_graphic.image_speed=1;
+					unit.freeze_graphic=pointer_null;
 				}
 			}
 			
@@ -158,6 +159,7 @@ switch (state) {
 					player_units[i].freeze_graphic.sprite_index=spr_freeze_out;
 					player_units[i].freeze_graphic.image_speed=1;
 					audio_play_sound(sfx_defreeze, 0, false, 0.5);
+					unit.freeze_graphic=pointer_null;
 				}
 			}
 			
@@ -752,6 +754,7 @@ switch (state) {
 					obstacle.freeze_graphic.sprite_index=spr_freeze_out;
 					obstacle.freeze_graphic.image_speed=1;
 					audio_play_sound(sfx_defreeze, 0, false, 0.5);
+					unit.freeze_graphic=pointer_null;
 			
 				}
 			}
