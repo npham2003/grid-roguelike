@@ -170,13 +170,14 @@ switch (state) {
 			enemy_order += 1;
 		}
 		
-		obj_draw_bg.colorSwitch = false;
+		//obj_draw_bg.colorSwitch = false;
 		
 		break;
 #endregion
 
 #region Player Preparing
 	case BattleState.PlayerPreparing:
+		obj_draw_bg.colorSwitch = false;
 		
 		if (teachingMovement) {
 			obj_menuTut.set_text("To move, I have to select myself with SPACE, and move with WASD. Then finalize with ENTER");
