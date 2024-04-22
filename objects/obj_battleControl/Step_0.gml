@@ -582,6 +582,7 @@ switch (state) {
 			
 			array_delete(enemy_units, enemy_check_death, 1);
 			enemy_check_death-=1;
+			set_enemy_turn_order();
 		}
 		
 		enemy_check_death += 1;
@@ -641,6 +642,7 @@ switch (state) {
 			
 				array_delete(enemy_units, enemy_check_death, 1);
 				enemy_check_death-=1;
+				set_enemy_turn_order();
 			}
 		
 			enemy_check_death += 1;
@@ -782,6 +784,7 @@ switch (state) {
 			
 				array_delete(enemy_units, enemy_check_death, 1);
 				enemy_check_death-=1;
+				set_enemy_turn_order();
 			}
 		
 			enemy_check_death += 1;

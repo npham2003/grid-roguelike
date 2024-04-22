@@ -85,6 +85,7 @@ spawn_unit = function(new_unit){
 	array_push(player_units, unit);
 	unit.prev_grid[0] = unit.grid_pos[0];
 	unit.prev_grid[1] = unit.grid_pos[1];
+	
 	unit.upgrades = [0,0,0,0];
 	empty_tile._entity_on_tile=unit;
 	
@@ -124,6 +125,7 @@ spawn_enemies = function(enemy_data){
 			obj_gridCreator.battle_grid[empty_tile._x_coord][empty_tile._y_coord]._entity_on_tile=unit;
 			unit.grid_pos=[empty_tile._x_coord,empty_tile._y_coord];
 			battle_gold+=unit.gold;
+			unit.enemy_turn_order=array_length(enemy_units);
 		
 	}
 }
@@ -150,6 +152,13 @@ spawn_summon_ally_side = function(enemy_data, _summoner){
 			unit.grid_pos=[empty_tile._x_coord,empty_tile._y_coord];
 			battle_gold+=unit.gold;
 		
+	}
+	set_enemy_turn_order();
+}
+
+set_enemy_turn_order = function(){
+	for(i=0;i<array_length(enemy_units);i++){
+		enemy_units[i].enemy_turn_order=i+1
 	}
 }
 

@@ -35,6 +35,8 @@ summon_max=2;
 can_summon=true;
 summoner=pointer_null;
 
+enemy_turn_order=0;
+
 //healthbar_y = y-40;
 
 // find a valid target
