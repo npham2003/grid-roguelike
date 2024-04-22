@@ -452,7 +452,7 @@ highlighted_target_cross = function(_center_x,_center_y,_range){
 	}
 	return highlighted_target_array;
 }
-
+ 
 highlighted_target_line_pierce = function(_center_x,_center_y){
 	
 	highlighted_target_array=[];
@@ -528,6 +528,24 @@ highlighted_enemy_target_line_pierce = function(_center_x,_center_y){
 	return highlighted_enemy_target_array;
 }
 
+
+highlighted_enemy_target_straight_back = function(_center_x,_center_y){
+	
+	highlighted_enemy_target_array=[];
+	var j=0;
+	while(_center_x+j>0){
+		
+		if(!battle_grid[_center_x+j][_center_y]._is_empty){
+			
+			array_push(highlighted_enemy_target_array,battle_grid[_center_x+j][_center_y]);
+			break;
+		}
+		j-=1;
+	}
+	
+	
+	return highlighted_enemy_target_array;
+}
 
 for (var i = 0; i< gridHoriz;i++){
 	for (var j = 0; j < gridVert;j++){

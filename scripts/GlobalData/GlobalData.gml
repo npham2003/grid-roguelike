@@ -100,7 +100,7 @@ global.actionLibrary = {
 		},
 		skillFunctions: {
 			base: function(unit){
-				
+				 
 				if (!unit.play_sound) { //play beam sound once
 					audio_play_sound(sfx_beam_windup, 0, false);
 					unit.play_sound = true;
@@ -2591,7 +2591,15 @@ global.enemyActions = {
 		],
 		type: "turret_no_target",
 		damage_type: "normal"
-	}
+	},
+	sight: {
+		name: "los attack",
+		range: [
+			[0, 0]
+		],
+		type: "los",
+		damage_type: "normal"
+	},
 }
 
 //Player(s) Data
@@ -2699,6 +2707,17 @@ global.enemies = [
 		sounds: { attack: sfx_bat_attack },
 		ally: false,
 		gold: 500
+	},
+	{
+		name: "LOS Enemy",
+		hp: 1,
+		hpMax: 1,
+		healthbar_offset: -40,
+		sprites: { idle: spr_skeleton_idle, attack: spr_skeleton_attack },
+		actions: [global.enemyActions.sight],
+		sounds: { attack: sfx_bat_attack },
+		ally: false,
+		gold: 100
 	}
 ]
 
@@ -2844,7 +2863,7 @@ global.tutorialenc = [
 global.encounters = [
 	[
 		{
-			info: global.enemies[0],
+			info: global.enemies[5],
 			grid: [8, 1]
 		}
 		
@@ -2855,22 +2874,22 @@ global.encounters = [
 			grid: [8, 3]
 		},
 		{
-			info: global.enemies[0],
+			info: global.enemies[5],
 			grid: [8, 2]
 		}
 		
 	],
 	[
 		{
-			info: global.enemies[1],
+			info: global.enemies[5],
 			grid: [8, 1]
 		},
 		{
-			info: global.enemies[1],
+			info: global.enemies[5],
 			grid: [8, 3]
 		},
 		{
-			info: global.enemies[1],
+			info: global.enemies[5],
 			grid: [8, 2]
 		}
 	],
@@ -2887,7 +2906,7 @@ global.encounters = [
 	],
 	[
 		{
-			info: global.enemies[1],
+			info: global.enemies[5],
 			grid: [8, 3]
 		},
 		{
@@ -2895,7 +2914,7 @@ global.encounters = [
 			grid: [8, 2]
 		},
 		{
-			info: global.enemies[1],
+			info: global.enemies[0],
 			grid: [7, 3]
 		},
 		{
@@ -2973,7 +2992,7 @@ global.encounters = [
 			grid: [8, 2]
 		},
 		{
-			info: global.enemies[2],
+			info: global.enemies[5],
 			grid: [8, 0]
 		},
 		{

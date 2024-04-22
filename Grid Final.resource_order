@@ -45,6 +45,9 @@
     {"name":"spr_push","order":11,"path":"sprites/spr_push/spr_push.yy",},
     {"name":"spr_right_arrow_transparent","order":2,"path":"sprites/spr_right_arrow_transparent/spr_right_arrow_transparent.yy",},
     {"name":"spr_right_arrow","order":8,"path":"sprites/spr_right_arrow/spr_right_arrow.yy",},
+    {"name":"spr_skeleton_idle","order":8,"path":"sprites/spr_skeleton_idle/spr_skeleton_idle.yy",},
+    {"name":"spr_skeleton_attack","order":9,"path":"sprites/spr_skeleton_attack/spr_skeleton_attack.yy",},
+    {"name":"spr_summoner_attack","order":7,"path":"sprites/spr_summoner_attack/spr_summoner_attack.yy",},
     {"name":"spr_summoner_idle","order":6,"path":"sprites/spr_summoner_idle/spr_summoner_idle.yy",},
     {"name":"spr_teleport_in","order":12,"path":"sprites/spr_teleport_in/spr_teleport_in.yy",},
     {"name":"spr_teleport_out_alt","order":14,"path":"sprites/spr_teleport_out_alt/spr_teleport_out_alt.yy",},
@@ -53,6 +56,5 @@
     {"name":"spr_temp_Zero","order":2,"path":"sprites/spr_temp_Zero/spr_temp_Zero.yy",},
     {"name":"spr_turret_attack","order":2,"path":"sprites/spr_turret_attack/spr_turret_attack.yy",},
     {"name":"spr_turret_idle","order":3,"path":"sprites/spr_turret_idle/spr_turret_idle.yy",},
-    {"name":"spr_summoner_attack","order":7,"path":"sprites/spr_summoner_attack/spr_summoner_attack.yy",},
   ],
 }

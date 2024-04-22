@@ -26,7 +26,7 @@ if (confirm) {
 		[confirmX[1], confirmY+(confirmRadius+c_border)],
 		[confirmX[1]+(confirmRadius+c_border), confirmY]
 	]
-	
+	 
 	draw_set_color(c_black);
 	draw_primitive_begin(pr_trianglestrip);
 	draw_vertices(c_outline2);
@@ -250,7 +250,7 @@ draw_text_ext(300, 10, _text, 40, 1000);
 
 if (turn_banner_animation_started) {
 	turn_life--;
-	show_debug_message(turn_life);
+	//show_debug_message(turn_life);
 	draw_set_color(global._primary);
 	
 	if (turn_life > 50) {
