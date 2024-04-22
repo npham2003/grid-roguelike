@@ -162,7 +162,7 @@ switch (state) {
 					unit.freeze_graphic=pointer_null;
 				}
 			}
-			
+			player_units[i].shield=0;
 			// error handling. might be unnecessary
 			if(player_units[i].stall_turns<0){
 				player_units[i].stall_turns=0;
