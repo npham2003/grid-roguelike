@@ -249,44 +249,44 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				if (!unit.skill_init) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 					unit.range = 3;
-					unit.skill_coords[0] = unit.grid_pos[0] + unit.range;
-					unit.skill_coords[1] = unit.grid_pos[1];
+					skill_coords[0] = unit.grid_pos[0] + unit.range;
+					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_init = true;
 					unit.is_attacking = true;
 	
 					audio_play_sound(sfx_mortar_windup, 0, false);
 				}
 				skill_range = obj_gridCreator.highlighted_attack_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
-				skill_range_aux = obj_gridCreator.highlighted_target_circle(unit.skill_coords[0], unit.skill_coords[1],1);
+				skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
-				obj_cursor.reset_cursor(unit.skill_coords[0],unit.skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && unit.skill_coords[0] > 0) {
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]])){
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] -= 1;
+						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && unit.skill_coords[0] < obj_gridCreator.gridHoriz) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]])){
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] += 1;
+						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && unit.skill_coords[1] < obj_gridCreator.gridVert) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1])){
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] += 1;
+						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && unit.skill_coords[1] > 0) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1])){
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] -= 1;
+						skill_coords[1] -= 1;
 					}
 				}
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
 					audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
-					obj_battleEffect.hit_animation_coordinates(unit.skill_coords[0],unit.skill_coords[1],1);
+					obj_battleEffect.hit_animation_coordinates(skill_coords[0],skill_coords[1],1);
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
 						if (!skill_range_aux[i]._is_empty) {
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
@@ -318,45 +318,45 @@ global.actionLibrary = {
 				if (!unit.skill_init) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 					unit.range = 3;
 					
-					unit.skill_coords[0] = unit.grid_pos[0] + unit.range;
-					unit.skill_coords[1] = unit.grid_pos[1];
+					skill_coords[0] = unit.grid_pos[0] + unit.range;
+					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_init = true;
 					unit.is_attacking = true;
 	
 					audio_play_sound(sfx_mortar_windup, 0, false);
 				}
 				skill_range = obj_gridCreator.highlighted_attack_all();
-				skill_range_aux = obj_gridCreator.highlighted_target_circle(unit.skill_coords[0], unit.skill_coords[1],1);
+				skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
 				show_debug_message(string(skill_range));
 				obj_cursor.movable_tiles=skill_range;
-				obj_cursor.reset_cursor(unit.skill_coords[0],unit.skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && unit.skill_coords[0] > 0) {
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]])){
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] -= 1;
+						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && unit.skill_coords[0] < obj_gridCreator.gridHoriz) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]])){
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz-1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] += 1;
+						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && unit.skill_coords[1] < obj_gridCreator.gridVert) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1])){
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] += 1;
+						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && unit.skill_coords[1] > 0) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1])){
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] -= 1;
+						skill_coords[1] -= 1;
 					}
 				}
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
 					audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
-					obj_battleEffect.hit_animation_coordinates(unit.skill_coords[0],unit.skill_coords[1],1);
+					obj_battleEffect.hit_animation_coordinates(skill_coords[0],skill_coords[1],1);
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
 						if (!skill_range_aux[i]._is_empty) {
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
@@ -387,86 +387,97 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				if (!unit.skill_init) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 					unit.range = 3;
-					unit.skill_coords[0] = unit.grid_pos[0];
-					unit.skill_coords[1] = unit.grid_pos[1];
+					skill_coords[0] = unit.grid_pos[0];
+					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_init = true;
 					unit.is_attacking = true;
 					skill_range = obj_gridCreator.highlighted_attack_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
-					skill_range_aux = obj_gridCreator.highlighted_target_circle(unit.skill_coords[0], unit.skill_coords[1],1);
+					skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
 					audio_play_sound(sfx_mortar_windup, 0, false);
 					obj_battleEffect.remove_push_preview();
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
 						if (!skill_range_aux[i]._is_empty) {
 							
-							if(unit.skill_coords[1]-1>=0){
-								if(skill_range_aux[i]==obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1]){
+							if(skill_coords[1]-1>=0){
+								if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1]){
 									obj_battleEffect.push_preview(skill_range_aux[i],3);
 								}
 							}
-							if(skill_range_aux[i]==obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1]){
-								obj_battleEffect.push_preview(skill_range_aux[i],2);
+							if(skill_coords[1]+1<5){
+								if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1]){
+									obj_battleEffect.push_preview(skill_range_aux[i],2);
+								}
 							}
-							if(unit.skill_coords[0]-1>=0){
-								if(skill_range_aux[i]==obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]]){
+							if(skill_coords[0]-1>=0){
+								if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]]){
 									obj_battleEffect.push_preview(skill_range_aux[i],1);
 								}
 							}
-							if(skill_range_aux[i]==obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]]){
-								obj_battleEffect.push_preview(skill_range_aux[i],0);
+							if(skill_coords[0]+1<10){
+								if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]]){
+									obj_battleEffect.push_preview(skill_range_aux[i],0);
+								}
 							}
 							
 						}
 					}
 				}
 				
-				if (keyboard_check_pressed(ord("A")) && unit.skill_coords[0] > 0) {
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]])){
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] -= 1;
+						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && unit.skill_coords[0] < obj_gridCreator.gridHoriz) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]])){
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz-1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] += 1;
+						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && unit.skill_coords[1] < obj_gridCreator.gridVert) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1])){
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert-1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] += 1;
+						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && unit.skill_coords[1] > 0) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1])){
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] -= 1;
+						skill_coords[1] -= 1;
 					}
 				}
 				skill_range = obj_gridCreator.highlighted_attack_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
-				skill_range_aux = obj_gridCreator.highlighted_target_circle(unit.skill_coords[0], unit.skill_coords[1],1);
+				skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
-				obj_cursor.reset_cursor(unit.skill_coords[0],unit.skill_coords[1]);
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
 				if(keyboard_check_pressed(vk_anykey)){
 					obj_battleEffect.remove_push_preview();
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
+						show_debug_message(array_length(skill_range_aux));
+						show_debug_message(i)
 						if (!skill_range_aux[i]._is_empty) {
 							
-							if(unit.skill_coords[1]-1>=0){
-								if(skill_range_aux[i]==obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1]){
+							if(skill_coords[1]-1>=0){
+								if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1]){
 									obj_battleEffect.push_preview(skill_range_aux[i],3);
 								}
 							}
-							if(skill_range_aux[i]==obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1]){
-								obj_battleEffect.push_preview(skill_range_aux[i],2);
+							if(skill_coords[1]+1<5){
+								if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1]){
+									obj_battleEffect.push_preview(skill_range_aux[i],2);
+								}
 							}
-							if(unit.skill_coords[0]-1>=0){
-								if(skill_range_aux[i]==obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]]){
+							if(skill_coords[0]-1>=0){
+								if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]]){
 									obj_battleEffect.push_preview(skill_range_aux[i],1);
 								}
 							}
-							if(skill_range_aux[i]==obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]]){
-								obj_battleEffect.push_preview(skill_range_aux[i],0);
+							if(skill_coords[0]+1<10){
+								if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]]){
+									obj_battleEffect.push_preview(skill_range_aux[i],0);
+								}
 							}
 							
 						}
@@ -474,10 +485,10 @@ global.actionLibrary = {
 				}
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
 					audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
-					obj_battleEffect.hit_animation_coordinates(unit.skill_coords[0],unit.skill_coords[1],1);
+					obj_battleEffect.hit_animation_coordinates(skill_coords[0],skill_coords[1],1);
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
 						if (!skill_range_aux[i]._is_empty) {
-							if(skill_range_aux[i]==obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]){
+							if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]){
 								_damage = unit.action.damage*2;
 							}else{
 								_damage = unit.action.damage
@@ -485,13 +496,13 @@ global.actionLibrary = {
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
 							skill_range_aux[i]._entity_on_tile.damage(_damage+unit.attack_bonus+unit.attack_bonus_temp);
 							show_debug_message(skill_range_aux[i]._entity_on_tile.hp);
-							if(skill_range_aux[i]==obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1]&&!obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1]._is_empty){
+							if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1]&&!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1]._is_empty){
 								skill_range_aux[i]._entity_on_tile.push_up(1);
-							}else if(skill_range_aux[i]==obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1]&&!obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1]._is_empty){
+							}else if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1]&&!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1]._is_empty){
 								skill_range_aux[i]._entity_on_tile.push_down(1);
-							}else if(skill_range_aux[i]==obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]]&&!obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]]._is_empty){
+							}else if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]]&&!obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]]._is_empty){
 								skill_range_aux[i]._entity_on_tile.push_forward(1);
-							}else if(skill_range_aux[i]==obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]]&&!obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]]._is_empty){
+							}else if(skill_range_aux[i]==obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]]&&!obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]]._is_empty){
 								skill_range_aux[i]._entity_on_tile.push_back(1);
 							}
 						}
@@ -509,6 +520,7 @@ global.actionLibrary = {
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_range = obj_gridCreator.reset_highlights_attack();
 					unit.skill_init = false;
+					obj_battleEffect.remove_push_preview();
 		
 				}
 			},
@@ -516,7 +528,7 @@ global.actionLibrary = {
 	},
 	charge: {
 		name: ["Charge", "Long Charge", "Parry"], //probably redundant to have a name but keep it
-		description: ["Gain 1 TP", "Gain 3 TP but move back to your original position", "Protect yourself from the next attack that hits you"],
+		description: ["Gain 1 TP", "Gain 3 TP but move back to your original position", "Protect yourself from the next attack that hits you on the next turn"],
 		cost: [0, 0, 2],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -621,46 +633,46 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				if (!unit.skill_init) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 					unit.range = 3;
-					unit.skill_coords[0] = unit.grid_pos[0] + unit.range;
-					unit.skill_coords[1] = unit.grid_pos[1];
+					skill_coords[0] = unit.grid_pos[0] + unit.range;
+					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_init = true;
 					unit.is_attacking = true;
 	
 					audio_play_sound(sfx_mortar_windup, 0, false);
 				}
 				skill_range = obj_gridCreator.highlighted_attack_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
-				skill_range_aux = obj_gridCreator.highlighted_target_square(unit.skill_coords[0], unit.skill_coords[1],1);
+				skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
-				obj_cursor.reset_cursor(unit.skill_coords[0],unit.skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && unit.skill_coords[0] > 0) {
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]])){
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] -= 1;
+						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && unit.skill_coords[0] < obj_gridCreator.gridHoriz) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]])){
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz - 1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] += 1;
+						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && unit.skill_coords[1] < obj_gridCreator.gridVert) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1])){
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] += 1;
+						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && unit.skill_coords[1] > 0) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1])){
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] -= 1;
+						skill_coords[1] -= 1;
 					}
 				}
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
-					if(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._is_empty){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
-						obj_battleControl.spawn_obstacle(global.obstacles[0],unit.skill_coords);	
+						obj_battleControl.spawn_obstacle(global.obstacles[0],skill_coords);	
 						unit.is_attacking = false;
 						skill_range = obj_gridCreator.reset_highlights_attack();
 						skill_range_aux = obj_gridCreator.reset_highlights_target();
@@ -683,46 +695,46 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				if (!unit.skill_init) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 					unit.range = 3;
-					unit.skill_coords[0] = unit.grid_pos[0] + unit.range;
-					unit.skill_coords[1] = unit.grid_pos[1];
+					skill_coords[0] = unit.grid_pos[0] + unit.range;
+					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_init = true;
 					unit.is_attacking = true;
 	
 					audio_play_sound(sfx_mortar_windup, 0, false);
 				}
 				skill_range = obj_gridCreator.highlighted_attack_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
-				skill_range_aux = obj_gridCreator.highlighted_target_square(unit.skill_coords[0], unit.skill_coords[1],2);
+				skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],2);
 				obj_cursor.movable_tiles=skill_range;
-				obj_cursor.reset_cursor(unit.skill_coords[0],unit.skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && unit.skill_coords[0] > 0) {
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]])){
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] -= 1;
+						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && unit.skill_coords[0] < obj_gridCreator.gridHoriz) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]])){
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] += 1;
+						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && unit.skill_coords[1] < obj_gridCreator.gridVert) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1])){
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] += 1;
+						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && unit.skill_coords[1] > 0) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1])){
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] -= 1;
+						skill_coords[1] -= 1;
 					}
 				}
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
-					if(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._is_empty){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
-						obj_battleControl.spawn_obstacle(global.obstacles[1],unit.skill_coords);	
+						obj_battleControl.spawn_obstacle(global.obstacles[1],skill_coords);	
 						unit.is_attacking = false;
 						skill_range = obj_gridCreator.reset_highlights_attack();
 						skill_range_aux = obj_gridCreator.reset_highlights_target();
@@ -745,39 +757,39 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				if (!unit.skill_init) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 					unit.range = 3;
-					unit.skill_coords[0] = unit.grid_pos[0] + unit.range;
-					unit.skill_coords[1] = unit.grid_pos[1];
+					skill_coords[0] = unit.grid_pos[0] + unit.range;
+					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_init = true;
 					unit.is_attacking = true;
 	
 					audio_play_sound(sfx_mortar_windup, 0, false);
 				}
 				skill_range = obj_gridCreator.highlighted_attack_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
-				skill_range_aux = obj_gridCreator.highlighted_target_square(unit.skill_coords[0], unit.skill_coords[1],1);
+				skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
-				obj_cursor.reset_cursor(unit.skill_coords[0],unit.skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && unit.skill_coords[0] > 0) {
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]])){
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] -= 1;
+						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && unit.skill_coords[0] < obj_gridCreator.gridHoriz) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]])){
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] += 1;
+						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && unit.skill_coords[1] < obj_gridCreator.gridVert) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1])){
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] += 1;
+						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && unit.skill_coords[1] > 0) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1])){
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] -= 1;
+						skill_coords[1] -= 1;
 					}
 				}
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
@@ -1096,11 +1108,11 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				if (unit.skill_progress==0) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 					unit.range = 3;
-					unit.skill_coords[0] = unit.grid_pos[0];
-					unit.skill_coords[1] = unit.grid_pos[1];
+					skill_coords[0] = unit.grid_pos[0];
+					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_progress = 1;
 					unit.is_attacking = true;
-					skill_range_aux = obj_gridCreator.highlighted_target_square(unit.skill_coords[0], unit.skill_coords[1],0);
+					skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],0);
 					audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
 				}
 				if(unit.skill_progress==1){
@@ -1111,42 +1123,42 @@ global.actionLibrary = {
 				}
 				
 				obj_cursor.movable_tiles=skill_range;
-				obj_cursor.reset_cursor(unit.skill_coords[0],unit.skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && unit.skill_coords[0] > 0) {
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]])){
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] -= 1;
+						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && unit.skill_coords[0] < obj_gridCreator.gridHoriz) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]])){
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] += 1;
+						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && unit.skill_coords[1] < obj_gridCreator.gridVert) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1])){
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] += 1;
+						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && unit.skill_coords[1] > 0) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1])){
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] -= 1;
+						skill_coords[1] -= 1;
 					}
 				}
-				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]];
+				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]];
 				for (var i = 0; i < array_length(skill_range_aux); i++) {
 					skill_range_aux[i]._target_highlight=true;
 				}
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
 					if(unit.skill_progress==1){
-						if(!obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._is_empty){
-							if(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.ally){
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
 								unit.skill_progress=2;
-								array_push(skill_range_aux,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]);
+								array_push(skill_range_aux,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]);
 								audio_play_sound(sfx_teleport_select, 0, false, 1);
 							}else{
 								audio_play_sound(sfx_no_tp, 0, false);
@@ -1156,8 +1168,8 @@ global.actionLibrary = {
 						}
 					}
 					else if(unit.skill_progress==2){
-						if(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._is_empty){
-							if(unit.skill_coords[0]<5){
+						if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+							if(skill_coords[0]<5){
 								audio_play_sound(sfx_teleport, 0, false, 1);
 								skill_range_aux[0]._entity_on_tile.grid_pos = [skill_range_aux[1]._x_coord,skill_range_aux[1]._y_coord];
 								
@@ -1190,8 +1202,8 @@ global.actionLibrary = {
 						skill_range_aux[1]._target_highlight=false;
 						array_delete(skill_range_aux,1,1);
 						obj_cursor.reset_cursor(skill_range_aux[0]._x_coord,skill_range_aux[0]._y_coord);
-						unit.skill_coords[0]=skill_range_aux[0]._x_coord;
-						unit.skill_coords[1]=skill_range_aux[0]._y_coord;
+						skill_coords[0]=skill_range_aux[0]._x_coord;
+						skill_coords[1]=skill_range_aux[0]._y_coord;
 					}else{
 						unit.is_attacking = false;
 						unit.skill_back = true;
@@ -1211,53 +1223,53 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				if (unit.skill_progress==0) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 					unit.range = 3;
-					unit.skill_coords[0] = unit.grid_pos[0];
-					unit.skill_coords[1] = unit.grid_pos[1];
+					skill_coords[0] = unit.grid_pos[0];
+					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_progress = 1;
 					unit.is_attacking = true;
-					skill_range_aux = obj_gridCreator.highlighted_target_square(unit.skill_coords[0], unit.skill_coords[1],0);
+					skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],0);
 					audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
 				}
 				skill_range = obj_gridCreator.highlighted_support_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
 				
 				obj_cursor.movable_tiles=skill_range;
-				obj_cursor.reset_cursor(unit.skill_coords[0],unit.skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && unit.skill_coords[0] > 0) {
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]])){
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] -= 1;
+						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && unit.skill_coords[0] < obj_gridCreator.gridHoriz) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]])){
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] += 1;
+						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && unit.skill_coords[1] < obj_gridCreator.gridVert) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1])){
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] += 1;
+						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && unit.skill_coords[1] > 0) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1])){
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] -= 1;
+						skill_coords[1] -= 1;
 					}
 				}
-				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]];
+				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]];
 				for (var i = 0; i < array_length(skill_range_aux); i++) {
 					skill_range_aux[i]._target_highlight=true;
 				}
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
 					if(unit.skill_progress==1){
-						if(!obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._is_empty){
-							if(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.ally){
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
 								audio_play_sound(sfx_teleport_select, 0, false, 1);
 								unit.skill_progress=2;
-								array_push(skill_range_aux,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]);
+								array_push(skill_range_aux,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]);
 							}else{
 								audio_play_sound(sfx_no_tp, 0, false);
 							}
@@ -1266,8 +1278,8 @@ global.actionLibrary = {
 						}
 					}
 					else if(unit.skill_progress==2){
-						if(!obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._is_empty){
-							if(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.ally){
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
 								audio_play_sound(sfx_teleport, 0, false, 1);
 								temp = skill_range_aux[0]._entity_on_tile;
 								skill_range_aux[0]._entity_on_tile = skill_range_aux[1]._entity_on_tile;
@@ -1307,8 +1319,8 @@ global.actionLibrary = {
 						skill_range_aux[1]._target_highlight=false;
 						array_delete(skill_range_aux,1,1);
 						obj_cursor.reset_cursor(skill_range_aux[0]._x_coord,skill_range_aux[0]._y_coord);
-						unit.skill_coords[0]=skill_range_aux[0]._x_coord;
-						unit.skill_coords[1]=skill_range_aux[0]._y_coord;
+						skill_coords[0]=skill_range_aux[0]._x_coord;
+						skill_coords[1]=skill_range_aux[0]._y_coord;
 					}else{
 						unit.is_attacking = false;
 						unit.skill_back = true;
@@ -1330,11 +1342,11 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				if (unit.skill_progress==0) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 					unit.range = 3;
-					unit.skill_coords[0] = unit.grid_pos[0];
-					unit.skill_coords[1] = unit.grid_pos[1];
+					skill_coords[0] = unit.grid_pos[0];
+					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_progress = 1;
 					unit.is_attacking = true;
-					skill_range_aux = obj_gridCreator.highlighted_target_square(unit.skill_coords[0], unit.skill_coords[1],0);
+					skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],0);
 					audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
 				}
 				if(unit.skill_progress==2){
@@ -1345,45 +1357,45 @@ global.actionLibrary = {
 				}
 				
 				obj_cursor.movable_tiles=skill_range;
-				obj_cursor.reset_cursor(unit.skill_coords[0],unit.skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && unit.skill_coords[0] > 0) {
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]])){
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] -= 1;
+						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && unit.skill_coords[0] < obj_gridCreator.gridHoriz) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]])){
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] += 1;
+						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && unit.skill_coords[1] < obj_gridCreator.gridVert) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1])){
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] += 1;
+						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && unit.skill_coords[1] > 0) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1])){
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] -= 1;
+						skill_coords[1] -= 1;
 					}
 				}
-				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]];
+				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]];
 				for (var i = 0; i < array_length(skill_range_aux); i++) {
 					skill_range_aux[i]._target_highlight=true;
 				}
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
 					if(unit.skill_progress==1){
-						if(!obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._is_empty){
-							if(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.ally){
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
 								audio_play_sound(sfx_teleport_select, 0, false, 1);
 								unit.skill_progress=2;
-								array_push(skill_range_aux,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]);
-								unit.skill_coords[0]=unit.grid_pos[0];
-								unit.skill_coords[1]=unit.grid_pos[1];
+								array_push(skill_range_aux,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]);
+								skill_coords[0]=unit.grid_pos[0];
+								skill_coords[1]=unit.grid_pos[1];
 							}else{
 								audio_play_sound(sfx_no_tp, 0, false);
 							}
@@ -1392,8 +1404,8 @@ global.actionLibrary = {
 						}
 					}
 					else if(unit.skill_progress==2){
-						if(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._is_empty){
-							if(unit.skill_coords[0]<5){
+						if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+							if(skill_coords[0]<5){
 								audio_play_sound(sfx_teleport, 0, false, 1);
 								skill_range_aux[0]._entity_on_tile.grid_pos = [skill_range_aux[1]._x_coord,skill_range_aux[1]._y_coord];
 								
@@ -1425,8 +1437,8 @@ global.actionLibrary = {
 						skill_range_aux[1]._target_highlight=false;
 						array_delete(skill_range_aux,1,1);
 						obj_cursor.reset_cursor(skill_range_aux[0]._x_coord,skill_range_aux[0]._y_coord);
-						unit.skill_coords[0]=skill_range_aux[0]._x_coord;
-						unit.skill_coords[1]=skill_range_aux[0]._y_coord;
+						skill_coords[0]=skill_range_aux[0]._x_coord;
+						skill_coords[1]=skill_range_aux[0]._y_coord;
 					}else{
 						unit.is_attacking = false;
 						unit.skill_back = true;
@@ -1616,11 +1628,11 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				if (unit.skill_progress==0) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 					unit.range = 3;
-					unit.skill_coords[0] = unit.grid_pos[0];
-					unit.skill_coords[1] = unit.grid_pos[1];
+					skill_coords[0] = unit.grid_pos[0];
+					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_progress = 1;
 					unit.is_attacking = true;
-					skill_range_aux = obj_gridCreator.highlighted_target_square(unit.skill_coords[0], unit.skill_coords[1],0);
+					skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],0);
 					audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
 				}
 				if(unit.skill_progress==1){
@@ -1630,43 +1642,43 @@ global.actionLibrary = {
 				
 				
 				obj_cursor.movable_tiles=skill_range;
-				obj_cursor.reset_cursor(unit.skill_coords[0],unit.skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && unit.skill_coords[0] > 0) {
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]])){
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] -= 1;
+						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && unit.skill_coords[0] < obj_gridCreator.gridHoriz) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]])){
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] += 1;
+						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && unit.skill_coords[1] < obj_gridCreator.gridVert) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1])){
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] += 1;
+						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && unit.skill_coords[1] > 0) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1])){
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] -= 1;
+						skill_coords[1] -= 1;
 					}
 				}
-				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]];
+				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]];
 				for (var i = 0; i < array_length(skill_range_aux); i++) {
 					skill_range_aux[i]._target_highlight=true;
 				}
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 					if(unit.skill_progress==1){
-						if(!obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._is_empty){
-							if(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.ally){
-								obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.attack_bonus_temp+=1;
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.attack_bonus_temp+=1;
 								
-								obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.attack_buff_recent=true;
+								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.attack_buff_recent=true;
 								
 								unit.is_attacking = false;
 								skill_range = obj_gridCreator.reset_highlights_support();
@@ -1675,7 +1687,7 @@ global.actionLibrary = {
 								unit.skill_init = false;
 								unit.skill_progress=0;
 								
-								obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile,3);
+								obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile,3);
 								audio_play_sound(sfx_charge, 0, false,0.3);
 								show_debug_message(unit.action.name);
 							}else{
@@ -1710,11 +1722,11 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				if (unit.skill_progress==0) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 					unit.range = 3;
-					unit.skill_coords[0] = unit.grid_pos[0];
-					unit.skill_coords[1] = unit.grid_pos[1];
+					skill_coords[0] = unit.grid_pos[0];
+					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_progress = 1;
 					unit.is_attacking = true;
-					skill_range_aux = obj_gridCreator.highlighted_target_square(unit.skill_coords[0], unit.skill_coords[1],0);
+					skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],0);
 					audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
 				}
 				if(unit.skill_progress==1){
@@ -1724,43 +1736,43 @@ global.actionLibrary = {
 				
 				
 				obj_cursor.movable_tiles=skill_range;
-				obj_cursor.reset_cursor(unit.skill_coords[0],unit.skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && unit.skill_coords[0] > 0) {
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]])){
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] -= 1;
+						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && unit.skill_coords[0] < obj_gridCreator.gridHoriz) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]])){
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] += 1;
+						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && unit.skill_coords[1] < obj_gridCreator.gridVert) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1])){
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] += 1;
+						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && unit.skill_coords[1] > 0) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1])){
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] -= 1;
+						skill_coords[1] -= 1;
 					}
 				}
-				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]];
+				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]];
 				for (var i = 0; i < array_length(skill_range_aux); i++) {
 					skill_range_aux[i]._target_highlight=true;
 				}
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 					if(unit.skill_progress==1){
-						if(!obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._is_empty){
-							if(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.ally){
-								obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.attack_bonus_temp+=1;
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.attack_bonus_temp+=1;
 								
-								obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.attack_buff_recent=true;
+								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.attack_buff_recent=true;
 								
 								unit.is_attacking = false;
 								skill_range = obj_gridCreator.reset_highlights_support();
@@ -1769,7 +1781,7 @@ global.actionLibrary = {
 								unit.skill_init = false;
 								unit.skill_progress=0;
 								audio_play_sound(sfx_charge, 0, false,0.3);
-								obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile,3);
+								obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile,3);
 								show_debug_message(unit.action.name);
 							}else{
 								audio_play_sound(sfx_no_tp, 0, false);
@@ -1803,11 +1815,11 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				if (unit.skill_progress==0) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 					unit.range = 3;
-					unit.skill_coords[0] = unit.grid_pos[0];
-					unit.skill_coords[1] = unit.grid_pos[1];
+					skill_coords[0] = unit.grid_pos[0];
+					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_progress = 1;
 					unit.is_attacking = true;
-					skill_range_aux = obj_gridCreator.highlighted_target_square(unit.skill_coords[0], unit.skill_coords[1],0);
+					skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],0);
 					audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
 				}
 				if(unit.skill_progress==1){
@@ -1817,42 +1829,42 @@ global.actionLibrary = {
 				
 				
 				obj_cursor.movable_tiles=skill_range;
-				obj_cursor.reset_cursor(unit.skill_coords[0],unit.skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && unit.skill_coords[0] > 0) {
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]])){
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] -= 1;
+						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && unit.skill_coords[0] < obj_gridCreator.gridHoriz) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]])){
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] += 1;
+						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && unit.skill_coords[1] < obj_gridCreator.gridVert) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1])){
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] += 1;
+						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && unit.skill_coords[1] > 0) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1])){
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] -= 1;
+						skill_coords[1] -= 1;
 					}
 				}
-				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]];
+				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]];
 				for (var i = 0; i < array_length(skill_range_aux); i++) {
 					skill_range_aux[i]._target_highlight=true;
 				}
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 					if(unit.skill_progress==1){
-						if(!obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._is_empty){
-							if(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.ally){
-								obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.attack_bonus_temp+=2;
-								obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.attack_buff_recent=true;
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.attack_bonus_temp+=2;
+								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.attack_buff_recent=true;
 								unit.is_attacking = false;
 								skill_range = obj_gridCreator.reset_highlights_support();
 								skill_range_aux = obj_gridCreator.reset_highlights_target();
@@ -1860,7 +1872,7 @@ global.actionLibrary = {
 								unit.skill_init = false;
 								unit.skill_progress=0;
 								audio_play_sound(sfx_charge, 0, false,0.3);
-								obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile,3);
+								obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile,3);
 								show_debug_message(unit.action.name);
 							}else{
 								audio_play_sound(sfx_no_tp, 0, false);
@@ -1909,11 +1921,11 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				if (unit.skill_progress==0) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 					unit.range = 3;
-					unit.skill_coords[0] = unit.grid_pos[0];
-					unit.skill_coords[1] = unit.grid_pos[1];
+					skill_coords[0] = unit.grid_pos[0];
+					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_progress = 1;
 					unit.is_attacking = true;
-					skill_range_aux = obj_gridCreator.highlighted_target_square(unit.skill_coords[0], unit.skill_coords[1],0);
+					skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],0);
 					audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
 				}
 				if(unit.skill_progress==1){
@@ -1923,43 +1935,43 @@ global.actionLibrary = {
 				
 				
 				obj_cursor.movable_tiles=skill_range;
-				obj_cursor.reset_cursor(unit.skill_coords[0],unit.skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && unit.skill_coords[0] > 0) {
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]])){
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] -= 1;
+						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && unit.skill_coords[0] < obj_gridCreator.gridHoriz) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]])){
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] += 1;
+						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && unit.skill_coords[1] < obj_gridCreator.gridVert) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1])){
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] += 1;
+						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && unit.skill_coords[1] > 0) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1])){
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] -= 1;
+						skill_coords[1] -= 1;
 					}
 				}
-				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]];
+				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]];
 				for (var i = 0; i < array_length(skill_range_aux); i++) {
 					skill_range_aux[i]._target_highlight=true;
 				}
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
 					if(unit.skill_progress==1){
-						if(!obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._is_empty){
-							if(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.ally){
-								obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.move_bonus_temp+=1;
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.move_bonus_temp+=1;
 								
-								obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.move_buff_recent=true;
+								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.move_buff_recent=true;
 								
 								unit.is_attacking = false;
 								skill_range = obj_gridCreator.reset_highlights_support();
@@ -1968,7 +1980,7 @@ global.actionLibrary = {
 								unit.skill_init = false;
 								unit.skill_progress=0;
 								
-								obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile,3);
+								obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile,3);
 								audio_play_sound(sfx_charge, 0, false,0.3);
 								show_debug_message(unit.action.name);
 							}else{
@@ -2003,11 +2015,11 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				if (unit.skill_progress==0) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 					unit.range = 3;
-					unit.skill_coords[0] = unit.grid_pos[0];
-					unit.skill_coords[1] = unit.grid_pos[1];
+					skill_coords[0] = unit.grid_pos[0];
+					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_progress = 1;
 					unit.is_attacking = true;
-					skill_range_aux = obj_gridCreator.highlighted_target_square(unit.skill_coords[0], unit.skill_coords[1],0);
+					skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],0);
 					audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
 				}
 				if(unit.skill_progress==1){
@@ -2017,43 +2029,43 @@ global.actionLibrary = {
 				
 				
 				obj_cursor.movable_tiles=skill_range;
-				obj_cursor.reset_cursor(unit.skill_coords[0],unit.skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && unit.skill_coords[0] > 0) {
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]])){
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] -= 1;
+						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && unit.skill_coords[0] < obj_gridCreator.gridHoriz) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]])){
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] += 1;
+						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && unit.skill_coords[1] < obj_gridCreator.gridVert) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1])){
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] += 1;
+						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && unit.skill_coords[1] > 0) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1])){
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] -= 1;
+						skill_coords[1] -= 1;
 					}
 				}
-				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]];
+				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]];
 				for (var i = 0; i < array_length(skill_range_aux); i++) {
 					skill_range_aux[i]._target_highlight=true;
 				}
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
 					if(unit.skill_progress==1){
-						if(!obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._is_empty){
-							if(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.ally){
-								obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.move_bonus_temp+=2;
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.move_bonus_temp+=2;
 								
-								obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.move_buff_recent=true;
+								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.move_buff_recent=true;
 								
 								unit.is_attacking = false;
 								skill_range = obj_gridCreator.reset_highlights_support();
@@ -2062,7 +2074,7 @@ global.actionLibrary = {
 								unit.skill_init = false;
 								unit.skill_progress=0;
 								audio_play_sound(sfx_charge, 0, false,0.3);
-								obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile,3);
+								obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile,3);
 								show_debug_message(unit.action.name);
 							}else{
 								audio_play_sound(sfx_no_tp, 0, false);
@@ -2096,11 +2108,11 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				if (unit.skill_progress==0) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
 					unit.range = 3;
-					unit.skill_coords[0] = unit.grid_pos[0];
-					unit.skill_coords[1] = unit.grid_pos[1];
+					skill_coords[0] = unit.grid_pos[0];
+					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_progress = 1;
 					unit.is_attacking = true;
-					skill_range_aux = obj_gridCreator.highlighted_target_square(unit.skill_coords[0], unit.skill_coords[1],0);
+					skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],0);
 					audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
 				}
 				if(unit.skill_progress==1){
@@ -2110,43 +2122,43 @@ global.actionLibrary = {
 				
 				
 				obj_cursor.movable_tiles=skill_range;
-				obj_cursor.reset_cursor(unit.skill_coords[0],unit.skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && unit.skill_coords[0] > 0) {
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]-1][unit.skill_coords[1]])){
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] -= 1;
+						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && unit.skill_coords[0] < obj_gridCreator.gridHoriz) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]+1][unit.skill_coords[1]])){
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[0] += 1;
+						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && unit.skill_coords[1] < obj_gridCreator.gridVert) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]+1])){
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] += 1;
+						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && unit.skill_coords[1] > 0) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]-1])){
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						unit.skill_coords[1] -= 1;
+						skill_coords[1] -= 1;
 					}
 				}
-				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]];
+				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]];
 				for (var i = 0; i < array_length(skill_range_aux); i++) {
 					skill_range_aux[i]._target_highlight=true;
 				}
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
 					if(unit.skill_progress==1){
-						if(!obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._is_empty){
-							if(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.ally && obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile!=unit){
-								if(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.has_attacked||obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.has_moved){
-									obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.has_attacked=false;
-									obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile.has_moved=false;
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally && obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile!=unit){
+								if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.has_attacked||obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.has_moved){
+									obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.has_attacked=false;
+									obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.has_moved=false;
 								
 									unit.is_attacking = false;
 									skill_range = obj_gridCreator.reset_highlights_support();
@@ -2155,7 +2167,7 @@ global.actionLibrary = {
 									unit.skill_init = false;
 									unit.skill_progress=0;
 									audio_play_sound(sfx_dance, 0, false,0.3);
-									obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[unit.skill_coords[0]][unit.skill_coords[1]]._entity_on_tile,7);
+									obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile,7);
 									show_debug_message(unit.action.name);
 								}else{
 									audio_play_sound(sfx_no_tp, 0, false);
@@ -2166,6 +2178,330 @@ global.actionLibrary = {
 						}else{
 							audio_play_sound(sfx_no_tp, 0, false);
 						}
+					}
+					
+					
+					
+					
+				}else if(keyboard_check_pressed(vk_tab)){
+					
+						unit.is_attacking = false;
+						unit.skill_back = true;
+						unit.skill_range = obj_gridCreator.reset_highlights_target();
+						unit.skill_range = obj_gridCreator.reset_highlights_support();
+						unit.skill_progress=0;
+					
+		
+				}
+			},
+		}
+	},	
+	shield: {
+		name: ["Protect", "Shove", "Wide Guard"], //probably redundant to have a name but keep it
+		description: [ "Make an adjacent ally immune to 1 attack this turn. Can include yourself", "Push an adjacent ally away from you", "Makes the user and all adjacent allies immune to 1 attack this turn"],
+		cost: [3, 5, 6],
+		subMenu: 0, //does it show up on screen or is it in a submenu
+		userAnimation: "attack",
+		//effectSprite: baseAttack,
+		damage: 1, // temp damage, until i figure out how to do this damage function thing
+		func: function(_user, _targets) {
+			var _damage = 1; //math function here
+			//BattleChangeHP(_targets);
+		},
+		skillFunctions: {
+			base: function(unit){
+				if(unit.skill_complete){
+					return;
+				}
+				obj_gridCreator.reset_highlights_target();
+				obj_gridCreator.reset_highlights_support();
+				unit.action = unit.actions[unit.skill_used];
+				var _damage = unit.action.damage;
+				if (unit.skill_progress==0) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
+					unit.range = 3;
+					skill_coords[0] = unit.grid_pos[0];
+					skill_coords[1] = unit.grid_pos[1];
+					unit.skill_progress = 1;
+					unit.is_attacking = true;
+					skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],0);
+					audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
+				}
+				if(unit.skill_progress==1){
+					skill_range = obj_gridCreator.highlighted_support_circle(unit.grid_pos[0], unit.grid_pos[1], 1);
+					
+				}
+				
+				
+				obj_cursor.movable_tiles=skill_range;
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[0] -= 1;
+					}
+				}
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[0] += 1;
+					}
+				}
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[1] += 1;
+					}
+				}
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[1] -= 1;
+					}
+				}
+				
+				for (var i = 0; i < array_length(skill_range_aux); i++) {
+					skill_range_aux[i]._target_highlight=true;
+				}
+				//show_debug_message(string(unit.skill_progress));
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+					if(unit.skill_progress==1){
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.shield+=1;
+								
+								
+								
+								unit.is_attacking = false;
+								skill_range = obj_gridCreator.reset_highlights_support();
+								skill_range_aux = obj_gridCreator.reset_highlights_target();
+								unit.skill_complete = true;
+								unit.skill_init = false;
+								unit.skill_progress=0;
+								
+								obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile,4);
+								audio_play_sound(sfx_charge, 0, false,0.3);
+								show_debug_message(unit.action.name);
+							}else{
+								audio_play_sound(sfx_no_tp, 0, false);
+							}
+						}else{
+							audio_play_sound(sfx_no_tp, 0, false);
+						}
+					}
+					
+					
+					
+					
+				}else if(keyboard_check_pressed(vk_tab)){
+					
+						unit.is_attacking = false;
+						unit.skill_back = true;
+						unit.skill_range = obj_gridCreator.reset_highlights_target();
+						unit.skill_range = obj_gridCreator.reset_highlights_support();
+						unit.skill_progress=0;
+					
+		
+				}
+			},
+			upgrade1: function(unit){
+				if(unit.skill_complete){
+					return;
+				}
+				obj_gridCreator.reset_highlights_target();
+				obj_gridCreator.reset_highlights_support();
+				unit.action = unit.actions[unit.skill_used];
+				var _damage = unit.action.damage;
+				if (unit.skill_progress==0) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
+					unit.range = 3;
+					skill_coords[0] = unit.grid_pos[0];
+					skill_coords[1] = unit.grid_pos[1];
+					unit.skill_progress = 1;
+					unit.is_attacking = true;
+					skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],0);
+					audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
+				}
+				if(unit.skill_progress==1){
+					skill_range = obj_gridCreator.highlighted_support_circle(unit.grid_pos[0], unit.grid_pos[1], 1);
+					
+				}
+				
+				
+				obj_cursor.movable_tiles=skill_range;
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[0] -= 1;
+					}
+				}
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[0] += 1;
+					}
+				}
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[1] += 1;
+					}
+				}
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[1] -= 1;
+					}
+				}
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && keyboard_check_pressed(vk_anykey)){
+					obj_battleEffect.remove_push_preview();
+					if(skill_coords[0]==unit.grid_pos[0]+1){
+						unit.skill_option=0;
+						obj_battleEffect.push_preview(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]],0);
+					}
+					if(skill_coords[0]==unit.grid_pos[0]-1){
+						unit.skill_option=1;
+						obj_battleEffect.push_preview(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]],1);
+					}
+					if(skill_coords[1]==unit.grid_pos[1]+1){
+						unit.skill_option=2;
+						obj_battleEffect.push_preview(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]],2);
+					}
+					if(skill_coords[1]==unit.grid_pos[1]-1){
+						unit.skill_option=3;
+						obj_battleEffect.push_preview(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]],3);
+					}
+				}
+				
+				for (var i = 0; i < array_length(skill_range_aux); i++) {
+					skill_range_aux[i]._target_highlight=true;
+				}
+				//show_debug_message(string(unit.skill_progress));
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+					if(unit.skill_progress==1){
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+								switch(unit.skill_option){
+									case 0:
+										obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.push_back(1);
+										break;
+									case 1:
+										obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.push_forward(1);
+										break;
+									case 2:
+										obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.push_down(1);
+										break;
+									case 3:
+										obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.push_up(1);
+										break;
+								}
+								
+								unit.is_attacking = false;
+								skill_range = obj_gridCreator.reset_highlights_support();
+								skill_range_aux = obj_gridCreator.reset_highlights_target();
+								unit.skill_complete = true;
+								unit.skill_init = false;
+								unit.skill_progress=0;
+								unit.skill_option=0;
+								audio_play_sound(sfx_charge, 0, false,0.3);
+								obj_battleEffect.remove_push_preview();
+								show_debug_message(unit.action.name);
+							}else{
+								audio_play_sound(sfx_no_tp, 0, false);
+							}
+						}else{
+							audio_play_sound(sfx_no_tp, 0, false);
+						}
+					}
+					
+					
+					
+					
+				}else if(keyboard_check_pressed(vk_tab)){
+					
+						unit.is_attacking = false;
+						unit.skill_back = true;
+						unit.skill_range = obj_gridCreator.reset_highlights_target();
+						unit.skill_range = obj_gridCreator.reset_highlights_support();
+						unit.skill_progress=0;
+						obj_battleEffect.remove_push_preview();
+					
+		
+				}
+			},
+			upgrade2: function(unit){
+				if(unit.skill_complete){
+					return;
+				}
+				obj_gridCreator.reset_highlights_target();
+				obj_gridCreator.reset_highlights_support();
+				unit.action = unit.actions[unit.skill_used];
+				var _damage = unit.action.damage;
+				if (unit.skill_progress==0) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
+					unit.range = 3;
+					skill_coords[0] = unit.grid_pos[0];
+					skill_coords[1] = unit.grid_pos[1];
+					unit.skill_progress = 1;
+					unit.is_attacking = true;
+					skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
+					audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
+				}
+				if(unit.skill_progress==1){
+					skill_range = obj_gridCreator.highlighted_support_circle(unit.grid_pos[0], unit.grid_pos[1], 0);
+					
+				}
+				
+				
+				obj_cursor.movable_tiles=skill_range;
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[0] -= 1;
+					}
+				}
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[0] += 1;
+					}
+				}
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[1] += 1;
+					}
+				}
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[1] -= 1;
+					}
+				}
+				
+				for (var i = 0; i < array_length(skill_range_aux); i++) {
+					skill_range_aux[i]._target_highlight=true;
+				}
+				//show_debug_message(string(unit.skill_progress));
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+					if(unit.skill_progress==1){
+						for(i=0;i<array_length(skill_range_aux);i++){
+							if(!skill_range_aux[i]._is_empty){
+								if(skill_range_aux[i]._entity_on_tile.ally){
+									skill_range_aux[i]._entity_on_tile.shield+=1;
+									
+									
+									obj_battleEffect.hit_animation(skill_range_aux[i]._entity_on_tile,4);
+									show_debug_message(unit.action.name);
+								}
+							}
+						}
+						unit.is_attacking = false;
+						skill_range = obj_gridCreator.reset_highlights_support();
+						skill_range_aux = obj_gridCreator.reset_highlights_target();
+						unit.skill_complete = true;
+						unit.skill_init = false;
+						unit.skill_progress=0;
+						audio_play_sound(sfx_charge, 0, false,0.3);
 					}
 					
 					
@@ -2293,7 +2629,7 @@ global.players = [
 		hpMax: 3,
 		playerSpeed: 2,
 		sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
-		actions : [global.actionLibrary.baseAttack, global.actionLibrary.stall, global.actionLibrary.buff,  global.actionLibrary.dance],
+		actions : [global.actionLibrary.baseAttack, global.actionLibrary.shield, global.actionLibrary.buff,  global.actionLibrary.dance],
 		ally: true,
 		tpGain: 3,
 		portrait: spr_temp_Zero,

@@ -21,11 +21,11 @@ hit_anim_index=[spr_hit, spr_explosion, spr_hit_electric, spr_charge, spr_defend
 0 - hit
 1 - explosion
 2 - electric
-4 - buff effect
-5 - shield effect
-6 - push
-7 - freeze
-8 - dance
+3 - buff effect
+4 - shield effect
+5 - push
+6 - freeze
+7 - dance
 */
 
 function hit_animation(_object, index) { // show hit animation. pass in index according to hit_anim_index
