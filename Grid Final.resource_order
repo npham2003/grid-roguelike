@@ -1,5 +1,7 @@
 {
-  "FolderOrderSettings":[],
+  "FolderOrderSettings":[
+    {"name":"Player Skills","order":1,"path":"folders/Scripts/Player Skills.yy",},
+  ],
   "ResourceOrderSettings":[
     {"name":"obj_battleEffect","order":2,"path":"objects/obj_battleEffect/obj_battleEffect.yy",},
     {"name":"obj_board_obstacle","order":1,"path":"objects/obj_board_obstacle/obj_board_obstacle.yy",},
@@ -11,6 +13,14 @@
     {"name":"obj_push_preview","order":7,"path":"objects/obj_push_preview/obj_push_preview.yy",},
     {"name":"obj_shield_damage_number","order":4,"path":"objects/obj_shield_damage_number/obj_shield_damage_number.yy",},
     {"name":"obj_shop_menu","order":5,"path":"objects/obj_shop_menu/obj_shop_menu.yy",},
+    {"name":"skill_teleport_ally_3","order":8,"path":"scripts/skill_teleport_ally_3/skill_teleport_ally_3.yy",},
+    {"name":"skill_teleport_ally_1","order":6,"path":"scripts/skill_teleport_ally_1/skill_teleport_ally_1.yy",},
+    {"name":"skill_teleport_ally_2","order":7,"path":"scripts/skill_teleport_ally_2/skill_teleport_ally_2.yy",},
+    {"name":"skill_teleport_enemy_1","order":3,"path":"scripts/skill_teleport_enemy_1/skill_teleport_enemy_1.yy",},
+    {"name":"skill_teleport_enemy_2","order":4,"path":"scripts/skill_teleport_enemy_2/skill_teleport_enemy_2.yy",},
+    {"name":"skill_teleport_enemy_3","order":5,"path":"scripts/skill_teleport_enemy_3/skill_teleport_enemy_3.yy",},
+    {"name":"skill_teleport_self_2","order":1,"path":"scripts/skill_teleport_self_2/skill_teleport_self_2.yy",},
+    {"name":"skill_teleport_self_3","order":2,"path":"scripts/skill_teleport_self_3/skill_teleport_self_3.yy",},
     {"name":"bgm_tutorialBGM","order":1,"path":"sounds/bgm_tutorialBGM/bgm_tutorialBGM.yy",},
     {"name":"sfx_charge","order":1,"path":"sounds/sfx_charge/sfx_charge.yy",},
     {"name":"sfx_dance","order":9,"path":"sounds/sfx_dance/sfx_dance.yy",},
