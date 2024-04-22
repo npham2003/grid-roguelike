@@ -2713,7 +2713,7 @@ global.enemies = [
 		hp: 1,
 		hpMax: 1,
 		healthbar_offset: -40,
-		sprites: { idle: spr_summoner_idle, attack: spr_summoner_attack },
+		sprites: { idle: spr_skeleton_idle, attack: spr_skeleton_attack },
 		actions: [global.enemyActions.sight],
 		sounds: { attack: sfx_bat_attack },
 		ally: false,
@@ -2874,22 +2874,22 @@ global.encounters = [
 			grid: [8, 3]
 		},
 		{
-			info: global.enemies[0],
+			info: global.enemies[5],
 			grid: [8, 2]
 		}
 		
 	],
 	[
 		{
-			info: global.enemies[1],
+			info: global.enemies[5],
 			grid: [8, 1]
 		},
 		{
-			info: global.enemies[1],
+			info: global.enemies[5],
 			grid: [8, 3]
 		},
 		{
-			info: global.enemies[1],
+			info: global.enemies[5],
 			grid: [8, 2]
 		}
 	],
@@ -2906,7 +2906,7 @@ global.encounters = [
 	],
 	[
 		{
-			info: global.enemies[1],
+			info: global.enemies[5],
 			grid: [8, 3]
 		},
 		{
@@ -2914,7 +2914,7 @@ global.encounters = [
 			grid: [8, 2]
 		},
 		{
-			info: global.enemies[1],
+			info: global.enemies[0],
 			grid: [7, 3]
 		},
 		{
@@ -2992,7 +2992,7 @@ global.encounters = [
 			grid: [8, 2]
 		},
 		{
-			info: global.enemies[2],
+			info: global.enemies[5],
 			grid: [8, 0]
 		},
 		{
