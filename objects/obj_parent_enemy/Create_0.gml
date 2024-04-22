@@ -87,43 +87,92 @@ function find_target() {
 // calculate the util of moving to a spot on the grid
 function calculate_util(test_x, test_y) {
 	util=0;
-	for (var i = 0; i < array_length(action.range); i++) {
-		var attack_x = test_x+action.range[i][0];
-		var attack_y = test_y+action.range[i][1];
+	switch(action.type){
+		case "normal":
+			for (var i = 0; i < array_length(action.range); i++) {
+				var attack_x = test_x+action.range[i][0];
+				var attack_y = test_y+action.range[i][1];
 		
-		if (attack_x < 0 || attack_x >= GRIDWIDTH) {
-			continue;
-		}
-		if (attack_y < 0 || attack_y >= GRIDHEIGHT) {
-			continue;
-		}
+				if (attack_x < 0 || attack_x >= GRIDWIDTH) {
+					continue;
+				}
+				if (attack_y < 0 || attack_y >= GRIDHEIGHT) {
+					continue;
+				}
 		
-		if(!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty){
+				if(!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty){
 			
-			// extra util for hitting target
-			//show_debug_message("something is on tile "+string(attack_x)+", "+string(attack_y));
-			if(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile==target){
-				util+=1;
-			}
+					// extra util for hitting target
+					//show_debug_message("something is on tile "+string(attack_x)+", "+string(attack_y));
+					if(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile==target){
+						util+=1;
+					}
 			
-			// util for hitting player
-			if(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.ally){
-				util+=2;
-			}else{
-				// util for hitting enemy
-				util-=3;
+					// util for hitting player
+					if(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.ally){
+						util+=2;
+					}else{
+						// util for hitting enemy
+						util-=3;
+					}
+				}
+		
+				if(attack_x<5){
+					util+=1;	
+				}
+				//show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
+		
 			}
-		}
+			// do not move into a targetted tile
+			if(obj_gridCreator.battle_grid[test_x][test_y]._danger_number>0){
+				util-=obj_gridCreator.battle_grid[test_x][test_y]._danger_number*2;
+			}
+			break;
+		case "los":
+			for (var i = 0; i < array_length(action.range); i++) {
+				var targeted=obj_gridCreator.highlighted_enemy_target_straight_back(test_x-1,test_y);
+				if(array_length(targeted)==0){
+					return 0;	
+				}
+				var attack_x = targeted[0]._x_coord;
+				var attack_y = targeted[0]._y_coord;
 		
-		if(attack_x<5){
-			util+=1;	
-		}
-		//show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
+				if (attack_x < 0 || attack_x >= GRIDWIDTH) {
+					continue;
+				}
+				if (attack_y < 0 || attack_y >= GRIDHEIGHT) {
+					continue;
+				}
 		
-	}
-	// do not move into a targetted tile
-	if(obj_gridCreator.battle_grid[test_x][test_y]._danger_number>0){
-		util-=obj_gridCreator.battle_grid[test_x][test_y]._danger_number*2;
+				if(!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty){
+			
+					// extra util for hitting target
+					//show_debug_message("something is on tile "+string(attack_x)+", "+string(attack_y));
+					if(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile==target){
+						util+=1;
+					}
+			
+					// util for hitting player
+					if(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.ally){
+						util+=2;
+					}else{
+						// util for hitting enemy
+						util-=3;
+					}
+				}
+		
+				if(attack_x<5){
+					util+=1;	
+				}
+				//show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
+		
+			}
+			// do not move into a targetted tile
+			if(obj_gridCreator.battle_grid[test_x][test_y]._danger_number>0){
+				util-=obj_gridCreator.battle_grid[test_x][test_y]._danger_number*2;
+			}
+			break;
+			
 	}
 	return util;
 	
@@ -189,6 +238,51 @@ function aim(){
 			case "turret_no_target":
 				move(grid_pos[0],grid_pos[1]);
 				break;
+			case "los":
+				
+				for(i=5;i<10;i++){
+					for(j=0;j<5;j++){
+						if(obj_gridCreator.battle_grid[i][j]._is_empty){
+							util=calculate_util(i,j);
+							show_debug_message("Util of ("+string(i)+","+string(j)+") is "+string(util));
+							if(util>=max_util){
+								if(util>max_util){
+									potential_positions=[];
+								}
+								max_util=util;
+				
+								array_push(potential_positions,[i,j]);
+							}
+						}else if(obj_gridCreator.battle_grid[i][j]._entity_on_tile==self){
+							util=calculate_util(i,j);
+							if(util>=max_util){
+								if(util>max_util){
+									potential_positions=[];
+								}
+								max_util=util;
+				
+								array_push(potential_positions,[i,j]);
+							}
+						}
+					}
+				}
+				
+				
+				position = irandom(array_length(potential_positions)-1);
+				show_debug_message("Max util: "+string(max_util));
+				show_debug_message(potential_positions);
+				var targeted=obj_gridCreator.highlighted_enemy_target_straight_back(potential_positions[position][0]-1,potential_positions[position][1]);
+				if(array_length(targeted)>0){
+					show_debug_message("Target at "+string(targeted[0]._x_coord));
+					show_debug_message("Moving to "+string(potential_positions[position][0]));
+					target_pos=[targeted[0]._x_coord-potential_positions[position][0],0];
+					show_debug_message(target_pos);
+				}else{
+					target_pos=[-1000,0];
+				}
+				move(potential_positions[position][0],potential_positions[position][1]);
+				
+				break;
 		
 		}
 		show_debug_message("{0} is ready to attack", name);
@@ -212,6 +306,22 @@ function move(new_x, new_y) {
 	//x = coord[0];
 	//y = coord[1];
 }
+ 
+function recalc_los(){
+	if(action.type=="los"){
+		remove_danger_highlights();
+		var targeted=obj_gridCreator.highlighted_enemy_target_straight_back(grid_pos[0]-1,grid_pos[1]);
+		if(array_length(targeted)>0){
+			target_pos=[targeted[0]._x_coord-grid_pos[0],0];
+		}else{
+			target_pos=[-1000,0];
+		}
+		move(grid_pos[0],grid_pos[1]);
+		
+	}
+	
+}
+
 
 // sets up the danger highlighting on the grid
 function set_danger_highlights() {
@@ -223,9 +333,11 @@ function set_danger_highlights() {
 		}
 		
 		// this is specifically if they're hitting a position not decided totally by their own grid position
-		if(action.type=="turret" || action.type=="random_turret"){
+		if(action.type=="turret" || action.type=="random_turret" || action.type=="los"){
 			offset=target_pos;	
 		}
+		
+		
 	
 		for (var i = 0; i < array_length(action.range); i++) {
 			var attack_x = grid_pos[0] + offset[0] + action.range[i][0];
@@ -254,7 +366,7 @@ function danger_debug() {
 	}
 	
 	// this is specifically if they're hitting a position not decided totally by their own grid position
-	if(action.type=="turret" || action.type=="random_turret"){
+	if(action.type=="turret" || action.type=="random_turret" || action.type=="los"){
 		offset=target_pos;	
 	}
 	for (var i = 0; i < array_length(action.range); i++) {
@@ -282,7 +394,7 @@ function remove_danger_highlights() {
 		}
 		
 		// this is specifically if they're hitting a position not decided totally by their own grid position
-		if(action.type=="turret" || action.type=="random_turret"){
+		if(action.type=="turret" || action.type=="random_turret" || action.type=="los"){
 			offset=target_pos;	
 		}
 		for (var i = 0; i < array_length(action.range); i++) {
@@ -323,14 +435,15 @@ function display_target_highlights(){
 		}
 		
 		// this is specifically if they're hitting a position not decided totally by their own grid position
-		if(action.type=="turret" || action.type=="random_turret"){
+		if(action.type=="turret" || action.type=="random_turret" || action.type=="los"){
 			offset=target_pos;	
 		}
 		for (var i = 0; i < array_length(action.range); i++) {
 			var attack_x = grid_pos[0] + offset[0] + action.range[i][0];
 			var attack_y = grid_pos[1] + offset[1] + action.range[i][1];
-		
+			show_debug_message(target_pos);
 			if (attack_x < 0 || attack_x >= GRIDWIDTH) {
+				
 				continue;
 			}
 			if (attack_y < 0 || attack_y >= GRIDHEIGHT) {
@@ -355,7 +468,7 @@ function remove_target_highlights(){
 		}
 		
 		// this is specifically if they're hitting a position not decided totally by their own grid position
-		if(action.type=="turret" || action.type=="random_turret"){
+		if(action.type=="turret" || action.type=="random_turret" || action.type=="los"){
 			offset=target_pos;	
 		}
 		for (var i = 0; i < array_length(action.range); i++) {
@@ -389,7 +502,7 @@ function do_damage(){
 	}
 	
 	// this is specifically if they're hitting a position not decided totally by their own grid position
-	if(action.type=="turret" || action.type=="random_turret"){
+	if(action.type=="turret" || action.type=="random_turret" || action.type=="los"){
 		offset=target_pos;	
 	}
 	

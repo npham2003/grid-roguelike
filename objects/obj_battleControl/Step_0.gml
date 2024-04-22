@@ -16,7 +16,7 @@ var wasd_pressed = key_A_pressed || key_W_pressed || key_S_pressed || key_D_pres
 var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_H_pressed;
 
 var enough_tp = false;
-
+ 
 if (transition_count > 0) {
 	transition_count-=1;
 	return;
@@ -311,6 +311,7 @@ switch (state) {
 								enough_tp = false;
 								unit.skill_progress=0;
 								change_state(BattleState.PlayerAiming);
+								
 								obj_gridCreator.reset_highlights_cursor();
 							}
 						}
@@ -374,6 +375,9 @@ switch (state) {
 					obj_menu.select = 0;
 					unit.back_move();
 					change_state(BattleState.PlayerWaitingAction);
+					for(i=0;i<array_length(enemy_units);i++){
+						enemy_units[i].recalc_los();
+					}
 					obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
 					obj_cursor.reset_cursor(unit.grid_pos[0], unit.grid_pos[1]);
 				}
@@ -425,6 +429,9 @@ switch (state) {
 					unit.skill_progress=0;
 					enough_tp = false;
 					change_state(BattleState.PlayerAiming);
+					for(i=0;i<array_length(enemy_units);i++){
+						enemy_units[i].recalc_los();
+					}
 				}
 					
 				}
@@ -434,7 +441,9 @@ switch (state) {
 				unit.has_moved = true;
 				unit.has_attacked = true;
 				change_state(BattleState.PlayerWaitingAction);
-				
+				for(i=0;i<array_length(enemy_units);i++){
+					enemy_units[i].recalc_los();
+				}
 				
 				obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
 			}
@@ -444,10 +453,13 @@ switch (state) {
 
 #region Player Aiming
 	case BattleState.PlayerAiming:
-	
+		
 		
 		if(unit.skill_back){ // if the player presses tab to go back. this is handled in the skill itself
 			obj_menu.confirm = false;
+			for(i=0;i<array_length(enemy_units);i++){
+				enemy_units[i].recalc_los();
+			}
 			change_state(BattleState.PlayerMoving);
 			unit.show_moveable_grids_prev();
 			unit.has_attacked = false;

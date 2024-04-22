@@ -1,25 +1,25 @@
 
 if (is_moving) {
 	
-	var target_pos = obj_gridCreator.get_coordinates(grid_pos[0], grid_pos[1]);
+	var target_grid_pos = obj_gridCreator.get_coordinates(grid_pos[0], grid_pos[1]);
 	
-	if (x != target_pos[0]) {
-		if (x < target_pos[0]) {
-			x += min(sprite_moving_speed, target_pos[0] - x);
+	if (x != target_grid_pos[0]) {
+		if (x < target_grid_pos[0]) {
+			x += min(sprite_moving_speed, target_grid_pos[0] - x);
 		}
 		else {
-			x -= min(sprite_moving_speed, x - target_pos[0]);
+			x -= min(sprite_moving_speed, x - target_grid_pos[0]);
 		}
 	}
-	else if (y != target_pos[1]) {
-		if (y < target_pos[1]) {
-			y += min(sprite_moving_speed, target_pos[1] - y);
+	else if (y != target_grid_pos[1]) {
+		if (y < target_grid_pos[1]) {
+			y += min(sprite_moving_speed, target_grid_pos[1] - y);
 		}
 		else {
-			y -= min(sprite_moving_speed, y - target_pos[1]);
+			y -= min(sprite_moving_speed, y - target_grid_pos[1]);
 		}
 	}
-	if(x==target_pos[0] && y==target_pos[1]) {
+	if(x==target_grid_pos[0] && y==target_grid_pos[1]) {
 		attack_ready = true;
 		set_danger_highlights();
 		
@@ -28,7 +28,7 @@ if (is_moving) {
 	}
 	
 }
-
+ 
 if(is_dead){
 	
 	if(image_alpha==0){
