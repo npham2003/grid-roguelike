@@ -24,6 +24,8 @@ shield = 0;
 began_push=false;
 target_pos=[];
 
+teleporting = 0;
+
 // used for freeze status
 stall_turns=0;
 freeze_graphic=pointer_null;
@@ -322,6 +324,24 @@ function recalc_los(){
 	
 }
 
+
+function teleport(new_x, new_y) {
+	remove_danger_highlights();
+	
+	obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
+	
+	grid_pos[0] = new_x;
+	grid_pos[1] = new_y;
+	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._is_empty=false;
+	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile=self;
+	
+	teleporting = 1;
+	var target_pos = obj_gridCreator.get_coordinates(grid_pos[0], grid_pos[1]);
+	x = target_pos[0];
+	y = target_pos[1];
+	
+	set_danger_highlights();
+}
 
 // sets up the danger highlighting on the grid
 function set_danger_highlights() {
