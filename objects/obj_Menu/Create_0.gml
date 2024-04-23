@@ -43,6 +43,8 @@ spacing = 150;
 confirmRadius = 40;
 confirmX = [850, 1050];
 confirmY = 660;
+confirmShiftX = 100;
+confirmShiftY = 0;
 
 border = 5;
 #endregion

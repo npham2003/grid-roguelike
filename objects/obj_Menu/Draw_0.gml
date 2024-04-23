@@ -26,7 +26,7 @@ if (confirm) {
 		[confirmX[1], confirmY+(confirmRadius+c_border)],
 		[confirmX[1]+(confirmRadius+c_border), confirmY]
 	]
-	 
+	
 	draw_set_color(c_black);
 	draw_primitive_begin(pr_trianglestrip);
 	draw_vertices(c_outline2);
@@ -43,12 +43,13 @@ if (confirm) {
 	draw_primitive_end();
 	
 	draw_set_color(global._characterSecondary);
-	draw_text_ext_transformed(900, 610, "Confirm: Enter", 30, 100, 0.5, 0.5, 0);
+	draw_text_ext_transformed(880, 615, "Confirm: Enter", 30, confirmY-160, 0.7, 0.7, 0);
 	
 	//draw_text_color(550, );
 }
 #endregion
 
+#region buttons
 var _buttonScale = 5;
 for (var i = skills - 1; i >= 0; i--) {
 
@@ -109,12 +110,7 @@ for (var i = skills - 1; i >= 0; i--) {
 	//text			player_unit.actions[i].name[player_unit.upgrades[i]]+ ": " +
 	if i < 4 draw_text_transformed_colour(menuX[i+1]-expandAnim*60, menuY[i]-35, global.controls[i], 0.5, 0.5, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
 }
-
-//draw_rectangle_colour(850, 620, 1050, 700, c_red, c_white, c_aqua, c_white, true);
-//draw_set_halign(fa_center);
-//draw_set_color(c_white);
-//draw_text_ext_transformed(950, 610, "Confirm: Enter", 30, 100, 0.8, 0.8, 0);
-
+#endregion
 
 #region hp
 if (open) {
@@ -246,11 +242,9 @@ draw_text_ext(300, 10, _text, 40, 1000);
 #endregion
 
 #region turn banner
-
-
 if (turn_banner_animation_started) {
 	turn_life--;
-	//show_debug_message(turn_life);
+	show_debug_message(turn_life);
 	draw_set_color(global._primary);
 	
 	if (turn_life > 50) {
