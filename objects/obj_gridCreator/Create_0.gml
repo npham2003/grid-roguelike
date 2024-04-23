@@ -227,6 +227,55 @@ highlighted_support_circle = function(_center_x,_center_y,_range){
 	return highlighted_support_array;
 }
 
+highlighted_support_player_side = function() {
+	highlighted_support_array = [];
+	
+	for (var i = 0; i < GRIDWIDTH / 2; i++) {
+		for(var j = 0; j < GRIDHEIGHT; j++) {
+			battle_grid[i][j]._support_highlight=true;
+			array_push(highlighted_support_array, battle_grid[i][j]);
+		}
+	}
+	
+	return highlighted_support_array;
+}
+
+highlighted_support_enemy_side = function() {
+	highlighted_support_array = [];
+	
+	for (var i = GRIDWIDTH / 2; i < GRIDWIDTH; i++) {
+		for(var j = 0; j < GRIDHEIGHT; j++) {
+			battle_grid[i][j]._support_highlight=true;
+			array_push(highlighted_support_array, battle_grid[i][j]);
+		}
+	}
+	
+	return highlighted_support_array;
+}
+
+highlighted_support_cross = function(_center_x, _center_y, _range) {
+	
+	highlighted_support_array = [];
+	
+	array_push(highlighted_support_array, battle_grid[_center_x][_center_y]);
+	battle_grid[_center_x][_center_y]._support_highlight = true;
+	
+	for(var i = -_range; i <= _range; i++){
+		if (i == 0) continue;
+		if(_center_x + i >= 0 && _center_x + i < GRIDWIDTH){
+			array_push(highlighted_support_array,battle_grid[_center_x + i][_center_y]);
+			battle_grid[_center_x + i][_center_y]._support_highlight = true;
+		}
+		if(_center_y + i >= 0 && _center_y + i < GRIDHEIGHT){
+			array_push(highlighted_support_array,battle_grid[_center_x][_center_y + i]);
+			battle_grid[_center_x][_center_y + i]._support_highlight = true;
+		}
+	}
+	
+	return highlighted_support_array;
+	
+}
+
 highlighted_move_cursor = function(_center_x,_center_y,_range){
 	
 	
