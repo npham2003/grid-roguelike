@@ -2557,7 +2557,7 @@ global.encounters = [
 			grid: [8, 3]
 		},
 		{
-			info: global.enemies[5],
+			info: global.enemies[0],
 			grid: [8, 2]
 		}
 		

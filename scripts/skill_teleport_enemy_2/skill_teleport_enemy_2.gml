@@ -77,8 +77,10 @@ function skill_teleport_enemy_2(unit){
 				target_unit_1 = target_grid_1._entity_on_tile;
 				target_unit_2 = target_grid_2._entity_on_tile;
 				
-				target_unit_1.teleport(target_grid_2._x_coord, target_grid_2._y_coord);
-				target_unit_2.teleport(target_grid_1._x_coord, target_grid_1._y_coord);
+				target_grid_1._entity_on_tile = target_unit_2;
+				target_grid_2._entity_on_tile = target_unit_1;
+				target_unit_1.teleport(target_grid_2._x_coord, target_grid_2._y_coord, false);
+				target_unit_2.teleport(target_grid_1._x_coord, target_grid_1._y_coord, false);
 
 				unit.is_attacking = false;
 				skill_range = obj_gridCreator.reset_highlights_support();
