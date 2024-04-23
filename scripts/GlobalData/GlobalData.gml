@@ -1121,7 +1121,7 @@ global.actionLibrary = {
 			upgrade2: skill_teleport_ally_3
 		}
 	},
-	telepory_enemy: {
+	teleport_enemy: {
 		name: ["Teleport enemy", "Swap enemy", "Teleport enemy(advanced)"],
 		description: [
 			"Teleport an enemy to an empty nearby space.",
@@ -2294,7 +2294,7 @@ global.enemyActions = {
 
 //Player(s) Data
 global.players = [
-	{ //l'cifure
+	{ //basic guy
 		name: "L'Cifure",
 		hp: 5,
 		hpMax: 5,
@@ -2308,7 +2308,7 @@ global.players = [
 		secondary: #386467
 		
 	},
-	{ //oktavia
+	{ //
 		name: "Oktavia",
 		hp: 3,
 		hpMax: 3,
@@ -2321,13 +2321,26 @@ global.players = [
 		primary: #0cac87,
 		secondary: #386467
 	},
+	{ // dancer guy
+		name: "Angel",
+		hp: 3,
+		hpMax: 3,
+		playerSpeed: 1,
+		sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
+		actions : [global.actionLibrary.baseAttack, global.actionLibrary.shield, global.actionLibrary.buff,  global.actionLibrary.dance],
+		ally: true,
+		tpGain: 3,
+		portrait: spr_temp_Zero,
+		primary: #0cac87,
+		secondary: #386467
+	},
 	{ // Teleport guy
 		name: "Angel",
 		hp: 3,
 		hpMax: 3,
 		playerSpeed: 1,
 		sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
-		actions : [global.actionLibrary.baseAttack, global.actionLibrary.teleport_self, global.actionLibrary.teleport_ally,  global.actionLibrary.telepory_enemy],
+		actions : [global.actionLibrary.baseAttack, global.actionLibrary.teleport_self, global.actionLibrary.teleport_ally,  global.actionLibrary.teleport_enemy],
 		ally: true,
 		tpGain: 3,
 		portrait: spr_temp_Zero,

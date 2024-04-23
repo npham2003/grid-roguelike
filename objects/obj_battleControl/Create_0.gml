@@ -41,7 +41,7 @@ var player_data = [
 		grid: [3, 2]		
 	},
 	{
-		info: global.players[1],
+		info: global.players[3],
 		grid: [2, 2]		
 	},
 	//{
