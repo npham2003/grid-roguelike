@@ -253,6 +253,19 @@ highlighted_support_enemy_side = function() {
 	return highlighted_support_array;
 }
 
+highlighted_support_all = function() {
+	highlighted_support_array = [];
+	
+	for (var i = GRIDWIDTH; i < GRIDWIDTH; i++) {
+		for(var j = 0; j < GRIDHEIGHT; j++) {
+			battle_grid[i][j]._support_highlight=true;
+			array_push(highlighted_support_array, battle_grid[i][j]);
+		}
+	}
+	
+	return highlighted_support_array;
+}
+
 highlighted_support_cross = function(_center_x, _center_y, _range) {
 	
 	highlighted_support_array = [];

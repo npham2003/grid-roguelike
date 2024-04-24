@@ -16,10 +16,10 @@ function skill_teleport_enemy_2(unit){
 		audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
 	}
 	if(unit.skill_progress==1){
-		skill_range = obj_gridCreator.highlighted_support_enemy_side();
+		skill_range = obj_gridCreator.highlighted_support_all();
 	}
 	if(unit.skill_progress==2){
-		skill_range = obj_gridCreator.highlighted_support_enemy_side();
+		skill_range = obj_gridCreator.highlighted_support_all();
 	}
 				
 	obj_cursor.movable_tiles=skill_range;
@@ -77,8 +77,10 @@ function skill_teleport_enemy_2(unit){
 				target_unit_1 = target_grid_1._entity_on_tile;
 				target_unit_2 = target_grid_2._entity_on_tile;
 				
-				target_unit_1.teleport(target_grid_2._x_coord, target_grid_2._y_coord);
-				target_unit_2.teleport(target_grid_1._x_coord, target_grid_1._y_coord);
+				target_grid_1._entity_on_tile = target_unit_2;
+				target_grid_2._entity_on_tile = target_unit_1;
+				target_unit_1.teleport(target_grid_2._x_coord, target_grid_2._y_coord, false);
+				target_unit_2.teleport(target_grid_1._x_coord, target_grid_1._y_coord, false);
 
 				unit.is_attacking = false;
 				skill_range = obj_gridCreator.reset_highlights_support();

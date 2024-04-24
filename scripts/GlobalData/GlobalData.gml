@@ -1086,7 +1086,7 @@ global.actionLibrary = {
 		}
 	},
 	teleport_self: {
-		name: ["Teleport yourself", "Teleport yourself(cross)", "Teleport yourself(advanced)"],
+		name: ["Misty Step", "Cartesian Shift", "Dimension Door"],
 		description: [
 			"Teleport yourself to an empty space within the distance of 2.",
 			"Teleport yourself to any space with same row or column as your current location.",
@@ -1106,7 +1106,7 @@ global.actionLibrary = {
 		}
 	},
 	teleport_ally: {
-		name: ["Teleport allay", "Swap allay", "Rescue ally"], //probably redundant to have a name but keep it
+		name: ["Warp", "Swap", "Rescue"], //probably redundant to have a name but keep it
 		description: [ "Move an adjacent ally to an empty nearby space.", "Swap the positions of 2 allies.", "Moves a nearby ally to an adjacent empty tile"],
 		cost: [5, 5, 7],
 		subMenu: 0, //does it show up on screen or is it in a submenu
@@ -1121,14 +1121,14 @@ global.actionLibrary = {
 			upgrade2: skill_teleport_ally_3
 		}
 	},
-	telepory_enemy: {
-		name: ["Teleport enemy", "Swap enemy", "Teleport enemy(advanced)"],
+	teleport_enemy: {
+		name: ["Vortex Shift", "Vortex Swap", "Vortex Warp"],
 		description: [
 			"Teleport an enemy to an empty nearby space.",
 			"Swap the positions of 2 enemies.",
 			"Teleport an enemy to any empty space."
 		],
-		cost: [3, 4, 5],
+		cost: [4, 5, 6],
 		subMenu: 0,
 		userAnimation: "attack",
 		damage: 0,
@@ -2509,7 +2509,7 @@ global.enemyActions = {
 
 //Player(s) Data
 global.players = [
-	{ //l'cifure
+	{ //basic guy
 		name: "L'Cifure",
 		hp: 5,
 		hpMax: 5,
@@ -2523,7 +2523,7 @@ global.players = [
 		secondary: #386467
 		
 	},
-	{ //oktavia
+	{ //
 		name: "Oktavia",
 		hp: 3,
 		hpMax: 3,
@@ -2536,13 +2536,26 @@ global.players = [
 		primary: #0cac87,
 		secondary: #386467
 	},
+	{ // dancer guy
+		name: "Angel",
+		hp: 3,
+		hpMax: 3,
+		playerSpeed: 1,
+		sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
+		actions : [global.actionLibrary.baseAttack, global.actionLibrary.shield, global.actionLibrary.buff,  global.actionLibrary.dance],
+		ally: true,
+		tpGain: 3,
+		portrait: spr_temp_Zero,
+		primary: #0cac87,
+		secondary: #386467
+	},
 	{ // Teleport guy
 		name: "Angel",
 		hp: 3,
 		hpMax: 3,
 		playerSpeed: 1,
 		sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
-		actions : [global.actionLibrary.baseAttack, global.actionLibrary.teleport_self, global.actionLibrary.teleport_ally,  global.actionLibrary.telepory_enemy],
+		actions : [global.actionLibrary.baseAttack, global.actionLibrary.teleport_self, global.actionLibrary.teleport_ally,  global.actionLibrary.teleport_enemy],
 		ally: true,
 		tpGain: 3,
 		portrait: spr_temp_Zero,
@@ -2808,7 +2821,7 @@ global.encounters = [
 			grid: [8, 3]
 		},
 		{
-			info: global.enemies[5],
+			info: global.enemies[0],
 			grid: [8, 2]
 		}
 		
