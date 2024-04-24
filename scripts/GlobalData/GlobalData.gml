@@ -3415,6 +3415,8 @@ global.enemyActions = {
 		damage_type: "normal"
 	},
 }
+	
+
 
 //Player(s) Data
 global.players = [
@@ -3432,20 +3434,20 @@ global.players = [
 		secondary: #386467
 		
 	},
-	{ // bomber
-		name: "Oktavia",
-		hp: 3,
-		hpMax: 3,
-		playerSpeed: 2,
-		sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
-		actions : [global.actionLibrary.baseAttack, global.actionLibrary.minefield, global.actionLibrary.mover,  global.actionLibrary.teleport_ally],
-		ally: true,
-		tpGain: 2,
-		portrait: spr_temp_Azami,
-		primary: #0cac87,
-		secondary: #386467
-	},
-	{ // dancer
+	//{ //
+	//	name: "Oktavia",
+	//	hp: 3,
+	//	hpMax: 3,
+	//	playerSpeed: 2,
+	//	sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
+	//	actions : [global.actionLibrary.baseAttack, global.actionLibrary.minefield, global.actionLibrary.mover,  global.actionLibrary.teleport_ally],
+	//	ally: true,
+	//	tpGain: 2,
+	//	portrait: spr_temp_Azami,
+	//	primary: #0cac87,
+	//	secondary: #386467
+	//},
+	{ // dancer guy
 		name: "Angel",
 		hp: 3,
 		hpMax: 3,
@@ -3502,7 +3504,21 @@ global.players = [
 	//}
 ]
 
-
+global.party=
+[
+	{
+		info: global.players[0],
+		grid: [3, 2]		
+	},
+	{
+		info: global.players[0],
+		grid: [2, 2]		
+	},
+	{
+		info: global.players[0],
+		grid: [3, 3]		
+	}
+];
 
 //Enemy Data
 global.enemies = [
