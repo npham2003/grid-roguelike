@@ -11,8 +11,8 @@ player_order = 0;
 enemy_order = 0;
 
 // maybe these are in the wrong spot? but anyway yea
-tp_max = 10;
-tp_current = 6;
+tp_max = 100;
+tp_current = 100;
 tp_bonus=0;
 
 in_animation = false;
@@ -39,10 +39,6 @@ var player_data = [
 	{
 		info: global.players[5],
 		grid: [3, 2]		
-	},
-	{
-		info: global.players[3],
-		grid: [2, 2]		
 	}
 ];
 

@@ -25,6 +25,8 @@ attack_buff_recent=false;
 move_buff_recent=false;
 move_bonus_temp=0;
 bombs_placed=0;
+thaw_damage=0;
+thaw_checked = false;
 var return_coords;
 
 show_debug_message("{0}: [{1}, {2}]", name, grid_pos[0], grid_pos[1]);
