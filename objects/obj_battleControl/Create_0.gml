@@ -11,8 +11,8 @@ player_order = 0;
 enemy_order = 0;
 
 // maybe these are in the wrong spot? but anyway yea
-tp_max = 100;
-tp_current = 100;
+tp_max = 10;
+tp_current = 6;
 tp_bonus=0;
 
 in_animation = false;
@@ -37,15 +37,15 @@ battle_progress=0;
 // Temp struct for player data, may move to a config file or generate dynamically in the future
 player_data = [
 	{
-		info: global.players[irandom_range(0,array_length(global.players))],
+		info: global.players[4],
 		grid: [3, 2]		
 	},
 	{
-		info: global.players[irandom_range(0,array_length(global.players))],
+		info: global.players[4],
 		grid: [2, 2]		
 	},
 	{
-		info: global.players[irandom_range(0,array_length(global.players))],
+		info: global.players[4],
 		grid: [3, 3]		
 	}
 ];
