@@ -75,7 +75,7 @@ switch (state) {
 #region Enemy Aiming
 	case BattleState.EnemyAiming:
 		
-		if (turns_until_gun == 2 && gun_spawned == false) {
+		if (turns_until_gun == 1 && gun_spawned == false) {
 			gun_spawned = true;
 			teachingBasic = true;
 			//spawn_gun(player_units[0]);
@@ -93,6 +93,19 @@ switch (state) {
 		
 			if (enemy_order >= array_length(enemy_units))
 			{
+				//if (teachingDamage) { tried addinga textbox
+				//	obj_menuTut.enter_text("PRESS ENTER");
+				//	var _textbox = instance_create_layer(50, 200, "UI", obj_textboxTut);
+				//	_textbox.tutorial_text("Well shit, I'm getting assaulted by these bats and I can't do anything about it. At least I can see where they're going to hit via these EXCLAMATION MARKS, and so I can dodge accordingly!");
+				//	if (key_Enter_pressed) {
+				//		enemy_order = 0;
+				//		teachingDamage = false;
+				//		teachingMovement = true;
+				//		_textbox.tutorial_text("");
+				//		_textbox.kill();
+				//		change_state(BattleState.PlayerPreparing);
+				//	}
+				//}
 				if (teachingDamage) {
 					obj_menuTut.enter_text("PRESS ENTER");
 					obj_menuTut.set_text("Well shit, I'm getting assaulted by these bats and I can't do anything about it. At least I can see where they're going to hit via these EXCLAMATION MARKS, and so I can dodge accordingly!");
@@ -106,7 +119,7 @@ switch (state) {
 				}
 				else if (gun_spawned && teachingBasic == false) {
 					obj_menuTut.enter_text("PRESS ENTER");
-					obj_menuTut.set_text("Magically a gun? I guess it's time to FIGHT BACK! Press H to use basic attacks");
+					obj_menuTut.set_text("Magically a gun? I guess it's time to FIGHT BACK! Press H to use basic attacks. You can also MOVE and ATTACK in one turn!");
 					if (key_Enter_pressed) {
 						enemy_order = 0;
 						obj_menuTut.set_text("");
@@ -115,7 +128,7 @@ switch (state) {
 					}
 				} else if (teachingBasic == true && teachingSkills == false) {
 					obj_menuTut.enter_text("PRESS ENTER");
-					obj_menuTut.set_text("Attacking costs Technique Points (TP), shown by the squares below. You gain some TP every turn based on who is in your party. Now, press H to fire back!");
+					obj_menuTut.set_text("Attacking costs Technique Points (TP), shown by the squares below. You gain some TP every turn based on who is in your party. Now, press H to fire back! You can also MOVE and ATTACK in one turn!");
 					if (key_Enter_pressed) {
 						enemy_order = 0;
 						obj_menuTut.set_text("");
@@ -159,7 +172,7 @@ switch (state) {
 			}
 			
 			// enemy aims
-			if(unit.stall_turns==0){
+			if(unit.stall_turns==0 && teachingSkills == false){
 				
 				unit.find_target();
 				unit.aim();
@@ -180,7 +193,7 @@ switch (state) {
 		obj_draw_bg.colorSwitch = false;
 		
 		if (teachingMovement) {
-			obj_menuTut.set_text("To move, I have to select myself with SPACE, and move with WASD. Then finalize with ENTER");
+			obj_menuTut.set_text("To move, I have to select myself with ENTER, and move with WASD. Then finalize with ENTER");
 			obj_menuTut.enter_text("PRESS ENTER");
 		}
 		
@@ -317,7 +330,7 @@ switch (state) {
 				// set the tpcost array in the menu to match actual costs
 				obj_menuTut.tpCost=[0,unit.actions[0].cost[unit.upgrades[0]],unit.actions[1].cost[unit.upgrades[1]],unit.actions[2].cost[unit.upgrades[2]],unit.actions[3].cost[unit.upgrades[3]]];
 				//obj_menuTut.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
-				obj_menuTut.set_text("WASD - Move Cursor     Space - Select Unit     Enter - End Turn");
+				obj_menuTut.set_text("WASD - Move Cursor     Enter - Select Unit     Space - End Turn");
 				
 				// resets the previous grid position to current position. needed for when getting moved when its not their turn (push or teleport)
 				unit.prev_grid=[unit.grid_pos[0],unit.grid_pos[1]];
@@ -328,7 +341,7 @@ switch (state) {
 				}
 				
 				// select the unit to move it
-				if (key_Space_pressed) {
+				if (key_Enter_pressed) {
 					if (!unit.has_moved && !unit.has_attacked) {
 						change_state(BattleState.PlayerMoving);
 						obj_gridCreator.remove_entity(unit.grid_pos[0],unit.grid_pos[1]);
@@ -407,7 +420,7 @@ switch (state) {
 		}else{
 			obj_menuTut.close_menu();
 		}
-		if(key_Enter_pressed){ // end the turn
+		if(key_Space_pressed){ // end the turn
 			board_obstacle_order = 0;
 			for (var i = 0; i < array_length(player_units); i++) {
 				if(!(player_units[i].has_attacked || player_units[i].has_moved)){
@@ -507,7 +520,7 @@ switch (state) {
 					
 				}
 			}
-			else if (key_Enter_pressed && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) { //move without using a skill
+			else if (key_Space_pressed && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) { //move without using a skill
 				unit.confirm_move();
 				unit.has_moved = true;
 				unit.has_attacked = true;

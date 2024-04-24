@@ -256,7 +256,7 @@ highlighted_support_enemy_side = function() {
 highlighted_support_all = function() {
 	highlighted_support_array = [];
 	
-	for (var i = GRIDWIDTH; i < GRIDWIDTH; i++) {
+	for (var i = 0; i < GRIDWIDTH; i++) {
 		for(var j = 0; j < GRIDHEIGHT; j++) {
 			battle_grid[i][j]._support_highlight=true;
 			array_push(highlighted_support_array, battle_grid[i][j]);
@@ -530,6 +530,21 @@ highlighted_target_line_pierce = function(_center_x,_center_y){
 			}
 		}
 	
+	return highlighted_target_array;
+}
+
+highlighted_target_cone = function(_center_x,_center_y,_range){
+	
+	highlighted_target_array=[];
+	for(var i = 1; i <= _range; i++){
+		for(var j = -i; j <= i; j++){
+			if(_center_x+i>=0 && _center_x+i<GRIDWIDTH && _center_y+j>=0 && _center_y+j<GRIDHEIGHT){
+				array_push(highlighted_target_array,battle_grid[_center_x+i][_center_y+j]);
+				battle_grid[_center_x+i][_center_y+j]._target_highlight=true;
+				//show_debug_message(string(_center_x+i)+", "+string(_center_y+j));
+			}
+		}
+	}
 	return highlighted_target_array;
 }
 

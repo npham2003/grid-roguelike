@@ -111,6 +111,9 @@ switch (state) {
 				
 				unit.find_target();
 				unit.aim();
+				for(i=0;i<enemy_order;i++){
+						enemy_units[i].recalc_los();
+					}
 			}
 			obj_menu.set_text(unit.name+" is aiming");
 			
@@ -173,8 +176,10 @@ switch (state) {
 				player_units[i].has_moved = false;
 				player_units[i].has_attacked = false;
 				tp_current+=player_units[i].tpGain;
-			}else if(player_units[i].hp<0){
+			}else if(player_units[i].hp<=0){
 				player_units[i].hp=0;
+				player_units[i].has_moved = true;
+				player_units[i].has_attacked = true;
 			}
 			
 			
@@ -244,7 +249,7 @@ switch (state) {
 				// set the tpcost array in the menu to match actual costs
 				obj_menu.tpCost=[0,unit.actions[0].cost[unit.upgrades[0]],unit.actions[1].cost[unit.upgrades[1]],unit.actions[2].cost[unit.upgrades[2]],unit.actions[3].cost[unit.upgrades[3]]];
 				//obj_menu.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
-				obj_menu.set_text("WASD - Move Cursor     Space - Select Unit     Enter - End Turn");
+				obj_menu.set_text("WASD - Move Cursor     Enter - Select Unit     Space - End Turn");
 				
 				// resets the previous grid position to current position. needed for when getting moved when its not their turn (push or teleport)
 				unit.prev_grid=[unit.grid_pos[0],unit.grid_pos[1]];
@@ -255,7 +260,7 @@ switch (state) {
 				}
 				
 				// select the unit to move it
-				if (key_Space_pressed) {
+				if (key_Enter_pressed) {
 					if (!unit.has_moved && !unit.has_attacked) {
 						change_state(BattleState.PlayerMoving);
 						obj_gridCreator.remove_entity(unit.grid_pos[0],unit.grid_pos[1]);
@@ -332,7 +337,7 @@ switch (state) {
 		}else{
 			obj_menu.close_menu();
 		}
-		if(key_Enter_pressed){ // end the turn
+		if(key_Space_pressed){ // end the turn
 			board_obstacle_order = 0;
 			for (var i = 0; i < array_length(player_units); i++) {
 				if(!(player_units[i].has_attacked || player_units[i].has_moved)){
@@ -554,6 +559,8 @@ switch (state) {
 								unit.skill_complete = false;
 								enough_tp = false;
 								unit.skill_progress =0;
+								
+								unit.thaw_checked = false;
 								change_state(BattleState.PlayerAiming);
 								obj_gridCreator.reset_highlights_cursor();
 								obj_battleEffect.remove_push_preview();
@@ -591,7 +598,12 @@ switch (state) {
 		var enemy_unit = enemy_units[enemy_check_death];
 		if (enemy_unit.hp<=0){
 			enemy_unit.despawn();
-			
+			if(enemy_unit.stall_turns>0){
+				unit.freeze_graphic.sprite_index=spr_freeze_out;
+				audio_play_sound(sfx_defreeze, 0, false, 0.5);
+				unit.freeze_graphic.image_speed=1;
+				unit.freeze_graphic=pointer_null;
+			}
 			array_delete(enemy_units, enemy_check_death, 1);
 			enemy_check_death-=1;
 			set_enemy_turn_order();

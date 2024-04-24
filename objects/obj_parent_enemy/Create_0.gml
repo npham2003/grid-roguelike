@@ -351,7 +351,7 @@ function teleport(new_x, new_y, set_grid = true) {
 // sets up the danger highlighting on the grid
 function set_danger_highlights() {
 	show_debug_message("{0} summon state is {1}", name, can_summon);
-	if(can_summon){
+	if(can_summon && action != pointer_null){
 		var offset=[];
 		if(action.type=="normal" || action.type=="turret_no_target"){
 			offset=[0,0];	
@@ -411,7 +411,7 @@ function danger_debug() {
 
 // removes danger highlights from tiles. used when pushed and we need to retarget or when dying to remove threatened area.
 function remove_danger_highlights() {
-	if(can_summon){
+	if(can_summon && action != pointer_null){
 		danger_debug();
 		var offset=[];
 		if(action.type=="normal" || action.type=="turret_no_target"){
@@ -453,7 +453,7 @@ function attack() {
 
 // displays the targetted tiles using target highlights. used when hovering over the enemy and when enemy attacks
 function display_target_highlights(){
-	if(can_summon){
+	if(can_summon && action != pointer_null){
 		var offset=[];
 		if(action.type=="normal" || action.type=="turret_no_target"){
 			offset=[0,0];	
@@ -486,7 +486,7 @@ function display_target_highlights(){
 // removes target highlights from targetted tiles.
 // THIS IS NOT REMOVING DANGER HIGHLIGHTTS
 function remove_target_highlights(){
-	if(can_summon){
+	if(can_summon && action != pointer_null){
 		var offset=[];
 		if(action.type=="normal" || action.type=="turret_no_target"){
 			offset=[0,0];	
@@ -595,14 +595,21 @@ function damage(damage_value){
 function despawn(){
 	is_dead=true;
 	obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
-	remove_danger_highlights();
+	if(stall_turns>0){
+		
+		freeze_graphic.sprite_index=spr_freeze_out;
+		freeze_graphic.image_speed=1;
+		freeze_graphic=pointer_null;
+
+	}else{
+		remove_danger_highlights();
+	}
 	// updates the summoned units count for the summoner if this is a summoned enemy
 	if(summoner!=pointer_null){
 		summoner.summoned_units-=1;
 	}
-	freeze_graphic.sprite_index=spr_freeze_out;
-	freeze_graphic.image_speed=1;
 }
+	
 
 // push to the right
 function push_back(squares){
