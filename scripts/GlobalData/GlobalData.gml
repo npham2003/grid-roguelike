@@ -3222,60 +3222,53 @@ global.actionLibrary = {
 		}
 	},
 	shuffle_horiz: {
-		name: ["Push Mine", "Gravity Mine", "Super Push Mine"], //probably redundant to have a name but keep it
-		description: ["Places a mine. Any units 1 tile get pushed by one tile.", "Places a mine. Any units in the surrounding area get pulled.", "Places a mine. Enemies get pushed to the end of the screen."],
-		cost: [3, 5, 5],
-		subMenu: 0, //does it show up on screen or is it in a submenu
+		name: ["", "", ""],
+		description: ["", "", ""],
+		cost: [4, 4, 4],
+		subMenu: 0,
 		userAnimation: "attack",
-		//effectSprite: baseAttack,
-		damage: 4, // temp damage, until i figure out how to do this damage function thing
+		damage: 0,
 		func: function(_user, _targets) {
-			var _damage = 1; //math function here
-			//BattleChangeHP(_targets);
+			var _damage = 0;
 		},
 		skillFunctions: {
 			base: skill_shuffle_horiz_1,
 			upgrade1: skill_shuffle_horiz_2,
 			upgrade2: skill_shuffle_horiz_3
 		}
-	
 	},
 	shuffle_vert: {
-		name: ["Push Mine", "Gravity Mine", "Super Push Mine"], //probably redundant to have a name but keep it
-		description: ["Places a mine. Any units 1 tile get pushed by one tile.", "Places a mine. Any units in the surrounding area get pulled.", "Places a mine. Enemies get pushed to the end of the screen."],
-		cost: [3, 5, 5],
-		subMenu: 0, //does it show up on screen or is it in a submenu
+		name: ["", "", ""],
+		description: ["", "", ""],
+		cost: [4, 4, 4],
+		subMenu: 0,
 		userAnimation: "attack",
-		//effectSprite: baseAttack,
-		damage: 4, // temp damage, until i figure out how to do this damage function thing
+		damage: 0,
 		func: function(_user, _targets) {
-			var _damage = 1; //math function here
-			//BattleChangeHP(_targets);
+			var _damage = 0;
 		},
 		skillFunctions: {
-			base: skill_shuffle_vert_1(),
-			upgrade1: skill_teleport_self_2,
-			upgrade2: skill_teleport_self_3
+			base: skill_shuffle_vert_1,
+			upgrade1: skill_shuffle_vert_2,
+			upgrade2: skill_shuffle_vert_3
 		}
 	},
-	shuffle_rot:{
-		name: ["Push Mine", "Gravity Mine", "Super Push Mine"], //probably redundant to have a name but keep it
-		description: ["Places a mine. Any units 1 tile get pushed by one tile.", "Places a mine. Any units in the surrounding area get pulled.", "Places a mine. Enemies get pushed to the end of the screen."],
-		cost: [3, 5, 5],
-		subMenu: 0, //does it show up on screen or is it in a submenu
+	shuffle_rot: {
+		name: ["", "", ""],
+		description: ["", "", ""],
+		cost: [4, 4, 4],
+		subMenu: 0,
 		userAnimation: "attack",
-		//effectSprite: baseAttack,
-		damage: 4, // temp damage, until i figure out how to do this damage function thing
+		damage: 0,
 		func: function(_user, _targets) {
-			var _damage = 1; //math function here
-			//BattleChangeHP(_targets);
+			var _damage = 0;
 		},
 		skillFunctions: {
-			base: skill_teleport_self_1,
-			upgrade1: skill_teleport_self_2,
-			upgrade2: skill_teleport_self_3
+			base: skill_shuffle_rot_1,
+			upgrade1: skill_shuffle_rot_2,
+			upgrade2: skill_shuffle_rot_3
 		}
-	}
+	},
 }
 
 global.enemyActions = {
