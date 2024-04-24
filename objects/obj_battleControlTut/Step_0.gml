@@ -193,7 +193,7 @@ switch (state) {
 		obj_draw_bg.colorSwitch = false;
 		
 		if (teachingMovement) {
-			obj_menuTut.set_text("To move, I have to select myself with SPACE, and move with WASD. Then finalize with ENTER");
+			obj_menuTut.set_text("To move, I have to select myself with ENTER, and move with WASD. Then finalize with ENTER");
 			obj_menuTut.enter_text("PRESS ENTER");
 		}
 		
@@ -265,7 +265,7 @@ switch (state) {
 		//show_debug_message("CURRENT TP: " + string(tp_current));
 		
 		if (teachingMovement) {
-					if (key_Enter_pressed) {
+					if (key_Space_pressed) {
 						teachingMovement = false;
 						obj_menuTut.set_text("");
 						obj_menuTut.enter_text("");
@@ -341,7 +341,7 @@ switch (state) {
 				}
 				
 				// select the unit to move it
-				if (key_Space_pressed) {
+				if (key_Enter_pressed) {
 					if (!unit.has_moved && !unit.has_attacked) {
 						change_state(BattleState.PlayerMoving);
 						obj_gridCreator.remove_entity(unit.grid_pos[0],unit.grid_pos[1]);
