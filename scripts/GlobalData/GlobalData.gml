@@ -1296,9 +1296,9 @@ global.actionLibrary = {
 		}
 	},
 	frostcone: {
-		name: ["Frost Cone", "Boreal Wind", "Sharp Winds"], //probably redundant to have a name but keep it
-		description: ["Attacks in a Cone in Front of You. Enemies who are Frozen Take More Damage", "Attacks in a Larger Cone.", "Frost Cone is Cheaper and Does More Damage to Frozen Enemies"],
-		cost: [3, 7, 2],
+		name: ["Frost Cone", "Boreal Wind", "Piercing Freeze"], //probably redundant to have a name but keep it
+		description: ["Attacks in a Cone in Front of You. Enemies who are Frozen Take More Damage", "Attacks in a Larger Cone. Freezes AFTER doing Damage", "Prevents all targets in a row from moving for 1 turn"],
+		cost: [3, 7, 4],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -1384,31 +1384,31 @@ global.actionLibrary = {
 								skill_range[i]._entity_on_tile.freeze_graphic.image_speed=1;
 								skill_range[i]._entity_on_tile.freeze_graphic=pointer_null;
 								skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus+unit.attack_bonus_temp+1);
-								//if (!skill_range[i]._is_empty) {											 I WAS TRYING TO GET REFREEZING TO WORK BUT I JUST COULD NOT 
-								//	skill_range[i]._entity_on_tile.stall_turns+=1;
-								//	if(skill_range[i]._entity_on_tile.ally){
-								//		skill_range[i]._entity_on_tile.has_attacked=true;
-								//		skill_range[i]._entity_on_tile.has_moved=true;
-								//	}else{
-								//		skill_range[i]._entity_on_tile.remove_danger_highlights();
-								//	}
-								//	obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 2, c_blue);
-								//	skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
-								//}
+								if (!skill_range[i]._is_empty) {
+									skill_range[i]._entity_on_tile.stall_turns+=1;
+									if(skill_range[i]._entity_on_tile.ally){
+										skill_range[i]._entity_on_tile.has_attacked=true;
+										skill_range[i]._entity_on_tile.has_moved=true;
+									}else{
+										skill_range[i]._entity_on_tile.remove_danger_highlights();
+									}
+									obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 2, c_blue);
+									skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
+								}
 							}
 							else {
 								skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus+unit.attack_bonus_temp);
-								//if (!skill_range[i]._is_empty) {
-								//skill_range[i]._entity_on_tile.stall_turns+=1;
-								//	if(skill_range[i]._entity_on_tile.ally){
-								//	skill_range[i]._entity_on_tile.has_attacked=true;
-								//	skill_range[i]._entity_on_tile.has_moved=true;
-								//}else{
-								//	skill_range[i]._entity_on_tile.remove_danger_highlights();
-								//}
-								//obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 2, c_blue);
-								//skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
-								//}
+								if(skill_range[i]._entity_on_tile.ally){
+									skill_range[i]._entity_on_tile.has_attacked=true;
+									skill_range[i]._entity_on_tile.has_moved=true;
+								}else{
+									skill_range[i]._entity_on_tile.remove_danger_highlights();
+								}
+								if (!skill_range[i]._is_empty) {
+								skill_range[i]._entity_on_tile.stall_turns+=1;
+								obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 2, c_blue);
+								skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
+								}
 							}
 							
 						}
@@ -1434,7 +1434,7 @@ global.actionLibrary = {
 			upgrade2: function(unit){
 				
 				unit.action = unit.actions[unit.skill_used];
-				skill_range = obj_gridCreator.highlighted_target_cone(unit.grid_pos[0], unit.grid_pos[1], 1);
+				skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=skill_range;
 				if(!unit.skill_init){
 					unit.skill_init=true;
@@ -1445,26 +1445,18 @@ global.actionLibrary = {
 				
 				var _damage = unit.action.damage;
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
+					audio_play_sound(sfx_freeze, 0, false, 0.5);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
-							if (skill_range[i]._entity_on_tile.stall_turns>0) {
-								skill_range[i]._entity_on_tile.freeze_graphic.sprite_index=spr_freeze_out;
-								audio_play_sound(sfx_defreeze, 0, false, 0.5);
-								skill_range[i]._entity_on_tile.freeze_graphic.image_speed=1;
-								skill_range[i]._entity_on_tile.freeze_graphic=pointer_null;
-								skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus+unit.attack_bonus_temp+2);
-								skill_range[i]._entity_on_tile.stall_turns = 0;
-							}
-							else {
-								skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus+unit.attack_bonus_temp);
-							}
+							skill_range[i]._entity_on_tile.stall_turns+=1;
 							if(skill_range[i]._entity_on_tile.ally){
 								skill_range[i]._entity_on_tile.has_attacked=true;
 								skill_range[i]._entity_on_tile.has_moved=true;
 							}else{
 								skill_range[i]._entity_on_tile.remove_danger_highlights();
 							}
-							
+							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 1, c_blue);
+							skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
 						}
 					}
 					unit.is_attacking = false;
@@ -1488,22 +1480,22 @@ global.actionLibrary = {
 		}
 	},
 	thaw: {
-		name: ["Thaw", "Refreeze", "Enhanced Thaw"], //probably redundant to have a name but keep it
-		description: ["Thaws all Frozen Entities. Deal Damage Based on Number of Entites Thawed", "It's a Cheaper Thaw", "Allies no Longer Take Damage from Thaw, and Thaw does More Per Entity Frozen"],
-		cost: [7, 5, 8],
+		name: ["Freeze", "Deep Freeze", "Piercing Freeze"], //probably redundant to have a name but keep it
+		description: ["Prevents the first target in a row from moving for 1 turn", "Prevents the first target in a row from moving for 2 turns", "Prevents all targets in a row from moving for 1 turn"],
+		cost: [2, 4, 4],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
-		damage: 0, // temp damage, until i figure out how to do this damage function thing
+		damage: 1, // temp damage, until i figure out how to do this damage function thing
 		func: function(_user, _targets) {
-			var _damage = 0; //math function here
+			var _damage = 1; //math function here
 			//BattleChangeHP(_targets);
 		},
 		skillFunctions: {
 			base: function(unit){
 				
 				unit.action = unit.actions[unit.skill_used];
-				skill_range = obj_gridCreator.highlighted_target_square(unit.grid_pos[0]+1, unit.grid_pos[1], 10);
+				skill_range = obj_gridCreator.highlighted_target_cone(unit.grid_pos[0]+1, unit.grid_pos[1], 1);
 				obj_cursor.movable_tiles=skill_range;
 				if(!unit.skill_init){
 					unit.skill_init=true;
@@ -1511,38 +1503,24 @@ global.actionLibrary = {
 				if(array_length(skill_range)>0 && !unit.skill_complete){
 					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
 				}
-				if (!unit.thaw_checked) {
-				for (var i = 0; i < array_length(skill_range); i++) {
-						if (!skill_range[i]._is_empty) {
-							if (skill_range[i]._entity_on_tile.stall_turns > 0) {
-							show_debug_message(unit.thaw_damage);
-							unit.thaw_damage += 1;	// atlernatively add frozen	into an array or something	
-							}
-						}
-					}
-					unit.thaw_checked = true;
-				}
+				
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+					audio_play_sound(sfx_freeze, 0, false, 0.5);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
-							skill_range[i]._entity_on_tile.freeze_graphic.sprite_index=spr_freeze_out;
-								audio_play_sound(sfx_defreeze, 0, false, 0.5);
-								skill_range[i]._entity_on_tile.freeze_graphic.image_speed=1;
-								skill_range[i]._entity_on_tile.freeze_graphic=pointer_null;
-								skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus+unit.attack_bonus_temp+unit.thaw_damage);
-								skill_range[i]._entity_on_tile.stall_turns = 0;
+							skill_range[i]._entity_on_tile.stall_turns+=1;
 							if(skill_range[i]._entity_on_tile.ally){
 								skill_range[i]._entity_on_tile.has_attacked=true;
 								skill_range[i]._entity_on_tile.has_moved=true;
 							}else{
 								skill_range[i]._entity_on_tile.remove_danger_highlights();
 							}
+							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 1, c_blue);
+							skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
 							
 						}
 					}
-					unit.thaw_damage = 0;
-					unit.thaw_checked = false;
 					unit.is_attacking = false;
 					unit.skill_complete = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -1564,7 +1542,7 @@ global.actionLibrary = {
 			upgrade1: function(unit){
 				
 				unit.action = unit.actions[unit.skill_used];
-				skill_range = obj_gridCreator.highlighted_target_square(unit.grid_pos[0]+1, unit.grid_pos[1], 10);
+				skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=skill_range;
 				if(!unit.skill_init){
 					unit.skill_init=true;
@@ -1572,38 +1550,23 @@ global.actionLibrary = {
 				if(array_length(skill_range)>0 && !unit.skill_complete){
 					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
 				}
-				if (!unit.thaw_checked) {
-				for (var i = 0; i < array_length(skill_range); i++) {
-						if (!skill_range[i]._is_empty) {
-							if (skill_range[i]._entity_on_tile.stall_turns > 0) {
-							show_debug_message(unit.thaw_damage);
-							unit.thaw_damage += 1;	// atlernatively add frozen	into an array or something	
-							}
-						}
-					}
-					unit.thaw_checked = true;
-				}
+				
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+					audio_play_sound(sfx_freeze, 0, false, 0.5);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
-							skill_range[i]._entity_on_tile.freeze_graphic.sprite_index=spr_freeze_out;
-								audio_play_sound(sfx_defreeze, 0, false, 0.5);
-								skill_range[i]._entity_on_tile.freeze_graphic.image_speed=1;
-								skill_range[i]._entity_on_tile.freeze_graphic=pointer_null;
-								skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus+unit.attack_bonus_temp+unit.thaw_damage);
-								skill_range[i]._entity_on_tile.stall_turns = 0;
+							skill_range[i]._entity_on_tile.stall_turns+=2;
 							if(skill_range[i]._entity_on_tile.ally){
 								skill_range[i]._entity_on_tile.has_attacked=true;
 								skill_range[i]._entity_on_tile.has_moved=true;
 							}else{
 								skill_range[i]._entity_on_tile.remove_danger_highlights();
 							}
-							
+							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 2, c_blue);
+							skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
 						}
 					}
-					unit.thaw_damage = 0;
-					unit.thaw_checked = false;
 					unit.is_attacking = false;
 					unit.skill_complete = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -1625,7 +1588,7 @@ global.actionLibrary = {
 			upgrade2: function(unit){
 				
 				unit.action = unit.actions[unit.skill_used];
-				skill_range = obj_gridCreator.highlighted_target_square(unit.grid_pos[0]+1, unit.grid_pos[1], 10);
+				skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=skill_range;
 				if(!unit.skill_init){
 					unit.skill_init=true;
@@ -1633,32 +1596,21 @@ global.actionLibrary = {
 				if(array_length(skill_range)>0 && !unit.skill_complete){
 					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
 				}
-				for (var i = 0; i < array_length(skill_range); i++) {
-						if (!skill_range[i]._is_empty) {
-							if (skill_range[i]._entity_on_tile.stall_turns > 0) {
-							unit.thaw_damage += 2;		// atlernatively add frozen	into an array or something	
-							}
-						}
-					}
+				
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+					audio_play_sound(sfx_freeze, 0, false, 0.5);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
-							skill_range[i]._entity_on_tile.freeze_graphic.sprite_index=spr_freeze_out;
-								audio_play_sound(sfx_defreeze, 0, false, 0.5);
-								skill_range[i]._entity_on_tile.freeze_graphic.image_speed=1;
-								skill_range[i]._entity_on_tile.freeze_graphic=pointer_null;
-								if (!skill_range[i]._entity_on_tile.ally) {
-								skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus+unit.attack_bonus_temp+unit.thaw_damage);
-								}
-								skill_range[i]._entity_on_tile.stall_turns = 0;
+							skill_range[i]._entity_on_tile.stall_turns+=1;
 							if(skill_range[i]._entity_on_tile.ally){
 								skill_range[i]._entity_on_tile.has_attacked=true;
 								skill_range[i]._entity_on_tile.has_moved=true;
 							}else{
 								skill_range[i]._entity_on_tile.remove_danger_highlights();
 							}
-							
+							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 1, c_blue);
+							skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
 						}
 					}
 					unit.is_attacking = false;
@@ -3122,7 +3074,7 @@ global.actionLibrary = {
 					audio_play_sound(sfx_mortar_windup, 0, false);
 				}
 				skill_range = obj_gridCreator.highlighted_attack_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
-				skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],1);
+				skill_range_aux = obj_gridCreator.highlighted_target_cross(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
 				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
@@ -3711,6 +3663,19 @@ global.players = [
 		ally: true,
 		tpGain: 1,
 		portrait: spr_temp_Azami,
+		primary: #0cac87,
+		secondary: #386467
+	},
+	{ //freeze guy
+		name: "Frozone",
+		hp: 3,
+		hpMax: 3,
+		playerSpeed: 2,
+		sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
+		actions : [global.actionLibrary.baseAttack, global.actionLibrary.freeze, global.actionLibrary.frostcone,  global.actionLibrary.thaw],
+		ally: true,
+		tpGain: 1,
+		portrait: spr_temp_Zero,
 		primary: #0cac87,
 		secondary: #386467
 	}
