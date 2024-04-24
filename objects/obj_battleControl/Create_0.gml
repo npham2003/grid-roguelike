@@ -35,10 +35,18 @@ battle_progress=0;
 // Spawn player units
 
 // Temp struct for player data, may move to a config file or generate dynamically in the future
-var player_data = [
+player_data = [
 	{
-		info: global.players[5],
+		info: global.players[irandom_range(0,array_length(global.players))],
 		grid: [3, 2]		
+	},
+	{
+		info: global.players[irandom_range(0,array_length(global.players))],
+		grid: [2, 2]		
+	},
+	{
+		info: global.players[irandom_range(0,array_length(global.players))],
+		grid: [3, 3]		
 	}
 ];
 

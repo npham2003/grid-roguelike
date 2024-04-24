@@ -1,5 +1,6 @@
 {
   "FolderOrderSettings":[
+    {"name":"Character Select","order":1,"path":"folders/Objects/Character Select.yy",},
     {"name":"Player Skills","order":1,"path":"folders/Scripts/Player Skills.yy",},
     {"name":"Front","order":1,"path":"folders/Sprites/UI/Front.yy",},
     {"name":"Grid","order":2,"path":"folders/Sprites/UI/Grid.yy",},
@@ -18,6 +19,7 @@
     {"name":"obj_shield_damage_number","order":4,"path":"objects/obj_shield_damage_number/obj_shield_damage_number.yy",},
     {"name":"obj_shop_menu","order":5,"path":"objects/obj_shop_menu/obj_shop_menu.yy",},
     {"name":"obj_textboxTut","order":1,"path":"objects/obj_textboxTut/obj_textboxTut.yy",},
+    {"name":"CharSel","order":1,"path":"rooms/CharSel/CharSel.yy",},
     {"name":"skill_teleport_ally_1","order":6,"path":"scripts/skill_teleport_ally_1/skill_teleport_ally_1.yy",},
     {"name":"skill_teleport_ally_2","order":7,"path":"scripts/skill_teleport_ally_2/skill_teleport_ally_2.yy",},
     {"name":"skill_teleport_ally_3","order":8,"path":"scripts/skill_teleport_ally_3/skill_teleport_ally_3.yy",},
@@ -85,9 +87,9 @@
     {"name":"spr_temp_Azami","order":1,"path":"sprites/spr_temp_Azami/spr_temp_Azami.yy",},
     {"name":"spr_temp_Glimmer","order":2,"path":"sprites/spr_temp_Glimmer/spr_temp_Glimmer.yy",},
     {"name":"spr_temp_Hina","order":5,"path":"sprites/spr_temp_Hina/spr_temp_Hina.yy",},
+    {"name":"spr_temp_Perun","order":6,"path":"sprites/spr_temp_Perun/spr_temp_Perun.yy",},
     {"name":"spr_temp_Saryu","order":4,"path":"sprites/spr_temp_Saryu/spr_temp_Saryu.yy",},
     {"name":"spr_temp_Wulfric","order":3,"path":"sprites/spr_temp_Wulfric/spr_temp_Wulfric.yy",},
-    {"name":"spr_temp_Perun","order":6,"path":"sprites/spr_temp_Perun/spr_temp_Perun.yy",},
     {"name":"spr_turret_attack","order":2,"path":"sprites/spr_turret_attack/spr_turret_attack.yy",},
     {"name":"spr_turret_idle","order":3,"path":"sprites/spr_turret_idle/spr_turret_idle.yy",},
     {"name":"Sprite82","order":3,"path":"sprites/Sprite82/Sprite82.yy",},
