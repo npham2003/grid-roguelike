@@ -249,7 +249,7 @@ switch (state) {
 				// set the tpcost array in the menu to match actual costs
 				obj_menu.tpCost=[0,unit.actions[0].cost[unit.upgrades[0]],unit.actions[1].cost[unit.upgrades[1]],unit.actions[2].cost[unit.upgrades[2]],unit.actions[3].cost[unit.upgrades[3]]];
 				//obj_menu.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
-				obj_menu.set_text("WASD - Move Cursor     Space - Select Unit     Enter - End Turn");
+				obj_menu.set_text("WASD - Move Cursor     Enter - Select Unit     Space - End Turn");
 				
 				// resets the previous grid position to current position. needed for when getting moved when its not their turn (push or teleport)
 				unit.prev_grid=[unit.grid_pos[0],unit.grid_pos[1]];
@@ -260,7 +260,7 @@ switch (state) {
 				}
 				
 				// select the unit to move it
-				if (key_Space_pressed) {
+				if (key_Enter_pressed) {
 					if (!unit.has_moved && !unit.has_attacked) {
 						change_state(BattleState.PlayerMoving);
 						obj_gridCreator.remove_entity(unit.grid_pos[0],unit.grid_pos[1]);
@@ -337,7 +337,7 @@ switch (state) {
 		}else{
 			obj_menu.close_menu();
 		}
-		if(key_Enter_pressed){ // end the turn
+		if(key_Space_pressed){ // end the turn
 			board_obstacle_order = 0;
 			for (var i = 0; i < array_length(player_units); i++) {
 				if(!(player_units[i].has_attacked || player_units[i].has_moved)){
