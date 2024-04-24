@@ -43,7 +43,7 @@ if (confirm) {
 	draw_primitive_end();
 	
 	draw_set_color(global._characterSecondary);
-	draw_text_ext_transformed(880, 615, "Confirm: Enter", 30, confirmY-160, 0.7, 0.7, 0);
+	draw_text_ext_transformed(confirmX[0]+20, 615, "Confirm: Enter", 30, confirmY-160, 0.7, 0.7, 0);
 	
 	//draw_text_color(550, );
 }

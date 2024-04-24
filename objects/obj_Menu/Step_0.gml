@@ -69,17 +69,19 @@ turn_text_anim = lerp(turn_text_anim, 2, 0.2)
 
 #region confirm opacity
 if(confirm){
-	confirmShiftX = 100;
+	confirmShiftX[0] = 850;
+	confirmShiftX[1] = 1050;
 	confirmShiftY = 660;
 	
 
 }else{
-	confirmShiftX = -100;
+	confirmShiftX[0] = 800;
+	confirmShiftX[1] = 1000;
 	confirmShiftY = 700;
 }
 
 confirmY = lerp(confirmY, confirmShiftY, 0.2);
-for (var i = 0; i < 2; ++i) {
-	//confirmX[i] = lerp(confirmX[i], confirmX[i] + confirmShiftX, 0.2);
-}
+confirmX[0] = lerp(confirmX[0], confirmShiftX[0], 0.2);
+confirmX[1] = lerp(confirmX[1], confirmShiftX[1], 0.2);
+
 #endregion

@@ -41,10 +41,10 @@ optionRadius = 40;
 spacing = 150;
 
 confirmRadius = 40;
-confirmX = [850, 1050];
+confirmX = [800, 1000];
 confirmY = 660;
-confirmShiftX = 100;
-confirmShiftY = 0;
+confirmShiftX = 0;
+confirmShiftY = [0,0];
 
 border = 5;
 #endregion
