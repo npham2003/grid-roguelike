@@ -189,6 +189,7 @@ draw_primitive_end();
 
 #region draw character
 gpu_set_blendenable(false);
+
 gpu_set_colorwriteenable(false, false, false, true);
 draw_set_alpha(0);
 draw_rectangle(imgX-150, imgY-150, imgX+160, imgY+100, false); //invisible rectangle
