@@ -4,8 +4,10 @@ if(hp<=0){
 	sprite_index=sprites.dead;
 }else if(is_attacking){
 	sprite_index=sprites.gun;
+	image_speed=1;
 }else{
 	sprite_index=sprites.idle;
+	image_speed=1;
 }
 new_coords = obj_gridCreator.get_coordinates(grid_pos[0],grid_pos[1]);
 if(teleporting==0){

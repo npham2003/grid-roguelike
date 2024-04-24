@@ -68,27 +68,31 @@ function skill_teleport_enemy_2(unit){
 			}
 		}
 		else if(unit.skill_progress==2){
-			if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty &&
-				!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
-				audio_play_sound(sfx_teleport, 0, false, 1);
+			if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+					audio_play_sound(sfx_teleport, 0, false, 1);
 				
-				target_grid_1 = skill_range_aux[0];
-				target_grid_2 = skill_range_aux[1];
-				target_unit_1 = target_grid_1._entity_on_tile;
-				target_unit_2 = target_grid_2._entity_on_tile;
+					target_grid_1 = skill_range_aux[0];
+					target_grid_2 = skill_range_aux[1];
+					target_unit_1 = target_grid_1._entity_on_tile;
+					target_unit_2 = target_grid_2._entity_on_tile;
 				
-				target_grid_1._entity_on_tile = target_unit_2;
-				target_grid_2._entity_on_tile = target_unit_1;
-				target_unit_1.teleport(target_grid_2._x_coord, target_grid_2._y_coord, false);
-				target_unit_2.teleport(target_grid_1._x_coord, target_grid_1._y_coord, false);
+					target_grid_1._entity_on_tile = target_unit_2;
+					target_grid_2._entity_on_tile = target_unit_1;
+					target_unit_1.teleport(target_grid_2._x_coord, target_grid_2._y_coord, false);
+					target_unit_2.teleport(target_grid_1._x_coord, target_grid_1._y_coord, false);
 
-				unit.is_attacking = false;
-				skill_range = obj_gridCreator.reset_highlights_support();
-				skill_range_aux = obj_gridCreator.reset_highlights_target();
-				unit.skill_complete = true;
-				unit.skill_init = false;
-				unit.skill_progress=0;
-				show_debug_message(unit.action.name);
+					unit.is_attacking = false;
+					skill_range = obj_gridCreator.reset_highlights_support();
+					skill_range_aux = obj_gridCreator.reset_highlights_target();
+					unit.skill_complete = true;
+					unit.skill_init = false;
+					unit.skill_progress=0;
+					show_debug_message(unit.action.name);
+				}else{
+					audio_play_sound(sfx_no_tp, 0, false);
+				}
+			
 			}else{
 				audio_play_sound(sfx_no_tp, 0, false);
 			}
