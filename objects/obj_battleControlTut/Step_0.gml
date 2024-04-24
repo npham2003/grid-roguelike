@@ -265,7 +265,7 @@ switch (state) {
 		//show_debug_message("CURRENT TP: " + string(tp_current));
 		
 		if (teachingMovement) {
-					if (key_Space_pressed) {
+					if (key_Enter_pressed) {
 						teachingMovement = false;
 						obj_menuTut.set_text("");
 						obj_menuTut.enter_text("");
@@ -341,7 +341,7 @@ switch (state) {
 				}
 				
 				// select the unit to move it
-				if (key_Enter_pressed) {
+				if (key_Space_pressed) {
 					if (!unit.has_moved && !unit.has_attacked) {
 						change_state(BattleState.PlayerMoving);
 						obj_gridCreator.remove_entity(unit.grid_pos[0],unit.grid_pos[1]);
@@ -420,7 +420,7 @@ switch (state) {
 		}else{
 			obj_menuTut.close_menu();
 		}
-		if(key_Enter_pressed){ // end the turn
+		if(key_Space_pressed){ // end the turn
 			board_obstacle_order = 0;
 			for (var i = 0; i < array_length(player_units); i++) {
 				if(!(player_units[i].has_attacked || player_units[i].has_moved)){
