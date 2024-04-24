@@ -1489,7 +1489,7 @@ global.actionLibrary = {
 	},
 	thaw: {
 		name: ["Thaw", "Refreeze", "Enhanced Thaw"], //probably redundant to have a name but keep it
-		description: ["Thaws all frozen units. Deal 1 damage for every unit thawed to all units", "Deal 1 damage for every frozen unit to all units. Refreezes frozen unit for 1 turn.", "Deal 2 damage for every frozen unit to all units."],
+		description: ["Thaws all frozen units. Deal 1 damage for every unit thawed to all units", "Deal 1 damage for every frozen unit to all units. Refreezes frozen units for 1 turn.", "Deal 2 damage for every frozen unit to all units."],
 		cost: [7, 5, 8],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -1556,6 +1556,7 @@ global.actionLibrary = {
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_init=false;
+					unit.thaw_checked = false;
 					obj_battleEffect.remove_push_preview();
 				
 		
@@ -1640,6 +1641,7 @@ global.actionLibrary = {
 				if(array_length(skill_range)>0 && !unit.skill_complete){
 					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
 				}
+				unit.thaw_damage=0;
 				for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
 							if (skill_range[i]._entity_on_tile.stall_turns > 0) {
