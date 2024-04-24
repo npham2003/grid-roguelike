@@ -26,6 +26,8 @@ target_pos=[];
 
 teleporting = 0;
 
+delay=30;
+
 // used for freeze status
 stall_turns=0;
 freeze_graphic=pointer_null;
@@ -304,6 +306,7 @@ function move(new_x, new_y) {
 	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile=self;
 	is_moving = true;
 	battlecontrol.in_animation = true;
+	delay = 30;
 	//var coord = obj_gridCreator.get_coordinates(grid_pos[0], grid_pos[1]);
 	//x = coord[0];
 	//y = coord[1];

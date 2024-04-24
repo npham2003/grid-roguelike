@@ -2558,7 +2558,7 @@ global.players = [
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.teleport_self, global.actionLibrary.teleport_ally,  global.actionLibrary.teleport_enemy],
 		ally: true,
 		tpGain: 3,
-		portrait: spr_temp_Zero,
+		portrait: spr_temp_Noelle,
 		primary: #0cac87,
 		secondary: #386467
 	},
