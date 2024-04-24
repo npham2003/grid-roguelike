@@ -53,7 +53,7 @@ border = 5;
 #region control
 
 player_unit = obj_player;
-currCharSprite = spr_temp_Akeha;
+currCharSprite = spr_temp_Taion;
 tpCost = [0, 1, 5, 7, 12];
 
 

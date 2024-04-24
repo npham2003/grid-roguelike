@@ -111,6 +111,9 @@ switch (state) {
 				
 				unit.find_target();
 				unit.aim();
+				for(i=0;i<enemy_order;i++){
+						enemy_units[i].recalc_los();
+					}
 			}
 			obj_menu.set_text(unit.name+" is aiming");
 			
@@ -173,8 +176,10 @@ switch (state) {
 				player_units[i].has_moved = false;
 				player_units[i].has_attacked = false;
 				tp_current+=player_units[i].tpGain;
-			}else if(player_units[i].hp<0){
+			}else if(player_units[i].hp<=0){
 				player_units[i].hp=0;
+				player_units[i].has_moved = true;
+				player_units[i].has_attacked = true;
 			}
 			
 			
