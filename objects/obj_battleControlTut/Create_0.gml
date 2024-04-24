@@ -36,6 +36,7 @@ unit = pointer_null;
 board_obstacle_order = 0;
 obstacle = pointer_null;
 
+
 #region Spawns
 
 // Spawn player units

@@ -283,7 +283,38 @@ function remove_target_highlights(){
 
 // actually does damage. ignores other obstacles and units with a mismatched ally boolean
 function do_damage(){
+	
 	obj_gridCreator.reset_highlights_target();
+	
+	if(action.damage_type=="push"){
+		for (var i = 0; i < array_length(action.range); i++) {
+		var attack_x = grid_pos[0] + action.range[i][0];
+		var attack_y = grid_pos[1] + action.range[i][1];
+		
+		if (attack_x < 0 || attack_x >= GRIDWIDTH) {
+			continue;
+		}
+		if (attack_y < 0 || attack_y >= GRIDHEIGHT) {
+			continue;
+		}
+		
+		
+						if (!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty) {
+							if(obj_gridCreator.battle_grid[attack_x][attack_y]==obj_gridCreator.battle_grid9[attack_x][attack_y-1]&&!obj_gridCreator.battle_gridobj_gridCreator.battle_grid[attack_x][attack_y-1]._is_empty){
+								obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_up(1);
+							}else if(obj_gridCreator.battle_grid[attack_x][attack_y]==obj_gridCreator.battle_grid[attack_x][attack_y+1]&&!obj_gridCreator.battle_grid[attack_x][attack_y+1]._is_empty){
+								obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_down(1);
+							}else if(obj_gridCreator.battle_grid[attack_x][attack_y]==obj_gridCreator.battle_grid[attack_x-1][attack_y]&&!obj_gridCreator.battle_grid[attack_x-1][attack_y]._is_empty){
+								obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_forward(1);
+							}else if(obj_gridCreator.battle_grid[attack_x][attack_y]==obj_gridCreator.battle_grid[attack_x+1][attack_y]&&!obj_gridCreator.battle_grid[attack_x+1][attack_y]._is_empty){
+								obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_back(1);
+							}
+						}
+		}
+		
+	}else{
+	
+	
 	for (var i = 0; i < array_length(action.range); i++) {
 		var attack_x = grid_pos[0] + action.range[i][0];
 		var attack_y = grid_pos[1] + action.range[i][1];
@@ -302,16 +333,20 @@ function do_damage(){
 				show_debug_message("("+string(attack_x)+","+string(attack_y)+")")
 				show_debug_message(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile==pointer_null);
 				obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.damage(strength);
+				if (action.damage_type=="cold") {
+					// does damage to affected tiles
+					obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.stall_turns+=1;
+				}
 			}
 			
 
 		}
 		
 	}
+	}
 	
 	show_debug_message("{0} has {1} turns left", name, turns_remaining);
 	remove_target_highlights();
-	
 }
 
 // empty but needed to not cause errors
