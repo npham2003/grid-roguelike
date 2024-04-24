@@ -37,7 +37,7 @@ battle_progress=0;
 // Temp struct for player data, may move to a config file or generate dynamically in the future
 var player_data = [
 	{
-		info: global.players[5],
+		info: global.players[4],
 		grid: [3, 2]		
 	},
 	{
