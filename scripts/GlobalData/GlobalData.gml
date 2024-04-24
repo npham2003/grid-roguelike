@@ -1179,7 +1179,9 @@ global.actionLibrary = {
 								skill_range[i]._entity_on_tile.remove_danger_highlights();
 							}
 							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 1, c_blue);
-							skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
+							if(skill_range[i]._entity_on_tile.stall_turns<=0){
+								skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
+							}
 							
 						}
 					}
@@ -1226,7 +1228,9 @@ global.actionLibrary = {
 								skill_range[i]._entity_on_tile.remove_danger_highlights();
 							}
 							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 2, c_blue);
-							skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
+							if(skill_range[i]._entity_on_tile.stall_turns<=0){
+								skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
+							}
 						}
 					}
 					unit.is_attacking = false;
@@ -1272,7 +1276,9 @@ global.actionLibrary = {
 								skill_range[i]._entity_on_tile.remove_danger_highlights();
 							}
 							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 1, c_blue);
-							skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
+							if(skill_range[i]._entity_on_tile.stall_turns<=0){
+								skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
+							}
 						}
 					}
 					unit.is_attacking = false;
