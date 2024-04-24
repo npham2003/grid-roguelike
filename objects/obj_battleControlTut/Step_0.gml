@@ -17,6 +17,10 @@ var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_H_press
 
 var enough_tp = false;
 
+if(keyboard_check_pressed(vk_ralt)) {
+	room_goto_next();
+}
+
 if (transition_count > 0) {
 	transition_count-=1;
 	return;
