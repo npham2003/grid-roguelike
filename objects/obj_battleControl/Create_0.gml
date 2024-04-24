@@ -37,17 +37,13 @@ battle_progress=0;
 // Temp struct for player data, may move to a config file or generate dynamically in the future
 var player_data = [
 	{
-		info: global.players[3],
+		info: global.players[4],
 		grid: [3, 2]		
 	},
 	{
-		info: global.players[1],
+		info: global.players[3],
 		grid: [2, 2]		
-	},
-	//{
-	//	info: global.players[0],
-	//	grid: [2, 1]		
-	//}
+	}
 ];
 
 // spawns units at the very start
@@ -64,7 +60,7 @@ for (var i = 0; i < array_length(player_data); i++) {
 	array_push(player_units, unit);
 	unit.prev_grid[0] = unit.grid_pos[0];
 	unit.prev_grid[1] = unit.grid_pos[1];
-	unit.upgrades = [0,0,0,0];
+	unit.upgrades = [0,2,2,0];
 	obj_gridCreator.battle_grid[player_data[i].grid[0]][player_data[i].grid[1]]._entity_on_tile=unit;
 	
 }

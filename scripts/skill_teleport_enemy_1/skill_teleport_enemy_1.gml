@@ -17,6 +17,7 @@ function skill_teleport_enemy_1(unit){
 	}
 	if(unit.skill_progress==1){
 		skill_range = obj_gridCreator.highlighted_support_all();
+		show_debug_message(skill_range);
 	}
 	if(unit.skill_progress==2){
 		original_grid = skill_range_aux[0];
@@ -70,7 +71,7 @@ function skill_teleport_enemy_1(unit){
 		}
 		else if(unit.skill_progress==2){
 			if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
-				if (skill_coords[0] >= GRIDWIDTH / 2) {
+				
 					audio_play_sound(sfx_teleport, 0, false, 1);
 				
 					original_grid = skill_range_aux[0];
@@ -86,10 +87,7 @@ function skill_teleport_enemy_1(unit){
 					unit.skill_init = false;
 					unit.skill_progress=0;
 					show_debug_message(unit.action.name);
-				}
-				else {
-					audio_play_sound(sfx_no_tp, 0, false);
-				}
+				
 			}
 			else {
 				audio_play_sound(sfx_no_tp, 0, false);
