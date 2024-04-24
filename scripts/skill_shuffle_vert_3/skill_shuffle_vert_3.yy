@@ -1,9 +1,9 @@
 {
   "$GMScript":"",
-  "%Name":"shuffle_vert_1",
+  "%Name":"skill_shuffle_vert_3",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"shuffle_vert_1",
+  "name":"skill_shuffle_vert_3",
   "parent":{
     "name":"Shuffle",
     "path":"folders/Scripts/Player Skills/Shuffle.yy",

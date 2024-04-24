@@ -2222,9 +2222,9 @@ global.actionLibrary = {
 			//BattleChangeHP(_targets);
 		},
 		skillFunctions: {
-			base: shuffle_horiz_1,
-			upgrade1: shuffle_rot_1,
-			upgrade2: shuffle_rot_1,
+			base: skill_shuffle_horiz_1,
+			upgrade1: skill_shuffle_horiz_2,
+			upgrade2: skill_shuffle_horiz_3,
 		}
 	},	
 }
