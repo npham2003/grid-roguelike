@@ -18,22 +18,22 @@ function skill_shuffle_horiz_1(unit) {
 	
 
 	obj_cursor.movable_tile = skill_range;
-	obj_cursor.reset_cursor(skill_coords[0]._x_coord, 3);
+	obj_cursor.reset_cursor(skill_range[0]._x_coord, 3);
 	
-	if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
-		if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
+	if (keyboard_check_pressed(ord("A")) && skill_range[0] > 0) {
+		if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_range[0]-1][skill_range[1]])){
 			audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-			skill_coords[0] -= 1;
+			skill_range[0] -= 1;
 		}
 	}
-	if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
-		if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
+	if (keyboard_check_pressed(ord("D")) && skill_range[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+		if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_range[0]+1][skill_range[1]])){
 			audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-			skill_coords[0] += 1;
+			skill_range[0] += 1;
 		}
 	}
 
-	skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]];
+	skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[skill_range[0]][skill_range[1]];
 	
 	for (var i = 0; i < array_length(skill_range); i++) {
 		skill_range[i]._target_highlight=true;
