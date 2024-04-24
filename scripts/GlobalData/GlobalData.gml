@@ -2620,7 +2620,7 @@ global.actionLibrary = {
 	},
 	placegravbomb: {
 		name: ["Push Mine", "Gravity Mine", "Super Push Mine"], //probably redundant to have a name but keep it
-		description: ["Places a mine. Any units 1 tile away take damage.", "Places a mine. Any units in the 3x3 area take 3 damage at the end of their turn.", "Places 2 mines."],
+		description: ["Places a mine. Any units 1 tile get pushed by one tile.", "Places a mine. Any units in the surrounding area get pulled.", "Places a mine. Enemies get pushed to the end of the screen."],
 		cost: [3, 5, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -2672,7 +2672,7 @@ global.actionLibrary = {
 						skill_coords[1] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
 					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
@@ -2734,7 +2734,7 @@ global.actionLibrary = {
 						skill_coords[1] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
 					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
@@ -2796,7 +2796,7 @@ global.actionLibrary = {
 						skill_coords[1] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
 					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
@@ -2896,6 +2896,39 @@ global.enemyActions = {
 		type: "normal",
 		damage_type: "cold"
 	},
+	mini_cross_push: {
+		name: "push explosion",
+		range: [
+					[-1, 0],
+			[0, -1], [0, 0], [0, 1], 
+					 [1, 0],
+		],
+		type: "normal",
+		damage_type: "push"
+	},
+	center_square_pushpush: {
+		name: "bigger push",
+		range: [
+			[-1, -1], [-1, 0], [-1, 1],
+			[0, -1], [0, 0], [0, 1], 
+			[1, -1], [1, 0], [1, 1]
+		],
+		type: "normal",
+		damage_type: "big push"
+	},
+	center_big_square_pull: {
+		name: "big square explosion",
+		range: [
+			[-2, -2], [-2, -1], [-2, 0], [-2, 1], [-2, 2],
+			[-1, -2], [-1, -1], [-1, 0], [-1, 1], [-1, 2],
+			[0, -2], [0, -1], [0, 0], [0, 1], [0, 2],
+			[1, -2], [1, -1], [1, 0], [1, 1], [1, 2],
+			[2, -2], [2, -1], [2, 0], [2, 1], [2, 2]
+		],
+		type: "normal",
+		damage_type: "cold"
+	},
+	
 	homing_aoe: {
 		name: "homing aoe",
 		range: [
@@ -2995,7 +3028,7 @@ global.players = [
 		hpMax: 3,
 		playerSpeed: 2,
 		sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
-		actions : [global.actionLibrary.baseAttack, global.actionLibrary.placebomb, global.actionLibrary.placeicebomb,  global.actionLibrary.dance],
+		actions : [global.actionLibrary.baseAttack, global.actionLibrary.placebomb, global.actionLibrary.placeicebomb,  global.actionLibrary.placegravbomb],
 		ally: true,
 		tpGain: 1,
 		portrait: spr_temp_Zero,
@@ -3170,7 +3203,7 @@ global.obstacles = [
 		turns_remaining: 1,
 		turns_max: 1,
 		sprites: { idle: spr_bomb, attack: spr_explosion },
-		actions: [global.enemyActions.center_square],
+		actions: [global.enemyActions.mini_cross_push],
 		sounds: { attack: sfx_slime_attack },
 		ally: false,
 		hp: 999,
@@ -3182,7 +3215,7 @@ global.obstacles = [
 		turns_remaining: 3,
 		turns_max: 3,
 		sprites: { idle: spr_bomb, attack: spr_explosion },
-		actions: [global.enemyActions.center_square],
+		actions: [global.enemyActions.center_big_square_pull],
 		sounds: { attack: sfx_slime_attack },
 		ally: false,
 		hp: 999,
@@ -3194,7 +3227,7 @@ global.obstacles = [
 		turns_remaining: 1,
 		turns_max: 1,
 		sprites: { idle: spr_bomb, attack: spr_explosion },
-		actions: [global.enemyActions.center_big_square],
+		actions: [global.enemyActions.center_square_pushpush],
 		sounds: { attack: sfx_slime_attack },
 		ally: false,
 		hp: 999,
