@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"skill_teleport_ally_3",
   "parent":{
-    "name":"Player Skills",
-    "path":"folders/Scripts/Player Skills.yy",
+    "name":"Teleport",
+    "path":"folders/Scripts/Player Skills/Teleport.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
