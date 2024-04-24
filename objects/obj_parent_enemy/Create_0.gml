@@ -595,14 +595,21 @@ function damage(damage_value){
 function despawn(){
 	is_dead=true;
 	obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
-	remove_danger_highlights();
+	if(stall_turns>0){
+		
+		freeze_graphic.sprite_index=spr_freeze_out;
+		freeze_graphic.image_speed=1;
+		freeze_graphic=pointer_null;
+
+	}else{
+		remove_danger_highlights();
+	}
 	// updates the summoned units count for the summoner if this is a summoned enemy
 	if(summoner!=pointer_null){
 		summoner.summoned_units-=1;
 	}
-	freeze_graphic.sprite_index=spr_freeze_out;
-	freeze_graphic.image_speed=1;
 }
+	
 
 // push to the right
 function push_back(squares){

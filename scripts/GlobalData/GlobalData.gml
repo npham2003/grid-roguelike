@@ -1297,7 +1297,7 @@ global.actionLibrary = {
 	},
 	frostcone: {
 		name: ["Frost Cone", "Boreal Wind", "Sharp Winds"], //probably redundant to have a name but keep it
-		description: ["Attacks in a Cone in Front of You. Enemies who are Frozen Take More Damage", "Attacks in a Larger Cone.", "Frost Cone is Cheaper and Does More Damage to Frozen Enemies"],
+		description: ["Attacks in a cone in Front of You. Enemies who are frozen take 1 more damage", "Attacks in a larger cone in Front of You. Enemies who are frozen take 1 more damage", "Attacks in a cone in Front of You. Enemies who are frozen take 2 more damage"],
 		cost: [3, 7, 2],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -1489,7 +1489,7 @@ global.actionLibrary = {
 	},
 	thaw: {
 		name: ["Thaw", "Refreeze", "Enhanced Thaw"], //probably redundant to have a name but keep it
-		description: ["Thaws all Frozen Entities. Deal Damage Based on Number of Entites Thawed", "It's a Cheaper Thaw", "Allies no Longer Take Damage from Thaw, and Thaw does More Per Entity Frozen"],
+		description: ["Thaws all frozen units. Deal 1 damage for every unit thawed to all units", "Deal 1 damage for every frozen unit to all units. Refreezes frozen unit for 1 turn.", "Deal 2 damage for every frozen unit to all units."],
 		cost: [7, 5, 8],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -1587,18 +1587,24 @@ global.actionLibrary = {
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
-							skill_range[i]._entity_on_tile.freeze_graphic.sprite_index=spr_freeze_out;
+							if(skill_range[i]._entity_on_tile.stall_turns>0){
+								skill_range[i]._entity_on_tile.freeze_graphic.sprite_index=spr_freeze_out;
 								audio_play_sound(sfx_defreeze, 0, false, 0.5);
 								skill_range[i]._entity_on_tile.freeze_graphic.image_speed=1;
-								skill_range[i]._entity_on_tile.freeze_graphic=pointer_null;
-								skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus+unit.attack_bonus_temp+unit.thaw_damage);
+								
 								skill_range[i]._entity_on_tile.stall_turns = 0;
-							if(skill_range[i]._entity_on_tile.ally){
-								skill_range[i]._entity_on_tile.has_attacked=true;
-								skill_range[i]._entity_on_tile.has_moved=true;
-							}else{
-								skill_range[i]._entity_on_tile.remove_danger_highlights();
+								obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 1, c_blue);
+								skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
+								skill_range[i]._entity_on_tile.stall_turns = 1;
+								if(skill_range[i]._entity_on_tile.ally){
+									skill_range[i]._entity_on_tile.has_attacked=true;
+									skill_range[i]._entity_on_tile.has_moved=true;
+								}else{
+									//skill_range[i]._entity_on_tile.remove_danger_highlights();
+								}
 							}
+							skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus+unit.attack_bonus_temp+unit.thaw_damage);
+							
 							
 						}
 					}
@@ -1617,6 +1623,7 @@ global.actionLibrary = {
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_init=false;
+					unit.thaw_checked = false;
 					obj_battleEffect.remove_push_preview();
 				
 		

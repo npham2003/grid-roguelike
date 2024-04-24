@@ -596,7 +596,12 @@ switch (state) {
 		var enemy_unit = enemy_units[enemy_check_death];
 		if (enemy_unit.hp<=0){
 			enemy_unit.despawn();
-			
+			if(enemy_unit.stall_turns>0){
+				unit.freeze_graphic.sprite_index=spr_freeze_out;
+				audio_play_sound(sfx_defreeze, 0, false, 0.5);
+				unit.freeze_graphic.image_speed=1;
+				unit.freeze_graphic=pointer_null;
+			}
 			array_delete(enemy_units, enemy_check_death, 1);
 			enemy_check_death-=1;
 			set_enemy_turn_order();
