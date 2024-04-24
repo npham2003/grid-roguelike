@@ -3354,6 +3354,61 @@ global.enemyActions = {
 		type: "normal",
 		damage_type: "normal"
 	},
+	center_square_c: {
+		name: "square explosion",
+		range: [
+			[-1, -1], [-1, 0], [-1, 1],
+			[0, -1], [0, 0], [0, 1], 
+			[1, -1], [1, 0], [1, 1]
+		],
+		type: "normal",
+		damage_type: "cold"
+	},
+	center_big_square_c: {
+		name: "big square explosion",
+		range: [
+			[-2, -2], [-2, -1], [-2, 0], [-2, 1], [-2, 2],
+			[-1, -2], [-1, -1], [-1, 0], [-1, 1], [-1, 2],
+			[0, -2], [0, -1], [0, 0], [0, 1], [0, 2],
+			[1, -2], [1, -1], [1, 0], [1, 1], [1, 2],
+			[2, -2], [2, -1], [2, 0], [2, 1], [2, 2]
+		],
+		type: "normal",
+		damage_type: "cold"
+	},
+	mini_cross_push: {
+		name: "push explosion",
+		range: [
+					[-1, 0],
+			[0, -1], [0, 0], [0, 1], 
+					 [1, 0],
+		],
+		type: "normal",
+		damage_type: "push"
+	},
+	center_square_pushpush: {
+		name: "bigger push",
+		range: [
+			[-1, -1], [-1, 0], [-1, 1],
+			[0, -1], [0, 0], [0, 1], 
+			[1, -1], [1, 0], [1, 1]
+		],
+		type: "normal",
+		damage_type: "big push"
+	},
+	center_big_square_pull: {
+		name: "big square explosion",
+		range: [
+			[-2, -2], [-2, -1], [-2, 0], [-2, 1], [-2, 2],
+			[-1, -2], [-1, -1], [-1, 0], [-1, 1], [-1, 2],
+			[0, -2], [0, -1], [0, 0], [0, 1], [0, 2],
+			[1, -2], [1, -1], [1, 0], [1, 1], [1, 2],
+			[2, -2], [2, -1], [2, 0], [2, 1], [2, 2]
+		],
+		type: "normal",
+		damage_type: "cold"
+	},
+	
 	homing_aoe: {
 		name: "homing aoe",
 		range: [
@@ -3563,7 +3618,102 @@ global.obstacles = [
 		healthbar_offset: -30,
 		strength: 1
 	},
-	
+	{
+		name: "Basic Bomb",
+		turns_remaining: 2,
+		turns_max: 2,
+		sprites: { idle: spr_bomb, attack: spr_explosion },
+		actions: [global.enemyActions.mini_cross],
+		sounds: { attack: sfx_slime_attack },
+		ally: false,
+		hp: 999,
+		healthbar_offset: -30,
+		strength: 1
+	},
+	{
+		name: "Bigger Bomb",
+		turns_remaining: 2,
+		turns_max: 2,
+		sprites: { idle: spr_big_bomb, attack: spr_big_explosion },
+		actions: [global.enemyActions.center_square],
+		sounds: { attack: sfx_slime_attack },
+		ally: false,
+		hp: 999,
+		healthbar_offset: -30,
+		strength: 3
+	},
+	{
+		name: "Ice Bomb",
+		turns_remaining: 1,
+		turns_max: 1,
+		sprites: { idle: spr_bomb, attack: spr_explosion },
+		actions: [global.enemyActions.center_square_c],
+		sounds: { attack: sfx_slime_attack },
+		ally: false,
+		hp: 999,
+		healthbar_offset: -30,
+		strength: 0
+	},
+	{
+		name: "Freezer",
+		turns_remaining: 3,
+		turns_max: 3,
+		sprites: { idle: spr_bomb, attack: spr_explosion },
+		actions: [global.enemyActions.center_square_c],
+		sounds: { attack: sfx_slime_attack },
+		ally: false,
+		hp: 999,
+		healthbar_offset: -30,
+		strength: 0
+	},
+	{
+		name: "Ice Age",
+		turns_remaining: 1,
+		turns_max: 1,
+		sprites: { idle: spr_bomb, attack: spr_explosion },
+		actions: [global.enemyActions.center_big_square_c],
+		sounds: { attack: sfx_slime_attack },
+		ally: false,
+		hp: 999,
+		healthbar_offset: -30,
+		strength: 1
+	},
+	{
+		name: "Push Bomb",
+		turns_remaining: 1,
+		turns_max: 1,
+		sprites: { idle: spr_bomb, attack: spr_explosion },
+		actions: [global.enemyActions.mini_cross_push],
+		sounds: { attack: sfx_slime_attack },
+		ally: false,
+		hp: 999,
+		healthbar_offset: -30,
+		strength: 0
+	},
+	{
+		name: "Pull Bomb",
+		turns_remaining: 3,
+		turns_max: 3,
+		sprites: { idle: spr_bomb, attack: spr_explosion },
+		actions: [global.enemyActions.center_big_square_pull],
+		sounds: { attack: sfx_slime_attack },
+		ally: false,
+		hp: 999,
+		healthbar_offset: -30,
+		strength: 0
+	},
+	{
+		name: "Double Push Bomb",
+		turns_remaining: 1,
+		turns_max: 1,
+		sprites: { idle: spr_bomb, attack: spr_explosion },
+		actions: [global.enemyActions.center_square_pushpush],
+		sounds: { attack: sfx_slime_attack },
+		ally: false,
+		hp: 999,
+		healthbar_offset: -30,
+		strength: 1
+	}
 ]
 
 // Encounters specifically for the tutorial
@@ -3581,7 +3731,31 @@ global.tutorialenc = [
 	[
 		{
 			info: global.enemies[0],
-			grid: [5, 1]
+			grid: [7, 1]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 1]
+		},
+		{
+			info: global.enemies[0],
+			grid: [9, 1]
+		},
+		{
+			info: global.enemies[1],
+			grid: [5, 3]
+		},
+		{
+			info: global.enemies[1],
+			grid: [6, 2]
+		},
+		{
+			info: global.enemies[1],
+			grid: [6, 3]
+		},
+		{
+			info: global.enemies[1],
+			grid: [6, 4]
 		},
 		{
 			info: global.enemies[0],

@@ -351,7 +351,7 @@ function teleport(new_x, new_y, set_grid = true) {
 // sets up the danger highlighting on the grid
 function set_danger_highlights() {
 	show_debug_message("{0} summon state is {1}", name, can_summon);
-	if(can_summon){
+	if(can_summon && action != pointer_null){
 		var offset=[];
 		if(action.type=="normal" || action.type=="turret_no_target"){
 			offset=[0,0];	
@@ -411,7 +411,7 @@ function danger_debug() {
 
 // removes danger highlights from tiles. used when pushed and we need to retarget or when dying to remove threatened area.
 function remove_danger_highlights() {
-	if(can_summon){
+	if(can_summon && action != pointer_null){
 		danger_debug();
 		var offset=[];
 		if(action.type=="normal" || action.type=="turret_no_target"){
@@ -453,7 +453,7 @@ function attack() {
 
 // displays the targetted tiles using target highlights. used when hovering over the enemy and when enemy attacks
 function display_target_highlights(){
-	if(can_summon){
+	if(can_summon && action != pointer_null){
 		var offset=[];
 		if(action.type=="normal" || action.type=="turret_no_target"){
 			offset=[0,0];	
@@ -486,7 +486,7 @@ function display_target_highlights(){
 // removes target highlights from targetted tiles.
 // THIS IS NOT REMOVING DANGER HIGHLIGHTTS
 function remove_target_highlights(){
-	if(can_summon){
+	if(can_summon && action != pointer_null){
 		var offset=[];
 		if(action.type=="normal" || action.type=="turret_no_target"){
 			offset=[0,0];	
