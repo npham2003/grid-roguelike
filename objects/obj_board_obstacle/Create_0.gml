@@ -24,6 +24,8 @@ hitting_who = false;
 freeze_graphic=pointer_null;
 stall_turns=0;
 
+teleporting = 0;
+
 //healthbar_y = y-40;
 
 // finds a target. not super relevant for board obstacles.
@@ -108,6 +110,30 @@ function calculate_util(test_x, test_y) {
 	return util;
 	
 }
+
+function teleport(new_x, new_y, set_grid = true) {
+	remove_danger_highlights();
+	
+	if (set_grid) {
+		obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
+	}
+	
+	grid_pos[0] = new_x;
+	grid_pos[1] = new_y;
+	
+	if (set_grid) {
+		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._is_empty=false;
+		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile=self;
+	}
+	
+	
+	teleporting = 1;
+	var coord = obj_gridCreator.get_coordinates(new_x, new_y);
+	x=coord[0];
+	y=coord[1];
+	set_danger_highlights();
+}
+
 
 // aims attack. does not move and only sets up danger highlights
 function aim(){

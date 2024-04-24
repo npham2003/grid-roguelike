@@ -16,10 +16,10 @@ function skill_teleport_enemy_2(unit){
 		audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
 	}
 	if(unit.skill_progress==1){
-		skill_range = obj_gridCreator.highlighted_support_enemy_side();
+		skill_range = obj_gridCreator.highlighted_support_all();
 	}
 	if(unit.skill_progress==2){
-		skill_range = obj_gridCreator.highlighted_support_enemy_side();
+		skill_range = obj_gridCreator.highlighted_support_all();
 	}
 				
 	obj_cursor.movable_tiles=skill_range;
