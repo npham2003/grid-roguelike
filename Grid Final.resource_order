@@ -7,6 +7,7 @@
     {"name":"Front","order":1,"path":"folders/Sprites/UI/Front.yy",},
     {"name":"Grid","order":2,"path":"folders/Sprites/UI/Grid.yy",},
     {"name":"Shop","order":3,"path":"folders/Sprites/UI/Shop.yy",},
+    {"name":"Textbox","order":6,"path":"folders/Sprites/UI/Textbox.yy",},
   ],
   "ResourceOrderSettings":[
     {"name":"obj_battleEffect","order":2,"path":"objects/obj_battleEffect/obj_battleEffect.yy",},
