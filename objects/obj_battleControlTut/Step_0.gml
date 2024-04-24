@@ -75,7 +75,7 @@ switch (state) {
 #region Enemy Aiming
 	case BattleState.EnemyAiming:
 		
-		if (turns_until_gun == 2 && gun_spawned == false) {
+		if (turns_until_gun == 1 && gun_spawned == false) {
 			gun_spawned = true;
 			teachingBasic = true;
 			//spawn_gun(player_units[0]);
@@ -93,6 +93,19 @@ switch (state) {
 		
 			if (enemy_order >= array_length(enemy_units))
 			{
+				//if (teachingDamage) { tried addinga textbox
+				//	obj_menuTut.enter_text("PRESS ENTER");
+				//	var _textbox = instance_create_layer(50, 200, "UI", obj_textboxTut);
+				//	_textbox.tutorial_text("Well shit, I'm getting assaulted by these bats and I can't do anything about it. At least I can see where they're going to hit via these EXCLAMATION MARKS, and so I can dodge accordingly!");
+				//	if (key_Enter_pressed) {
+				//		enemy_order = 0;
+				//		teachingDamage = false;
+				//		teachingMovement = true;
+				//		_textbox.tutorial_text("");
+				//		_textbox.kill();
+				//		change_state(BattleState.PlayerPreparing);
+				//	}
+				//}
 				if (teachingDamage) {
 					obj_menuTut.enter_text("PRESS ENTER");
 					obj_menuTut.set_text("Well shit, I'm getting assaulted by these bats and I can't do anything about it. At least I can see where they're going to hit via these EXCLAMATION MARKS, and so I can dodge accordingly!");
@@ -106,7 +119,7 @@ switch (state) {
 				}
 				else if (gun_spawned && teachingBasic == false) {
 					obj_menuTut.enter_text("PRESS ENTER");
-					obj_menuTut.set_text("Magically a gun? I guess it's time to FIGHT BACK! Press H to use basic attacks");
+					obj_menuTut.set_text("Magically a gun? I guess it's time to FIGHT BACK! Press H to use basic attacks. You can also MOVE and ATTACK in one turn!");
 					if (key_Enter_pressed) {
 						enemy_order = 0;
 						obj_menuTut.set_text("");
@@ -115,7 +128,7 @@ switch (state) {
 					}
 				} else if (teachingBasic == true && teachingSkills == false) {
 					obj_menuTut.enter_text("PRESS ENTER");
-					obj_menuTut.set_text("Attacking costs Technique Points (TP), shown by the squares below. You gain some TP every turn based on who is in your party. Now, press H to fire back!");
+					obj_menuTut.set_text("Attacking costs Technique Points (TP), shown by the squares below. You gain some TP every turn based on who is in your party. Now, press H to fire back! You can also MOVE and ATTACK in one turn!");
 					if (key_Enter_pressed) {
 						enemy_order = 0;
 						obj_menuTut.set_text("");
@@ -159,7 +172,7 @@ switch (state) {
 			}
 			
 			// enemy aims
-			if(unit.stall_turns==0){
+			if(unit.stall_turns==0 && teachingSkills == false){
 				
 				unit.find_target();
 				unit.aim();
