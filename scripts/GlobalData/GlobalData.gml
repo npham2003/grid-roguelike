@@ -1384,7 +1384,7 @@ global.actionLibrary = {
 								skill_range[i]._entity_on_tile.freeze_graphic.image_speed=1;
 								skill_range[i]._entity_on_tile.freeze_graphic=pointer_null;
 								skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus+unit.attack_bonus_temp+1);
-								//if (!skill_range[i]._is_empty) {
+								//if (!skill_range[i]._is_empty) {											 I WAS TRYING TO GET REFREEZING TO WORK BUT I JUST COULD NOT 
 								//	skill_range[i]._entity_on_tile.stall_turns+=1;
 								//	if(skill_range[i]._entity_on_tile.ally){
 								//		skill_range[i]._entity_on_tile.has_attacked=true;
