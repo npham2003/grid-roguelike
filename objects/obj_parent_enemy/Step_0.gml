@@ -19,11 +19,20 @@ if (is_moving) {
 		}
 	}
 	if(x==target_grid_pos[0] && y==target_grid_pos[1]) {
-		attack_ready = true;
-		set_danger_highlights();
+		if(delay==30){
+			attack_ready = true;
+			set_danger_highlights();
 		
-		is_moving = false;
-		battlecontrol.in_animation = false;
+			
+			
+			display_target_highlights();
+		}
+		delay-=1;
+		if(delay<=0){
+			is_moving = false;
+			remove_target_highlights();
+			battlecontrol.in_animation = false;
+		}
 	}
 	
 }
