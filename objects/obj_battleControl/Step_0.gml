@@ -700,10 +700,12 @@ switch (state) {
 			}
 			change_state(BattleState.PlayerUpgrade);
 		}else{
+			obj_gridCreator.reset_highlights_cursor();
+			obj_menu.set_text("Press any key to restart");
 			if(keyboard_check_pressed(vk_anykey)){
 				obj_gridCreator.reset_highlights_cursor();
 				obj_menu.set_text("Press any key to restart");
-				room_restart();
+				room_goto_previous();
 			}
 			
 		}
