@@ -3,7 +3,7 @@
   "%Name":"spr_temp_Glimmer",
   "bboxMode":0,
   "bbox_bottom":575,
-  "bbox_left":0,
+  "bbox_left":101,
   "bbox_right":607,
   "bbox_top":74,
   "collisionKind":1,
