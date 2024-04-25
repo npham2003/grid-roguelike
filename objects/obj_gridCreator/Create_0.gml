@@ -68,6 +68,24 @@ visualize_danger = function(){
 	}
 }
 
+visualize_danger_bool = function(){
+	show_debug_message("Grid Viewer");
+	for(i=0;i<array_length(battle_grid[0]);i++){
+		var row_string="";
+		for(j=0; j<array_length(battle_grid);j++){
+			var highlight="T";
+			if(!battle_grid[j][i]._danger_highlight){
+				highlight="F";
+			}
+			row_string = string_concat(row_string,"[",string(highlight),"]");	
+			if(j==4){
+				row_string = string_concat(row_string," | ");
+			}
+		}
+		show_debug_message(row_string);
+	}
+}
+
 move_entity = function(_prev_x,_prev_y,_new_x,_new_y){
 	var _entity_pointer = battle_grid[_prev_x][_prev_y]._entity_on_tile;
 	if(!battle_grid[_prev_x][_prev_y]._is_empty ){
@@ -400,6 +418,26 @@ highlighted_target_straight = function(_center_x,_center_y){
 			array_push(highlighted_target_array,battle_grid[_center_x+j][_center_y]);
 			battle_grid[_center_x+j][_center_y]._target_highlight=true;
 			break;
+		}
+		j+=1;
+	}
+	
+	
+	return highlighted_target_array;
+}
+
+highlighted_target_row = function(_center_y){
+	
+	highlighted_target_array=[];
+	_center_x=0;
+	var j=0;
+	while(_center_x+j<GRIDWIDTH){
+		
+		if(!battle_grid[_center_x+j][_center_y]._is_empty){
+			
+			array_push(highlighted_target_array,battle_grid[_center_x+j][_center_y]);
+			battle_grid[_center_x+j][_center_y]._target_highlight=true;
+		
 		}
 		j+=1;
 	}

@@ -3514,6 +3514,455 @@ global.actionLibrary = {
 			},
 		}
 	},
+	pushspread: {
+		name: ["Repelling Blast", "Repelling Shockwave", "Magnetic Pull"], 
+		description: ["Pushes all units in front of you and in an adjacent row away from each other. Choose affected rows with A and S.", 
+			"Pushes all units in front of you and in an adjacent row away from each other until they hit a wall or another unit.", 
+			"Slams all units in front of you and in an adjacent row towards each other."],
+		cost: [3, 4, 4],
+		subMenu: 0, //does it show up on screen or is it in a submenu
+		userAnimation: "attack",
+		//effectSprite: baseAttack,
+		damage: 2, // temp damage, until i figure out how to do this damage function thing
+		func: function(_user, _targets) {
+			var _damage = 1; //math function here
+			//BattleChangeHP(_targets);
+		},
+		skillFunctions: {
+			base: function(unit){
+				
+				if (!unit.play_sound) { //play beam sound once
+					audio_play_sound(sfx_beam_windup, 0, false);
+					unit.play_sound = true;
+					skill_type=-1;
+					obj_battleEffect.remove_push_preview();
+					obj_gridCreator.reset_highlights_target();
+					skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
+					if(unit.grid_pos[1]+skill_type>0 && unit.grid_pos[1]+skill_type<GRIDHEIGHT){
+						skill_range = array_concat(skill_range, obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]+skill_type));
+					}
+					for(i=0;i<array_length(skill_range);i++){
+						if(unit.grid_pos[1]==skill_range[i]._y_coord){
+							obj_battleEffect.push_preview(skill_range[i],2);
+						}else{
+							obj_battleEffect.push_preview(skill_range[i],3);
+						}
+					}
+					
+				}
+				unit.is_attacking = true;
+				unit.action = unit.actions[unit.skill_used];
+				var _damage = unit.action.damage;
+				
+				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
+				if (keyboard_check_pressed(ord("S")) && skill_type==-1) {
+					skill_type=1;
+					obj_battleEffect.remove_push_preview();
+					obj_gridCreator.reset_highlights_target();
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+					skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
+					if(unit.grid_pos[1]+skill_type>0 && unit.grid_pos[1]+skill_type<GRIDHEIGHT){
+						skill_range = array_concat(skill_range, obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]+skill_type));
+					}
+					
+					for(i=0;i<array_length(skill_range);i++){
+						if(unit.grid_pos[1]==skill_range[i]._y_coord){
+							obj_battleEffect.push_preview(skill_range[i],3);
+						}else{
+							obj_battleEffect.push_preview(skill_range[i],2);
+						}
+					}
+				}
+				if (keyboard_check_pressed(ord("W")) && skill_type==1) { // a bunch of this is hardcoded atm
+					skill_type=-1;
+					obj_battleEffect.remove_push_preview();
+					obj_gridCreator.reset_highlights_target();
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+					skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
+					if(unit.grid_pos[1]+skill_type>0 && unit.grid_pos[1]+skill_type<GRIDHEIGHT){
+						skill_range = array_concat(skill_range, obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]+skill_type));
+					}
+					for(i=0;i<array_length(skill_range);i++){
+						if(unit.grid_pos[1]==skill_range[i]._y_coord){
+							obj_battleEffect.push_preview(skill_range[i],2);
+						}else{
+							obj_battleEffect.push_preview(skill_range[i],3);
+						}
+					}
+				}
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) { // use the skill
+					audio_play_sound(sfx_blast, 0, false);
+					obj_battleEffect.remove_push_preview();
+					for (var i = 0; i < array_length(skill_range); i++) {
+						if (!skill_range[i]._is_empty) {
+							if(skill_type==1){
+								if(unit.grid_pos[1]==skill_range[i]._y_coord){
+									skill_range[i]._entity_on_tile.push_up(1);
+								}else{
+									skill_range[i]._entity_on_tile.push_down(1);
+								}
+							}else{
+								if(unit.grid_pos[1]==skill_range[i]._y_coord){
+									skill_range[i]._entity_on_tile.push_down(1);
+								}else{
+									skill_range[i]._entity_on_tile.push_up(1);
+								}
+							}
+						}
+					}
+					unit.is_attacking = false;
+					unit.skill_complete = true;
+					unit.play_sound = false;
+					unit.skill_range = obj_gridCreator.reset_highlights_target();
+					show_debug_message(unit.action.name);
+				}else if(keyboard_check_pressed(vk_tab)){
+					obj_battleEffect.remove_push_preview();
+					unit.is_attacking = false;
+					unit.skill_back = true;
+					skill_range = obj_gridCreator.reset_highlights_target();
+					unit.play_sound = false;
+				}
+			},
+			upgrade1: function(unit){
+				
+				if (!unit.play_sound) { //play beam sound once
+					audio_play_sound(sfx_beam_windup, 0, false);
+					unit.play_sound = true;
+					skill_type=-1;
+					obj_battleEffect.remove_push_preview();
+					obj_gridCreator.reset_highlights_target();
+					skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
+					if(unit.grid_pos[1]+skill_type>0 && unit.grid_pos[1]+skill_type<GRIDHEIGHT){
+						skill_range = array_concat(skill_range, obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]+skill_type));
+					}
+					for(i=0;i<array_length(skill_range);i++){
+						if(unit.grid_pos[1]==skill_range[i]._y_coord){
+							obj_battleEffect.push_preview(skill_range[i],2);
+						}else{
+							obj_battleEffect.push_preview(skill_range[i],3);
+						}
+					}
+					
+				}
+				unit.is_attacking = true;
+				unit.action = unit.actions[unit.skill_used];
+				var _damage = unit.action.damage;
+				
+				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
+				if (keyboard_check_pressed(ord("S")) && skill_type==-1) {
+					skill_type=1;
+					obj_battleEffect.remove_push_preview();
+					obj_gridCreator.reset_highlights_target();
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+					skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
+					if(unit.grid_pos[1]+skill_type>0 && unit.grid_pos[1]+skill_type<GRIDHEIGHT){
+						skill_range = array_concat(skill_range, obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]+skill_type));
+					}
+					
+					for(i=0;i<array_length(skill_range);i++){
+						if(unit.grid_pos[1]==skill_range[i]._y_coord){
+							obj_battleEffect.push_preview(skill_range[i],3);
+						}else{
+							obj_battleEffect.push_preview(skill_range[i],2);
+						}
+					}
+				}
+				if (keyboard_check_pressed(ord("W")) && skill_type==1) { // a bunch of this is hardcoded atm
+					skill_type=-1;
+					obj_battleEffect.remove_push_preview();
+					obj_gridCreator.reset_highlights_target();
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+					skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
+					if(unit.grid_pos[1]+skill_type>0 && unit.grid_pos[1]+skill_type<GRIDHEIGHT){
+						skill_range = array_concat(skill_range, obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]+skill_type));
+					}
+					for(i=0;i<array_length(skill_range);i++){
+						if(unit.grid_pos[1]==skill_range[i]._y_coord){
+							obj_battleEffect.push_preview(skill_range[i],2);
+						}else{
+							obj_battleEffect.push_preview(skill_range[i],3);
+						}
+					}
+				}
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) { // use the skill
+					audio_play_sound(sfx_blast, 0, false);
+					obj_battleEffect.remove_push_preview();
+					for (var i = 0; i < array_length(skill_range); i++) {
+						if (!skill_range[i]._is_empty) {
+							if(skill_type==1){
+								if(unit.grid_pos[1]==skill_range[i]._y_coord){
+									skill_range[i]._entity_on_tile.push_up(5);
+								}else{
+									skill_range[i]._entity_on_tile.push_down(5);
+								}
+							}else{
+								if(unit.grid_pos[1]==skill_range[i]._y_coord){
+									skill_range[i]._entity_on_tile.push_down(5);
+								}else{
+									skill_range[i]._entity_on_tile.push_up(5);
+								}
+							}
+						}
+					}
+					unit.is_attacking = false;
+					unit.skill_complete = true;
+					unit.play_sound = false;
+					unit.skill_range = obj_gridCreator.reset_highlights_target();
+					show_debug_message(unit.action.name);
+				}else if(keyboard_check_pressed(vk_tab)){
+					obj_battleEffect.remove_push_preview();
+					unit.is_attacking = false;
+					unit.skill_back = true;
+					skill_range = obj_gridCreator.reset_highlights_target();
+					unit.play_sound = false;
+				}
+			},
+			upgrade2: function(unit){
+				
+				if (!unit.play_sound) { //play beam sound once
+					audio_play_sound(sfx_beam_windup, 0, false);
+					unit.play_sound = true;
+					skill_type=-1;
+					obj_battleEffect.remove_push_preview();
+					obj_gridCreator.reset_highlights_target();
+					skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
+					if(unit.grid_pos[1]+skill_type>0 && unit.grid_pos[1]+skill_type<GRIDHEIGHT){
+						skill_range = array_concat(skill_range, obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]+skill_type));
+					}
+					for(i=0;i<array_length(skill_range);i++){
+						if(unit.grid_pos[1]==skill_range[i]._y_coord){
+							obj_battleEffect.push_preview(skill_range[i],3);
+						}else{
+							obj_battleEffect.push_preview(skill_range[i],2);
+						}
+					}
+					
+				}
+				unit.is_attacking = true;
+				unit.action = unit.actions[unit.skill_used];
+				var _damage = unit.action.damage;
+				
+				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
+				if (keyboard_check_pressed(ord("S")) && skill_type==-1) {
+					skill_type=1;
+					obj_battleEffect.remove_push_preview();
+					obj_gridCreator.reset_highlights_target();
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+					skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
+					if(unit.grid_pos[1]+skill_type>0 && unit.grid_pos[1]+skill_type<GRIDHEIGHT){
+						skill_range = array_concat(skill_range, obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]+skill_type));
+					}
+					
+					for(i=0;i<array_length(skill_range);i++){
+						if(unit.grid_pos[1]==skill_range[i]._y_coord){
+							obj_battleEffect.push_preview(skill_range[i],2);
+						}else{
+							obj_battleEffect.push_preview(skill_range[i],3);
+						}
+					}
+				}
+				if (keyboard_check_pressed(ord("W")) && skill_type==1) { // a bunch of this is hardcoded atm
+					skill_type=-1;
+					obj_battleEffect.remove_push_preview();
+					obj_gridCreator.reset_highlights_target();
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+					skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
+					if(unit.grid_pos[1]+skill_type>0 && unit.grid_pos[1]+skill_type<GRIDHEIGHT){
+						skill_range = array_concat(skill_range, obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]+skill_type));
+					}
+					for(i=0;i<array_length(skill_range);i++){
+						if(unit.grid_pos[1]==skill_range[i]._y_coord){
+							obj_battleEffect.push_preview(skill_range[i],3);
+						}else{
+							obj_battleEffect.push_preview(skill_range[i],2);
+						}
+					}
+				}
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) { // use the skill
+					audio_play_sound(sfx_blast, 0, false);
+					obj_battleEffect.remove_push_preview();
+					for (var i = 0; i < array_length(skill_range); i++) {
+						if (!skill_range[i]._is_empty) {
+							if(skill_type==-1){
+								if(unit.grid_pos[1]==skill_range[i]._y_coord  && !skill_range[i]._entity_on_tile.began_push){
+									skill_range[i]._entity_on_tile.push_up(1);
+								}else{
+									skill_range[i]._entity_on_tile.push_down(1);
+								}
+							}else{
+								if(unit.grid_pos[1]==skill_range[i]._y_coord && !skill_range[i]._entity_on_tile.began_push){
+									skill_range[i]._entity_on_tile.push_down(1);
+								}else{
+									skill_range[i]._entity_on_tile.push_up(1);
+								}
+							}
+						}
+					}
+					unit.is_attacking = false;
+					unit.skill_complete = true;
+					unit.play_sound = false;
+					unit.skill_range = obj_gridCreator.reset_highlights_target();
+					show_debug_message(unit.action.name);
+				}else if(keyboard_check_pressed(vk_tab)){
+					obj_battleEffect.remove_push_preview();
+					unit.is_attacking = false;
+					unit.skill_back = true;
+					skill_range = obj_gridCreator.reset_highlights_target();
+					unit.play_sound = false;
+				}
+			},
+			
+		}
+			
+	},
+	pushlos: {
+		name: ["Force Push", "Long Phase", "Force Pull"], //probably redundant to have a name but keep it
+		description: ["Moves the first target in front in each row 1 tile to the right", "Moves all units in the same row 1 tile to the right", "Moves the first target in front in each row 1 tile to the left"],
+		cost: [3, 3, 3],
+		subMenu: 0, //does it show up on screen or is it in a submenu
+		userAnimation: "attack",
+		//effectSprite: baseAttack,
+		damage: 1, // temp damage, until i figure out how to do this damage function thing
+		func: function(_user, _targets) {
+			var _damage = 1; //math function here
+			//BattleChangeHP(_targets);
+		},
+		skillFunctions: {
+			base: function(unit){
+				
+				unit.action = unit.actions[unit.skill_used];
+				skill_range = [];
+				for(i=0;i<GRIDHEIGHT;i++){
+					skill_range = array_concat(skill_range,  obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, i));
+				}
+				obj_cursor.movable_tiles=[];
+				if(!unit.skill_init){
+					for(i=0;i<array_length(skill_range);i++){
+						obj_battleEffect.push_preview(skill_range[i],0);
+					}
+					unit.skill_init=true;
+				}
+				if(array_length(skill_range)>0 && !unit.skill_complete){
+					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
+				}
+				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
+				
+				var _damage = unit.action.damage;
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
+					audio_play_sound(sfx_push, 0, false, 0.3);
+					for (var i = 0; i < array_length(skill_range); i++) {
+						if (!skill_range[i]._is_empty) {
+							skill_range[i]._entity_on_tile.push_back(1);
+						}
+					}
+					unit.is_attacking = false;
+					unit.skill_complete = true;
+					skill_range = obj_gridCreator.reset_highlights_target();
+					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
+					unit.skill_init=false;
+					obj_battleEffect.remove_push_preview();
+					
+		
+				}else if(keyboard_check_pressed(vk_tab)){
+					unit.is_attacking = false;
+					unit.skill_back = true;
+					skill_range = obj_gridCreator.reset_highlights_target();
+					unit.skill_init=false;
+					obj_battleEffect.remove_push_preview();
+				
+		
+				}
+			},
+			upgrade1: function(unit){
+				
+				unit.action = unit.actions[unit.skill_used];
+				skill_range = obj_gridCreator.highlighted_target_row(unit.grid_pos[1]);
+				
+				obj_cursor.movable_tiles=[];
+				if(!unit.skill_init){
+					for(i=0;i<array_length(skill_range);i++){
+						obj_battleEffect.push_preview(skill_range[i],0);
+					}
+					unit.skill_init=true;
+				}
+				if(array_length(skill_range)>0 && !unit.skill_complete){
+					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
+				}
+				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
+				
+				var _damage = unit.action.damage;
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
+					audio_play_sound(sfx_push, 0, false, 0.3);
+					for (var i = array_length(skill_range)-1; i >=0; i--) {
+						if (!skill_range[i]._is_empty) {
+							skill_range[i]._entity_on_tile.push_back(1);
+						}
+					}
+					unit.is_attacking = false;
+					unit.skill_complete = true;
+					skill_range = obj_gridCreator.reset_highlights_target();
+					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
+					unit.skill_init=false;
+					obj_battleEffect.remove_push_preview();
+					
+		
+				}else if(keyboard_check_pressed(vk_tab)){
+					unit.is_attacking = false;
+					unit.skill_back = true;
+					skill_range = obj_gridCreator.reset_highlights_target();
+					unit.skill_init=false;
+					obj_battleEffect.remove_push_preview();
+				
+		
+				}
+			},
+			upgrade2: function(unit){
+				
+				unit.action = unit.actions[unit.skill_used];
+				skill_range = [];
+				for(i=0;i<GRIDHEIGHT;i++){
+					skill_range = array_concat(skill_range,  obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, i));
+				}
+				obj_cursor.movable_tiles=[];
+				if(!unit.skill_init){
+					for(i=0;i<array_length(skill_range);i++){
+						obj_battleEffect.push_preview(skill_range[i],1);
+					}
+					unit.skill_init=true;
+				}
+				if(array_length(skill_range)>0 && !unit.skill_complete){
+					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
+				}
+				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
+				
+				var _damage = unit.action.damage;
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("L"))) {
+					audio_play_sound(sfx_push, 0, false, 0.3);
+					for (var i = 0; i < array_length(skill_range); i++) {
+						if (!skill_range[i]._is_empty) {
+							skill_range[i]._entity_on_tile.push_forward(1);
+						}
+					}
+					unit.is_attacking = false;
+					unit.skill_complete = true;
+					skill_range = obj_gridCreator.reset_highlights_target();
+					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
+					unit.skill_init=false;
+					obj_battleEffect.remove_push_preview();
+					
+		
+				}else if(keyboard_check_pressed(vk_tab)){
+					unit.is_attacking = false;
+					unit.skill_back = true;
+					skill_range = obj_gridCreator.reset_highlights_target();
+					unit.skill_init=false;
+					obj_battleEffect.remove_push_preview();
+				
+		
+				}
+			},
+		}
+	},
 }
 
 global.enemyActions = {
@@ -3679,24 +4128,11 @@ global.players = [
 		secondary: #386467
 		
 	},
-	//{ //
-	//	name: "Oktavia",
-	//	hp: 3,
-	//	hpMax: 3,
-	//	playerSpeed: 2,
-	//	sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
-	//	actions : [global.actionLibrary.baseAttack, global.actionLibrary.minefield, global.actionLibrary.mover,  global.actionLibrary.teleport_ally],
-	//	ally: true,
-	//	tpGain: 2,
-	//	portrait: spr_temp_Azami,
-	//	primary: #0cac87,
-	//	secondary: #386467
-	//},
 	{ // dancer guy
 		name: "Angel",
 		hp: 3,
 		hpMax: 3,
-		playerSpeed: 1,
+		playerSpeed: 3,
 		sprites : { idle: spr_player3, dead: spr_player3_dead, gun: spr_player3_shooting},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.shield, global.actionLibrary.buff,  global.actionLibrary.dance],
 		ally: true,
@@ -3706,9 +4142,9 @@ global.players = [
 		secondary: #386467
 	},
 	{ // Teleport guy
-		name: "Angel",
-		hp: 3,
-		hpMax: 3,
+		name: "Warpman",
+		hp: 2,
+		hpMax: 2,
 		playerSpeed: 1,
 		sprites : { idle: spr_player5, dead: spr_player5_dead, gun: spr_player5_shooting},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.teleport_self, global.actionLibrary.teleport_ally,  global.actionLibrary.teleport_enemy],
@@ -3733,8 +4169,8 @@ global.players = [
 	},
 	{ //freeze guy
 		name: "Frozone",
-		hp: 3,
-		hpMax: 3,
+		hp: 5,
+		hpMax: 5,
 		playerSpeed: 2,
 		sprites : { idle: spr_player6, dead: spr_player6_dead, gun: spr_player6_shooting},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.freeze, global.actionLibrary.frostcone,  global.actionLibrary.thaw],
@@ -3743,7 +4179,20 @@ global.players = [
 		portrait: spr_temp_Perun,
 		primary: #0cac87,
 		secondary: #386467
-	}
+	},
+	{ // push guy
+		name: "Oktavia",
+		hp: 4,
+		hpMax: 4,
+		playerSpeed: 2,
+		sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
+		actions : [global.actionLibrary.baseAttack, global.actionLibrary.mover, global.actionLibrary.pushspread,  global.actionLibrary.pushlos],
+		ally: true,
+		tpGain: 2,
+		portrait: spr_temp_Pandoria,
+		primary: #0cac87,
+		secondary: #386467
+	},
 	//{ //new member
 	//	name: "put new party member here", //refer to example above
 	//}
