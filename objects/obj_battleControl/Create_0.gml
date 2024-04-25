@@ -35,35 +35,35 @@ battle_progress=0;
 // Spawn player units
 
 // Temp struct for player data, may move to a config file or generate dynamically in the future
-//player_data = [
-//	{
-//		info: global.players[irandom_range(0,array_length(global.players)-1)],
-//		grid: [3, 2]		
-//	},
-//	{
-//		info: global.players[irandom_range(0,array_length(global.players)-1)],
-//		grid: [2, 2]		
-//	},
-//	{
-//		info: global.players[irandom_range(0,array_length(global.players)-1)],
-//		grid: [3, 3]		
-//	}
-//];
-
 player_data = [
 	{
-		info: global.players[3],
+		info: global.players[irandom_range(0,array_length(global.players)-1)],
 		grid: [3, 2]		
 	},
 	{
-		info: global.players[3],
+		info: global.players[irandom_range(0,array_length(global.players)-1)],
 		grid: [2, 2]		
 	},
 	{
-		info: global.players[3],
+		info: global.players[irandom_range(0,array_length(global.players)-1)],
 		grid: [3, 3]		
 	}
 ];
+
+//player_data = [
+//	{
+//		info: global.players[3],
+//		grid: [3, 2]		
+//	},
+//	{
+//		info: global.players[3],
+//		grid: [2, 2]		
+//	},
+//	{
+//		info: global.players[3],
+//		grid: [3, 3]		
+//	}
+//];
 
 // spawns units at the very start
 for (var i = 0; i < array_length(player_data); i++) {
