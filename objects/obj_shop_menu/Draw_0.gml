@@ -101,7 +101,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 						gpu_set_blendenable(false);
 						gpu_set_colorwriteenable(false, false, false, true);
 						draw_set_alpha(0);
-						draw_rectangle(actual_x+(character_spacing*i)+50, y+350, actual_x+(character_spacing*i)+350, y+650, false); //invisible rectangle
+						draw_rectangle(actual_x+(character_spacing*i)-400, y, actual_x+(character_spacing*i)+400, y+1000, false); //invisible rectangle
 
 						//mask
 						draw_set_alpha(1);
