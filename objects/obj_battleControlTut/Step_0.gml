@@ -17,7 +17,7 @@ var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_H_press
 
 var enough_tp = false;
 
-if(keyboard_check_pressed(vk_ralt)) {
+if(keyboard_check_pressed(vk_delete)) {
 	room_goto_next();
 }
 

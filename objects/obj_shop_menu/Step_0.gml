@@ -29,7 +29,11 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 					selector_pos[1]=1;
 				}
 			}
-			if(keyboard_check_pressed(vk_enter) && selectable[selector_pos[0]+selector_pos[1]*4]){
+			if(keyboard_check_pressed(vk_enter)){
+				if(!selectable[selector_pos[0]+selector_pos[1]*4]){
+					audio_play_sound(sfx_no_tp, 0, false);
+					return;
+				}
 				if(selector_pos[0]==0&&selector_pos[1]==0){ // heal
 					menu_level=1;
 				}
@@ -39,12 +43,15 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 					if(obj_battleControl.tp_current>obj_battleControl.tp_max){
 						obj_battleControl.tp_current=obj_battleControl.tp_max;
 					}
+					audio_play_sound(sfx_buy, 0, false);
 				}
 				if(selector_pos[0]==2&&selector_pos[1]==0&&selectable[2]){ // 1 extra tp per turn
 					tp_bonus();
+					audio_play_sound(sfx_buy, 0, false);
 				}
 				if(selector_pos[0]==3&&selector_pos[1]==0&&selectable[3]){ // 1 extra dmg on attacks
 					attack_up();
+					audio_play_sound(sfx_buy, 0, false);
 				}
 				if(selector_pos[0]==0&&selector_pos[1]==1&&selectable[4]){ // upgrade skill 1
 					menu_level=2;
@@ -60,6 +67,7 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 				}
 				if(selector_pos[0]==3&&selector_pos[1]==1&&selectable[7]){ // new party member
 					new_party_member();
+					audio_play_sound(sfx_buy, 0, false);
 				}
 				
 			}
@@ -85,8 +93,13 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 				menu_level=0;
 				character_select_pos=0;
 			}
-			if(keyboard_check_pressed(vk_enter) && selectable[character_select_pos]){
+			if(keyboard_check_pressed(vk_enter)){
+				if(!selectable[character_select_pos]){
+					audio_play_sound(sfx_no_tp, 0, false);
+					return;
+				}
 				heal(obj_battleControl.player_units[character_select_pos]);
+				audio_play_sound(sfx_buy, 0, false);
 			}
 			break;
 		case 2:
@@ -126,7 +139,12 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 					new_skill_upgrade=2;
 				}
 			}
-			if(keyboard_check_pressed(vk_enter) && selectable[new_skill_upgrade]){
+			if(keyboard_check_pressed(vk_enter)){
+				if(!selectable[new_skill_upgrade]){
+					audio_play_sound(sfx_no_tp, 0, false);
+					return;
+				}
+				audio_play_sound(sfx_buy, 0, false);
 				menu_level=0;
 				upgrade(obj_battleControl.player_units[character_select_pos],skill_select_pos,new_skill_upgrade);
 			}
