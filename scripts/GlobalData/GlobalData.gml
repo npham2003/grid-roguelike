@@ -4143,8 +4143,8 @@ global.players = [
 	},
 	{ // Teleport guy
 		name: "Warpman",
-		hp: 3,
-		hpMax: 3,
+		hp: 2,
+		hpMax: 2,
 		playerSpeed: 1,
 		sprites : { idle: spr_player5, dead: spr_player5_dead, gun: spr_player5_shooting},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.teleport_self, global.actionLibrary.teleport_ally,  global.actionLibrary.teleport_enemy],
@@ -4169,8 +4169,8 @@ global.players = [
 	},
 	{ //freeze guy
 		name: "Frozone",
-		hp: 3,
-		hpMax: 3,
+		hp: 5,
+		hpMax: 5,
 		playerSpeed: 2,
 		sprites : { idle: spr_player6, dead: spr_player6_dead, gun: spr_player6_shooting},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.freeze, global.actionLibrary.frostcone,  global.actionLibrary.thaw],
@@ -4182,8 +4182,8 @@ global.players = [
 	},
 	{ // push guy
 		name: "Oktavia",
-		hp: 3,
-		hpMax: 3,
+		hp: 4,
+		hpMax: 4,
 		playerSpeed: 2,
 		sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.mover, global.actionLibrary.pushspread,  global.actionLibrary.pushlos],
