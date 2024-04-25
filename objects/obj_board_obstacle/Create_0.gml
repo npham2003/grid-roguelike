@@ -300,14 +300,25 @@ function do_damage(){
 		
 		
 						if (!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty) {
-							if(obj_gridCreator.battle_grid[attack_x][attack_y]==obj_gridCreator.battle_grid9[attack_x][attack_y-1]&&!obj_gridCreator.battle_gridobj_gridCreator.battle_grid[attack_x][attack_y-1]._is_empty){
-								obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_up(1);
-							}else if(obj_gridCreator.battle_grid[attack_x][attack_y]==obj_gridCreator.battle_grid[attack_x][attack_y+1]&&!obj_gridCreator.battle_grid[attack_x][attack_y+1]._is_empty){
-								obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_down(1);
-							}else if(obj_gridCreator.battle_grid[attack_x][attack_y]==obj_gridCreator.battle_grid[attack_x-1][attack_y]&&!obj_gridCreator.battle_grid[attack_x-1][attack_y]._is_empty){
-								obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_forward(1);
-							}else if(obj_gridCreator.battle_grid[attack_x][attack_y]==obj_gridCreator.battle_grid[attack_x+1][attack_y]&&!obj_gridCreator.battle_grid[attack_x+1][attack_y]._is_empty){
-								obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_back(1);
+							if(attack_y>0){
+								if(obj_gridCreator.battle_grid[attack_x][attack_y]==obj_gridCreator.battle_grid9[attack_x][attack_y-1]&&!obj_gridCreator.battle_gridobj_gridCreator.battle_grid[attack_x][attack_y-1]._is_empty){
+									obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_up(1);
+								}
+							}
+							if(attack_y<4){
+								if(obj_gridCreator.battle_grid[attack_x][attack_y]==obj_gridCreator.battle_grid[attack_x][attack_y+1]&&!obj_gridCreator.battle_grid[attack_x][attack_y+1]._is_empty){
+									obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_down(1);
+								}
+							}
+							if(attack_x>0){
+								if(obj_gridCreator.battle_grid[attack_x][attack_y]==obj_gridCreator.battle_grid[attack_x-1][attack_y]&&!obj_gridCreator.battle_grid[attack_x-1][attack_y]._is_empty){
+									obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_forward(1);
+								}
+							}
+							if(attack_x<9){
+								if(obj_gridCreator.battle_grid[attack_x][attack_y]==obj_gridCreator.battle_grid[attack_x+1][attack_y]&&!obj_gridCreator.battle_grid[attack_x+1][attack_y]._is_empty){
+									obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_back(1);
+								}
 							}
 						}
 		}
