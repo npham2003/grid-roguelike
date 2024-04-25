@@ -216,10 +216,10 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
+    {"roomId":{"name":"Tutorial","path":"rooms/Tutorial/Tutorial.yy",},},
     {"roomId":{"name":"CharSel","path":"rooms/CharSel/CharSel.yy",},},
     {"roomId":{"name":"GridTest","path":"rooms/GridTest/GridTest.yy",},},
     {"roomId":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
-    {"roomId":{"name":"Tutorial","path":"rooms/Tutorial/Tutorial.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
