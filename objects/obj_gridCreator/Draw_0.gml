@@ -25,7 +25,7 @@ for (var i = 0; i< gridHoriz;i++){
 		if(obj_gridCreator.battle_grid[i][j]._danger_cursor){
 			draw_sprite_ext(spr_grid_target_highlight, image_index, x + (i*100), y + (j*50), image_xscale, image_yscale, image_angle, image_blend, _target_transparency);
 		}
-		if(obj_gridCreator.battle_grid[i][j]._danger_highlight){
+		if(obj_gridCreator.battle_grid[i][j]._danger_number>0){
 			var highlight_color = merge_color(c_yellow, c_red, (obj_gridCreator.battle_grid[i][j]._danger_number-1)/4);
 			draw_sprite_ext(spr_grid_danger_highlight, image_index, x + (i*100), y + (j*50), image_xscale, image_yscale, image_angle, highlight_color, 1);
 		}

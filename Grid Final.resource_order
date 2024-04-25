@@ -87,7 +87,7 @@
     {"name":"spr_teleport_out","order":13,"path":"sprites/spr_teleport_out/spr_teleport_out.yy",},
     {"name":"spr_temp_Azami","order":1,"path":"sprites/spr_temp_Azami/spr_temp_Azami.yy",},
     {"name":"spr_temp_Glimmer","order":2,"path":"sprites/spr_temp_Glimmer/spr_temp_Glimmer.yy",},
-    {"name":"spr_temp_Hina","order":5,"path":"sprites/spr_temp_Hina/spr_temp_Hina.yy",},
+    {"name":"spr_temp_Pandoria","order":5,"path":"sprites/spr_temp_Pandoria/spr_temp_Pandoria.yy",},
     {"name":"spr_temp_Perun","order":6,"path":"sprites/spr_temp_Perun/spr_temp_Perun.yy",},
     {"name":"spr_temp_Saryu","order":4,"path":"sprites/spr_temp_Saryu/spr_temp_Saryu.yy",},
     {"name":"spr_temp_Wulfric","order":3,"path":"sprites/spr_temp_Wulfric/spr_temp_Wulfric.yy",},
