@@ -285,42 +285,99 @@ function remove_target_highlights(){
 function do_damage(){
 	
 	obj_gridCreator.reset_highlights_target();
-	
+	if(action.damage_type=="big push"){
+		for (var i = 0; i < array_length(action.range); i++) {
+			var attack_x = grid_pos[0] + action.range[i][0];
+			var attack_y = grid_pos[1] + action.range[i][1];
+		
+			if (attack_x < 0 || attack_x >= GRIDWIDTH) {
+				continue;
+			}
+			if (attack_y < 0 || attack_y >= GRIDHEIGHT) {
+				continue;
+			}
+		
+		
+			if (!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty) {
+				if (obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.ally==hitting_who){
+					if(grid_pos[0]<attack_x){
+						obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_back(10);
+					}
+					else if(grid_pos[0]>attack_x){
+						obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_forward(10);
+					}
+					else if(grid_pos[1]<attack_y){
+						obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_down(10);
+					}
+					else if(grid_pos[1]>attack_y){
+						obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_up(10);
+					}
+				}
+			}
+		}
+		
+	}else
+	if(action.damage_type=="pull"){
+		for (var i = 0; i < array_length(action.range); i++) {
+			var attack_x = grid_pos[0] + action.range[i][0];
+			var attack_y = grid_pos[1] + action.range[i][1];
+		
+			if (attack_x < 0 || attack_x >= GRIDWIDTH) {
+				continue;
+			}
+			if (attack_y < 0 || attack_y >= GRIDHEIGHT) {
+				continue;
+			}
+		
+		
+			if (!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty) {
+				if (obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.ally==hitting_who && !obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.began_push){
+					if(grid_pos[0]<attack_x){
+						obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_forward(1);
+					}
+					else if(grid_pos[0]>attack_x){
+						obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_back(1);
+					}
+					else if(grid_pos[1]<attack_y){
+						obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_up(1);
+					}
+					else if(grid_pos[1]>attack_y){
+						obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_down(1);
+					}
+				}
+			}
+		}
+		
+	}else
 	if(action.damage_type=="push"){
 		for (var i = 0; i < array_length(action.range); i++) {
-		var attack_x = grid_pos[0] + action.range[i][0];
-		var attack_y = grid_pos[1] + action.range[i][1];
+			var attack_x = grid_pos[0] + action.range[i][0];
+			var attack_y = grid_pos[1] + action.range[i][1];
 		
-		if (attack_x < 0 || attack_x >= GRIDWIDTH) {
-			continue;
-		}
-		if (attack_y < 0 || attack_y >= GRIDHEIGHT) {
-			continue;
-		}
+			if (attack_x < 0 || attack_x >= GRIDWIDTH) {
+				continue;
+			}
+			if (attack_y < 0 || attack_y >= GRIDHEIGHT) {
+				continue;
+			}
 		
 		
-						if (!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty) {
-							if(attack_y>0){
-								if(obj_gridCreator.battle_grid[attack_x][attack_y]==obj_gridCreator.battle_grid9[attack_x][attack_y-1]&&!obj_gridCreator.battle_gridobj_gridCreator.battle_grid[attack_x][attack_y-1]._is_empty){
-									obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_up(1);
-								}
-							}
-							if(attack_y<4){
-								if(obj_gridCreator.battle_grid[attack_x][attack_y]==obj_gridCreator.battle_grid[attack_x][attack_y+1]&&!obj_gridCreator.battle_grid[attack_x][attack_y+1]._is_empty){
-									obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_down(1);
-								}
-							}
-							if(attack_x>0){
-								if(obj_gridCreator.battle_grid[attack_x][attack_y]==obj_gridCreator.battle_grid[attack_x-1][attack_y]&&!obj_gridCreator.battle_grid[attack_x-1][attack_y]._is_empty){
-									obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_forward(1);
-								}
-							}
-							if(attack_x<9){
-								if(obj_gridCreator.battle_grid[attack_x][attack_y]==obj_gridCreator.battle_grid[attack_x+1][attack_y]&&!obj_gridCreator.battle_grid[attack_x+1][attack_y]._is_empty){
-									obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_back(1);
-								}
-							}
-						}
+			if (!obj_gridCreator.battle_grid[attack_x][attack_y]._is_empty) {
+				if (obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.ally==hitting_who){
+					if(grid_pos[0]<attack_x){
+						obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_back(1);
+					}
+					else if(grid_pos[0]>attack_x){
+						obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_forward(1);
+					}
+					else if(grid_pos[1]<attack_y){
+						obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_down(1);
+					}
+					else if(grid_pos[1]>attack_y){
+						obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.push_up(1);
+					}
+				}
+			}
 		}
 		
 	}else{
@@ -346,8 +403,8 @@ function do_damage(){
 				obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.damage(strength);
 				if (action.damage_type=="cold") {
 					// does damage to affected tiles
-					obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.stall_turns+=1;
-					obj_battleEffect.show_damage(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile, 1, c_blue);
+					obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.stall_turns+=2;
+					obj_battleEffect.show_damage(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile, 2, c_blue);
 					obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile, 6);
 				}
 			}

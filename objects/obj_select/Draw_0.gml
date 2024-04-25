@@ -1,31 +1,25 @@
-/// @description Insert description here
-// You can write your code in this editor
+var hint_text = "Type numbers to put guys in your team\n";
+hint_text += "Press Enter to confirm your selection\n";
+hint_text += "Press Tab to cancel current selection\n";
+
+for (var i = 0; i < array_length(member_name); i++) {
+	hint_text += string(i + 1) + ". " + member_name[i] + "\n";
+}
+
 draw_set_font(fnt_chiaro);
-draw_text_ext_transformed(100, 100, "Type numbers to put guys in your team\n1. Damage Guy\n2. Dancer Guy\n3. Teleport Guy\n4. Bomb Guy\n5. Freeze Guy", 50, 800, 1, 1, 0);
+draw_text_ext_transformed(100, 100, hint_text, 50, 800, 1, 1, 0);
 
-if(keyboard_check_pressed(vk_anykey)){
-	if(keyboard_check_pressed(ord("1"))){
-		array_push(party, 0);
-	}
-	if(keyboard_check_pressed(ord("2"))){
-		array_push(party, 1);
-	}
-	if(keyboard_check_pressed(ord("3"))){
-		array_push(party, 2);
-	}
-	if(keyboard_check_pressed(ord("4"))){
-		array_push(party, 3);
-	}
-	if(keyboard_check_pressed(ord("5"))){
-		array_push(party, 4);
-	}
+var member_text = "";
 
+for (var i = 0; i < array_length(party); i++) {
+	if (i == 0) member_text += "1st: ";
+	else if (i == 1) member_text += "2nd: ";
+	else if (i == 2) member_text += "3rd: ";
+	
+	if (party[i] != -1) {
+		member_text += member_name[party[i]];
+	}
+	
+	member_text += "\n";
 }
-
-if(array_length(party)>=3){
-	for( i=0;i<array_length(global.party);i++){
-		global.party[i].info=global.players[party[i]];
-		global.party[i].grid=[i,2];
-	}
-	room_goto_next();
-}
+draw_text_ext_transformed(800, 300, member_text, 50, 800, 1, 1, 0);

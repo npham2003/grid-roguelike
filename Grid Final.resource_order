@@ -38,6 +38,7 @@
     {"name":"sfx_teleport_select","order":5,"path":"sounds/sfx_teleport_select/sfx_teleport_select.yy",},
     {"name":"sfx_teleport_windup","order":4,"path":"sounds/sfx_teleport_windup/sfx_teleport_windup.yy",},
     {"name":"sfx_teleport","order":6,"path":"sounds/sfx_teleport/sfx_teleport.yy",},
+    {"name":"sfx_buy","order":10,"path":"sounds/sfx_buy/sfx_buy.yy",},
     {"name":"all_arrow_sprites","order":10,"path":"sprites/all_arrow_sprites/all_arrow_sprites.yy",},
     {"name":"enemy_bg","order":5,"path":"sprites/enemy_bg/enemy_bg.yy",},
     {"name":"player_bg","order":4,"path":"sprites/player_bg/player_bg.yy",},

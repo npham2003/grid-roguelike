@@ -33,22 +33,20 @@ battle_progress=0;
 #region Spawns
 
 // Spawn player units
-
-// Temp struct for player data, may move to a config file or generate dynamically in the future
 player_data = [
 	{
-		info: global.players[irandom_range(0,array_length(global.players)-1)],
-		grid: [3, 2]		
+		info: global.party[0].info,
+		grid: [3, 2]
 	},
 	{
-		info: global.players[irandom_range(0,array_length(global.players)-1)],
-		grid: [2, 2]		
+		info: global.party[1].info,
+		grid: [2, 2]
 	},
 	{
-		info: global.players[irandom_range(0,array_length(global.players)-1)],
-		grid: [3, 3]		
+		info: global.party[2].info,
+		grid: [3, 3]
 	}
-];
+]
 
 // spawns units at the very start
 for (var i = 0; i < array_length(player_data); i++) {

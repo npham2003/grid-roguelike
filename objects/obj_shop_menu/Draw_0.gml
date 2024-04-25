@@ -2,6 +2,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	
 	// background and border
 	
+
 	
 	if(menu_level!=3){
 		draw_set_color(c_black);
@@ -192,7 +193,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 						gpu_set_blendenable(false);
 						gpu_set_colorwriteenable(false, false, false, true);
 						draw_set_alpha(0);
-						//draw_rectangle(imgX-150, imgY-150, imgX+160, imgY+100, false); //invisible rectangle
+						draw_rectangle(actual_x+(character_spacing*i)+50, y+350, actual_x+(character_spacing*i)+350, y+650, false); //invisible rectangle
 
 						//mask
 						draw_set_alpha(1);
@@ -297,6 +298,21 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 		}
 		
 	}
+	
+	#region gold
+	draw_set_alpha(1);
+	draw_primitive_begin(pr_trianglestrip);
+	draw_set_color(global._primary);
+	draw_vertices(make_diamond(87, 53, 30));
+	draw_primitive_end();
+	draw_primitive_begin(pr_trianglestrip);
+	draw_set_color(global._aspect_bars);
+	draw_vertices(make_diamond(87, 53, 25));
+	draw_primitive_end();
+
+	draw_set_color(global._primary);
+	draw_text_transformed(75, 20, "G    "+ string(obj_battleControl.gold), 0.8, 0.8, 0);
+	#endregion
 	//reset draw
 	draw_set_color(c_white);
 	draw_set_alpha(1);
