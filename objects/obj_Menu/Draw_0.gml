@@ -108,7 +108,7 @@ for (var i = skills - 1; i >= 0; i--) {
 	#endregion
 
 	//text			player_unit.actions[i].name[player_unit.upgrades[i]]+ ": " +
-	if i < 4 draw_text_transformed_colour(menuX[i+1]-expandAnim*60, menuY[i]-35, global.controls[i], 0.5, 0.5, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+	if i < 4 draw_text_transformed_colour(menuX[i+1]-expandAnim*60, menuY[i]-35, global.controls[i], 1, 1, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
 }
 #endregion
 

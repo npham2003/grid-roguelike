@@ -337,15 +337,19 @@ switch (state) {
 		}else{
 			obj_menu.close_menu();
 		}
-		if(key_Space_pressed){ // end the turn
-			board_obstacle_order = 0;
-			for (var i = 0; i < array_length(player_units); i++) {
-				if(!(player_units[i].has_attacked || player_units[i].has_moved)){
-					player_units[i].attack_bonus_temp=0;
+		if(key_Space_pressed){ //ask end turn
+			
+			
+			if(key_Space_pressed){ // end the turn
+				board_obstacle_order = 0;
+				for (var i = 0; i < array_length(player_units); i++) {
+					if(!(player_units[i].has_attacked || player_units[i].has_moved)){
+						player_units[i].attack_bonus_temp=0;
 					
+					}
 				}
+				change_state(BattleState.PlayerBoardObstacle);
 			}
-			change_state(BattleState.PlayerBoardObstacle);
 		}
 		break;
 #endregion
