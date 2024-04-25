@@ -102,3 +102,7 @@ draw_vertices = function(vertices){
 		draw_vertex(vertices[i][0], vertices[i][1]);
 	}
 }
+
+make_diamond = function(_x, _y, _r) {
+	return [[_x - _r, _y], [_x ,_y -_r], [_x, _y + _r], [_x + _r, _y]];
+}

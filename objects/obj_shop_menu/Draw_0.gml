@@ -2,6 +2,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	
 	// background and border
 	
+
 	
 	if(menu_level!=3){
 		draw_set_color(c_black);
@@ -297,6 +298,21 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 		}
 		
 	}
+	
+	#region gold
+	draw_set_alpha(1);
+	draw_primitive_begin(pr_trianglestrip);
+	draw_set_color(global._primary);
+	draw_vertices(make_diamond(87, 53, 30));
+	draw_primitive_end();
+	draw_primitive_begin(pr_trianglestrip);
+	draw_set_color(global._aspect_bars);
+	draw_vertices(make_diamond(87, 53, 25));
+	draw_primitive_end();
+
+	draw_set_color(global._primary);
+	draw_text_transformed(75, 20, "G    "+ string(obj_battleControl.gold), 0.8, 0.8, 0);
+	#endregion
 	//reset draw
 	draw_set_color(c_white);
 	draw_set_alpha(1);
