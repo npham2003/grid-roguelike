@@ -21,7 +21,7 @@ transition_count = 0;
 
 enemy_check_death = 0;
 checking_death = false;
-gold = 10000;
+gold = 0;
 battle_gold = 0;
 unit = pointer_null;
 
