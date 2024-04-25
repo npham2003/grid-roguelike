@@ -3137,7 +3137,7 @@ global.actionLibrary = {
 					audio_play_sound(sfx_mortar_windup, 0, false);
 				}
 				skill_range = obj_gridCreator.highlighted_attack_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
-				skill_range_aux = obj_gridCreator.highlighted_target_cross(skill_coords[0], skill_coords[1],1);
+				skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
 				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
@@ -3164,7 +3164,7 @@ global.actionLibrary = {
 						skill_coords[1] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
@@ -3226,7 +3226,7 @@ global.actionLibrary = {
 						skill_coords[1] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
@@ -3288,7 +3288,7 @@ global.actionLibrary = {
 						skill_coords[1] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
@@ -3339,7 +3339,7 @@ global.actionLibrary = {
 					audio_play_sound(sfx_mortar_windup, 0, false);
 				}
 				skill_range = obj_gridCreator.highlighted_attack_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
-				skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],1);
+				skill_range_aux = obj_gridCreator.highlighted_target_cross(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
 				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
@@ -3401,7 +3401,7 @@ global.actionLibrary = {
 					audio_play_sound(sfx_mortar_windup, 0, false);
 				}
 				skill_range = obj_gridCreator.highlighted_attack_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
-				skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],1);
+				skill_range_aux = obj_gridCreator.highlighted_target_cross(skill_coords[0], skill_coords[1],2);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
 				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
@@ -3463,7 +3463,7 @@ global.actionLibrary = {
 					audio_play_sound(sfx_mortar_windup, 0, false);
 				}
 				skill_range = obj_gridCreator.highlighted_attack_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
-				skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],2);
+				skill_range_aux = obj_gridCreator.highlighted_target_cross(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
 				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
@@ -3603,24 +3603,24 @@ global.enemyActions = {
 	center_square_pushpush: {
 		name: "bigger push",
 		range: [
-			[-1, -1], [-1, 0], [-1, 1],
+					[-1, 0],
 			[0, -1], [0, 0], [0, 1], 
-			[1, -1], [1, 0], [1, 1]
+					 [1, 0],
 		],
 		type: "normal",
 		damage_type: "big push"
 	},
 	center_big_square_pull: {
 		name: "big square explosion",
-		range: [
-			[-2, -2], [-2, -1], [-2, 0], [-2, 1], [-2, 2],
-			[-1, -2], [-1, -1], [-1, 0], [-1, 1], [-1, 2],
-			[0, -2], [0, -1], [0, 0], [0, 1], [0, 2],
-			[1, -2], [1, -1], [1, 0], [1, 1], [1, 2],
-			[2, -2], [2, -1], [2, 0], [2, 1], [2, 2]
+				range: [
+					[-2, 0],
+					[-1, 0],
+	[0, -2], [0, -1], [0, 0], [0, 1], [0,2],
+					 [1, 0],
+					 [2, 0]
 		],
 		type: "normal",
-		damage_type: "cold"
+		damage_type: "pull"
 	},
 	
 	homing_aoe: {

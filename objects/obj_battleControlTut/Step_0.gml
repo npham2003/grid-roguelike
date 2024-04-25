@@ -524,7 +524,7 @@ switch (state) {
 					
 				}
 			}
-			else if (key_Space_pressed && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) { //move without using a skill
+			else if (key_Enter_pressed && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) { //move without using a skill
 				unit.confirm_move();
 				unit.has_moved = true;
 				unit.has_attacked = true;
