@@ -14,7 +14,6 @@ enemy_order = 0;
 tp_max = 10;
 tp_current = 2;
 tp_bonus=0;
-//room_goto_next();
 in_animation = false;
 transition_count = 0;
 
