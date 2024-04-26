@@ -122,7 +122,9 @@ switch (state) {
 				unit.aim();
 				for(i=0;i<enemy_order;i++){
 						enemy_units[i].recalc_los();
+						in_animation=true;
 					}
+				
 			}
 			obj_menu.set_text(unit.name+" is aiming");
 			

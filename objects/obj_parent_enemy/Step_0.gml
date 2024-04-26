@@ -22,9 +22,6 @@ if (is_moving) {
 		if(delay==30){
 			attack_ready = true;
 			set_danger_highlights();
-		
-			
-			
 			display_target_highlights();
 		}
 		delay-=1;
