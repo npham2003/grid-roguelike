@@ -245,9 +245,9 @@ switch (state) {
 				unit.prev_grid=[unit.grid_pos[0],unit.grid_pos[1]];
 				
 				// previews movable tiles
-				if(!unit.has_moved && !unit.has_attacked){
-					unit.preview_moveable_grids();
-				}
+				//if(!unit.has_moved && !unit.has_attacked){
+				//	unit.preview_moveable_grids();
+				//}
 				
 				// select the unit to move it
 				if (key_Enter_pressed) {

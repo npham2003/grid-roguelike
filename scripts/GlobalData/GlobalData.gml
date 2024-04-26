@@ -588,6 +588,7 @@ global.actionLibrary = {
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_init = false;
+					obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._entity_on_tile=pointer_null;
 		
 				}
 				
