@@ -4216,7 +4216,7 @@ global.party=
 
 //Enemy Data
 global.enemies = [
-	{
+	{//slime
 		name: "Slime",
 		hp: 2,
 		hpMax: 2,
@@ -4227,7 +4227,7 @@ global.enemies = [
 		ally: false,
 		gold: 2
 	},
-	{
+	{//bat
 		name: "Bat",
 		hp: 1,
 		hpMax: 1,
@@ -4238,7 +4238,7 @@ global.enemies = [
 		ally: false,
 		gold: 1
 	},
-	{
+	{//shooter
 		name: "Shooter",
 		hp: 5,
 		hpMax: 5,
@@ -4249,7 +4249,7 @@ global.enemies = [
 		ally: false,
 		gold: 3
 	},
-	{
+	{//cross
 		name: "Cross",
 		hp: 2,
 		hpMax: 2,
@@ -4260,7 +4260,7 @@ global.enemies = [
 		ally: false,
 		gold: 0
 	},
-	{
+	{//summoner
 		name: "Summoner",
 		hp: 5,
 		hpMax: 5,
@@ -4271,7 +4271,7 @@ global.enemies = [
 		ally: false,
 		gold: 5
 	},
-	{
+	{//los
 		name: "LOS Enemy",
 		hp: 1,
 		hpMax: 1,
@@ -4286,7 +4286,7 @@ global.enemies = [
 
 //Obstacles
 global.obstacles = [
-	{
+	{//bomb
 		name: "Bomb",
 		turns_remaining: 3,
 		turns_max: 3,
@@ -4298,7 +4298,7 @@ global.obstacles = [
 		healthbar_offset: -30,
 		strength: 3
 	},
-	{
+	{//big bomb
 		name: "Big Bomb",
 		turns_remaining: 3,
 		turns_max: 3,
