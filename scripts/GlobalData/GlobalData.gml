@@ -2713,6 +2713,8 @@ global.actionLibrary = {
 						unit.skill_complete = true;
 						unit.skill_init = false;
 						show_debug_message(unit.action.name);
+					}else{
+						audio_play_sound(sfx_no_tp, 0, false);
 					}
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
@@ -2775,6 +2777,8 @@ global.actionLibrary = {
 						unit.skill_complete = true;
 						unit.skill_init = false;
 						show_debug_message(unit.action.name);
+					}else{
+						audio_play_sound(sfx_no_tp, 0, false);
 					}
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
@@ -2841,6 +2845,8 @@ global.actionLibrary = {
 							show_debug_message(unit.action.name);
 						}
 						
+					}else{
+						audio_play_sound(sfx_no_tp, 0, false);
 					}
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.bombs_placed = 0;
@@ -2919,6 +2925,8 @@ global.actionLibrary = {
 						unit.skill_complete = true;
 						unit.skill_init = false;
 						show_debug_message(unit.action.name);
+					}else{
+						audio_play_sound(sfx_no_tp, 0, false);
 					}
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
@@ -2981,6 +2989,8 @@ global.actionLibrary = {
 						unit.skill_complete = true;
 						unit.skill_init = false;
 						show_debug_message(unit.action.name);
+					}else{
+						audio_play_sound(sfx_no_tp, 0, false);
 					}
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
@@ -3043,6 +3053,8 @@ global.actionLibrary = {
 						unit.skill_complete = true;
 						unit.skill_init = false;
 						show_debug_message(unit.action.name);
+					}else{
+						audio_play_sound(sfx_no_tp, 0, false);
 					}
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.bombs_placed = 0;
@@ -3121,6 +3133,8 @@ global.actionLibrary = {
 						unit.skill_complete = true;
 						unit.skill_init = false;
 						show_debug_message(unit.action.name);
+					}else{
+						audio_play_sound(sfx_no_tp, 0, false);
 					}
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
@@ -3183,6 +3197,8 @@ global.actionLibrary = {
 						unit.skill_complete = true;
 						unit.skill_init = false;
 						show_debug_message(unit.action.name);
+					}else{
+						audio_play_sound(sfx_no_tp, 0, false);
 					}
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
@@ -3245,6 +3261,8 @@ global.actionLibrary = {
 						unit.skill_complete = true;
 						unit.skill_init = false;
 						show_debug_message(unit.action.name);
+					}else{
+						audio_play_sound(sfx_no_tp, 0, false);
 					}
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.bombs_placed = 0;
