@@ -13,7 +13,7 @@ var key_Tab_pressed = keyboard_check_pressed(vk_tab);
 var key_Space_pressed = keyboard_check_pressed(vk_space);
 
 var wasd_pressed = key_A_pressed || key_W_pressed || key_S_pressed || key_D_pressed;
-var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_H_pressed;
+var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_H_pressed || key_Enter_pressed;
 
 var enough_tp = false;
 
@@ -424,15 +424,32 @@ switch (state) {
 		}else{
 			obj_menuTut.close_menu();
 		}
-		if(key_Space_pressed){ // end the turn
-			board_obstacle_order = 0;
-			for (var i = 0; i < array_length(player_units); i++) {
-				if(!(player_units[i].has_attacked || player_units[i].has_moved)){
-					player_units[i].attack_bonus_temp=0;
+		if(key_Space_pressed){ //ask end turn
+			obj_cursor.movable_tiles=[];
+			if(obj_menuTut.ask_end){ // end the turn
+				board_obstacle_order = 0;
+				obj_menuTut.ask_end = false;
+				
+				for (var i = 0; i < array_length(player_units); i++) {
+					if(!(player_units[i].has_attacked || player_units[i].has_moved)){
+						player_units[i].attack_bonus_temp=0;
 					
+					}
 				}
+				obj_gridCreator.reset_highlights_cursor();
+				change_state(BattleState.PlayerBoardObstacle);
+				obj_menuTut.ask_end = false;
 			}
-			change_state(BattleState.PlayerBoardObstacle);
+			
+			
+			
+			else {
+				obj_menuTut.ask_end = true;
+				}
+		}
+		if(obj_menuTut.ask_end && key_Tab_pressed) {
+			obj_menuTut.ask_end = false;
+			obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
 		}
 		break;
 #endregion
@@ -470,7 +487,7 @@ switch (state) {
 					obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
 					obj_cursor.reset_cursor(unit.grid_pos[0], unit.grid_pos[1]);
 				}
-			else if (teachingBasic == true && jkl_pressed && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) { // choose a skill. target position must be empty
+			else if (jkl_pressed && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) { // choose a skill. target position must be empty
 				
 				obj_gridCreator.reset_highlights_cursor();
 				if (!unit.has_attacked) {
@@ -513,6 +530,14 @@ switch (state) {
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
 			}
+				else if (key_Enter_pressed) {
+					if (tp_current >= unit.actions[4].cost[unit.upgrades[4]]) {
+					unit.skill_used = 4;
+					enough_tp = true;
+					}else {
+						audio_play_sound(sfx_no_tp, 0, false);
+					}
+			}
 			
 				if (enough_tp) { // enough tp to use a skill
 					unit.confirm_move();
@@ -524,15 +549,15 @@ switch (state) {
 					
 				}
 			}
-			else if (key_Enter_pressed && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) { //move without using a skill
-				unit.confirm_move();
-				unit.has_moved = true;
-				unit.has_attacked = true;
-				change_state(BattleState.PlayerWaitingAction);
+			//else if (key_Enter_pressed && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) { //move without using a skill
+			//	unit.confirm_move();
+			//	unit.has_moved = true;
+			//	unit.has_attacked = true;
+			//	change_state(BattleState.PlayerWaitingAction);
 				
 				
-				obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
-			}
+			//	obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
+			//}
 		}
 		break;
 #endregion

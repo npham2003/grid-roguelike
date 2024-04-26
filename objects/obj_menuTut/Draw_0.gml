@@ -277,3 +277,13 @@ else {
 draw_set_alpha(1);
 draw_set_halign(fa_left);
 #endregion
+
+#region ask end
+if (ask_end){
+	draw_rectangle_colour(0, 250, room_width, 450, global._aspect_bars, global._aspect_bars, global._aspect_bars, global._aspect_bars, false);
+	draw_set_color(global._primary);
+	draw_set_halign(fa_center);
+	draw_text_transformed(650, 260, "You still have units with actions remaining.\nDo you want to end your turn now?\nConfirm: Space   Back: Tab", 0.8, 0.8, 0);
+}
+draw_set_halign(fa_left);
+#endregion

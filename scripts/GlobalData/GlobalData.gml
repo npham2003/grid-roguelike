@@ -3703,7 +3703,7 @@ global.actionLibrary = {
 		}
 	},
 	nothing: {
-		name: ["Place"], //probably redundant to have a name but keep it
+		name: ["Wait"], //probably redundant to have a name but keep it
 		description: ["Move without using a skill"],
 		cost: [0],
 		subMenu: 0, //does it show up on screen or is it in a submenu

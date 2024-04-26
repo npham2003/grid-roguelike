@@ -22,6 +22,8 @@ turn_text_anim = 0;
 turn_life = 100;
 turn_banner_animation_started=false;
 
+ask_end=false;
+
 #region location & size
 imgX = 200;
 imgY = 680;
