@@ -328,10 +328,11 @@ switch (state) {
 			obj_menu.close_menu();
 		}
 		if(key_Space_pressed){ //ask end turn
-			
-			
-			if(key_Space_pressed){ // end the turn
+				
+			if(obj_menu.ask_end && key_Space_pressed){ // end the turn
 				board_obstacle_order = 0;
+				obj_menu.ask_end = false;
+				
 				for (var i = 0; i < array_length(player_units); i++) {
 					if(!(player_units[i].has_attacked || player_units[i].has_moved)){
 						player_units[i].attack_bonus_temp=0;
@@ -339,7 +340,16 @@ switch (state) {
 					}
 				}
 				change_state(BattleState.PlayerBoardObstacle);
+				obj_menu.ask_end = false;
 			}
+			
+			else if(obj_menu.ask_end && key_Tab_pressed) {
+				obj_menu.ask_end = false;
+			}
+			
+			else {
+				obj_menu.ask_end = true;
+				}
 		}
 		break;
 #endregion

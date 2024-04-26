@@ -8,16 +8,26 @@ enemyTurn = true;
 
 confirm = false;
 
-tp_opacity_increase=true;
+player_unit = obj_player;
+currCharSprite = spr_temp_Taion;
+
+hp_opacity=0;
+hp_opacity_increase=true;
+
+tpCost = [0, 1, 5, 7, 12];
 tp_opacity=0;
+tp_opacity_increase=true;
+
+turn_count = 0;
+turn_max = 3;
 
 turn_opacity_increase=true;
 turn_opacity=50;
-turn_count = 0;
-turn_max = 3;
 turn_text_anim = 0;
 turn_life = 100;
 turn_banner_animation_started=false;
+
+ask_end = false;
 
 #region location & size
 imgX = 200;
@@ -49,13 +59,7 @@ confirmShiftY = [0,0];
 border = 5;
 #endregion
 
-#region control
-
-player_unit = obj_player;
-currCharSprite = spr_temp_Taion;
-tpCost = [0, 1, 5, 7, 12];
-
-
+#region control func
 close_menu = function(){
 	open = false;
 	//expansionLimit = 0;

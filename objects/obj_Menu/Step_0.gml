@@ -48,6 +48,20 @@ if(tp_opacity<=0.5){
 }
 #endregion
 
+#region hp opacity
+if(hp_opacity_increase){
+	hp_opacity+=0.01;
+}else{
+	hp_opacity-=0.01;
+}
+if(hp_opacity>=1){
+	hp_opacity_increase=false;
+}
+if(hp_opacity<=0.5){
+	hp_opacity_increase=true;
+}
+#endregion
+
 #region turn opacity
 if (turn_count <= turn_max) {
 	if(turn_opacity_increase){
