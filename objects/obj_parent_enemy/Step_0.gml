@@ -78,3 +78,4 @@ else if (teleporting == 2) {
 		teleporting = 0;
 	}
 }
+depth=layer_get_depth("Units")-grid_pos[1];
