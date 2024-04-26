@@ -3516,7 +3516,7 @@ global.actionLibrary = {
 	},
 	pushspread: {
 		name: ["Repelling Blast", "Repelling Shockwave", "Magnetic Pull"], 
-		description: ["Pushes all units in front of you and in an adjacent row away from each other. Choose affected rows with A and S.", 
+		description: ["Pushes all units in front of you and in an adjacent row away from each other. Choose affected rows with W and S.", 
 			"Pushes all units in front of you and in an adjacent row away from each other until they hit a wall or another unit.", 
 			"Slams all units in front of you and in an adjacent row towards each other."],
 		cost: [3, 4, 4],

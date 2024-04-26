@@ -259,7 +259,7 @@ switch (state) {
 		// tp bonus 
 		//tp_current+=tp_bonus;
 		if (teachingSkills) {
-			tp_current = 10;
+			tp_current = tp_max;
 		}
 		
 		// makes sure you don't go over max tp
