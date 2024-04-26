@@ -35,20 +35,9 @@ switch (state) {
 		obj_menu.set_turn_banner(false);
 		obj_draw_bg.colorSwitch = true;
 		
-		for (var i = 0; i < array_length(player_units); i++) {
-			
-			// revives dead units
-			if(player_units[i].hp<=0){
-				player_units[i].hp=1;
-			}
-			if(i==0){
-				obj_cursor.current_x=player_units[i].grid_pos[0];
-				obj_cursor.current_y=player_units[i].grid_pos[1];
-				//obj_cursor.current_x=0;
-				//obj_cursor.current_y=0;
-				
-			}
-		}
+		
+		obj_cursor.current_x=player_units[0].grid_pos[0];
+		obj_cursor.current_y=player_units[0].grid_pos[1];
 		//for (var i = 0; i < array_length(board_obstacles); i++) {
 		//	board_obstacles[i].despawn();
 		//	array_delete(board_obstacles,i,1);
@@ -695,6 +684,14 @@ switch (state) {
 			gold+=battle_gold;
 			obj_gridCreator.reset_highlights_enemy();
 			battle_progress+=1;
+			for (var i = 0; i < array_length(player_units); i++) {
+			
+				// revives dead units
+				if(player_units[i].hp<=0){
+					player_units[i].hp=1;
+				}
+				
+			}
 			if(battle_progress==array_length(global.encounters)){
 				battle_progress=0;
 			}
