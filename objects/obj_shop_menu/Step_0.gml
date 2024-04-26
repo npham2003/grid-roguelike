@@ -24,6 +24,9 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 				selector_pos[1]+=1;
 				fill_alpha = 0;
 				selector_pos[1]=selector_pos[1]%2
+				if(selector_pos[1]==1 && selector_pos[0]==3){
+					selector_pos[0]=2;
+				}
 			}
 			if (keyboard_check_pressed(ord("W"))) {
 				selector_pos[1]-=1;
