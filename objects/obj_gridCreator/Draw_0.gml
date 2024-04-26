@@ -11,7 +11,7 @@ for (var i = 0; i< gridHoriz;i++){
 			if(obj_gridCreator.battle_grid[i][j]._move_highlight){
 				draw_sprite_ext(spr_grid_move_highlight, image_index, x + (i*100), y + (j*50), image_xscale, image_yscale, image_angle, image_blend, 0.7);
 			}else if(obj_gridCreator.battle_grid[i][j]._move_cursor){
-				draw_sprite_ext(spr_grid_move_highlight, image_index, x + (i*100), y + (j*50), image_xscale, image_yscale, image_angle, image_blend, 0.5);
+				draw_sprite_ext(spr_grid_move_highlight, image_index, x + (i*100), y + (j*50), image_xscale, image_yscale, image_angle, image_blend, 0.3);
 			}
 		}else{
 			draw_sprite(spr_grid_enemy_side,0, x + (i*100), y + (j*50));

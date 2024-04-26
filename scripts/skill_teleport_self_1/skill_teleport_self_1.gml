@@ -13,7 +13,7 @@ function skill_teleport_self_1(unit){
 		unit.skill_progress = 1;
 		unit.is_attacking = true;
 		skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],0);
-		audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
+		audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 	}
 
 	if(unit.skill_progress==1){

@@ -266,13 +266,13 @@ switch (state) {
 				//obj_menu.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
 				
 				
-				// resets the previous grid position to current position. needed for when getting moved when its not their turn (push or teleport)
+				// resets the ewous grid position to current position. needed for when getting moved when its not their turn (push or teleport)
 				unit.prev_grid=[unit.grid_pos[0],unit.grid_pos[1]];
 				
 				// previews movable tiles
-				//if(!unit.has_moved && !unit.has_attacked){
-				//	unit.preview_moveable_grids();
-				//}
+				if(!unit.has_moved && !unit.has_attacked){
+					unit.preview_moveable_grids();
+				}
 				
 				// select the unit to move it
 				if (key_Enter_pressed) {
