@@ -3702,6 +3702,51 @@ global.actionLibrary = {
 			},
 		}
 	},
+	nothing: {
+		name: ["Place"], //probably redundant to have a name but keep it
+		description: ["Move without using a skill"],
+		cost: [0],
+		subMenu: 0, //does it show up on screen or is it in a submenu
+		userAnimation: "attack",
+		//effectSprite: baseAttack,
+		damage: 1, 
+		func: function(_user, _targets) {
+			var _damage = 1; //math function here
+			//BattleChangeHP(_targets);
+		},
+		skillFunctions: {
+			base: function(unit){
+				
+				unit.action = unit.actions[unit.skill_used];
+				if(!unit.skill_init){
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+					// setup initial target
+					
+					unit.skill_init=true;
+					show_debug_message("basic init");
+				}
+				
+				obj_cursor.movable_tiles=[];
+				
+				var _damage = unit.action.damage;
+				if (keyboard_check_pressed(vk_enter)) { // use the skill
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+					
+					unit.is_attacking = false;
+					unit.skill_complete = true;
+					skill_range = obj_gridCreator.reset_highlights_target();
+					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
+					unit.skill_init=false;
+				}else if(keyboard_check_pressed(vk_tab)){
+					unit.is_attacking = false;
+					unit.skill_back = true;
+					unit.skill_init=false;
+					skill_range = obj_gridCreator.reset_highlights_target();
+		
+				}
+			}
+		}
+	},
 }
 
 global.enemyActions = {
@@ -3859,7 +3904,7 @@ global.players = [
 		hpMax: 5,
 		playerSpeed: 2,
 		sprites : { idle: spr_player2, dead: spr_player2_dead, gun: spr_player2_shooting},
-		actions : [global.actionLibrary.baseAttack, global.actionLibrary.beam, global.actionLibrary.charge,  global.actionLibrary.mortar],
+		actions : [global.actionLibrary.baseAttack, global.actionLibrary.beam, global.actionLibrary.charge,  global.actionLibrary.mortar, global.actionLibrary.nothing],
 		ally: true,
 		tpGain: 1,
 		portrait: spr_temp_Taion,
@@ -3873,7 +3918,7 @@ global.players = [
 		hpMax: 3,
 		playerSpeed: 3,
 		sprites : { idle: spr_player3, dead: spr_player3_dead, gun: spr_player3_shooting},
-		actions : [global.actionLibrary.baseAttack, global.actionLibrary.shield, global.actionLibrary.buff,  global.actionLibrary.dance],
+		actions : [global.actionLibrary.baseAttack, global.actionLibrary.shield, global.actionLibrary.buff,  global.actionLibrary.dance, global.actionLibrary.nothing],
 		ally: true,
 		tpGain: 3,
 		portrait: spr_temp_Glimmer,
@@ -3886,7 +3931,7 @@ global.players = [
 		hpMax: 2,
 		playerSpeed: 1,
 		sprites : { idle: spr_player5, dead: spr_player5_dead, gun: spr_player5_shooting},
-		actions : [global.actionLibrary.baseAttack, global.actionLibrary.teleport_self, global.actionLibrary.teleport_ally,  global.actionLibrary.teleport_enemy],
+		actions : [global.actionLibrary.baseAttack, global.actionLibrary.teleport_self, global.actionLibrary.teleport_ally,  global.actionLibrary.teleport_enemy, global.actionLibrary.nothing],
 		ally: true,
 		tpGain: 3,
 		portrait: spr_temp_Wulfric,
@@ -3899,7 +3944,7 @@ global.players = [
 		hpMax: 3,
 		playerSpeed: 2,
 		sprites : { idle: spr_player4, dead: spr_player4_dead, gun: spr_player4_shooting},
-		actions : [global.actionLibrary.baseAttack, global.actionLibrary.placebomb, global.actionLibrary.placeicebomb,  global.actionLibrary.placegravbomb],
+		actions : [global.actionLibrary.baseAttack, global.actionLibrary.placebomb, global.actionLibrary.placeicebomb,  global.actionLibrary.placegravbomb, global.actionLibrary.nothing],
 		ally: true,
 		tpGain: 1,
 		portrait: spr_temp_Azami,
@@ -3912,7 +3957,7 @@ global.players = [
 		hpMax: 5,
 		playerSpeed: 2,
 		sprites : { idle: spr_player6, dead: spr_player6_dead, gun: spr_player6_shooting},
-		actions : [global.actionLibrary.baseAttack, global.actionLibrary.freeze, global.actionLibrary.frostcone,  global.actionLibrary.thaw],
+		actions : [global.actionLibrary.baseAttack, global.actionLibrary.freeze, global.actionLibrary.frostcone,  global.actionLibrary.thaw, global.actionLibrary.nothing],
 		ally: true,
 		tpGain: 1,
 		portrait: spr_temp_Perun,
@@ -3925,7 +3970,7 @@ global.players = [
 		hpMax: 4,
 		playerSpeed: 2,
 		sprites : { idle: spr_player, dead: spr_player_dead, gun: spr_player_shooting},
-		actions : [global.actionLibrary.baseAttack, global.actionLibrary.mover, global.actionLibrary.pushspread,  global.actionLibrary.pushlos],
+		actions : [global.actionLibrary.baseAttack, global.actionLibrary.mover, global.actionLibrary.pushspread,  global.actionLibrary.pushlos, global.actionLibrary.nothing],
 		ally: true,
 		tpGain: 2,
 		portrait: spr_temp_Pandoria,
