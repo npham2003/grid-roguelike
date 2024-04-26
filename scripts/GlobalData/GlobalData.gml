@@ -4225,7 +4225,7 @@ global.enemies = [
 		actions: [global.enemyActions.melee],
 		sounds: { attack: sfx_slime_attack },
 		ally: false,
-		gold: 200
+		gold: 2
 	},
 	{
 		name: "Bat",
@@ -4236,7 +4236,7 @@ global.enemies = [
 		actions: [global.enemyActions.ranged_attack],
 		sounds: { attack: sfx_bat_attack },
 		ally: false,
-		gold: 100
+		gold: 1
 	},
 	{
 		name: "Shooter",
@@ -4247,7 +4247,7 @@ global.enemies = [
 		actions: [global.enemyActions.homing_aoe],
 		sounds: { attack: sfx_bat_attack },
 		ally: false,
-		gold: 300
+		gold: 3
 	},
 	{
 		name: "Cross",
@@ -4269,7 +4269,7 @@ global.enemies = [
 		actions: [global.enemyActions.summon],
 		sounds: { attack: sfx_bat_attack },
 		ally: false,
-		gold: 500
+		gold: 5
 	},
 	{
 		name: "LOS Enemy",
@@ -4280,7 +4280,7 @@ global.enemies = [
 		actions: [global.enemyActions.sight],
 		sounds: { attack: sfx_bat_attack },
 		ally: false,
-		gold: 100
+		gold: 1
 	}
 ]
 

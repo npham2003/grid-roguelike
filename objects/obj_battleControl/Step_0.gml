@@ -35,7 +35,7 @@ switch (state) {
 		obj_menu.set_turn_banner(false);
 		obj_draw_bg.colorSwitch = true;
 		
-		
+		tp_current=3;
 		obj_cursor.current_x=player_units[0].grid_pos[0];
 		obj_cursor.current_y=player_units[0].grid_pos[1];
 		//for (var i = 0; i < array_length(board_obstacles); i++) {
@@ -164,7 +164,7 @@ switch (state) {
 			if(player_units[i].hp>0 && player_units[i].stall_turns==0){
 				player_units[i].has_moved = false;
 				player_units[i].has_attacked = false;
-				tp_current+=player_units[i].tpGain;
+				
 			}else if(player_units[i].hp<=0){
 				player_units[i].hp=0;
 				player_units[i].has_moved = true;
@@ -177,6 +177,7 @@ switch (state) {
 		}
 		// tp bonus 
 		tp_current+=tp_bonus;
+		tp_current+=3;
 		
 		// makes sure you don't go over max tp
 		if (tp_current > tp_max) {
