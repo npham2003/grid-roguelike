@@ -12,9 +12,9 @@ function skill_teleport_ally_2(unit){
 		unit.skill_progress = 1;
 		unit.is_attacking = true;
 		skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],0);
-		audio_play_sound(sfx_teleport_windup, 0, false, 0.5);
+		audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 	}
-	skill_range = obj_gridCreator.highlighted_support_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
+	skill_range = obj_gridCreator.highlighted_support_player_side();
 				
 	obj_cursor.movable_tiles=skill_range;
 	obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);

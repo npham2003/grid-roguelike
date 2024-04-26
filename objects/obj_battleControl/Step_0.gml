@@ -13,7 +13,7 @@ var key_Tab_pressed = keyboard_check_pressed(vk_tab);
 var key_Space_pressed = keyboard_check_pressed(vk_space);
 
 var wasd_pressed = key_A_pressed || key_W_pressed || key_S_pressed || key_D_pressed;
-var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_H_pressed;
+var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_H_pressed || key_Enter_pressed;
 
 var enough_tp = false;
  
@@ -31,7 +31,27 @@ switch (state) {
 	
 #region Battle Start
 	case BattleState.BattleStart:
-		
+		for (var i = 0; i < array_length(player_units); i++) {
+			
+			
+				
+		// removes attack buff if 2nd turn
+				
+			show_debug_message("reset attack bonus");
+			player_units[i].attack_bonus_temp=0;
+				
+			player_units[i].attack_buff_recent=false;
+				
+		// removes move buff if 2nd turn
+				
+			show_debug_message("reset move bonus");
+			player_units[i].move_bonus_temp=0;
+				
+			player_units[i].move_buff_recent=false;
+			player_units[i].has_moved = false;
+			player_units[i].has_attacked = false;
+			
+		}
 		obj_menu.set_turn_banner(false);
 		obj_draw_bg.colorSwitch = true;
 		
@@ -213,11 +233,16 @@ switch (state) {
 			change_state(BattleState.BattleEnd);
 			break;
 		}
-		
+		obj_menu.set_text("WASD - Move Cursor     Enter - Select Unit     Space - End Turn");
 		// checks if all player units have moved
 		for (var i = 0; i < array_length(player_units); i++) {
 			if (!player_units[i].has_attacked) {
 				has_all_attacked = false;
+			}
+			if(player_units[i].hp<=0){
+				player_units[i].hp=0;
+				player_units[i].has_moved = true;
+				player_units[i].has_attacked = true;
 			}
 		}
 		if (has_all_attacked) {
@@ -239,9 +264,9 @@ switch (state) {
 				// set the tpcost array in the menu to match actual costs
 				obj_menu.tpCost=[0,unit.actions[0].cost[unit.upgrades[0]],unit.actions[1].cost[unit.upgrades[1]],unit.actions[2].cost[unit.upgrades[2]],unit.actions[3].cost[unit.upgrades[3]]];
 				//obj_menu.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
-				obj_menu.set_text("WASD - Move Cursor     Enter - Select Unit     Space - End Turn");
 				
-				// resets the previous grid position to current position. needed for when getting moved when its not their turn (push or teleport)
+				
+				// resets the ewous grid position to current position. needed for when getting moved when its not their turn (push or teleport)
 				unit.prev_grid=[unit.grid_pos[0],unit.grid_pos[1]];
 				
 				// previews movable tiles
@@ -328,7 +353,7 @@ switch (state) {
 			obj_menu.close_menu();
 		}
 		if(key_Space_pressed){ //ask end turn
-				
+			obj_cursor.movable_tiles=[];
 			if(obj_menu.ask_end && key_Space_pressed){ // end the turn
 				board_obstacle_order = 0;
 				obj_menu.ask_end = false;
@@ -339,17 +364,20 @@ switch (state) {
 					
 					}
 				}
+				obj_gridCreator.reset_highlights_cursor();
 				change_state(BattleState.PlayerBoardObstacle);
 				obj_menu.ask_end = false;
 			}
 			
-			else if(obj_menu.ask_end && key_Tab_pressed) {
-				obj_menu.ask_end = false;
-			}
+			
 			
 			else {
 				obj_menu.ask_end = true;
 				}
+		}
+		if(obj_menu.ask_end && key_Tab_pressed) {
+			obj_menu.ask_end = false;
+			obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
 		}
 		break;
 #endregion
@@ -429,6 +457,13 @@ switch (state) {
 					}else {
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
+			}else if (key_Enter_pressed) {
+					if (tp_current >= unit.actions[4].cost[unit.upgrades[4]]) {
+					unit.skill_used = 4;
+					enough_tp = true;
+					}else {
+						audio_play_sound(sfx_no_tp, 0, false);
+					}
 			}
 			
 				if (enough_tp) { // enough tp to use a skill
@@ -445,17 +480,17 @@ switch (state) {
 					
 				}
 			}
-			else if (key_Enter_pressed && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) { //move without using a skill
-				unit.confirm_move();
-				unit.has_moved = true;
-				unit.has_attacked = true;
-				change_state(BattleState.PlayerWaitingAction);
-				for(i=0;i<array_length(enemy_units);i++){
-					enemy_units[i].recalc_los();
-				}
+			//else if (key_Enter_pressed && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) { //move without using a skill
+			//	unit.confirm_move();
+			//	unit.has_moved = true;
+			//	unit.has_attacked = true;
+			//	change_state(BattleState.PlayerWaitingAction);
+			//	for(i=0;i<array_length(enemy_units);i++){
+			//		enemy_units[i].recalc_los();
+			//	}
 				
-				obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
-			}
+			//	obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
+			//}
 		}
 		break;
 #endregion

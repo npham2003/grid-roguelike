@@ -1,6 +1,7 @@
 {
   "FolderOrderSettings":[
     {"name":"Character Select","order":1,"path":"folders/Objects/Character Select.yy",},
+    {"name":"Main Menu","order":2,"path":"folders/Objects/Main Menu.yy",},
     {"name":"Player Skills","order":1,"path":"folders/Scripts/Player Skills.yy",},
     {"name":"Front","order":1,"path":"folders/Sprites/UI/Front.yy",},
     {"name":"Grid","order":2,"path":"folders/Sprites/UI/Grid.yy",},
@@ -8,6 +9,7 @@
     {"name":"Textbox","order":6,"path":"folders/Sprites/UI/Textbox.yy",},
   ],
   "ResourceOrderSettings":[
+    {"name":"fnt_archivo","order":1,"path":"fonts/fnt_archivo/fnt_archivo.yy",},
     {"name":"obj_battleEffect","order":2,"path":"objects/obj_battleEffect/obj_battleEffect.yy",},
     {"name":"obj_board_obstacle","order":1,"path":"objects/obj_board_obstacle/obj_board_obstacle.yy",},
     {"name":"obj_cursor","order":1,"path":"objects/obj_cursor/obj_cursor.yy",},
@@ -29,6 +31,7 @@
     {"name":"skill_teleport_self_2","order":1,"path":"scripts/skill_teleport_self_2/skill_teleport_self_2.yy",},
     {"name":"skill_teleport_self_3","order":2,"path":"scripts/skill_teleport_self_3/skill_teleport_self_3.yy",},
     {"name":"bgm_tutorialBGM","order":1,"path":"sounds/bgm_tutorialBGM/bgm_tutorialBGM.yy",},
+    {"name":"sfx_buy","order":10,"path":"sounds/sfx_buy/sfx_buy.yy",},
     {"name":"sfx_charge","order":1,"path":"sounds/sfx_charge/sfx_charge.yy",},
     {"name":"sfx_dance","order":9,"path":"sounds/sfx_dance/sfx_dance.yy",},
     {"name":"sfx_defreeze","order":8,"path":"sounds/sfx_defreeze/sfx_defreeze.yy",},
@@ -38,7 +41,6 @@
     {"name":"sfx_teleport_select","order":5,"path":"sounds/sfx_teleport_select/sfx_teleport_select.yy",},
     {"name":"sfx_teleport_windup","order":4,"path":"sounds/sfx_teleport_windup/sfx_teleport_windup.yy",},
     {"name":"sfx_teleport","order":6,"path":"sounds/sfx_teleport/sfx_teleport.yy",},
-    {"name":"sfx_buy","order":10,"path":"sounds/sfx_buy/sfx_buy.yy",},
     {"name":"all_arrow_sprites","order":10,"path":"sprites/all_arrow_sprites/all_arrow_sprites.yy",},
     {"name":"enemy_bg","order":5,"path":"sprites/enemy_bg/enemy_bg.yy",},
     {"name":"player_bg","order":4,"path":"sprites/player_bg/player_bg.yy",},
