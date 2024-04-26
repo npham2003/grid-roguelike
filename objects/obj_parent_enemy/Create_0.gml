@@ -252,7 +252,7 @@ function aim(){
 					for(j=0;j<5;j++){
 						if(obj_gridCreator.battle_grid[i][j]._is_empty){
 							util=calculate_util(i,j);
-							show_debug_message("Util of ("+string(i)+","+string(j)+") is "+string(util));
+							//show_debug_message("Util of ("+string(i)+","+string(j)+") is "+string(util));
 							if(util>=max_util){
 								if(util>max_util){
 									potential_positions=[];
@@ -319,12 +319,14 @@ function move(new_x, new_y) {
 function recalc_los(){
 	if(action.type=="los"){
 		remove_danger_highlights();
+		show_debug_message("Recalculating {0}", enemy_turn_order);
 		var targeted=obj_gridCreator.highlighted_enemy_target_straight_back(grid_pos[0]-1,grid_pos[1]);
 		if(array_length(targeted)>0){
 			target_pos=[targeted[0]._x_coord-grid_pos[0],0];
 		}else{
 			target_pos=[-1000,0];
 		}
+		delay=30;
 		move(grid_pos[0],grid_pos[1]);
 		
 	}
@@ -380,10 +382,12 @@ function set_danger_highlights() {
 			}
 			obj_gridCreator.battle_grid[attack_x][attack_y]._danger_highlight = true;
 			obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number+=1;
+			show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
 			//show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
 		
 		}
 	}
+	danger_debug();
 	
 }
 
@@ -440,6 +444,7 @@ function remove_danger_highlights() {
 			//show_debug_message("({0}, {1}): {2}", attack_x,attack_y,obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number);
 			if(obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number<=0){
 				obj_gridCreator.battle_grid[attack_x][attack_y]._danger_highlight = false;
+				obj_gridCreator.battle_grid[attack_x][attack_y]._danger_number=0;
 			}
 		}
 	}
