@@ -31,7 +31,27 @@ switch (state) {
 	
 #region Battle Start
 	case BattleState.BattleStart:
-		
+		for (var i = 0; i < array_length(player_units); i++) {
+			
+			
+				
+		// removes attack buff if 2nd turn
+				
+			show_debug_message("reset attack bonus");
+			player_units[i].attack_bonus_temp=0;
+				
+			player_units[i].attack_buff_recent=false;
+				
+		// removes move buff if 2nd turn
+				
+			show_debug_message("reset move bonus");
+			player_units[i].move_bonus_temp=0;
+				
+			player_units[i].move_buff_recent=false;
+			player_units[i].has_moved = false;
+			player_units[i].has_attacked = false;
+			
+		}
 		obj_menu.set_turn_banner(false);
 		obj_draw_bg.colorSwitch = true;
 		
@@ -213,11 +233,16 @@ switch (state) {
 			change_state(BattleState.BattleEnd);
 			break;
 		}
-		
+		obj_menu.set_text("WASD - Move Cursor     Enter - Select Unit     Space - End Turn");
 		// checks if all player units have moved
 		for (var i = 0; i < array_length(player_units); i++) {
 			if (!player_units[i].has_attacked) {
 				has_all_attacked = false;
+			}
+			if(player_units[i].hp<=0){
+				player_units[i].hp=0;
+				player_units[i].has_moved = true;
+				player_units[i].has_attacked = true;
 			}
 		}
 		if (has_all_attacked) {
@@ -239,7 +264,7 @@ switch (state) {
 				// set the tpcost array in the menu to match actual costs
 				obj_menu.tpCost=[0,unit.actions[0].cost[unit.upgrades[0]],unit.actions[1].cost[unit.upgrades[1]],unit.actions[2].cost[unit.upgrades[2]],unit.actions[3].cost[unit.upgrades[3]]];
 				//obj_menu.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
-				obj_menu.set_text("WASD - Move Cursor     Enter - Select Unit     Space - End Turn");
+				
 				
 				// resets the previous grid position to current position. needed for when getting moved when its not their turn (push or teleport)
 				unit.prev_grid=[unit.grid_pos[0],unit.grid_pos[1]];
