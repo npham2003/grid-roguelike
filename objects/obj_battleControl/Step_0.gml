@@ -559,7 +559,7 @@ switch (state) {
 								unit.skill_complete = false;
 								enough_tp = false;
 								unit.skill_progress =0;
-								
+								unit.play_sound = false;
 								unit.thaw_checked = false;
 								change_state(BattleState.PlayerAiming);
 								obj_gridCreator.reset_highlights_cursor();

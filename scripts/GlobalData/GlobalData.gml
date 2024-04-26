@@ -879,7 +879,7 @@ global.actionLibrary = {
 					}
 				}
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
 					audio_play_sound(sfx_push, 0, false, 0.3);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
@@ -963,7 +963,7 @@ global.actionLibrary = {
 					}
 				}
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
 					audio_play_sound(sfx_base_laser, 0, false);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
@@ -1045,7 +1045,7 @@ global.actionLibrary = {
 					}
 				}
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
+				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("J"))) {
 					audio_play_sound(sfx_push, 0, false, 0.3);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						
