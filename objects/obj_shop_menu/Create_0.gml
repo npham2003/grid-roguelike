@@ -11,8 +11,8 @@ skill_x_start = 150;
 skill_y_start = 30;
 
 descriptor_text = ["Heal 1 character for 1 HP",
+					"Increase TP by 1",
 					"Gain 1 extra TP each turn for 1 battle",
-					"Increase maximum TP by 5",
 					"Each attack does 1 extra damage for one battle", 
 					"Alter skill 1",
 					"Alter skill 2",
@@ -20,7 +20,7 @@ descriptor_text = ["Heal 1 character for 1 HP",
 					"Gain 1 random party member"];
 menu_level=0;
 
-cost = [200, 300, 600, 300, 600, 600, 600, 1000];
+cost = [2, 4, 6, 4, 6, 6, 6, 10];
 
 selectable = [true, true, true, true, true, true, true, true];
 

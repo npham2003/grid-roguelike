@@ -45,14 +45,15 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 					menu_level=1;
 				}
 				if(selector_pos[0]==1&&selector_pos[1]==0&&selectable[1]){ // gain 1 tp
-					tp_bonus();
+					obj_battleControl.tp_current+=1;
+					obj_battleControl.gold-=cost[1];
 					audio_play_sound(sfx_buy, 0, false);
 					
 				}
 				if(selector_pos[0]==2&&selector_pos[1]==0&&selectable[2]){ // 1 extra tp per turn
-					obj_battleControl.tp_max+=5;
-					obj_battleControl.gold-=cost[2];
+					tp_bonus();
 					audio_play_sound(sfx_buy, 0, false);
+					
 				}
 				if(selector_pos[0]==3&&selector_pos[1]==0&&selectable[3]){ // 1 extra dmg on attacks
 					attack_up();
