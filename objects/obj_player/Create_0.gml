@@ -27,6 +27,10 @@ move_bonus_temp=0;
 bombs_placed=0;
 thaw_damage=0;
 thaw_checked = false;
+
+hp_opacity=0;
+hp_opacity_increase=true;
+
 var return_coords;
 
 show_debug_message("{0}: [{1}, {2}]", name, grid_pos[0], grid_pos[1]);
@@ -292,5 +296,41 @@ function push_down(squares){
 		obj_battleEffect.show_damage(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]+1]._entity_on_tile,1,c_red);
 		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]+1]._entity_on_tile.hp-=1;
 		
+	}
+}
+
+make_diamond = function(_x, _y, _r) {
+	return [[_x - _r, _y], [_x ,_y -_r], [_x, _y + _r], [_x + _r, _y]];
+}
+
+//draw tp
+make_tp = function(_x, _y, _spacing, _len, is_rows) {
+	var _res = [];
+	var _bars =  _len/5;
+	var _rem =  _len%5;
+	var _y_offset = 0;
+	
+	var _lines = _bars + _rem;
+	
+		for (var i = 0; i < _len; ++i) {
+			if (_bars > 0 && is_rows) {
+				if (i != 0 && i%5 == 0) {
+					for(var j = 0; j<array_length(_res);j++){
+						_res[j][1]-=_spacing/3;
+						_y_offset+=_spacing*0.45;
+					}
+				}
+			}
+			if (is_rows) _res[i] = [_x + (i%5)*_spacing, _y - _spacing*((i%5)%2) + _y_offset];
+			else _res[i] = [_x + (i)*_spacing, _y - _spacing*(i%2) + _y_offset];
+		}
+
+	return _res;
+	
+}
+
+draw_vertices = function(vertices){
+	for (var i = 0; i < array_length(vertices); ++i) {
+		draw_vertex(vertices[i][0], vertices[i][1]);
 	}
 }

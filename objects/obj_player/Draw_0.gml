@@ -18,3 +18,31 @@ if(stall_turns>0){
 if(has_attacked || has_moved){
 	//gpu_set_fog(oldFog[0], oldFog[1], oldFog[2], oldFog[3]);
 }
+
+
+var _pips = make_tp(x-30, y-60, 7, hpMax+1, false);
+for (var i = 1; i < array_length(_pips); ++i){
+	draw_primitive_begin(pr_trianglestrip);
+	draw_set_color(c_white);
+	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 5));
+	draw_primitive_end();
+}
+
+var _pips = make_tp(x-30, y-60, 7, hp+1, false);
+for (var i = 1; i < array_length(_pips); ++i){
+	draw_primitive_begin(pr_trianglestrip);
+	draw_set_color(c_red);
+	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 4));
+	draw_primitive_end();
+}
+
+for (var i = array_length(_pips)-1; i > array_length(_pips)-1-obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._danger_number; --i){
+	draw_primitive_begin(pr_trianglestrip);
+		
+	draw_set_color(c_black);
+	draw_set_alpha(hp_opacity);
+	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 4));
+	draw_primitive_end();
+}
+
+draw_set_alpha(1);

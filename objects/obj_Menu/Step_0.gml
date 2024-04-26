@@ -1,4 +1,4 @@
-//options
+#region options
 for (var i = 0; i < skills; ++i) {
 	
 	if(obj_battleControl.state==BattleState.PlayerAiming){
@@ -18,8 +18,9 @@ for (var i = 0; i < skills; ++i) {
 
 expandAnim = lerp(expandAnim, state, 0.2);
 tpCost=[0,player_unit.actions[0].cost[player_unit.upgrades[0]],player_unit.actions[1].cost[player_unit.upgrades[1]],player_unit.actions[2].cost[player_unit.upgrades[2]],player_unit.actions[3].cost[player_unit.upgrades[3]]];
+#endregion
 
-//portrait opacity
+#region portrait opacity
 if(open){
 	state = 1;
 	if(portraitAlpha<1){
@@ -31,9 +32,9 @@ if(open){
 		portraitAlpha-=0.1;
 	}
 }
+#endregion
 
-
-//tp opacity
+#region tp opacity
 if(tp_opacity_increase){
 	tp_opacity+=0.01;
 }else{
@@ -45,9 +46,23 @@ if(tp_opacity>=1){
 if(tp_opacity<=0.5){
 	tp_opacity_increase=true;
 }
+#endregion
 
+#region hp opacity
+if(hp_opacity_increase){
+	hp_opacity+=0.01;
+}else{
+	hp_opacity-=0.01;
+}
+if(hp_opacity>=1){
+	hp_opacity_increase=false;
+}
+if(hp_opacity<=0.5){
+	hp_opacity_increase=true;
+}
+#endregion
 
-//turn opacity
+#region turn opacity
 if (turn_count <= turn_max) {
 	if(turn_opacity_increase){
 		turn_opacity+=0.05;
@@ -64,3 +79,23 @@ if (turn_count <= turn_max) {
 }
 
 turn_text_anim = lerp(turn_text_anim, 2, 0.2)
+#endregion
+
+#region confirm opacity
+if(confirm){
+	confirmShiftX[0] = 850;
+	confirmShiftX[1] = 1050;
+	confirmShiftY = 660;
+	
+
+}else{
+	confirmShiftX[0] = 800;
+	confirmShiftX[1] = 1000;
+	confirmShiftY = 700;
+}
+
+confirmY = lerp(confirmY, confirmShiftY, 0.2);
+confirmX[0] = lerp(confirmX[0], confirmShiftX[0], 0.2);
+confirmX[1] = lerp(confirmX[1], confirmShiftX[1], 0.2);
+
+#endregion
