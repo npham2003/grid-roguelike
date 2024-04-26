@@ -4240,8 +4240,8 @@ global.enemies = [
 	},
 	{
 		name: "Shooter",
-		hp: 3,
-		hpMax: 3,
+		hp: 5,
+		hpMax: 5,
 		healthbar_offset: -60,
 		sprites: { idle: spr_cannon_idle, attack: spr_cannon_attack },
 		actions: [global.enemyActions.homing_aoe],
@@ -4251,8 +4251,8 @@ global.enemies = [
 	},
 	{
 		name: "Cross",
-		hp: 1,
-		hpMax: 1,
+		hp: 2,
+		hpMax: 2,
 		healthbar_offset: -40,
 		sprites: { idle: spr_turret_idle, attack: spr_turret_attack },
 		actions: [global.enemyActions.cross],
@@ -4262,8 +4262,8 @@ global.enemies = [
 	},
 	{
 		name: "Summoner",
-		hp: 3,
-		hpMax: 3,
+		hp: 5,
+		hpMax: 5,
 		healthbar_offset: -40,
 		sprites: { idle: spr_summoner_idle, attack: spr_summoner_attack },
 		actions: [global.enemyActions.summon],
@@ -4554,6 +4554,14 @@ global.encounters = [
 		{
 			info: global.enemies[5],
 			grid: [8, 2]
+		},
+		{
+			info: global.enemies[5],
+			grid: [8, 4]
+		},
+		{
+			info: global.enemies[5],
+			grid: [8, 0]
 		}
 	],
 	[
@@ -4564,6 +4572,14 @@ global.encounters = [
 		{
 			info: global.enemies[0],
 			grid: [8, 2]
+		},
+		{
+			info: global.enemies[0],
+			grid: [7, 2]
+		},
+		{
+			info: global.enemies[0],
+			grid: [7, 3]
 		}
 		
 	],
@@ -4584,21 +4600,11 @@ global.encounters = [
 			info: global.enemies[1],
 			grid: [6, 3]
 		},
-		
-	],
-	[
 		{
-			info: global.enemies[0],
+			info: global.enemies[5],
 			grid: [8, 1]
 		},
-		{
-			info: global.enemies[0],
-			grid: [8, 2]
-		},
-		{
-			info: global.enemies[0],
-			grid: [8, 3]
-		}
+		
 	],
 	[
 		{
@@ -4624,6 +4630,28 @@ global.encounters = [
 	],
 	[
 		{
+			info: global.enemies[0],
+			grid: [8, 1]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 2]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 3]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 4]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 0]
+		}
+	],
+	[
+		{
 			info: global.enemies[2],
 			grid: [9, 2]
 		},
@@ -4645,6 +4673,14 @@ global.encounters = [
 		{
 			info: global.enemies[2],
 			grid: [9, 3]
+		},
+		{
+			info: global.enemies[1],
+			grid: [8, 1]
+		},
+		{
+			info: global.enemies[1],
+			grid: [8, 3]
 		}
 		
 	],
@@ -4661,6 +4697,10 @@ global.encounters = [
 		{
 			info: global.enemies[2],
 			grid: [8, 4]
+		},
+		{
+			info: global.enemies[2],
+			grid: [8, 3]
 		},
 		
 	],
@@ -4699,6 +4739,25 @@ global.encounters = [
 			info: global.enemies[1],
 			grid: [8, 2]
 		}
+	],
+	[
+		{
+			info: global.enemies[4],
+			grid: [9, 1]
+		},
+		{
+			info: global.enemies[4],
+			grid: [9, 3]
+		},
+		{
+			info: global.enemies[1],
+			grid: [7, 2]
+		},
+		{
+			info: global.enemies[1],
+			grid: [8, 2]
+		}
+		
 	],
 	[
 		{
@@ -4725,13 +4784,6 @@ global.encounters = [
 			info: global.enemies[4],
 			grid: [9, 3]
 		},
-		
-	],
-	[
-		{
-			info: global.enemies[4],
-			grid: [9, 1]
-		},
 		{
 			info: global.enemies[0],
 			grid: [7, 3]
@@ -4755,6 +4807,22 @@ global.encounters = [
 			info: global.enemies[2],
 			grid: [8, 2]
 		},
+		{
+			info: global.enemies[2],
+			grid: [8, 4]
+		},
+		{
+			info: global.enemies[2],
+			grid: [8, 0]
+		},
+		{
+			info: global.enemies[1],
+			grid: [7, 2]
+		},
+		{
+			info: global.enemies[1],
+			grid: [8, 2]
+		}
 		
 	],
 	
