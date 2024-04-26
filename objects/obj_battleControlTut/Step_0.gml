@@ -132,7 +132,7 @@ switch (state) {
 					}
 				} else if (teachingBasic == true && teachingSkills == false) {
 					obj_menuTut.enter_text("PRESS ENTER");
-					obj_menuTut.set_text("Attacking costs Technique Points (TP), shown by the squares below. You gain some TP every turn based on who is in your party. Now, press H to fire back! You can also MOVE and ATTACK in one turn!");
+					obj_menuTut.set_text("Attacking costs Technique Points (TP), shown by the squares below. You gain some TP every turn. Now, press H to fire back! You can also MOVE and ATTACK in one turn!");
 					if (key_Enter_pressed) {
 						enemy_order = 0;
 						obj_menuTut.set_text("");
@@ -141,7 +141,7 @@ switch (state) {
 					}
 				} else if (teachingSkills == true && skillTaught == false) {
 					obj_menuTut.enter_text("PRESS ENTER");
-					obj_menuTut.set_text("Skills cost more TP. Use the J and L skills to defeat the enemies.  If you want to go back, press Tab. For now, TP will be refreshed every turn, but that is usually not the case.");
+					obj_menuTut.set_text("Skills cost more TP. J hits all enemies in a line. L fires in an AOE. If you want to go back, press Tab. For now, TP will be refreshed every turn, but that is usually not the case.");
 					if (key_Enter_pressed) {
 						skillTaught = true;
 						enemy_order = 0;
@@ -259,7 +259,7 @@ switch (state) {
 		// tp bonus 
 		//tp_current+=tp_bonus;
 		if (teachingSkills) {
-			tp_current = 10;
+			tp_current = tp_max;
 		}
 		
 		// makes sure you don't go over max tp

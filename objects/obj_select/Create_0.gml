@@ -9,7 +9,8 @@ member_name = [
 	"Dancer Guy",
 	"Teleport Guy",
 	"Bomb Guy",
-	"Freeze Guy"
+	"Freeze Guy",
+	"Push Guy"
 ];
 
-selected = [false, false, false, false, false];
+selected = [false, false, false, false, false, false];

@@ -243,8 +243,7 @@ draw_text_ext(200, 10, _text, 40, 1000);
 
 #region press enter
 draw_set_font(fnt_chiaro);
-draw_set_alpha(_enter_opacity);
-draw_text_transformed(1000, 150, _enter_text, 0.6, 0.6, 0);
+draw_text_transformed_color(1000, 150, _enter_text, 0.6, 0.6, 0, c_black, c_black, c_black, c_black, _enter_opacity);
 #endregion
 
 #region turn banner

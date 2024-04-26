@@ -1,5 +1,5 @@
 moveable_grids = [];
-move_range = 2; // temp val, change during initialization
+//playerSpeed = 2; // temp val, change during initialization
 skill_used = 0; // just to determine whether we do j k l, maybe it's not optimized
 skill_range = [];
 skill_range_aux = [];
@@ -37,27 +37,27 @@ has_moved = false;
 has_attacked = false;
 
 function show_moveable_grids() {
-	//moveable_grids = obj_gridCreator.get_moveable_grids(grid_pos, move_range);
+	//moveable_grids = obj_gridCreator.get_moveable_grids(grid_pos, playerSpeed);
 	prev_grid = [grid_pos[0], grid_pos[1]];
 	//show_debug_message(grid_pos[0]);
 	//show_debug_message(grid_pos[1]);
-	moveable_grids = obj_gridCreator.highlighted_move(grid_pos[0], grid_pos[1], move_range+move_bonus_temp);
+	moveable_grids = obj_gridCreator.highlighted_move(grid_pos[0], grid_pos[1], playerSpeed+move_bonus_temp);
 	obj_cursor.movable_tiles=moveable_grids;
 	//moveable_grids = obj_gridCreator.highlighted_attack_line(0, grid_pos[1]);
 
 }
 
 function preview_moveable_grids() {
-	//moveable_grids = obj_gridCreator.get_moveable_grids(grid_pos, move_range);
-	obj_gridCreator.highlighted_move_cursor(grid_pos[0], grid_pos[1], move_range+move_bonus_temp);	
+	//moveable_grids = obj_gridCreator.get_moveable_grids(grid_pos, playerSpeed);
+	obj_gridCreator.highlighted_move_cursor(grid_pos[0], grid_pos[1], playerSpeed+move_bonus_temp);	
 	//moveable_grids = obj_gridCreator.highlighted_attack_line(0, grid_pos[1]);
 
 }
 
 function show_moveable_grids_prev() {
-	//moveable_grids = obj_gridCreator.get_moveable_grids(grid_pos, move_range);
+	//moveable_grids = obj_gridCreator.get_moveable_grids(grid_pos, playerSpeed);
 	
-	moveable_grids = obj_gridCreator.highlighted_move(prev_grid[0], prev_grid[1], move_range+move_bonus_temp);
+	moveable_grids = obj_gridCreator.highlighted_move(prev_grid[0], prev_grid[1], playerSpeed+move_bonus_temp);
 	obj_cursor.movable_tiles=moveable_grids;
 	obj_cursor.reset_cursor(grid_pos[0],grid_pos[1]);
 	//moveable_grids = obj_gridCreator.highlighted_attack_line(0, grid_pos[1]);

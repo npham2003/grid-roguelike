@@ -8,18 +8,25 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 				selector_pos[0]-=1;
 				fill_alpha = 0;
 				if(selector_pos[0]<0){
-					selector_pos[0]=3;
+					selector_pos[0]=3-selector_pos[1];
 				}
 			}
 			if (keyboard_check_pressed(ord("D"))) {
 				selector_pos[0]+=1;
 				fill_alpha = 0;
-				selector_pos[0]=selector_pos[0]%4
+				if(selector_pos[1]==0){
+					selector_pos[0]=selector_pos[0]%4
+				}else{
+					selector_pos[0]=selector_pos[0]%3
+				}
 			}
 			if (keyboard_check_pressed(ord("S"))) {
 				selector_pos[1]+=1;
 				fill_alpha = 0;
 				selector_pos[1]=selector_pos[1]%2
+				if(selector_pos[1]==1 && selector_pos[0]==3){
+					selector_pos[0]=2;
+				}
 			}
 			if (keyboard_check_pressed(ord("W"))) {
 				selector_pos[1]-=1;
@@ -38,15 +45,13 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 					menu_level=1;
 				}
 				if(selector_pos[0]==1&&selector_pos[1]==0&&selectable[1]){ // gain 1 tp
-					obj_battleControl.tp_current+=1;
-					obj_battleControl.gold-=cost[1];
-					if(obj_battleControl.tp_current>obj_battleControl.tp_max){
-						obj_battleControl.tp_current=obj_battleControl.tp_max;
-					}
+					tp_bonus();
 					audio_play_sound(sfx_buy, 0, false);
+					
 				}
 				if(selector_pos[0]==2&&selector_pos[1]==0&&selectable[2]){ // 1 extra tp per turn
-					tp_bonus();
+					obj_battleControl.tp_max+=5;
+					obj_battleControl.gold-=cost[2];
 					audio_play_sound(sfx_buy, 0, false);
 				}
 				if(selector_pos[0]==3&&selector_pos[1]==0&&selectable[3]){ // 1 extra dmg on attacks

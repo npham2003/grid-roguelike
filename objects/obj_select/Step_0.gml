@@ -24,6 +24,11 @@ if(curr < 3){
 		curr++;
 		selected[4] = true;
 	}
+	if(keyboard_check_pressed(ord("6")) && !selected[5]){
+		party[curr] = 5;
+		curr++;
+		selected[5] = true;
+	}
 }
 
 if (keyboard_check_pressed(vk_tab) && curr > 0) {

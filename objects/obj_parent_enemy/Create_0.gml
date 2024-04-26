@@ -46,7 +46,11 @@ enemy_turn_order=0;
 // find a valid target
 function find_target() {
 	var available_targets = battlecontrol.player_units;
+	
 	target = available_targets[irandom(array_length(available_targets) - 1)];
+	while(target.hp<=0){
+		target = available_targets[irandom(array_length(available_targets) - 1)];
+	}
 	show_debug_message("{0}'s target: {1}", name, target.name);
 	target_pos=[target.grid_pos[0],target.grid_pos[1]];
 }
@@ -113,9 +117,9 @@ function calculate_util(test_x, test_y) {
 					}
 			
 					// util for hitting player
-					if(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.ally){
+					if(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.ally && obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.hp>0){
 						util+=2;
-					}else{
+					}else if(!obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.ally){
 						// util for hitting enemy
 						util-=3;
 					}
@@ -623,7 +627,7 @@ function push_back(squares){
 	if(grid_pos[0]==0 || grid_pos[0]==GRIDWIDTH-1){
 		obj_battleEffect.show_damage(self,1,c_red);
 		hp-=1;
-		display_target_highlights();
+		
 		began_push=false;
 		return;
 	}
@@ -659,7 +663,7 @@ function push_forward(squares){
 		obj_battleEffect.show_damage(self,1,c_red);
 		hp-=1;
 		began_push=false;
-		display_target_highlights();
+		
 		return;
 	}
 	if(obj_gridCreator.battle_grid[grid_pos[0]-1][grid_pos[1]]._is_empty){
@@ -688,10 +692,10 @@ function push_up(squares){
 	if(!began_push){
 		obj_battleEffect.push_animation(self,1);
 	}
-	if(grid_pos[0]==0 || grid_pos[1]==0){
+	if(grid_pos[1]==0){
 		obj_battleEffect.show_damage(self,1,c_red);
 		hp-=1;
-		display_target_highlights();
+		
 		began_push=false;
 		return;
 	}
@@ -723,10 +727,10 @@ function push_down(squares){
 	if(!began_push){
 		obj_battleEffect.push_animation(self,3);
 	}
-	if(grid_pos[0]==0 || grid_pos[1]==GRIDHEIGHT-1){
+	if(grid_pos[1]==GRIDHEIGHT-1){
 		obj_battleEffect.show_damage(self,1,c_red);
 		hp-=1;
-		display_target_highlights();
+		
 		return;
 	}
 	if(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]+1]._is_empty){

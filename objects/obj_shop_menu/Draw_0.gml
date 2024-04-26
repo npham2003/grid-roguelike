@@ -11,28 +11,35 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 		draw_sprite_ext(spr_shop_menu_border, image_index, actual_x, y, image_xscale, image_yscale, image_angle, image_blend, alpha);
 		for (i = 0; i<4; i++){
 			for (j=0; j<2; j++){
-			
+				var offset=100*j
+				var text_box_offset=250*j;
 				//if the option is selected
+				if(i==3&&j==1){
+					break;
+				}
+				draw_set_alpha(1);
+				draw_set_color(c_white);
+				draw_rectangle(actual_x+(200*i)+125+offset, y+(175*j)+37.5, actual_x+(200*i)+275+offset, y+(175*j)+187.5, true);
+				draw_set_color(c_black);
 				if (selector_pos[0] == i && selector_pos[1] == j){
 				
 					//draw option, fill with white
 					fill_alpha = lerp(fill_alpha, 1, 0.2);
 					draw_set_alpha(fill_alpha);
-					draw_rectangle_colour(actual_x+(200*i)+125, y+(175*j)+37.5, actual_x+(200*i)+275, y+(175*j)+187.5, global._primary, global._primary, global._primary, global._primary, false);
+					draw_rectangle_colour(actual_x+(200*i)+125+offset, y+(175*j)+37.5, actual_x+(200*i)+275+offset, y+(175*j)+187.5, global._primary, global._primary, global._primary, global._primary, false);
 				
 					//draw text box and text
 					draw_set_alpha(1);
-					draw_rectangle_colour(actual_x+(200*i)+100, y+(175*j)-42, actual_x+(200*i)+300, y+(175*j)+22, c_black, c_black, c_black, c_black, false);
+					draw_rectangle_colour(actual_x+(200*i)+100+offset, y+(175*j)-42+text_box_offset, actual_x+(200*i)+300+offset, y+(175*j)+22+text_box_offset, c_black, c_black, c_black, c_black, false);
 					draw_set_color(global._primary);
-					draw_text_ext_transformed(actual_x+(200*i)+115, y+(175*j)-50, descriptor_text[i+j*4], 40, 360, 0.5, 0.5, image_angle);
-					draw_sprite_ext(spr_shop_menu_border, image_index, actual_x+(200*i)+100, y+(175*j)-50, 0.2, 0.2, image_angle, global._primary, alpha);
+					draw_text_ext_transformed(actual_x+(200*i)+115+offset, y+(175*j)-50+text_box_offset, descriptor_text[i+j*4], 40, 360, 0.5, 0.5, image_angle);
+					draw_sprite_ext(spr_shop_menu_border, image_index, actual_x+(200*i)+100+offset, y+(175*j)-50+text_box_offset, 0.2, 0.2, image_angle, global._primary, alpha);
 				}
 		
 				//draw empty rectangle
 				draw_set_alpha(1);
 				draw_set_color(c_white);
-				draw_rectangle(actual_x+(200*i)+125, y+(175*j)+37.5, actual_x+(200*i)+275, y+(175*j)+187.5, true);
-				draw_text_ext_transformed(actual_x+(200*i)+150, y+(175*j)+37.5, cost[i+j*4], 40, 360, 0.5, 0.5, image_angle);
+				draw_text_ext_transformed(actual_x+(200*i)+150+offset, y+(175*j)+37.5, cost[i+j*4], 40, 360, 0.5, 0.5, image_angle);
 				draw_set_color(c_black);
 				
 			

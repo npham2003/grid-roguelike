@@ -11,8 +11,8 @@ player_order = 0;
 enemy_order = 0;
 
 // maybe these are in the wrong spot? but anyway yea
-tp_max = 10;
-tp_current = 6;
+tp_max = 5;
+tp_current = 0;
 tp_bonus=0;
 
 in_animation = false;
