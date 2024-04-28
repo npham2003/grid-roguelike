@@ -62,14 +62,17 @@ switch(sub_menu){
 				}
 				if(keyboard_check_pressed(vk_enter)){
 					
-					
+					if(selector_pos==0 || selector_pos==1){
+						audio_play_sound(sfx_game_start, 0, false, 1, 0);
+					}
 					
 					if(selector_pos==2){
-						
+						audio_play_sound(sfx_menu_next, 0, false, 1, 0);
 						next_background_color=menu_colors[1];
 					}
 					if(selector_pos==3){
 						funny_opacity=1;
+						audio_play_sound(sfx_vine_boom, 0, false, 1, 0);
 					}else{
 						transition_in=false;
 					}
@@ -97,7 +100,9 @@ switch(sub_menu){
 						transition_in=false;
 						selector_pos=0;
 						next_background_color=menu_colors[0];
+						audio_play_sound(sfx_menu_back, 0, false, 0.7, 0);
 					}else{
+						audio_play_sound(sfx_menu_next, 0, false, 1, 0);
 						url_open_ext(website_urls[selector_pos],"_blank");
 					}
 				}
@@ -105,6 +110,7 @@ switch(sub_menu){
 					transition_in=false;
 					selector_pos=0;
 					next_background_color=menu_colors[0];
+					audio_play_sound(sfx_menu_back, 0, false, 0.7, 0);
 				}
 			}
 			break;
