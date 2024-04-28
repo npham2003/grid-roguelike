@@ -35,8 +35,8 @@ credits_x=room_width/2;
 
 profile_pictures=[spr_nick, spr_emil, spr_will, spr_lu, spr_back];
 
-diamond_fill=#E87B00;
-diamond_outline=#00CED5;
+diamond_fill=#ffb20a;
+diamond_outline=#009900;
 
 website_urls=["https://twitter.com/AqoursBaelz/", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"];
 
