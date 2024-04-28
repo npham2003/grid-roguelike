@@ -14,9 +14,9 @@ descriptor_text = ["Heal 1 character for 1 HP",
 					"Increase TP by 1",
 					"Gain 1 extra TP each turn for 1 battle",
 					"Each attack does 1 extra damage for one battle", 
-					"Alter skill 1",
-					"Alter skill 2",
-					"Alter skill 3",
+					"Upgrade a skill on this character",
+					"Upgrade a skill on this character",
+					"Upgrade a skill on this character",
 					"Gain 1 random party member"];
 menu_level=0;
 

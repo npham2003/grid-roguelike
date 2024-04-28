@@ -4,7 +4,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	
 
 	
-	if(menu_level!=3){
+	if(menu_level!=3 || menu_level!=2){
 		draw_set_color(c_black);
 		draw_set_alpha(alpha*0.8);
 		draw_rectangle(0, 0, room_width, room_height, false);
@@ -55,7 +55,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 					//draw_sprite_ext(spr_diamond_base, 0, imgX, imgY, portraitScale, portraitScale, 0, c_white, 1);
 					draw_set_color(c_white);
 					draw_primitive_begin(pr_trianglestrip);
-					draw_rectangle(actual_x+(200*i)+offset, y+(175*j), actual_x+(200*i)+500+offset, y+(175*j)+500, true);
+					draw_rectangle(actual_x+(200*i)+125+offset, y+(175*j)+37.5, actual_x+(200*i)+275+offset, y+(175*j)+187.5, true);
 					draw_primitive_end();
 
 					gpu_set_blendenable(true);
