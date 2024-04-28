@@ -332,6 +332,7 @@ switch (state) {
 								unit.skill_complete = false;
 								enough_tp = false;
 								unit.skill_progress=0;
+								audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 								change_state(BattleState.PlayerAiming);
 								
 								obj_gridCreator.reset_highlights_cursor();
@@ -474,6 +475,7 @@ switch (state) {
 					unit.skill_complete = false;
 					unit.skill_progress=0;
 					enough_tp = false;
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					change_state(BattleState.PlayerAiming);
 					for(i=0;i<array_length(enemy_units);i++){
 						enemy_units[i].recalc_los();
@@ -605,6 +607,7 @@ switch (state) {
 								change_state(BattleState.PlayerAiming);
 								obj_gridCreator.reset_highlights_cursor();
 								obj_battleEffect.remove_push_preview();
+								audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 							}
 						}
 				
