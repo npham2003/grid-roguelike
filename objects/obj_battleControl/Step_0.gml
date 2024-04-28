@@ -55,7 +55,7 @@ switch (state) {
 		obj_menu.set_turn_banner(false);
 		obj_draw_bg.colorSwitch = true;
 		
-		tp_current=3;
+		
 		obj_cursor.current_x=player_units[0].grid_pos[0];
 		obj_cursor.current_y=player_units[0].grid_pos[1];
 		//for (var i = 0; i < array_length(board_obstacles); i++) {
@@ -332,6 +332,7 @@ switch (state) {
 								unit.skill_complete = false;
 								enough_tp = false;
 								unit.skill_progress=0;
+								audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 								change_state(BattleState.PlayerAiming);
 								
 								obj_gridCreator.reset_highlights_cursor();
@@ -474,6 +475,7 @@ switch (state) {
 					unit.skill_complete = false;
 					unit.skill_progress=0;
 					enough_tp = false;
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					change_state(BattleState.PlayerAiming);
 					for(i=0;i<array_length(enemy_units);i++){
 						enemy_units[i].recalc_los();
@@ -605,6 +607,7 @@ switch (state) {
 								change_state(BattleState.PlayerAiming);
 								obj_gridCreator.reset_highlights_cursor();
 								obj_battleEffect.remove_push_preview();
+								audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 							}
 						}
 				
@@ -747,6 +750,7 @@ switch (state) {
 			if(battle_progress==array_length(global.encounters)){
 				battle_progress=0;
 			}
+			tp_current=3;
 			change_state(BattleState.PlayerUpgrade);
 		}else{
 			obj_gridCreator.reset_highlights_cursor();
