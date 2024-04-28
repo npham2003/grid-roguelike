@@ -61,20 +61,20 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 				}
 				if(selector_pos[0]==0&&selector_pos[1]==1&&selectable[4]){ // upgrade skill 1
 					menu_level=2;
-					skill_select_pos=1;
+					character_select_pos=0;
 				}
 				if(selector_pos[0]==1&&selector_pos[1]==1&&selectable[5]){ // upgrade skill 2
 					menu_level=2;
-					skill_select_pos=2;
+					character_select_pos=1;
 				}
 				if(selector_pos[0]==2&&selector_pos[1]==1&&selectable[6]){ // upgrade skill 3
 					menu_level=2;
-					skill_select_pos=3;
+					character_select_pos=2;
 				}
-				if(selector_pos[0]==3&&selector_pos[1]==1&&selectable[7]){ // new party member
-					new_party_member();
-					audio_play_sound(sfx_buy, 0, false);
-				}
+				//if(selector_pos[0]==3&&selector_pos[1]==1&&selectable[7]){ // new party member
+				//	new_party_member();
+				//	audio_play_sound(sfx_buy, 0, false);
+				//}
 				
 			}
 			if(keyboard_check_pressed(vk_tab)){
@@ -109,16 +109,19 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 			}
 			break;
 		case 2:
-			if (keyboard_check_pressed(ord("A"))) {
-				character_select_pos-=1;
+			if (keyboard_check_pressed(ord("W"))) {
+				skill_select_pos-=1;
 				
-				if(character_select_pos<0){
-					character_select_pos=array_length(obj_battleControl.player_units)-1;
+				if(skill_select_pos<0){
+					skill_select_pos=2;
 				}
 			}
-			if (keyboard_check_pressed(ord("D"))) {
-				character_select_pos+=1;
-				character_select_pos=character_select_pos%array_length(obj_battleControl.player_units);
+			if (keyboard_check_pressed(ord("S"))) {
+				skill_select_pos+=1;
+				
+				if(skill_select_pos>2){
+					skill_select_pos=0;
+				}
 				
 			}
 			if(keyboard_check_pressed(vk_tab)){
@@ -127,11 +130,14 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 			}
 			if(keyboard_check_pressed(vk_enter)){
 				menu_level=3;
+				skill_select_pos+=1;
+				new_skill_upgrade=obj_battleControl.player_units[character_select_pos].upgrades[skill_select_pos];
 			}
 			break;
 		case 3:
 			if(keyboard_check_pressed(vk_tab)){
 				menu_level=2;
+				skill_select_pos-=1;
 			}
 			if (keyboard_check_pressed(ord("S"))) {
 				new_skill_upgrade+=1;
