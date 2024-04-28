@@ -6,7 +6,7 @@ background = layer_background_get_id(layer_get_id("Background"));
 
 current_background_color=global._characterSecondary;
 next_background_color=global._characterSecondary;
-menu_colors=[global._characterSecondary,global._characterPrimary];
+menu_colors=[global._characterSecondary,global._characterPrimary, c_maroon];
 
 
 line_spacing=sprite_get_height(spr_diamond_base) * 15/2;;
@@ -38,7 +38,7 @@ profile_pictures=[spr_nick, spr_emil, spr_will, spr_lu, spr_back];
 diamond_fill=#ffb20a;
 diamond_outline=#009900;
 
-website_urls=["https://twitter.com/AqoursBaelz/", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"];
+website_urls=["https://twitter.com/AqoursBaelz/", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://wsl7779.itch.io", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"];
 
 menu_options=[
 	[

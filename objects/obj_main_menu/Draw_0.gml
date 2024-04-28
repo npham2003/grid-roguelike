@@ -129,5 +129,9 @@ if(sub_menu==1){
 	}
 	
 }
-
+draw_set_valign(fa_top);
+draw_set_halign(fa_left);
 draw_set_font(fnt_chiaro);
+draw_set_color(c_black);
+text_outline(580,700, "WASD - Move Cursor    Enter - Select    Tab - Back", 1, c_white, 8, 100000, 1000000);
+draw_set_color(c_white);

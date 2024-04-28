@@ -22,7 +22,8 @@ if(transition_in){
 		actual_options_x=lerp(actual_options_x,initial_options_x,0.2);
 		if(actual_logo_x<=-290){
 			if(selector_pos==0){
-				room_goto(2);
+				//room_goto(2);
+				sub_menu=2;
 			}
 			if(selector_pos==1){
 				room_goto(1);
@@ -62,7 +63,12 @@ switch(sub_menu){
 				}
 				if(keyboard_check_pressed(vk_enter)){
 					
-					if(selector_pos==0 || selector_pos==1){
+					if(selector_pos==0){
+						audio_play_sound(sfx_game_start, 0, false, 1, 0);
+						next_background_color=menu_colors[2];
+						
+					}
+					if(selector_pos==1){
 						audio_play_sound(sfx_game_start, 0, false, 1, 0);
 					}
 					
@@ -108,7 +114,7 @@ switch(sub_menu){
 				}
 				if(keyboard_check_pressed(vk_tab)){
 					transition_in=false;
-					selector_pos=0;
+					selector_pos=2;
 					next_background_color=menu_colors[0];
 					audio_play_sound(sfx_menu_back, 0, false, 0.7, 0);
 				}
