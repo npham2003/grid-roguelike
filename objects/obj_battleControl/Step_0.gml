@@ -55,7 +55,7 @@ switch (state) {
 		obj_menu.set_turn_banner(false);
 		obj_draw_bg.colorSwitch = true;
 		
-		tp_current=3;
+		
 		obj_cursor.current_x=player_units[0].grid_pos[0];
 		obj_cursor.current_y=player_units[0].grid_pos[1];
 		//for (var i = 0; i < array_length(board_obstacles); i++) {
@@ -747,6 +747,7 @@ switch (state) {
 			if(battle_progress==array_length(global.encounters)){
 				battle_progress=0;
 			}
+			tp_current=3;
 			change_state(BattleState.PlayerUpgrade);
 		}else{
 			obj_gridCreator.reset_highlights_cursor();

@@ -1,7 +1,117 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-line_spacing=150;
+
+background = layer_background_get_id(layer_get_id("Background"));
+
+current_background_color=global._characterSecondary;
+next_background_color=global._characterSecondary;
+menu_colors=[global._characterSecondary,global._characterPrimary];
+
+
+line_spacing=sprite_get_height(spr_diamond_base) * 15/2;;
 big_acronym=["O","O","P","S"];
 full_word=["bject","riented","hase","hifts"];
 italic_offset=50;
+
+initial_logo_x=-300;
+actual_logo_x=-300;
+logo_x=400;
+selector_pos=0;
+
+
+initial_options_x=2000;
+actual_options_x=2000;
+options_x=1000;
+arrow_spacing=-200
+
+sub_menu=0;
+
+transition_in=true;
+
+initial_credits_x=2000;
+actual_credits_x=2000;
+credits_x=room_width/2;
+
+profile_pictures=[spr_nick, spr_emil, spr_will, spr_lu, spr_back];
+
+website_urls=["https://twitter.com/AqoursBaelz/"];
+
+menu_options=[
+	[
+		"Play",
+		"Tutorial",
+		"Credits"
+	],
+	[
+		"Nick Pham",
+		"Emil Cheung",
+		"Will Lee",
+		"Lu Pang",
+		""
+	]
+];
+
+
+
+
+make_diamond = function(_x, _y, _r) {
+	return [[_x - _r, _y], [_x ,_y -_r], [_x, _y + _r], [_x + _r, _y]];
+}
+
+//draw tp
+
+make_menu = function(_x, _y, _spacing, _len, is_rows) {
+	var _res = [];
+	var _bars =  _len/5;
+	var _rem =  _len%5;
+	var _y_offset = 0;
+	
+	var _lines = _bars + _rem;
+	
+		for (var i = 0; i < _len; ++i) {
+			if (_bars > 0 && is_rows) {
+				if (i != 0 && i%5 == 0) {
+					for(var j = 0; j<array_length(_res);j++){
+						_res[j][1]-=_spacing/3;
+						_y_offset+=_spacing*0.45;
+					}
+				}
+			}
+			 _res[i] = [_x + _spacing*(i%2) + _y_offset , _y   + (i)*_spacing];
+		}
+
+	return _res;
+	
+}
+make_menu_alternate = function(_x, _y, _spacing, _len, is_rows, actual, initial) {
+	var _res = [];
+	var _bars =  _len/5;
+	var _rem =  _len%5;
+	var _y_offset = 0;
+	
+	var _lines = _bars + _rem;
+	
+		for (var i = 0; i < _len; ++i) {
+			if (_bars > 0 && is_rows) {
+				if (i != 0 && i%5 == 0) {
+					for(var j = 0; j<array_length(_res);j++){
+						_res[j][1]-=_spacing/3;
+						_y_offset+=_spacing*0.45;
+					}
+				}
+			}
+			//show_debug_message(string(((actual - initial)*power(-1,i))));
+			 _res[i] = [_x + _spacing*(i%2) + _y_offset + ((initial - actual)*power(-1,i)), _y   + (i)*_spacing];
+			 
+		}
+
+	return _res;
+	
+}
+
+draw_vertices = function(vertices){
+	for (var i = 0; i < array_length(vertices); ++i) {
+		draw_vertex(vertices[i][0], vertices[i][1]);
+	}
+}
