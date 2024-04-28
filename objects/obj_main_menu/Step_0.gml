@@ -90,6 +90,11 @@ switch(sub_menu){
 						url_open_ext(website_urls[selector_pos],"_blank");
 					}
 				}
+				if(keyboard_check_pressed(vk_tab)){
+					transition_in=false;
+					selector_pos=0;
+					next_background_color=menu_colors[0];
+				}
 			}
 			break;
 }
