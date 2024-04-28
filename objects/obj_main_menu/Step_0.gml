@@ -2,6 +2,11 @@
 // You can write your code in this editor
 layer_background_blend(background, current_background_color);
 current_background_color = merge_color(current_background_color, next_background_color, 0.1);
+
+if(funny_opacity>0){
+	funny_opacity-=0.05;
+}
+
 if(transition_in){
 	
 	if(sub_menu==0){
@@ -56,11 +61,17 @@ switch(sub_menu){
 					}
 				}
 				if(keyboard_check_pressed(vk_enter)){
-				
-					transition_in=false;
+					
+					
+					
 					if(selector_pos==2){
 						
 						next_background_color=menu_colors[1];
+					}
+					if(selector_pos==3){
+						funny_opacity=1;
+					}else{
+						transition_in=false;
 					}
 					
 				}

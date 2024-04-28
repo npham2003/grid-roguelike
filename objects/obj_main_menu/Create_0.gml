@@ -44,7 +44,8 @@ menu_options=[
 	[
 		"Play",
 		"Tutorial",
-		"Credits"
+		"Credits",
+		"Exit"
 	],
 	[
 		"Nick Pham",
@@ -56,7 +57,9 @@ menu_options=[
 ];
 
 
+funny_opacity=0;
 
+funny_scale=max(room_height/sprite_get_height(saul_goodman), room_width/sprite_get_width(saul_goodman));
 
 make_diamond = function(_x, _y, _r) {
 	return [[_x - _r, _y], [_x ,_y -_r], [_x, _y + _r], [_x + _r, _y]];

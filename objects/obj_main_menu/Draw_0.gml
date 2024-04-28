@@ -3,7 +3,7 @@
 
 draw_set_font(fnt_archivo);
 
-
+draw_sprite_ext(saul_goodman,image_number, room_width/2, room_height/2, funny_scale, funny_scale, image_angle, c_white, funny_opacity)
 draw_sprite(spr_logo,image_number,actual_logo_x,room_height/2);
 
 
