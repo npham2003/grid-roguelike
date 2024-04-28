@@ -24,14 +24,14 @@ if(sub_menu==0){
 		}
 		draw_primitive_end();
 		draw_primitive_begin(pr_trianglestrip);
-		draw_set_color(global._characterPrimary);
+		draw_set_color(diamond_outline);
 		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], line_spacing+10));
 		//draw_set_color(global._tpBorder);
 		//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 12));
 		draw_primitive_end();
 		draw_primitive_begin(pr_trianglestrip);
 	
-		draw_set_color(global._primary);
+		draw_set_color(diamond_fill);
 	
 		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], line_spacing+5));
 		//draw_set_color(global._tpBorder);
@@ -39,7 +39,7 @@ if(sub_menu==0){
 		//draw_set_color(global._tpBar);
 		//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 5));
 		draw_primitive_end();
-		draw_set_color(c_white);
+		draw_set_color(c_black);
 	
 		draw_text(_pips[i][0],_pips[i][1],menu_options[0][i]);
 		
@@ -64,14 +64,14 @@ if(sub_menu==1){
 		draw_primitive_begin(pr_trianglestrip);
 		//draw_set_color(global._tpBorder);
 		//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 10*expandAnim));
-		draw_set_color(global._characterPrimary);
+		draw_set_color(diamond_outline);
 		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], line_spacing-10));
 		//draw_set_color(global._tpBorder);
 		//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 12));
 		draw_primitive_end();
 		draw_primitive_begin(pr_trianglestrip);
 	
-		draw_set_color(global._primary);
+		draw_set_color(diamond_fill);
 	
 		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], line_spacing-15));
 		//draw_set_color(global._tpBorder);
@@ -87,7 +87,9 @@ if(sub_menu==1){
 		}else{
 			draw_set_halign(fa_left);
 		}
-		draw_text(_pips[i][0]+line_spacing*1.2*power(-1,i+1),_pips[i][1],menu_options[1][i]);
+		//draw_text(_pips[i][0]+line_spacing*1.2*power(-1,i+1),_pips[i][1],menu_options[1][i]);
+		draw_set_color(c_black);
+		text_outline(_pips[i][0]+line_spacing*1.2*power(-1,i+1),_pips[i][1], menu_options[1][i], 2, c_white, 8, 100000, 1000000);
 		
 		#region draw character
 		gpu_set_blendenable(false);

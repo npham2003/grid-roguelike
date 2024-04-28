@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"Textbox",
-    "path":"folders/Sprites/UI/Textbox.yy",
+    "name":"Main Menu",
+    "path":"folders/Sprites/UI/Main Menu.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
