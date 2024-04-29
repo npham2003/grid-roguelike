@@ -1,10 +1,7 @@
 if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	
 	// background and border
-	
-
-	
-	if(menu_level!=3 || menu_level!=2){
+	if(menu_level!=3 || menu_level!=2){ //if this is not the skill select screen
 		draw_set_color(c_black);
 		draw_set_alpha(1);
 		draw_rectangle(0, 0, room_width, room_height, false);
@@ -14,16 +11,16 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 				var offset=100*j
 				var text_box_offset=250*j;
 				//if the option is selected
-				if(i==3&&j==1){
+				if(i==3&&j==1){ //this is so we dont draw the 8th option
 					break;
 				}
 				draw_set_alpha(1);
 				draw_set_color(c_white);
 				//draw_rectangle(actual_x+(200*i)+125+offset, y+(175*j)+37.5, actual_x+(200*i)+275+offset, y+(175*j)+187.5, true);
 				draw_set_color(c_black);
-				if (selector_pos[0] == i && selector_pos[1] == j){
+				if (selector_pos[0] == i && selector_pos[1] == j){ //if this option is highlighted
 				
-					//draw option, fill with white
+					//draw option and fill with primary
 					fill_alpha = lerp(fill_alpha, 1, 0.2);
 					draw_set_alpha(fill_alpha);
 					draw_rectangle_colour(actual_x+(200*i)+125+offset, y+(175*j)+37.5, actual_x+(200*i)+275+offset, y+(175*j)+187.5, global._primary, global._primary, global._primary, global._primary, false);
@@ -36,7 +33,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 					draw_sprite_ext(spr_shop_menu_border, image_index, actual_x+(200*i)+100+offset, y+(175*j)-50+text_box_offset, 0.2, 0.2, image_angle, global._primary, alpha);
 				}
 		
-				//draw empty rectangle
+				//draw cost of option in top left corner
 				draw_set_alpha(1);
 				draw_set_color(c_white);
 				draw_text_ext_transformed(actual_x+(200*i)+150+offset, y+(175*j)+37.5, cost[i+j*4], 40, 360, 0.5, 0.5, image_angle);
@@ -48,7 +45,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 
 					gpu_set_colorwriteenable(false, false, false, true);
 					draw_set_alpha(0);
-					draw_rectangle(actual_x+(200*i)+125+offset, y+(175*j)+37.5, actual_x+(200*i)+275+offset, y+(175*j)+187.5, true);
+					draw_rectangle(actual_x+(200*i)+125+offset, y+(175*j)+37.5, actual_x+(200*i)+275+offset, y+(175*j)+187.5, true); //invisible rectangle
 
 					//mask
 					draw_set_alpha(1);
