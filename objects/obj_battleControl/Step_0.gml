@@ -393,7 +393,7 @@ switch (state) {
 		// error handling but unit should always be a player unit here
 		if(unit!=pointer_null){
 			//obj_menu.set_text("WASD - Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
-			obj_menu.set_text("WASD - Move     Enter - Do Nothing     Tab - Back");
+			obj_menu.set_text("WASD - Move     Enter - Wait     Tab - Back");
 			
 			// moving
 			if (wasd_pressed) {
