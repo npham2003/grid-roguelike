@@ -3925,7 +3925,8 @@ global.players = [
 		tpGain: 1,
 		portrait: spr_temp_Taion,
 		primary: #0cac87,
-		secondary: #386467
+		secondary: #386467,
+		portrait_full: spr_Taion_full
 		
 	},
 	{ // dancer guy
@@ -3939,7 +3940,8 @@ global.players = [
 		tpGain: 3,
 		portrait: spr_temp_Glimmer,
 		primary: #0cac87,
-		secondary: #386467
+		secondary: #386467,
+		portrait_full: spr_Glimmer_full
 	},
 	{ // Teleport guy
 		name: "Warpman",
@@ -3952,10 +3954,11 @@ global.players = [
 		tpGain: 3,
 		portrait: spr_temp_Wulfric,
 		primary: #0cac87,
-		secondary: #386467
+		secondary: #386467,
+		portrait_full: spr_Wulfric_full
 	},
 	{ //Bomb guy
-		name: "BombasticSideye",
+		name: "Bombastic",
 		hp: 3,
 		hpMax: 3,
 		playerSpeed: 2,
@@ -3965,7 +3968,8 @@ global.players = [
 		tpGain: 1,
 		portrait: spr_temp_Azami,
 		primary: #0cac87,
-		secondary: #386467
+		secondary: #386467,
+		portrait_full: spr_Azami_full
 	},
 	{ //freeze guy
 		name: "Frozone",
@@ -3978,7 +3982,8 @@ global.players = [
 		tpGain: 1,
 		portrait: spr_temp_Perun,
 		primary: #0cac87,
-		secondary: #386467
+		secondary: #386467,
+		portrait_full: spr_Perun_full
 	},
 	{ // push guy
 		name: "Oktavia",
@@ -3991,7 +3996,8 @@ global.players = [
 		tpGain: 2,
 		portrait: spr_temp_Pandoria,
 		primary: #0cac87,
-		secondary: #386467
+		secondary: #386467,
+		portrait_full: spr_Pandoria_full
 	},
 	//{ //new member
 	//	name: "put new party member here", //refer to example above

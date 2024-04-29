@@ -17,22 +17,27 @@ if(transition_in){
 		actual_credits_x=lerp(actual_credits_x,credits_x,0.2);
 	}
 	else if(sub_menu==2){
-		actual_character_select=lerp(actual_character_select,character_select,0.2);
-		actual_skill_x=lerp(actual_skill_x,skill_x_start,0.2);
+		actual_character_select=lerp(actual_character_select,character_select,0.1);
+		actual_skill_x=lerp(actual_skill_x,skill_x_start,0.1);
 	}
 }else{
 	if(sub_menu==0){
 		actual_logo_x=lerp(actual_logo_x,initial_logo_x,0.2);
 		actual_options_x=lerp(actual_options_x,initial_options_x,0.2);
 		if(actual_logo_x<=-290){
+			
 			if(selector_pos==0){
 				//room_goto(2);
 				sub_menu=2;
 				transition_in=true;
+				audio_pause_sound(bgm_xenoblade_x_title);
+				audio_play_sound(bgm_gather_under_night,0,true,0.7);
 				
 			}
 			if(selector_pos==1){
 				room_goto(1);
+				
+				audio_stop_sound(bgm_xenoblade_x_title);
 			}
 			if(selector_pos==2){
 				sub_menu=1;
@@ -51,14 +56,19 @@ if(transition_in){
 	}
 	else if(sub_menu==2){
 		actual_character_select=lerp(actual_character_select,initial_character_select,0.1);
-		actual_skill_x=lerp(actual_skill_x,initial_skill_x,0.2);
+		actual_skill_x=lerp(actual_skill_x,initial_skill_x,0.1);
 		
-		if(actual_character_select<-1900){
+		if(actual_character_select<-1950){
+			audio_stop_sound(bgm_gather_under_night);
 			if(curr>=3){
+				audio_stop_sound(bgm_xenoblade_x_title);
 				room_goto(3);
+			}else{
+				sub_menu=0;
+				transition_in=true;
+				audio_resume_sound(bgm_xenoblade_x_title);
+				
 			}
-			sub_menu=0;
-			transition_in=true;
 		}
 	}
 }
