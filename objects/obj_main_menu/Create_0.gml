@@ -44,12 +44,14 @@ character_select=200;
 
 initial_skill_x = 2000;
 actual_skill_x=2000;
-skill_x_start = 650;
+skill_x_start = 750;
 skill_y_start = 30;
 
 selected = [false, false, false, false, false, false];
 curr=0;
 party=[-1,-1,-1];
+
+audio_play_sound(bgm_xenoblade_x_title,0,true);
 
 website_urls=["https://twitter.com/AqoursBaelz/", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://wsl7779.itch.io", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"];
 
@@ -185,7 +187,7 @@ text_outline = function(){
 	draw_set_color(dto_dcol);
 
 	draw_text_ext(argument0,argument1,argument2,argument6,argument7);	
-	show_debug_message(argument2);
+	
 	
 }
 
