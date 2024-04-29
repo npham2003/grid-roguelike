@@ -3,6 +3,9 @@
 
 
 background = layer_background_get_id(layer_get_id("Background"));
+background_layer=layer_get_id("Background");
+initial_bg_hspeed=layer_get_hspeed(background_layer);
+initial_bg_vspeed=layer_get_vspeed(background_layer);
 
 current_background_color=global._characterSecondary;
 next_background_color=global._characterSecondary;
