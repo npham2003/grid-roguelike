@@ -144,14 +144,16 @@ if(sub_menu==1){
 if(sub_menu==2){
 	
 	if(selected[selector_pos]){
-		draw_sprite_ext(global.players[selector_pos].portrait_full,0,actual_character_select+400, room_height/2,1,1,image_angle,c_white,0.8);
+		draw_sprite_ext(global.players[selector_pos].portrait_full,0,actual_character_select+350, room_height/2,1,1,image_angle,c_white,0.8);
 	}else{
-		draw_sprite_ext(global.players[selector_pos].portrait_full,0,actual_character_select+400, room_height/2,1,1,image_angle,c_white,0.5);
+		draw_sprite_ext(global.players[selector_pos].portrait_full,0,actual_character_select+350, room_height/2,1,1,image_angle,c_white,0.5);
 	}
 	draw_set_font(fnt_archivo);
 	draw_set_color(c_black);
 	draw_set_halign(fa_center);
-	text_outline(actual_character_select+400, room_height/2, global.players[selector_pos].name, 1, c_white, 4, 8, 100000);
+	text_outline(actual_character_select+350, room_height/2, global.players[selector_pos].name, 1, c_white, 4, 8, 100000);
+	draw_set_font(fnt_chiaro);
+	text_outline(actual_character_select+350, room_height/2+40, global.players[selector_pos].guy, 1, c_white, 4, 8, 100000);
 	var _pips = make_menu_alternate(character_select, room_height/2-((array_length(global.players)-1)*(line_spacing-15)/2), line_spacing-15, array_length(global.players), false, character_select, actual_character_select);
 	for (var i = 0; i < array_length(_pips); ++i){
 		draw_primitive_begin(pr_trianglestrip);
@@ -279,14 +281,14 @@ if(sub_menu==2){
 			draw_vertices(_button);
 			draw_primitive_end();
 			
-			
+			draw_set_alpha(1);
 			draw_set_color(global._characterPrimary);
 			draw_primitive_begin(pr_trianglestrip);
 			//draw_vertices(_outline1);
 			draw_lines(_outline1,border*2,diamond_fill);
 			draw_primitive_end();
 			
-			draw_set_alpha(1);
+			
 			draw_set_color(c_black);
 			draw_primitive_begin(pr_trianglestrip);
 			//draw_vertices(_outline2);

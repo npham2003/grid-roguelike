@@ -3926,7 +3926,8 @@ global.players = [
 		portrait: spr_temp_Taion,
 		primary: #0cac87,
 		secondary: #386467,
-		portrait_full: spr_Taion_full
+		portrait_full: spr_Taion_full,
+		guy: "Damage Guy"
 		
 	},
 	{ // dancer guy
@@ -3941,7 +3942,8 @@ global.players = [
 		portrait: spr_temp_Glimmer,
 		primary: #0cac87,
 		secondary: #386467,
-		portrait_full: spr_Glimmer_full
+		portrait_full: spr_Glimmer_full,
+		guy: "Dancer Guy"
 	},
 	{ // Teleport guy
 		name: "Warpman",
@@ -3955,7 +3957,8 @@ global.players = [
 		portrait: spr_temp_Wulfric,
 		primary: #0cac87,
 		secondary: #386467,
-		portrait_full: spr_Wulfric_full
+		portrait_full: spr_Wulfric_full,
+		guy: "Warper Guy"
 	},
 	{ //Bomb guy
 		name: "Bombastic",
@@ -3969,7 +3972,8 @@ global.players = [
 		portrait: spr_temp_Azami,
 		primary: #0cac87,
 		secondary: #386467,
-		portrait_full: spr_Azami_full
+		portrait_full: spr_Azami_full,
+		guy: "Bomb Guy"
 	},
 	{ //freeze guy
 		name: "Frozone",
@@ -3983,7 +3987,8 @@ global.players = [
 		portrait: spr_temp_Perun,
 		primary: #0cac87,
 		secondary: #386467,
-		portrait_full: spr_Perun_full
+		portrait_full: spr_Perun_full,
+		guy: "Freeze Guy"
 	},
 	{ // push guy
 		name: "Oktavia",
@@ -3997,7 +4002,8 @@ global.players = [
 		portrait: spr_temp_Pandoria,
 		primary: #0cac87,
 		secondary: #386467,
-		portrait_full: spr_Pandoria_full
+		portrait_full: spr_Pandoria_full,
+		guy: "Push Guy"
 	},
 	//{ //new member
 	//	name: "put new party member here", //refer to example above
