@@ -820,7 +820,7 @@ switch (state) {
 						obj_menuTut.set_text("");
 						obj_menuTut.enter_text("");
 						audio_stop_sound(bgm_tutorialBGM);
-						room_goto_next();
+						room_goto(0);
 					}
 		}
 	
