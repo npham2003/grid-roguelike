@@ -30,6 +30,8 @@ obstacle = pointer_null;
 
 battle_progress=0;
 
+turn_count=0;
+
 #region Spawns
 
 // Spawn player units

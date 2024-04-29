@@ -140,7 +140,7 @@ switch (state) {
 #region Player Preparing
 	case BattleState.PlayerPreparing:
 		obj_draw_bg.colorSwitch = false;
-		
+		turn_count+=1;
 		for (var i = 0; i < array_length(player_units); i++) {
 			
 			// do not remove buffs if the player is frozen
@@ -199,7 +199,7 @@ switch (state) {
 		}
 		// tp bonus 
 		tp_current+=tp_bonus;
-		tp_current+=3;
+		tp_current+=4;
 		
 		// makes sure you don't go over max tp
 		if (tp_current > tp_max) {
@@ -753,7 +753,7 @@ switch (state) {
 			if(battle_progress==array_length(global.encounters)){
 				battle_progress=0;
 			}
-			tp_current=3;
+			tp_current=tp_max;
 			change_state(BattleState.PlayerUpgrade);
 		}else{
 			obj_gridCreator.reset_highlights_cursor();

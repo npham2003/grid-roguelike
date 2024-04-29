@@ -240,8 +240,65 @@ if(sub_menu==2){
 			var action = global.players[selector_pos].actions[j+1];
 			draw_set_color(c_white);
 			
+			#region setup
+			var _border = border;
+			var _outline1 = [
+				[actual_skill_x, skill_y_start+90+j*220-(optionRadius+_border)],
+				[actual_skill_x-(optionRadius+_border), skill_y_start+90+j*220],
+				[actual_skill_x, skill_y_start+90+j*220+(optionRadius+_border)],
+				[actual_skill_x+500, skill_y_start+90+j*220+(optionRadius+_border)],
+				[actual_skill_x+500+(optionRadius+_border), skill_y_start+90+j*220],
+				[actual_skill_x+500, skill_y_start+90+j*220-(optionRadius+_border)],
+			]
+			var _outline2 = [
+				
+				[actual_skill_x, skill_y_start+90+j*220-(optionRadius+_border*2)],
+				[actual_skill_x-(optionRadius+_border*2), skill_y_start+90+j*220],
+				[actual_skill_x, skill_y_start+90+j*220+(optionRadius+_border*2)],
+				[actual_skill_x+500, skill_y_start+90+j*220+(optionRadius+_border*2)],
+				[actual_skill_x+500+(optionRadius+_border*2), skill_y_start+90+j*220],
+				[actual_skill_x+500, skill_y_start+90+j*220-(optionRadius+_border*2)],
+			]
+			_border = 0;
+			var _button = [
+				[actual_skill_x-(optionRadius+_border), skill_y_start+90+j*220],
+				[actual_skill_x, skill_y_start+90+j*220-(optionRadius+_border)],
+				
+				[actual_skill_x, skill_y_start+90+j*220+(optionRadius+_border)],
+				[actual_skill_x+500, skill_y_start+90+j*220-(optionRadius+_border)],
+				[actual_skill_x+500, skill_y_start+90+j*220+(optionRadius+_border)],
+				
+				[actual_skill_x+500+(optionRadius+_border), skill_y_start+90+j*220]
+			]
+			#endregion
+	
+			#region draw buttons
+			draw_set_alpha(0.1);
+			draw_set_color(c_black);
+			draw_primitive_begin(pr_trianglestrip);
+			draw_vertices(_button);
+			draw_primitive_end();
 			
-			draw_sprite_ext(spr_shop_menu_border, image_index, actual_skill_x+00, skill_y_start+(j)*220, 0.5, 0.5, image_angle, image_blend, 1);
+			
+			draw_set_color(global._characterPrimary);
+			draw_primitive_begin(pr_trianglestrip);
+			//draw_vertices(_outline1);
+			draw_lines(_outline1,border*2,diamond_fill);
+			draw_primitive_end();
+			
+			draw_set_alpha(1);
+			draw_set_color(c_black);
+			draw_primitive_begin(pr_trianglestrip);
+			//draw_vertices(_outline2);
+			draw_lines(_outline2,border,diamond_outline);
+			draw_primitive_end();
+	
+			
+	
+			
+			#endregion
+			
+			//draw_sprite_ext(spr_shop_menu_border, image_index, actual_skill_x+00, skill_y_start+(j)*220, 0.5, 0.5, image_angle, image_blend, 1);
 			draw_set_valign(fa_top);
 			draw_set_halign(fa_left);
 			

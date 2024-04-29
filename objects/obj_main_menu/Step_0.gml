@@ -7,7 +7,7 @@ if(funny_opacity>0){
 	funny_opacity-=0.05;
 }
 
-
+show_debug_message(array_length(global.encounters));
 
 if(transition_in){
 	
