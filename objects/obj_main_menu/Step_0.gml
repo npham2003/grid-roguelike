@@ -7,7 +7,23 @@ if(funny_opacity>0){
 	funny_opacity-=0.05;
 }
 
-show_debug_message(array_length(global.encounters));
+#region turn opacity
+
+	if(turn_opacity_increase){
+		turn_opacity+=0.05;
+	}else{
+		turn_opacity-=0.05;
+	}
+	if(turn_opacity>=0.8){
+		turn_opacity_increase=false;
+	}
+	if(turn_opacity<=0.5){
+		turn_opacity_increase=true;
+	}
+
+
+turn_text_anim = lerp(turn_text_anim, 2, 0.2)
+#endregion
 
 if(transition_in){
 	
@@ -39,6 +55,12 @@ if(transition_in){
 				transition_in=true;
 				audio_pause_sound(bgm_xenoblade_x_title);
 				audio_play_sound(bgm_gather_under_night,0,true,0.7);
+				turn_life=100;
+				turn_banner_animation_started=true;
+				turn_opacity=100;
+			
+				turn_text_anim = 0;
+				turn_life = 100;
 				
 				transition_in=true;
 				audio_pause_sound(bgm_xenoblade_x_title);
@@ -56,6 +78,8 @@ if(transition_in){
 				sub_menu=1;
 				transition_in=true;
 				selector_pos=0;
+				
+				turn_life=100;
 			}
 		}
 	}

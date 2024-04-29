@@ -331,6 +331,36 @@ if(sub_menu==2){
 		
 	}
 	
+	#region turn banner
+	if (turn_banner_animation_started) {
+		turn_life--;
+		draw_set_color(global._primary);
+	
+		if (turn_life > 50) {
+			draw_set_alpha(turn_opacity/100);
+		}
+		else {
+			turn_life--;
+			draw_set_alpha(turn_life/100);
+		}
+		if(turn_life<=0){
+			turn_banner_animation_started=false;	
+		}
+		
+		draw_rectangle_colour(0, 500, room_width, 250, global._aspect_bars, global._aspect_bars, global._aspect_bars, global._aspect_bars, false);
+		draw_set_color(diamond_fill);
+		draw_set_halign(fa_center);
+		draw_set_font(fnt_archivo);
+		draw_text_transformed(room_width/2, 320, "SELECT YOUR TEAM", turn_text_anim, 2, 0);
+	
+	}
+	else {
+		turn_life = 100;
+	}
+	draw_set_alpha(1);
+	draw_set_halign(fa_left);
+	#endregion
+	
 }
 draw_set_valign(fa_top);
 draw_set_halign(fa_left);
