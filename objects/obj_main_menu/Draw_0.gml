@@ -252,7 +252,7 @@ if(sub_menu==2){
 			//draw_text_ext_transformed(actual_skill_x+15, skill_y_start+((j)*220)+10, action.name[0], 40, 600, 0.8, 0.8, image_angle);
 			//draw_text_ext_transformed(actual_skill_x+15, skill_y_start+((j)*220)+50, action.description[0], 40, 600, 0.8, 0.8, image_angle);
 			draw_set_font(fnt_chiaro_small);
-			text_outline(actual_skill_x+15, skill_y_start+((j)*220)+50, action.description[0], 1, c_white, 4, 40, 450);
+			text_outline(actual_skill_x+15, skill_y_start+((j)*220)+50, action.description[0], 1, c_white, 4, 30, 460);
 			draw_set_font(fnt_chiaro);
 			text_outline(actual_skill_x+15, skill_y_start+((j)*220), action.name[0], 1, c_white, 4, 40, 600);
 			
