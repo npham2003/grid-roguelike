@@ -3068,7 +3068,7 @@ global.actionLibrary = {
 	},
 	placegravbomb: {
 		name: ["Push Mine", "Gravity Mine", "Super Push Mine"], //probably redundant to have a name but keep it
-		description: ["Places a mine. Any adjacent units get pushed 1 tile away at the end of their turn", "Places a mine. Any units in the surrounding area get pulled 1 tile in at the end of their turn", "Places a mine. Enemies get pushed away until they hit an obstacle at the end of their turn"],
+		description: ["Places a mine. Any adjacent units get pushed 1 tile away at the end of their turn", "Places a mine. Any units in the surrounding area get pulled 1 tile in at the end of their turn", "Places a mine. Adjacent enemies get pushed away until they hit an obstacle at the end of their turn"],
 		cost: [3, 4, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -3276,9 +3276,9 @@ global.actionLibrary = {
 	},
 	pushspread: {
 		name: ["Repelling Blast", "Repelling Shockwave", "Compress"], 
-		description: ["Pushes all units in front of you and in an adjacent row away from each other. Choose affected rows with W and S.", 
+		description: ["Pushes all units in front of you and in 1 adjacent row away from each other", 
 			"Pushes all units in front of you and in an adjacent row away from each other until they hit a wall or another unit.", 
-			"Slams all units in front of you in adjacent rows into the row in front of you."],
+			"Slams all units in front of you and in adjacent rows into the row in front of you."],
 		cost: [4, 6, 4],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
