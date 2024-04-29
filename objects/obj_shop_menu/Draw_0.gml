@@ -178,101 +178,12 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 						break;
 						
 					#endregion
-					#region skill change
-					case 2:
 					
-						//draw_sprite_ext(spr_diamond_base, 0, actual_x+(200*i)+200, y+500, _sb,_sb, 0, global._primary, 1);
-						//draw_sprite_ext(spr_diamond_outline, 0, actual_x+(200*i)+200, y+500, _sb,_sb, 0, global._characterPrimary, 1);
-			
-						//if(selector_pos[0]==2){ // checks to see if we are resetting a skill
-						//	selectable[i]=false;
-						//	for(j=0;j<array_length(obj_battleControl.player_units[i].upgrades);j++){ // checks to see if there are any skills to reset
-						//		if(obj_battleControl.player_units[i].upgrades[j]!=0){
-								
-						//			selectable[i]=true;
-						//			break;
-						//		}
-						//	}
-						//}
-						//else if(array_contains(obj_battleControl.player_units[i].upgrades, 0)){  //checks if there are any skills to upgrade
-						//	selectable[i]=true;
-						//}else{
-						//	selectable[i]=false;
-						//}
-						
-						selectable[i]=true;
-			
-						#region draw diamond
-						draw_set_color(c_black);
-						draw_primitive_begin(pr_trianglestrip);
-						draw_vertices(make_diamond(actual_x+(character_spacing*i)+200, y+500,playerDim+10));
-						draw_primitive_end();
-			
-						//if(character_select_pos!=i){
-							draw_set_color(global._characterPrimary);
-						//}else{
-						//	draw_set_color(c_white);
-						//}
-						draw_primitive_begin(pr_trianglestrip);
-						draw_vertices(make_diamond(actual_x+(character_spacing*i)+200, y+500,playerDim+5));
-						draw_primitive_end();
-						if(character_select_pos==i){
-							draw_set_color(global._primary);
-				
-						}else if(selectable[i]){
-							draw_set_color(c_white);
-						}
-						else{
-							draw_set_color(c_gray);	
-						}
-						draw_primitive_begin(pr_trianglestrip);
-						draw_vertices(make_diamond(actual_x+(character_spacing*i)+200, y+500,playerDim));
-						draw_primitive_end();
-						#endregion
-
-						#region draw character
-						gpu_set_blendenable(false);
-						gpu_set_colorwriteenable(false, false, false, true);
-						draw_set_alpha(0);
-						draw_rectangle(actual_x+(character_spacing*i)+50, y+350, actual_x+(character_spacing*i)+350, y+650, false); //invisible rectangle
-
-						//mask
-						draw_set_alpha(1);
-						//draw_sprite_ext(spr_diamond_base, 0, imgX, imgY, portraitScale, portraitScale, 0, c_white, 1);
-						draw_set_color(c_white);
-						draw_primitive_begin(pr_trianglestrip);
-						draw_vertices(make_diamond(actual_x+(character_spacing*i)+200, y+500,playerDim));
-						draw_primitive_end();
-
-						gpu_set_blendenable(true);
-						gpu_set_colorwriteenable(true, true, true, true);
-
-						//draw over mask
-						gpu_set_blendmode_ext(bm_dest_alpha, bm_inv_dest_alpha);
-						//gpu_set_blendmode_ext_sepalpha(bm_dest_alpha, bm_inv_src_alpha, portraitAlpha, bm_inv_src_alpha);
-
-						//gpu_set_blendmode_ext_sepalpha(portraitAlpha, portraitAlpha, portraitAlpha, portraitAlpha);
-						gpu_set_alphatestenable(true);
-						//draw_sprite_ext(spr_temp_Akeha_under, 0, imgX, imgY-20, -0.55, 0.55, 0, c_white, 1);
-						if(!selectable[i]){
-							draw_sprite_ext(obj_battleControl.player_units[i].portrait, 0, actual_x+(character_spacing*i)+200, y+500, -0.55, 0.55, 0, c_gray, 1);
-						}else{
-							draw_sprite_ext(obj_battleControl.player_units[i].portrait, 0, actual_x+(character_spacing*i)+200, y+500, -0.55, 0.55, 0, c_white, 1);
-						}
-						#endregion
-						gpu_set_alphatestenable(false);
-						draw_set_alpha(1);
-						gpu_set_blendmode(bm_normal);
-			
-			
-					
-						break;
-					#endregion
 				}
 			}
 		}
 	}
-	if(menu_level == 2){
+	if(menu_level == 2){ //select skill to upgrade
 		draw_set_color(c_black);
 		draw_set_alpha(1);
 		draw_rectangle(0, 0, room_width, room_height, false);
@@ -298,11 +209,9 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 			var action = obj_battleControl.player_units[character_select_pos].actions[i+1];
 			var prev_skill = obj_battleControl.player_units[character_select_pos].upgrades[i+1];
 			
-			if(prev_skill==i){
-				selectable[i]=false;	
-			}else{
-				selectable[i]=true;	
-			}
+			
+			selectable[i]=true;	
+			
 			
 			
 			
@@ -325,6 +234,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 			draw_text_ext_transformed(skill_x_start+15, skill_y_start+((i)*250)+40, action.description[prev_skill], 40, 600, 0.8, 0.8, image_angle);
 			draw_text_ext_transformed(skill_x_start+15, skill_y_start+((i)*250)+5, action.name[prev_skill], 40, 600, 0.8, 0.8, image_angle);
 			
+			//tp costs
 			var _pips = make_tp(skill_x_start+415, skill_y_start+((i)*250)+30, 7*obj_menu.expandAnim, action.cost[prev_skill], true);
 
 			draw_set_color(global._tpBar);
@@ -339,7 +249,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 		
 		
 	}
-	if(menu_level == 3){
+	if(menu_level == 3){ //upgrade your skill
 		draw_set_color(c_black);
 		draw_set_alpha(1);
 		draw_rectangle(0, 0, room_width, room_height, false);
@@ -363,17 +273,14 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 		
 		for(i=0;i<3;i++){
 			
-			
+			// cant select skill you already have
 			if(prev_skill==i){
 				selectable[i]=false;	
 			}else{
 				selectable[i]=true;	
 			}
 			
-			
-			
-			
-			
+
 			if(i==new_skill_upgrade){
 				show_debug_message("draw arrow");
 				if(selectable[i]){
@@ -408,6 +315,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	
 	#region gold
 	if(menu_level==2&&skill_select_pos==0){
+		// translucent if selecting top left skill
 		draw_set_alpha(0.5);
 	}else{
 		draw_set_alpha(1);
