@@ -1,5 +1,5 @@
 
-if(obj_main_menu.sub_menu==2){
+
 	if(curr < 3){
 		if(keyboard_check_pressed(ord("1")) && !selected[0]){
 			party[curr] = 0;
@@ -38,11 +38,6 @@ if(obj_main_menu.sub_menu==2){
 			curr--;
 			selected[party[curr]] = false;
 			party[curr] = -1;
-		}else{
-			obj_main_menu.sub_menu=0;
-			obj_main_menu.transition_in=true;
-			obj_main_menu.next_background_color=obj_main_menu.menu_colors[0];
-			
 		}
 	}
 
@@ -53,4 +48,4 @@ if(obj_main_menu.sub_menu==2){
 		}
 		room_goto(3);
 	}
-}
+	

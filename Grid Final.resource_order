@@ -12,6 +12,7 @@
   ],
   "ResourceOrderSettings":[
     {"name":"fnt_archivo","order":1,"path":"fonts/fnt_archivo/fnt_archivo.yy",},
+    {"name":"fnt_chiaro_small","order":2,"path":"fonts/fnt_chiaro_small/fnt_chiaro_small.yy",},
     {"name":"obj_battleEffect","order":2,"path":"objects/obj_battleEffect/obj_battleEffect.yy",},
     {"name":"obj_board_obstacle","order":1,"path":"objects/obj_board_obstacle/obj_board_obstacle.yy",},
     {"name":"obj_cursor","order":1,"path":"objects/obj_cursor/obj_cursor.yy",},
@@ -39,6 +40,7 @@
     {"name":"sfx_defreeze","order":8,"path":"sounds/sfx_defreeze/sfx_defreeze.yy",},
     {"name":"sfx_freeze","order":7,"path":"sounds/sfx_freeze/sfx_freeze.yy",},
     {"name":"sfx_game_start","order":12,"path":"sounds/sfx_game_start/sfx_game_start.yy",},
+    {"name":"sfx_menu_back","order":14,"path":"sounds/sfx_menu_back/sfx_menu_back.yy",},
     {"name":"sfx_menu_next","order":13,"path":"sounds/sfx_menu_next/sfx_menu_next.yy",},
     {"name":"sfx_push","order":3,"path":"sounds/sfx_push/sfx_push.yy",},
     {"name":"sfx_shield","order":2,"path":"sounds/sfx_shield/sfx_shield.yy",},
@@ -46,7 +48,6 @@
     {"name":"sfx_teleport_windup","order":4,"path":"sounds/sfx_teleport_windup/sfx_teleport_windup.yy",},
     {"name":"sfx_teleport","order":6,"path":"sounds/sfx_teleport/sfx_teleport.yy",},
     {"name":"sfx_vine_boom","order":11,"path":"sounds/sfx_vine_boom/sfx_vine_boom.yy",},
-    {"name":"sfx_menu_back","order":14,"path":"sounds/sfx_menu_back/sfx_menu_back.yy",},
     {"name":"all_arrow_sprites","order":10,"path":"sprites/all_arrow_sprites/all_arrow_sprites.yy",},
     {"name":"enemy_bg","order":5,"path":"sprites/enemy_bg/enemy_bg.yy",},
     {"name":"menu_bg","order":1,"path":"sprites/menu_bg/menu_bg.yy",},
