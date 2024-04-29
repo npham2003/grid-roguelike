@@ -6,7 +6,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	
 	if(menu_level!=3 || menu_level!=2){
 		draw_set_color(c_black);
-		draw_set_alpha(alpha*0.8);
+		draw_set_alpha(1);
 		draw_rectangle(0, 0, room_width, room_height, false);
 		draw_sprite_ext(spr_shop_menu_border, image_index, actual_x, y, image_xscale, image_yscale, image_angle, image_blend, alpha);
 		for (i = 0; i<4; i++){
@@ -19,7 +19,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 				}
 				draw_set_alpha(1);
 				draw_set_color(c_white);
-				draw_rectangle(actual_x+(200*i)+125+offset, y+(175*j)+37.5, actual_x+(200*i)+275+offset, y+(175*j)+187.5, true);
+				//draw_rectangle(actual_x+(200*i)+125+offset, y+(175*j)+37.5, actual_x+(200*i)+275+offset, y+(175*j)+187.5, true);
 				draw_set_color(c_black);
 				if (selector_pos[0] == i && selector_pos[1] == j){
 				
@@ -48,7 +48,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 
 					gpu_set_colorwriteenable(false, false, false, true);
 					draw_set_alpha(0);
-					draw_rectangle(actual_x+(200*i)+125+offset-150, y+(175*j)+37.5+150, actual_x+(200*i)+275+offset+150, y+(175*j)+187.5+150, false); //invisible rectangle
+					draw_rectangle(actual_x+(200*i)+125+offset, y+(175*j)+37.5, actual_x+(200*i)+275+offset, y+(175*j)+187.5, true);
 
 					//mask
 					draw_set_alpha(1);
