@@ -4,6 +4,9 @@
 
 background = layer_background_get_id(layer_get_id("Background"));
 background_layer=layer_get_id("Background");
+
+effects_layer=layer_get_id("Effect_1");
+
 initial_bg_hspeed=layer_get_hspeed(background_layer);
 initial_bg_vspeed=layer_get_vspeed(background_layer);
 
@@ -29,6 +32,9 @@ options_x=1000;
 arrow_spacing=-200
 
 sub_menu=0;
+
+border = 5;
+optionRadius = 80;
 
 transition_in=true;
 
@@ -163,6 +169,12 @@ make_tp = function(_x, _y, _spacing, _len, is_rows) {
 draw_vertices = function(vertices){
 	for (var i = 0; i < array_length(vertices); ++i) {
 		draw_vertex(vertices[i][0], vertices[i][1]);
+	}
+}
+
+draw_lines = function(vertices, _width, _color){
+	for (var i = 0; i < array_length(vertices); ++i) {
+		draw_line_width_color(vertices[i][0], vertices[i][1], vertices[(i+1)%array_length(vertices)][0], vertices[(i+1)%array_length(vertices)][1], _width, _color, _color);
 	}
 }
 
