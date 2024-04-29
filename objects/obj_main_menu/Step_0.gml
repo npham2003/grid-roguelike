@@ -12,6 +12,8 @@ if(transition_in){
 	if(sub_menu==0){
 		actual_logo_x=lerp(actual_logo_x,logo_x,0.2);
 		actual_options_x=lerp(actual_options_x,options_x,0.2);
+		layer_hspeed(background_layer, lerp(layer_get_hspeed(background_layer),initial_bg_hspeed,0.2));
+		layer_vspeed(background_layer, lerp(layer_get_vspeed(background_layer),initial_bg_vspeed,0.2));
 	}
 	else if(sub_menu==1){
 		actual_credits_x=lerp(actual_credits_x,credits_x,0.2);
@@ -19,6 +21,8 @@ if(transition_in){
 	else if(sub_menu==2){
 		actual_character_select=lerp(actual_character_select,character_select,0.1);
 		actual_skill_x=lerp(actual_skill_x,skill_x_start,0.1);
+		layer_hspeed(background_layer, lerp(layer_get_hspeed(background_layer),initial_bg_hspeed*3,0.2));
+		layer_vspeed(background_layer, lerp(layer_get_vspeed(background_layer),initial_bg_vspeed*3,0.2));
 	}
 }else{
 	if(sub_menu==0){
@@ -67,6 +71,7 @@ if(transition_in){
 				sub_menu=0;
 				transition_in=true;
 				audio_resume_sound(bgm_xenoblade_x_title);
+				
 				
 			}
 		}

@@ -477,6 +477,7 @@ switch (state) {
 					unit.skill_complete = false;
 					unit.skill_progress=0;
 					enough_tp = false;
+					obj_gridCreator.reset_highlights_move();
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					change_state(BattleState.PlayerAiming);
 					for(i=0;i<array_length(enemy_units);i++){

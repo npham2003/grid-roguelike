@@ -89,7 +89,7 @@ global.actionLibrary = {
 	},
 	beam: {
 		name: ["Beam", "Big Beam", "Repel Beam"], 
-		description: ["Does 2 damage to all targets in a row", "Does 2 damage to all targets in surrounding rows. Double damage if target is in the same row", "Does 2 damage to all targets in a row and pushes them back 1 tile."],
+		description: ["Does 2 damage to all targets in a row", "Does 2 damage to all targets in front of you and in surrounding rows. Double damage if target is in the same row", "Does 2 damage to all targets in a row and pushes them back 1 tile."],
 		cost: [3, 5, 4],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -233,7 +233,7 @@ global.actionLibrary = {
 	},
 	mortar: {
 		name: ["Mortar", "Airstrike", "Force Grenade"], //probably redundant to have a name but keep it
-		description: ["Hits a nearby target and damages all adjacent units", "Hits any target and damages all adjacent units", "Hits a nearby target and damages and pushes all adjacent units. Center target takes double damage."],
+		description: ["Hits a target up to 3 tiles away and damages all adjacent units", "Hits any target and damages all adjacent units", "Hits a target up to 3 tiles away and damages and pushes all adjacent units. Center target takes double damage."],
 		cost: [4, 6, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -528,8 +528,8 @@ global.actionLibrary = {
 		}
 	},
 	charge: {
-		name: ["Charge", "Long Charge", "Parry"], //probably redundant to have a name but keep it
-		description: ["Gain 1 TP", "Gain 3 TP but move back to your original position", "Protect yourself from all attacks that hit you on the next turn"],
+		name: ["Charge", "Chargeback", "Parry"], //probably redundant to have a name but keep it
+		description: ["Gain 1 TP", "Gain 3 TP but move back to your original position", "Protect yourself from all attacks that hit you this turn"],
 		cost: [0, 0, 3],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -1103,9 +1103,9 @@ global.actionLibrary = {
 	teleport_self: {
 		name: ["Misty Step", "Cartesian Shift", "Dimension Door"],
 		description: [
-			"Teleport yourself to an empty space within the distance of 2.",
-			"Teleport yourself to any space with same row or column as your current location.",
-			"Teleport yourself to any empty space."
+			"Teleport yourself to an empty space within 2 tiles",
+			"Teleport yourself to any space with same row or column as your current location",
+			"Teleport yourself to any empty space"
 		],
 		cost: [0, 1, 2],
 		subMenu: 0,
@@ -1122,7 +1122,7 @@ global.actionLibrary = {
 	},
 	teleport_ally: {
 		name: ["Warp", "Swap", "Rescue"], //probably redundant to have a name but keep it
-		description: [ "Move an adjacent ally to an empty space up to 3 tiles away.", "Swap the positions of 2 allies.", "Moves a nearby ally to an adjacent empty tile"],
+		description: [ "Move an adjacent ally to an empty space up to 3 tiles away", "Swap the positions of 2 allies up to 3 tiles away", "Moves an ally up to 3 tiles away to an adjacent empty tile "],
 		cost: [3, 4, 3],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -1139,9 +1139,9 @@ global.actionLibrary = {
 	teleport_enemy: {
 		name: ["Vortex Shift", "Vortex Swap", "Vortex Warp"],
 		description: [
-			"Teleport an enemy to an empty nearby space.",
-			"Swap the positions of 2 enemies.",
-			"Teleport an enemy to any empty space."
+			"Teleport an enemy to an empty space up to 3 tiles away",
+			"Swap the positions of any 2 enemies",
+			"Teleport an enemy to any empty space"
 		],
 		cost: [3, 4, 4],
 		subMenu: 0,
@@ -1158,7 +1158,7 @@ global.actionLibrary = {
 	},
 	freeze: {
 		name: ["Freeze", "Deep Freeze", "Piercing Freeze"], //probably redundant to have a name but keep it
-		description: ["Prevents the first target in a row from moving for 1 turn", "Prevents the first target in a row from moving for 2 turns", "Prevents all targets in a row from moving for 1 turn"],
+		description: ["Prevents the first target in a row from acting for 1 turn", "Prevents the first target in a row from acting for 2 turns", "Prevents all targets in a row from acting for 1 turn"],
 		cost: [2, 4, 4],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -1322,7 +1322,7 @@ global.actionLibrary = {
 		}
 	},
 	frostcone: {
-		name: ["Frost Cone", "Boreal Wind", "Sharp Winds"], //probably redundant to have a name but keep it
+		name: ["Frostbite", "Boreal Wind", "Sharp Winds"], //probably redundant to have a name but keep it
 		description: ["Attacks in a cone in front of you. Enemies who are frozen take 1 more damage", "Attacks in a cone in front of you as well as everything in front of you in the row. Enemies who are frozen take 1 more damage", "Attacks in a cone in front of you. Enemies who are frozen take 2 more damage"],
 		cost: [3, 4, 4],
 		subMenu: 0, //does it show up on screen or is it in a submenu
@@ -1512,7 +1512,7 @@ global.actionLibrary = {
 	},
 	thaw: {
 		name: ["Icicle Crash", "Avalanche", "Absolute Zero"], //probably redundant to have a name but keep it
-		description: ["Freezes a nearby unit and all adjacent units for 1 turn", "Freezes any unit and all adjacent units for 1 turn", "Freeze all enemy units for 1 turn"],
+		description: ["Freezes a unit up to 3 tiles away and all adjacent units for 1 turn", "Freezes any unit and all adjacent units for 1 turn", "Freeze all enemy units for 1 turn"],
 		cost: [4, 6, 8],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -1733,7 +1733,7 @@ global.actionLibrary = {
 	},
 	buff: {
 		name: ["Encourage", "Rallying Cry", "Invigorate"], //probably redundant to have a name but keep it
-		description: [ "Make an adjacent ally do 1 extra damage for 2 turns. Can include yourself", "Make a nearby ally do 1 extra damage for 2 turns. Can include yourself", "Make an adjacent ally do 2 extra damage for 2 turns. Can include yourself"],
+		description: [ "Make an adjacent ally do 1 extra damage for 2 turns. Can include yourself", "Make an ally up to 3 tiles away do 1 extra damage for 2 turns. Can include yourself", "Make an adjacent ally do 2 extra damage for 2 turns. Can include yourself"],
 		cost: [3, 5, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -2648,7 +2648,7 @@ global.actionLibrary = {
 	},
 	placebomb: {
 		name: ["Mine", "Bigger Mine", "More Mines"], //probably redundant to have a name but keep it
-		description: ["Places a mine. Any units 1 tile away take damage.", "Places a mine. Any units in the 3x3 area take 3 damage at the end of their turn.", "Places 2 mines."],
+		description: ["Places a mine. Any units 1 tile away take damage at the end of their turn", "Places a mine. Any units in the 3x3 area take 3 damage at the end of their turn.", "Places 2 mines. Any units 1 tile away take damage at the end of their turn"],
 		cost: [2, 3, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -2860,7 +2860,7 @@ global.actionLibrary = {
 	},
 	placeicebomb: {
 		name: ["Ice Mine", "Freezer", "Ice Age"], //probably redundant to have a name but keep it
-		description: ["Places an ice mine that freezes enemies.", "Places an ice mine that continually freezes enemies.", "Places a large ice mine that freezes and does damage."],
+		description: ["Places an ice mine that freezes units in a 3x3 area at the end of their turn", "Places an ice mine that continually freezes units in a 3x3 area for 3 turns", "Places a large ice mine that freezes units in a 5x5 area and does 1 damage"],
 		cost: [3, 5, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -3068,7 +3068,7 @@ global.actionLibrary = {
 	},
 	placegravbomb: {
 		name: ["Push Mine", "Gravity Mine", "Super Push Mine"], //probably redundant to have a name but keep it
-		description: ["Places a mine. Any units 1 tile get pushed by one tile.", "Places a mine. Any units in the surrounding area get pulled.", "Places a mine. Enemies get pushed to the end of the screen."],
+		description: ["Places a mine. Any adjacent units get pushed 1 tile away at the end of their turn", "Places a mine. Any units in the surrounding area get pulled 1 tile in at the end of their turn", "Places a mine. Enemies get pushed away until they hit an obstacle at the end of their turn"],
 		cost: [3, 4, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
