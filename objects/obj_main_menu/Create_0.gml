@@ -42,8 +42,14 @@ initial_character_select = -2000;
 actual_character_select = -2000;
 character_select=200;
 
+initial_skill_x = 2000;
+actual_skill_x=2000;
 skill_x_start = 650;
 skill_y_start = 30;
+
+selected = [false, false, false, false, false, false];
+curr=0;
+party=[-1,-1,-1];
 
 website_urls=["https://twitter.com/AqoursBaelz/", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://wsl7779.itch.io", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"];
 
@@ -196,7 +202,7 @@ text_outline_small = function(){
 	var dto_dcol=draw_get_color();
 
 	draw_set_color(argument4);
-	draw_set_font(fnt_archivo);
+	
 	for(var dto_i=45; dto_i<405; dto_i+=360/argument5)
 	{
 	  //draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);

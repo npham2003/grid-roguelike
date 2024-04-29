@@ -18,6 +18,7 @@ if(transition_in){
 	}
 	else if(sub_menu==2){
 		actual_character_select=lerp(actual_character_select,character_select,0.2);
+		actual_skill_x=lerp(actual_skill_x,skill_x_start,0.2);
 	}
 }else{
 	if(sub_menu==0){
@@ -28,7 +29,7 @@ if(transition_in){
 				//room_goto(2);
 				sub_menu=2;
 				transition_in=true;
-				room_goto(2);
+				
 			}
 			if(selector_pos==1){
 				room_goto(1);
@@ -50,7 +51,12 @@ if(transition_in){
 	}
 	else if(sub_menu==2){
 		actual_character_select=lerp(actual_character_select,initial_character_select,0.1);
+		actual_skill_x=lerp(actual_skill_x,initial_skill_x,0.2);
+		
 		if(actual_character_select<-1900){
+			if(curr>=3){
+				room_goto(3);
+			}
 			sub_menu=0;
 			transition_in=true;
 		}
@@ -76,7 +82,8 @@ switch(sub_menu){
 				if(keyboard_check_pressed(vk_enter)){
 					
 					if(selector_pos==0){
-						audio_play_sound(sfx_game_start, 0, false, 1, 0);
+						audio_play_sound(sfx_menu_next, 0, false, 1, 0);
+						
 						next_background_color=menu_colors[2];
 						
 						
@@ -149,13 +156,39 @@ switch(sub_menu){
 					}
 				}
 				if(keyboard_check_pressed(vk_enter)){
+					if(!selected[selector_pos]){
+						party[curr]=selector_pos;
+						selected[selector_pos]=true;
+						curr++;
+						if(curr!=3){
+							audio_play_sound(sfx_menu_next, 0, false, 1, 0);
+						}
+					}
+					if(curr==3){
+						for(var i = 0; i < array_length(global.party); i++){
+							global.party[i].info=global.players[party[i]];
+							global.party[i].grid=[i, 2];
+						}
+						transition_in=false;
+						audio_play_sound(sfx_game_start, 0, false, 1, 0);
+					}
+						
 					
 				}
 				if(keyboard_check_pressed(vk_tab)){
-					transition_in=false;
-					selector_pos=0;
-					next_background_color=menu_colors[0];
 					audio_play_sound(sfx_menu_back, 0, false, 0.7, 0);
+					if(curr>0){
+						
+						curr--;
+						selected[party[curr]] = false;
+						party[curr] = -1;
+					
+					}else{
+						transition_in=false;
+						selector_pos=0;
+						next_background_color=menu_colors[0];
+						
+					}
 				}
 			}
 			break;
