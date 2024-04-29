@@ -246,6 +246,8 @@ switch (state) {
 				player_units[i].has_moved = true;
 				player_units[i].has_attacked = true;
 			}
+			obj_gridCreator.battle_grid[player_units[i].grid_pos[0]][player_units[i].grid_pos[1]]._entity_on_tile=player_units[i];
+			obj_gridCreator.battle_grid[player_units[i].grid_pos[0]][player_units[i].grid_pos[1]]._is_empty=false;
 		}
 		if (has_all_attacked) {
 			board_obstacle_order = 0;
@@ -469,7 +471,7 @@ switch (state) {
 					}
 			}
 			
-				if (enough_tp) { // enough tp to use a skill
+				if (enough_tp && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) { // enough tp to use a skill
 					unit.confirm_move();
 					unit.skill_init = false;
 					unit.skill_complete = false;
