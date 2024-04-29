@@ -62,6 +62,12 @@ party=[-1,-1,-1];
 
 audio_play_sound(bgm_xenoblade_x_title,0,true);
 
+turn_opacity_increase=true;
+turn_opacity=50;
+turn_text_anim = 0;
+turn_life = 100;
+turn_banner_animation_started=false;
+
 website_urls=["https://twitter.com/AqoursBaelz/", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://wsl7779.itch.io", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"];
 
 menu_options=[
