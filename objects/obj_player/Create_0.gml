@@ -109,10 +109,12 @@ function move_right() {
 }
 
 function confirm_move() {
-	obj_gridCreator.remove_entity(prev_grid[0],prev_grid[1]);
-	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile=self;
-	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._is_empty=false;
-	obj_gridCreator.reset_highlights_move();
+	if(!obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._is_empty){
+		obj_gridCreator.remove_entity(prev_grid[0],prev_grid[1]);
+		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile=self;
+		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._is_empty=false;
+		obj_gridCreator.reset_highlights_move();
+	}
 	
 	
 }
@@ -123,8 +125,10 @@ function back_move(){
 	//	obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
 	//}
 	//obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
-	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._is_empty=true;
-	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile=pointer_null;
+	if(obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile==self){
+		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._is_empty=true;
+		obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile=pointer_null;
+	}
 	grid_pos[0]=prev_grid[0];
 	grid_pos[1]=prev_grid[1];
 	obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._entity_on_tile=self;

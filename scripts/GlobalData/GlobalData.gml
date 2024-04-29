@@ -1187,7 +1187,7 @@ global.actionLibrary = {
 					audio_play_sound(sfx_freeze, 0, false, 0.5);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
-							skill_range[i]._entity_on_tile.stall_turns+=1;
+							
 							if(skill_range[i]._entity_on_tile.ally){
 								skill_range[i]._entity_on_tile.has_attacked=true;
 								skill_range[i]._entity_on_tile.has_moved=true;
@@ -1197,6 +1197,7 @@ global.actionLibrary = {
 							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 1, c_blue);
 							if(skill_range[i]._entity_on_tile.stall_turns<=0){
 								skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
+								skill_range[i]._entity_on_tile.stall_turns+=1;
 							}
 							
 						}
@@ -1236,7 +1237,7 @@ global.actionLibrary = {
 					//audio_play_sound(sfx_freeze, 0, false, 0.5);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
-							skill_range[i]._entity_on_tile.stall_turns+=2;
+							
 							if(skill_range[i]._entity_on_tile.ally){
 								skill_range[i]._entity_on_tile.has_attacked=true;
 								skill_range[i]._entity_on_tile.has_moved=true;
@@ -1247,6 +1248,7 @@ global.actionLibrary = {
 							if(skill_range[i]._entity_on_tile.stall_turns<=0){
 								skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
 							}
+							skill_range[i]._entity_on_tile.stall_turns+=2;
 						}
 					}
 					unit.is_attacking = false;
@@ -1285,7 +1287,7 @@ global.actionLibrary = {
 					//audio_play_sound(sfx_freeze, 0, false, 0.5);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
-							skill_range[i]._entity_on_tile.stall_turns+=1;
+							
 							if(skill_range[i]._entity_on_tile.ally){
 								skill_range[i]._entity_on_tile.has_attacked=true;
 								skill_range[i]._entity_on_tile.has_moved=true;
@@ -1296,6 +1298,7 @@ global.actionLibrary = {
 							if(skill_range[i]._entity_on_tile.stall_turns<=0){
 								skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
 							}
+							skill_range[i]._entity_on_tile.stall_turns+=1;
 						}
 					}
 					unit.is_attacking = false;
@@ -1359,12 +1362,7 @@ global.actionLibrary = {
 							else {
 								skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus+unit.attack_bonus_temp);
 							}
-							if(skill_range[i]._entity_on_tile.ally){
-								skill_range[i]._entity_on_tile.has_attacked=true;
-								skill_range[i]._entity_on_tile.has_moved=true;
-							}else{
-								skill_range[i]._entity_on_tile.remove_danger_highlights();
-							}
+							
 							
 						}
 					}
@@ -1483,12 +1481,12 @@ global.actionLibrary = {
 							else {
 								skill_range[i]._entity_on_tile.damage(_damage+unit.attack_bonus+unit.attack_bonus_temp);
 							}
-							if(skill_range[i]._entity_on_tile.ally){
-								skill_range[i]._entity_on_tile.has_attacked=true;
-								skill_range[i]._entity_on_tile.has_moved=true;
-							}else{
-								skill_range[i]._entity_on_tile.remove_danger_highlights();
-							}
+							//if(skill_range[i]._entity_on_tile.ally){
+							//	skill_range[i]._entity_on_tile.has_attacked=true;
+							//	skill_range[i]._entity_on_tile.has_moved=true;
+							//}else{
+							//	skill_range[i]._entity_on_tile.remove_danger_highlights();
+							//}
 							
 						}
 					}
@@ -3927,7 +3925,8 @@ global.players = [
 		tpGain: 1,
 		portrait: spr_temp_Taion,
 		primary: #0cac87,
-		secondary: #386467
+		secondary: #386467,
+		portrait_full: spr_Taion_full
 		
 	},
 	{ // dancer guy
@@ -3941,7 +3940,8 @@ global.players = [
 		tpGain: 3,
 		portrait: spr_temp_Glimmer,
 		primary: #0cac87,
-		secondary: #386467
+		secondary: #386467,
+		portrait_full: spr_Glimmer_full
 	},
 	{ // Teleport guy
 		name: "Warpman",
@@ -3954,10 +3954,11 @@ global.players = [
 		tpGain: 3,
 		portrait: spr_temp_Wulfric,
 		primary: #0cac87,
-		secondary: #386467
+		secondary: #386467,
+		portrait_full: spr_Wulfric_full
 	},
 	{ //Bomb guy
-		name: "BombasticSideye",
+		name: "Bombastic",
 		hp: 3,
 		hpMax: 3,
 		playerSpeed: 2,
@@ -3967,7 +3968,8 @@ global.players = [
 		tpGain: 1,
 		portrait: spr_temp_Azami,
 		primary: #0cac87,
-		secondary: #386467
+		secondary: #386467,
+		portrait_full: spr_Azami_full
 	},
 	{ //freeze guy
 		name: "Frozone",
@@ -3980,7 +3982,8 @@ global.players = [
 		tpGain: 1,
 		portrait: spr_temp_Perun,
 		primary: #0cac87,
-		secondary: #386467
+		secondary: #386467,
+		portrait_full: spr_Perun_full
 	},
 	{ // push guy
 		name: "Oktavia",
@@ -3993,7 +3996,8 @@ global.players = [
 		tpGain: 2,
 		portrait: spr_temp_Pandoria,
 		primary: #0cac87,
-		secondary: #386467
+		secondary: #386467,
+		portrait_full: spr_Pandoria_full
 	},
 	//{ //new member
 	//	name: "put new party member here", //refer to example above
