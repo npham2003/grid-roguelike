@@ -88,8 +88,16 @@ if(sub_menu==1){
 			draw_set_halign(fa_left);
 		}
 		//draw_text(_pips[i][0]+line_spacing*1.2*power(-1,i+1),_pips[i][1],menu_options[1][i]);
+		draw_set_color(c_white);
+		draw_set_alpha(1);
+		//text_outline(_pips[i][0]+line_spacing*1.2*power(-1,i+1),_pips[i][1], menu_options[1][i], 2, c_white, 8, 100000, 1000000);
+		for(var dto_i=45; dto_i<405; dto_i+=360/8)
+		{
+		  //draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);
+		  draw_text_ext(_pips[i][0]+line_spacing*1.2*power(-1,i+1)+round(lengthdir_x(2,dto_i)),_pips[i][1]+round(lengthdir_y(2,dto_i)),menu_options[1][i],8,100000);
+		}
 		draw_set_color(c_black);
-		text_outline(_pips[i][0]+line_spacing*1.2*power(-1,i+1),_pips[i][1], menu_options[1][i], 2, c_white, 8, 100000, 1000000);
+		draw_text_ext(_pips[i][0]+line_spacing*1.2*power(-1,i+1),_pips[i][1], menu_options[1][i],8,10000);
 		
 		#region draw character
 		gpu_set_blendenable(false);

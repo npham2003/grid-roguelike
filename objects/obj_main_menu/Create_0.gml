@@ -185,6 +185,7 @@ text_outline = function(){
 	draw_set_color(dto_dcol);
 
 	draw_text_ext(argument0,argument1,argument2,argument6,argument7);	
+	show_debug_message(argument2);
 	
 }
 
