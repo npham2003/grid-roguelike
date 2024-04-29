@@ -17,6 +17,7 @@ hp_opacity_increase=true;
 tpCost = [0, 1, 5, 7, 12];
 tp_opacity=0;
 tp_opacity_increase=true;
+skill_names=["","","",""];
 
 turn_count = 0;
 turn_max = 3;

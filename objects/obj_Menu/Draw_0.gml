@@ -97,7 +97,7 @@ for (var i = skills - 1; i >= 0; i--) {
 	#endregion
 	
 	#region draw tp
-	var _pips = make_tp(menuX[i] - expandAnim*70, menuY[i] + 15*expandAnim, 7*expandAnim, tpCost[i], true);
+	var _pips = make_tp(menuX[i] - expandAnim*70, menuY[i] - 15*expandAnim, 7*expandAnim, tpCost[i], true);
 
 	draw_set_color(global._characterSecondary);
 	for (var j = 0; j < array_length(_pips); j++){
@@ -108,7 +108,16 @@ for (var i = skills - 1; i >= 0; i--) {
 	#endregion
 
 	//text			player_unit.actions[i].name[player_unit.upgrades[i]]+ ": " +
-	if i < 4 draw_text_transformed_colour(menuX[i+1]-expandAnim*25, menuY[i]-60, global.controls[i], 1, 1, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+	if (i < 4){
+		draw_text_transformed_colour(menuX[i+1]-expandAnim*25, menuY[i]-60, global.controls[i], 1, 1, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+		draw_set_halign(fa_right);
+		draw_set_font(fnt_chiaro_small);
+		draw_text_transformed_colour(menuX[i+1]-expandAnim*25+20, menuY[i], skill_names[i+1], 0.7, 0.7, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+		draw_set_font(fnt_chiaro);
+	}
+	show_debug_message(skill_names);
+	draw_set_halign(fa_left);
+	
 }
 #endregion
 

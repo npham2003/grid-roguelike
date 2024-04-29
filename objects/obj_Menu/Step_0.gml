@@ -18,6 +18,7 @@ for (var i = 0; i < skills; ++i) {
 
 expandAnim = lerp(expandAnim, state, 0.2);
 tpCost=[0,player_unit.actions[0].cost[player_unit.upgrades[0]],player_unit.actions[1].cost[player_unit.upgrades[1]],player_unit.actions[2].cost[player_unit.upgrades[2]],player_unit.actions[3].cost[player_unit.upgrades[3]]];
+skill_names=["",player_unit.actions[0].name[player_unit.upgrades[0]],player_unit.actions[1].name[player_unit.upgrades[1]],player_unit.actions[2].name[player_unit.upgrades[2]],player_unit.actions[3].name[player_unit.upgrades[3]]];
 #endregion
 
 #region portrait opacity
