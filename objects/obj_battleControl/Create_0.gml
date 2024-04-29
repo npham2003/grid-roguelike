@@ -12,7 +12,7 @@ enemy_order = 0;
 
 // maybe these are in the wrong spot? but anyway yea
 tp_max = 9;
-tp_current = 3;
+tp_current = 9;
 tp_bonus=0;
 
 in_animation = false;
