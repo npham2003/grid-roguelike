@@ -1,4 +1,4 @@
-if(obj_main_menu.sub_menu==2){
+
 
 	var hint_text = "Type numbers to put guys in your team\n";
 	hint_text += "Press Enter to confirm your selection\n";
@@ -26,4 +26,3 @@ if(obj_main_menu.sub_menu==2){
 	}
 	draw_text_ext_transformed(800, 300, member_text, 50, 800, 1, 1, 0);
 
-}

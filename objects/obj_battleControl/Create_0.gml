@@ -12,7 +12,7 @@ enemy_order = 0;
 
 // maybe these are in the wrong spot? but anyway yea
 tp_max = 9;
-tp_current = 3;
+tp_current = 9;
 tp_bonus=0;
 
 in_animation = false;
@@ -29,6 +29,8 @@ board_obstacle_order = 0;
 obstacle = pointer_null;
 
 battle_progress=0;
+
+turn_count=0;
 
 #region Spawns
 

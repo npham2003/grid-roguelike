@@ -140,7 +140,7 @@ switch (state) {
 #region Player Preparing
 	case BattleState.PlayerPreparing:
 		obj_draw_bg.colorSwitch = false;
-		
+		turn_count+=1;
 		for (var i = 0; i < array_length(player_units); i++) {
 			
 			// do not remove buffs if the player is frozen
@@ -199,7 +199,7 @@ switch (state) {
 		}
 		// tp bonus 
 		tp_current+=tp_bonus;
-		tp_current+=3;
+		tp_current+=4;
 		
 		// makes sure you don't go over max tp
 		if (tp_current > tp_max) {
@@ -246,6 +246,8 @@ switch (state) {
 				player_units[i].has_moved = true;
 				player_units[i].has_attacked = true;
 			}
+			obj_gridCreator.battle_grid[player_units[i].grid_pos[0]][player_units[i].grid_pos[1]]._entity_on_tile=player_units[i];
+			obj_gridCreator.battle_grid[player_units[i].grid_pos[0]][player_units[i].grid_pos[1]]._is_empty=false;
 		}
 		if (has_all_attacked) {
 			board_obstacle_order = 0;
@@ -391,7 +393,7 @@ switch (state) {
 		// error handling but unit should always be a player unit here
 		if(unit!=pointer_null){
 			//obj_menu.set_text("WASD - Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
-			obj_menu.set_text("WASD - Move     Enter - Do Nothing     Tab - Back");
+			obj_menu.set_text("WASD - Move     Enter - Wait     Tab - Back");
 			
 			// moving
 			if (wasd_pressed) {
@@ -469,12 +471,13 @@ switch (state) {
 					}
 			}
 			
-				if (enough_tp) { // enough tp to use a skill
+				if (enough_tp && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) { // enough tp to use a skill
 					unit.confirm_move();
 					unit.skill_init = false;
 					unit.skill_complete = false;
 					unit.skill_progress=0;
 					enough_tp = false;
+					obj_gridCreator.reset_highlights_move();
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					change_state(BattleState.PlayerAiming);
 					for(i=0;i<array_length(enemy_units);i++){
@@ -750,7 +753,7 @@ switch (state) {
 			if(battle_progress==array_length(global.encounters)){
 				battle_progress=0;
 			}
-			tp_current=3;
+			tp_current=tp_max;
 			change_state(BattleState.PlayerUpgrade);
 		}else{
 			obj_gridCreator.reset_highlights_cursor();
