@@ -48,11 +48,16 @@ if (confirm) {
 	//draw_text_color(550, );
 }
 #endregion
+if((obj_battleControl.state==BattleState.PlayerAiming||obj_battleControl.state==BattleState.PlayerMoving)||!open){
+	skills=6;
+}else{
+	skills=5;
+}
 
 #region buttons
 var _buttonScale = 5;
-for (var i = skills - 1; i >= 0; i--) {
-
+for (var i = skills; i >= 0; i--) {
+	
 	#region setup
 	var _border = border;
 	var _outline1 = [
@@ -116,12 +121,22 @@ for (var i = skills - 1; i >= 0; i--) {
 	#endregion
 
 	//text			player_unit.actions[i].name[player_unit.upgrades[i]]+ ": " +
-	if (i < 4){
-		draw_text_transformed_colour(menuX[i+1]-expandAnim*25, menuY[i]-60, global.controls[i], 1, 1, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
-		draw_set_halign(fa_right);
-		draw_set_font(fnt_chiaro_small);
-		draw_text_transformed_colour(menuX[i+1]-expandAnim*25+20, menuY[i], skill_names[i+1], 0.7, 0.7, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
-		draw_set_font(fnt_chiaro);
+	if (i < 5){
+		if(i==4){
+			
+			draw_set_halign(fa_right);
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+string_width("L"), menuY[i]-60, global.controls[i], 1, 1, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, waitAlpha);
+			draw_set_halign(fa_right);
+			draw_set_font(fnt_chiaro_small);
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+20, menuY[i], skill_names[i+1], 0.7, 0.7, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, waitAlpha);
+			draw_set_font(fnt_chiaro);
+		}else{
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+string_width("L"), menuY[i]-60, global.controls[i], 1, 1, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+			draw_set_halign(fa_right);
+			draw_set_font(fnt_chiaro_small);
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+20, menuY[i], skill_names[i+1], 0.7, 0.7, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+			draw_set_font(fnt_chiaro);
+		}
 	}
 	
 	draw_set_halign(fa_left);

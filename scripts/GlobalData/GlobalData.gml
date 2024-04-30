@@ -1,4 +1,4 @@
-global.controls = ["H", "J", "K", "L"];
+global.controls = ["H", "J", "K", "L", "Enter"];
 
 //Action Library
 // _damage+unit.attack_bonus+unit.attack_bonus_temp
