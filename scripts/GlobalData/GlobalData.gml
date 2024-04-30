@@ -1,4 +1,4 @@
-global.controls = ["H", "J", "K", "L"];
+global.controls = ["H", "J", "K", "L", "Enter"];
 
 //Action Library
 // _damage+unit.attack_bonus+unit.attack_bonus_temp
@@ -89,7 +89,7 @@ global.actionLibrary = {
 	},
 	beam: {
 		name: ["Beam", "Big Beam", "Repel Beam"], 
-		description: ["Does 2 damage to all targets in a row", "Does 2 damage to all targets in front of you and in surrounding rows. Double damage if target is in the same row", "Does 2 damage to all targets in a row and pushes them back 1 tile."],
+		description: ["Does 2 damage to all targets in a row", "Does 2 damage to all targets in front of you and in surrounding rows.\nDouble damage if target is in the same row", "Does 2 damage to all targets in a row and pushes them back 1 tile."],
 		cost: [3, 5, 4],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -233,7 +233,7 @@ global.actionLibrary = {
 	},
 	mortar: {
 		name: ["Mortar", "Airstrike", "Force Grenade"], //probably redundant to have a name but keep it
-		description: ["Hits a target up to 3 tiles away and damages all adjacent units", "Hits any target and damages all adjacent units", "Hits a target up to 3 tiles away and damages and pushes all adjacent units. Center target takes double damage."],
+		description: ["Hits a target up to 3 tiles away and damages all adjacent units", "Hits any target and damages all adjacent units", "Hits a target up to 3 tiles away and damages and pushes all adjacent units.\nCenter target takes double damage."],
 		cost: [4, 6, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -530,7 +530,7 @@ global.actionLibrary = {
 	charge: {
 		name: ["Charge", "Chargeback", "Parry"], //probably redundant to have a name but keep it
 		description: ["Gain 1 TP", "Gain 3 TP but move back to your original position", "Protect yourself from all attacks that hit you this turn"],
-		cost: [0, 0, 3],
+		cost: [-1, -3, 3],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -552,10 +552,8 @@ global.actionLibrary = {
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 					obj_battleEffect.hit_animation(unit,3);
 					audio_play_sound(sfx_charge, 0, false,0.3);
-					obj_battleControl.tp_current+=1;
-					if(obj_battleControl.tp_current>obj_battleControl.tp_max){
-						obj_battleControl.tp_current=obj_battleControl.tp_max;
-					}
+					
+					
 					unit.skill_complete = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_init = false;
@@ -581,10 +579,8 @@ global.actionLibrary = {
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 					obj_battleEffect.hit_animation(unit,3);
 					audio_play_sound(sfx_charge, 0, false,0.3);
-					obj_battleControl.tp_current+=3;
-					if(obj_battleControl.tp_current>obj_battleControl.tp_max){
-						obj_battleControl.tp_current=obj_battleControl.tp_max;
-					}
+					
+					
 					unit.skill_complete = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_init = false;
@@ -1323,7 +1319,7 @@ global.actionLibrary = {
 	},
 	frostcone: {
 		name: ["Frostbite", "Boreal Wind", "Sharp Winds"], //probably redundant to have a name but keep it
-		description: ["Attacks in a cone in front of you. Enemies who are frozen take 1 more damage", "Attacks in a cone in front of you as well as everything in front of you in the row. Enemies who are frozen take 1 more damage", "Attacks in a cone in front of you. Enemies who are frozen take 2 more damage"],
+		description: ["Attacks in a cone in front of you.\nFrozen units take 1 more damage", "Attacks in a cone in front of you as well as everything in front of you in the row.\nFrozen units take 1 more damage", "Attacks in a cone in front of you.\nFrozen units take 2 more damage"],
 		cost: [3, 4, 4],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -2648,7 +2644,7 @@ global.actionLibrary = {
 	},
 	placebomb: {
 		name: ["Mine", "Bigger Mine", "More Mines"], //probably redundant to have a name but keep it
-		description: ["Places a mine. Any units 1 tile away take damage at the end of their turn", "Places a mine. Any units in the 3x3 area take 3 damage at the end of their turn.", "Places 2 mines. Any units 1 tile away take damage at the end of their turn"],
+		description: ["Places a mine. Any adjacent units take damage at the end of their turn", "Places a mine. Any units in the 3x3 area take 3 damage at the end of their turn.", "Places 2 mines. Any adjacent units take damage at the end of their turn"],
 		cost: [2, 3, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",

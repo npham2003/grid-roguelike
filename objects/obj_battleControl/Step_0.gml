@@ -126,7 +126,7 @@ switch (state) {
 					}
 				
 			}
-			obj_menu.set_text(unit.name+" is aiming");
+			//obj_menu.set_text(unit.name+" is aiming");
 			
 			// next enemy
 			enemy_order += 1;
@@ -267,6 +267,8 @@ switch (state) {
 				
 				// set the tpcost array in the menu to match actual costs
 				obj_menu.tpCost=[0,unit.actions[0].cost[unit.upgrades[0]],unit.actions[1].cost[unit.upgrades[1]],unit.actions[2].cost[unit.upgrades[2]],unit.actions[3].cost[unit.upgrades[3]]];
+				obj_menu.skill_names=["",unit.actions[0].name[unit.upgrades[0]],unit.actions[1].name[unit.upgrades[1]],unit.actions[2].name[unit.upgrades[2]],unit.actions[3].name[unit.upgrades[3]]];
+				
 				//obj_menu.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
 				
 				
@@ -338,6 +340,7 @@ switch (state) {
 								change_state(BattleState.PlayerAiming);
 								
 								obj_gridCreator.reset_highlights_cursor();
+								obj_menu.set_skill_text(string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
 							}
 						}
 				}
@@ -483,6 +486,7 @@ switch (state) {
 					for(i=0;i<array_length(enemy_units);i++){
 						enemy_units[i].recalc_los();
 					}
+					obj_menu.set_skill_text(string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
 				}
 					
 				}
@@ -519,14 +523,17 @@ switch (state) {
 			
 			
 		}else{
-			obj_menu.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+""+string(unit.actions[unit.skill_used].name[unit.upgrades[unit.skill_used]])+"\n"+string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
+			obj_menu.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n");
+			obj_menu.set_skill_text(string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
 			obj_menu.confirm = true;
 			
 			if (unit.skill_complete) {  // did the skill get used and finish
 				obj_menu.confirm = false;
 				tp_current -= unit.actions[unit.skill_used].cost[unit.upgrades[unit.skill_used]];
 				unit.has_attacked = true;
-				
+				if(tp_current>tp_max){
+					tp_current=tp_max;
+				}
 				change_state(BattleState.PlayerTakingAction);
 			}
 			switch(unit.upgrades[unit.skill_used]){ //use the right skill based on upgrade array
@@ -611,6 +618,7 @@ switch (state) {
 								obj_gridCreator.reset_highlights_cursor();
 								obj_battleEffect.remove_push_preview();
 								audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+								obj_menu.set_skill_text(string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
 							}
 						}
 				
