@@ -120,7 +120,7 @@ if (back) {
 }
 #endregion
 
-if((obj_battleControl.state==BattleState.PlayerAiming||obj_battleControl.state==BattleState.PlayerMoving)||!open){
+if((obj_battleControl.state==BattleState.PlayerAiming||obj_battleControl.state==BattleState.PlayerMoving||obj_battleControl.state==BattleState.PlayerTakingAction)||!open){
 	skills=6;
 }else{
 	skills=5;
