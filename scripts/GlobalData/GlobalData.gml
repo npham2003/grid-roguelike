@@ -2644,7 +2644,7 @@ global.actionLibrary = {
 	},
 	placebomb: {
 		name: ["Mine", "Bigger Mine", "More Mines"], //probably redundant to have a name but keep it
-		description: ["Places a mine. Any units 1 tile away take damage at the end of their turn", "Places a mine. Any units in the 3x3 area take 3 damage at the end of their turn.", "Places 2 mines. Any units 1 tile away take damage at the end of their turn"],
+		description: ["Places a mine. Any adjacent units take damage at the end of their turn", "Places a mine. Any units in the 3x3 area take 3 damage at the end of their turn.", "Places 2 mines. Any adjacent units take damage at the end of their turn"],
 		cost: [2, 3, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
