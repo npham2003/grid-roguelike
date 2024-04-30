@@ -91,11 +91,21 @@ for (var i = skills; i >= 0; i--) {
 	draw_primitive_end();
 	
 	draw_set_color(global._characterPrimary);
+	//if(obj_battleControl.state==BattleState.PlayerAiming){
+	//	if(i-1==player_unit.skill_used){
+	//		draw_set_color(c_black);
+	//	}
+	//}
 	draw_primitive_begin(pr_trianglestrip);
 	draw_vertices(_outline1);
 	draw_primitive_end();
 	
 	draw_set_color(global._primary);
+	if(obj_battleControl.state==BattleState.PlayerAiming){
+		if(i-1==player_unit.skill_used){
+			draw_set_color(skill_used_color);
+		}
+	}
 	draw_primitive_begin(pr_trianglestrip);
 	draw_vertices(_button);
 	draw_primitive_end();
@@ -296,10 +306,19 @@ draw_set_color(global._primary);
 draw_text_transformed(75, 20, "G    "+ string(obj_battleControl.gold), 0.8, 0.8, 0);
 #endregion
 
+draw_text_transformed(75, 70, "Battle "+ string(obj_battleControl.battle_progress+1)+"/"+string(array_length(global.encounters)), 0.8, 0.8, 0);
+draw_text_transformed(75, 100, "Turn "+ string(obj_battleControl.turn_count), 0.8, 0.8, 0);
+
 #region skill details
-draw_set_font(fnt_chiaro);
+draw_set_font(fnt_chiaro_small);
 draw_set_color(c_white);
-draw_text_ext(300, 10, _text, 40, 1000);
+
+draw_text_ext(500, rootY-105, _text, 40, 1000);
+draw_set_font(fnt_chiaro_small);
+if(obj_battleControl.state==BattleState.PlayerAiming){
+	draw_text_ext(250, 90, skill_description, 25, 1100);
+}
+draw_set_font(fnt_chiaro);
 #endregion
 
 #region turn banner

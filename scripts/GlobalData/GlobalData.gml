@@ -89,7 +89,7 @@ global.actionLibrary = {
 	},
 	beam: {
 		name: ["Beam", "Big Beam", "Repel Beam"], 
-		description: ["Does 2 damage to all targets in a row", "Does 2 damage to all targets in front of you and in surrounding rows. Double damage if target is in the same row", "Does 2 damage to all targets in a row and pushes them back 1 tile."],
+		description: ["Does 2 damage to all targets in a row", "Does 2 damage to all targets in front of you and in surrounding rows.\nDouble damage if target is in the same row", "Does 2 damage to all targets in a row and pushes them back 1 tile."],
 		cost: [3, 5, 4],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -233,7 +233,7 @@ global.actionLibrary = {
 	},
 	mortar: {
 		name: ["Mortar", "Airstrike", "Force Grenade"], //probably redundant to have a name but keep it
-		description: ["Hits a target up to 3 tiles away and damages all adjacent units", "Hits any target and damages all adjacent units", "Hits a target up to 3 tiles away and damages and pushes all adjacent units. Center target takes double damage."],
+		description: ["Hits a target up to 3 tiles away and damages all adjacent units", "Hits any target and damages all adjacent units", "Hits a target up to 3 tiles away and damages and pushes all adjacent units.\nCenter target takes double damage."],
 		cost: [4, 6, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -1319,7 +1319,7 @@ global.actionLibrary = {
 	},
 	frostcone: {
 		name: ["Frostbite", "Boreal Wind", "Sharp Winds"], //probably redundant to have a name but keep it
-		description: ["Attacks in a cone in front of you. Enemies who are frozen take 1 more damage", "Attacks in a cone in front of you as well as everything in front of you in the row. Enemies who are frozen take 1 more damage", "Attacks in a cone in front of you. Enemies who are frozen take 2 more damage"],
+		description: ["Attacks in a cone in front of you.\nFrozen units take 1 more damage", "Attacks in a cone in front of you as well as everything in front of you in the row.\nFrozen units take 1 more damage", "Attacks in a cone in front of you.\nFrozen units take 2 more damage"],
 		cost: [3, 4, 4],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",

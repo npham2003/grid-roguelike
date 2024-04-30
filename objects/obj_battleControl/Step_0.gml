@@ -126,7 +126,7 @@ switch (state) {
 					}
 				
 			}
-			obj_menu.set_text(unit.name+" is aiming");
+			//obj_menu.set_text(unit.name+" is aiming");
 			
 			// next enemy
 			enemy_order += 1;
@@ -340,6 +340,7 @@ switch (state) {
 								change_state(BattleState.PlayerAiming);
 								
 								obj_gridCreator.reset_highlights_cursor();
+								obj_menu.set_skill_text(string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
 							}
 						}
 				}
@@ -485,6 +486,7 @@ switch (state) {
 					for(i=0;i<array_length(enemy_units);i++){
 						enemy_units[i].recalc_los();
 					}
+					obj_menu.set_skill_text(string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
 				}
 					
 				}
@@ -521,7 +523,8 @@ switch (state) {
 			
 			
 		}else{
-			obj_menu.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n"+""+string(unit.actions[unit.skill_used].name[unit.upgrades[unit.skill_used]])+"\n"+string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
+			obj_menu.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n");
+			obj_menu.set_skill_text(string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
 			obj_menu.confirm = true;
 			
 			if (unit.skill_complete) {  // did the skill get used and finish
@@ -615,6 +618,7 @@ switch (state) {
 								obj_gridCreator.reset_highlights_cursor();
 								obj_battleEffect.remove_push_preview();
 								audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+								obj_menu.set_skill_text(string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
 							}
 						}
 				

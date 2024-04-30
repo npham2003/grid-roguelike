@@ -1,6 +1,7 @@
 state = 0;
 skills = 6;
 _text = "";
+skill_description="";
 
 open = true;
 playerTurn = false;
@@ -30,7 +31,7 @@ turn_banner_animation_started=false;
 
 ask_end = false;
 
-
+skill_used_color=#987959;
 
 #region location & size
 imgX = 200;
@@ -76,6 +77,10 @@ open_menu = function(){
 
 set_text = function(_new_text){
 	_text = _new_text;
+}
+
+set_skill_text = function(_new_text){
+	skill_description = _new_text;
 }
 
 set_select = function(_option) {
