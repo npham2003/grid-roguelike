@@ -1,3 +1,23 @@
+
+
+draw_line_width_color(room_width/2-progress_length/2,progress_height,room_width/2+progress_length/2,progress_height,progress_thickness,global._primary,global._primary);
+draw_set_color(global._characterPrimary);
+draw_circle(player_marker,progress_height,15, false);
+draw_set_color(global._primary);
+for(i=0;i<5;i++){
+	draw_set_color(global._primary);
+	draw_circle(room_width/2-progress_length/2+(progress_length/(battles_in_room-1)*i),progress_height,10, false);
+	if(obj_battleControl.battle_progress%5==i){
+		draw_set_alpha(tp_opacity*0.5);
+		draw_set_color(c_white);
+		draw_circle(room_width/2-progress_length/2+(progress_length/(battles_in_room-1)*i),progress_height,10, false);
+	}
+	draw_set_alpha(1);
+	
+}
+
+
+
 #region confirm
 if (confirm) {
 	var c_border = border;

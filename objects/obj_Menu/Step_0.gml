@@ -127,3 +127,8 @@ backX[0] = lerp(backX[0], backShiftX[0], 0.2);
 backX[1] = lerp(backX[1], backShiftX[1], 0.2);
 
 #endregion
+
+player_marker=lerp(player_marker,room_width/2-progress_length/2+(progress_length/(battles_in_room-1)*(obj_battleControl.battle_progress%5)),0.1);
+if(obj_battleControl.battle_progress%5==0){
+	player_marker=room_width/2-progress_length/2;
+}

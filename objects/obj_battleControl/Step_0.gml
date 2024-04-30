@@ -607,7 +607,7 @@ switch (state) {
 							else {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
-						}else if (key_Enter_pressed) {
+						}else if (key_Enter_pressed&&unit.skill_used!=4) {
 							if (tp_current >= unit.actions[4].cost[unit.upgrades[4]]) {
 							unit.skill_used = 4;
 							enough_tp = true;
@@ -770,7 +770,11 @@ switch (state) {
 				battle_progress=0;
 			}
 			tp_current=tp_max;
-			change_state(BattleState.PlayerUpgrade);
+			if(battle_progress%5==0){
+				change_state(BattleState.PlayerUpgrade);
+			}else{
+				change_state(BattleState.BattleStart);
+			}
 		}else{
 			obj_gridCreator.reset_highlights_cursor();
 			obj_menu.set_text("Press any key to restart");
