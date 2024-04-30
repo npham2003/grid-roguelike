@@ -9,6 +9,8 @@ enemyTurn = true;
 
 confirm = false;
 
+back = false;
+
 player_unit = obj_player;
 currCharSprite = spr_temp_Taion;
 
@@ -60,6 +62,14 @@ confirmX = [1000, 1200];
 confirmY = 660;
 confirmShiftX = 0;
 confirmShiftY = [0,0];
+
+backRadius = 40;
+backX = [1000, 1200];
+backY = 660;
+backShiftX = 0;
+backShiftY = [0,0];
+
+
 
 border = 5;
 #endregion
