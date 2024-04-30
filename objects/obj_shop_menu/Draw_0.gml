@@ -229,13 +229,13 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	if(menu_level == 3){ //upgrade your skill
 			#region setup
 			var _border = border;
-			var _outline1 = [
+				var _outline1 = [
 				[skill_x_start+upgrade_offset, skill_y_start+90-(optionRadius+_border)],
 				[skill_x_start+upgrade_offset-(optionRadius+_border), skill_y_start+90],
 				[skill_x_start+upgrade_offset, skill_y_start+90+(optionRadius+_border)],
 				[skill_x_start+upgrade_offset+500, skill_y_start+90+(optionRadius+_border)],
-				[skill_x_start+upgrade_offset+500+(optionRadius+_border), skill_y_start+9],
-				[skill_x_start+upgrade_offset+500, skill_y_start+90+-(optionRadius+_border)],
+				[skill_x_start+upgrade_offset+500+(optionRadius+_border), skill_y_start+90],
+				[skill_x_start+upgrade_offset+500, skill_y_start+90-(optionRadius+_border)],
 			]
 			var _outline2 = [
 				
@@ -258,6 +258,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 				[skill_x_start+upgrade_offset+upgrade_offset+500+(optionRadius+_border), skill_y_start+90]
 			]
 			#endregion
+			
 		
 		//draw_set_color(c_black);
 		//draw_set_alpha(1);
