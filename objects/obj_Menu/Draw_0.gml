@@ -339,10 +339,6 @@ draw_sprite_ext(player_unit.portrait, 0, imgX, imgY-20, -0.55, 0.55, 0, c_white,
 gpu_set_alphatestenable(false);
 draw_set_alpha(1);
 gpu_set_blendmode(bm_normal);
-
-
-
-
 #endregion
 
 #region gold

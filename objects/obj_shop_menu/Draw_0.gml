@@ -15,8 +15,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 					break;
 				}
 				draw_set_alpha(1);
-				draw_set_color(c_white);
-				//draw_rectangle(actual_x+(200*i)+125+offset, y+(175*j)+37.5, actual_x+(200*i)+275+offset, y+(175*j)+187.5, true);
+				
 				draw_set_color(c_black);
 				if (selector_pos[0] == i && selector_pos[1] == j){ //if this option is highlighted
 				
@@ -33,26 +32,20 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 					draw_sprite_ext(spr_shop_menu_border, image_index, actual_x+(200*i)+100+offset, y+(175*j)-50+text_box_offset, 0.2, 0.2, image_angle, global._primary, alpha);
 				}
 		
-				//draw cost of option in top left corner
-				draw_set_alpha(1);
-				draw_set_color(c_white);
-				draw_text_ext_transformed(actual_x+(200*i)+150+offset, y+(175*j)+37.5, cost[i+j*4], 40, 360, 0.5, 0.5, image_angle);
-				draw_set_color(c_black);
 				
 				if(j==1){
 					#region draw character
 					gpu_set_blendenable(false);
-
 					gpu_set_colorwriteenable(false, false, false, true);
 					draw_set_alpha(0);
-					draw_rectangle(actual_x+(200*i)+125+offset, y+(175*j)+37.5, actual_x+(200*i)+275+offset, y+(175*j)+187.5, true); //invisible rectangle
+					draw_rectangle(actual_x+(190*i)+100+offset, y+(175*j)+20, actual_x+(200*i)+300+offset, y+(175*j)+240, false); //invisible rectangle
 
 					//mask
 					draw_set_alpha(1);
 					//draw_sprite_ext(spr_diamond_base, 0, imgX, imgY, portraitScale, portraitScale, 0, c_white, 1);
 					draw_set_color(c_white);
 					draw_primitive_begin(pr_trianglestrip);
-					draw_rectangle(actual_x+(200*i)+125+offset, y+(175*j)+37.5, actual_x+(200*i)+275+offset, y+(175*j)+187.5, true);
+					draw_rectangle(actual_x+(200*i)+125+offset, y+(175*j)+37.5, actual_x+(200*i)+275+offset, y+(175*j)+187.5, false);
 					draw_primitive_end();
 
 					gpu_set_blendenable(true);
@@ -60,11 +53,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 
 					//draw over mask
 					gpu_set_blendmode_ext(bm_dest_alpha, bm_inv_dest_alpha);
-					//gpu_set_blendmode_ext_sepalpha(bm_dest_alpha, bm_inv_src_alpha, portraitAlpha, bm_inv_src_alpha);
-
-					//gpu_set_blendmode_ext_sepalpha(portraitAlpha, portraitAlpha, portraitAlpha, portraitAlpha);
 					gpu_set_alphatestenable(true);
-					//draw_sprite_ext(spr_temp_Akeha_under, 0, imgX, imgY-20, -0.55, 0.55, 0, c_white, 1);
 					draw_sprite_ext(obj_battleControl.player_units[i].portrait, 0, actual_x+(200*i)+200+offset, y+(175*j)+113, -0.4, 0.4, 0, c_white, 1);
 					gpu_set_alphatestenable(false);
 					draw_set_alpha(1);
@@ -72,7 +61,12 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 					#endregion
 				}
 				
-			
+				//draw cost of option in top left corner
+				draw_set_alpha(1);
+				draw_set_color(c_white);
+				draw_text_ext_transformed(actual_x+(200*i)+150+offset, y+(175*j)+37.5, cost[i+j*4], 40, 360, 0.5, 0.5, image_angle);
+				draw_set_color(c_black);
+				
 				if(obj_battleControl.gold<cost[i+j*4]){
 					selectable[i+j*4]=false;
 				
@@ -82,7 +76,9 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 				if(array_length(obj_battleControl.player_units)==4){
 					selectable[7]=false;	
 				}
-		
+				
+				draw_set_color(c_white);
+				draw_rectangle(actual_x+(200*i)+125+offset, y+(175*j)+37.5, actual_x+(200*i)+275+offset, y+(175*j)+187.5, true);
 			}
 		}
 	}
