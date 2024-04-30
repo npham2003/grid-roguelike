@@ -54,6 +54,9 @@ portrait_flash=[false,false,false,false,false,false];
 portrait_flash_opacity=[1,1,1,1,1,1];
 portrait_flash_times=[2.376,2.480,2.573,2.832,3.121,3.298, 4.683];
 portrait_final_flash=false;
+portrait_fill_flash=0;
+beat_increment=0;
+beat_length=0.75;
 
 initial_skill_x = 2000;
 actual_skill_x=2000;
@@ -63,6 +66,8 @@ skill_y_start = 30;
 selected = [false, false, false, false, false, false];
 curr=0;
 party=[-1,-1,-1];
+
+
 
 audio_play_sound(bgm_xenoblade_x_title,0,true);
 

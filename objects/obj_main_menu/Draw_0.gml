@@ -181,8 +181,11 @@ if(sub_menu==2){
 		//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 12));
 		draw_primitive_end();
 		draw_primitive_begin(pr_trianglestrip);
-	
-		draw_set_color(diamond_fill);
+		if(selected[i]){
+			draw_set_color(diamond_fill);
+		}else{
+			draw_set_color(merge_color(diamond_fill,c_white,portrait_fill_flash));
+		}
 	
 		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], line_spacing-30));
 		//draw_set_color(global._tpBorder);
