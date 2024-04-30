@@ -90,25 +90,6 @@ if (turn_count <= turn_max) {
 turn_text_anim = lerp(turn_text_anim, 2, 0.2)
 #endregion
 
-#region confirm opacity
-if(confirm){
-	confirmShiftX[0] = 920;
-	confirmShiftX[1] = 1170;
-	confirmShiftY = 660;
-	
-
-}else{
-	confirmShiftX[0] = 870;
-	confirmShiftX[1] = 1020;
-	confirmShiftY = 660;
-}
-
-confirmY = lerp(confirmY, confirmShiftY, 0.2);
-confirmX[0] = lerp(confirmX[0], confirmShiftX[0], 0.2);
-confirmX[1] = lerp(confirmX[1], confirmShiftX[1], 0.2);
-
-#endregion
-
 #region back opacity
 if(back){
 	backShiftX[0] = 770;
@@ -127,3 +108,29 @@ backX[0] = lerp(backX[0], backShiftX[0], 0.2);
 backX[1] = lerp(backX[1], backShiftX[1], 0.2);
 
 #endregion
+
+#region confirm opacity
+if(confirm){
+	confirmShiftX[0] = 920;
+	confirmShiftX[1] = 1170;
+	confirmShiftY = 660;
+	
+
+}else{
+	confirmShiftX[0] = backShiftX[0];
+	confirmShiftX[1] = backShiftX[1];
+	confirmShiftY = backShiftY;
+}
+
+confirmY = lerp(confirmY, confirmShiftY, 0.2);
+confirmX[0] = lerp(confirmX[0], confirmShiftX[0], 0.2);
+confirmX[1] = lerp(confirmX[1], confirmShiftX[1], 0.2);
+
+#endregion
+
+
+
+player_marker=lerp(player_marker,room_width/2-progress_length/2+(progress_length/(battles_in_room-1)*(obj_battleControl.battle_progress%5)),0.1);
+if(obj_battleControl.battle_progress%5==0){
+	player_marker=room_width/2-progress_length/2;
+}
