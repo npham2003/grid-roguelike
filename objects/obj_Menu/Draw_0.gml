@@ -123,7 +123,7 @@ for (var i = skills - 1; i >= 0; i--) {
 		draw_text_transformed_colour(menuX[i+1]-expandAnim*25+20, menuY[i], skill_names[i+1], 0.7, 0.7, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
 		draw_set_font(fnt_chiaro);
 	}
-	show_debug_message(skill_names);
+	
 	draw_set_halign(fa_left);
 	
 }

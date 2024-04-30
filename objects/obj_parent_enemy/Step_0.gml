@@ -78,4 +78,18 @@ else if (teleporting == 2) {
 		teleporting = 0;
 	}
 }
+
+if(hp_opacity_increase){
+	hp_opacity+=0.01;	
+}else{
+	hp_opacity-=0.01;
+}
+
+if(hp_opacity>0.6){
+	hp_opacity_increase=false;	
+}
+if(hp_opacity<0.1){
+	hp_opacity_increase=true;	
+}
+
 depth=layer_get_depth("Units")-grid_pos[1];
