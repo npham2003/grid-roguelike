@@ -17,7 +17,7 @@ for(i=0;i<5;i++){
 }
 
 
-
+draw_set_font(fnt_archivo);
 #region confirm
 if (confirm) {
 	var c_border = border;
@@ -63,7 +63,7 @@ if (confirm) {
 	draw_primitive_end();
 	
 	draw_set_color(global._characterSecondary);
-	draw_text_ext_transformed(confirmX[0]+50, 615, "Confirm: "+global.controls[player_unit.skill_used], 30, confirmY-160, 0.7, 0.7, 0);
+	draw_text_ext_transformed(confirmX[0]+50, 625, "Confirm: "+global.controls[player_unit.skill_used], 30, confirmY-160, 0.5, 0.5, 0);
 	
 	//draw_text_color(550, );
 }
@@ -114,11 +114,13 @@ if (back) {
 	draw_primitive_end();
 	
 	draw_set_color(global._characterSecondary);
-	draw_text_ext_transformed(backX[0]+20, 615, "Back: Tab", 30, backY-160, 0.7, 0.7, 0);
+	draw_text_ext_transformed(backX[0]+20, 625, "Back: Tab", 30, backY-160, 0.5, 0.5, 0);
 	
 	//draw_text_color(550, );
 }
 #endregion
+
+draw_set_font(fnt_chiaro);
 
 if((obj_battleControl.state==BattleState.PlayerAiming||obj_battleControl.state==BattleState.PlayerMoving||obj_battleControl.state==BattleState.PlayerTakingAction)||!open){
 	skills=6;
@@ -207,14 +209,16 @@ for (var i = skills; i >= 0; i--) {
 		if(i==4){
 			
 			draw_set_halign(fa_right);
-			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+string_width("L"), menuY[i]-60, global.controls[i], 1, 1, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, waitAlpha);
+			draw_set_font(fnt_archivo);
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+string_width("L"), menuY[i]-30, global.controls[i], 0.6, 0.6, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, waitAlpha);
 			draw_set_halign(fa_right);
 			draw_set_font(fnt_chiaro_small);
 			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+20, menuY[i], skill_names[i+1], 0.7, 0.7, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, waitAlpha);
 			draw_set_font(fnt_chiaro);
 			
 		}else{
-			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+string_width("L"), menuY[i]-60, global.controls[i], 1, 1, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+			draw_set_font(fnt_archivo);
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25, menuY[i]-30, global.controls[i], 0.6, 0.6, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
 			draw_set_halign(fa_right);
 			draw_set_font(fnt_chiaro_small);
 			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+20, menuY[i], skill_names[i+1], 0.7, 0.7, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
