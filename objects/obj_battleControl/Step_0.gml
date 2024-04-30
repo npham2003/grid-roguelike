@@ -220,7 +220,7 @@ switch (state) {
 
 #region Player Waiting Action
 	case BattleState.PlayerWaitingAction:
-		
+		obj_menu.back = false;
 		// WASD to move, JKL to use skills, Tab to switch units, Enter to end player turn
 		// If all units have attacked, end player's turn
 		
@@ -392,11 +392,11 @@ switch (state) {
 
 #region Player Moving
 	case BattleState.PlayerMoving:
-		
+		obj_menu.back = true;
 		// error handling but unit should always be a player unit here
 		if(unit!=pointer_null){
 			//obj_menu.set_text("WASD - Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
-			obj_menu.set_text("WASD - Move     Enter - Wait     Tab - Back");
+			obj_menu.set_text("WASD - Move");
 			
 			// moving
 			if (wasd_pressed) {
@@ -509,7 +509,7 @@ switch (state) {
 #region Player Aiming
 	case BattleState.PlayerAiming:
 		
-		
+		obj_menu.back = true;
 		if(unit.skill_back){ // if the player presses tab to go back. this is handled in the skill itself
 			obj_menu.confirm = false;
 			for(i=0;i<array_length(enemy_units);i++){
@@ -523,7 +523,8 @@ switch (state) {
 			
 			
 		}else{
-			obj_menu.set_text("WASD - Aim     Enter - Confirm     Tab - Back\n");
+			//obj_menu.set_text("WASD - Aim    Tab - Back");
+			obj_menu.set_text("WASD - Aim  ");
 			obj_menu.set_skill_text(string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
 			obj_menu.confirm = true;
 			
@@ -606,7 +607,14 @@ switch (state) {
 							else {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
-						}
+						}else if (key_Enter_pressed) {
+							if (tp_current >= unit.actions[4].cost[unit.upgrades[4]]) {
+							unit.skill_used = 4;
+							enough_tp = true;
+							}else {
+								audio_play_sound(sfx_no_tp, 0, false);
+							}
+					}
 							if (enough_tp) {
 								unit.skill_init= false;
 								unit.skill_complete = false;
@@ -638,7 +646,7 @@ switch (state) {
 #region Player Taking Action
 	case BattleState.PlayerTakingAction:
 	
-		
+		obj_menu.back = true;
 		
 		show_debug_message(unit.name + ": taking action");
 		

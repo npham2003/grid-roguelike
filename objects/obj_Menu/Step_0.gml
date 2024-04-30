@@ -21,7 +21,7 @@ for (var i = 0; i < skills; ++i) {
 
 expandAnim = lerp(expandAnim, state, 0.2);
 tpCost=[0,player_unit.actions[0].cost[player_unit.upgrades[0]],player_unit.actions[1].cost[player_unit.upgrades[1]],player_unit.actions[2].cost[player_unit.upgrades[2]],player_unit.actions[3].cost[player_unit.upgrades[3]],0,0];
-skill_names=["",player_unit.actions[0].name[player_unit.upgrades[0]],player_unit.actions[1].name[player_unit.upgrades[1]],player_unit.actions[2].name[player_unit.upgrades[2]],player_unit.actions[3].name[player_unit.upgrades[3]],player_unit.actions[4].name[player_unit.upgrades[4]], ""];
+skill_names=["",player_unit.actions[0].name[player_unit.upgrades[0]],player_unit.actions[1].name[player_unit.upgrades[1]],player_unit.actions[2].name[player_unit.upgrades[2]],player_unit.actions[3].name[player_unit.upgrades[3]],player_unit.actions[4].name[player_unit.upgrades[4]],""];
 
 if(obj_battleControl.state==BattleState.PlayerWaitingAction){
 	menuX[5] = lerp(menuX[5], rootX + 5 * spacing * 0 + 0 * 200, 0.05);
@@ -92,19 +92,38 @@ turn_text_anim = lerp(turn_text_anim, 2, 0.2)
 
 #region confirm opacity
 if(confirm){
-	confirmShiftX[0] = 1010;
-	confirmShiftX[1] = 1210;
+	confirmShiftX[0] = 920;
+	confirmShiftX[1] = 1170;
 	confirmShiftY = 660;
 	
 
 }else{
-	confirmShiftX[0] = 960;
-	confirmShiftX[1] = 1160;
-	confirmShiftY = 700;
+	confirmShiftX[0] = 870;
+	confirmShiftX[1] = 1020;
+	confirmShiftY = 660;
 }
 
 confirmY = lerp(confirmY, confirmShiftY, 0.2);
 confirmX[0] = lerp(confirmX[0], confirmShiftX[0], 0.2);
 confirmX[1] = lerp(confirmX[1], confirmShiftX[1], 0.2);
+
+#endregion
+
+#region back opacity
+if(back){
+	backShiftX[0] = 770;
+	backShiftX[1] = 920;
+	backShiftY = 660;
+	
+
+}else{
+	backShiftX[0] = 720;
+	backShiftX[1] = 870;
+	backShiftY = 700;
+}
+
+backY = lerp(backY, backShiftY, 0.2);
+backX[0] = lerp(backX[0], backShiftX[0], 0.2);
+backX[1] = lerp(backX[1], backShiftX[1], 0.2);
 
 #endregion
