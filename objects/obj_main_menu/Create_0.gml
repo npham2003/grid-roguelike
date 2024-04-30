@@ -52,7 +52,8 @@ actual_character_select = -2000;
 character_select=200;
 portrait_flash=[false,false,false,false,false,false];
 portrait_flash_opacity=[1,1,1,1,1,1];
-portrait_flash_times=[2.426,2.530,2.623,2.902,3.191,3.368];
+portrait_flash_times=[2.376,2.480,2.573,2.832,3.121,3.298, 4.683];
+portrait_final_flash=false;
 
 initial_skill_x = 2000;
 actual_skill_x=2000;

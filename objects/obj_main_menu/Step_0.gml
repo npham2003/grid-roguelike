@@ -62,8 +62,8 @@ if(transition_in){
 				turn_text_anim = 0;
 				turn_life = 100;
 				portrait_flash=[false,false,false,false,false,false];
-				portrait_flash_opacity=[1,1,1,1,1,1];
-				
+				portrait_flash_opacity=[0,0,0,0,0,0];
+				portrait_final_flash=false;
 				transition_in=true;
 				
 				
@@ -287,6 +287,16 @@ switch(sub_menu){
 				if(portrait_flash_opacity[i]>0){
 					portrait_flash_opacity[i]-=0.02;
 				}
+			}
+			if(portrait_flash_times[6]<audio_sound_get_track_position(css_sound_id)&&portrait_flash_opacity[5]==0&&!portrait_final_flash){
+				for(i=0;i<array_length(portrait_flash_opacity);i++){
+				
+				
+				
+					portrait_flash_opacity[i]=1;
+				
+				}
+				portrait_final_flash=true;
 			}
 			
 			break;

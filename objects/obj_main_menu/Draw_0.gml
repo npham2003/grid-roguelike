@@ -182,7 +182,7 @@ if(sub_menu==2){
 		draw_primitive_end();
 		draw_primitive_begin(pr_trianglestrip);
 	
-		draw_set_color(merge_color(diamond_fill,c_white,portrait_flash_opacity[i]));
+		draw_set_color(diamond_fill);
 	
 		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], line_spacing-30));
 		//draw_set_color(global._tpBorder);
@@ -232,7 +232,16 @@ if(sub_menu==2){
 		draw_set_alpha(1);
 		gpu_set_blendmode(bm_normal);
 
-
+		draw_primitive_begin(pr_trianglestrip);
+		//draw_set_color(global._tpBorder);
+		//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 10*expandAnim));
+		draw_set_color(c_white);
+		draw_set_alpha(portrait_flash_opacity[i]);
+		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], line_spacing-25));
+		//draw_set_color(global._tpBorder);
+		//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 12));
+		draw_primitive_end();
+		draw_set_alpha(1);
 
 
 		#endregion
