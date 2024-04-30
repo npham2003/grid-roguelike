@@ -233,10 +233,12 @@ for (var i = skills; i >= 0; i--) {
 
 if (open) {
 #region name
+	draw_set_font(fnt_archivo);
 	//var pc;
 	//pc = (player_unit.hp / player_unit.hpMax) * 100;
 	//draw_healthbar(menuX[0]-70, menuY[0]+3, menuX[0], menuY[0]-3, pc, global._primary, global._characterSecondary, global._characterSecondary, 0, true, true)
-	draw_text_transformed(menuX[0]-expandAnim*90, menuY[0]-expandAnim*25, player_unit.name, 0.5, 0.5, 0);
+	draw_text_transformed(menuX[0]-expandAnim*100, menuY[0]-expandAnim*15, player_unit.name, 0.4, 0.4, 0);
+	draw_set_font(fnt_chiaro);
 	//draw_text_transformed(menuX[0]+50, menuY[0]-35, "HP: " + string(obj_player.hp), 0.8, 0.8, 0);
 #endregion
 
