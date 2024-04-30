@@ -31,7 +31,7 @@ turn_banner_animation_started=false;
 
 ask_end = false;
 
-skill_used_color=#987959;
+skill_used_color=#d1baa4;
 
 #region location & size
 imgX = 200;
