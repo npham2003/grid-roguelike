@@ -379,7 +379,7 @@ draw_set_color(global._primary);
 draw_text_transformed(75, 20, "G    "+ string(obj_battleControl.gold), 0.8, 0.8, 0);
 #endregion
 
-draw_text_transformed(75, 70, "Battle "+ string(obj_battleControl.battle_progress+1)+"/"+string(array_length(global.encounters)), 0.8, 0.8, 0);
+draw_text_transformed(75, 70, "Floor "+ string(floor(obj_battleControl.battle_progress/5)+1)+"/"+string(floor(array_length(global.encounters)/5)), 0.8, 0.8, 0);
 draw_text_transformed(75, 100, "Turn "+ string(obj_battleControl.turn_count), 0.8, 0.8, 0);
 
 #region skill details
