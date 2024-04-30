@@ -553,9 +553,7 @@ global.actionLibrary = {
 					obj_battleEffect.hit_animation(unit,3);
 					audio_play_sound(sfx_charge, 0, false,0.3);
 					
-					if(obj_battleControl.tp_current>obj_battleControl.tp_max){
-						obj_battleControl.tp_current=obj_battleControl.tp_max;
-					}
+					
 					unit.skill_complete = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_init = false;
@@ -582,9 +580,7 @@ global.actionLibrary = {
 					obj_battleEffect.hit_animation(unit,3);
 					audio_play_sound(sfx_charge, 0, false,0.3);
 					
-					if(obj_battleControl.tp_current>obj_battleControl.tp_max){
-						obj_battleControl.tp_current=obj_battleControl.tp_max;
-					}
+					
 					unit.skill_complete = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_init = false;
