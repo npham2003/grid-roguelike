@@ -11,18 +11,16 @@ skill_x_start = 150;
 skill_y_start = 30;
 
 descriptor_text = ["Heal 1 character for 1 HP",
-					"Increase TP by 1",
-					"Gain 1 extra TP each turn for 1 battle",
-					"Each attack does 1 extra damage for one battle", 
+					"Gain 1 extra TP each turn until the next floor",
+					"Each attack does 1 extra damage until the next floor", 
 					"Upgrade a skill on this character",
 					"Upgrade a skill on this character",
-					"Upgrade a skill on this character",
-					"Gain 1 random party member"];
+					"Upgrade a skill on this character",];
 menu_level=0;
 
-cost = [2, 4, 6, 4, 6, 6, 6, 10];
+cost = [2, 8, 5, 6, 6, 6,];
 
-selectable = [true, true, true, true, true, true, true, true];
+selectable = [true, true, true, true, true, true];
 
 playerDim = sprite_get_height(spr_diamond_base) * 15/2;
 
@@ -37,27 +35,27 @@ upgrade = function(unit, skill, path){
 	unit.upgrades[skill]=path;
 	switch(path){
 		case 1:
-			obj_battleControl.gold-=cost[4];
+			obj_battleControl.gold-=cost[3];
 			break;
 		case 2:
-			obj_battleControl.gold-=cost[5];
+			obj_battleControl.gold-=cost[4];
 			break;
 		case 0:
-			obj_battleControl.gold-=cost[6];
+			obj_battleControl.gold-=cost[5];
 			break;
 	}
 }
 
 tp_bonus = function(){
 	obj_battleControl.tp_bonus+=1;
-	obj_battleControl.gold-=cost[2];
+	obj_battleControl.gold-=cost[1];
 }
 
 attack_up = function(){
 	for(i=0;i<array_length(obj_battleControl.player_units);i++){
 		obj_battleControl.player_units[i].attack_bonus+=1;
 	}
-	obj_battleControl.gold-=cost[3];
+	obj_battleControl.gold-=cost[2];
 }
 
 // in future maybe implement a way to not get repeats? maybe repeats are ok?

@@ -1,14 +1,14 @@
 if (obj_battleControl.state == BattleState.PlayerUpgrade) {
-	
+	show_debug_message(selectable);
 	// background and border
 	if(menu_level!=3 || menu_level!=2){ //if this is not the skill select screen
 		draw_set_color(c_black);
 		draw_set_alpha(1);
 		draw_rectangle(0, 0, room_width, room_height, false);
 		draw_sprite_ext(spr_shop_menu_border, image_index, actual_x, y, image_xscale, image_yscale, image_angle, image_blend, alpha);
-		for (i = 0; i<4; i++){
+		for (i = 0; i<3; i++){
 			for (j=0; j<2; j++){
-				var offset=100*j
+				
 				var text_box_offset=250*j;
 				//if the option is selected
 				if(i==3&&j==1){ //this is so we dont draw the 8th option
@@ -22,14 +22,14 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 					//draw option and fill with primary
 					fill_alpha = lerp(fill_alpha, 1, 0.2);
 					draw_set_alpha(fill_alpha);
-					draw_rectangle_colour(actual_x+(200*i)+125+offset, y+(175*j)+37.5, actual_x+(200*i)+275+offset, y+(175*j)+187.5, global._primary, global._primary, global._primary, global._primary, false);
+					draw_rectangle_colour(actual_x+(200*i)+225, y+(175*j)+37.5, actual_x+(200*i)+375, y+(175*j)+187.5, global._primary, global._primary, global._primary, global._primary, false);
 				
 					//draw text box and text
 					draw_set_alpha(1);
-					draw_rectangle_colour(actual_x+(200*i)+100+offset, y+(175*j)-42+text_box_offset, actual_x+(200*i)+300+offset, y+(175*j)+22+text_box_offset, c_black, c_black, c_black, c_black, false);
+					draw_rectangle_colour(actual_x+(200*i)+200, y+(175*j)-42+text_box_offset, actual_x+(200*i)+400, y+(175*j)+22+text_box_offset, c_black, c_black, c_black, c_black, false);
 					draw_set_color(global._primary);
-					draw_text_ext_transformed(actual_x+(200*i)+115+offset, y+(175*j)-50+text_box_offset, descriptor_text[i+j*4], 40, 360, 0.5, 0.5, image_angle);
-					draw_sprite_ext(spr_shop_menu_border, image_index, actual_x+(200*i)+100+offset, y+(175*j)-50+text_box_offset, 0.2, 0.2, image_angle, global._primary, alpha);
+					draw_text_ext_transformed(actual_x+(200*i)+215, y+(175*j)-50+text_box_offset, descriptor_text[i+j*3], 40, 360, 0.5, 0.5, image_angle);
+					draw_sprite_ext(spr_shop_menu_border, image_index, actual_x+(200*i)+200, y+(175*j)-50+text_box_offset, 0.2, 0.2, image_angle, global._primary, alpha);
 				}
 		
 				
@@ -38,14 +38,14 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 					gpu_set_blendenable(false);
 					gpu_set_colorwriteenable(false, false, false, true);
 					draw_set_alpha(0);
-					draw_rectangle(actual_x+(190*i)+100+offset, y+(175*j)+20, actual_x+(200*i)+300+offset, y+(175*j)+240, false); //invisible rectangle
+					draw_rectangle(actual_x+(190*i)+200, y+(175*j)+20, actual_x+(200*i)+400, y+(175*j)+240, false); //invisible rectangle
 
 					//mask
 					draw_set_alpha(1);
 					//draw_sprite_ext(spr_diamond_base, 0, imgX, imgY, portraitScale, portraitScale, 0, c_white, 1);
 					draw_set_color(c_white);
 					draw_primitive_begin(pr_trianglestrip);
-					draw_rectangle(actual_x+(200*i)+125+offset, y+(175*j)+37.5, actual_x+(200*i)+275+offset, y+(175*j)+187.5, false);
+					draw_rectangle(actual_x+(200*i)+225, y+(175*j)+37.5, actual_x+(200*i)+375, y+(175*j)+187.5, false);
 					draw_primitive_end();
 
 					gpu_set_blendenable(true);
@@ -54,7 +54,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 					//draw over mask
 					gpu_set_blendmode_ext(bm_dest_alpha, bm_inv_dest_alpha);
 					gpu_set_alphatestenable(true);
-					draw_sprite_ext(obj_battleControl.player_units[i].portrait, 0, actual_x+(200*i)+200+offset, y+(175*j)+113, -0.4, 0.4, 0, c_white, 1);
+					draw_sprite_ext(obj_battleControl.player_units[i].portrait, 0, actual_x+(200*i)+300, y+(175*j)+113, -0.4, 0.4, 0, c_white, 1);
 					gpu_set_alphatestenable(false);
 					draw_set_alpha(1);
 					gpu_set_blendmode(bm_normal);
@@ -64,21 +64,18 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 				//draw cost of option in top left corner
 				draw_set_alpha(1);
 				draw_set_color(c_white);
-				draw_text_ext_transformed(actual_x+(200*i)+150+offset, y+(175*j)+37.5, cost[i+j*4], 40, 360, 0.5, 0.5, image_angle);
+				draw_text_ext_transformed(actual_x+(200*i)+250, y+(175*j)+37.5, cost[i+j*3], 40, 360, 0.5, 0.5, image_angle);
 				draw_set_color(c_black);
 				
-				if(obj_battleControl.gold<cost[i+j*4]){
-					selectable[i+j*4]=false;
-				
+				if(obj_battleControl.gold<cost[i+j*3]){
+					selectable[i+j*3]=false;
 				}else{
-					selectable[i+j*4]=true;
+					selectable[i+j*3]=true;
 				}
-				if(array_length(obj_battleControl.player_units)==4){
-					selectable[7]=false;	
-				}
+				
 				
 				draw_set_color(c_white);
-				draw_rectangle(actual_x+(200*i)+125+offset, y+(175*j)+37.5, actual_x+(200*i)+275+offset, y+(175*j)+187.5, true);
+				draw_rectangle(actual_x+(200*i)+225, y+(175*j)+37.5, actual_x+(200*i)+375, y+(175*j)+187.5, true);
 			}
 		}
 	}
