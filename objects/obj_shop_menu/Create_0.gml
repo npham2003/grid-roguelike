@@ -1,14 +1,20 @@
 alpha = 0;
+fill_alpha = 0;
+
 actual_x=2500;
 selector_pos=[0,0]
 character_select_pos=0;
 skill_select_pos=0;
-fill_alpha = 0;
+
 new_skill_upgrade=0;
 character_spacing=260;
+upgrade_offset = 0;
 
 skill_x_start = 150;
 skill_y_start = 30;
+
+optionRadius = 40;
+border = 5;
 
 descriptor_text = ["Heal 1 character for 1 HP",
 					"Gain 1 extra TP each turn until the next floor",
