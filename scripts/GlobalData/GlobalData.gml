@@ -530,7 +530,7 @@ global.actionLibrary = {
 	charge: {
 		name: ["Charge", "Chargeback", "Parry"], //probably redundant to have a name but keep it
 		description: ["Gain 1 TP", "Gain 3 TP but move back to your original position", "Protect yourself from all attacks that hit you this turn"],
-		cost: [0, 0, 3],
+		cost: [-1, -3, 3],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -552,7 +552,7 @@ global.actionLibrary = {
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 					obj_battleEffect.hit_animation(unit,3);
 					audio_play_sound(sfx_charge, 0, false,0.3);
-					obj_battleControl.tp_current+=1;
+					
 					if(obj_battleControl.tp_current>obj_battleControl.tp_max){
 						obj_battleControl.tp_current=obj_battleControl.tp_max;
 					}
@@ -581,7 +581,7 @@ global.actionLibrary = {
 				if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("K"))) {
 					obj_battleEffect.hit_animation(unit,3);
 					audio_play_sound(sfx_charge, 0, false,0.3);
-					obj_battleControl.tp_current+=3;
+					
 					if(obj_battleControl.tp_current>obj_battleControl.tp_max){
 						obj_battleControl.tp_current=obj_battleControl.tp_max;
 					}

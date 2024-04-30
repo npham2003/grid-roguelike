@@ -95,9 +95,17 @@ for (var i = skills - 1; i >= 0; i--) {
 	draw_vertices(_button);
 	draw_primitive_end();
 	#endregion
-	
+	var _cost = tpCost[i];
+	if(_cost<0){
+		_cost=_cost*-1;
+		draw_set_halign(fa_right);
+		draw_set_font(fnt_archivo);
+		draw_text_transformed_colour(menuX[i] - expandAnim*80, menuY[i] - 38*expandAnim, "+", 0.7, 0.7, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+		draw_set_font(fnt_chiaro);
+		draw_set_halign(fa_left);
+	}
 	#region draw tp
-	var _pips = make_tp(menuX[i] - expandAnim*70, menuY[i] - 15*expandAnim, 7*expandAnim, tpCost[i], true);
+	var _pips = make_tp(menuX[i] - expandAnim*70, menuY[i] - 15*expandAnim, 7*expandAnim, _cost, true);
 
 	draw_set_color(global._characterSecondary);
 	for (var j = 0; j < array_length(_pips); j++){

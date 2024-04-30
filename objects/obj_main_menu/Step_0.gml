@@ -54,17 +54,18 @@ if(transition_in){
 				sub_menu=2;
 				transition_in=true;
 				audio_pause_sound(bgm_xenoblade_x_title);
-				audio_play_sound(bgm_gather_under_night,0,true,0.7);
+				css_sound_id=audio_play_sound(bgm_gather_under_night,0,true,0.7);
 				turn_life=100;
 				turn_banner_animation_started=true;
 				turn_opacity=100;
 			
 				turn_text_anim = 0;
 				turn_life = 100;
+				portrait_flash=[false,false,false,false,false,false];
+				portrait_flash_opacity=[1,1,1,1,1,1];
 				
 				transition_in=true;
-				audio_pause_sound(bgm_xenoblade_x_title);
-				audio_play_sound(bgm_gather_under_night,0,true,0.7);
+				
 				
 			}
 			if(selector_pos==1){
@@ -277,6 +278,17 @@ switch(sub_menu){
 					}
 				}
 			}
+			for(i=0;i<array_length(portrait_flash);i++){
+				if(portrait_flash_times[i]<audio_sound_get_track_position(css_sound_id) && !portrait_flash[i]){
+					portrait_flash[i]=true;
+					portrait_flash_opacity[i]=1;
+				}
+				
+				if(portrait_flash_opacity[i]>0){
+					portrait_flash_opacity[i]-=0.02;
+				}
+			}
+			
 			break;
 	
 }

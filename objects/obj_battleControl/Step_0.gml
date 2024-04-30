@@ -528,7 +528,9 @@ switch (state) {
 				obj_menu.confirm = false;
 				tp_current -= unit.actions[unit.skill_used].cost[unit.upgrades[unit.skill_used]];
 				unit.has_attacked = true;
-				
+				if(tp_current>tp_max){
+					tp_current=tp_max;
+				}
 				change_state(BattleState.PlayerTakingAction);
 			}
 			switch(unit.upgrades[unit.skill_used]){ //use the right skill based on upgrade array

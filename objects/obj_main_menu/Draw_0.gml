@@ -182,7 +182,7 @@ if(sub_menu==2){
 		draw_primitive_end();
 		draw_primitive_begin(pr_trianglestrip);
 	
-		draw_set_color(diamond_fill);
+		draw_set_color(merge_color(diamond_fill,c_white,portrait_flash_opacity[i]));
 	
 		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], line_spacing-30));
 		//draw_set_color(global._tpBorder);
@@ -316,9 +316,18 @@ if(sub_menu==2){
 			text_outline(actual_skill_x+15, skill_y_start+((j)*220), action.name[0], 1, c_white, 4, 40, 600);
 			
 			
+			var _cost = action.cost[0];
+			if(_cost<0){
+				_cost=_cost*-1;
+				draw_set_font(fnt_archivo);
+				draw_set_halign(fa_right);
+				draw_set_color(global._tpBar);
+				draw_text_transformed_colour(actual_skill_x+400, skill_y_start+((j)*220)+20, "+", 0.7, 0.7, 0, global._tpBar, global._tpBar, global._tpBar, global._tpBar, 1);
+				
+				draw_set_halign(fa_left);
+			}
 			
-			
-			var _tp_pips = make_tp(actual_skill_x+415, skill_y_start+((j)*220)+30, 7, action.cost[0], true);
+			var _tp_pips = make_tp(actual_skill_x+415, skill_y_start+((j)*220)+50, 7, _cost, true);
 
 			draw_set_color(global._tpBar);
 			for (var k = 0; k < array_length(_tp_pips); k++){

@@ -50,6 +50,9 @@ diamond_outline=#009900;
 initial_character_select = -2000;
 actual_character_select = -2000;
 character_select=200;
+portrait_flash=[false,false,false,false,false,false];
+portrait_flash_opacity=[1,1,1,1,1,1];
+portrait_flash_times=[2.426,2.530,2.623,2.902,3.191,3.368];
 
 initial_skill_x = 2000;
 actual_skill_x=2000;
@@ -67,6 +70,8 @@ turn_opacity=50;
 turn_text_anim = 0;
 turn_life = 100;
 turn_banner_animation_started=false;
+
+css_sound_id=pointer_null;
 
 website_urls=["https://twitter.com/AqoursBaelz/", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://wsl7779.itch.io", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"];
 
@@ -164,7 +169,7 @@ make_tp = function(_x, _y, _spacing, _len, is_rows) {
 				}
 			}
 			//show_debug_message(string(((actual - initial)*power(-1,i))));
-			 _res[i] = [_x  + (i)*_spacing, _y   + _spacing*(i%2) + _y_offset];
+			 _res[i] = [_x  + (i)*_spacing, _y  - _spacing*(i%2) + _y_offset];
 			 
 		}
 
