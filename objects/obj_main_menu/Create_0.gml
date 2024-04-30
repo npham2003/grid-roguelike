@@ -12,7 +12,7 @@ initial_bg_vspeed=layer_get_vspeed(background_layer);
 
 current_background_color=global._characterSecondary;
 next_background_color=global._characterSecondary;
-menu_colors=[global._characterSecondary,global._characterPrimary, c_maroon];
+menu_colors=[global._menu_secondary,global._menu_primary, c_maroon];
 
 
 line_spacing=sprite_get_height(spr_diamond_base) * 15/2;;
