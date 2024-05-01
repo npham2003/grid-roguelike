@@ -127,18 +127,30 @@ backX = lerp(backX, backShift, 0.2);
 
 #endregion
 
-#region lose anim
+#region win lose anim
 if (win > 0) {
-	if (win == 2) grayscale_params.g_Intensity = lerp(grayscale_params.g_Intensity, 1, 0.2);
-	lineX = lerp(room_width, 0, 0.2);
+	//show_debug_message("win: " + string(win));
+	if (win == 2) grayscaleAlpha = 1;
+	
+	lineXShift = 0;
+	//show_debug_message("lineX: " + string(lineX));
 	
 	if (lineX == 0) {
-		line_width = lerp(2, 200, 0.2);
+		lineYLShift = 0;
+		lineYRShift = room_height;
+		//show_debug_message("lineY: " + string(lineYL) + ", " + string(lineYR));
 	}
 	
-	if (line_width == 200) winlose_anim_complete = true;
+	if (lineYR == room_height) winlose_anim_complete = true;
 	else winlose_anim_complete = false;
+	//show_debug_message(string(winlose_anim_complete));
 }
-else grayscale_params.g_Intensity = 0;
+else grayscaleAlpha = 0;
 
+grayscale_params.g_Intensity = lerp(grayscale_params.g_Intensity, grayscaleAlpha, 0.5);
+lineX = lerp(lineX, lineXShift, 0.2);
+lineYL = lerp(lineYL, lineYLShift, 0.2);
+lineYR = lerp(lineYR, lineYRShift, 0.2);
+
+show_debug_message(grayscale_params.g_Intensity);
 #endregion

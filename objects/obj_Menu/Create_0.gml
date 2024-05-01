@@ -75,8 +75,13 @@ confirmShiftY = [0,0];
 backX = 1000;
 backShift = 1000;
 
+grayscaleAlpha = 0;
 lineX = room_width;
-line_width = 1;
+lineXShift = room_width;
+lineYL = room_height/2;
+lineYR = room_height/2;
+lineYLShift = room_height/2;
+lineYRShift = room_height/2;
 winlose_anim_complete = false;
 
 border = 5;
