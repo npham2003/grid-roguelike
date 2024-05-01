@@ -41,6 +41,9 @@ switch (state) {
 			player_units[i].attack_bonus_temp=0;
 				
 			player_units[i].attack_buff_recent=false;
+			player_units[i].shield=0;
+				
+			
 				
 		// removes move buff if 2nd turn
 				
