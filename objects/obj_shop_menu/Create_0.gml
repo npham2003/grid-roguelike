@@ -11,9 +11,9 @@ character_spacing=260;
 upgrade_offset = 0;
 
 skill_x_start = 150;
-skill_y_start = 30;
+skill_y_start = 90;
 
-optionRadius = 50;
+optionRadius = 80;
 border = 5;
 
 descriptor_text = ["Heal 1 character for 1 HP",
@@ -138,3 +138,8 @@ draw_lines = function(vertices, _width, _color){
         draw_line_width_color(_x_1, _y_1, _x_2, _y_2, _width, _color, _color);
     }
 }
+
+lay_id = layer_get_id("Shop_BG");
+background = layer_background_get_id(lay_id);
+layer_background_blend(background, global._aspect_bars);
+layer_set_visible(lay_id, false);
