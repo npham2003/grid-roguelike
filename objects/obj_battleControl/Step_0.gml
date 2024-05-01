@@ -35,7 +35,9 @@ switch (state) {
 	
 #region Battle Start
 	case BattleState.BattleStart:
-		
+
+		obj_menu.win = 0;
+
 		if(battle_progress%5==0){
 			
 			audio_stop_sound(current_music);
@@ -88,7 +90,7 @@ switch (state) {
 		// chooses a random encounter. set to a value for debugging
 		//var random_battle = irandom(array_length(global.encounters)-1);
 		//random_battle=4;
-		//battle_progress=13;
+		battle_progress=14;
 		random_battle=battle_progress;
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
@@ -763,7 +765,13 @@ switch (state) {
 			}
 			if(battle_progress==array_length(global.encounters)){
 				battle_progress=0;
+				audio_stop_sound(current_music);
+				music_track = bgm_victory;
+				//music_track = global.floor_music[2][0];
+
+				current_music = audio_play_sound(music_track, 0, false, 0.7);
 				change_state(BattleState.GameWin);
+				break;
 			}
 			tp_current=tp_max;
 			if(battle_progress < array_length(global.encounters) && (battle_progress%5==0||battle_progress%2==0)){
@@ -778,9 +786,13 @@ switch (state) {
 				}
 			}
 		}else{
-			obj_menu.win = 2;
 			obj_gridCreator.reset_highlights_cursor();
-			obj_menu.set_text("Press any key to restart");
+			//obj_menu.set_text("Press any key to restart");
+			audio_stop_sound(current_music);
+				music_track = bgm_the_voice_someone_calls;
+				//music_track = global.floor_music[2][0];
+
+				current_music = audio_play_sound(music_track, 0, false, 0.7);
 			change_state(BattleState.GameLose);
 			
 		}
@@ -902,10 +914,20 @@ switch (state) {
 
 #region Player beats all 15 levels
 	case BattleState.GameWin:
+		obj_menu.win = 1;
+		if (keyboard_check_pressed(vk_anykey)) {
+			audio_stop_sound(current_music)
+			room_goto(0);
+		}
 		break;
 #endregion
 #region Player loses
 	case BattleState.GameLose:
+		obj_menu.win = 2;
+		if (keyboard_check_pressed(vk_anykey)) {
+			audio_stop_sound(current_music)
+			room_goto(0);
+		}
 		break;
 		
 #endregion
