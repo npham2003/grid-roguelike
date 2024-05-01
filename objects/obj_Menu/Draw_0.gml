@@ -1,3 +1,20 @@
+
+draw_line_width_color(room_width/2-progress_length/2,progress_height,room_width/2+progress_length/2,progress_height,progress_thickness,global._primary,global._primary);
+draw_set_color(global._characterPrimary);
+draw_circle(player_marker,progress_height,15, false);
+draw_set_color(global._primary);
+for(i=0;i<5;i++){
+	draw_set_color(global._primary);
+	draw_circle(room_width/2-progress_length/2+(progress_length/(battles_in_room-1)*i),progress_height,10, false);
+	if(obj_battleControl.battle_progress%5==i){
+		draw_set_alpha(tp_opacity*0.5);
+		draw_set_color(c_white);
+		draw_circle(room_width/2-progress_length/2+(progress_length/(battles_in_room-1)*i),progress_height,10, false);
+	}
+	draw_set_alpha(1);
+
+}
+
 #region confirm
 if (confirm) {
 	var c_border = border;
@@ -41,9 +58,9 @@ if (confirm) {
 	draw_primitive_begin(pr_trianglestrip);
 	draw_vertices(c_button);
 	draw_primitive_end();
-	
+	draw_set_font(fnt_chiaro_small);
 	draw_set_color(global._characterSecondary);
-	draw_text_ext_transformed(confirmX[0]+50, 615, "Confirm: "+global.controls[player_unit.skill_used], 30, confirmY-160, 0.7, 0.7, 0);
+	draw_text_ext_transformed(confirmX[0]+50, 615, "Confirm: "+global.controls[player_unit.skill_used], 30, confirmY-160, 1, 1, 0);
 	
 	//draw_text_color(550, );
 }
@@ -83,18 +100,18 @@ if (back) {
 	draw_vertices(c_outline2);
 	draw_primitive_end();
 	
-	draw_set_color(global._characterPrimary);
+	draw_set_color(global._characterSecondary);
 	draw_primitive_begin(pr_trianglestrip);
 	draw_vertices(c_outline1);
 	draw_primitive_end();
 	
-	draw_set_color(global._primary);
+	draw_set_color(global._characterSecondary);
 	draw_primitive_begin(pr_trianglestrip);
 	draw_vertices(c_button);
 	draw_primitive_end();
-	
-	draw_set_color(global._characterSecondary);
-	draw_text_ext_transformed(backX[0]-(backRadius+c_border)+10, 615, "Back: Tab", 30, backY-160, 0.7, 0.7, 0);
+	draw_set_font(fnt_chiaro_small);
+	draw_set_color(c_white);
+	draw_text_ext_transformed(backX[0]-(backRadius+c_border)+10, rootY-105, "Back: Tab", 30, backY-160, 1, 1, 0);
 	
 	//draw_text_color(550, );
 }
@@ -350,7 +367,7 @@ draw_set_color(global._primary);
 draw_text_transformed(75, 20, "G    "+ string(obj_battleControl.gold), 0.8, 0.8, 0);
 #endregion
 
-draw_text_transformed(75, 70, "Battle "+ string(obj_battleControl.battle_progress+1)+"/"+string(array_length(global.encounters)), 0.8, 0.8, 0);
+draw_text_transformed(75, 70, "Floor "+ string(floor(obj_battleControl.battle_progress/5)+1)+"/"+string(string(floor(array_length(global.encounters)/5))), 0.8, 0.8, 0);
 draw_text_transformed(75, 100, "Turn "+ string(obj_battleControl.turn_count), 0.8, 0.8, 0);
 
 #region skill details
