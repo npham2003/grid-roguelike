@@ -959,7 +959,9 @@ switch (state) {
 			if(keyboard_check_pressed(vk_anykey)){
 				obj_gridCreator.reset_highlights_cursor();
 				obj_menuTut.set_text("Press any key to restart");
+				audio_stop_sound(current_music);
 				room_restart();
+				
 			}
 			
 		}
@@ -1001,7 +1003,8 @@ switch (state) {
 					if (key_Enter_pressed) {
 						obj_menuTut.set_text("");
 						obj_menuTut.enter_text("");
-						audio_stop_sound(bgm_tutorialBGM);
+						
+						audio_stop_sound(current_music);
 						room_goto(0);
 					}
 		}
