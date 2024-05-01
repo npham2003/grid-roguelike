@@ -121,8 +121,8 @@ if(back){
 
 }else{
 	backShiftX[0] = 700;
-	backShiftX[1] = 750;
-	backShiftY = 700;
+	backShiftX[1] = 700;
+	backShiftY = 660;
 }
 
 backY = lerp(backY, backShiftY, 0.2);

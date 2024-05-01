@@ -73,26 +73,26 @@ if (back) {
 	var c_outline1 = [
 
 		[backX[0]-(backRadius+c_border), backY-(backRadius+c_border)],
-		[backX[0]-(backRadius+c_border), backY+(backRadius+c_border)],
+		[backX[0]-(backRadius+c_border), backY],
 		[backX[1]+(backRadius+c_border), backY-(backRadius+c_border)],
-		[backX[1]+(backRadius+c_border), backY+(backRadius+c_border)],
+		[backX[1]+(backRadius+c_border), backY],
 
 	]
 	var c_outline2 = [
 
 		[backX[0]-(backRadius+c_border*2), backY-(backRadius+c_border*2)],
-		[backX[0]-(backRadius+c_border*2), backY+(backRadius+c_border*2)],
+		[backX[0]-(backRadius+c_border*2), backY],
 		[backX[1]+(backRadius+c_border*2), backY-(backRadius+c_border*2)],
-		[backX[1]+(backRadius+c_border*2), backY+(backRadius+c_border*2)],
+		[backX[1]+(backRadius+c_border*2), backY],
 
 	]
 	c_border = 0;
 	var c_button = [
 
 		[backX[0]-(backRadius+c_border*2), backY-(backRadius+c_border)],
-		[backX[0]-(backRadius+c_border*2), backY+(backRadius+c_border)],
+		[backX[0]-(backRadius+c_border*2), backY],
 		[backX[1]+(backRadius+c_border*2), backY-(backRadius+c_border)],
-		[backX[1]+(backRadius+c_border*2), backY+(backRadius+c_border)],
+		[backX[1]+(backRadius+c_border*2), backY],
 
 	]
 	
@@ -100,6 +100,8 @@ if (back) {
 	//draw_primitive_begin(pr_trianglestrip);
 	//draw_vertices(c_outline2);
 	//draw_primitive_end();
+	draw_set_color(c_black);
+	draw_rectangle(backX[0]-(backRadius+c_border*2),backY-(backRadius+c_border*2),backX[1]+(backRadius+c_border*2),backY-(backRadius+c_border),false)
 	
 	draw_set_color(global._characterSecondary);
 	draw_primitive_begin(pr_trianglestrip);

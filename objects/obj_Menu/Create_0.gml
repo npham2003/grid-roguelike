@@ -69,7 +69,7 @@ confirmY = 660;
 confirmShiftX = 0;
 confirmShiftY = [0,0];
 
-backRadius = 30;
+backRadius = 40;
 backX = [1000, 1200];
 backY = 660;
 backShiftX = 0;
