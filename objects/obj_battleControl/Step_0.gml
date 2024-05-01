@@ -766,15 +766,9 @@ switch (state) {
 				}
 				
 			}
-			if(battle_progress>=array_length(global.encounters)){
-				obj_menu.win = 1;
-				obj_menu.set_text("Press any key to return to main menu.");
-				if(keyboard_check_pressed(vk_anykey)){
-					obj_gridCreator.reset_highlights_cursor();
-					obj_menu.set_text("Press any key to return to main menu.");
-					obj_menu.win = 0;
-					room_goto(0);
-				}
+			if(battle_progress==array_length(global.encounters)){
+				battle_progress=0;
+				change_state(BattleState.GameWin);
 			}
 			tp_current=tp_max;
 			if(battle_progress < array_length(global.encounters) && (battle_progress%5==0||battle_progress%2==0)){
@@ -792,12 +786,7 @@ switch (state) {
 			obj_menu.win = 2;
 			obj_gridCreator.reset_highlights_cursor();
 			obj_menu.set_text("Press any key to restart");
-			if(keyboard_check_pressed(vk_anykey)){
-				obj_gridCreator.reset_highlights_cursor();
-				obj_menu.set_text("Press any key to restart");
-				obj_menu.win = 0;
-				room_goto(0);
-			}
+			change_state(BattleState.GameLose);
 			
 		}
 		break;
@@ -908,6 +897,14 @@ switch (state) {
 			
 		}
 		break;
+	
+		
 #endregion
+#region Player beats all 15 levels
+	case BattleState.GameWin:
+		break;
+#region Player loses
+	case BattleState.GameWin:
+		break;
 
 };
