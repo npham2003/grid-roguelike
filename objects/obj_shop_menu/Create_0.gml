@@ -23,10 +23,10 @@ descriptor_text = ["Heal 1 character for 1 HP",
 					"Upgrade a skill on this character",
 					"Upgrade a skill on this character",];
 menu_level=0;
-
 cost = [2, 8, 5, 6, 6, 6,];
-
 selectable = [true, true, true, true, true, true];
+art = []
+
 
 playerDim = sprite_get_height(spr_diamond_base) * 15/2;
 

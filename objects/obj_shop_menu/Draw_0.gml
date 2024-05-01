@@ -299,9 +299,9 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 			#endregion
 			
 		
-		draw_set_color(global._aspect_bars);
+		//draw_set_color(global._aspect_bars);
 		draw_set_alpha(1);
-		draw_rectangle(0, 0, room_width, room_height, false);
+		//draw_rectangle(0, 0, room_width, room_height, false);
 		
 		
 		draw_set_color(c_white);
