@@ -4352,7 +4352,7 @@ global.encounters = [
 			grid: [8, 2]
 		}
 		
-	],
+	], // 3 gold
 	[
 		{
 			info: global.enemies[5],
@@ -4374,7 +4374,7 @@ global.encounters = [
 			info: global.enemies[5],
 			grid: [8, 0]
 		}
-	],
+	], // 5 gold
 	[
 		{
 			info: global.enemies[1],
@@ -4393,7 +4393,29 @@ global.encounters = [
 			grid: [7, 3]
 		}
 		
-	],
+	], // 7 gold
+	[
+		{
+			info: global.enemies[1],
+			grid: [6, 2]
+		},
+		{
+			info: global.enemies[1],
+			grid: [7, 1]
+		},
+		{
+			info: global.enemies[1],
+			grid: [7, 3]
+		},
+		{
+			info: global.enemies[1],
+			grid: [7, 2]
+		},
+		{
+			info: global.enemies[1],
+			grid: [8, 2]
+		}
+	], // 5 gold
 	[
 		{
 			info: global.enemies[5],
@@ -4416,29 +4438,7 @@ global.encounters = [
 			grid: [8, 1]
 		},
 		
-	],
-	[
-		{
-			info: global.enemies[1],
-			grid: [6, 2]
-		},
-		{
-			info: global.enemies[1],
-			grid: [7, 1]
-		},
-		{
-			info: global.enemies[1],
-			grid: [7, 3]
-		},
-		{
-			info: global.enemies[1],
-			grid: [7, 2]
-		},
-		{
-			info: global.enemies[1],
-			grid: [8, 2]
-		}
-	],
+	], // 7 gold, end of floor 1
 	[
 		{
 			info: global.enemies[0],
@@ -4460,7 +4460,7 @@ global.encounters = [
 			info: global.enemies[0],
 			grid: [8, 0]
 		}
-	],
+	], // 10 gold
 	[
 		{
 			info: global.enemies[2],
@@ -4474,7 +4474,7 @@ global.encounters = [
 			info: global.enemies[1],
 			grid: [8, 3]
 		}
-	],
+	], // 5 gold
 	
 	[
 		{
@@ -4494,7 +4494,7 @@ global.encounters = [
 			grid: [8, 3]
 		}
 		
-	],
+	], // 8 gold
 	[
 		
 		{
@@ -4514,7 +4514,7 @@ global.encounters = [
 			grid: [8, 3]
 		},
 		
-	],
+	], // 10 gold
 	[
 		{
 			info: global.enemies[2],
@@ -4532,7 +4532,7 @@ global.encounters = [
 			info: global.enemies[0],
 			grid: [8, 3]
 		},
-	],
+	], // 10 gold, end of floor 2
 	[
 		{
 			info: global.enemies[4],
@@ -4550,7 +4550,7 @@ global.encounters = [
 			info: global.enemies[1],
 			grid: [8, 2]
 		}
-	],
+	], // 8 gold
 	[
 		{
 			info: global.enemies[4],
@@ -4569,7 +4569,7 @@ global.encounters = [
 			grid: [8, 2]
 		}
 		
-	],
+	], // 12 gold
 	[
 		{
 			info: global.enemies[2],
@@ -4585,7 +4585,7 @@ global.encounters = [
 		},
 		
 		
-	],
+	], // 11 gold
 	[
 		{
 			info: global.enemies[4],
@@ -4604,7 +4604,7 @@ global.encounters = [
 			grid: [8, 3]
 		},
 		
-	],
+	], // 14 gold
 	[
 		{
 			info: global.enemies[4],
@@ -4635,7 +4635,7 @@ global.encounters = [
 			grid: [7, 3]
 		}
 		
-	],
+	], // 21 gold, end of floor 3
 	//[
 	//	{
 	//		info: global.enemies[1],
