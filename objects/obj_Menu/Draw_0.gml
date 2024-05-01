@@ -61,7 +61,7 @@ if (confirm) {
 	draw_primitive_begin(pr_trianglestrip);
 	draw_vertices(c_button);
 	draw_primitive_end();
-	draw_set_font(fnt_chiaro_small);
+	draw_set_font(fnt_archivo);
 	draw_set_color(global._characterSecondary);
 	draw_text_ext_transformed(confirmX[0]+50, 625, "Confirm: "+global.controls[player_unit.skill_used], 30, confirmY-160, 0.5, 0.5, 0);
 	
@@ -140,6 +140,8 @@ for (var i = skills; i >= 0; i--) {
 	draw_vertices(_button);
 	draw_primitive_end();
 	#endregion
+	
+	#region draw tp
 	var _cost = tpCost[i];
 	if(_cost<0){
 		_cost=_cost*-1;
@@ -149,7 +151,7 @@ for (var i = skills; i >= 0; i--) {
 		draw_set_font(fnt_chiaro);
 		draw_set_halign(fa_left);
 	}
-	#region draw tp
+
 	var _pips = make_tp(menuX[i] - expandAnim*70, menuY[i] - 15*expandAnim, 7*expandAnim, _cost, true);
 
 	draw_set_color(global._characterSecondary);
@@ -286,7 +288,8 @@ draw_primitive_begin(pr_trianglestrip);
 draw_vertices(make_diamond(imgX,imgY,playerDim+5));
 draw_primitive_end();
 
-draw_set_color(global._primary);
+if (open) draw_set_color(global._primary);
+else draw_set_color(global._aspect_bars);
 draw_primitive_begin(pr_trianglestrip);
 draw_vertices(make_diamond(imgX,imgY,playerDim));
 draw_primitive_end();
@@ -337,8 +340,10 @@ draw_set_color(global._primary);
 draw_text_transformed(75, 20, "G    "+ string(obj_battleControl.gold), 0.8, 0.8, 0);
 #endregion
 
-draw_text_transformed(75, 70, "Floor "+ string(floor(obj_battleControl.battle_progress/5)+1)+"/"+string(string(floor(array_length(global.encounters)/5))), 0.8, 0.8, 0);
-draw_text_transformed(75, 100, "Turn "+ string(obj_battleControl.turn_count), 0.8, 0.8, 0);
+draw_set_halign(fa_right);
+draw_text_transformed(room_width-50, 20, "Floor "+ string(floor(obj_battleControl.battle_progress/5)+1)+"/"+string(string(floor(array_length(global.encounters)/5))), 0.8, 0.8, 0);
+draw_text_transformed(room_width-50, 50, "Turn "+ string(obj_battleControl.turn_count), 0.8, 0.8, 0);
+draw_set_halign(fa_left);
 
 #region skill details
 draw_set_font(fnt_chiaro_small);

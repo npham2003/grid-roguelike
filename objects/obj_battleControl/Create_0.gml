@@ -201,7 +201,10 @@ enum BattleState {
 	BattleEnd,
 	PlayerUpgrade,
 	PlayerBoardObstacle,
-	EnemyBoardObstacle
+	EnemyBoardObstacle,
+	GameWin,
+	GameLose,
+	BattlePause
 };
 
 //state = BattleState.PlayerUpgrade;
