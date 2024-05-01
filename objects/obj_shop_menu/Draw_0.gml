@@ -3,7 +3,16 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	
 	draw_set_font(fnt_archivo);
 	draw_set_halign(fa_center);
+	draw_set_color(c_white);
+	for(var dto_i=45; dto_i<405; dto_i+=360/8)
+	{
+		//draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);
+		//draw_text_ext(actual_x-235+round(lengthdir_x(2,dto_i)),y+165+round(lengthdir_y(2,dto_i)),"+",8,100000);
+		draw_text_ext_transformed(actual_x+round(lengthdir_x(2,dto_i)),50+round(lengthdir_y(2,dto_i)),"SHOP",8,100000,1,1,0);
+	}
+	draw_set_color(c_black);
 	draw_text(actual_x,50,"SHOP");
+	draw_set_color(c_white);
 	draw_set_font(fnt_chiaro);
 	draw_set_halign(fa_left);
 	
@@ -77,9 +86,16 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 				else{
 					if(i==0){
 						draw_set_font(fnt_archivo);
-						draw_set_halign(fa_center);
-						draw_set_valign(fa_middle);
-						draw_text_transformed_color(actual_x-235,y+165,"+",1.5,1.5,0,c_red,c_red,c_red,c_red,1);
+						
+						
+						draw_set_color(c_white);
+						for(var dto_i=45; dto_i<405; dto_i+=360/8)
+						{
+							//draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);
+							//draw_text_ext(actual_x-235+round(lengthdir_x(2,dto_i)),y+165+round(lengthdir_y(2,dto_i)),"+",8,100000);
+							draw_text_ext_transformed(actual_x-260+round(lengthdir_x(2,dto_i)),y+125+round(lengthdir_y(2,dto_i)),"+",8,100000,1.5,1.5,0);
+						}
+						draw_text_transformed_color(actual_x-260,y+125,"+",1.5,1.5,0,c_red,c_red,c_red,c_red,1);
 						draw_set_font(fnt_chiaro);
 						draw_set_halign(fa_left);
 						draw_set_valign(fa_top);
@@ -96,17 +112,102 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 						
 						draw_set_color(c_red);
 						draw_primitive_begin(pr_trianglestrip);
-						draw_vertices(make_diamond(actual_x-175, y+165, 24));
+						draw_vertices(make_diamond(actual_x-175, y+165, 20));
 						draw_primitive_end();
 						draw_set_color(c_white);
+					}
+					if(i==1){
+						draw_set_font(fnt_archivo);
+						
+						
+						draw_set_color(c_white);
+						for(var dto_i=45; dto_i<405; dto_i+=360/8)
+						{
+							//draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);
+							//draw_text_ext(actual_x-235+round(lengthdir_x(2,dto_i)),y+165+round(lengthdir_y(2,dto_i)),"+",8,100000);
+							draw_text_ext_transformed(actual_x-60+round(lengthdir_x(2,dto_i)),y+125+round(lengthdir_y(2,dto_i)),"+",8,100000,1.5,1.5,0);
+						}
+						draw_text_transformed_color(actual_x-60,y+125,"+",1.5,1.5,0,global._tpBar,global._tpBar,global._tpBar,global._tpBar,1);
+						draw_set_font(fnt_chiaro);
+						draw_set_halign(fa_left);
+						draw_set_valign(fa_top);
+						
+						draw_set_color(global._tpBar);
+						draw_primitive_begin(pr_trianglestrip);
+						draw_vertices(make_diamond(actual_x+25, y+165, 30));
+						draw_primitive_end();
+						
+						draw_set_color(global._aspect_bars);
+						draw_primitive_begin(pr_trianglestrip);
+						draw_vertices(make_diamond(actual_x+25, y+165, 26));
+						draw_primitive_end();
+						
+						draw_set_color(global._tpBorder);
+						draw_primitive_begin(pr_trianglestrip);
+						draw_vertices(make_diamond(actual_x+25, y+165, 22));
+						draw_primitive_end();
+						
+						draw_set_color(global._tpBar);
+						draw_primitive_begin(pr_trianglestrip);
+						draw_vertices(make_diamond(actual_x+25, y+165, 20));
+						draw_primitive_end();
+						draw_set_color(c_white);
+					}
+					if(i==2){
+						draw_set_font(fnt_archivo);
+						
+						
+						draw_set_color(c_white);
+						for(var dto_i=45; dto_i<405; dto_i+=360/8)
+						{
+							//draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);
+							//draw_text_ext(actual_x-235+round(lengthdir_x(2,dto_i)),y+165+round(lengthdir_y(2,dto_i)),"+",8,100000);
+							draw_text_ext_transformed(actual_x+140+round(lengthdir_x(2,dto_i)),y+125+round(lengthdir_y(2,dto_i)),"+",8,100000,1.5,1.5,0);
+						}
+						draw_text_transformed_color(actual_x+140,y+125,"+",1.5,1.5,0,c_maroon,c_maroon,c_maroon,c_maroon,1);
+						draw_set_font(fnt_chiaro);
+						draw_set_halign(fa_left);
+						draw_set_valign(fa_top);
+						
+						
+						draw_sprite(spr_gun_shop,0,actual_x+225,y+165);
+						//draw_set_color(global._tpBar);
+						//draw_primitive_begin(pr_trianglestrip);
+						//draw_vertices(make_diamond(actual_x+25, y+165, 30));
+						//draw_primitive_end();
+						
+						//draw_set_color(global._aspect_bars);
+						//draw_primitive_begin(pr_trianglestrip);
+						//draw_vertices(make_diamond(actual_x+25, y+165, 26));
+						//draw_primitive_end();
+						
+						//draw_set_color(global._tpBorder);
+						//draw_primitive_begin(pr_trianglestrip);
+						//draw_vertices(make_diamond(actual_x+25, y+165, 22));
+						//draw_primitive_end();
+						
+						//draw_set_color(global._tpBar);
+						//draw_primitive_begin(pr_trianglestrip);
+						//draw_vertices(make_diamond(actual_x+25, y+165, 20));
+						//draw_primitive_end();
+						//draw_set_color(c_white);
 					}
 				}
 				
 				//draw cost of option in top left corner
 				draw_set_alpha(1);
 				draw_set_color(c_white);
-				draw_text_ext_transformed(actual_x+(200*(i-1))-50, y+(175*j)+87.5, cost[i+j*3], 40, 360, 0.5, 0.5, image_angle);
+				draw_set_font(fnt_archivo);
+				for(var dto_i=45; dto_i<405; dto_i+=360/8)
+				{
+					//draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);
+					//draw_text_ext(actual_x-235+round(lengthdir_x(2,dto_i)),y+165+round(lengthdir_y(2,dto_i)),"+",8,100000);
+					draw_text_ext_transformed(actual_x+(200*(i-1))-60+round(lengthdir_x(2,dto_i)),y+(175*j)+95+round(lengthdir_y(2,dto_i)),cost[i+j*3],8,100000,0.5,0.5,0);
+				}
 				draw_set_color(c_black);
+				
+				draw_text_ext_transformed(actual_x+(200*(i-1))-60, y+(175*j)+95, cost[i+j*3], 40, 360, 0.5, 0.5, image_angle);
+				draw_set_color(c_white);
 				
 				if(obj_battleControl.gold<cost[i+j*3]){
 					selectable[i+j*3]=false;
@@ -531,12 +632,9 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	}
 	
 	#region gold
-	if(menu_level==2&&skill_select_pos==0){
-		// translucent if selecting top left skill
-		draw_set_alpha(0.5);
-	}else{
+	draw_set_font(fnt_chiaro);
 		draw_set_alpha(1);
-	}	
+		
 	draw_primitive_begin(pr_trianglestrip);
 	draw_set_color(global._primary);
 	draw_vertices(make_diamond(87, 53, 30));
