@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":1955.7355,
+  "duration":187.58531,
   "name":"bgm_unfinished_battle",
   "parent":{
     "name":"Floor 3",
