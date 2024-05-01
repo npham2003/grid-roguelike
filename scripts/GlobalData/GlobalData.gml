@@ -4246,15 +4246,15 @@ global.tutorialenc = [
 		},
 		{
 			info: global.enemies[0],
-			grid: [7, 4]
+			grid: [7, 3]
 		},
 		{
 			info: global.enemies[0],
-			grid: [8, 4]
+			grid: [8, 3]
 		},
 		{
 			info: global.enemies[0],
-			grid: [9, 4]
+			grid: [9, 3]
 		},
 	],
 	[

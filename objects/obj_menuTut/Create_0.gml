@@ -1,6 +1,8 @@
 state = 0;
-skills = 5;
+skills = 6;
 _text = "";
+
+skill_description="";
 
 open = true;
 playerTurn = false;
@@ -8,15 +10,27 @@ enemyTurn = true;
 
 confirm = false;
 
+back = false;
+
+win = 0;
+
+
+
+//grayscale = layer_get_fx("Grayscale");
+
+//grayscale_params = fx_get_parameters(grayscale);
+
 player_unit = obj_player;
 currCharSprite = spr_temp_Taion;
 
 hp_opacity=0;
 hp_opacity_increase=true;
 
-tpCost = [0, 1, 5, 7, 12];
+tpCost = [0, 1, 5, 7, 12, 0, 0, 0];
 tp_opacity=0;
 tp_opacity_increase=true;
+
+skill_names=["","","","","",""];
 
 _enter_text = "";
 _enter_opacity = 0;
@@ -33,6 +47,20 @@ turn_banner_animation_started=false;
 
 ask_end = false;
 
+skill_used_color=#d1baa4;
+
+
+
+progress_thickness=5;
+
+progress_length=400;
+
+progress_height=50;
+
+battles_in_room=5;
+
+player_marker=room_width/2-progress_length/2;
+
 #region location & size
 imgX = 200;
 imgY = 680;
@@ -41,8 +69,9 @@ rootX = imgX+20;
 rootY = imgY + 32;
 select_shift = 30;
 
-menuX = [rootX, rootX, rootX, rootX, rootX];
-menuY = [rootY, rootY, rootY, rootY, rootY];
+menuX = [rootX, rootX, rootX, rootX, rootX, rootX, rootX];
+
+menuY = [rootY, rootY, rootY, rootY, rootY, rootX, rootY];
 
 portraitScale = 0.55;
 playerScale = 15;
@@ -51,14 +80,26 @@ playerDim = sprite_get_height(spr_diamond_base) * playerScale/2;
 optionAlpha = 0;
 portraitAlpha=1;
 
+waitAlpha=0;
+
 optionRadius = 40;
 spacing = 150;
 
 confirmRadius = 40;
-confirmX = [800, 1000];
+confirmX = [1000, 1200];
 confirmY = 660;
 confirmShiftX = 0;
 confirmShiftY = [0,0];
+
+backX = 1000;
+
+backShift = 1000;
+
+lineX = room_width;
+
+line_width = 1;
+
+winlose_anim_complete = false;
 
 border = 5;
 #endregion
@@ -80,6 +121,11 @@ set_text = function(_new_text){
 
 enter_text = function(_new_text){
 	_enter_text = _new_text;
+}
+
+
+set_skill_text = function(_new_text){
+	skill_description = _new_text;
 }
 
 set_select = function(_option) {
@@ -140,6 +186,60 @@ set_turn_banner = function(player_turn){
 		turn_text_anim = 0;
 		turn_life = 100;
 	}
+}
+
+text_outline = function(){
+
+	//x,y: Coordinates to draw
+
+	//str: String to draw
+
+	//arugment3 = outwidth: Width of outline in pixels
+
+	//argument4 = outcol: Colour of outline (main text draws with regular set colour)
+
+	//argument5 = outfidelity: Fidelity of outline (recommended: 4 for small, 8 for medium, 16 for larger. Watch your performance!)
+
+	//argument6 = separation, for the draw_text_EXT command.
+
+	//argument7 = width for the draw_text_EXT command.
+
+
+
+
+
+	//2,c_dkgray,4,20,500 <Personal favorite preset. (For fnt_3)
+
+	var dto_dcol=draw_get_color();
+
+
+
+	draw_set_color(argument4);
+
+
+
+	for(var dto_i=45; dto_i<405; dto_i+=360/argument5)
+
+	{
+
+	  //draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);
+
+	  draw_text_ext(argument0+round(lengthdir_x(argument3,dto_i)),argument1+round(lengthdir_y(argument3,dto_i)),argument2,argument6,argument7);
+
+	}
+
+
+
+	draw_set_color(dto_dcol);
+
+
+
+	draw_text_ext(argument0,argument1,argument2,argument6,argument7);	
+
+	
+
+	
+
 }
 
 #endregion

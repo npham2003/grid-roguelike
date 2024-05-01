@@ -877,10 +877,15 @@ switch (state) {
 			enemy_check_death += 1;
 			
 		}
-		break;
+				break;
+
 	
+
 		
+
 #endregion
+
+
 #region Player beats all 15 levels
 	case BattleState.GameWin:
 		break;

@@ -26,6 +26,7 @@ teachingBasic = false;
 teachingSkills = false;
 teachingMortar = false;
 skillTaught = false;
+basicTaught = false;
 dialogueLine = 0;
 
 enemy_check_death = 0;
