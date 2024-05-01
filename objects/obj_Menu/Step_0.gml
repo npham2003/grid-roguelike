@@ -111,14 +111,14 @@ confirmX[1] = lerp(confirmX[1], confirmShiftX[1], 0.2);
 
 #region back opacity
 if(back){
-	backShiftX[0] = 770;
-	backShiftX[1] = 920;
+	backShiftX[0] = 700;
+	backShiftX[1] = 750;
 	backShiftY = 660;
 	
 
 }else{
-	backShiftX[0] = 720;
-	backShiftX[1] = 870;
+	backShiftX[0] = 700;
+	backShiftX[1] = 750;
 	backShiftY = 700;
 }
 

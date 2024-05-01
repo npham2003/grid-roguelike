@@ -53,29 +53,29 @@ if (confirm) {
 if (back) {
 	var c_border = border;
 	var c_outline1 = [
-		[backX[0]-(backRadius+c_border), backY],
-		[backX[0], backY-(backRadius+c_border)],
-		[backX[0], backY+(backRadius+c_border)],
-		[backX[1], backY-(backRadius+c_border)],
-		[backX[1], backY+(backRadius+c_border)],
-		[backX[1]+(backRadius+c_border), backY]
+
+		[backX[0]-(backRadius+c_border), backY-(backRadius+c_border)],
+		[backX[0]-(backRadius+c_border), backY+(backRadius+c_border)],
+		[backX[1]+(backRadius+c_border), backY-(backRadius+c_border)],
+		[backX[1]+(backRadius+c_border), backY+(backRadius+c_border)],
+
 	]
 	var c_outline2 = [
-		[backX[0]-(backRadius+c_border*2), backY],
-		[backX[0], backY-(backRadius+c_border*2)],
-		[backX[0], backY+(backRadius+c_border*2)],
-		[backX[1], backY-(backRadius+c_border*2)],
-		[backX[1], backY+(backRadius+c_border*2)],
-		[backX[1]+(backRadius+c_border*2), backY]
+
+		[backX[0]-(backRadius+c_border*2), backY-(backRadius+c_border*2)],
+		[backX[0]-(backRadius+c_border*2), backY+(backRadius+c_border*2)],
+		[backX[1]+(backRadius+c_border*2), backY-(backRadius+c_border*2)],
+		[backX[1]+(backRadius+c_border*2), backY+(backRadius+c_border*2)],
+
 	]
 	c_border = 0;
 	var c_button = [
-		[backX[0]-(backRadius+c_border), backY],
-		[backX[0], backY-(backRadius+c_border)],
-		[backX[0], backY+(backRadius+c_border)],
-		[backX[1], backY-(backRadius+c_border)],
-		[backX[1], backY+(backRadius+c_border)],
-		[backX[1]+(backRadius+c_border), backY]
+
+		[backX[0]-(backRadius+c_border*2), backY-(backRadius+c_border)],
+		[backX[0]-(backRadius+c_border*2), backY+(backRadius+c_border)],
+		[backX[1]+(backRadius+c_border*2), backY-(backRadius+c_border)],
+		[backX[1]+(backRadius+c_border*2), backY+(backRadius+c_border)],
+
 	]
 	
 	draw_set_color(c_black);
@@ -94,7 +94,7 @@ if (back) {
 	draw_primitive_end();
 	
 	draw_set_color(global._characterSecondary);
-	draw_text_ext_transformed(backX[0]+20, 615, "Back: Tab", 30, backY-160, 0.7, 0.7, 0);
+	draw_text_ext_transformed(backX[0]-(backRadius+c_border)+10, 615, "Back: Tab", 30, backY-160, 0.7, 0.7, 0);
 	
 	//draw_text_color(550, );
 }
