@@ -355,7 +355,7 @@ draw_set_font(fnt_chiaro);
 #region turn banner
 if (turn_banner_animation_started) {
 	turn_life--;
-	show_debug_message(turn_life);
+	//show_debug_message(turn_life);
 	draw_set_color(global._primary);
 	
 	if (turn_life > 50) {
