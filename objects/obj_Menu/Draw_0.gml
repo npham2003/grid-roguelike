@@ -433,7 +433,7 @@ if (win == 1){
 #region lose
 if (win == 2){
 	draw_set_color(c_black);
-	draw_line_width(lineX, room_height/2, room_width, room_height/2, line_width);
+	draw_rectangle(lineX, room_height/2, room_width, room_height/2, false);
 	
 	if (winlose_anim_complete) {
 		draw_text_transformed(room_width/2, room_height/2, "YOU DIED", 0.8, 0.8, 0);

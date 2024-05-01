@@ -74,7 +74,7 @@ switch (state) {
 		// chooses a random encounter. set to a value for debugging
 		//var random_battle = irandom(array_length(global.encounters)-1);
 		//random_battle=4;
-		//battle_progress=14;
+		battle_progress=14;
 		random_battle=battle_progress;
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
