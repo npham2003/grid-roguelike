@@ -12,7 +12,7 @@ initial_bg_vspeed=layer_get_vspeed(background_layer);
 
 current_background_color=global._characterSecondary;
 next_background_color=global._characterSecondary;
-menu_colors=[global._characterSecondary,global._characterPrimary, c_maroon];
+menu_colors=[global._menu_secondary,global._menu_primary, c_maroon];
 
 
 line_spacing=sprite_get_height(spr_diamond_base) * 15/2;;
@@ -191,7 +191,26 @@ draw_vertices = function(vertices){
 
 draw_lines = function(vertices, _width, _color){
 	for (var i = 0; i < array_length(vertices); ++i) {
-		draw_line_width_color(vertices[i][0], vertices[i][1], vertices[(i+1)%array_length(vertices)][0], vertices[(i+1)%array_length(vertices)][1], _width, _color, _color);
+		_x_1=vertices[i][0];
+		_y_1=vertices[i][1];
+		_x_2=vertices[(i+1)%array_length(vertices)][0];
+		_y_2=vertices[(i+1)%array_length(vertices)][1];
+		_offset=1;
+		if(_x_1<_x_2){
+			_x_1-=_offset;
+			_x_2+=_offset;
+		}else if(_x_1>_x_2){
+			_x_1+=_offset;
+			_x_2-=_offset;
+		}
+		if(_y_1<_y_2){
+			_y_1-=_offset;
+			_y_2+=_offset;
+		}else if(_y_2<_y_1){
+			_y_1+=_offset;
+			_y_2-=_offset;
+		}
+		draw_line_width_color(_x_1, _y_1, _x_2, _y_2, _width, _color, _color);
 	}
 }
 

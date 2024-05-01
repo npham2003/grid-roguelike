@@ -35,12 +35,6 @@ ask_end = false;
 
 skill_used_color=#d1baa4;
 
-progress_thickness=5;
-progress_length=400;
-progress_height=50;
-battles_in_room=5;
-player_marker=room_width/2-progress_length/2;
-
 #region location & size
 imgX = 200;
 imgY = 680;
@@ -74,8 +68,6 @@ backX = [1000, 1200];
 backY = 660;
 backShiftX = 0;
 backShiftY = [0,0];
-
-
 
 border = 5;
 #endregion
