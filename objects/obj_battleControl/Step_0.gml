@@ -770,7 +770,7 @@ switch (state) {
 				battle_progress=0;
 			}
 			tp_current=tp_max;
-			if(battle_progress%5==0){
+			if(battle_progress%5==0||battle_progress%2==0){
 				change_state(BattleState.PlayerUpgrade);
 			}else{
 				change_state(BattleState.BattleStart);
