@@ -129,6 +129,7 @@ spawn_enemies = function(enemy_data){
 			battle_gold+=unit.gold;
 		
 	}
+	set_enemy_turn_order();
 }
 
 // spawns an enemy on the ally side of the board. if target tile is not empty it will find a nearby empty one

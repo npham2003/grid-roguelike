@@ -137,7 +137,7 @@ for (var i = skills; i >= 0; i--) {
 	if((obj_battleControlTut.teachingBasic || obj_battleControlTut.basicTaught) && i==1){
 		draw_set_color(global._primary);
 	}
-	if((obj_battleControlTut.teachingSkills) && i==2){
+	if((obj_battleControlTut.teachingSkills) && (i==2 || i==3)){
 		draw_set_color(global._primary);
 	}
 	if((obj_battleControlTut.teachingMortar) && i==4){
