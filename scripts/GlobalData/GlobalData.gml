@@ -1729,7 +1729,7 @@ global.actionLibrary = {
 	},
 	buff: {
 		name: ["Encourage", "Rallying Cry", "Invigorate"], //probably redundant to have a name but keep it
-		description: [ "Make an adjacent ally do 1 extra damage for 2 turns. Can include yourself", "Make an ally up to 3 tiles away do 1 extra damage for 2 turns. Can include yourself", "Make an adjacent ally do 2 extra damage for 2 turns. Can include yourself"],
+		description: [ "Make an adjacent ally do 1 extra damage for 2 turns.", "Make an ally up to 3 tiles away do 1 extra damage for 2 turns", "Make an adjacent ally do 2 extra damage for 2 turns"],
 		cost: [3, 5, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -2022,7 +2022,7 @@ global.actionLibrary = {
 	},
 	dance: {
 		name: ["Haste", "Superspeed", "Dance"], //probably redundant to have a name but keep it
-		description: [ "Allow an adjacent ally to move an extra tile for 2 turns. Can include yourself", "Allow an adjacent ally to move 2 extra tiles for 2 turns. Can include yourself", "Allow an adjacent ally to act again"],
+		description: [ "Allow an adjacent ally to move an extra tile for 2 turns", "Allow an adjacent ally to move 2 extra tiles for 2 turns", "Allow an adjacent ally to act again"],
 		cost: [4, 5, 3],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
