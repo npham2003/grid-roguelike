@@ -20,10 +20,10 @@ currCharSprite = spr_temp_Taion;
 hp_opacity=0;
 hp_opacity_increase=true;
 
-tpCost = [0, 1, 5, 7, 12];
+tpCost = [0, 1, 5, 7, 12,0,0,0];
 tp_opacity=0;
 tp_opacity_increase=true;
-skill_names=["","","",""];
+skill_names=["","","","","",""];
 
 turn_count = 0;
 turn_max = 3;
@@ -109,7 +109,6 @@ set_select = function(_option) {
 #region draw helpers
 //draw a diamond given center and radius
 make_diamond = function(_x, _y, _r) {
-	if _r ==  15 show_debug_message("hi");
 	return [[_x - _r, _y], [_x ,_y -_r], [_x, _y + _r], [_x + _r, _y]];
 }
 
