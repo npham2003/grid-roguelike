@@ -13,7 +13,7 @@ upgrade_offset = 0;
 skill_x_start = 150;
 skill_y_start = 30;
 
-optionRadius = 40;
+optionRadius = 50;
 border = 5;
 
 descriptor_text = ["Heal 1 character for 1 HP",
@@ -108,12 +108,33 @@ make_tp = function(_x, _y, _spacing, _len, is_rows) {
 	
 }
 
-draw_vertices = function(vertices){
-	for (var i = 0; i < array_length(vertices); ++i) {
-		draw_vertex(vertices[i][0], vertices[i][1]);
-	}
-}
 
 make_diamond = function(_x, _y, _r) {
 	return [[_x - _r, _y], [_x ,_y -_r], [_x, _y + _r], [_x + _r, _y]];
+}
+
+draw_lines = function(vertices, _width, _color){
+    for (var i = 0; i < array_length(vertices); ++i) {
+        _x_1=vertices[i][0];
+        _y_1=vertices[i][1];
+        _x_2=vertices[(i+1)%array_length(vertices)][0];
+        _y_2=vertices[(i+1)%array_length(vertices)][1];
+        _offset=1;
+		
+        if(_x_1<_x_2){
+            _x_1-=_offset;
+            _x_2+=_offset;
+        }else if(_x_1>_x_2){
+            _x_1+=_offset;
+            _x_2-=_offset;
+        }
+        if(_y_1<_y_2){
+            _y_1-=_offset;
+            _y_2+=_offset;
+        }else if(_y_2<_y_1){
+            _y_1+=_offset;
+            _y_2-=_offset;
+        }
+        draw_line_width_color(_x_1, _y_1, _x_2, _y_2, _width, _color, _color);
+    }
 }

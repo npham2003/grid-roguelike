@@ -294,7 +294,7 @@ if(sub_menu==2){
 			draw_primitive_end();
 			
 			draw_set_alpha(1);
-			draw_set_color(global._characterPrimary);
+			draw_set_color(global._menu_primary);
 			draw_primitive_begin(pr_trianglestrip);
 			//draw_vertices(_outline1);
 			draw_lines(_outline1,border*2,diamond_fill);

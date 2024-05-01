@@ -2,7 +2,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	show_debug_message(selectable);
 	// background and border
 	if(menu_level<=1){ //if this is not the skill select screen
-		draw_set_color(c_black);
+		draw_set_color(global._aspect_bars);
 		draw_set_alpha(1);
 		draw_rectangle(0, 0, room_width, room_height, false);
 		draw_sprite_ext(spr_shop_menu_border, image_index, actual_x, y, image_xscale, image_yscale, image_angle, image_blend, alpha);
@@ -177,7 +177,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 		}
 	}
 	if(menu_level == 2){ //select skill to upgrade
-		draw_set_color(c_black);
+		draw_set_color(global._aspect_bars);
 		draw_set_alpha(1);
 		draw_rectangle(0, 0, room_width, room_height, false);
 		
@@ -228,64 +228,62 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	}
 	if(menu_level == 3){ //upgrade your skill
 			#region setup
-			var _border = border;
+				var _border = border;
 				var _outline1 = [
-				[skill_x_start+upgrade_offset, skill_y_start+90-(optionRadius+_border)],
-				[skill_x_start+upgrade_offset-(optionRadius+_border), skill_y_start+90],
-				[skill_x_start+upgrade_offset, skill_y_start+90+(optionRadius+_border)],
-				[skill_x_start+upgrade_offset+500, skill_y_start+90+(optionRadius+_border)],
-				[skill_x_start+upgrade_offset+500+(optionRadius+_border), skill_y_start+90],
-				[skill_x_start+upgrade_offset+500, skill_y_start+90-(optionRadius+_border)],
+				[skill_x_start, skill_y_start+90-(optionRadius+_border)],
+				[skill_x_start-(optionRadius+_border), skill_y_start+90],
+				[skill_x_start, skill_y_start+90+(optionRadius+_border)],
+				[skill_x_start+500, skill_y_start+90+(optionRadius+_border)],
+				[skill_x_start+500+(optionRadius+_border), skill_y_start+90],
+				[skill_x_start+500, skill_y_start+90-(optionRadius+_border)],
 			]
 			var _outline2 = [
 				
-				[skill_x_start+upgrade_offset, skill_y_start+90-(optionRadius+_border*2)],
-				[skill_x_start+upgrade_offset-(optionRadius+_border*2), skill_y_start+90],
-				[skill_x_start+upgrade_offset, skill_y_start+90+(optionRadius+_border*2)],
-				[skill_x_start+upgrade_offset+500, skill_y_start+90+(optionRadius+_border*2)],
-				[skill_x_start+upgrade_offset+500+(optionRadius+_border*2), skill_y_start+90],
-				[skill_x_start+upgrade_offset+500, skill_y_start+90-(optionRadius+_border*2)],
+				[skill_x_start, skill_y_start+90-(optionRadius+_border*2)],
+				[skill_x_start-(optionRadius+_border*2), skill_y_start+90],
+				[skill_x_start, skill_y_start+90+(optionRadius+_border*2)],
+				[skill_x_start+500, skill_y_start+90+(optionRadius+_border*2)],
+				[skill_x_start+500+(optionRadius+_border*2), skill_y_start+90],
+				[skill_x_start+500, skill_y_start+90-(optionRadius+_border*2)],
 			]
 			_border = 0;
 			var _button = [
-				[skill_x_start+upgrade_offset+upgrade_offset-(optionRadius+_border), skill_y_start+90],
-				[skill_x_start+upgrade_offset+upgrade_offset, skill_y_start+90-(optionRadius+_border)],
+				[skill_x_start-(optionRadius+_border), skill_y_start+90],
+				[skill_x_start, skill_y_start+90-(optionRadius+_border)],
 				
-				[skill_x_start+upgrade_offset+upgrade_offset, skill_y_start+90+(optionRadius+_border)],
-				[skill_x_start+upgrade_offset+upgrade_offset+500, skill_y_start+90-(optionRadius+_border)],
-				[skill_x_start+upgrade_offset+upgrade_offset+500, skill_y_start+90+(optionRadius+_border)],
+				[skill_x_start, skill_y_start+90+(optionRadius+_border)],
+				[skill_x_start+500, skill_y_start+90-(optionRadius+_border)],
+				[skill_x_start+500, skill_y_start+90+(optionRadius+_border)],
 				
-				[skill_x_start+upgrade_offset+upgrade_offset+500+(optionRadius+_border), skill_y_start+90]
+				[skill_x_start+500+(optionRadius+_border), skill_y_start+90]
 			]
 			#endregion
 			
 		
-		//draw_set_color(c_black);
-		//draw_set_alpha(1);
-		//draw_rectangle(0, 0, room_width, room_height, false);
+		draw_set_color(global._aspect_bars);
+		draw_set_alpha(1);
+		draw_rectangle(0, 0, room_width, room_height, false);
 		
 		
-		//draw_set_color(c_white);
+		draw_set_color(c_white);
 		var action = obj_battleControl.player_units[character_select_pos].actions[skill_select_pos];
 		var prev_skill = obj_battleControl.player_units[character_select_pos].upgrades[skill_select_pos];
 		
 		//LEFT BOX
 		//draw_sprite_ext(spr_shop_menu_border, image_index, skill_x_start, skill_y_start+(1)*250, 0.5, 0.5, image_angle, image_blend, alpha);
-		
-		draw_set_color(c_black);
+
 		draw_primitive_begin(pr_trianglestrip);
-		draw_vertices(_outline2);
+		draw_lines(_outline2, border*2, c_black);
 		draw_primitive_end();
 	
-		draw_set_color(global._characterPrimary);
 		draw_primitive_begin(pr_trianglestrip);
-		draw_vertices(_outline1);
+		draw_lines(_outline1, border, global._menu_primary);
 		draw_primitive_end();
 	
-		draw_set_color(global._primary);
-		draw_primitive_begin(pr_trianglestrip);
-		draw_vertices(_button);
-		draw_primitive_end();
+		//draw_set_color(global._primary);
+		//draw_primitive_begin(pr_trianglestrip);
+		//draw_vertices(_button);
+		//draw_primitive_end();
 		
 		draw_set_alpha(1);
 		draw_text_ext_transformed(skill_x_start+15, skill_y_start+((1)*250)+5, action.name[prev_skill], 40, 600, 0.8, 0.8, image_angle);
@@ -300,6 +298,54 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 		}
 		
 		for(i=0;i<3;i++){
+				var _border = border;
+				var _outline1 = [
+				[skill_x_start+600, skill_y_start+(220*i)+90-(optionRadius+_border)],
+				[skill_x_start+600-(optionRadius+_border), skill_y_start+(220*i)+90],
+				[skill_x_start+600, skill_y_start+(220*i)+90+(optionRadius+_border)],
+				[skill_x_start+600+500, skill_y_start+(220*i)+90+(optionRadius+_border)],
+				[skill_x_start+600+500+(optionRadius+_border), skill_y_start+(220*i)+90],
+				[skill_x_start+600+500, skill_y_start+(220*i)+90-(optionRadius+_border)],
+			]
+			var _outline2 = [
+				
+				[skill_x_start+600, skill_y_start+(220*i)+90-(optionRadius+_border*2)],
+				[skill_x_start+600-(optionRadius+_border*2), skill_y_start+(220*i)+90],
+				[skill_x_start+600, skill_y_start+(220*i)+90+(optionRadius+_border*2)],
+				[skill_x_start+600+500, skill_y_start+(220*i)+90+(optionRadius+_border*2)],
+				[skill_x_start+600+500+(optionRadius+_border*2), skill_y_start+(220*i)+90],
+				[skill_x_start+600+500, skill_y_start+(220*i)+90-(optionRadius+_border*2)],
+			]
+			_border = 0;
+			var _button = [
+				[skill_x_start+600-(optionRadius+_border), skill_y_start+(220*i)+90],
+				[skill_x_start+600, skill_y_start+(220*i)+90-(optionRadius+_border)],
+				
+				[skill_x_start+600, skill_y_start+(220*i)+90+(optionRadius+_border)],
+				[skill_x_start+600+500, skill_y_start+(220*i)+90-(optionRadius+_border)],
+				[skill_x_start+600+500, skill_y_start+(220*i)+90+(optionRadius+_border)],
+				
+				[skill_x_start+600+500+(optionRadius+_border), skill_y_start+(220*i)+90]
+			]
+			
+			//RIGHT BOXES
+			//draw_sprite_ext(spr_shop_menu_border, image_index, skill_x_start+600, skill_y_start+(i)*250, 0.5, 0.5, image_angle, image_blend, alpha);
+
+			draw_primitive_begin(pr_trianglestrip);
+			draw_lines(_outline2, border*2, c_black);
+			draw_primitive_end();
+	
+			draw_primitive_begin(pr_trianglestrip);
+			draw_lines(_outline1, border, global._menu_primary);
+			draw_primitive_end();
+	
+			//draw_set_color(global._primary);
+			//draw_primitive_begin(pr_trianglestrip);
+			//draw_vertices(_button);
+			//draw_primitive_end();
+			
+			draw_text_ext_transformed(skill_x_start+615, skill_y_start+((i)*250)+50, action.description[i], 40, 600, 0.8, 0.8, image_angle);
+			draw_text_ext_transformed(skill_x_start+615, skill_y_start+((i)*250)+10, action.name[i], 40, 600, 0.8, 0.8, image_angle);
 			
 			// cant select skill you already have
 			if(prev_skill==i){
@@ -324,11 +370,6 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 				draw_set_color(c_gray);
 			}
 			
-			
-			//RIGHT BOXES
-			//draw_sprite_ext(spr_shop_menu_border, image_index, skill_x_start+600, skill_y_start+(i)*250, 0.5, 0.5, image_angle, image_blend, alpha);
-			draw_text_ext_transformed(skill_x_start+615, skill_y_start+((i)*250)+50, action.description[i], 40, 600, 0.8, 0.8, image_angle);
-			draw_text_ext_transformed(skill_x_start+615, skill_y_start+((i)*250)+10, action.name[i], 40, 600, 0.8, 0.8, image_angle);
 			
 			var _pips = make_tp(skill_x_start+1015, skill_y_start+((i)*250)+30, 7*obj_menu.expandAnim, action.cost[i], true);
 
