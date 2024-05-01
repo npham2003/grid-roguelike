@@ -43,13 +43,13 @@ if (confirm) {
 	draw_primitive_end();
 	
 	draw_set_color(global._characterSecondary);
-	draw_text_ext_transformed(900, 610, "Confirm: Enter", 30, 100, 0.5, 0.5, 0);
+	draw_text_ext_transformed(confirmX[0]+20, 615, "Confirm: Enter", 30, confirmY-160, 0.7, 0.7, 0);
 	
 	//draw_text_color(550, );
 }
 #endregion
 
-
+#region buttons
 var _buttonScale = 5;
 for (var i = skills - 1; i >= 0; i--) {
 
@@ -108,19 +108,48 @@ for (var i = skills - 1; i >= 0; i--) {
 	#endregion
 
 	//text			player_unit.actions[i].name[player_unit.upgrades[i]]+ ": " +
-	if i < 4 draw_text_transformed_colour(menuX[i+1]-expandAnim*60, menuY[i]-35, global.controls[i], 0.5, 0.5, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
-}
-
-
-#region hp
-if (open) {
-	var pc;
-	pc = (player_unit.hp / player_unit.hpMax) * 100;
-	draw_healthbar(menuX[0]-70, menuY[0]+3, menuX[0], menuY[0]-3, pc, global._primary, global._characterSecondary, global._characterSecondary, 0, true, true)
-	draw_text_transformed(menuX[0]-expandAnim*50, menuY[0], string(player_unit.hp)+"/"+string(player_unit.hpMax), 0.5, 0.5, 0);
-	//draw_text_transformed(menuX[0]+50, menuY[0]-35, "HP: " + string(obj_player.hp), 0.8, 0.8, 0);
+	if i < 4 draw_text_transformed_colour(menuX[i+1]-expandAnim*25, menuY[i]-60, global.controls[i], 1, 1, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
 }
 #endregion
+
+if (open) {
+#region name
+	//var pc;
+	//pc = (player_unit.hp / player_unit.hpMax) * 100;
+	//draw_healthbar(menuX[0]-70, menuY[0]+3, menuX[0], menuY[0]-3, pc, global._primary, global._characterSecondary, global._characterSecondary, 0, true, true)
+	draw_text_transformed(menuX[0]-expandAnim*90, menuY[0]-expandAnim*25, player_unit.name, 0.5, 0.5, 0);
+	//draw_text_transformed(menuX[0]+50, menuY[0]-35, "HP: " + string(obj_player.hp), 0.8, 0.8, 0);
+#endregion
+
+#region hp
+//	var _pips = make_tp(rootX+100, rootY-70, 15, player_unit.hpMax+1, false);
+//for (var i = 1; i < array_length(_pips); ++i){
+//	draw_primitive_begin(pr_trianglestrip);
+//	draw_set_color(c_red);
+//	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 12));
+//	draw_primitive_end();
+//}
+
+//	var _pips = make_tp(rootX+100, rootY-70, 15, player_unit.hp+1, false);
+//for (var i = 1; i < array_length(_pips); ++i){
+//	draw_primitive_begin(pr_trianglestrip);
+//	draw_set_color(c_maroon);
+//	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 10));
+//	draw_primitive_end();
+//}
+
+//	for (var i = array_length(_pips)-1; i > array_length(_pips)-1-obj_gridCreator.battle_grid[player_unit.grid_pos[0]][player_unit.grid_pos[1]]._danger_number; --i){
+//		draw_primitive_begin(pr_trianglestrip);
+		
+//		draw_set_color(c_black);
+//		draw_set_alpha(hp_opacity);
+//		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 10));
+//		draw_primitive_end();
+//	}
+
+//	draw_set_alpha(1);
+#endregion
+}
 
 #region party tp
 var _pips = make_tp(rootX+120, rootY-70, 15, obj_battleControlTut.tp_max, false);
@@ -145,9 +174,8 @@ for (var i = 0; i < array_length(_pips); ++i){
 	draw_primitive_end();
 }
 
-
 var _pips = make_tp(rootX+120, rootY-70, 15, obj_battleControlTut.tp_current, false);
-//show_debug_message(string(obj_battleControlTut.tp_current));
+//show_debug_message(string(obj_battleControl.tp_current));
 for (var i = 0; i < array_length(_pips); ++i){
 	draw_primitive_begin(pr_trianglestrip);
 	draw_set_color(global._tpBorder);
@@ -189,6 +217,7 @@ draw_primitive_end();
 
 #region draw character
 gpu_set_blendenable(false);
+
 gpu_set_colorwriteenable(false, false, false, true);
 draw_set_alpha(0);
 draw_rectangle(imgX-150, imgY-150, imgX+160, imgY+100, false); //invisible rectangle
@@ -238,7 +267,7 @@ draw_text_transformed(75, 20, "G    "+ string(obj_battleControlTut.gold), 0.8, 0
 #region skill details
 draw_set_font(fnt_chiaro);
 draw_set_color(c_white);
-draw_text_ext(200, 10, _text, 40, 1000);
+draw_text_ext(300, 10, _text, 40, 1000);
 #endregion
 
 #region press enter
@@ -247,8 +276,6 @@ draw_text_transformed_color(1000, 150, _enter_text, 0.6, 0.6, 0, c_black, c_blac
 #endregion
 
 #region turn banner
-
-
 if (turn_banner_animation_started) {
 	turn_life--;
 	show_debug_message(turn_life);

@@ -17,10 +17,6 @@ var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_H_press
 
 var enough_tp = false;
 
-if(keyboard_check_pressed(vk_delete)) {
-	room_goto_next();
-}
-
 if (transition_count > 0) {
 	transition_count-=1;
 	return;
@@ -36,23 +32,32 @@ switch (state) {
 #region Battle Start
 	case BattleState.BattleStart:
 		
-		obj_menuTut.set_turn_banner(false);
-		obj_draw_bg.colorSwitch = true;
-		
 		for (var i = 0; i < array_length(player_units); i++) {
-			player_units[i].attack_bonus=0;
-			// revives dead units
-			if(player_units[i].hp<=0){
-				player_units[i].hp=1;
-			}
-			if(i==0){
-				obj_cursor.current_x=player_units[i].grid_pos[0];
-				obj_cursor.current_y=player_units[i].grid_pos[1];
-				//obj_cursor.current_x=0;
-				//obj_cursor.current_y=0;
+			
 				
+			
+				
+		// removes attack buff if 2nd turn
+				
+			show_debug_message("reset attack bonus");
+			player_units[i].attack_bonus_temp=0;
+				
+			player_units[i].attack_buff_recent=false;
+				
+		// removes move buff if 2nd turn
+				
+			show_debug_message("reset move bonus");
+			player_units[i].move_bonus_temp=0;
+				
+			player_units[i].move_buff_recent=false;
+			player_units[i].has_moved = false;
+			player_units[i].has_attacked = false;
+			
 			}
-		}
+			
+		obj_cursor.current_x=player_units[0].grid_pos[0];
+		obj_cursor.current_y=player_units[0].grid_pos[1];
+		
 		//for (var i = 0; i < array_length(board_obstacles); i++) {
 		//	board_obstacles[i].despawn();
 		//	array_delete(board_obstacles,i,1);
@@ -84,13 +89,6 @@ switch (state) {
 			teachingBasic = true;
 			//spawn_gun(player_units[0]);
 		}
-		//if (gun_spawned == true && gun_array[0].is_dead == false) {
-		//	if (player_units[0].grid_pos[0] == gun_array[0].grid_pos[0] && player_units[0].grid_pos[1] == gun_array[0].grid_pos[1]) {
-		//	gun_array[0].is_dead = true;
-		//	teachingBasic = true;
-		//	}
-		//}
-		
 		if (in_animation) {
 			break;
 		}else{
@@ -196,6 +194,8 @@ switch (state) {
 	case BattleState.PlayerPreparing:
 		obj_draw_bg.colorSwitch = false;
 		
+		turn_count+=1;
+		
 		if (teachingMovement) {
 			obj_menuTut.set_text("To move, I have to select myself with ENTER, and move with WASD. Then finalize with ENTER");
 			obj_menuTut.enter_text("PRESS ENTER");
@@ -233,8 +233,10 @@ switch (state) {
 					player_units[i].freeze_graphic.sprite_index=spr_freeze_out;
 					player_units[i].freeze_graphic.image_speed=1;
 					audio_play_sound(sfx_defreeze, 0, false, 0.5);
+					unit.freeze_graphic=pointer_null;
 				}
 			}
+			player_units[i].shield=0;
 			
 			// error handling. might be unnecessary
 			if(player_units[i].stall_turns<0){
@@ -246,10 +248,12 @@ switch (state) {
 				player_units[i].has_moved = false;
 				player_units[i].has_attacked = false;
 				if (teachingBasic) { // gain tp once unlock damage
-				tp_current+=player_units[i].tpGain;
+				tp_current+=4;
 				}
 			}else if(player_units[i].hp<0){
 				player_units[i].hp=0;
+				player_units[i].has_moved = true;
+				player_units[i].has_attacked = true;
 			}
 			
 			
@@ -309,11 +313,26 @@ switch (state) {
 			break;
 		}
 		
+		obj_menuTut.set_text("WASD - Move Cursor     Enter - Select Unit     Space - End Turn");
+		
 		// checks if all player units have moved
 		for (var i = 0; i < array_length(player_units); i++) {
 			if (!player_units[i].has_attacked) {
 				has_all_attacked = false;
 			}
+			if(player_units[i].hp<=0){
+
+				player_units[i].hp=0;
+
+				player_units[i].has_moved = true;
+
+				player_units[i].has_attacked = true;
+
+			}
+
+			obj_gridCreator.battle_grid[player_units[i].grid_pos[0]][player_units[i].grid_pos[1]]._entity_on_tile=player_units[i];
+
+			obj_gridCreator.battle_grid[player_units[i].grid_pos[0]][player_units[i].grid_pos[1]]._is_empty=false;
 		}
 		if (has_all_attacked) {
 			board_obstacle_order = 0;
@@ -333,8 +352,6 @@ switch (state) {
 				
 				// set the tpcost array in the menu to match actual costs
 				obj_menuTut.tpCost=[0,unit.actions[0].cost[unit.upgrades[0]],unit.actions[1].cost[unit.upgrades[1]],unit.actions[2].cost[unit.upgrades[2]],unit.actions[3].cost[unit.upgrades[3]]];
-				//obj_menuTut.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
-				obj_menuTut.set_text("WASD - Move Cursor     Enter - Select Unit     Space - End Turn");
 				
 				// resets the previous grid position to current position. needed for when getting moved when its not their turn (push or teleport)
 				unit.prev_grid=[unit.grid_pos[0],unit.grid_pos[1]];
@@ -376,19 +393,16 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						//else if (key_K_pressed && teachingSkills == true) {
-						//	if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
-						//		//obj_menuTut.set_select(3);
-						//		//unit.skill_used = 2;
-						//		if (tp_current < tp_max) {
-						//			tp_current += 1;
-						//		}
-						//		enough_tp = true;
-						//	}
-						//	else {
-						//			audio_play_sound(sfx_no_tp, 0, false);
-						//		}
-						//}
+						else if (key_K_pressed && teachingSkills == true) {
+							if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
+								//obj_menuTut.set_select(3);
+								unit.skill_used = 2;
+								enough_tp = true;
+							}
+							else {
+									audio_play_sound(sfx_no_tp, 0, false);
+								}
+						}
 						else if (key_L_pressed && teachingSkills == true) {
 							if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
 								//obj_menuTut.set_select(4);
@@ -403,6 +417,8 @@ switch (state) {
 								unit.skill_init = false;
 								unit.skill_complete = false;
 								enough_tp = false;
+								unit.skill_progress=0;
+								audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 								change_state(BattleState.PlayerAiming);
 								obj_gridCreator.reset_highlights_cursor();
 							}
@@ -441,8 +457,6 @@ switch (state) {
 				obj_menuTut.ask_end = false;
 			}
 			
-			
-			
 			else {
 				obj_menuTut.ask_end = true;
 				}
@@ -460,7 +474,7 @@ switch (state) {
 		// error handling but unit should always be a player unit here
 		if(unit!=pointer_null){
 			//obj_menuTut.set_text("WASD - Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
-			obj_menuTut.set_text("WASD - Move     Enter - Do Nothing     Tab - Back");
+			obj_menuTut.set_text("WASD - Move     Enter - Wait     Tab - Back");
 			
 			// moving
 			if (wasd_pressed) {
@@ -484,6 +498,9 @@ switch (state) {
 					obj_menuTut.select = 0;
 					unit.back_move();
 					change_state(BattleState.PlayerWaitingAction);
+					for(i=0;i<array_length(enemy_units);i++) {
+						enemy_units[i].recalc_los();
+					}
 					obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
 					obj_cursor.reset_cursor(unit.grid_pos[0], unit.grid_pos[1]);
 				}
@@ -510,18 +527,15 @@ switch (state) {
 							audio_play_sound(sfx_no_tp, 0, false);
 						}
 				}
-				//else if (key_K_pressed && teachingSkills == true) {
-				//	if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
-				//		if (tp_current < tp_max) {
-				//					tp_current += 1;
-				//				}
-				//	//unit.skill_used = 2;
-				//	enough_tp = true;
-				//	}
-				//	else {
-				//			audio_play_sound(sfx_no_tp, 0, false);
-				//		}
-				//}
+				else if (key_K_pressed && teachingSkills == true) {
+					if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
+					unit.skill_used = 2;
+					enough_tp = true;
+					}
+					else {
+							audio_play_sound(sfx_no_tp, 0, false);
+						}
+				}
 				else if (key_L_pressed && teachingSkills == true) {
 					if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
 					unit.skill_used = 3;
@@ -539,12 +553,20 @@ switch (state) {
 					}
 			}
 			
-				if (enough_tp) { // enough tp to use a skill
+				if (enough_tp && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) { // enough tp to use a skill
 					unit.confirm_move();
 					unit.skill_init = false;
 					unit.skill_complete = false;
+					unit.skill_progress=0;
 					enough_tp = false;
+					obj_gridCreator.reset_highlights_move();
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					change_state(BattleState.PlayerAiming);
+					for(i=0;i<array_length(enemy_units);i++){
+
+						enemy_units[i].recalc_los();
+
+					}
 				}
 					
 				}
@@ -568,6 +590,12 @@ switch (state) {
 		
 		if(unit.skill_back){ // if the player presses tab to go back. this is handled in the skill itself
 			obj_menuTut.confirm = false;
+
+			for(i=0;i<array_length(enemy_units);i++){
+
+				enemy_units[i].recalc_los();
+
+			}
 			change_state(BattleState.PlayerMoving);
 			unit.show_moveable_grids_prev();
 			unit.has_attacked = false;
@@ -632,22 +660,19 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						//else if (key_K_pressed&&unit.skill_used!=2&&teachingSkills == true) {
-						//	obj_gridCreator.reset_highlights_cursor();
-						//	obj_gridCreator.reset_highlights_attack();
-						//	obj_gridCreator.reset_highlights_target();
-						//	obj_gridCreator.reset_highlights_support();
-						//	if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
-						//	if (tp_current < tp_max) {
-						//			tp_current += 1;
-						//		}
-						//	//unit.skill_used = 2;
-						//	enough_tp = true;
-						//	}
-						//	else {
-						//			audio_play_sound(sfx_no_tp, 0, false);
-						//		}
-						//}
+						else if (key_K_pressed&&unit.skill_used!=2&&teachingSkills == true) {
+							obj_gridCreator.reset_highlights_cursor();
+							obj_gridCreator.reset_highlights_attack();
+							obj_gridCreator.reset_highlights_target();
+							obj_gridCreator.reset_highlights_support();
+							if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
+							unit.skill_used = 2;
+							enough_tp = true;
+							}
+							else {
+									audio_play_sound(sfx_no_tp, 0, false);
+								}
+						}
 						else if (key_L_pressed&&unit.skill_used!=3&&teachingSkills == true) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
@@ -665,10 +690,14 @@ switch (state) {
 								unit.skill_init= false;
 								unit.skill_complete = false;
 								enough_tp = false;
+								unit.skill_progress=0;
+								unit.play_sound = false;
+								unit.thaw_checked = false;
 								
 								change_state(BattleState.PlayerAiming);
 								obj_gridCreator.reset_highlights_cursor();
 								obj_battleEffect.remove_push_preview();
+								audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 							}
 						}
 				
@@ -704,8 +733,21 @@ switch (state) {
 		if (enemy_unit.hp<=0){
 			enemy_unit.despawn();
 			
+			if(enemy_unit.stall_turns>0){
+
+				unit.freeze_graphic.sprite_index=spr_freeze_out;
+
+				audio_play_sound(sfx_defreeze, 0, false, 0.5);
+
+				unit.freeze_graphic.image_speed=1;
+
+				unit.freeze_graphic=pointer_null;
+
+			}
+			
 			array_delete(enemy_units, enemy_check_death, 1);
 			enemy_check_death-=1;
+			set_enemy_turn_order();
 		}
 		
 		enemy_check_death += 1;
@@ -771,6 +813,7 @@ switch (state) {
 			if (enemy_check_death >= array_length(enemy_units)) {
 				enemy_check_death = 0;
 				enemy_order+=1;
+				set_enemy_turn_order();
 				checking_death=false;
 			}
 		}
@@ -783,10 +826,44 @@ switch (state) {
 #region Battle End
 	case BattleState.BattleEnd:
 		tp_bonus=0;
+		for (var i = 0; i < array_length(player_units); i++) {
+
+			player_units[i].attack_bonus=0;
+
+		}
 		if(in_animation){
 			break;
 		}
 		if(array_length(enemy_units)==0){
+			gold+=battle_gold;
+
+			obj_gridCreator.reset_highlights_enemy();
+
+			battle_progress+=1;
+
+			for (var i = 0; i < array_length(player_units); i++) {
+
+			
+
+				// revives dead units
+
+				if(player_units[i].hp<=0){
+
+					player_units[i].hp=1;
+
+				}
+
+				
+
+			}
+
+			if(battle_progress==array_length(global.encounters)){
+
+				battle_progress=0;
+
+			}
+
+			tp_current=tp_max;
 			change_state(BattleState.PlayerUpgrade);
 		}else{
 			if(keyboard_check_pressed(vk_anykey)){
@@ -838,6 +915,7 @@ switch (state) {
 			break;
 		}
 		obj_menuTut.close_menu();
+		obj_draw_bg.colorSwitch = true;
 		
 		
 		if (board_obstacle_order >= array_length(board_obstacles)) {
@@ -896,6 +974,7 @@ switch (state) {
 					obstacle.freeze_graphic.sprite_index=spr_freeze_out;
 					obstacle.freeze_graphic.image_speed=1;
 					audio_play_sound(sfx_defreeze, 0, false, 0.5);
+					unit.freeze_graphic=pointer_null;
 			
 				}
 			}
@@ -921,6 +1000,7 @@ switch (state) {
 			
 				array_delete(enemy_units, enemy_check_death, 1);
 				enemy_check_death-=1;
+				set_enemy_turn_order();
 			}
 		
 			enemy_check_death += 1;
