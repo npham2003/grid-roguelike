@@ -40,7 +40,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 					gpu_set_blendenable(false);
 					gpu_set_colorwriteenable(false, false, false, true);
 					draw_set_alpha(0);
-					draw_rectangle(actual_x+(190*i)+200, y+(175*j)+20, actual_x+(200*i)+400, y+(175*j)+240, false); //invisible rectangle
+					draw_rectangle(actual_x+(190*i)+50, y+(175*j)-100, actual_x+(200*i)+450, y+(175*j)+350, false); //invisible rectangle
 
 					//mask
 					draw_set_alpha(1);
@@ -196,35 +196,28 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 			
 			selectable[i]=true;	
 			
-			if(i==skill_select_pos){
-				show_debug_message("draw arrow");
-				if(selectable[i]){
-					draw_sprite_ext(spr_right_arrow, image_index, skill_x_start-75, skill_y_start+(i)*230+75, 1, 1, image_angle, image_blend, 1);
-				}else{
-					draw_sprite_ext(spr_right_arrow_transparent, image_index, skill_x_start-75, skill_y_start+(i)*230+75, 1, 1, image_angle, image_blend, 0.5);
-				}
-			}
+			
 			
 			draw_set_color(c_white);
 			
 			//draw_sprite_ext(spr_shop_menu_border, image_index, skill_x_start, skill_y_start+(i)*230, 0.5, 0.5, image_angle, image_blend, alpha);
 			var _border = border;
-			skill_x_start = 150;
+			
 			var _outline1 = [
 				[skill_x_start, skill_y_start+(230*i)+90-(optionRadius+_border)],
 				[skill_x_start-(optionRadius+_border), skill_y_start+(230*i)+90],
 				[skill_x_start, skill_y_start+(230*i)+90+(optionRadius+_border)],
-				[skill_x_start+500, skill_y_start+(230*i)+90+(optionRadius+_border)],
-				[skill_x_start+500+(optionRadius+_border), skill_y_start+(230*i)+90],
-				[skill_x_start+500, skill_y_start+(230*i)+90-(optionRadius+_border)],
+				[skill_x_start+450, skill_y_start+(230*i)+90+(optionRadius+_border)],
+				[skill_x_start+450+(optionRadius+_border), skill_y_start+(230*i)+90],
+				[skill_x_start+450, skill_y_start+(230*i)+90-(optionRadius+_border)],
 			]
 			var _outline2 = [
 				[skill_x_start, skill_y_start+(230*i)+90-(optionRadius+_border*2)],
 				[skill_x_start-(optionRadius+_border*2), skill_y_start+(230*i)+90],
 				[skill_x_start, skill_y_start+(230*i)+90+(optionRadius+_border*2)],
-				[skill_x_start+500, skill_y_start+(230*i)+90+(optionRadius+_border*2)],
-				[skill_x_start+500+(optionRadius+_border*2), skill_y_start+(230*i)+90],
-				[skill_x_start+500, skill_y_start+(230*i)+90-(optionRadius+_border*2)],
+				[skill_x_start+450, skill_y_start+(230*i)+90+(optionRadius+_border*2)],
+				[skill_x_start+450+(optionRadius+_border*2), skill_y_start+(230*i)+90],
+				[skill_x_start+450, skill_y_start+(230*i)+90-(optionRadius+_border*2)],
 			]
 			_border = 0;
 			var _button = [
@@ -232,25 +225,48 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 				[skill_x_start, skill_y_start+(230*i)+90-(optionRadius+_border)],
 				
 				[skill_x_start, skill_y_start+(230*i)+90+(optionRadius+_border)],
-				[skill_x_start+500, skill_y_start+(230*i)+90-(optionRadius+_border)],
-				[skill_x_start+500, skill_y_start+(230*i)+90+(optionRadius+_border)],
+				[skill_x_start+450, skill_y_start+(230*i)+90-(optionRadius+_border)],
+				[skill_x_start+450, skill_y_start+(230*i)+90+(optionRadius+_border)],
 				
-				[skill_x_start+500+(optionRadius+_border), skill_y_start+(230*i)+90]
+				[skill_x_start+450+(optionRadius+_border), skill_y_start+(230*i)+90]
 			]
 			
 			draw_primitive_begin(pr_trianglestrip);
 			draw_lines(_outline2, border*2, c_black);
 			draw_primitive_end();
-	
+		
 			draw_primitive_begin(pr_trianglestrip);
-			draw_lines(_outline1, border, global._menu_primary);
+			if(i==skill_select_pos){
+				if(selectable[i]){
+					draw_lines(_outline1, border, c_white); // highlighted and selectable
+				}else{
+					draw_lines(_outline1, border, c_gray); // highlighted and unselectable
+				}
+			}else{
+				if(selectable[i]){
+					draw_lines(_outline1, border, global._menu_primary); // not highlighted and selectable
+				}else{
+					draw_lines(_outline1, border, global._menu_secondary); // not highlighted and unselectable
+				}
+			}
+			
 			draw_primitive_end();
 			
 			draw_text_ext_transformed(skill_x_start+15, skill_y_start+((i)*230)+40, action.description[prev_skill], 40, 600, 0.8, 0.8, image_angle);
 			draw_text_ext_transformed(skill_x_start+15, skill_y_start+((i)*230)+5, action.name[prev_skill], 40, 600, 0.8, 0.8, image_angle);
 			
 			//tp costs
-			var _pips = make_tp(skill_x_start+415, skill_y_start+((i)*230)+30, 7*obj_menu.expandAnim, action.cost[prev_skill], true);
+			var _cost =  action.cost[prev_skill];
+			if(_cost<0){
+				_cost=_cost*-1;
+				draw_set_font(fnt_archivo);
+				draw_set_halign(fa_right);
+				draw_set_color(global._tpBar);
+				draw_text_transformed_colour(skill_x_start+400, skill_y_start+((i)*230)+5, "+", 0.7, 0.7, 0, global._tpBar, global._tpBar, global._tpBar, global._tpBar, 1);
+				draw_set_font(fnt_chiaro);
+				draw_set_halign(fa_left);
+			}
+			var _pips = make_tp(skill_x_start+415, skill_y_start+((i)*230)+30, 7*obj_menu.expandAnim, _cost, true);
 
 			draw_set_color(global._tpBar);
 			for (var j = 0; j < array_length(_pips); j++){
@@ -267,34 +283,34 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	if(menu_level == 3){ //upgrade your skill
 			#region setup
 				var _border = border;
-				skill_x_start = 100;
+				
 				var _outline1 = [
-				[skill_x_start, skill_y_start+90-(optionRadius+_border)],
-				[skill_x_start-(optionRadius+_border), skill_y_start+90],
-				[skill_x_start, skill_y_start+90+(optionRadius+_border)],
-				[skill_x_start+500, skill_y_start+90+(optionRadius+_border)],
-				[skill_x_start+500+(optionRadius+_border), skill_y_start+90],
-				[skill_x_start+500, skill_y_start+90-(optionRadius+_border)],
+				[skill_x_start, skill_y_start+90-(optionRadius+_border)+230],
+				[skill_x_start-(optionRadius+_border), skill_y_start+90+230],
+				[skill_x_start, skill_y_start+90+(optionRadius+_border)+230],
+				[skill_x_start+450, skill_y_start+90+(optionRadius+_border)+230],
+				[skill_x_start+450+(optionRadius+_border), skill_y_start+90+230],
+				[skill_x_start+450, skill_y_start+90-(optionRadius+_border)+230],
 			]
 			var _outline2 = [
 				
-				[skill_x_start, skill_y_start+90-(optionRadius+_border*2)],
-				[skill_x_start-(optionRadius+_border*2), skill_y_start+90],
-				[skill_x_start, skill_y_start+90+(optionRadius+_border*2)],
-				[skill_x_start+500, skill_y_start+90+(optionRadius+_border*2)],
-				[skill_x_start+500+(optionRadius+_border*2), skill_y_start+90],
-				[skill_x_start+500, skill_y_start+90-(optionRadius+_border*2)],
+				[skill_x_start, skill_y_start+90-(optionRadius+_border*2)+230],
+				[skill_x_start-(optionRadius+_border*2), skill_y_start+90+230],
+				[skill_x_start, skill_y_start+90+(optionRadius+_border*2)+230],
+				[skill_x_start+450, skill_y_start+90+(optionRadius+_border*2)+230],
+				[skill_x_start+450+(optionRadius+_border*2), skill_y_start+90+230],
+				[skill_x_start+450, skill_y_start+90-(optionRadius+_border*2)+230],
 			]
 			_border = 0;
 			var _button = [
-				[skill_x_start-(optionRadius+_border), skill_y_start+90],
-				[skill_x_start, skill_y_start+90-(optionRadius+_border)],
+				[skill_x_start-(optionRadius+_border), skill_y_start+90+230],
+				[skill_x_start, skill_y_start+90-(optionRadius+_border+230)],
 				
-				[skill_x_start, skill_y_start+90+(optionRadius+_border)],
-				[skill_x_start+500, skill_y_start+90-(optionRadius+_border)],
-				[skill_x_start+500, skill_y_start+90+(optionRadius+_border)],
+				[skill_x_start, skill_y_start+90+(optionRadius+_border)+230],
+				[skill_x_start+450, skill_y_start+90-(optionRadius+_border)+230],
+				[skill_x_start+450, skill_y_start+90+(optionRadius+_border)+230],
 				
-				[skill_x_start+500+(optionRadius+_border), skill_y_start+90]
+				[skill_x_start+450+(optionRadius+_border), skill_y_start+90+230]
 			]
 			#endregion
 			
@@ -327,7 +343,18 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 		draw_set_alpha(1);
 		draw_text_ext_transformed(skill_x_start+15, skill_y_start+((1)*230)+5, action.name[prev_skill], 40, 600, 0.8, 0.8, image_angle);
 		draw_text_ext_transformed(skill_x_start+15, skill_y_start+((1)*230)+40, action.description[prev_skill], 40, 600, 0.8, 0.8, image_angle);
-		var _pips = make_tp(skill_x_start+400, skill_y_start+((1)*230)+30, 7*obj_menu.expandAnim, action.cost[prev_skill], true);
+		var _cost =  action.cost[prev_skill];
+		if(_cost<0){
+			_cost=_cost*-1;
+			draw_set_font(fnt_archivo);
+			draw_set_halign(fa_right);
+			draw_set_color(global._tpBar);
+			draw_text_transformed_colour(skill_x_start+400, skill_y_start+(230)+5, "+", 0.7, 0.7, 0, global._tpBar, global._tpBar, global._tpBar, global._tpBar, 1);
+			draw_set_font(fnt_chiaro);
+			draw_set_halign(fa_left);
+		}
+		var _pips = make_tp(skill_x_start+415, skill_y_start+(230)+30, 7*obj_menu.expandAnim, _cost, true);
+		show_debug_message(_cost);
 	
 		draw_set_color(global._tpBar);
 		for (var j = 0; j < array_length(_pips); j++){
@@ -338,34 +365,34 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 		
 		for(i=0;i<3;i++){
 				var _border = border;
-				skill_x_start = 150;
+				
 				var _outline1 = [
-				[skill_x_start+600, skill_y_start+(230*i)+90-(optionRadius+_border)],
-				[skill_x_start+600-(optionRadius+_border), skill_y_start+(230*i)+90],
-				[skill_x_start+600, skill_y_start+(230*i)+90+(optionRadius+_border)],
-				[skill_x_start+600+500, skill_y_start+(230*i)+90+(optionRadius+_border)],
-				[skill_x_start+600+500+(optionRadius+_border), skill_y_start+(230*i)+90],
-				[skill_x_start+600+500, skill_y_start+(230*i)+90-(optionRadius+_border)],
+				[skill_x_start+650, skill_y_start+(230*i)+90-(optionRadius+_border)],
+				[skill_x_start+650-(optionRadius+_border), skill_y_start+(230*i)+90],
+				[skill_x_start+650, skill_y_start+(230*i)+90+(optionRadius+_border)],
+				[skill_x_start+650+500, skill_y_start+(230*i)+90+(optionRadius+_border)],
+				[skill_x_start+650+500+(optionRadius+_border), skill_y_start+(230*i)+90],
+				[skill_x_start+650+500, skill_y_start+(230*i)+90-(optionRadius+_border)],
 			]
 			var _outline2 = [
 				
-				[skill_x_start+600, skill_y_start+(230*i)+90-(optionRadius+_border*2)],
-				[skill_x_start+600-(optionRadius+_border*2), skill_y_start+(230*i)+90],
-				[skill_x_start+600, skill_y_start+(230*i)+90+(optionRadius+_border*2)],
-				[skill_x_start+600+500, skill_y_start+(230*i)+90+(optionRadius+_border*2)],
-				[skill_x_start+600+500+(optionRadius+_border*2), skill_y_start+(230*i)+90],
-				[skill_x_start+600+500, skill_y_start+(230*i)+90-(optionRadius+_border*2)],
+				[skill_x_start+650, skill_y_start+(230*i)+90-(optionRadius+_border*2)],
+				[skill_x_start+650-(optionRadius+_border*2), skill_y_start+(230*i)+90],
+				[skill_x_start+650, skill_y_start+(230*i)+90+(optionRadius+_border*2)],
+				[skill_x_start+650+500, skill_y_start+(230*i)+90+(optionRadius+_border*2)],
+				[skill_x_start+650+500+(optionRadius+_border*2), skill_y_start+(230*i)+90],
+				[skill_x_start+650+500, skill_y_start+(230*i)+90-(optionRadius+_border*2)],
 			]
 			_border = 0;
 			var _button = [
-				[skill_x_start+600-(optionRadius+_border), skill_y_start+(230*i)+90],
-				[skill_x_start+600, skill_y_start+(230*i)+90-(optionRadius+_border)],
+				[skill_x_start+650-(optionRadius+_border), skill_y_start+(230*i)+90],
+				[skill_x_start+650, skill_y_start+(230*i)+90-(optionRadius+_border)],
 				
-				[skill_x_start+600, skill_y_start+(230*i)+90+(optionRadius+_border)],
-				[skill_x_start+600+500, skill_y_start+(230*i)+90-(optionRadius+_border)],
-				[skill_x_start+600+500, skill_y_start+(230*i)+90+(optionRadius+_border)],
+				[skill_x_start+650, skill_y_start+(230*i)+90+(optionRadius+_border)],
+				[skill_x_start+650+500, skill_y_start+(230*i)+90-(optionRadius+_border)],
+				[skill_x_start+650+500, skill_y_start+(230*i)+90+(optionRadius+_border)],
 				
-				[skill_x_start+600+500+(optionRadius+_border), skill_y_start+(230*i)+90]
+				[skill_x_start+650+500+(optionRadius+_border), skill_y_start+(230*i)+90]
 			]
 			
 			//RIGHT BOXES
@@ -376,7 +403,19 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 			draw_primitive_end();
 	
 			draw_primitive_begin(pr_trianglestrip);
-			draw_lines(_outline1, border, global._menu_primary);
+			if(i==new_skill_upgrade){
+				if(selectable[i]){
+					draw_lines(_outline1, border, c_white); //highlighted and selectable
+				}else{
+					draw_lines(_outline1, border, c_gray); //highlighted and not selectable
+				}
+			}else{
+				if(selectable[i]){
+					draw_lines(_outline1, border, global._menu_primary); //not highlighted and selectable
+				}else{
+					draw_lines(_outline1, border, global._menu_secondary); //not highlighted and not selectable
+				}
+			}
 			draw_primitive_end();
 	
 			//draw_set_color(global._primary);
@@ -384,8 +423,8 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 			//draw_vertices(_button);
 			//draw_primitive_end();
 			
-			draw_text_ext_transformed(skill_x_start+615, skill_y_start+((i)*230)+50, action.description[i], 40, 600, 0.8, 0.8, image_angle);
-			draw_text_ext_transformed(skill_x_start+615, skill_y_start+((i)*230)+10, action.name[i], 40, 600, 0.8, 0.8, image_angle);
+			draw_text_ext_transformed(skill_x_start+665, skill_y_start+((i)*230)+50, action.description[i], 40, 600, 0.8, 0.8, image_angle);
+			draw_text_ext_transformed(skill_x_start+665, skill_y_start+((i)*230)+10, action.name[i], 40, 600, 0.8, 0.8, image_angle);
 			
 			// cant select skill you already have
 			if(prev_skill==i){
@@ -395,14 +434,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 			}
 			
 
-			if(i==new_skill_upgrade){
-				show_debug_message("draw arrow");
-				if(selectable[i]){
-					draw_sprite_ext(spr_right_arrow, image_index, skill_x_start+525, skill_y_start+(i)*230+75, 1, 1, image_angle, image_blend, 1);
-				}else{
-					draw_sprite_ext(spr_right_arrow_transparent, image_index, skill_x_start+525, skill_y_start+(i)*230+75, 1, 1, image_angle, image_blend, 0.5);
-				}
-			}
+			
 			
 			if(selectable[i]){
 				draw_set_color(c_white);
@@ -410,8 +442,17 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 				draw_set_color(c_gray);
 			}
 			
-			
-			var _pips = make_tp(skill_x_start+1015, skill_y_start+((i)*250)+30, 7*obj_menu.expandAnim, action.cost[i], true);
+			var _cost =  action.cost[i];
+			if(_cost<0){
+				_cost=_cost*-1;
+				draw_set_font(fnt_archivo);
+				draw_set_halign(fa_right);
+				draw_set_color(global._tpBar);
+				draw_text_transformed_colour(skill_x_start+1050, skill_y_start+((i)*230)+5, "+", 0.7, 0.7, 0, global._tpBar, global._tpBar, global._tpBar, global._tpBar, 1);
+				draw_set_font(fnt_chiaro);
+				draw_set_halign(fa_left);
+			}
+			var _pips = make_tp(skill_x_start+1065, skill_y_start+((i)*230)+30, 7*obj_menu.expandAnim, _cost, true);
 
 			draw_set_color(global._tpBar);
 			for (var j = 0; j < array_length(_pips); j++){

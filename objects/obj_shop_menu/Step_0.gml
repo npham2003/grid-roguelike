@@ -51,15 +51,15 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 					audio_play_sound(sfx_buy, 0, false);
 					
 				}
-				if(selector_pos[0]==0&&selector_pos[1]==1&&selectable[4]){ // upgrade skill 1
+				if(selector_pos[0]==0&&selector_pos[1]==1&&selectable[3]){ // upgrade skill 1
 					menu_level=2;
 					character_select_pos=0;
 				}
-				if(selector_pos[0]==1&&selector_pos[1]==1&&selectable[5]){ // upgrade skill 2
+				if(selector_pos[0]==1&&selector_pos[1]==1&&selectable[4]){ // upgrade skill 2
 					menu_level=2;
 					character_select_pos=1;
 				}
-				if(selector_pos[0]==2&&selector_pos[1]==1&&selectable[6]){ // upgrade skill 3
+				if(selector_pos[0]==2&&selector_pos[1]==1&&selectable[5]){ // upgrade skill 3
 					menu_level=2;
 					character_select_pos=2;
 				}

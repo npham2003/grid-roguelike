@@ -10,7 +10,7 @@ new_skill_upgrade=0;
 character_spacing=260;
 upgrade_offset = 0;
 
-skill_x_start = 150;
+skill_x_start = 100;
 skill_y_start = 90;
 
 optionRadius = 80;
