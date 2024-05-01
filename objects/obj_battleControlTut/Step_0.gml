@@ -197,7 +197,7 @@ switch (state) {
 						case 0:
 							obj_menuTut.close_menu();
 							obj_menuTut.enter_text("PRESS ENTER");
-							obj_menuTut.set_text("Enough Running. It's time to fire back.");
+							obj_menuTut.set_text("Enough running. It's time to fire back.");
 							if (key_Enter_pressed) {
 								dialogueLine += 1;
 						}
@@ -213,7 +213,7 @@ switch (state) {
 						
 						case 2:
 							obj_menuTut.close_menu();
-							obj_menuTut.set_text("Use your basic attack (H) to retaliate against the bats.");
+							obj_menuTut.set_text("Use your basic attack (H) to retaliate against the bats. Then press H again to confirm.");
 							obj_menuTut.enter_text("PRESS ENTER");
 							if (key_Enter_pressed) {
 							enemy_order = 0;
