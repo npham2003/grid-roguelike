@@ -4602,33 +4602,44 @@ global.encounters = [
 		},
 		
 	],
+	//[
+	//	{
+	//		info: global.enemies[4],
+	//		grid: [9, 1]
+	//	},
+	//	{
+	//		info: global.enemies[4],
+	//		grid: [9, 3]
+	//	},
+	//	{
+	//		info: global.enemies[2],
+	//		grid: [8, 2]
+	//	},
+	//	{
+	//		info: global.enemies[2],
+	//		grid: [8, 4]
+	//	},
+	//	{
+	//		info: global.enemies[2],
+	//		grid: [8, 0]
+	//	},
+	//	{
+	//		info: global.enemies[1],
+	//		grid: [7, 2]
+	//	},
+	//	{
+	//		info: global.enemies[1],
+	//		grid: [8, 2]
+	//	}
+		
+	//],
 	[
 		{
-			info: global.enemies[4],
-			grid: [9, 1]
-		},
-		{
-			info: global.enemies[4],
-			grid: [9, 3]
-		},
-		{
-			info: global.enemies[2],
-			grid: [8, 2]
-		},
-		{
-			info: global.enemies[2],
-			grid: [8, 4]
-		},
-		{
-			info: global.enemies[2],
-			grid: [8, 0]
-		},
-		{
 			info: global.enemies[1],
-			grid: [7, 2]
+			grid: [8, 3]
 		},
 		{
-			info: global.enemies[1],
+			info: global.enemies[0],
 			grid: [8, 2]
 		}
 		

@@ -1,6 +1,6 @@
 if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	layer_set_visible(lay_id, true);
-	
+
 	draw_set_font(fnt_archivo);
 	draw_set_halign(fa_center);
 	draw_text(actual_x,50,"SHOP");
@@ -9,6 +9,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	
 	
 	show_debug_message(selectable);
+
 	// background and border
 	if(menu_level<=1){ //if this is not the skill select screen
 		//draw_set_color(global._aspect_bars);
@@ -419,7 +420,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 			draw_set_halign(fa_left);
 		}
 		var _pips = make_tp(skill_x_start+415, skill_y_start+(230)+30, 7*obj_menu.expandAnim, _cost, true);
-		show_debug_message(_cost);
+		//show_debug_message(_cost);
 	
 		draw_set_color(global._tpBar);
 		for (var j = 0; j < array_length(_pips); j++){
