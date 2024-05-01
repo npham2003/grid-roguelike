@@ -747,10 +747,8 @@ switch (state) {
 
 #region Battle End
 	case BattleState.BattleEnd:
-		tp_bonus=0;
-		for (var i = 0; i < array_length(player_units); i++) {
-			player_units[i].attack_bonus=0;
-		}
+		
+		
 		if(in_animation){
 			break;
 		}
@@ -774,6 +772,12 @@ switch (state) {
 				change_state(BattleState.PlayerUpgrade);
 			}else{
 				change_state(BattleState.BattleStart);
+			}
+			if(battle_progress%5==0){
+				tp_bonus=0;
+				for (var i = 0; i < array_length(player_units); i++) {
+					player_units[i].attack_bonus=0;
+				}
 			}
 		}else{
 			obj_gridCreator.reset_highlights_cursor();
