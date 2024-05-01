@@ -1,6 +1,6 @@
 if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	layer_set_visible(lay_id, true);
-
+	
 	draw_set_font(fnt_archivo);
 	draw_set_halign(fa_center);
 	draw_set_color(c_white);

@@ -1,3 +1,6 @@
+
+
+
 #region progress bar
 draw_line_width_color(room_width/2-progress_length/2,progress_height,room_width/2+progress_length/2,progress_height,progress_thickness,global._primary,global._primary);
 draw_set_color(global._characterPrimary);
@@ -101,7 +104,7 @@ if((obj_battleControl.state==BattleState.PlayerAiming||obj_battleControl.state==
 #region buttons
 var _buttonScale = 5;
 for (var i = skills; i >= 0; i--) {
-	
+
 	#region setup
 	var _border = border;
 	var _outline1 = [
@@ -127,13 +130,13 @@ for (var i = skills; i >= 0; i--) {
 		[menuX[i]+(optionRadius+_border), rootY]
 	]
 	#endregion
-	
+
 	#region draw buttons
 	draw_set_color(c_black);
 	draw_primitive_begin(pr_trianglestrip);
 	draw_vertices(_outline2);
 	draw_primitive_end();
-	
+
 	draw_set_color(global._characterPrimary);
 	draw_primitive_begin(pr_trianglestrip);
 	draw_vertices(_outline1);
@@ -145,23 +148,28 @@ for (var i = skills; i >= 0; i--) {
 			draw_set_color(skill_used_color);
 		}
 	}
+
 	draw_primitive_begin(pr_trianglestrip);
 	draw_vertices(_button);
 	draw_primitive_end();
 	#endregion
 	
 	#region draw tp
+	
+
 	var _cost = tpCost[i];
 	if(_cost<0){
 		_cost=_cost*-1;
 		draw_set_halign(fa_right);
 		draw_set_font(fnt_archivo);
+	
 		draw_text_transformed_colour(menuX[i] - expandAnim*80, menuY[i] - 38*expandAnim, "+", 0.7, 0.7, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
 		draw_set_font(fnt_chiaro);
 		draw_set_halign(fa_left);
 	}
 
 	var _pips = make_tp(menuX[i] - expandAnim*70, menuY[i] - 15*expandAnim, 7*expandAnim, _cost, true);
+
 
 	draw_set_color(global._characterSecondary);
 	for (var j = 0; j < array_length(_pips); j++){
@@ -174,7 +182,7 @@ for (var i = skills; i >= 0; i--) {
 	//text			player_unit.actions[i].name[player_unit.upgrades[i]]+ ": " +
 	if (i < 5){
 		if(i==4){
-			
+	
 			draw_set_halign(fa_right);
 			draw_set_font(fnt_archivo);
 			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+string_width("L"), menuY[i]-30, global.controls[i], 0.6, 0.6, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, waitAlpha);
@@ -184,6 +192,7 @@ for (var i = skills; i >= 0; i--) {
 			draw_set_font(fnt_chiaro);
 			
 		}else{
+
 			draw_set_font(fnt_archivo);
 			draw_text_transformed_colour(menuX[i+1]-expandAnim*25, menuY[i]-30, global.controls[i], 0.6, 0.6, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
 			draw_set_halign(fa_right);
@@ -242,6 +251,7 @@ if (open) {
 #region party tp
 var _pips = make_tp(rootX+120, rootY-70, 15, obj_battleControl.tp_max, false);
 for (var i = 0; i < array_length(_pips); ++i){
+
 	draw_primitive_begin(pr_trianglestrip);
 	//draw_set_color(global._tpBorder);
 	//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 10*expandAnim));
@@ -265,6 +275,7 @@ for (var i = 0; i < array_length(_pips); ++i){
 var _pips = make_tp(rootX+120, rootY-70, 15, obj_battleControl.tp_current, false);
 //show_debug_message(string(obj_battleControl.tp_current));
 for (var i = 0; i < array_length(_pips); ++i){
+
 	draw_primitive_begin(pr_trianglestrip);
 	draw_set_color(global._tpBorder);
 	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 6));
@@ -309,7 +320,7 @@ gpu_set_blendenable(false);
 
 gpu_set_colorwriteenable(false, false, false, true);
 draw_set_alpha(0);
-draw_rectangle(imgX-150, imgY-150, imgX+160, imgY+100, false); //invisible rectangle
+draw_rectangle(imgX-170, imgY-300, imgX+160, imgY+100, false); //invisible rectangle
 
 //mask
 draw_set_alpha(portraitAlpha);
@@ -334,6 +345,7 @@ gpu_set_alphatestenable(false);
 draw_set_alpha(1);
 gpu_set_blendmode(bm_normal);
 #endregion
+
 
 #region gold
 draw_primitive_begin(pr_trianglestrip);
