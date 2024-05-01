@@ -33,6 +33,7 @@
     {"name":"skill_teleport_enemy_3","order":5,"path":"scripts/skill_teleport_enemy_3/skill_teleport_enemy_3.yy",},
     {"name":"skill_teleport_self_2","order":1,"path":"scripts/skill_teleport_self_2/skill_teleport_self_2.yy",},
     {"name":"skill_teleport_self_3","order":2,"path":"scripts/skill_teleport_self_3/skill_teleport_self_3.yy",},
+    {"name":"bgm_gather_under_night","order":16,"path":"sounds/bgm_gather_under_night/bgm_gather_under_night.yy",},
     {"name":"bgm_tutorialBGM","order":1,"path":"sounds/bgm_tutorialBGM/bgm_tutorialBGM.yy",},
     {"name":"bgm_xenoblade_x_title","order":15,"path":"sounds/bgm_xenoblade_x_title/bgm_xenoblade_x_title.yy",},
     {"name":"sfx_buy","order":10,"path":"sounds/sfx_buy/sfx_buy.yy",},
@@ -49,7 +50,6 @@
     {"name":"sfx_teleport_windup","order":4,"path":"sounds/sfx_teleport_windup/sfx_teleport_windup.yy",},
     {"name":"sfx_teleport","order":6,"path":"sounds/sfx_teleport/sfx_teleport.yy",},
     {"name":"sfx_vine_boom","order":11,"path":"sounds/sfx_vine_boom/sfx_vine_boom.yy",},
-    {"name":"bgm_gather_under_night","order":16,"path":"sounds/bgm_gather_under_night/bgm_gather_under_night.yy",},
     {"name":"all_arrow_sprites","order":10,"path":"sprites/all_arrow_sprites/all_arrow_sprites.yy",},
     {"name":"enemy_bg","order":5,"path":"sprites/enemy_bg/enemy_bg.yy",},
     {"name":"menu_bg","order":1,"path":"sprites/menu_bg/menu_bg.yy",},
@@ -117,5 +117,6 @@
     {"name":"spr_turret_idle","order":3,"path":"sprites/spr_turret_idle/spr_turret_idle.yy",},
     {"name":"spr_Wulfric_full","order":9,"path":"sprites/spr_Wulfric_full/spr_Wulfric_full.yy",},
     {"name":"Sprite82","order":3,"path":"sprites/Sprite82/Sprite82.yy",},
+    {"name":"spr_gun_shop","order":19,"path":"sprites/spr_gun_shop/spr_gun_shop.yy",},
   ],
 }

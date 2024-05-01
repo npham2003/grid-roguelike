@@ -1,3 +1,32 @@
+#region progress bar
+draw_line_width_color(room_width/2-progress_length/2,progress_height,room_width/2+progress_length/2,progress_height,progress_thickness,global._primary,global._primary);
+draw_set_color(global._characterPrimary);
+//draw_circle(player_marker,progress_height,15, false);
+draw_primitive_begin(pr_trianglestrip);
+draw_vertices(make_diamond(player_marker,progress_height,15));
+draw_primitive_end();
+draw_set_color(global._primary);
+
+draw_set_font(fnt_archivo);
+
+for(i=0;i<5;i++){
+	draw_set_color(global._primary);
+	draw_primitive_begin(pr_trianglestrip);
+	draw_vertices(make_diamond(room_width/2-progress_length/2+(progress_length/(battles_in_room-1)*i),progress_height,10));
+	draw_primitive_end();
+	//draw_circle(room_width/2-progress_length/2+(progress_length/(battles_in_room-1)*i),progress_height,10, false);
+	if(obj_battleControl.battle_progress%5==i){
+		draw_set_alpha(tp_opacity*0.5);
+		draw_set_color(c_white);
+		draw_primitive_begin(pr_trianglestrip);
+		draw_vertices(make_diamond(room_width/2-progress_length/2+(progress_length/(battles_in_room-1)*i),progress_height,10));
+		draw_primitive_end();
+		//draw_circle(room_width/2-progress_length/2+(progress_length/(battles_in_room-1)*i),progress_height,10, false);
+	}
+	draw_set_alpha(1);
+}
+#endregion
+
 #region confirm
 if (confirm) {
 	var c_border = border;
@@ -41,18 +70,38 @@ if (confirm) {
 	draw_primitive_begin(pr_trianglestrip);
 	draw_vertices(c_button);
 	draw_primitive_end();
-	
+	draw_set_font(fnt_archivo);
 	draw_set_color(global._characterSecondary);
-	draw_text_ext_transformed(confirmX[0]+20, 615, "Confirm: Enter", 30, confirmY-160, 0.7, 0.7, 0);
+	draw_text_ext_transformed(confirmX[0]+50, 625, "Confirm: "+global.controls[player_unit.skill_used], 30, confirmY-160, 0.5, 0.5, 0);
 	
 	//draw_text_color(550, );
 }
 #endregion
 
+#region back
+if (back) {
+	
+	draw_set_color(global._characterPrimary);
+	draw_rectangle(700, 650, backX, 620, false);
+	
+	draw_set_font(fnt_chiaro_small);
+	draw_set_color(c_white);
+	draw_text(710, rootY-105, "Back: Tab");
+	
+	draw_set_font(fnt_chiaro);
+}
+#endregion
+
+if((obj_battleControl.state==BattleState.PlayerAiming||obj_battleControl.state==BattleState.PlayerMoving||obj_battleControl.state==BattleState.PlayerTakingAction)||!open){
+	skills=6;
+}else{
+	skills=5;
+}
+
 #region buttons
 var _buttonScale = 5;
-for (var i = skills - 1; i >= 0; i--) {
-
+for (var i = skills; i >= 0; i--) {
+	
 	#region setup
 	var _border = border;
 	var _outline1 = [
@@ -91,13 +140,28 @@ for (var i = skills - 1; i >= 0; i--) {
 	draw_primitive_end();
 	
 	draw_set_color(global._primary);
+	if(obj_battleControl.state==BattleState.PlayerAiming){
+		if(i-1==player_unit.skill_used){
+			draw_set_color(skill_used_color);
+		}
+	}
 	draw_primitive_begin(pr_trianglestrip);
 	draw_vertices(_button);
 	draw_primitive_end();
 	#endregion
 	
 	#region draw tp
-	var _pips = make_tp(menuX[i] - expandAnim*70, menuY[i] + 15*expandAnim, 7*expandAnim, tpCost[i], true);
+	var _cost = tpCost[i];
+	if(_cost<0){
+		_cost=_cost*-1;
+		draw_set_halign(fa_right);
+		draw_set_font(fnt_archivo);
+		draw_text_transformed_colour(menuX[i] - expandAnim*80, menuY[i] - 38*expandAnim, "+", 0.7, 0.7, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+		draw_set_font(fnt_chiaro);
+		draw_set_halign(fa_left);
+	}
+
+	var _pips = make_tp(menuX[i] - expandAnim*70, menuY[i] - 15*expandAnim, 7*expandAnim, _cost, true);
 
 	draw_set_color(global._characterSecondary);
 	for (var j = 0; j < array_length(_pips); j++){
@@ -108,16 +172,40 @@ for (var i = skills - 1; i >= 0; i--) {
 	#endregion
 
 	//text			player_unit.actions[i].name[player_unit.upgrades[i]]+ ": " +
-	if i < 4 draw_text_transformed_colour(menuX[i+1]-expandAnim*25, menuY[i]-60, global.controls[i], 1, 1, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+	if (i < 5){
+		if(i==4){
+			
+			draw_set_halign(fa_right);
+			draw_set_font(fnt_archivo);
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+string_width("L"), menuY[i]-30, global.controls[i], 0.6, 0.6, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, waitAlpha);
+			draw_set_halign(fa_right);
+			draw_set_font(fnt_chiaro_small);
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+20, menuY[i], skill_names[i+1], 0.7, 0.7, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, waitAlpha);
+			draw_set_font(fnt_chiaro);
+			
+		}else{
+			draw_set_font(fnt_archivo);
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25, menuY[i]-30, global.controls[i], 0.6, 0.6, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+			draw_set_halign(fa_right);
+			draw_set_font(fnt_chiaro_small);
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+20, menuY[i], skill_names[i+1], 0.7, 0.7, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+			draw_set_font(fnt_chiaro);
+		}
+	}
+	
+	draw_set_halign(fa_left);
+	
 }
 #endregion
 
 if (open) {
 #region name
+	draw_set_font(fnt_archivo);
 	//var pc;
 	//pc = (player_unit.hp / player_unit.hpMax) * 100;
 	//draw_healthbar(menuX[0]-70, menuY[0]+3, menuX[0], menuY[0]-3, pc, global._primary, global._characterSecondary, global._characterSecondary, 0, true, true)
-	draw_text_transformed(menuX[0]-expandAnim*90, menuY[0]-expandAnim*25, player_unit.name, 0.5, 0.5, 0);
+	draw_text_transformed(menuX[0]-expandAnim*100, menuY[0]-expandAnim*15, player_unit.name, 0.4, 0.4, 0);
+	draw_set_font(fnt_chiaro);
 	//draw_text_transformed(menuX[0]+50, menuY[0]-35, "HP: " + string(obj_player.hp), 0.8, 0.8, 0);
 #endregion
 
@@ -209,7 +297,8 @@ draw_primitive_begin(pr_trianglestrip);
 draw_vertices(make_diamond(imgX,imgY,playerDim+5));
 draw_primitive_end();
 
-draw_set_color(global._primary);
+if (open) draw_set_color(global._primary);
+else draw_set_color(global._aspect_bars);
 draw_primitive_begin(pr_trianglestrip);
 draw_vertices(make_diamond(imgX,imgY,playerDim));
 draw_primitive_end();
@@ -244,10 +333,6 @@ draw_sprite_ext(player_unit.portrait, 0, imgX, imgY-20, -0.55, 0.55, 0, c_white,
 gpu_set_alphatestenable(false);
 draw_set_alpha(1);
 gpu_set_blendmode(bm_normal);
-
-
-
-
 #endregion
 
 #region gold
@@ -264,16 +349,27 @@ draw_set_color(global._primary);
 draw_text_transformed(75, 20, "G    "+ string(obj_battleControl.gold), 0.8, 0.8, 0);
 #endregion
 
+draw_set_halign(fa_right);
+draw_text_transformed(room_width-50, 20, "Floor "+ string(floor(obj_battleControl.battle_progress/5)+1)+"/"+string(string(floor(array_length(global.encounters)/5))), 0.8, 0.8, 0);
+draw_text_transformed(room_width-50, 50, "Turn "+ string(obj_battleControl.turn_count), 0.8, 0.8, 0);
+draw_set_halign(fa_left);
+
 #region skill details
-draw_set_font(fnt_chiaro);
+draw_set_font(fnt_chiaro_small);
 draw_set_color(c_white);
-draw_text_ext(300, 10, _text, 40, 1000);
+
+draw_text_ext(500, rootY-105, _text, 40, 1000);
+draw_set_font(fnt_chiaro_small);
+if(obj_battleControl.state==BattleState.PlayerAiming){
+	draw_text_ext(250, 90, skill_description, 25, 1100);
+}
+draw_set_font(fnt_chiaro);
 #endregion
 
 #region turn banner
 if (turn_banner_animation_started) {
 	turn_life--;
-	show_debug_message(turn_life);
+	//show_debug_message(turn_life);
 	draw_set_color(global._primary);
 	
 	if (turn_life > 50) {
@@ -309,3 +405,27 @@ if (ask_end){
 }
 draw_set_halign(fa_left);
 #endregion
+
+#region win
+if (win == 1){
+	draw_set_color(c_black);
+	draw_line_width(lineX, room_height/2, room_width, room_height/2, line_width);
+	
+	if (winlose_anim_complete) {
+		draw_text_transformed(room_width/2, room_height/2, "WIN", 0.8, 0.8, 0);
+		
+	}
+}
+#endregion
+
+#region lose
+if (win == 2){
+	draw_set_color(c_black);
+	draw_line_width(lineX, room_height/2, room_width, room_height/2, line_width);
+	
+	if (winlose_anim_complete) {
+		draw_text_transformed(room_width/2, room_height/2, "YOU DIED", 0.8, 0.8, 0);
+	}
+}
+#endregion
+

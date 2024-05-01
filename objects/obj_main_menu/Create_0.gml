@@ -12,7 +12,7 @@ initial_bg_vspeed=layer_get_vspeed(background_layer);
 
 current_background_color=global._characterSecondary;
 next_background_color=global._characterSecondary;
-menu_colors=[global._characterSecondary,global._characterPrimary, c_maroon];
+menu_colors=[global._menu_secondary,global._menu_primary, c_maroon];
 
 
 line_spacing=sprite_get_height(spr_diamond_base) * 15/2;;
@@ -50,6 +50,13 @@ diamond_outline=#009900;
 initial_character_select = -2000;
 actual_character_select = -2000;
 character_select=200;
+portrait_flash=[false,false,false,false,false,false];
+portrait_flash_opacity=[1,1,1,1,1,1];
+portrait_flash_times=[2.376,2.480,2.573,2.832,3.121,3.298, 4.683];
+portrait_final_flash=false;
+portrait_fill_flash=0;
+beat_increment=0;
+beat_length=0.75;
 
 initial_skill_x = 2000;
 actual_skill_x=2000;
@@ -60,13 +67,17 @@ selected = [false, false, false, false, false, false];
 curr=0;
 party=[-1,-1,-1];
 
-audio_play_sound(bgm_xenoblade_x_title,0,true);
+
+
+audio_play_sound(bgm_xenoblade_x_title,0,true,0.5);
 
 turn_opacity_increase=true;
 turn_opacity=50;
 turn_text_anim = 0;
 turn_life = 100;
 turn_banner_animation_started=false;
+
+css_sound_id=pointer_null;
 
 website_urls=["https://twitter.com/AqoursBaelz/", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://wsl7779.itch.io", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"];
 
@@ -164,7 +175,7 @@ make_tp = function(_x, _y, _spacing, _len, is_rows) {
 				}
 			}
 			//show_debug_message(string(((actual - initial)*power(-1,i))));
-			 _res[i] = [_x  + (i)*_spacing, _y   + _spacing*(i%2) + _y_offset];
+			 _res[i] = [_x  + (i)*_spacing, _y  - _spacing*(i%2) + _y_offset];
 			 
 		}
 
@@ -180,7 +191,26 @@ draw_vertices = function(vertices){
 
 draw_lines = function(vertices, _width, _color){
 	for (var i = 0; i < array_length(vertices); ++i) {
-		draw_line_width_color(vertices[i][0], vertices[i][1], vertices[(i+1)%array_length(vertices)][0], vertices[(i+1)%array_length(vertices)][1], _width, _color, _color);
+		_x_1=vertices[i][0];
+		_y_1=vertices[i][1];
+		_x_2=vertices[(i+1)%array_length(vertices)][0];
+		_y_2=vertices[(i+1)%array_length(vertices)][1];
+		_offset=1;
+		if(_x_1<_x_2){
+			_x_1-=_offset;
+			_x_2+=_offset;
+		}else if(_x_1>_x_2){
+			_x_1+=_offset;
+			_x_2-=_offset;
+		}
+		if(_y_1<_y_2){
+			_y_1-=_offset;
+			_y_2+=_offset;
+		}else if(_y_2<_y_1){
+			_y_1+=_offset;
+			_y_2-=_offset;
+		}
+		draw_line_width_color(_x_1, _y_1, _x_2, _y_2, _width, _color, _color);
 	}
 }
 
@@ -209,32 +239,5 @@ text_outline = function(){
 
 	draw_text_ext(argument0,argument1,argument2,argument6,argument7);	
 	
-	
-}
-
-text_outline_small = function(){
-	//x,y: Coordinates to draw
-	//str: String to draw
-	//arugment3 = outwidth: Width of outline in pixels
-	//argument4 = outcol: Colour of outline (main text draws with regular set colour)
-	//argument5 = outfidelity: Fidelity of outline (recommended: 4 for small, 8 for medium, 16 for larger. Watch your performance!)
-	//argument6 = separation, for the draw_text_EXT command.
-	//argument7 = width for the draw_text_EXT command.
-
-
-	//2,c_dkgray,4,20,500 <Personal favorite preset. (For fnt_3)
-	var dto_dcol=draw_get_color();
-
-	draw_set_color(argument4);
-	
-	for(var dto_i=45; dto_i<405; dto_i+=360/argument5)
-	{
-	  //draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);
-	  draw_text_ext(argument0+round(lengthdir_x(argument3,dto_i)),argument1+round(lengthdir_y(argument3,dto_i)),argument2,argument6,argument7);
-	}
-
-	draw_set_color(dto_dcol);
-
-	draw_text_ext(argument0,argument1,argument2,argument6,argument7);	
 	
 }

@@ -3,6 +3,7 @@
 layer_background_blend(background, current_background_color);
 current_background_color = merge_color(current_background_color, next_background_color, 0.1);
 
+
 if(funny_opacity>0){
 	funny_opacity-=0.05;
 }
@@ -54,17 +55,19 @@ if(transition_in){
 				sub_menu=2;
 				transition_in=true;
 				audio_pause_sound(bgm_xenoblade_x_title);
-				audio_play_sound(bgm_gather_under_night,0,true,0.7);
+				css_sound_id=audio_play_sound(bgm_gather_under_night,0,true,0.6);
 				turn_life=100;
 				turn_banner_animation_started=true;
 				turn_opacity=100;
 			
 				turn_text_anim = 0;
 				turn_life = 100;
-				
+				portrait_flash=[false,false,false,false,false,false];
+				portrait_flash_opacity=[0,0,0,0,0,0];
+				portrait_final_flash=false;
 				transition_in=true;
-				audio_pause_sound(bgm_xenoblade_x_title);
-				audio_play_sound(bgm_gather_under_night,0,true,0.7);
+				beat_increment=0;
+				
 				
 			}
 			if(selector_pos==1){
@@ -88,7 +91,9 @@ if(transition_in){
 		if(actual_credits_x>1900){
 			sub_menu=0;
 			transition_in=true;
+			selector_pos=2;
 		}
+		
 		
 	}
 	else if(sub_menu==2){
@@ -130,9 +135,8 @@ switch(sub_menu){
 				if(keyboard_check_pressed(vk_enter)){
 					
 					if(selector_pos==0){
-						audio_play_sound(sfx_menu_next, 0, false, 1, 0);
+						audio_play_sound(sfx_menu_next, 0, false, 0.7, 0);
 						
-						audio_play_sound(sfx_menu_next, 0, false, 1, 0);
 						
 						next_background_color=menu_colors[2];
 						
@@ -140,16 +144,16 @@ switch(sub_menu){
 						
 					}
 					if(selector_pos==1){
-						audio_play_sound(sfx_game_start, 0, false, 1, 0);
+						audio_play_sound(sfx_game_start, 0, false, 0.7, 0);
 					}
 					
 					if(selector_pos==2){
-						audio_play_sound(sfx_menu_next, 0, false, 1, 0);
+						audio_play_sound(sfx_menu_next, 0, false, 0.7, 0);
 						next_background_color=menu_colors[1];
 					}
 					if(selector_pos==3){
 						funny_opacity=1;
-						audio_play_sound(sfx_vine_boom, 0, false, 1, 0);
+						audio_play_sound(sfx_vine_boom, 0, false, 0.7, 0);
 					}else{
 						transition_in=false;
 					}
@@ -179,7 +183,7 @@ switch(sub_menu){
 						next_background_color=menu_colors[0];
 						audio_play_sound(sfx_menu_back, 0, false, 0.7, 0);
 					}else{
-						audio_play_sound(sfx_menu_next, 0, false, 1, 0);
+						audio_play_sound(sfx_menu_next, 0, false, 0.7, 0);
 						url_open_ext(website_urls[selector_pos],"_blank");
 					}
 				}
@@ -215,7 +219,7 @@ switch(sub_menu){
 						selected[selector_pos]=true;
 						
 						if(curr!=2){
-							audio_play_sound(sfx_menu_next, 0, false, 1, 0);
+							audio_play_sound(sfx_menu_next, 0, false, 0.7, 0);
 						}
 					}else{
 						audio_play_sound(sfx_menu_back, 0, false, 0.7, 0);
@@ -277,6 +281,40 @@ switch(sub_menu){
 					}
 				}
 			}
+			for(i=0;i<array_length(portrait_flash);i++){
+				if(portrait_flash_times[i]<audio_sound_get_track_position(css_sound_id) && !portrait_flash[i]){
+					portrait_flash[i]=true;
+					portrait_flash_opacity[i]=1;
+				}
+				
+				if(portrait_flash_opacity[i]>0){
+					portrait_flash_opacity[i]-=0.02;
+				}
+			}
+			if(portrait_flash_times[6]<audio_sound_get_track_position(css_sound_id)&&portrait_flash_opacity[5]==0&&!portrait_final_flash){
+				for(i=0;i<array_length(portrait_flash_opacity);i++){
+				
+				
+				
+					portrait_flash_opacity[i]=1;
+				
+				}
+				portrait_final_flash=true;
+			}
+			if(portrait_final_flash){
+				if(floor(audio_sound_get_track_position(css_sound_id)/beat_length)==0){
+					beat_increment=0;
+				}
+				if(floor(audio_sound_get_track_position(css_sound_id)/beat_length)>beat_increment){
+					beat_increment=floor(audio_sound_get_track_position(css_sound_id)/beat_length);
+					portrait_fill_flash=0.9;
+				}
+				
+			}
+			if(portrait_fill_flash>0){
+				portrait_fill_flash-=0.05;
+			}
+			
 			break;
 	
 }
