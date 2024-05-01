@@ -7,13 +7,13 @@ character_select_pos=0;
 skill_select_pos=0;
 
 new_skill_upgrade=0;
-character_spacing=260;
+character_spacing=300;
 upgrade_offset = 0;
 
-skill_x_start = 150;
-skill_y_start = 30;
+skill_x_start = 100;
+skill_y_start = 90;
 
-optionRadius = 50;
+optionRadius = 80;
 border = 5;
 
 descriptor_text = ["Heal 1 character for 1 HP",
@@ -23,10 +23,10 @@ descriptor_text = ["Heal 1 character for 1 HP",
 					"Upgrade a skill on this character",
 					"Upgrade a skill on this character",];
 menu_level=0;
-
 cost = [2, 8, 5, 6, 6, 6,];
-
 selectable = [true, true, true, true, true, true];
+art = []
+
 
 playerDim = sprite_get_height(spr_diamond_base) * 15/2;
 
@@ -138,3 +138,8 @@ draw_lines = function(vertices, _width, _color){
         draw_line_width_color(_x_1, _y_1, _x_2, _y_2, _width, _color, _color);
     }
 }
+
+lay_id = layer_get_id("Shop_BG");
+background = layer_background_get_id(lay_id);
+layer_background_blend(background, global._aspect_bars);
+layer_set_visible(lay_id, false);

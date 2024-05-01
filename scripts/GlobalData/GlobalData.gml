@@ -89,7 +89,7 @@ global.actionLibrary = {
 	},
 	beam: {
 		name: ["Beam", "Big Beam", "Repel Beam"], 
-		description: ["Does 2 damage to all targets in a row", "Does 2 damage to all targets in front of you and in surrounding rows.\nDouble damage if target is in the same row", "Does 2 damage to all targets in a row and pushes them back 1 tile."],
+		description: ["Does 2 damage to all targets in a row", "Does 2 damage to all targets in current and adjacent rows.\nDouble damage if in the same row", "Does 2 damage to all targets in a row and pushes them back 1 tile."],
 		cost: [3, 5, 4],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
