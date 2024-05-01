@@ -787,7 +787,7 @@ switch (state) {
 			}
 		}else{
 			obj_gridCreator.reset_highlights_cursor();
-			obj_menu.set_text("Press any key to restart");
+			//obj_menu.set_text("Press any key to restart");
 			audio_stop_sound(current_music);
 				music_track = bgm_the_voice_someone_calls;
 				//music_track = global.floor_music[2][0];
@@ -915,11 +915,19 @@ switch (state) {
 #region Player beats all 15 levels
 	case BattleState.GameWin:
 		obj_menu.win = 1;
+		if (keyboard_check_pressed(vk_anykey)) {
+			audio_stop_sound(current_music)
+			room_goto(0);
+		}
 		break;
 #endregion
 #region Player loses
 	case BattleState.GameLose:
 		obj_menu.win = 2;
+		if (keyboard_check_pressed(vk_anykey)) {
+			audio_stop_sound(current_music)
+			room_goto(0);
+		}
 		break;
 		
 #endregion
