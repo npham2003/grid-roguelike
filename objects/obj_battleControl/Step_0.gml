@@ -750,6 +750,7 @@ switch (state) {
 			if(battle_progress==array_length(global.encounters)){
 				battle_progress=0;
 				change_state(BattleState.GameWin);
+				break;
 			}
 			tp_current=tp_max;
 			if(battle_progress < array_length(global.encounters) && (battle_progress%5==0||battle_progress%2==0)){
