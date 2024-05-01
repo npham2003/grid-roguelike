@@ -4245,8 +4245,26 @@ global.tutorialenc = [
 			grid: [9, 1]
 		},
 		{
+			info: global.enemies[0],
+			grid: [7, 4]
+		},
+		{
+			info: global.enemies[0],
+			grid: [8, 4]
+		},
+		{
+			info: global.enemies[0],
+			grid: [9, 4]
+		},
+	],
+	[
+	{
 			info: global.enemies[1],
-			grid: [5, 3]
+			grid: [5, 2]
+		},
+		{
+			info: global.enemies[1],
+			grid: [6, 1]
 		},
 		{
 			info: global.enemies[1],
@@ -4258,11 +4276,7 @@ global.tutorialenc = [
 		},
 		{
 			info: global.enemies[1],
-			grid: [6, 4]
-		},
-		{
-			info: global.enemies[1],
-			grid: [7, 3]
+			grid: [7, 2]
 		}
 	]
 ]

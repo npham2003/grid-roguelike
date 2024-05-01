@@ -1,5 +1,5 @@
 #region confirm
-if (confirm) {
+if (confirm && obj_battleControlTut.teachingBasic == true) {
 	var c_border = border;
 	var c_outline1 = [
 		[confirmX[0]-(confirmRadius+c_border), confirmY],

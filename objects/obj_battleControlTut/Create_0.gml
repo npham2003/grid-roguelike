@@ -24,7 +24,9 @@ gun_spawned = false;
 gun_array = [];
 teachingBasic = false;
 teachingSkills = false;
+teachingMortar = false;
 skillTaught = false;
+dialogueLine = 0;
 
 enemy_check_death = 0;
 checking_death = false;
