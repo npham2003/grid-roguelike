@@ -31,6 +31,7 @@ switch (state) {
 	
 #region Battle Start
 	case BattleState.BattleStart:
+		obj_menu.win = 0;
 		for (var i = 0; i < array_length(player_units); i++) {
 			
 			
@@ -765,7 +766,6 @@ switch (state) {
 				}
 			}
 		}else{
-			obj_menu.win = 2;
 			obj_gridCreator.reset_highlights_cursor();
 			obj_menu.set_text("Press any key to restart");
 			change_state(BattleState.GameLose);
@@ -889,10 +889,12 @@ switch (state) {
 
 #region Player beats all 15 levels
 	case BattleState.GameWin:
+		obj_menu.win = 1;
 		break;
 #endregion
 #region Player loses
 	case BattleState.GameLose:
+		obj_menu.win = 2;
 		break;
 		
 #endregion
