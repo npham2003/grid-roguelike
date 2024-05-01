@@ -32,7 +32,6 @@ switch (state) {
 #region Battle Start
 	case BattleState.BattleStart:
 		obj_menu.win = 0;
-		battle_progress=5;
 		if(battle_progress%5==0){
 			
 			audio_stop_sound(current_music);

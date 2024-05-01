@@ -651,6 +651,10 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	//reset draw
 	draw_set_color(c_white);
 	draw_set_alpha(1);
+	draw_set_color(c_black);
+	text_outline(580,700, "WASD - Move Cursor    Enter - Select    Tab - Back", 1, c_white, 8, 100000, 1000000);
+	draw_set_color(c_white);
+	
 }
 else {
 	layer_set_visible(lay_id, false);
