@@ -752,17 +752,14 @@ switch (state) {
 			}
 			if(battle_progress==array_length(global.encounters)){
 				battle_progress=0;
+				change_state(BattleState.GameWin);
 			}
 			tp_current=tp_max;
 			change_state(BattleState.PlayerUpgrade);
 		}else{
 			obj_gridCreator.reset_highlights_cursor();
 			obj_menu.set_text("Press any key to restart");
-			if(keyboard_check_pressed(vk_anykey)){
-				obj_gridCreator.reset_highlights_cursor();
-				obj_menu.set_text("Press any key to restart");
-				room_goto_previous();
-			}
+			change_state(BattleState.GameLose);
 			
 		}
 		break;
@@ -873,6 +870,14 @@ switch (state) {
 			
 		}
 		break;
+	
+		
 #endregion
+#region Player beats all 15 levels
+	case BattleState.GameWin:
+		break;
+#region Player loses
+	case BattleState.GameWin:
+		break;
 
 };
