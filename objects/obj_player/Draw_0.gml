@@ -36,7 +36,7 @@ for (var i = 1; i < array_length(_pips); ++i){
 	draw_primitive_end();
 }
 
-for (var i = array_length(_pips)-1; i >= array_length(_pips)-obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._danger_number &&i>=0; --i){
+for (var i = array_length(_pips)-1; i >= array_length(_pips)-obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._danger_number &&i>0; --i){
 	draw_primitive_begin(pr_trianglestrip);
 		
 	draw_set_color(c_black);
