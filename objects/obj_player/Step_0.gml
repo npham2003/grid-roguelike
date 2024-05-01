@@ -46,6 +46,18 @@ if(teleporting==0){
 	prev_grid[1]=grid_pos[1];
 }
 
+if(hp_opacity_increase){
+	hp_opacity+=0.01;	
+}else{
+	hp_opacity-=0.01;
+}
+
+if(hp_opacity>0.6){
+	hp_opacity_increase=false;	
+}
+if(hp_opacity<0.1){
+	hp_opacity_increase=true;	
+}
 
 depth=layer_get_depth("Units")-grid_pos[1];
 //show_debug_message("Current: ({0},{1}) Prev: ({2},{3})", grid_pos[0], grid_pos[1], prev_grid[0], prev_grid[1]);

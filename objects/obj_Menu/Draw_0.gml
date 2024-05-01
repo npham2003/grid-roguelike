@@ -43,16 +43,73 @@ if (confirm) {
 	draw_primitive_end();
 	
 	draw_set_color(global._characterSecondary);
-	draw_text_ext_transformed(confirmX[0]+20, 615, "Confirm: Enter", 30, confirmY-160, 0.7, 0.7, 0);
+	draw_text_ext_transformed(confirmX[0]+50, 615, "Confirm: "+global.controls[player_unit.skill_used], 30, confirmY-160, 0.7, 0.7, 0);
 	
 	//draw_text_color(550, );
 }
 #endregion
 
+#region back
+if (back) {
+	var c_border = border;
+	var c_outline1 = [
+
+		[backX[0]-(backRadius+c_border), backY-(backRadius+c_border)],
+		[backX[0]-(backRadius+c_border), backY+(backRadius+c_border)],
+		[backX[1]+(backRadius+c_border), backY-(backRadius+c_border)],
+		[backX[1]+(backRadius+c_border), backY+(backRadius+c_border)],
+
+	]
+	var c_outline2 = [
+
+		[backX[0]-(backRadius+c_border*2), backY-(backRadius+c_border*2)],
+		[backX[0]-(backRadius+c_border*2), backY+(backRadius+c_border*2)],
+		[backX[1]+(backRadius+c_border*2), backY-(backRadius+c_border*2)],
+		[backX[1]+(backRadius+c_border*2), backY+(backRadius+c_border*2)],
+
+	]
+	c_border = 0;
+	var c_button = [
+
+		[backX[0]-(backRadius+c_border*2), backY-(backRadius+c_border)],
+		[backX[0]-(backRadius+c_border*2), backY+(backRadius+c_border)],
+		[backX[1]+(backRadius+c_border*2), backY-(backRadius+c_border)],
+		[backX[1]+(backRadius+c_border*2), backY+(backRadius+c_border)],
+
+	]
+	
+	draw_set_color(c_black);
+	draw_primitive_begin(pr_trianglestrip);
+	draw_vertices(c_outline2);
+	draw_primitive_end();
+	
+	draw_set_color(global._characterPrimary);
+	draw_primitive_begin(pr_trianglestrip);
+	draw_vertices(c_outline1);
+	draw_primitive_end();
+	
+	draw_set_color(global._primary);
+	draw_primitive_begin(pr_trianglestrip);
+	draw_vertices(c_button);
+	draw_primitive_end();
+	
+	draw_set_color(global._characterSecondary);
+	draw_text_ext_transformed(backX[0]-(backRadius+c_border)+10, 615, "Back: Tab", 30, backY-160, 0.7, 0.7, 0);
+	
+	//draw_text_color(550, );
+}
+#endregion
+
+if((obj_battleControl.state==BattleState.PlayerAiming||obj_battleControl.state==BattleState.PlayerMoving)||!open){
+	skills=6;
+}else{
+	skills=5;
+}
+
 #region buttons
 var _buttonScale = 5;
-for (var i = skills - 1; i >= 0; i--) {
-
+for (var i = skills; i >= 0; i--) {
+	
 	#region setup
 	var _border = border;
 	var _outline1 = [
@@ -91,13 +148,26 @@ for (var i = skills - 1; i >= 0; i--) {
 	draw_primitive_end();
 	
 	draw_set_color(global._primary);
+	if(obj_battleControl.state==BattleState.PlayerAiming){
+		if(i-1==player_unit.skill_used){
+			draw_set_color(skill_used_color);
+		}
+	}
 	draw_primitive_begin(pr_trianglestrip);
 	draw_vertices(_button);
 	draw_primitive_end();
 	#endregion
-	
+	var _cost = tpCost[i];
+	if(_cost<0){
+		_cost=_cost*-1;
+		draw_set_halign(fa_right);
+		draw_set_font(fnt_archivo);
+		draw_text_transformed_colour(menuX[i] - expandAnim*80, menuY[i] - 38*expandAnim, "+", 0.7, 0.7, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+		draw_set_font(fnt_chiaro);
+		draw_set_halign(fa_left);
+	}
 	#region draw tp
-	var _pips = make_tp(menuX[i] - expandAnim*70, menuY[i] + 15*expandAnim, 7*expandAnim, tpCost[i], true);
+	var _pips = make_tp(menuX[i] - expandAnim*70, menuY[i] - 15*expandAnim, 7*expandAnim, _cost, true);
 
 	draw_set_color(global._characterSecondary);
 	for (var j = 0; j < array_length(_pips); j++){
@@ -108,7 +178,27 @@ for (var i = skills - 1; i >= 0; i--) {
 	#endregion
 
 	//text			player_unit.actions[i].name[player_unit.upgrades[i]]+ ": " +
-	if i < 4 draw_text_transformed_colour(menuX[i+1]-expandAnim*25, menuY[i]-60, global.controls[i], 1, 1, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+	if (i < 5){
+		if(i==4){
+			
+			draw_set_halign(fa_right);
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+string_width("L"), menuY[i]-60, global.controls[i], 1, 1, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, waitAlpha);
+			draw_set_halign(fa_right);
+			draw_set_font(fnt_chiaro_small);
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+20, menuY[i], skill_names[i+1], 0.7, 0.7, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, waitAlpha);
+			draw_set_font(fnt_chiaro);
+			
+		}else{
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+string_width("L"), menuY[i]-60, global.controls[i], 1, 1, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+			draw_set_halign(fa_right);
+			draw_set_font(fnt_chiaro_small);
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+20, menuY[i], skill_names[i+1], 0.7, 0.7, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+			draw_set_font(fnt_chiaro);
+		}
+	}
+	
+	draw_set_halign(fa_left);
+	
 }
 #endregion
 
@@ -244,10 +334,6 @@ draw_sprite_ext(player_unit.portrait, 0, imgX, imgY-20, -0.55, 0.55, 0, c_white,
 gpu_set_alphatestenable(false);
 draw_set_alpha(1);
 gpu_set_blendmode(bm_normal);
-
-
-
-
 #endregion
 
 #region gold
@@ -264,10 +350,19 @@ draw_set_color(global._primary);
 draw_text_transformed(75, 20, "G    "+ string(obj_battleControl.gold), 0.8, 0.8, 0);
 #endregion
 
+draw_text_transformed(75, 70, "Battle "+ string(obj_battleControl.battle_progress+1)+"/"+string(array_length(global.encounters)), 0.8, 0.8, 0);
+draw_text_transformed(75, 100, "Turn "+ string(obj_battleControl.turn_count), 0.8, 0.8, 0);
+
 #region skill details
-draw_set_font(fnt_chiaro);
+draw_set_font(fnt_chiaro_small);
 draw_set_color(c_white);
-draw_text_ext(300, 10, _text, 40, 1000);
+
+draw_text_ext(500, rootY-105, _text, 40, 1000);
+draw_set_font(fnt_chiaro_small);
+if(obj_battleControl.state==BattleState.PlayerAiming){
+	draw_text_ext(250, 90, skill_description, 25, 1100);
+}
+draw_set_font(fnt_chiaro);
 #endregion
 
 #region turn banner

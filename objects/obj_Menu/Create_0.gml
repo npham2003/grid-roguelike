@@ -1,12 +1,15 @@
 state = 0;
-skills = 5;
+skills = 6;
 _text = "";
+skill_description="";
 
 open = true;
 playerTurn = false;
 enemyTurn = true;
 
 confirm = false;
+
+back = false;
 
 player_unit = obj_player;
 currCharSprite = spr_temp_Taion;
@@ -17,6 +20,7 @@ hp_opacity_increase=true;
 tpCost = [0, 1, 5, 7, 12];
 tp_opacity=0;
 tp_opacity_increase=true;
+skill_names=["","","",""];
 
 turn_count = 0;
 turn_max = 3;
@@ -29,6 +33,8 @@ turn_banner_animation_started=false;
 
 ask_end = false;
 
+skill_used_color=#d1baa4;
+
 #region location & size
 imgX = 200;
 imgY = 680;
@@ -37,8 +43,8 @@ rootX = imgX+20;
 rootY = imgY + 32;
 select_shift = 30;
 
-menuX = [rootX, rootX, rootX, rootX, rootX];
-menuY = [rootY, rootY, rootY, rootY, rootY];
+menuX = [rootX, rootX, rootX, rootX, rootX, rootX, rootX];
+menuY = [rootY, rootY, rootY, rootY, rootY, rootX, rootY];
 
 portraitScale = 0.55;
 playerScale = 15;
@@ -46,15 +52,22 @@ playerDim = sprite_get_height(spr_diamond_base) * playerScale/2;
 
 optionAlpha = 0;
 portraitAlpha=1;
+waitAlpha=0;
 
 optionRadius = 40;
 spacing = 150;
 
 confirmRadius = 40;
-confirmX = [800, 1000];
+confirmX = [1000, 1200];
 confirmY = 660;
 confirmShiftX = 0;
 confirmShiftY = [0,0];
+
+backRadius = 40;
+backX = [1000, 1200];
+backY = 660;
+backShiftX = 0;
+backShiftY = [0,0];
 
 border = 5;
 #endregion
@@ -72,6 +85,10 @@ open_menu = function(){
 
 set_text = function(_new_text){
 	_text = _new_text;
+}
+
+set_skill_text = function(_new_text){
+	skill_description = _new_text;
 }
 
 set_select = function(_option) {

@@ -21,7 +21,7 @@ transition_count = 0;
 
 enemy_check_death = 0;
 checking_death = false;
-gold = 0;
+gold = 10000000000;
 battle_gold = 0;
 unit = pointer_null;
 
@@ -205,7 +205,7 @@ enum BattleState {
 };
 
 //state = BattleState.PlayerUpgrade;
-state = BattleState.BattleStart;
+state = BattleState.PlayerUpgrade;
 show_debug_message("Battle Start");
 
 function change_state(new_state) {
