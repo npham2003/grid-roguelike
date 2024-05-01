@@ -8,8 +8,11 @@ playerTurn = false;
 enemyTurn = true;
 
 confirm = false;
-
 back = false;
+win = 0;
+
+grayscale = layer_get_fx("Grayscale");
+grayscale_params = fx_get_parameters(grayscale);
 
 player_unit = obj_player;
 currCharSprite = spr_temp_Taion;
@@ -72,6 +75,9 @@ confirmShiftY = [0,0];
 backX = 1000;
 backShift = 1000;
 
+lineX = room_width;
+line_width = 1;
+winlose_anim_complete = false;
 
 border = 5;
 #endregion
@@ -158,3 +164,4 @@ set_turn_banner = function(player_turn){
 #endregion
 
 expandAnim = state;
+grayscale_params.g_Intensity = 0;

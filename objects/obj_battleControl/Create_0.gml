@@ -205,7 +205,7 @@ enum BattleState {
 };
 
 //state = BattleState.PlayerUpgrade;
-state = BattleState.PlayerUpgrade;
+state = BattleState.BattleStart;
 show_debug_message("Battle Start");
 
 function change_state(new_state) {

@@ -74,7 +74,7 @@ switch (state) {
 		// chooses a random encounter. set to a value for debugging
 		//var random_battle = irandom(array_length(global.encounters)-1);
 		//random_battle=4;
-		//battle_progress=10;
+		battle_progress=14;
 		random_battle=battle_progress;
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
@@ -768,6 +768,14 @@ switch (state) {
 				
 			}
 			if(battle_progress==array_length(global.encounters)){
+				obj_menu.win = 1;
+				obj_menu.set_text("Press any key to return to main menu.");
+				if(keyboard_check_pressed(vk_anykey)){
+					obj_gridCreator.reset_highlights_cursor();
+					obj_menu.set_text("Press any key to return to main menu.");
+					obj_menu.win = 0;
+					room_goto(0);
+				}
 				battle_progress=0;
 			}
 			tp_current=tp_max;
@@ -783,12 +791,14 @@ switch (state) {
 				}
 			}
 		}else{
+			obj_menu.win = 2;
 			obj_gridCreator.reset_highlights_cursor();
 			obj_menu.set_text("Press any key to restart");
 			if(keyboard_check_pressed(vk_anykey)){
 				obj_gridCreator.reset_highlights_cursor();
 				obj_menu.set_text("Press any key to restart");
-				room_goto_previous();
+				obj_menu.win = 0;
+				room_goto(0);
 			}
 			
 		}

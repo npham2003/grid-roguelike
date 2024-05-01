@@ -126,3 +126,19 @@ if(back){
 backX = lerp(backX, backShift, 0.2);
 
 #endregion
+
+#region lose anim
+if (win == 2) {
+	grayscale_params.g_Intensity = lerp(grayscale_params.g_Intensity, 1, 0.2);
+	lineX = lerp(room_width, 0, 0.2);
+	
+	if (lineX == 0) {
+		line_width = lerp(1, 200, 0.2);
+	}
+	
+	if (line_width == 200) winlose_anim_complete = true;
+	else winlose_anim_complete = false;
+}
+else grayscale_params.g_Intensity = 0;
+
+#endregion

@@ -391,3 +391,26 @@ if (ask_end){
 }
 draw_set_halign(fa_left);
 #endregion
+
+#region win
+if (win == 1){
+	draw_set_color(c_black);
+	draw_line_width(lineX, room_height/2, room_width, room_height/2, line_width);
+	
+	if (winlose_anim_complete) {
+		draw_text_transformed(room_width/2, room_height/2, "WIN", 0.8, 0.8, 0);
+		
+	}
+}
+#endregion
+
+#region lose
+if (win == 2){
+	draw_set_color(c_black);
+	draw_line_width(lineX, room_height/2, room_width, room_height/2, line_width);
+	
+	if (winlose_anim_complete) {
+		draw_text_transformed(room_width/2, room_height/2, "YOU DIED", 0.8, 0.8, 0);
+	}
+}
+#endregion
