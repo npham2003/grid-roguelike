@@ -3912,8 +3912,8 @@ global.enemyActions = {
 global.players = [
 	{ //basic guy
 		name: "L'Cifure",
-		hp: 5,
-		hpMax: 5,
+		hp: 3,
+		hpMax: 3,
 		playerSpeed: 2,
 		sprites : { idle: spr_player2, dead: spr_player2_dead, gun: spr_player2_shooting},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.beam, global.actionLibrary.charge,  global.actionLibrary.mortar, global.actionLibrary.nothing],
@@ -3943,8 +3943,8 @@ global.players = [
 	},
 	{ // Teleport guy
 		name: "Warpman",
-		hp: 2,
-		hpMax: 2,
+		hp: 3,
+		hpMax: 3,
 		playerSpeed: 1,
 		sprites : { idle: spr_player5, dead: spr_player5_dead, gun: spr_player5_shooting},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.teleport_self, global.actionLibrary.teleport_ally,  global.actionLibrary.teleport_enemy, global.actionLibrary.nothing],
@@ -3958,8 +3958,8 @@ global.players = [
 	},
 	{ //Bomb guy
 		name: "Bombastic",
-		hp: 3,
-		hpMax: 3,
+		hp: 4,
+		hpMax: 4,
 		playerSpeed: 2,
 		sprites : { idle: spr_player4, dead: spr_player4_dead, gun: spr_player4_shooting},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.placebomb, global.actionLibrary.placeicebomb,  global.actionLibrary.placegravbomb, global.actionLibrary.nothing],
