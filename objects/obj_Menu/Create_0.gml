@@ -69,11 +69,9 @@ confirmY = 660;
 confirmShiftX = 0;
 confirmShiftY = [0,0];
 
-backRadius = 40;
-backX = [1000, 1200];
-backY = 660;
-backShiftX = 0;
-backShiftY = [0,0];
+backX = 1000;
+backShift = 1000;
+
 
 border = 5;
 #endregion

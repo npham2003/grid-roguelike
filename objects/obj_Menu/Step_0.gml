@@ -28,10 +28,12 @@ if(obj_battleControl.state==BattleState.PlayerWaitingAction){
 	waitAlpha = lerp(waitAlpha, 0, 0.05);
 }
 #endregion
+
 player_marker=lerp(player_marker,room_width/2-progress_length/2+(progress_length/(battles_in_room-1)*(obj_battleControl.battle_progress%5)),0.1);
 if(obj_battleControl.battle_progress%5==0){
 	player_marker=room_width/2-progress_length/2;
 }
+
 #region portrait opacity
 if(open){
 	state = 1;
@@ -93,7 +95,7 @@ if (turn_count <= turn_max) {
 turn_text_anim = lerp(turn_text_anim, 2, 0.2)
 #endregion
 
-#region confirm opacity
+#region confirm location
 if(confirm){
 	confirmShiftX[0] = 920;
 	confirmShiftX[1] = 1170;
@@ -112,21 +114,15 @@ confirmX[1] = lerp(confirmX[1], confirmShiftX[1], 0.2);
 
 #endregion
 
-#region back opacity
+#region back
 if(back){
-	backShiftX[0] = 700;
-	backShiftX[1] = 750;
-	backShiftY = 660;
+	backShift = 820;
 	
 
 }else{
-	backShiftX[0] = 700;
-	backShiftX[1] = 700;
-	backShiftY = 660;
+	backShift=700;
 }
 
-backY = lerp(backY, backShiftY, 0.2);
-backX[0] = lerp(backX[0], backShiftX[0], 0.2);
-backX[1] = lerp(backX[1], backShiftX[1], 0.2);
+backX = lerp(backX, backShift, 0.2);
 
 #endregion

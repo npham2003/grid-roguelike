@@ -69,54 +69,15 @@ if (confirm) {
 
 #region back
 if (back) {
-	var c_border = border;
-	var c_outline1 = [
-
-		[backX[0]-(backRadius+c_border), backY-(backRadius+c_border)],
-		[backX[0]-(backRadius+c_border), backY],
-		[backX[1]+(backRadius+c_border), backY-(backRadius+c_border)],
-		[backX[1]+(backRadius+c_border), backY],
-
-	]
-	var c_outline2 = [
-
-		[backX[0]-(backRadius+c_border*2), backY-(backRadius+c_border*2)],
-		[backX[0]-(backRadius+c_border*2), backY],
-		[backX[1]+(backRadius+c_border*2), backY-(backRadius+c_border*2)],
-		[backX[1]+(backRadius+c_border*2), backY],
-
-	]
-	c_border = 0;
-	var c_button = [
-
-		[backX[0]-(backRadius+c_border*2), backY-(backRadius+c_border)],
-		[backX[0]-(backRadius+c_border*2), backY],
-		[backX[1]+(backRadius+c_border*2), backY-(backRadius+c_border)],
-		[backX[1]+(backRadius+c_border*2), backY],
-
-	]
 	
-	//draw_set_color(c_black);
-	//draw_primitive_begin(pr_trianglestrip);
-	//draw_vertices(c_outline2);
-	//draw_primitive_end();
-	draw_set_color(c_black);
-	draw_rectangle(backX[0]-(backRadius+c_border*2),backY-(backRadius+c_border*2),backX[1]+(backRadius+c_border*2),backY-(backRadius+c_border),false)
+	draw_set_color(global._characterPrimary);
+	draw_rectangle(700, 650, backX, 620, false);
 	
-	draw_set_color(global._characterSecondary);
-	draw_primitive_begin(pr_trianglestrip);
-	draw_vertices(c_outline1);
-	draw_primitive_end();
-	
-	draw_set_color(global._characterSecondary);
-	draw_primitive_begin(pr_trianglestrip);
-	draw_vertices(c_button);
-	draw_primitive_end();
 	draw_set_font(fnt_chiaro_small);
 	draw_set_color(c_white);
-	draw_text_ext_transformed(backX[0]-(backRadius+c_border)+10, rootY-105, "Back: Tab", 30, backY-160, 1, 1, 0);
+	draw_text(710, rootY-105, "Back: Tab");
 	
-	//draw_text_color(550, );
+	draw_set_font(fnt_chiaro);
 }
 #endregion
 
