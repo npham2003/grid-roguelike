@@ -42,6 +42,10 @@ battle_progress=0;
 
 turn_count=0;
 
+music_track = bgm_monochrome_clock;
+
+current_music = audio_play_sound(music_track, 0, true, 0.5);
+
 #region Spawns
 
 // Spawn player units

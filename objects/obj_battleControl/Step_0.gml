@@ -31,6 +31,15 @@ switch (state) {
 	
 #region Battle Start
 	case BattleState.BattleStart:
+		battle_progress=5;
+		if(battle_progress%5==0){
+			
+			audio_stop_sound(current_music);
+			music_track = global.floor_music[floor(battle_progress/5)][irandom_range(0,array_length(global.floor_music[floor(battle_progress/5)])-1)];
+
+			current_music = audio_play_sound(music_track, 0, true, 0.7);
+			
+		}
 		for (var i = 0; i < array_length(player_units); i++) {
 			
 			
