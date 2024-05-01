@@ -191,7 +191,26 @@ draw_vertices = function(vertices){
 
 draw_lines = function(vertices, _width, _color){
 	for (var i = 0; i < array_length(vertices); ++i) {
-		draw_line_width_color(vertices[i][0], vertices[i][1], vertices[(i+1)%array_length(vertices)][0], vertices[(i+1)%array_length(vertices)][1], _width, _color, _color);
+		_x_1=vertices[i][0];
+		_y_1=vertices[i][1];
+		_x_2=vertices[(i+1)%array_length(vertices)][0];
+		_y_2=vertices[(i+1)%array_length(vertices)][1];
+		_offset=1;
+		if(_x_1<_x_2){
+			_x_1-=_offset;
+			_x_2+=_offset;
+		}else if(_x_1>_x_2){
+			_x_1+=_offset;
+			_x_2-=_offset;
+		}
+		if(_y_1<_y_2){
+			_y_1-=_offset;
+			_y_2+=_offset;
+		}else if(_y_2<_y_1){
+			_y_1+=_offset;
+			_y_2-=_offset;
+		}
+		draw_line_width_color(_x_1, _y_1, _x_2, _y_2, _width, _color, _color);
 	}
 }
 
