@@ -16,6 +16,8 @@ skill_y_start = 90;
 optionRadius = 80;
 border = 5;
 
+
+
 descriptor_text = ["Heal 1 character for 1 HP",
 					"Gain 1 extra TP each turn until the next floor",
 					"Each attack does 1 extra damage until the next floor", 
