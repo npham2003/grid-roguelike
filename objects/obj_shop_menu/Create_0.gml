@@ -7,7 +7,7 @@ character_select_pos=0;
 skill_select_pos=0;
 
 new_skill_upgrade=0;
-character_spacing=260;
+character_spacing=300;
 upgrade_offset = 0;
 
 skill_x_start = 100;

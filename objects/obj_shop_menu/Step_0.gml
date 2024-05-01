@@ -1,7 +1,7 @@
 
 if(obj_battleControl.state==BattleState.PlayerUpgrade){
 	alpha = lerp(alpha,1,0.05);
-	actual_x=lerp(actual_x,x,0.05);
+	actual_x=lerp(actual_x,room_width/2,0.05);
 	switch(menu_level){
 		case 0:
 			if (keyboard_check_pressed(ord("A"))) {
