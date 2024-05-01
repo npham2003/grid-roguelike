@@ -131,6 +131,18 @@ for (var i = skills; i >= 0; i--) {
 	draw_primitive_end();
 	
 	draw_set_color(global._primary);
+	if( i>0 && i<5){
+		draw_set_color(not_selectable_color);
+	}
+	if((obj_battleControlTut.teachingBasic || obj_battleControlTut.basicTaught) && i==1){
+		draw_set_color(global._primary);
+	}
+	if((obj_battleControlTut.teachingSkills) && i==2){
+		draw_set_color(global._primary);
+	}
+	if((obj_battleControlTut.teachingMortar) && i==4){
+		draw_set_color(global._primary);
+	}
 	
 	if(obj_battleControlTut.state==BattleState.PlayerAiming){
 
@@ -184,11 +196,11 @@ for (var i = skills; i >= 0; i--) {
 		if(i==4){
 
 			
-
+			
 			draw_set_halign(fa_right);
 
 			draw_set_font(fnt_archivo);
-
+			
 			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+string_width("L"), menuY[i]-30, global.controls[i], 0.6, 0.6, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, waitAlpha);
 
 			draw_set_halign(fa_right);

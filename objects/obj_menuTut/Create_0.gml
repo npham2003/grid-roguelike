@@ -14,7 +14,7 @@ back = false;
 
 win = 0;
 
-
+not_selectable_color = #83684c;
 
 //grayscale = layer_get_fx("Grayscale");
 
@@ -107,11 +107,13 @@ border = 5;
 #region control func
 close_menu = function(){
 	open = false;
+	
 	//expansionLimit = 0;
 }
 
 open_menu = function(){
 	open = true;
+	
 	//expansionLimit = 1.3;
 }
 

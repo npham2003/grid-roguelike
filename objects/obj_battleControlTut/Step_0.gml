@@ -89,7 +89,7 @@ switch (state) {
 	
 #region Enemy Aiming
 	case BattleState.EnemyAiming:
-		
+		obj_menuTut.back = false;
 		if (turns_until_gun == 2 && gun_spawned == false) {
 			gun_spawned = true;
 			teachingBasic = true;
@@ -135,7 +135,7 @@ switch (state) {
 						break;
 						
 						case 2:
-							obj_menuTut.set_text("To move, press ENTER to select our character and use WASD to get out of danger! Then press ENTER again to confirm/place them down.");
+							obj_menuTut.set_text("To move, press ENTER to select our character and use WASD to get out of danger! Then press ENTER again to use the Wait action, and ENTER again to confirm.");
 							obj_menuTut.enter_text("PRESS ENTER");
 							if (key_Enter_pressed) {
 							obj_menuTut.open_menu();
@@ -431,9 +431,9 @@ switch (state) {
 				obj_menuTut.player_unit=unit;
 				
 				// set the tpcost array in the menu to match actual costs
-				obj_menuTut.tpCost=[0,unit.actions[0].cost[unit.upgrades[0]],unit.actions[1].cost[unit.upgrades[1]],unit.actions[2].cost[unit.upgrades[2]],unit.actions[3].cost[unit.upgrades[3]]];
+				//obj_menuTut.tpCost=[0,unit.actions[0].cost[unit.upgrades[0]],unit.actions[1].cost[unit.upgrades[1]],unit.actions[2].cost[unit.upgrades[2]],unit.actions[3].cost[unit.upgrades[3]]];
 
-				obj_menuTut.skill_names=["",unit.actions[0].name[unit.upgrades[0]],unit.actions[1].name[unit.upgrades[1]],unit.actions[2].name[unit.upgrades[2]],unit.actions[3].name[unit.upgrades[3]]];
+				//obj_menuTut.skill_names=["",unit.actions[0].name[unit.upgrades[0]],unit.actions[1].name[unit.upgrades[1]],unit.actions[2].name[unit.upgrades[2]],unit.actions[3].name[unit.upgrades[3]]];
 
 				
 
@@ -541,14 +541,14 @@ switch (state) {
 
 #region Player Moving
 	case BattleState.PlayerMoving:
-		
+		obj_menuTut.back = true;
 		// error handling but unit should always be a player unit here
 		if(unit!=pointer_null){
 			//obj_menuTut.set_text("WASD - Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
-			if (teachingDamage) {
-				obj_menuTut.set_text("WASD - Move");
-			}
-			
+			//if (teachingDamage) {
+			//	obj_menuTut.set_text("WASD - Move");
+			//}
+			obj_menuTut.set_text("WASD - Move");
 			// moving
 			if (wasd_pressed) {
 				//show_debug_message(unit.name + ": moving");
@@ -651,7 +651,7 @@ switch (state) {
 
 #region Player Aiming
 	case BattleState.PlayerAiming:
-	
+		obj_menuTut.back = true;
 		
 		if(unit.skill_back){ // if the player presses tab to go back. this is handled in the skill itself
 			obj_menuTut.confirm = false;
@@ -960,7 +960,7 @@ switch (state) {
 
 #region
 	case BattleState.PlayerUpgrade:
-		
+		obj_menuTut.back = false;
 		if (teachingBasic == true && teachingSkills == false) {
 					obj_menuTut.close_menu();
 					obj_menuTut.enter_text("PRESS ENTER");

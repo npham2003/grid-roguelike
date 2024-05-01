@@ -1,5 +1,5 @@
 #region options
-if (obj_battleControlTut.teachingBasic == true) {
+//if (obj_battleControlTut.teachingBasic == true) {
 for (var i = 0; i < skills; ++i) {
 	
 	if(obj_battleControlTut.state==BattleState.PlayerAiming){
@@ -15,16 +15,19 @@ for (var i = 0; i < skills; ++i) {
 		menuX[i] = lerp(menuX[i], rootX + i * spacing * state + state * 200, 0.2);
 	}
 	optionAlpha = lerp(optionAlpha, state, 0.1);
+	if(skills==6){
+		waitAlpha = lerp(waitAlpha, state, 0.1);
+	}
 }
 
 expandAnim = lerp(expandAnim, state, 0.2);
-}
+//}
 tpCost=[0,player_unit.actions[0].cost[player_unit.upgrades[0]],player_unit.actions[1].cost[player_unit.upgrades[1]],player_unit.actions[2].cost[player_unit.upgrades[2]],player_unit.actions[3].cost[player_unit.upgrades[3]],0,0];
 
 skill_names=["",player_unit.actions[0].name[player_unit.upgrades[0]],player_unit.actions[1].name[player_unit.upgrades[1]],player_unit.actions[2].name[player_unit.upgrades[2]],player_unit.actions[3].name[player_unit.upgrades[3]],player_unit.actions[4].name[player_unit.upgrades[4]],""];
 
 
-if(obj_battleControlTut.state==BattleState.PlayerWaitingAction){
+if(obj_battleControlTut.state==BattleState.PlayerWaitingAction||obj_battleControlTut.state==BattleState.EnemyTakingAction||obj_battleControlTut.state==BattleState.PlayerUpgrade||obj_battleControlTut.state==BattleState.BattleEnd){
 
 	menuX[5] = lerp(menuX[5], rootX + 5 * spacing * 0 + 0 * 200, 0.05);
 
