@@ -23,7 +23,7 @@ expandAnim = lerp(expandAnim, state, 0.2);
 tpCost=[0,player_unit.actions[0].cost[player_unit.upgrades[0]],player_unit.actions[1].cost[player_unit.upgrades[1]],player_unit.actions[2].cost[player_unit.upgrades[2]],player_unit.actions[3].cost[player_unit.upgrades[3]],0,0];
 skill_names=["",player_unit.actions[0].name[player_unit.upgrades[0]],player_unit.actions[1].name[player_unit.upgrades[1]],player_unit.actions[2].name[player_unit.upgrades[2]],player_unit.actions[3].name[player_unit.upgrades[3]],player_unit.actions[4].name[player_unit.upgrades[4]],""];
 
-if(obj_battleControl.state==BattleState.PlayerWaitingAction){
+if(obj_battleControl.state==BattleState.PlayerWaitingAction||obj_battleControl.state==BattleState.EnemyTakingAction||obj_battleControl.state==BattleState.PlayerUpgrade||obj_battleControl.state==BattleState.BattleEnd){
 	menuX[5] = lerp(menuX[5], rootX + 5 * spacing * 0 + 0 * 200, 0.05);
 	waitAlpha = lerp(waitAlpha, 0, 0.05);
 }

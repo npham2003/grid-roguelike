@@ -42,6 +42,10 @@ battle_progress=0;
 
 turn_count=0;
 
+music_track = bgm_monochrome_clock;
+
+current_music = audio_play_sound(music_track, 0, true, 0.5);
+
 #region Spawns
 
 // Spawn player units
@@ -129,6 +133,7 @@ spawn_enemies = function(enemy_data){
 			battle_gold+=unit.gold;
 		
 	}
+	set_enemy_turn_order();
 }
 
 // spawns an enemy on the ally side of the board. if target tile is not empty it will find a nearby empty one
