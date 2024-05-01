@@ -365,31 +365,12 @@ switch (state) {
 		}
 		if(key_Space_pressed){ //ask end turn
 			obj_cursor.movable_tiles=[];
-			if(obj_menu.ask_end && key_Space_pressed){ // end the turn
-				board_obstacle_order = 0;
-				obj_menu.ask_end = false;
-				
-				for (var i = 0; i < array_length(player_units); i++) {
-					if(!(player_units[i].has_attacked || player_units[i].has_moved)){
-						player_units[i].attack_bonus_temp=0;
-					
-					}
-				}
-				obj_gridCreator.reset_highlights_cursor();
-				change_state(BattleState.PlayerBoardObstacle);
-				obj_menu.ask_end = false;
-			}
+			obj_menu.ask_end = true;
+			change_state(BattleState.BattlePause);
 			
 			
-			
-			else {
-				obj_menu.ask_end = true;
-				}
 		}
-		if(obj_menu.ask_end && key_Tab_pressed) {
-			obj_menu.ask_end = false;
-			obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
-		}
+		
 		break;
 #endregion
 
@@ -903,8 +884,34 @@ switch (state) {
 #region Player beats all 15 levels
 	case BattleState.GameWin:
 		break;
+#endregion
 #region Player loses
-	case BattleState.GameWin:
+	case BattleState.GameLose:
 		break;
+		
+#endregion
+#region Game paused
+	case BattleState.BattlePause:
+		if(obj_menu.ask_end && key_Space_pressed){ // end the turn
+				board_obstacle_order = 0;
+				obj_menu.ask_end = false;
+				
+				for (var i = 0; i < array_length(player_units); i++) {
+					if(!(player_units[i].has_attacked || player_units[i].has_moved)){
+						player_units[i].attack_bonus_temp=0;
+					
+					}
+				}
+				obj_gridCreator.reset_highlights_cursor();
+				change_state(BattleState.PlayerBoardObstacle);
+				obj_menu.ask_end = false;
+			}
+			if(obj_menu.ask_end && key_Tab_pressed) {
+				obj_menu.ask_end = false;
+				obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
+				change_state(BattleState.PlayerWaitingAction);
+			}
+		break;
+#endregion
 
 };
