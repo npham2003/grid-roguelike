@@ -765,6 +765,11 @@ switch (state) {
 			}
 			if(battle_progress==array_length(global.encounters)){
 				battle_progress=0;
+				audio_stop_sound(current_music);
+				music_track = bgm_victory;
+				//music_track = global.floor_music[2][0];
+
+				current_music = audio_play_sound(music_track, 0, false, 0.7);
 				change_state(BattleState.GameWin);
 				break;
 			}
@@ -783,6 +788,11 @@ switch (state) {
 		}else{
 			obj_gridCreator.reset_highlights_cursor();
 			obj_menu.set_text("Press any key to restart");
+			audio_stop_sound(current_music);
+				music_track = bgm_the_voice_someone_calls;
+				//music_track = global.floor_music[2][0];
+
+				current_music = audio_play_sound(music_track, 0, false, 0.7);
 			change_state(BattleState.GameLose);
 			
 		}
