@@ -24,7 +24,10 @@ gun_spawned = false;
 gun_array = [];
 teachingBasic = false;
 teachingSkills = false;
+teachingMortar = false;
 skillTaught = false;
+basicTaught = false;
+dialogueLine = 0;
 
 enemy_check_death = 0;
 checking_death = false;
@@ -35,18 +38,20 @@ unit = pointer_null;
 board_obstacle_order = 0;
 obstacle = pointer_null;
 
+battle_progress=0;
+
+turn_count=0;
 
 #region Spawns
 
 // Spawn player units
 
-// Temp struct for player data, may move to a config file or generate dynamically in the future
-var player_data = [
+player_data = [
 	{
 		info: global.players[0],
 		grid: [2, 2]		
 	}
-];
+]
 
 // spawns units at the very start
 for (var i = 0; i < array_length(player_data); i++) {
@@ -83,7 +88,7 @@ spawn_unit = function(new_unit){
 	array_push(player_units, unit);
 	unit.prev_grid[0] = unit.grid_pos[0];
 	unit.prev_grid[1] = unit.grid_pos[1];
-	unit.upgrades = [0,0,0,0];
+	unit.upgrades = [0,0,0,0,0];
 	empty_tile._entity_on_tile=unit;
 	
 }
@@ -149,6 +154,20 @@ spawn_summon_ally_side = function(enemy_data, _summoner){
 			battle_gold+=unit.gold;
 		
 	}
+		set_enemy_turn_order();
+
+}
+
+
+
+set_enemy_turn_order = function(){
+
+	for(i=0;i<array_length(enemy_units);i++){
+
+		enemy_units[i].enemy_turn_order=i+1
+
+	}
+	
 }
 
 // spawns a board obstacle. 
