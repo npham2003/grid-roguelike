@@ -109,6 +109,7 @@ set_select = function(_option) {
 #region draw helpers
 //draw a diamond given center and radius
 make_diamond = function(_x, _y, _r) {
+	if _r ==  15 show_debug_message("hi");
 	return [[_x - _r, _y], [_x ,_y -_r], [_x, _y + _r], [_x + _r, _y]];
 }
 

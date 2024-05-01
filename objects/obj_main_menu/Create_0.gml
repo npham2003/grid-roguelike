@@ -69,7 +69,7 @@ party=[-1,-1,-1];
 
 
 
-audio_play_sound(bgm_xenoblade_x_title,0,true);
+audio_play_sound(bgm_xenoblade_x_title,0,true,0.5);
 
 turn_opacity_increase=true;
 turn_opacity=50;

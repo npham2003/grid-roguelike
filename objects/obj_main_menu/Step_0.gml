@@ -55,7 +55,7 @@ if(transition_in){
 				sub_menu=2;
 				transition_in=true;
 				audio_pause_sound(bgm_xenoblade_x_title);
-				css_sound_id=audio_play_sound(bgm_gather_under_night,0,true,0.7);
+				css_sound_id=audio_play_sound(bgm_gather_under_night,0,true,0.6);
 				turn_life=100;
 				turn_banner_animation_started=true;
 				turn_opacity=100;
@@ -135,9 +135,8 @@ switch(sub_menu){
 				if(keyboard_check_pressed(vk_enter)){
 					
 					if(selector_pos==0){
-						audio_play_sound(sfx_menu_next, 0, false, 1, 0);
+						audio_play_sound(sfx_menu_next, 0, false, 0.7, 0);
 						
-						audio_play_sound(sfx_menu_next, 0, false, 1, 0);
 						
 						next_background_color=menu_colors[2];
 						
@@ -145,16 +144,16 @@ switch(sub_menu){
 						
 					}
 					if(selector_pos==1){
-						audio_play_sound(sfx_game_start, 0, false, 1, 0);
+						audio_play_sound(sfx_game_start, 0, false, 0.7, 0);
 					}
 					
 					if(selector_pos==2){
-						audio_play_sound(sfx_menu_next, 0, false, 1, 0);
+						audio_play_sound(sfx_menu_next, 0, false, 0.7, 0);
 						next_background_color=menu_colors[1];
 					}
 					if(selector_pos==3){
 						funny_opacity=1;
-						audio_play_sound(sfx_vine_boom, 0, false, 1, 0);
+						audio_play_sound(sfx_vine_boom, 0, false, 0.7, 0);
 					}else{
 						transition_in=false;
 					}
@@ -184,7 +183,7 @@ switch(sub_menu){
 						next_background_color=menu_colors[0];
 						audio_play_sound(sfx_menu_back, 0, false, 0.7, 0);
 					}else{
-						audio_play_sound(sfx_menu_next, 0, false, 1, 0);
+						audio_play_sound(sfx_menu_next, 0, false, 0.7, 0);
 						url_open_ext(website_urls[selector_pos],"_blank");
 					}
 				}
@@ -220,7 +219,7 @@ switch(sub_menu){
 						selected[selector_pos]=true;
 						
 						if(curr!=2){
-							audio_play_sound(sfx_menu_next, 0, false, 1, 0);
+							audio_play_sound(sfx_menu_next, 0, false, 0.7, 0);
 						}
 					}else{
 						audio_play_sound(sfx_menu_back, 0, false, 0.7, 0);
