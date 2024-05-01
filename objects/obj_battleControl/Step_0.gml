@@ -17,6 +17,8 @@ var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_H_press
 
 var enough_tp = false;
  
+
+
 if (transition_count > 0) {
 	transition_count-=1;
 	return;
@@ -27,15 +29,20 @@ if (transition_count < 0) {
 	return;
 }
 
+
+
 switch (state) {
 	
 #region Battle Start
 	case BattleState.BattleStart:
+
 		obj_menu.win = 0;
+
 		if(battle_progress%5==0){
 			
 			audio_stop_sound(current_music);
 			music_track = global.floor_music[floor(battle_progress/5)][irandom_range(0,array_length(global.floor_music[floor(battle_progress/5)])-1)];
+			//music_track = global.floor_music[2][0];
 
 			current_music = audio_play_sound(music_track, 0, true, 0.7);
 			
