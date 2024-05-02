@@ -45,7 +45,7 @@ if (confirm) {
 	draw_set_font(fnt_archivo);
 	
 	draw_set_color(global._characterSecondary);
-	draw_text_ext_transformed(confirmX[0]+50, 625, "Confirm: "+global.controls[player_unit.skill_used], 30, confirmY-160, 0.5, 0.5, 0);
+	draw_text_ext_transformed(confirmX[0]+50, 625, "Confirm: Enter", 30, confirmY-160, 0.5, 0.5, 0);
 	
 	//draw_text_color(550, );
 }
@@ -201,7 +201,7 @@ for (var i = skills; i >= 0; i--) {
 
 			draw_set_font(fnt_archivo);
 			
-			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+string_width("L"), menuY[i]-30, global.controls[i], 0.6, 0.6, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, waitAlpha);
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25, menuY[i]-30, global.controls[i], 0.6, 0.6, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, waitAlpha);
 
 			draw_set_halign(fa_right);
 

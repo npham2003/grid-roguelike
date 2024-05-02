@@ -52,7 +52,7 @@ function skill_teleport_ally_3(unit){
 	for (var i = 0; i < array_length(skill_range_aux); i++) {
 		skill_range_aux[i]._target_highlight=true;
 	}
-	if (keyboard_check_pressed(ord("K"))) {
+	if (keyboard_check_pressed(ord("K"))  || keyboard_check_pressed(vk_enter)) {
 		if(unit.skill_progress==1){
 			if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 				if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){

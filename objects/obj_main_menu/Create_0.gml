@@ -15,7 +15,8 @@ next_background_color=global._characterSecondary;
 menu_colors=[global._menu_secondary,global._menu_primary, c_maroon, global._aspect_bars];
 
 
-line_spacing=115;
+line_spacing=90;
+character_select_spacing=120;
 big_acronym=["O","O","P","S"];
 full_word=["bject","riented","hase","hifts"];
 italic_offset=50;
@@ -104,11 +105,11 @@ tips=[
 	],
 	[
 		"How to Play (2)",
-		"Once a unit is selected, tiles within their movement range become highlighted by a darker blue. You can now move them using the cursor.\n\nOnce you move them to a desired position, press (ENTER) to select the Wait skill. Press (ENTER) again to confirm using Wait.\n\nYou cannot move to the opposite side of the grid."
+		"Once a unit is selected, tiles within their movement range become highlighted by a darker blue. You can now move them using the cursor.\n\nOnce you move them to a desired position, press (Y) to select the Wait skill. Press (ENTER) to confirm using Wait.\n\nYou cannot move to the opposite side of the grid."
 	],
 	[
 		"How to Play (3)",
-		"You can press TAB at any time to unselect a skill or unit.\n\nBefore selecting a unit, you may also press SPACE to end your turn. Note that the turn will end automatically if all of your units have performed an action."
+		"You can press TAB at any time to unselect a skill or unit.\n\nBefore selecting a unit, you may also press (SPACE) to end your turn. Note that the turn will end automatically if all of your units have performed an action."
 	],
 	[
 		"Hit Points",
@@ -120,7 +121,7 @@ tips=[
 	],
 	[
 		"Using Skills",
-		"Units can both move and use a skill on the same turn. Skills, as well as how much TP they cost, are displayed in the menu on the bottom. To use a skill, press the associated button to select it. Press it again to confirm using it.\n\nSome skills require you to pick a target or allow you to aim them. Use (WASD) to select the targeted area with your cursor before confirming with your skill button.\n\nA skill's range will be shown in RED if it does damage, and GREEN if it doesn't. Tiles affected by the skill being aimed at your cursor position blink WHITE."
+		"Units can both move and use a skill on the same turn. Skills, as well as how much TP they cost, are displayed in the menu on the bottom. To use a skill, press the associated button to select it. Press either (ENTER) or the skill button again to confirm.\n\nSome skills require you to pick a target or allow you to aim them. Use (WASD) to select the targeted area with your cursor before confirming.\n\nA skill's range will be shown in RED if it does damage, and GREEN if it doesn't. Tiles affected by the skill being aimed at your cursor position blink WHITE."
 	],
 	[
 		"Friendly Fire",
@@ -128,7 +129,7 @@ tips=[
 	],
 	[
 		"Shared Skills",
-		"Although units each have three unique skills, they share the Wait action and the Attack skill. Attack is always used with (H) and Wait is always used with (ENTER)."
+		"Although units each have three unique skills, they share the Wait action and the Attack skill. Attack is always used with (H) and Wait is always used with (Y)."
 	],
 	[
 		"Using the Attack",
@@ -254,6 +255,22 @@ tips=[
 		"Bombastic: Push Mine",
 		"Warpman's (L) skill Push Mine, places a mine that pushes adjacent units away from it for 1 tile! It lasts for 1 turn.\n\nIts first upgrade, Gravity Mine, affects units up to 2 tiles away in the same row or column, and pulls units in towards it instead of pushing them away! This lasts 3 turns.\n\nIts second upgrade, Super Push Mine, pushes units away from the mine until they collide with a wall or another unit. This mine lasts for 1 turn"
 	],
+	[
+		"Frozone: Summary",
+		"Frozone is focused around inflicting the Freeze status on enemy units. By locking enemies down and making them unable to attack or move, she can allow units to move into previously targeted spaces without actually killing the enemy attacker.\n\n"
+	],
+	[
+		"Frozone: Freeze",
+		"Frozone's (J) skill Freeze lets her freeze the first unit in front of her for 1 turn!\n\nIts first upgrade, Deep Freeze, makes the skill freeze for 2 turns!\n\nIts second upgrade, Piercing Freeze, allows her to freeze all units in front of her for 1 turn!"
+	],
+	[
+		"Frozone: Frostbite",
+		"Frozone's (K) skill Frostbite hits all enemies in a cone in front of her for 1 damage. It also does 1 extra damage to any frozen units. The cone's range is 3 tiles in front of her.\n\nIts first upgrade, Boreal Wind, attacks everything in the cone in addition to everything in front of Frozone on the same row!\n\nIts second upgrade, Sharp Winds, does an extra 2 damage to frozen units!"
+	],
+	[
+		"Frozone: Icicle Crash",
+		"Frozone's (L) skill Icicle Crash, freezes a target within 3 spaces and all adjacent units for 1 turn!\n\nIts first upgrade, Avalanche, allows you to target anywhere on the grid.\n\nIts second upgrade, Absolute Zero, freezes all enemy units for 1 turn!"
+	],
 
 ]
 
@@ -287,7 +304,7 @@ menu_options=[
 	[
 		"Play",
 		"Tutorial",
-		"Tips",
+		"Manual",
 		"Credits",
 		"Exit"
 	],

@@ -41,7 +41,7 @@ if(sub_menu==0){
 		draw_primitive_end();
 		draw_set_color(c_black);
 	
-		draw_text(_pips[i][0],_pips[i][1],menu_options[0][i]);
+		draw_text_transformed(_pips[i][0],_pips[i][1],menu_options[0][i],0.7,0.7,0);
 		
 	}
 	draw_set_alpha(1);
@@ -155,20 +155,20 @@ if(sub_menu==2){
 	draw_set_font(fnt_chiaro);
 	draw_set_color(c_white);
 	text_outline(actual_character_select+350, room_height/2+40, global.players[selector_pos].guy, 1, c_black, 4, 8, 100000);
-	var _pips = make_menu_alternate(character_select, room_height/2-((array_length(global.players)-1)*(line_spacing-15)/2), line_spacing-15, array_length(global.players), false, character_select, actual_character_select);
+	var _pips = make_menu_alternate(character_select, room_height/2-((array_length(global.players)-1)*(character_select_spacing-15)/2), character_select_spacing-15, array_length(global.players), false, character_select, actual_character_select);
 	for (var i = 0; i < array_length(_pips); ++i){
 		draw_primitive_begin(pr_trianglestrip);
 		
 		if(selector_pos==i && selected[i]){
 			draw_set_color(c_aqua);
-			draw_vertices(make_diamond(_pips[i][0],_pips[i][1], line_spacing-15));
+			draw_vertices(make_diamond(_pips[i][0],_pips[i][1], character_select_spacing-15));
 		}else if(selector_pos==i){
 			draw_set_color(c_white);
-			draw_vertices(make_diamond(_pips[i][0],_pips[i][1], line_spacing-15));
+			draw_vertices(make_diamond(_pips[i][0],_pips[i][1], character_select_spacing-15));
 		}
 		else if(selected[i]){
 			draw_set_color(c_blue);
-			draw_vertices(make_diamond(_pips[i][0],_pips[i][1], line_spacing-15));
+			draw_vertices(make_diamond(_pips[i][0],_pips[i][1], character_select_spacing-15));
 		}
 		draw_primitive_end();
 		
@@ -177,7 +177,7 @@ if(sub_menu==2){
 		//draw_set_color(global._tpBorder);
 		//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 10*expandAnim));
 		draw_set_color(diamond_outline);
-		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], line_spacing-25));
+		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], character_select_spacing-25));
 		//draw_set_color(global._tpBorder);
 		//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 12));
 		draw_primitive_end();
@@ -188,7 +188,7 @@ if(sub_menu==2){
 			draw_set_color(merge_color(diamond_fill,c_white,portrait_fill_flash));
 		}
 	
-		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], line_spacing-30));
+		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], character_select_spacing-30));
 		//draw_set_color(global._tpBorder);
 		//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 6));
 		//draw_set_color(global._tpBar);
@@ -218,7 +218,7 @@ if(sub_menu==2){
 		//draw_sprite_ext(spr_diamond_base, 0, imgX, imgY, portraitScale, portraitScale, 0, c_white, 1);
 		draw_set_color(c_white);
 		draw_primitive_begin(pr_trianglestrip);
-		draw_vertices(make_diamond(_pips[i][0],_pips[i][1],line_spacing-30));
+		draw_vertices(make_diamond(_pips[i][0],_pips[i][1],character_select_spacing-30));
 		draw_primitive_end();
 
 		gpu_set_blendenable(true);
@@ -241,7 +241,7 @@ if(sub_menu==2){
 		//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 10*expandAnim));
 		draw_set_color(c_white);
 		draw_set_alpha(portrait_flash_opacity[i]);
-		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], line_spacing-25));
+		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], character_select_spacing-25));
 		//draw_set_color(global._tpBorder);
 		//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 12));
 		draw_primitive_end();

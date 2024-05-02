@@ -7,13 +7,14 @@ var key_J_pressed = keyboard_check_pressed(ord("J"));
 var key_K_pressed = keyboard_check_pressed(ord("K"));
 var key_L_pressed = keyboard_check_pressed(ord("L"));
 var key_H_pressed = keyboard_check_pressed(ord("H"));
+var key_Y_pressed = keyboard_check_pressed(ord("Y"));
 
 var key_Enter_pressed = keyboard_check_pressed(vk_enter);
 var key_Tab_pressed = keyboard_check_pressed(vk_tab);
 var key_Space_pressed = keyboard_check_pressed(vk_space);
 
 var wasd_pressed = key_A_pressed || key_W_pressed || key_S_pressed || key_D_pressed;
-var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_H_pressed || key_Enter_pressed;
+var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_H_pressed || key_Enter_pressed || key_Y_pressed;
 
 var enough_tp = false;
  
@@ -466,7 +467,7 @@ switch (state) {
 					}else {
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
-			}else if (key_Enter_pressed) {
+			}else if (key_Y_pressed) {
 					if (tp_current >= unit.actions[4].cost[unit.upgrades[4]]) {
 					unit.skill_used = 4;
 					enough_tp = true;
@@ -608,7 +609,8 @@ switch (state) {
 							else {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
-						}else if (key_Enter_pressed&&unit.skill_used!=4) {
+						}
+						else if (key_Y_pressed&&unit.skill_used!=4) {
 							if (tp_current >= unit.actions[4].cost[unit.upgrades[4]]) {
 							unit.skill_used = 4;
 							enough_tp = true;
