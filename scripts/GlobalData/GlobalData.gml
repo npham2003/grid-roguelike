@@ -25,7 +25,7 @@ global.floor_music=[
 // THIS IS THE DAMAGE FORMULA
 global.actionLibrary = {
 	baseAttack: {
-		name: ["Base Attack"], //probably redundant to have a name but keep it
+		name: ["Attack"], //probably redundant to have a name but keep it
 		description: ["Does 1 damage to the first target in any direction"],
 		cost: [1],
 		subMenu: 0, //does it show up on screen or is it in a submenu

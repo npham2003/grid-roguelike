@@ -43,6 +43,11 @@ if(transition_in){
 		layer_hspeed(background_layer, lerp(layer_get_hspeed(background_layer),initial_bg_hspeed*-5,0.2));
 		layer_vspeed(background_layer, lerp(layer_get_vspeed(background_layer),initial_bg_vspeed*5,0.2));
 	}
+	else if(sub_menu==3){
+		actual_tips=lerp(actual_tips,tips_x,0.1);
+		actual_description_x=lerp(actual_description_x,description_x_start,0.1);
+
+	}
 }else{
 	if(sub_menu==0){
 		actual_logo_x=lerp(actual_logo_x,initial_logo_x,0.2);
@@ -78,11 +83,17 @@ if(transition_in){
 				audio_stop_sound(bgm_xenoblade_x_title);
 			}
 			if(selector_pos==2){
+				sub_menu=3;
+				transition_in=true;
+				selector_pos=0;
+				
+			}
+			if(selector_pos==3){
 				sub_menu=1;
 				transition_in=true;
 				selector_pos=0;
 				
-				turn_life=100;
+				
 			}
 		}
 	}
@@ -91,7 +102,7 @@ if(transition_in){
 		if(actual_credits_x>1900){
 			sub_menu=0;
 			transition_in=true;
-			selector_pos=2;
+			selector_pos=3;
 		}
 		
 		
@@ -112,6 +123,16 @@ if(transition_in){
 				
 				
 			}
+		}
+	}
+	else if(sub_menu==3){
+		actual_tips=lerp(actual_tips,initial_tips,0.1);
+		actual_description_x=lerp(actual_description_x,initial_description_x,0.1);
+		if(actual_tips<-1900){
+			transition_in=true;
+			sub_menu=0;
+			current_tip=array_length(tips)-1;
+			option_cur=0;
 		}
 	}
 }
@@ -146,12 +167,15 @@ switch(sub_menu){
 					if(selector_pos==1){
 						audio_play_sound(sfx_game_start, 0, false, 0.7, 0);
 					}
-					
 					if(selector_pos==2){
+						audio_play_sound(sfx_menu_next, 0, false, 0.7, 0);
+						next_background_color=menu_colors[3];
+					}
+					if(selector_pos==3){
 						audio_play_sound(sfx_menu_next, 0, false, 0.7, 0);
 						next_background_color=menu_colors[1];
 					}
-					if(selector_pos==3){
+					if(selector_pos==4){
 						funny_opacity=1;
 						audio_play_sound(sfx_vine_boom, 0, false, 0.7, 0);
 					}else{
@@ -189,7 +213,7 @@ switch(sub_menu){
 				}
 				if(keyboard_check_pressed(vk_tab)){
 					transition_in=false;
-					selector_pos=2;
+					selector_pos=3;
 					next_background_color=menu_colors[0];
 					audio_play_sound(sfx_menu_back, 0, false, 0.7, 0);
 				}
@@ -316,5 +340,74 @@ switch(sub_menu){
 			}
 			
 			break;
-	
+	case 3:
+		
+			if(transition_in){
+				if (keyboard_check_pressed(ord("S"))) {
+					option_cur+=1;
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+					option_cur=option_cur%total_options;
+				
+				}
+				if (keyboard_check_pressed(ord("W"))) {
+					option_cur-=1;
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+					if(option_cur<0){
+						option_cur=total_options-1;
+					}
+				}
+				if (keyboard_check_pressed(ord("D"))) {
+					option_cur+=10;
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+					option_cur=option_cur%total_options;
+				
+				}
+				if (keyboard_check_pressed(ord("A"))) {
+					option_cur-=10;
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+					if(option_cur<0){
+						option_cur=total_options+option_cur;
+					}
+				}
+				if(keyboard_check_pressed(vk_tab)){
+					transition_in=false;
+					selector_pos=2;
+					next_background_color=menu_colors[0];
+					audio_play_sound(sfx_menu_back, 0, false, 0.7, 0);
+					
+					
+				}
+				if(keyboard_check_pressed(vk_enter)){
+					
+						audio_play_sound(sfx_menu_next, 0, false, 0.7, 0);
+						current_tip=option_cur;
+				}
+			//Determine the current y position we are drawing at
+			if y_draw_cur!=y_draw_begin{//If the y position to draw is not yet at the begin y position we want, in/de crease the value to get it there
+			    y_draw_cur+=(y_draw_begin-y_draw_cur)*transition_speed;}//This will "smoothing" transition the y position to the begin position
+
+			//Determine the begin y position to draw
+			y_draw_begin=(y_draw_offset*-1)*option_cur; //we do -1 because the menu will be drawn downward, doing -1 will then make the images begin to draw up higher
+
+			//Determine the Current option we are selecting/hovering
+			//option_cur=clamp(option_cur+(keyboard_check_pressed(ord("S"))-keyboard_check_pressed(ord("W"))),0,total_options-1);
+
+			//Scale the options
+			for(i=0;i<total_options;i++){
+			    var scale_end=scale+(scale_add*(option_cur==i)); //add additional scale size if this option is the currently selected option
+			    //if option[i,_scale]!=scale_end{
+			    //    option[i,_scale]+=(scale_end-option[i,_scale])*scale_speed;}}
+				option[i, _scale]=1;
+			}
+      
+			//Fade the options
+			for(i=0;i<total_options;i++){
+			    var fade_end=1-(abs(i-option_cur)*fade); //find the "distance" this option is from current option, use that to determine strength of fade
+			    if option[i,_fade]!=fade_end{
+			        option[i,_fade]+=(fade_end-option[i,_fade])*fade_speed;}}
+			}
+			break;
+
+
+		
 }
