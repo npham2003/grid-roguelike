@@ -16,6 +16,7 @@ skill_y_start = 90;
 optionRadius = 80;
 border = 5;
 
+delay=60;
 
 
 descriptor_text = ["Heal 1 character for 1 HP",

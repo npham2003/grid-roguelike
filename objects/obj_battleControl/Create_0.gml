@@ -116,6 +116,7 @@ spawn_enemies = function(enemy_data){
 	for (var i = 0; i < array_length(enemy_data); i++) {
 		var empty_tile = obj_gridCreator.find_empty_tile_enemy(enemy_data[i].grid[0], enemy_data[i].grid[1], 5);
 		var coord =[empty_tile.x, empty_tile.y];
+		var coord = obj_gridCreator.get_coordinates(empty_tile._x_coord, empty_tile._y_coord);
 		show_debug_message("Empty at "+string(coord));
 		
 			obj_gridCreator.battle_grid[empty_tile._x_coord][empty_tile._y_coord]._is_empty=false;

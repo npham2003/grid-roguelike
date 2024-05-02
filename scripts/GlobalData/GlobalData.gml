@@ -47,7 +47,7 @@ global.actionLibrary = {
 					unit.skill_init=true;
 					show_debug_message("basic init");
 				}
-				
+				obj_gridCreator.highlighted_attack_cross(unit.grid_pos[0], unit.grid_pos[1],15);
 				obj_cursor.movable_tiles=skill_range;
 				unit.is_attacking = true;
 				if(array_length(skill_range)>0 && !unit.skill_complete){ // set cursor to target if it hits anything, if not its on the player unit
@@ -96,12 +96,14 @@ global.actionLibrary = {
 					unit.skill_complete = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
 					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
+					skill_range = obj_gridCreator.reset_highlights_attack();
 					unit.skill_init=false;
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					unit.skill_init=false;
 					skill_range = obj_gridCreator.reset_highlights_target();
+					skill_range = obj_gridCreator.reset_highlights_attack();
 		
 				}
 			}
