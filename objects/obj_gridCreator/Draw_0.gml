@@ -1,9 +1,9 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+draw_sprite_ext(playerGrid,0,x,y,500/64,250/64,0,c_white,1);
 
-
-
+draw_sprite_ext(enemyGrid,0,x+500,y,500/64,250/64,0,c_white,1);
 for (var i = 0; i< gridHoriz;i++){
 	for (var j = 0; j < gridVert;j++){
 		if(i<5){

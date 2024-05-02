@@ -155,15 +155,23 @@ switch (state) {
 						case 2:
 							obj_menuTut.close_menu();
 							obj_menuTut.enter_text("PRESS ENTER");
-							obj_menuTut.set_text("Skills cost more TP. For example, the beam (J) hits all enemies in a line. Press the skill button (J) again to fire.");
+							obj_menuTut.set_text("Skills cost more TP. For example, Beam (J) hits all enemies in a line. Press the skill button (J) again to fire.");
+							if (key_Enter_pressed) {
+								dialogueLine += 1;
+						}
+						break;
+						case 3:
+							obj_menuTut.close_menu();
+							obj_menuTut.enter_text("PRESS ENTER");
+							obj_menuTut.set_text("If you need more TP, Charge (K) allows you to gain 1 TP. Press the skill button (K) again to confirm.");
 							if (key_Enter_pressed) {
 								dialogueLine += 1;
 						}
 						break;
 						
-						case 3:
+						case 4:
 							obj_menuTut.enter_text("PRESS ENTER");
-							obj_menuTut.set_text("If you want to go back/undo, press Tab.");
+							obj_menuTut.set_text("If you want to go back, press Tab.");
 							if (key_Enter_pressed) {
 							obj_menuTut.open_menu();
 							skillTaught = true;
@@ -951,7 +959,9 @@ switch (state) {
 			if(keyboard_check_pressed(vk_anykey)){
 				obj_gridCreator.reset_highlights_cursor();
 				obj_menuTut.set_text("Press any key to restart");
+				audio_stop_sound(current_music);
 				room_restart();
+				
 			}
 			
 		}
@@ -993,7 +1003,8 @@ switch (state) {
 					if (key_Enter_pressed) {
 						obj_menuTut.set_text("");
 						obj_menuTut.enter_text("");
-						audio_stop_sound(bgm_tutorialBGM);
+						
+						audio_stop_sound(current_music);
 						room_goto(0);
 					}
 		}
