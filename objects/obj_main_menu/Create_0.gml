@@ -180,7 +180,7 @@ tips=[
 	],
 	[
 		"Status: Freeze",
-		"Frozen units turn blue and will be unable to move or attack until unfrozen.\n\nThe BLUE damage number shows how many turns they will be frozen for. It will reappear every turn to show how many more turns the unit will remain frozen.\n\nThis timer appears at the end of player turn for player units, and after enemies attack but before they aim.\n\nUnits can act on the same turn they become unfrozen."
+		"Frozen units turn blue and will be unable to move or attack until unfrozen.\n\nThe BLUE damage number shows how many turns they will be frozen for. It will reappear every turn to show how many more turns the unit will remain frozen. For player units, this happens right before Player Turn. For enemy units, this happens right after the enmy attack phase.\n\nThis timer appears at the end of player turn for player units, and after enemies attack but before they aim.\n\nUnits can act on the same turn they become unfrozen. Enemies will immediately move and aim after being unfrozen, and player units become actionable immediately as well."
 	],
 	[
 		"Status: Buffs",
@@ -228,11 +228,11 @@ tips=[
 	],
 	[
 		"Warpman: Misty Step",
-		"Warpman's (J) skill Misty Step allows him to teleport to an empty tile up to 2 spaces away! It also costs no TP, making it an excellent movement option.\n\nIts first upgrade, Cartesian Shift, let's him teleport to any space in the same row or column.\n\nIts second upgrade, Dimension Door, let's him move to any empty space on the player side of the grid!"
+		"Warpman's (J) skill Misty Step allows him to teleport to an empty tile up to 2 spaces away! It also costs no TP, making it an excellent movement option.\n\nIts first upgrade, Cartesian Shift, lets him teleport to any space in the same row or column.\n\nIts second upgrade, Dimension Door, lets him move to any empty space on the player side of the grid!"
 	],
 	[
 		"Warpman: Warp",
-		"Warpman's (K) skill Warp lets him teleport any adjacent ally to another tile up to 3 spaces away!.\n\nIts first upgrade, Swap, lets you swap the positions of 2 allies, regardless of how far away they are.\n\nIts second upgrade, Rescue, teleports an ally up to 3 spaces from their current position to any of Warpman's adjacent tiles! Use it to get out of a pinch."
+		"Warpman's (K) skill Warp lets him teleport any adjacent ally to another tile up to 3 spaces away!\n\nIts first upgrade, Swap, lets you swap the positions of 2 allies, regardless of how far away they are.\n\nIts second upgrade, Rescue, teleports an ally up to 3 spaces from their current position to any of Warpman's adjacent tiles! Use it to get out of a pinch."
 	],
 	[
 		"Warpman: Vortex Shift",
@@ -240,7 +240,19 @@ tips=[
 	],
 	[
 		"Bombastic: Summary",
-		"Scroll through tips on the left with WASD.\n\nPress ENTER to select a tip to view its contents."
+		"Bombastic specializes in setting traps on the grid. While they don't do any immediate damage, they have a wide range and are incredibly efficient for their TP cost.\n\nMake sure her bombs don't accidentally blow your own units up!"
+	],
+	[
+		"Bombastic: Mine",
+		"Bombastic's (J) skill Mine lets her place a mine on the field! This mine does 1 damage to all adjacent units! It lasts 1 turn.\n\nIts first upgrade, Bigger Mine, makes the mine she places affect a 3x3 area instead! This lasts for 2 turns!\n\nIts second upgrade, More Mines, allows her to place 2 mines on a single turn!"
+	],
+	[
+		"Bombastic: Ice Mine",
+		"Bombastic's (K) skill Ice Mine allows her to place a mine that freezes units in a 3x3 area for 2 turns. The mine lasts 1 turn.\n\nIts first upgrade, Freezer, places an Ice Mine that lasts for 3 turns!\n\nIts second upgrade, Ice Age, places a larger Ice Mine, which in addition to affecting a 5x5 area, also deals 1 damage to affected units!"
+	],
+	[
+		"Bombastic: Push Mine",
+		"Warpman's (L) skill Push Mine, places a mine that pushes adjacent units away from it for 1 tile! It lasts for 1 turn.\n\nIts first upgrade, Gravity Mine, affects units up to 2 tiles away in the same row or column, and pulls units in towards it instead of pushing them away! This lasts 3 turns.\n\nIts second upgrade, Super Push Mine, pushes units away from the mine until they collide with a wall or another unit. This mine lasts for 1 turn"
 	],
 
 ]
