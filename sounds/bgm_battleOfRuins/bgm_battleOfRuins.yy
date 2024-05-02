@@ -12,8 +12,8 @@
   "duration":169.11673,
   "name":"bgm_battleOfRuins",
   "parent":{
-    "name":"Sounds",
-    "path":"folders/Sounds.yy",
+    "name":"Floor 1",
+    "path":"folders/Sounds/Floor 1.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
@@ -21,5 +21,5 @@
   "sampleRate":44100,
   "soundFile":"bgm_battleOfRuins.mp3",
   "type":1,
-  "volume":0.1,
+  "volume":1.0,
 }

@@ -8,7 +8,7 @@
 
 global._primary = #d1a578;
 global._secondary = #1cc6e0;
-global._aspect_bars = #141414;
+global._aspect_bars = #1a1a1a;
 
 global._menu_primary = #0cac87;
 global._menu_secondary = #386467;

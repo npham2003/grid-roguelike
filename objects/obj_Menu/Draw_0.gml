@@ -1,6 +1,3 @@
-
-
-
 #region progress bar
 draw_line_width_color(room_width/2-progress_length/2,progress_height,room_width/2+progress_length/2,progress_height,progress_thickness,global._primary,global._primary);
 draw_set_color(global._characterPrimary);
@@ -418,26 +415,33 @@ if (ask_end){
 draw_set_halign(fa_left);
 #endregion
 
-#region win
-if (win == 1){
-	draw_set_color(c_black);
-	draw_line_width(lineX, room_height/2, room_width, room_height/2, line_width);
+#region win lose
+if (win > 0){
+	if (win == 1) draw_set_color(global._primary);
+	else if (win == 2) draw_set_color(c_black);
+	draw_rectangle(lineX, lineYL, room_width, lineYR, false);
 	
 	if (winlose_anim_complete) {
-		draw_text_transformed(room_width/2, room_height/2, "WIN", 0.8, 0.8, 0);
+		if (win == 2) draw_set_color(global._primary);
+		else if (win == 1) draw_set_color(c_black);
+		
+		draw_set_halign(fa_center);
+		draw_set_font(fnt_archivo);
+		if (win == 1) draw_text_transformed(room_width/2, room_height/2-100, "WIN", 2, 2, 0);
+		else if (win == 2) draw_text_transformed(room_width/2, room_height/2-100, "YOU DIED", 2, 2, 0);
+		
+		draw_set_font(fnt_chiaro);
+		draw_text_transformed(room_width/2, room_height/2 + 110, "PRESS ANY KEY TO RETURN TO MAIN MENU", 0.8, 0.8, 0);
+		
+		draw_text_transformed(room_width/2, room_height/2-20, "Gold: " + string(obj_battleControl.gold), 0.8, 0.8, 0)
+		
+		if (win == 2){
+			draw_text_transformed(room_width/2, room_height/2+10, "Floor: " + string(floor(obj_battleControl.battle_progress/5)+1)+"/"+string(string(floor(array_length(global.encounters)/5))), 0.8, 0.8, 0);
+			draw_text_transformed(room_width/2, room_height/2+40, "Turn Count: " + string(obj_battleControl.turn_count), 0.8, 0.8, 0);
+		}
+		else draw_text_transformed(room_width/2, room_height/2+10, "Turn Count: " + string(obj_battleControl.turn_count), 0.8, 0.8, 0);
 		
 	}
+	draw_set_halign(fa_left);
 }
 #endregion
-
-#region lose
-if (win == 2){
-	draw_set_color(c_black);
-	draw_line_width(lineX, room_height/2, room_width, room_height/2, line_width);
-	
-	if (winlose_anim_complete) {
-		draw_text_transformed(room_width/2, room_height/2, "YOU DIED", 0.8, 0.8, 0);
-	}
-}
-#endregion
-
