@@ -28,13 +28,6 @@ for (var i = 1; i < array_length(_pips); ++i){
 	draw_primitive_end();
 }
 
-for (var i = array_length(_pips)-1; i > array_length(_pips)-1-obj_gridCreator.battle_grid[grid_pos[0]][grid_pos[1]]._danger_number; --i){
-	draw_primitive_begin(pr_trianglestrip);
-		
-	draw_set_color(c_black);
-	draw_set_alpha(hp_opacity);
-	draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 4));
-	draw_primitive_end();
-}
+
 
 draw_set_alpha(1);
