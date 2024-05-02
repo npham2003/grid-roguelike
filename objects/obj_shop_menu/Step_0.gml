@@ -4,7 +4,8 @@ if(delay>0){
 	return;
 }
 
-if(obj_battleControl.state==BattleState.PlayerUpgrade){
+if(obj_battleControl.state==BattleState.PlayerUpgrade && !transition_out){
+	
 	obj_gridCreator.x=5000;
 	obj_battleControl.transition_count=80;
 	alpha = lerp(alpha,1,0.05);
@@ -78,8 +79,7 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 			}
 			if(keyboard_check_pressed(vk_tab)){
 				selector_pos=[0,0];
-				obj_gridCreator.transition_in=true;
-				obj_battleControl.change_state(BattleState.BattleStart);
+				transition_out=true;
 			}
 			break;
 		case 1:
@@ -161,6 +161,16 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 				upgrade(obj_battleControl.player_units[character_select_pos],skill_select_pos,new_skill_upgrade);
 			}
 		
+	}
+}else if(transition_out){
+	alpha = lerp(alpha,0,0.05);
+	actual_x=lerp(actual_x,-2000,0.05);
+	
+	if(actual_x<-1500){
+		transition_out=false;
+		
+		obj_gridCreator.transition_in=true;
+		obj_battleControl.change_state(BattleState.BattleStart);
 	}
 }else{
 	alpha = lerp(alpha,0,0.05);

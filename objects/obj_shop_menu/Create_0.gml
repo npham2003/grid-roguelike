@@ -18,6 +18,7 @@ border = 5;
 
 delay=60;
 
+transition_out=false;
 
 descriptor_text = ["Heal 1 character for 1 HP",
 					"Gain 1 extra TP each turn until the next floor",
