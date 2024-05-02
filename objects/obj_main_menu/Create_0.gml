@@ -322,7 +322,7 @@ menu_options=[
 	[
 		"Play",
 		"Tutorial",
-		"Manual",
+		"Tips",
 		"Credits",
 		"Exit"
 	],
