@@ -10,7 +10,7 @@ if (is_moving) {
 			x -= min(sprite_moving_speed, x - target_grid_pos[0]);
 		}
 	}
-	else if (y != target_grid_pos[1]) {
+	if (y != target_grid_pos[1]) {
 		if (y < target_grid_pos[1]) {
 			y += min(sprite_moving_speed, target_grid_pos[1] - y);
 		}
@@ -18,7 +18,7 @@ if (is_moving) {
 			y -= min(sprite_moving_speed, y - target_grid_pos[1]);
 		}
 	}
-	if(x==target_grid_pos[0] && y==target_grid_pos[1]) {
+	if(abs(x-target_grid_pos[0])<5 && abs(y-target_grid_pos[1])<5) {
 		if(delay==30){
 			attack_ready = true;
 			set_danger_highlights();
@@ -30,6 +30,8 @@ if (is_moving) {
 			remove_target_highlights();
 			battlecontrol.in_animation = false;
 		}
+	}else{
+		show_debug_message("({0}, {1}) but we're supposed to be at ({2}, {3})",x,y,target_grid_pos[0],target_grid_pos[1]);	
 	}
 	
 }

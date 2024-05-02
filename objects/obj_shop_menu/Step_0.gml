@@ -1,5 +1,12 @@
 
+if(delay>0){
+	delay-=1;
+	return;
+}
+
 if(obj_battleControl.state==BattleState.PlayerUpgrade){
+	obj_gridCreator.x=5000;
+	obj_battleControl.transition_count=80;
 	alpha = lerp(alpha,1,0.05);
 	actual_x=lerp(actual_x,room_width/2,0.05);
 	switch(menu_level){
@@ -71,6 +78,7 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 			}
 			if(keyboard_check_pressed(vk_tab)){
 				selector_pos=[0,0];
+				obj_gridCreator.transition_in=true;
 				obj_battleControl.change_state(BattleState.BattleStart);
 			}
 			break;
@@ -157,4 +165,5 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade){
 }else{
 	alpha = lerp(alpha,0,0.05);
 	actual_x=lerp(actual_x,2500,0.05);
+	delay=120;
 }

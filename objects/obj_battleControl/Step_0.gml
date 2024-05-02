@@ -37,14 +37,15 @@ switch (state) {
 	case BattleState.BattleStart:
 
 		obj_menu.win = 0;
-
+		obj_gridCreator.transition_in=true;
+		
 		if(battle_progress%5==0){
 			
 			audio_stop_sound(current_music);
 			music_track = global.floor_music[floor(battle_progress/5)][irandom_range(0,array_length(global.floor_music[floor(battle_progress/5)])-1)];
 			//music_track = global.floor_music[2][0];
 
-			current_music = audio_play_sound(music_track, 0, true, 0.7);
+			current_music = audio_play_sound(music_track, 0, true, 0.5);
 			
 		}
 		for (var i = 0; i < array_length(player_units); i++) {
@@ -90,7 +91,7 @@ switch (state) {
 		// chooses a random encounter. set to a value for debugging
 		//var random_battle = irandom(array_length(global.encounters)-1);
 		//random_battle=4;
-		//battle_progress=14;
+		//battle_progress=1;
 		random_battle=battle_progress;
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
@@ -775,6 +776,7 @@ switch (state) {
 			}
 			tp_current=tp_max;
 			if(battle_progress < array_length(global.encounters) && (battle_progress%5==0||battle_progress%2==0)){
+				obj_gridCreator.transition_in=false;
 				change_state(BattleState.PlayerUpgrade);
 			}else{
 				if (obj_menu.win == 0) change_state(BattleState.BattleStart);

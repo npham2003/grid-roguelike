@@ -1,3 +1,8 @@
+if(delay>0){
+	delay-=1;
+	return;
+}
+
 if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	layer_set_visible(lay_id, true);
 	

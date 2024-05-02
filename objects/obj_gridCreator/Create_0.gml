@@ -15,6 +15,8 @@ _target_transparency=0.5;
 _more_visible=true;
 _moving = false;
 
+transition_in = true;
+
 
 // get co-ordinates for the middle of the tile at (x,y)
 // (0,0) is top left
