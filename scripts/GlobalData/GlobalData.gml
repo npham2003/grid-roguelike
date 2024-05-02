@@ -2666,7 +2666,7 @@ global.actionLibrary = {
 	},
 	placebomb: {
 		name: ["Mine", "Bigger Mine", "More Mines"], //probably redundant to have a name but keep it
-		description: ["Places a mine. Any adjacent units take damage at the end of their turn", "Places a mine. Any units in the 3x3 area take 3 damage at the end of their turn.", "Places 2 mines. Any adjacent units take damage at the end of their turn"],
+		description: ["Places a mine in an empty space. Any adjacent units take 1 damage at the end of their turn", "Places a mine in an empty space. Any units in the 3x3 area take 3 damage at the end of their turn.", "Places 2 mines in 2 empty spaces. Any adjacent units take 1 damage at the end of their turn"],
 		cost: [2, 3, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -2878,7 +2878,7 @@ global.actionLibrary = {
 	},
 	placeicebomb: {
 		name: ["Ice Mine", "Freezer", "Ice Age"], //probably redundant to have a name but keep it
-		description: ["Places an ice mine that freezes units in a 3x3 area at the end of their turn", "Places an ice mine that continually freezes units in a 3x3 area for 3 turns", "Places a large ice mine that freezes units in a 5x5 area and does 1 damage"],
+		description: ["Places an ice mine in an empty space that freezes units in a 3x3 area at the end of their turn", "Places an ice mine in an empty space that continually freezes units in a 3x3 area for 3 turns", "Places a large ice mine in an empty space that freezes units in a 5x5 area and does 1 damage"],
 		cost: [3, 5, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -3086,7 +3086,7 @@ global.actionLibrary = {
 	},
 	placegravbomb: {
 		name: ["Push Mine", "Gravity Mine", "Super Push Mine"], //probably redundant to have a name but keep it
-		description: ["Places a mine. Any adjacent units get pushed 1 tile away at the end of their turn", "Places a mine. Any units in the surrounding area get pulled 1 tile in at the end of their turn", "Places a mine. Adjacent enemies get pushed away until they hit an obstacle at the end of their turn"],
+		description: ["Places a mine in an empty space. Any adjacent units get pushed 1 tile away at the end of their turn", "Places a mine in an empty space. Units up to 2 tiles away get pulled 1 tile in at the end of their turn", "Places a mine in an empty space. Adjacent units get pushed until they hit an obstacle at the end of their turn"],
 		cost: [3, 4, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
