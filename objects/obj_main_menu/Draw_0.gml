@@ -149,11 +149,11 @@ if(sub_menu==2){
 		draw_sprite_ext(global.players[selector_pos].portrait_full,0,actual_character_select+350, room_height/2,1,1,image_angle,c_white,0.5);
 	}
 	draw_set_font(fnt_archivo);
-	draw_set_color(c_black);
-	draw_set_halign(fa_center);
-	text_outline(actual_character_select+350, room_height/2, global.players[selector_pos].name, 1, c_white, 4, 8, 100000);
-	draw_set_font(fnt_chiaro);
 	draw_set_color(c_white);
+	draw_set_halign(fa_center);
+	text_outline(actual_character_select+350, room_height/2, global.players[selector_pos].name, 1, c_black, 4, 8, 100000);
+	draw_set_font(fnt_chiaro);
+	
 	text_outline(actual_character_select+350, room_height/2+40, global.players[selector_pos].guy, 1, c_black, 4, 8, 100000);
 	var _pips = make_menu_alternate(character_select, room_height/2-((array_length(global.players)-1)*(character_select_spacing-15)/2), character_select_spacing-15, array_length(global.players), false, character_select, actual_character_select);
 	for (var i = 0; i < array_length(_pips); ++i){
@@ -325,9 +325,9 @@ if(sub_menu==2){
 			//draw_text_ext_transformed(actual_skill_x+15, skill_y_start+((j)*220)+50, action.description[0], 40, 600, 0.8, 0.8, image_angle);
 			draw_set_font(fnt_chiaro_small);
 			text_outline(actual_skill_x+15, skill_y_start+((j)*220)+50, action.description[0], 1, c_black, 4, 30, 460);
-			draw_set_color(c_black)
+			draw_set_color(c_white)
 			draw_set_font(fnt_archivo);
-			text_outline(actual_skill_x+15, skill_y_start+((j)*220)+15, action.name[0], 1, c_white, 4, 40, 600);
+			text_outline(actual_skill_x+15, skill_y_start+((j)*220)+15, action.name[0], 1, c_black, 4, 40, 600);
 			
 			
 			var _cost = action.cost[0];
