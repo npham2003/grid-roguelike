@@ -17,7 +17,7 @@ function skill_teleport_self_2(unit){
 	}
 
 	if(unit.skill_progress==1){
-		skill_range = obj_gridCreator.highlighted_support_cross(unit.grid_pos[0], unit.grid_pos[1], 9);
+		skill_range = obj_gridCreator.highlighted_support_cross_player_side(unit.grid_pos[0], unit.grid_pos[1], 9);
 	}
 				
 	obj_cursor.movable_tiles=skill_range;

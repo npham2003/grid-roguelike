@@ -1818,8 +1818,12 @@ global.actionLibrary = {
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
 					if(unit.skill_progress==1){
-						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && skill_coords[0]!=unit.grid_pos[0] && skill_coords[1]!=unit.grid_pos[1]){
+						show_debug_message(unit.grid_pos);
+						show_debug_message(skill_coords);
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
+							show_debug_message("are they an ally");
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+								show_debug_message("we are here");
 								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.attack_bonus_temp+=1;
 								
 								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.attack_buff_recent=true;
@@ -1912,7 +1916,7 @@ global.actionLibrary = {
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
 					if(unit.skill_progress==1){
-						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && skill_coords[0]!=unit.grid_pos[0] && skill_coords[1]!=unit.grid_pos[1]){
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
 								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.attack_bonus_temp+=1;
 								
@@ -2005,7 +2009,7 @@ global.actionLibrary = {
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
 					if(unit.skill_progress==1){
-						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && skill_coords[0]!=unit.grid_pos[0] && skill_coords[1]!=unit.grid_pos[1]){
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
 								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.attack_bonus_temp+=2;
 								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.attack_buff_recent=true;
@@ -2111,7 +2115,7 @@ global.actionLibrary = {
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
 					if(unit.skill_progress==1){
-						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && skill_coords[0]!=unit.grid_pos[0] && skill_coords[1]!=unit.grid_pos[1]){
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
 								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.move_bonus_temp+=1;
 								
@@ -2205,7 +2209,7 @@ global.actionLibrary = {
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
 					if(unit.skill_progress==1){
-						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && skill_coords[0]!=unit.grid_pos[0] && skill_coords[1]!=unit.grid_pos[1]){
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
 								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.move_bonus_temp+=2;
 								
@@ -2298,7 +2302,7 @@ global.actionLibrary = {
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
 					if(unit.skill_progress==1){
-						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && skill_coords[0]!=unit.grid_pos[0] && skill_coords[1]!=unit.grid_pos[1]){
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally && obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile!=unit){
 								if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.has_attacked||obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.has_moved){
 									obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.has_attacked=false;
@@ -2409,7 +2413,7 @@ global.actionLibrary = {
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
 					if(unit.skill_progress==1){
-						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && skill_coords[0]!=unit.grid_pos[0] && skill_coords[1]!=unit.grid_pos[1]){
+						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
 								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.shield+=1;
 								

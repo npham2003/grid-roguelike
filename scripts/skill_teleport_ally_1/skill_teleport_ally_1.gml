@@ -16,10 +16,10 @@ function skill_teleport_ally_1(unit){
 		audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 	}
 	if(unit.skill_progress==1){
-		skill_range = obj_gridCreator.highlighted_support_circle(unit.grid_pos[0], unit.grid_pos[1], 1);
+		skill_range = obj_gridCreator.highlighted_support_circle_player_side(unit.grid_pos[0], unit.grid_pos[1], 1);
 	}
 	if(unit.skill_progress==2){
-		skill_range = obj_gridCreator.highlighted_support_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
+		skill_range = obj_gridCreator.highlighted_support_circle_player_side(unit.grid_pos[0], unit.grid_pos[1], unit.range);
 	}
 				
 	obj_cursor.movable_tiles=skill_range;
