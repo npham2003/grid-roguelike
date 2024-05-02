@@ -51,7 +51,7 @@ function skill_teleport_self_2(unit){
 		skill_range_aux[i]._target_highlight=true;
 	}
 	
-	if (keyboard_check_pressed(ord("J"))) {
+	if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
 		if(unit.skill_progress==1){
 			if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 				if(skill_coords[0]<5){
