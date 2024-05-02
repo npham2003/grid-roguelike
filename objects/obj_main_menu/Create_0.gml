@@ -42,6 +42,7 @@ transition_in=true;
 initial_credits_x=2000;
 actual_credits_x=2000;
 credits_x=room_width/2;
+credits_spacing=120;
 
 profile_pictures=[spr_nick, spr_emil, spr_will, spr_lu, spr_back];
 
