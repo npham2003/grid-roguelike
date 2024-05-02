@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":1863.7062,
+  "duration":367.9347,
   "name":"bgm_keves_battle",
   "parent":{
     "name":"Floor 1",

@@ -26,7 +26,7 @@ target_pos=[];
 
 teleporting = 0;
 
-delay=30;
+delay=120;
 
 // used for freeze status
 stall_turns=0;

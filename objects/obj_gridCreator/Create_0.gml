@@ -15,6 +15,8 @@ _target_transparency=0.5;
 _more_visible=true;
 _moving = false;
 
+transition_in = true;
+
 
 // get co-ordinates for the middle of the tile at (x,y)
 // (0,0) is top left
@@ -405,6 +407,67 @@ highlighted_attack_all = function(){
 		}
 	}
 	return highlighted_attack_array;
+}
+highlighted_attack_cross = function(_center_x, _center_y, _range) {
+	
+	highlighted_attack_array = [];
+	
+	array_push(highlighted_attack_array, battle_grid[_center_x][_center_y]);
+	battle_grid[_center_x][_center_y]._attack_highlight = true;
+	
+
+	
+	for(var i = 0; i <= _range; i++){
+		if (i == 0) continue;
+		if(_center_x + i >= 0 && _center_x + i < GRIDWIDTH){
+			array_push(highlighted_attack_array,battle_grid[_center_x + i][_center_y]);
+			battle_grid[_center_x + i][_center_y]._attack_highlight = true;
+			if(!battle_grid[_center_x + i][_center_y]._is_empty){
+				break;
+			}
+		}
+		
+
+	}
+	
+	for(var i = 0; i >=-_range; i--){
+		if (i == 0) continue;
+		if(_center_x + i >= 0 && _center_x + i < GRIDWIDTH){
+			array_push(highlighted_attack_array,battle_grid[_center_x + i][_center_y]);
+			battle_grid[_center_x + i][_center_y]._attack_highlight = true;
+			if(!battle_grid[_center_x + i][_center_y]._is_empty){
+				break;
+			}
+		}
+		
+	}
+	
+	for(var i = 0; i <= _range; i++){
+		if (i == 0) continue;
+		if(_center_y + i >= 0 && _center_y + i < GRIDHEIGHT){
+			array_push(highlighted_attack_array,battle_grid[_center_x][_center_y + i]);
+			battle_grid[_center_x][_center_y + i]._attack_highlight = true;
+			if(!battle_grid[_center_x][_center_y + i]._is_empty){
+				break;
+			}
+		}
+		
+		
+	}
+	
+	for(var i = 0; i >=-_range; i--){
+		if (i == 0) continue;
+		if(_center_y + i >= 0 && _center_y + i < GRIDHEIGHT){
+			array_push(highlighted_attack_array,battle_grid[_center_x][_center_y + i]);
+			battle_grid[_center_x][_center_y + i]._attack_highlight = true;
+			if(!battle_grid[_center_x][_center_y + i]._is_empty){
+				break;
+			}
+		}
+		
+	}
+	return highlighted_attack_array;
+	
 }
 
 highlighted_target_straight = function(_center_x,_center_y){
