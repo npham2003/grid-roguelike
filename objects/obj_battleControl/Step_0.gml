@@ -115,7 +115,7 @@ switch (state) {
 				change_state(BattleState.PlayerPreparing);
 				break;
 			}
-			show_debug_message(string(enemy_order));
+			//show_debug_message(string(enemy_order));
 			unit = enemy_units[enemy_order];
 			
 			// if the enemy is frozen
@@ -257,6 +257,13 @@ switch (state) {
 			break;
 		}
 		obj_menu.set_text("WASD - Move Cursor     Enter - Select Unit     Space - End Turn");
+		
+		for (var i = 0; i<array_length(obj_gridCreator.battle_grid_flattened); i++){ // NO MORE GHOSTS
+			if(obj_gridCreator.battle_grid_flattened[i]._x_coord<5){
+				obj_gridCreator.battle_grid_flattened[i]._is_empty=true;
+				obj_gridCreator.battle_grid_flattened[i]._entity_on_tile=pointer_null;
+			}
+		}
 		// checks if all player units have moved
 		for (var i = 0; i < array_length(player_units); i++) {
 			if (!player_units[i].has_attacked) {
@@ -366,7 +373,7 @@ switch (state) {
 						}
 				}
 				else if (key_Tab_pressed) { // changes upgrades for debugging
-					//for(i = 1;i<array_length(unit.upgrades);i++){
+					//for(i = 1;i<array_length(unit.upgrades)-1;i++){
 					//	unit.upgrades[i]+=1;
 					//	unit.upgrades[i]=unit.upgrades[i]%3;
 					//}
@@ -394,6 +401,7 @@ switch (state) {
 
 #region Player Moving
 	case BattleState.PlayerMoving:
+		obj_cursor.sprite_index=spr_grid_cursor;
 		obj_menu.back = true;
 		// error handling but unit should always be a player unit here
 		if(unit!=pointer_null){
@@ -648,7 +656,7 @@ switch (state) {
 
 #region Player Taking Action
 	case BattleState.PlayerTakingAction:
-	
+		obj_cursor.sprite_index=spr_grid_cursor;
 		obj_menu.back = true;
 		
 		show_debug_message(unit.name + ": taking action");

@@ -52,10 +52,28 @@ function skill_teleport_ally_3(unit){
 	for (var i = 0; i < array_length(skill_range_aux); i++) {
 		skill_range_aux[i]._target_highlight=true;
 	}
+	if(unit.skill_progress==1){
+		if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+			obj_cursor.sprite_index=spr_grid_cursor_invalid;
+		}else{
+			if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally && obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.id!=unit.id){
+				obj_cursor.sprite_index=spr_grid_cursor;
+			}else{ 
+				obj_cursor.sprite_index=spr_grid_cursor_invalid;
+			}
+		}
+	}
+	if(unit.skill_progress==2){
+		if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty || (unit.grid_pos[0]==skill_coords[0] && unit.grid_pos[1]==skill_coords[1]) ){
+			obj_cursor.sprite_index=spr_grid_cursor_invalid;
+		}else{
+			obj_cursor.sprite_index=spr_grid_cursor;
+		}
+	}
 	if (keyboard_check_pressed(ord("K"))  || keyboard_check_pressed(vk_enter)) {
 		if(unit.skill_progress==1){
 			if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
-				if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+				if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally && obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.id!=unit.id){
 					audio_play_sound(sfx_teleport_select, 0, false, 1);
 					unit.skill_progress=2;
 					array_push(skill_range_aux,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]);
@@ -69,7 +87,7 @@ function skill_teleport_ally_3(unit){
 			}
 		}
 		else if(unit.skill_progress==2){
-			if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+			if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (unit.grid_pos[0]!=skill_coords[0] || unit.grid_pos[1]!=skill_coords[1])){
 				if(skill_coords[0]<5){
 					audio_play_sound(sfx_teleport, 0, false, 1);
 					skill_range_aux[0]._entity_on_tile.grid_pos = [skill_range_aux[1]._x_coord,skill_range_aux[1]._y_coord];

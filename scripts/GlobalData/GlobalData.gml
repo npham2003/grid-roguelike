@@ -112,7 +112,7 @@ global.actionLibrary = {
 	beam: {
 		name: ["Beam", "Big Beam", "Repel Beam"], 
 		description: ["Does 2 damage to all targets in a row", "Does 2 damage to all targets in current and adjacent rows.\nDouble damage if in the same row", "Does 2 damage to all targets in a row and pushes them back 1 tile."],
-		cost: [3, 5, 4],
+		cost: [3, 7, 4],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -1206,17 +1206,19 @@ global.actionLibrary = {
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
 							
-							if(skill_range[i]._entity_on_tile.ally){
-								skill_range[i]._entity_on_tile.has_attacked=true;
-								skill_range[i]._entity_on_tile.has_moved=true;
-							}else{
-								skill_range[i]._entity_on_tile.remove_danger_highlights();
-							}
-							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 1, c_blue);
 							if(skill_range[i]._entity_on_tile.stall_turns<=0){
 								skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
-								skill_range[i]._entity_on_tile.stall_turns+=1;
+								
+								if(skill_range[i]._entity_on_tile.ally){
+									skill_range[i]._entity_on_tile.has_attacked=true;
+									skill_range[i]._entity_on_tile.has_moved=true;
+								}else{
+									skill_range[i]._entity_on_tile.remove_danger_highlights();
+								}
 							}
+							skill_range[i]._entity_on_tile.stall_turns+=1;
+							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 1, c_blue);
+							
 							
 						}
 					}
@@ -1256,15 +1258,16 @@ global.actionLibrary = {
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
 							
-							if(skill_range[i]._entity_on_tile.ally){
-								skill_range[i]._entity_on_tile.has_attacked=true;
-								skill_range[i]._entity_on_tile.has_moved=true;
-							}else{
-								skill_range[i]._entity_on_tile.remove_danger_highlights();
-							}
+							
 							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 2, c_blue);
 							if(skill_range[i]._entity_on_tile.stall_turns<=0){
 								skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
+								if(skill_range[i]._entity_on_tile.ally){
+									skill_range[i]._entity_on_tile.has_attacked=true;
+									skill_range[i]._entity_on_tile.has_moved=true;
+								}else{
+									skill_range[i]._entity_on_tile.remove_danger_highlights();
+								}
 							}
 							skill_range[i]._entity_on_tile.stall_turns+=2;
 						}
@@ -1306,15 +1309,16 @@ global.actionLibrary = {
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
 							
-							if(skill_range[i]._entity_on_tile.ally){
-								skill_range[i]._entity_on_tile.has_attacked=true;
-								skill_range[i]._entity_on_tile.has_moved=true;
-							}else{
-								skill_range[i]._entity_on_tile.remove_danger_highlights();
-							}
+							
 							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 1, c_blue);
 							if(skill_range[i]._entity_on_tile.stall_turns<=0){
 								skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
+								if(skill_range[i]._entity_on_tile.ally){
+									skill_range[i]._entity_on_tile.has_attacked=true;
+									skill_range[i]._entity_on_tile.has_moved=true;
+								}else{
+									skill_range[i]._entity_on_tile.remove_danger_highlights();
+								}
 							}
 							skill_range[i]._entity_on_tile.stall_turns+=1;
 						}
@@ -1815,6 +1819,15 @@ global.actionLibrary = {
 				for (var i = 0; i < array_length(skill_range_aux); i++) {
 					skill_range_aux[i]._target_highlight=true;
 				}
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+						obj_cursor.sprite_index=spr_grid_cursor;
+					}else{
+						obj_cursor.sprite_index=spr_grid_cursor_invalid;
+					}
+				}else{
+					obj_cursor.sprite_index=spr_grid_cursor_invalid;
+				}
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
 					if(unit.skill_progress==1){
@@ -1913,6 +1926,15 @@ global.actionLibrary = {
 				for (var i = 0; i < array_length(skill_range_aux); i++) {
 					skill_range_aux[i]._target_highlight=true;
 				}
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+						obj_cursor.sprite_index=spr_grid_cursor;
+					}else{
+						obj_cursor.sprite_index=spr_grid_cursor_invalid;
+					}
+				}else{
+					obj_cursor.sprite_index=spr_grid_cursor_invalid;
+				}
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
 					if(unit.skill_progress==1){
@@ -2005,6 +2027,16 @@ global.actionLibrary = {
 				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]];
 				for (var i = 0; i < array_length(skill_range_aux); i++) {
 					skill_range_aux[i]._target_highlight=true;
+				}
+				
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+						obj_cursor.sprite_index=spr_grid_cursor;
+					}else{
+						obj_cursor.sprite_index=spr_grid_cursor_invalid;
+					}
+				}else{
+					obj_cursor.sprite_index=spr_grid_cursor_invalid;
 				}
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
@@ -2112,6 +2144,15 @@ global.actionLibrary = {
 				for (var i = 0; i < array_length(skill_range_aux); i++) {
 					skill_range_aux[i]._target_highlight=true;
 				}
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+						obj_cursor.sprite_index=spr_grid_cursor;
+					}else{
+						obj_cursor.sprite_index=spr_grid_cursor_invalid;
+					}
+				}else{
+					obj_cursor.sprite_index=spr_grid_cursor_invalid;
+				}
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
 					if(unit.skill_progress==1){
@@ -2206,6 +2247,15 @@ global.actionLibrary = {
 				for (var i = 0; i < array_length(skill_range_aux); i++) {
 					skill_range_aux[i]._target_highlight=true;
 				}
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+						obj_cursor.sprite_index=spr_grid_cursor;
+					}else{
+						obj_cursor.sprite_index=spr_grid_cursor_invalid;
+					}
+				}else{
+					obj_cursor.sprite_index=spr_grid_cursor_invalid;
+				}
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
 					if(unit.skill_progress==1){
@@ -2298,6 +2348,15 @@ global.actionLibrary = {
 				skill_range_aux[unit.skill_progress-1]=obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]];
 				for (var i = 0; i < array_length(skill_range_aux); i++) {
 					skill_range_aux[i]._target_highlight=true;
+				}
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+						obj_cursor.sprite_index=spr_grid_cursor;
+					}else{
+						obj_cursor.sprite_index=spr_grid_cursor_invalid;
+					}
+				}else{
+					obj_cursor.sprite_index=spr_grid_cursor_invalid;
 				}
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
@@ -2409,6 +2468,15 @@ global.actionLibrary = {
 				
 				for (var i = 0; i < array_length(skill_range_aux); i++) {
 					skill_range_aux[i]._target_highlight=true;
+				}
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+						obj_cursor.sprite_index=spr_grid_cursor;
+					}else{
+						obj_cursor.sprite_index=spr_grid_cursor_invalid;
+					}
+				}else{
+					obj_cursor.sprite_index=spr_grid_cursor_invalid;
 				}
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
@@ -2523,6 +2591,15 @@ global.actionLibrary = {
 				for (var i = 0; i < array_length(skill_range_aux); i++) {
 					skill_range_aux[i]._target_highlight=true;
 				}
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+						obj_cursor.sprite_index=spr_grid_cursor;
+					}else{
+						obj_cursor.sprite_index=spr_grid_cursor_invalid;
+					}
+				}else{
+					obj_cursor.sprite_index=spr_grid_cursor_invalid;
+				}
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
 					if(unit.skill_progress==1){
@@ -2629,6 +2706,15 @@ global.actionLibrary = {
 				for (var i = 0; i < array_length(skill_range_aux); i++) {
 					skill_range_aux[i]._target_highlight=true;
 				}
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+						obj_cursor.sprite_index=spr_grid_cursor;
+					}else{
+						obj_cursor.sprite_index=spr_grid_cursor_invalid;
+					}
+				}else{
+					obj_cursor.sprite_index=spr_grid_cursor_invalid;
+				}
 				//show_debug_message(string(unit.skill_progress));
 				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
 					if(unit.skill_progress==1){
@@ -2722,8 +2808,13 @@ global.actionLibrary = {
 						skill_coords[1] -= 1;
 					}
 				}
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  || (skill_coords[0]==unit.grid_pos[0] && skill_coords[1]==unit.grid_pos[1])){
+					obj_cursor.sprite_index=spr_grid_cursor_invalid;
+				}else{
+					obj_cursor.sprite_index=spr_grid_cursor;
+				}
 				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
-					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
 						obj_battleControl.spawn_obstacle(global.obstacles[2],skill_coords);	//minibomb
@@ -2733,6 +2824,7 @@ global.actionLibrary = {
 						unit.skill_complete = true;
 						unit.skill_init = false;
 						show_debug_message(unit.action.name);
+						obj_cursor.sprite_index=spr_grid_cursor;
 					}else{
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
@@ -2742,6 +2834,7 @@ global.actionLibrary = {
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_range = obj_gridCreator.reset_highlights_attack();
 					unit.skill_init = false;
+					obj_cursor.sprite_index=spr_grid_cursor
 		
 				}
 			},
@@ -2786,8 +2879,13 @@ global.actionLibrary = {
 						skill_coords[1] -= 1;
 					}
 				}
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  || (skill_coords[0]==unit.grid_pos[0] && skill_coords[1]==unit.grid_pos[1])){
+					obj_cursor.sprite_index=spr_grid_cursor_invalid;
+				}else{
+					obj_cursor.sprite_index=spr_grid_cursor;
+				}
 				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
-					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
 						obj_battleControl.spawn_obstacle(global.obstacles[3],skill_coords);	
@@ -2797,10 +2895,12 @@ global.actionLibrary = {
 						unit.skill_complete = true;
 						unit.skill_init = false;
 						show_debug_message(unit.action.name);
+						obj_cursor.sprite_index=spr_grid_cursor;
 					}else{
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
 				}else if(keyboard_check_pressed(vk_tab)){
+					obj_cursor.sprite_index=spr_grid_cursor;
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
@@ -2819,11 +2919,17 @@ global.actionLibrary = {
 					skill_coords[1] = unit.grid_pos[1];
 					unit.skill_init = true;
 					unit.is_attacking = true;
+					unit.bomb_positions=[];
+					unit.bomb_highlights=[];
+					
 	
 					//audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 				}
 				skill_range = obj_gridCreator.highlighted_attack_circle(unit.grid_pos[0], unit.grid_pos[1], unit.range);
 				skill_range_aux = obj_gridCreator.highlighted_target_cross(skill_coords[0], skill_coords[1],1);
+				for(i=0;i<array_length(unit.bomb_highlights);i++){
+					unit.bomb_highlights[i]._target_highlight=true;	
+				}
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
 				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
@@ -2850,32 +2956,63 @@ global.actionLibrary = {
 						skill_coords[1] -= 1;
 					}
 				}
+				show_debug_message(array_contains(unit.bomb_positions,[skill_coords[0],skill_coords[1]]));
+				show_debug_message(unit.bomb_positions);
+				show_debug_message(skill_coords);
+				show_debug_message(array_any(unit.bomb_positions, function (_val, _ind){
+					return _val[0]==skill_coords[0] &&  _val[1]==skill_coords[1]
+				}));
+				if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1]) && !array_any(unit.bomb_positions, function (_val, _ind){
+						return _val[0]==skill_coords[0] &&  _val[1]==skill_coords[1]
+					})){
+					obj_cursor.sprite_index=spr_grid_cursor;
+				}else{
+					
+					obj_cursor.sprite_index=spr_grid_cursor_invalid;
+				}
 				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
-					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1]) && !array_any(unit.bomb_positions, function (_val, _ind){
+						return _val[0]==skill_coords[0] &&  _val[1]==skill_coords[1]
+					})){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
-						obj_battleControl.spawn_obstacle(global.obstacles[2],skill_coords);	//minibomb
+						//obj_battleControl.spawn_obstacle(global.obstacles[2],skill_coords);	//minibomb
+						for(i=0;i<array_length(skill_range_aux);i++){
+							array_push(unit.bomb_highlights,skill_range_aux[i]);	
+						}
+						array_push(unit.bomb_positions,[skill_coords[0],skill_coords[1]]);
+						
 						unit.bombs_placed += 1;
 						if (unit.bombs_placed == 2) {
+							for(i=0;i<array_length(unit.bomb_positions);i++){
+								obj_battleControl.spawn_obstacle(global.obstacles[2],unit.bomb_positions[i]);	//minibomb	
+							}
 							unit.is_attacking = false;
 							skill_range = obj_gridCreator.reset_highlights_attack();
 							skill_range_aux = obj_gridCreator.reset_highlights_target();
 							unit.skill_complete = true;
 							unit.skill_init = false;
 							show_debug_message(unit.action.name);
+							obj_cursor.sprite_index=spr_grid_cursor;
 						}
 						
 					}else{
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
 				}else if(keyboard_check_pressed(vk_tab)){
-					unit.bombs_placed = 0;
-					unit.is_attacking = false;
-					unit.skill_back = true;
-					unit.skill_range = obj_gridCreator.reset_highlights_target();
-					unit.skill_range = obj_gridCreator.reset_highlights_attack();
-					unit.skill_init = false;
-		
+					if(unit.bombs_placed>0){
+						unit.bombs_placed -= 1;
+						unit.bomb_positions=[];
+						unit.bomb_highlights=[];
+					}else{
+						unit.bombs_placed = 0;
+						unit.is_attacking = false;
+						unit.skill_back = true;
+						unit.skill_range = obj_gridCreator.reset_highlights_target();
+						unit.skill_range = obj_gridCreator.reset_highlights_attack();
+						unit.skill_init = false;
+						obj_cursor.sprite_index=spr_grid_cursor;
+					}
 				}
 			},
 		}
@@ -2934,8 +3071,13 @@ global.actionLibrary = {
 						skill_coords[1] -= 1;
 					}
 				}
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty || (skill_coords[0]==unit.grid_pos[0] && skill_coords[1]==unit.grid_pos[1])){
+					obj_cursor.sprite_index=spr_grid_cursor_invalid;
+				}else{
+					obj_cursor.sprite_index=spr_grid_cursor;
+				}
 				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
-					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
 						obj_battleControl.spawn_obstacle(global.obstacles[4],skill_coords);	//minibomb
@@ -2945,6 +3087,7 @@ global.actionLibrary = {
 						unit.skill_complete = true;
 						unit.skill_init = false;
 						show_debug_message(unit.action.name);
+						obj_cursor.sprite_index=spr_grid_cursor;
 					}else{
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
@@ -2954,7 +3097,7 @@ global.actionLibrary = {
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_range = obj_gridCreator.reset_highlights_attack();
 					unit.skill_init = false;
-		
+					obj_cursor.sprite_index=spr_grid_cursor;
 				}
 			},
 			upgrade1: function(unit){
@@ -2998,8 +3141,13 @@ global.actionLibrary = {
 						skill_coords[1] -= 1;
 					}
 				}
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  || (skill_coords[0]==unit.grid_pos[0] && skill_coords[1]==unit.grid_pos[1])){
+					obj_cursor.sprite_index=spr_grid_cursor_invalid;
+				}else{
+					obj_cursor.sprite_index=spr_grid_cursor;
+				}
 				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
-					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
 						obj_battleControl.spawn_obstacle(global.obstacles[5],skill_coords);	
@@ -3009,6 +3157,7 @@ global.actionLibrary = {
 						unit.skill_complete = true;
 						unit.skill_init = false;
 						show_debug_message(unit.action.name);
+						obj_cursor.sprite_index=spr_grid_cursor;
 					}else{
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
@@ -3018,6 +3167,8 @@ global.actionLibrary = {
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_range = obj_gridCreator.reset_highlights_attack();
 					unit.skill_init = false;
+					
+					obj_cursor.sprite_index=spr_grid_cursor;
 		
 				}
 			},
@@ -3062,8 +3213,13 @@ global.actionLibrary = {
 						skill_coords[1] -= 1;
 					}
 				}
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty || (skill_coords[0]==unit.grid_pos[0] && skill_coords[1]==unit.grid_pos[1])){
+					obj_cursor.sprite_index=spr_grid_cursor_invalid;
+				}else{
+					obj_cursor.sprite_index=spr_grid_cursor;
+				}
 				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
-					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
 						obj_battleControl.spawn_obstacle(global.obstacles[6],skill_coords);	
@@ -3073,6 +3229,7 @@ global.actionLibrary = {
 						unit.skill_complete = true;
 						unit.skill_init = false;
 						show_debug_message(unit.action.name);
+						obj_cursor.sprite_index=spr_grid_cursor;
 					}else{
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
@@ -3083,6 +3240,7 @@ global.actionLibrary = {
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_range = obj_gridCreator.reset_highlights_attack();
 					unit.skill_init = false;
+					obj_cursor.sprite_index=spr_grid_cursor;
 		
 				}
 			},
@@ -3142,8 +3300,13 @@ global.actionLibrary = {
 						skill_coords[1] -= 1;
 					}
 				}
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty || (skill_coords[0]==unit.grid_pos[0] && skill_coords[1]==unit.grid_pos[1])){
+					obj_cursor.sprite_index=spr_grid_cursor_invalid;
+				}else{
+					obj_cursor.sprite_index=spr_grid_cursor;
+				}
 				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
-					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
 						obj_battleControl.spawn_obstacle(global.obstacles[7],skill_coords);	//minibomb
@@ -3153,6 +3316,7 @@ global.actionLibrary = {
 						unit.skill_complete = true;
 						unit.skill_init = false;
 						show_debug_message(unit.action.name);
+						obj_cursor.sprite_index=spr_grid_cursor;
 					}else{
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
@@ -3162,7 +3326,7 @@ global.actionLibrary = {
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_range = obj_gridCreator.reset_highlights_attack();
 					unit.skill_init = false;
-		
+					obj_cursor.sprite_index=spr_grid_cursor;
 				}
 			},
 			upgrade1: function(unit){
@@ -3206,8 +3370,13 @@ global.actionLibrary = {
 						skill_coords[1] -= 1;
 					}
 				}
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty || (skill_coords[0]==unit.grid_pos[0] && skill_coords[1]==unit.grid_pos[1])){
+					obj_cursor.sprite_index=spr_grid_cursor_invalid;
+				}else{
+					obj_cursor.sprite_index=spr_grid_cursor;
+				}
 				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
-					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
 						obj_battleControl.spawn_obstacle(global.obstacles[8],skill_coords);	
@@ -3217,6 +3386,7 @@ global.actionLibrary = {
 						unit.skill_complete = true;
 						unit.skill_init = false;
 						show_debug_message(unit.action.name);
+						obj_cursor.sprite_index=spr_grid_cursor;
 					}else{
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
@@ -3226,6 +3396,7 @@ global.actionLibrary = {
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_range = obj_gridCreator.reset_highlights_attack();
 					unit.skill_init = false;
+					obj_cursor.sprite_index=spr_grid_cursor;
 		
 				}
 			},
@@ -3270,8 +3441,13 @@ global.actionLibrary = {
 						skill_coords[1] -= 1;
 					}
 				}
+				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty || (skill_coords[0]==unit.grid_pos[0] && skill_coords[1]==unit.grid_pos[1])){
+					obj_cursor.sprite_index=spr_grid_cursor_invalid;
+				}else{
+					obj_cursor.sprite_index=spr_grid_cursor;
+				}
 				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
-					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
 						obj_battleControl.spawn_obstacle(global.obstacles[9],skill_coords);	
@@ -3291,7 +3467,7 @@ global.actionLibrary = {
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_range = obj_gridCreator.reset_highlights_attack();
 					unit.skill_init = false;
-		
+					obj_cursor.sprite_index=spr_grid_cursor;
 				}
 			},
 		}
@@ -3759,12 +3935,18 @@ global.actionLibrary = {
 			base: function(unit){
 				
 				unit.action = unit.actions[unit.skill_used];
+				
 				if(!unit.skill_init){
 					//audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					// setup initial target
 					
 					unit.skill_init=true;
 					show_debug_message("basic init");
+					obj_gridCreator.reset_highlights_attack();
+					obj_gridCreator.reset_highlights_target();
+					obj_gridCreator.reset_highlights_support();
+					
+				
 				}
 				
 				obj_cursor.movable_tiles=[];

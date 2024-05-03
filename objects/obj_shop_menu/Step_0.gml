@@ -168,7 +168,9 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade && !transition_out){
 	
 	if(actual_x<-1500){
 		transition_out=false;
+
 		obj_battleControl.transition_count=80;
+
 		obj_gridCreator.transition_in=true;
 		obj_battleControl.change_state(BattleState.BattleStart);
 	}
