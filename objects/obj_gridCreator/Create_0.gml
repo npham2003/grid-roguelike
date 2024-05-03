@@ -551,7 +551,7 @@ highlighted_target_straight_back = function(_center_x,_center_y){
 	
 	highlighted_target_array=[];
 	var j=0;
-	while(_center_x+j>0){
+	while(_center_x+j>=0){
 		
 		if(!battle_grid[_center_x+j][_center_y]._is_empty){
 			
@@ -570,7 +570,7 @@ highlighted_target_straight_up = function(_center_x,_center_y){
 	
 	highlighted_target_array=[];
 	var j=0;
-	while(_center_y+j>0){
+	while(_center_y+j>=0){
 		
 		if(!battle_grid[_center_x][_center_y+j]._is_empty){
 			
