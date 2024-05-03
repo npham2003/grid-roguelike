@@ -60,6 +60,7 @@
     {"name":"sfx_teleport_windup","order":4,"path":"sounds/sfx_teleport_windup/sfx_teleport_windup.yy",},
     {"name":"sfx_teleport","order":6,"path":"sounds/sfx_teleport/sfx_teleport.yy",},
     {"name":"sfx_vine_boom","order":11,"path":"sounds/sfx_vine_boom/sfx_vine_boom.yy",},
+    {"name":"sfx_frostbite","order":23,"path":"sounds/sfx_frostbite/sfx_frostbite.yy",},
     {"name":"all_arrow_sprites","order":10,"path":"sprites/all_arrow_sprites/all_arrow_sprites.yy",},
     {"name":"enemy_bg","order":5,"path":"sprites/enemy_bg/enemy_bg.yy",},
     {"name":"menu_bg","order":1,"path":"sprites/menu_bg/menu_bg.yy",},

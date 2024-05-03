@@ -1371,6 +1371,7 @@ global.actionLibrary = {
 				
 				var _damage = unit.action.damage;
 				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
+					audio_play_sound(sfx_frostbite, 0, false, 0.5);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
 							if (skill_range[i]._entity_on_tile.stall_turns>0) {
@@ -1420,6 +1421,7 @@ global.actionLibrary = {
 				
 				var _damage = unit.action.damage;
 				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
+					audio_play_sound(sfx_frostbite, 0, false, 0.5);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
 							if (skill_range[i]._entity_on_tile.stall_turns>0) {
@@ -1490,6 +1492,7 @@ global.actionLibrary = {
 				
 				var _damage = unit.action.damage;
 				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
+					audio_play_sound(sfx_frostbite, 0, false, 0.5);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
 							if (skill_range[i]._entity_on_tile.stall_turns>0) {
