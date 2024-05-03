@@ -137,7 +137,7 @@ spawn_enemies = function(enemy_data){
 
 // spawns an enemy on the ally side of the board. if target tile is not empty it will find a nearby empty one
 spawn_summon_ally_side = function(enemy_data, _summoner){
-	battle_gold=0;
+	
 	for (var i = 0; i < array_length(enemy_data); i++) {
 		empty_tile = obj_gridCreator.find_empty_tile_ally(enemy_data[i].grid[0], enemy_data[i].grid[1], 5);
 		var coord =[empty_tile.x, empty_tile.y];
