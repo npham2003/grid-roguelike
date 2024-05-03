@@ -431,13 +431,14 @@ if (win > 0){
 		else if (win == 2) draw_text_transformed(room_width/2, room_height/2-100, "YOU DIED", 2, 2, 0);
 		
 		draw_set_font(fnt_chiaro);
-		draw_text_transformed(room_width/2, room_height/2 + 110, "PRESS ANY KEY TO RETURN TO MAIN MENU", 0.8, 0.8, 0);
+		draw_text_transformed(room_width/2, room_height/2 + 150, "PRESS ANY KEY TO RETURN TO MAIN MENU", 0.8, 0.8, 0);
 		
 		draw_text_transformed(room_width/2, room_height/2-20, "Gold: " + string(obj_battleControl.gold), 0.8, 0.8, 0)
 		
 		if (win == 2){
 			draw_text_transformed(room_width/2, room_height/2+10, "Floor: " + string(floor(obj_battleControl.battle_progress/5)+1)+"/"+string(string(floor(array_length(global.encounters)/5))), 0.8, 0.8, 0);
-			draw_text_transformed(room_width/2, room_height/2+40, "Turn Count: " + string(obj_battleControl.turn_count), 0.8, 0.8, 0);
+			draw_text_transformed(room_width/2, room_height/2+40, "Battle: " + string(floor(obj_battleControl.battle_progress)+1)+"/"+string(string(floor(array_length(global.encounters)))), 0.8, 0.8, 0);
+			draw_text_transformed(room_width/2, room_height/2+70, "Turn Count: " + string(obj_battleControl.turn_count), 0.8, 0.8, 0);
 		}
 		else draw_text_transformed(room_width/2, room_height/2+10, "Turn Count: " + string(obj_battleControl.turn_count), 0.8, 0.8, 0);
 		

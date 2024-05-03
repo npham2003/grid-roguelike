@@ -44,7 +44,7 @@ if(is_dead){
 	}
 	// fade out speed
 	image_alpha-=0.01;
-	show_debug_message(string(image_alpha));
+	//show_debug_message(string(image_alpha));
 	
 }
 

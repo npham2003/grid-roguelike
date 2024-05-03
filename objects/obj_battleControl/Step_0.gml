@@ -115,7 +115,7 @@ switch (state) {
 				change_state(BattleState.PlayerPreparing);
 				break;
 			}
-			show_debug_message(string(enemy_order));
+			//show_debug_message(string(enemy_order));
 			unit = enemy_units[enemy_order];
 			
 			// if the enemy is frozen
@@ -373,10 +373,10 @@ switch (state) {
 						}
 				}
 				else if (key_Tab_pressed) { // changes upgrades for debugging
-					//for(i = 1;i<array_length(unit.upgrades);i++){
-					//	unit.upgrades[i]+=1;
-					//	unit.upgrades[i]=unit.upgrades[i]%3;
-					//}
+					for(i = 1;i<array_length(unit.upgrades)-1;i++){
+						unit.upgrades[i]+=1;
+						unit.upgrades[i]=unit.upgrades[i]%3;
+					}
 				}
 				
 			}else{ // enemy unit
@@ -401,6 +401,7 @@ switch (state) {
 
 #region Player Moving
 	case BattleState.PlayerMoving:
+		obj_cursor.sprite_index=spr_grid_cursor;
 		obj_menu.back = true;
 		// error handling but unit should always be a player unit here
 		if(unit!=pointer_null){
@@ -655,7 +656,7 @@ switch (state) {
 
 #region Player Taking Action
 	case BattleState.PlayerTakingAction:
-	
+		obj_cursor.sprite_index=spr_grid_cursor;
 		obj_menu.back = true;
 		
 		show_debug_message(unit.name + ": taking action");

@@ -13,19 +13,48 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	{
 		//draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);
 		//draw_text_ext(actual_x-235+round(lengthdir_x(2,dto_i)),y+165+round(lengthdir_y(2,dto_i)),"+",8,100000);
-		draw_text_ext_transformed(actual_x+round(lengthdir_x(2,dto_i)),50+round(lengthdir_y(2,dto_i)),"SHOP",8,100000,1,1,0);
+		draw_text_ext_transformed(actual_x+round(lengthdir_x(2,dto_i)),75+round(lengthdir_y(2,dto_i)),"SHOP",8,100000,1,1,0);
 	}
 	draw_set_color(c_white);
-	draw_text(actual_x,50,"SHOP");
+	draw_text(actual_x,75,"SHOP");
 	draw_set_color(c_white);
 	draw_set_font(fnt_chiaro);
 	draw_set_halign(fa_left);
 	
 	
-	show_debug_message(selectable);
+	
 
 	// background and border
 	if(menu_level<=1){ //if this is not the skill select screen
+		
+		#region progress bar
+		draw_line_width_color(room_width/2-obj_menu.progress_length/2,obj_menu.progress_height,room_width/2+obj_menu.progress_length/2,obj_menu.progress_height,obj_menu.progress_thickness,global._primary,global._primary);
+		draw_set_color(global._characterPrimary);
+		//draw_circle(player_marker,progress_height,15, false);
+		draw_primitive_begin(pr_trianglestrip);
+		draw_vertices(make_diamond(obj_menu.player_marker,obj_menu.progress_height,15));
+		draw_primitive_end();
+		draw_set_color(global._primary);
+
+		draw_set_font(fnt_archivo);
+
+		for(i=0;i<5;i++){
+			draw_set_color(global._primary);
+			draw_primitive_begin(pr_trianglestrip);
+			draw_vertices(make_diamond(room_width/2-obj_menu.progress_length/2+(obj_menu.progress_length/(obj_menu.battles_in_room-1)*i),obj_menu.progress_height,10));
+			draw_primitive_end();
+			//draw_circle(room_width/2-progress_length/2+(progress_length/(battles_in_room-1)*i),progress_height,10, false);
+			if(obj_battleControl.battle_progress%5==i){
+				draw_set_alpha(obj_menu.tp_opacity*0.5);
+				draw_set_color(c_white);
+				draw_primitive_begin(pr_trianglestrip);
+				draw_vertices(make_diamond(room_width/2-obj_menu.progress_length/2+(obj_menu.progress_length/(obj_menu.battles_in_room-1)*i),obj_menu.progress_height,10));
+				draw_primitive_end();
+				//draw_circle(room_width/2-progress_length/2+(progress_length/(battles_in_room-1)*i),progress_height,10, false);
+			}
+			draw_set_alpha(1);
+		}
+		#endregion
 		//draw_set_color(global._aspect_bars);
 		draw_set_alpha(1);
 		//draw_rectangle(0, 0, room_width, room_height, false);
@@ -202,7 +231,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 				
 				//draw cost of option in top left corner
 				draw_set_alpha(1);
-				draw_set_color(c_white);
+				draw_set_color(c_black);
 				draw_set_font(fnt_archivo);
 				for(var dto_i=45; dto_i<405; dto_i+=360/8)
 				{
@@ -210,7 +239,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 					//draw_text_ext(actual_x-235+round(lengthdir_x(2,dto_i)),y+165+round(lengthdir_y(2,dto_i)),"+",8,100000);
 					draw_text_ext_transformed(actual_x+(200*(i-1))-60+round(lengthdir_x(2,dto_i)),y+(175*j)+95+round(lengthdir_y(2,dto_i)),cost[i+j*3],8,100000,0.5,0.5,0);
 				}
-				draw_set_color(c_black);
+				draw_set_color(c_white);
 				
 				draw_text_ext_transformed(actual_x+(200*(i-1))-60, y+(175*j)+95, cost[i+j*3], 40, 360, 0.5, 0.5, image_angle);
 				draw_set_color(c_white);
@@ -654,10 +683,10 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	draw_text_transformed(75, 20, "G    "+ string(obj_battleControl.gold), 0.8, 0.8, 0);
 	#endregion
 	//reset draw
-	draw_set_color(c_black);
+	draw_set_color(c_white);
 	draw_set_alpha(1);
 	
-	text_outline(580,700, "WASD - Move Cursor    Enter - Select    Tab - Back", 1, c_white, 8, 100000, 1000000);
+	text_outline(580,700, "WASD - Move Cursor    Enter - Select    Tab - Back", 1, c_black, 8, 100000, 1000000);
 	draw_set_color(c_white);
 	
 }

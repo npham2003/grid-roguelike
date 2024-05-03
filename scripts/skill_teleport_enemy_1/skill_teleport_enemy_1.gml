@@ -17,7 +17,6 @@ function skill_teleport_enemy_1(unit){
 	}
 	if(unit.skill_progress==1){
 		skill_range = obj_gridCreator.highlighted_support_all();
-		show_debug_message(skill_range);
 	}
 	if(unit.skill_progress==2){
 		original_grid = skill_range_aux[0];
@@ -54,6 +53,24 @@ function skill_teleport_enemy_1(unit){
 	for (var i = 0; i < array_length(skill_range_aux); i++) {
 		skill_range_aux[i]._target_highlight=true;
 	}
+	if(unit.skill_progress==1){
+		if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+			obj_cursor.sprite_index=spr_grid_cursor_invalid;
+		}else{
+			if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+				obj_cursor.sprite_index=spr_grid_cursor;
+			}else{
+				obj_cursor.sprite_index=spr_grid_cursor_invalid;
+			}
+		}
+	}
+	if(unit.skill_progress==2){
+		if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty || (unit.grid_pos[0]==skill_coords[0] && unit.grid_pos[1]==skill_coords[1])){
+			obj_cursor.sprite_index=spr_grid_cursor_invalid;
+		}else{
+			obj_cursor.sprite_index=spr_grid_cursor;
+		}
+	}
 	//show_debug_message(string(unit.skill_progress));
 	if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
 		if(unit.skill_progress==1){
@@ -70,7 +87,7 @@ function skill_teleport_enemy_1(unit){
 			}
 		}
 		else if(unit.skill_progress==2){
-			if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+			if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (unit.grid_pos[0]!=skill_coords[0] || unit.grid_pos[1]!=skill_coords[1])){
 				
 					audio_play_sound(sfx_teleport, 0, false, 1);
 				
@@ -110,6 +127,7 @@ function skill_teleport_enemy_1(unit){
 			unit.skill_range = obj_gridCreator.reset_highlights_target();
 			unit.skill_range = obj_gridCreator.reset_highlights_support();
 			unit.skill_progress=0;
+			obj_cursor.sprite_index=spr_grid_cursor;
 		}
 		
 	}

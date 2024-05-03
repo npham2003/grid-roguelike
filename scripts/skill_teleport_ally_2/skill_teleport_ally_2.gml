@@ -13,6 +13,7 @@ function skill_teleport_ally_2(unit){
 		unit.is_attacking = true;
 		skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],0);
 		audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+		unit.confirm_move();
 	}
 	skill_range = obj_gridCreator.highlighted_support_player_side();
 				
@@ -46,11 +47,36 @@ function skill_teleport_ally_2(unit){
 	for (var i = 0; i < array_length(skill_range_aux); i++) {
 		skill_range_aux[i]._target_highlight=true;
 	}
+	if(unit.skill_progress==1){
+		if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+			obj_cursor.sprite_index=spr_grid_cursor_invalid;
+		}else{
+			if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally && obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.id!=unit.id){
+				show_debug_message("fuck");
+				obj_cursor.sprite_index=spr_grid_cursor;
+			}else{
+				show_debug_message("hi");
+				obj_cursor.sprite_index=spr_grid_cursor_invalid;
+			}
+		}
+	}
+	if(unit.skill_progress==2){
+		if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty || skill_range_aux[0]==obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]){
+			obj_cursor.sprite_index=spr_grid_cursor_invalid;
+		}else{
+			if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally && obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.id!=unit.id){
+				obj_cursor.sprite_index=spr_grid_cursor;
+			}else{
+				obj_cursor.sprite_index=spr_grid_cursor_invalid;
+			}
+		}
+	}
+
 	//show_debug_message(string(unit.skill_progress));
 	if (keyboard_check_pressed(ord("K"))  || keyboard_check_pressed(vk_enter)) {
 		if(unit.skill_progress==1){
 			if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
-				if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+				if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally && obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.id!=unit.id){
 					audio_play_sound(sfx_teleport_select, 0, false, 1);
 					unit.skill_progress=2;
 					array_push(skill_range_aux,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]);
@@ -63,7 +89,7 @@ function skill_teleport_ally_2(unit){
 		}
 		else if(unit.skill_progress==2){
 			if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
-				if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+				if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally && obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.id!=unit.id){
 					audio_play_sound(sfx_teleport, 0, false, 1);
 					temp = skill_range_aux[0]._entity_on_tile;
 					skill_range_aux[0]._entity_on_tile = skill_range_aux[1]._entity_on_tile;
@@ -111,6 +137,7 @@ function skill_teleport_ally_2(unit){
 			unit.skill_range = obj_gridCreator.reset_highlights_target();
 			unit.skill_range = obj_gridCreator.reset_highlights_support();
 			unit.skill_progress=0;
+			obj_cursor.sprite_index=spr_grid_cursor;
 		}
 		
 	}
