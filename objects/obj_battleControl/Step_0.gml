@@ -124,10 +124,13 @@ switch (state) {
 				obj_battleEffect.show_damage(unit, unit.stall_turns, c_blue);
 				// finishing frozen turns
 				if(unit.stall_turns<=0){
-					unit.freeze_graphic.sprite_index=spr_freeze_out;
+					if(unit.freeze_graphic!=pointer_null){
+						unit.freeze_graphic.sprite_index=spr_freeze_out;
+						
+						unit.freeze_graphic.image_speed=1;
+						unit.freeze_graphic=pointer_null;
+					}
 					audio_play_sound(sfx_defreeze, 0, false, 0.5);
-					unit.freeze_graphic.image_speed=1;
-					unit.freeze_graphic=pointer_null;
 				}
 			}
 			
@@ -194,7 +197,7 @@ switch (state) {
 					player_units[i].freeze_graphic.sprite_index=spr_freeze_out;
 					player_units[i].freeze_graphic.image_speed=1;
 					audio_play_sound(sfx_defreeze, 0, false, 0.5);
-					unit.freeze_graphic=pointer_null;
+					player_units[i].freeze_graphic=pointer_null;
 				}
 			}
 			player_units[i].shield=0;
@@ -898,11 +901,13 @@ switch (state) {
 				
 				// finishing freeze turns
 				if(obstacle.stall_turns==0){
-					
-					obstacle.freeze_graphic.sprite_index=spr_freeze_out;
-					obstacle.freeze_graphic.image_speed=1;
+					if(obstacle.freeze_graphic!=pointer_null){
+						obstacle.freeze_graphic.sprite_index=spr_freeze_out;
+						obstacle.freeze_graphic.image_speed=1;
+						obstacle.freeze_graphic=pointer_null;
+					}
 					audio_play_sound(sfx_defreeze, 0, false, 0.5);
-					unit.freeze_graphic=pointer_null;
+					
 			
 				}
 			}

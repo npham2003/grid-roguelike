@@ -436,8 +436,10 @@ function despawn(){
 	is_dead=true;
 	obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
 	remove_danger_highlights();
-	freeze_graphic.sprite_index=spr_freeze_out;
-	freeze_graphic.image_speed=1;
+	if(freeze_graphic!=pointer_null){
+		freeze_graphic.sprite_index=spr_freeze_out;
+		freeze_graphic.image_speed=1;
+	}
 }
 
 // pushes right
