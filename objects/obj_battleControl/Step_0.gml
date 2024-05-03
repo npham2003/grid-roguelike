@@ -184,7 +184,9 @@ switch (state) {
 				}
 				player_units[i].move_buff_recent=false;
 			}
-			
+			if(turn_count-attack_up_turn>3){
+				player_units[i].attack_bonus=0;
+			}
 			// if unit is frozen
 			if(player_units[i].stall_turns>0){
 				player_units[i].stall_turns-=1;

@@ -24,7 +24,7 @@ transition_out=false;
 
 descriptor_text = ["Heal 1 character for 1 HP",
 					"Gain 1 extra TP each turn until the next floor",
-					"Each attack does 1 extra damage until the next floor", 
+					"Each attack does 1 extra damage for 3 turns or until the next floor", 
 					"Upgrade a skill on this character",
 					"Upgrade a skill on this character",
 					"Upgrade a skill on this character",];
@@ -67,6 +67,7 @@ attack_up = function(){
 	for(i=0;i<array_length(obj_battleControl.player_units);i++){
 		obj_battleControl.player_units[i].attack_bonus+=1;
 	}
+	obj_battleControl.attack_up_turn=obj_battleControl.turn_count;
 	obj_battleControl.gold-=cost[2];
 }
 

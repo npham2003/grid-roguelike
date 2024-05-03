@@ -21,7 +21,7 @@ transition_count = 0;
 
 enemy_check_death = 0;
 checking_death = false;
-gold = 0;
+gold = 100;
 battle_gold = 0;
 unit = pointer_null;
 
@@ -31,10 +31,13 @@ obstacle = pointer_null;
 battle_progress=0;
 
 turn_count=0;
+attack_up_turn=0;
 
 music_track = global.floor_music[0][irandom_range(0,array_length(global.floor_music[0])-1)];
 
 current_music = audio_play_sound(music_track, 0, true, 0.3);
+
+
 
 #region Spawns
 
