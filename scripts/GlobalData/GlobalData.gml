@@ -935,7 +935,7 @@ global.actionLibrary = {
 					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
 					unit.skill_init=false;
 					obj_battleEffect.remove_push_preview();
-					
+					unit.skill_option = 0;
 		
 				}else if(keyboard_check_pressed(vk_tab)){
 					unit.is_attacking = false;
@@ -1013,6 +1013,7 @@ global.actionLibrary = {
 							}
 						}
 					}
+					unit.skill_option = 0;
 					unit.is_attacking = false;
 					unit.skill_complete = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -1102,6 +1103,7 @@ global.actionLibrary = {
 					}
 					unit.is_attacking = false;
 					unit.skill_complete = true;
+					unit.skill_option = 0;
 					skill_range = obj_gridCreator.reset_highlights_target();
 					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
 					obj_battleEffect.remove_push_preview();
