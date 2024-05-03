@@ -373,10 +373,10 @@ switch (state) {
 						}
 				}
 				else if (key_Tab_pressed) { // changes upgrades for debugging
-					for(i = 1;i<array_length(unit.upgrades)-1;i++){
-						unit.upgrades[i]+=1;
-						unit.upgrades[i]=unit.upgrades[i]%3;
-					}
+					//for(i = 1;i<array_length(unit.upgrades)-1;i++){
+					//	unit.upgrades[i]+=1;
+					//	unit.upgrades[i]=unit.upgrades[i]%3;
+					//}
 				}
 				
 			}else{ // enemy unit
