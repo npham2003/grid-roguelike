@@ -26,7 +26,7 @@ global.floor_music=[
 global.actionLibrary = {
 	baseAttack: {
 		name: ["Attack"], //probably redundant to have a name but keep it
-		description: ["Does 1 damage to the first target in any direction"],
+		description: ["Does 1 damage to the first target in any direction. Ignores units with 0 HP"],
 		cost: [1],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -43,11 +43,11 @@ global.actionLibrary = {
 				if(!unit.skill_init){
 					//audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					// setup initial target
-					skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
+					skill_range = obj_gridCreator.highlighted_target_straight_basic(unit.grid_pos[0]+1, unit.grid_pos[1]);
 					unit.skill_init=true;
 					show_debug_message("basic init");
 				}
-				obj_gridCreator.highlighted_attack_cross(unit.grid_pos[0], unit.grid_pos[1],15);
+				obj_gridCreator.highlighted_attack_cross_basic(unit.grid_pos[0], unit.grid_pos[1],15);
 				obj_cursor.movable_tiles=skill_range;
 				unit.is_attacking = true;
 				if(array_length(skill_range)>0 && !unit.skill_complete){ // set cursor to target if it hits anything, if not its on the player unit
@@ -58,26 +58,26 @@ global.actionLibrary = {
 				
 				if (keyboard_check_pressed(ord("A"))) { // aiming
 					obj_gridCreator.reset_highlights_target();
-					skill_range = obj_gridCreator.highlighted_target_straight_back(unit.grid_pos[0]-1, unit.grid_pos[1]);
+					skill_range = obj_gridCreator.highlighted_target_straight_back_basic(unit.grid_pos[0]-1, unit.grid_pos[1]);
 					
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 
 				}
 				if (keyboard_check_pressed(ord("D")) ) { // a bunch of this is hardcoded atm
 					obj_gridCreator.reset_highlights_target();
-					skill_range = obj_gridCreator.highlighted_target_straight(unit.grid_pos[0]+1, unit.grid_pos[1]);
+					skill_range = obj_gridCreator.highlighted_target_straight_basic(unit.grid_pos[0]+1, unit.grid_pos[1]);
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 
 				}
 				if (keyboard_check_pressed(ord("S")) ) { // a bunch of this is hardcoded atm
 					obj_gridCreator.reset_highlights_target();
-					skill_range = obj_gridCreator.highlighted_target_straight_down(unit.grid_pos[0], unit.grid_pos[1]+1);
+					skill_range = obj_gridCreator.highlighted_target_straight_down_basic(unit.grid_pos[0], unit.grid_pos[1]+1);
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 
 				}
 				if (keyboard_check_pressed(ord("W"))) { // a bunch of this is hardcoded atm
 					obj_gridCreator.reset_highlights_target();
-					skill_range = obj_gridCreator.highlighted_target_straight_up(unit.grid_pos[0], unit.grid_pos[1]-1);
+					skill_range = obj_gridCreator.highlighted_target_straight_up_basic(unit.grid_pos[0], unit.grid_pos[1]-1);
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 
 				}
