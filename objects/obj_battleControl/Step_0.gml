@@ -46,7 +46,7 @@ switch (state) {
 			music_track = global.floor_music[floor(battle_progress/5)][irandom_range(0,array_length(global.floor_music[floor(battle_progress/5)])-1)];
 			//music_track = global.floor_music[2][0];
 
-			current_music = audio_play_sound(music_track, 0, true, 0.5);
+			current_music = audio_play_sound(music_track, 0, true, 0.3);
 			
 		}
 		for (var i = 0; i < array_length(player_units); i++) {
@@ -259,10 +259,14 @@ switch (state) {
 		obj_menu.set_text("WASD - Move Cursor     Enter - Select Unit     Space - End Turn");
 		
 		for (var i = 0; i<array_length(obj_gridCreator.battle_grid_flattened); i++){ // NO MORE GHOSTS
-			if(obj_gridCreator.battle_grid_flattened[i]._x_coord<5){
+			
 				obj_gridCreator.battle_grid_flattened[i]._is_empty=true;
 				obj_gridCreator.battle_grid_flattened[i]._entity_on_tile=pointer_null;
-			}
+			
+		}
+		for (var i = 0; i < array_length(enemy_units); i++) {
+			obj_gridCreator.battle_grid[enemy_units[i].grid_pos[0]][enemy_units[i].grid_pos[1]]._entity_on_tile=enemy_units[i];
+			obj_gridCreator.battle_grid[enemy_units[i].grid_pos[0]][enemy_units[i].grid_pos[1]]._is_empty=false;
 		}
 		// checks if all player units have moved
 		for (var i = 0; i < array_length(player_units); i++) {
@@ -673,10 +677,12 @@ switch (state) {
 		if (enemy_unit.hp<=0){
 			enemy_unit.despawn();
 			if(enemy_unit.stall_turns>0){
-				unit.freeze_graphic.sprite_index=spr_freeze_out;
+				if(unit.freeze_graphic!=pointer_null){
+					unit.freeze_graphic.sprite_index=spr_freeze_out;			
+					unit.freeze_graphic.image_speed=1;
+					unit.freeze_graphic=pointer_null;
+				}
 				audio_play_sound(sfx_defreeze, 0, false, 0.5);
-				unit.freeze_graphic.image_speed=1;
-				unit.freeze_graphic=pointer_null;
 			}
 			array_delete(enemy_units, enemy_check_death, 1);
 			enemy_check_death-=1;
@@ -692,6 +698,9 @@ switch (state) {
 				change_state(BattleState.BattleEnd);
 			}
 			else {
+				for(i=0;i<array_length(enemy_units);i++){
+					enemy_units[i].recalc_los();
+				}
 				change_state(BattleState.PlayerWaitingAction);
 				
 				unit.is_attacking = false;
@@ -761,6 +770,16 @@ switch (state) {
 		
 		if(in_animation){
 			break;
+		}
+		for (var i = 0; i<array_length(obj_gridCreator.battle_grid_flattened); i++){ // NO MORE GHOSTS
+			
+				obj_gridCreator.battle_grid_flattened[i]._is_empty=true;
+				obj_gridCreator.battle_grid_flattened[i]._entity_on_tile=pointer_null;
+			
+		}
+		for (var i = 0; i < array_length(player_units); i++) {
+			obj_gridCreator.battle_grid[player_units[i].grid_pos[0]][player_units[i].grid_pos[1]]._entity_on_tile=player_units[i];
+			obj_gridCreator.battle_grid[player_units[i].grid_pos[0]][player_units[i].grid_pos[1]]._is_empty=false;
 		}
 		if(array_length(enemy_units)==0){
 			gold+=battle_gold;

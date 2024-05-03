@@ -1179,7 +1179,7 @@ global.actionLibrary = {
 	freeze: {
 		name: ["Freeze", "Deep Freeze", "Piercing Freeze"], //probably redundant to have a name but keep it
 		description: ["Prevents the first target in a row from acting for 1 turn", "Prevents the first target in a row from acting for 2 turns", "Prevents all targets in a row from acting for 1 turn"],
-		cost: [2, 4, 4],
+		cost: [3, 5, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -1348,7 +1348,7 @@ global.actionLibrary = {
 	frostcone: {
 		name: ["Frostbite", "Boreal Wind", "Sharp Winds"], //probably redundant to have a name but keep it
 		description: ["Attacks in a cone in front of you.\nFrozen units take 1 more damage", "Attacks in a cone in front of you as well as everything in front of you in the row.\nFrozen units take 1 more damage", "Attacks in a cone in front of you.\nFrozen units take 2 more damage"],
-		cost: [3, 4, 4],
+		cost: [4, 6, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -1539,8 +1539,8 @@ global.actionLibrary = {
 	},
 	thaw: {
 		name: ["Icicle Crash", "Avalanche", "Absolute Zero"], //probably redundant to have a name but keep it
-		description: ["Freezes a unit up to 3 tiles away and all adjacent units for 1 turn", "Freezes any unit and all adjacent units for 1 turn", "Freeze all enemy units for 1 turn"],
-		cost: [4, 6, 8],
+		description: ["Freeze any unit for 1 turn", "Freezes a unit up to 3 tiles away and all adjacent units for 1 turn", "Freeze all enemy units for 1 turn"],
+		cost: [5, 6, 9],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -1551,6 +1551,84 @@ global.actionLibrary = {
 		},
 		skillFunctions: {
 			base: function(unit){
+				obj_gridCreator.reset_highlights_target();
+				unit.action = unit.actions[unit.skill_used];
+				var _damage = unit.action.damage;
+				if (!unit.skill_init) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
+					unit.range = 3;
+					
+					skill_coords[0] = unit.grid_pos[0] + unit.range;
+					skill_coords[1] = unit.grid_pos[1];
+					unit.skill_init = true;
+					unit.is_attacking = true;
+	
+					//audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+				}
+				skill_range = obj_gridCreator.highlighted_attack_all();
+				skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],0);
+				show_debug_message(string(skill_range));
+				obj_cursor.movable_tiles=skill_range;
+				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
+				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[0] -= 1;
+					}
+				}
+				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz-1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[0] += 1;
+					}
+				}
+				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[1] += 1;
+					}
+				}
+				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
+						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+						skill_coords[1] -= 1;
+					}
+				}
+				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
+					audio_play_sound(sfx_freeze, 0, false, 0.5);
+					
+					for (var i = 0; i < array_length(skill_range_aux); i++) {
+						if (!skill_range_aux[i]._is_empty) {
+							if(skill_range_aux[i]._entity_on_tile.stall_turns<=0){
+								skill_range_aux[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range_aux[i]._entity_on_tile, 6);
+							}
+							skill_range_aux[i]._entity_on_tile.stall_turns+=1;
+							if(skill_range_aux[i]._entity_on_tile.ally){
+								skill_range_aux[i]._entity_on_tile.has_attacked=true;
+								skill_range_aux[i]._entity_on_tile.has_moved=true;
+							}else{
+								skill_range_aux[i]._entity_on_tile.remove_danger_highlights();
+							}
+							obj_battleEffect.show_damage(skill_range_aux[i]._entity_on_tile, 1, c_blue);
+							
+						}
+					}
+		
+					unit.is_attacking = false;
+					skill_range = obj_gridCreator.reset_highlights_attack();
+					skill_range_aux = obj_gridCreator.reset_highlights_target();
+					unit.skill_complete = true;
+					unit.skill_init = false;
+					show_debug_message(unit.action.name);
+				}else if(keyboard_check_pressed(vk_tab)){
+					unit.is_attacking = false;
+					unit.skill_back = true;
+					unit.skill_range = obj_gridCreator.reset_highlights_target();
+					unit.skill_range = obj_gridCreator.reset_highlights_attack();
+					unit.skill_init = false;
+		
+				}
+			},
+			upgrade1: function(unit){
 				obj_gridCreator.reset_highlights_target();
 				unit.action = unit.actions[unit.skill_used];
 				var _damage = unit.action.damage;
@@ -1627,84 +1705,7 @@ global.actionLibrary = {
 		
 				}
 			},
-			upgrade1: function(unit){
-				obj_gridCreator.reset_highlights_target();
-				unit.action = unit.actions[unit.skill_used];
-				var _damage = unit.action.damage;
-				if (!unit.skill_init) { // i gotta find a better way to initialize the skill coord that doesn't use this stupid bool
-					unit.range = 3;
-					
-					skill_coords[0] = unit.grid_pos[0] + unit.range;
-					skill_coords[1] = unit.grid_pos[1];
-					unit.skill_init = true;
-					unit.is_attacking = true;
-	
-					//audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-				}
-				skill_range = obj_gridCreator.highlighted_attack_all();
-				skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
-				show_debug_message(string(skill_range));
-				obj_cursor.movable_tiles=skill_range;
-				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
-						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						skill_coords[0] -= 1;
-					}
-				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz-1) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
-						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						skill_coords[0] += 1;
-					}
-				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
-						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						skill_coords[1] += 1;
-					}
-				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
-					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
-						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-						skill_coords[1] -= 1;
-					}
-				}
-				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
-					audio_play_sound(sfx_freeze, 0, false, 0.5);
-					obj_battleEffect.hit_animation_coordinates(skill_coords[0],skill_coords[1],1);
-					for (var i = 0; i < array_length(skill_range_aux); i++) {
-						if (!skill_range_aux[i]._is_empty) {
-							if(skill_range_aux[i]._entity_on_tile.stall_turns<=0){
-								skill_range_aux[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range_aux[i]._entity_on_tile, 6);
-							}
-							skill_range_aux[i]._entity_on_tile.stall_turns+=1;
-							if(skill_range_aux[i]._entity_on_tile.ally){
-								skill_range_aux[i]._entity_on_tile.has_attacked=true;
-								skill_range_aux[i]._entity_on_tile.has_moved=true;
-							}else{
-								skill_range_aux[i]._entity_on_tile.remove_danger_highlights();
-							}
-							obj_battleEffect.show_damage(skill_range_aux[i]._entity_on_tile, 1, c_blue);
-							
-						}
-					}
-		
-					unit.is_attacking = false;
-					skill_range = obj_gridCreator.reset_highlights_attack();
-					skill_range_aux = obj_gridCreator.reset_highlights_target();
-					unit.skill_complete = true;
-					unit.skill_init = false;
-					show_debug_message(unit.action.name);
-				}else if(keyboard_check_pressed(vk_tab)){
-					unit.is_attacking = false;
-					unit.skill_back = true;
-					unit.skill_range = obj_gridCreator.reset_highlights_target();
-					unit.skill_range = obj_gridCreator.reset_highlights_attack();
-					unit.skill_init = false;
-		
-				}
-			},
+			
 			upgrade2: function(unit){
 				
 				unit.action = unit.actions[unit.skill_used];
