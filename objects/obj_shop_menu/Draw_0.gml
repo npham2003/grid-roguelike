@@ -6,26 +6,27 @@ if(delay>0){
 if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	layer_set_visible(lay_id, true);
 	
-	draw_set_font(fnt_archivo);
-	draw_set_halign(fa_center);
-	draw_set_color(c_black);
-	for(var dto_i=45; dto_i<405; dto_i+=360/8)
-	{
-		//draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);
-		//draw_text_ext(actual_x-235+round(lengthdir_x(2,dto_i)),y+165+round(lengthdir_y(2,dto_i)),"+",8,100000);
-		draw_text_ext_transformed(actual_x+round(lengthdir_x(2,dto_i)),75+round(lengthdir_y(2,dto_i)),"SHOP",8,100000,1,1,0);
-	}
-	draw_set_color(c_white);
-	draw_text(actual_x,75,"SHOP");
-	draw_set_color(c_white);
-	draw_set_font(fnt_chiaro);
-	draw_set_halign(fa_left);
+	
 	
 	
 	
 
 	// background and border
 	if(menu_level<=1){ //if this is not the skill select screen
+		draw_set_font(fnt_archivo);
+		draw_set_halign(fa_center);
+		draw_set_color(c_black);
+		for(var dto_i=45; dto_i<405; dto_i+=360/8)
+		{
+			//draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);
+			//draw_text_ext(actual_x-235+round(lengthdir_x(2,dto_i)),y+165+round(lengthdir_y(2,dto_i)),"+",8,100000);
+			draw_text_ext_transformed(actual_x+round(lengthdir_x(2,dto_i)),75+round(lengthdir_y(2,dto_i)),"SHOP",8,100000,1,1,0);
+		}
+		draw_set_color(c_white);
+		draw_text(actual_x,75,"SHOP");
+		draw_set_color(c_white);
+		draw_set_font(fnt_chiaro);
+		draw_set_halign(fa_left);
 		
 		#region progress bar
 		draw_line_width_color(room_width/2-obj_menu.progress_length/2,obj_menu.progress_height,room_width/2+obj_menu.progress_length/2,obj_menu.progress_height,obj_menu.progress_thickness,global._primary,global._primary);
@@ -240,7 +241,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 					draw_text_ext_transformed(actual_x+(200*(i-1))-60+round(lengthdir_x(2,dto_i)),y+(175*j)+95+round(lengthdir_y(2,dto_i)),cost[i+j*3],8,100000,0.5,0.5,0);
 				}
 				draw_set_color(c_white);
-				
+				draw_set_color(global._primary);
 				draw_text_ext_transformed(actual_x+(200*(i-1))-60, y+(175*j)+95, cost[i+j*3], 40, 360, 0.5, 0.5, image_angle);
 				draw_set_color(c_white);
 				

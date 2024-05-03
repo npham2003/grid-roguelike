@@ -742,7 +742,7 @@ highlighted_target_straight_down_basic = function(_center_x,_center_y){
 		
 		if(!battle_grid[_center_x][_center_y+j]._is_empty){
 			if(battle_grid[_center_x][_center_y+j]._entity_on_tile.hp>0){
-				array_push(highlhted_target_array,battle_grid[_center_x][_center_y+j]);
+				array_push(highlighted_target_array,battle_grid[_center_x][_center_y+j]);
 				battle_grid[_center_x][_center_y+j]._target_highlight=true;
 				break;
 			}

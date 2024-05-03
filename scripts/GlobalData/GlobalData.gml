@@ -111,8 +111,8 @@ global.actionLibrary = {
 	},
 	beam: {
 		name: ["Beam", "Big Beam", "Repel Beam"], 
-		description: ["Does 2 damage to all targets in a row", "Does 2 damage to all targets in current and adjacent rows.\nDouble damage if in the same row", "Does 2 damage to all targets in a row and pushes them back 1 tile."],
-		cost: [3, 7, 4],
+		description: ["Does 2 damage to all targets in a row", "Does 1 damage to all targets in current and adjacent rows.\nDouble damage if in the same row", "Does 2 damage to all targets in a row and pushes them back 1 tile."],
+		cost: [3, 6, 4],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -173,9 +173,9 @@ global.actionLibrary = {
 					for (var i = 0; i < array_length(skill_range); i++) {
 						
 						if(skill_range[i]._y_coord==unit.grid_pos[1]){ // doubles damage if on the same row
-							_damage = unit.action.damage*2;
+							_damage = 2;
 						}else{
-							_damage = unit.action.damage;
+							_damage = 1;
 						}
 						if (!skill_range[i]._is_empty) {
 							show_debug_message(string(skill_range[i]._y_coord)+" and "+string(unit.grid_pos[1]));
