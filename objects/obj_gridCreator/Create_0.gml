@@ -574,7 +574,7 @@ highlighted_target_straight_up = function(_center_x,_center_y){
 		
 		if(!battle_grid[_center_x][_center_y+j]._is_empty){
 			
-			array_push(highlighted_target_array,battle_grid[_center_x+j][_center_y]);
+			array_push(highlighted_target_array,battle_grid[_center_x][_center_y+j]);
 			battle_grid[_center_x][_center_y+j]._target_highlight=true;
 			break;
 		}
@@ -593,7 +593,7 @@ highlighted_target_straight_down = function(_center_x,_center_y){
 		
 		if(!battle_grid[_center_x][_center_y+j]._is_empty){
 			
-			array_push(highlighted_target_array,battle_grid[_center_x+j][_center_y]);
+			array_push(highlighted_target_array,battle_grid[_center_x][_center_y+j]);
 			battle_grid[_center_x][_center_y+j]._target_highlight=true;
 			break;
 		}

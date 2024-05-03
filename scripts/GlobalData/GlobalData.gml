@@ -78,7 +78,7 @@ global.actionLibrary = {
 				if (keyboard_check_pressed(ord("W"))) { // a bunch of this is hardcoded atm
 					obj_gridCreator.reset_highlights_target();
 					skill_range = obj_gridCreator.highlighted_target_straight_up(unit.grid_pos[0], unit.grid_pos[1]-1);
-						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 
 				}
 				var _damage = unit.action.damage;
