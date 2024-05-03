@@ -29,7 +29,7 @@ descriptor_text = ["Heal 1 character for 1 HP",
 					"Upgrade a skill on this character",
 					"Upgrade a skill on this character",];
 menu_level=0;
-cost = [5, 15, 20, 6, 6, 6,];
+cost = [6, 15, 30, 6, 6, 6,];
 selectable = [true, true, true, true, true, true];
 art = []
 
