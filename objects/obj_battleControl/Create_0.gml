@@ -68,7 +68,7 @@ for (var i = 0; i < array_length(player_data); i++) {
 	array_push(player_units, unit);
 	unit.prev_grid[0] = unit.grid_pos[0];
 	unit.prev_grid[1] = unit.grid_pos[1];
-	unit.upgrades = [0,1,0,0,0];
+	unit.upgrades = [0,0,0,0,0];
 	obj_gridCreator.battle_grid[player_data[i].grid[0]][player_data[i].grid[1]]._entity_on_tile=unit;
 	
 }
@@ -137,7 +137,7 @@ spawn_enemies = function(enemy_data){
 
 // spawns an enemy on the ally side of the board. if target tile is not empty it will find a nearby empty one
 spawn_summon_ally_side = function(enemy_data, _summoner){
-	battle_gold=0;
+	
 	for (var i = 0; i < array_length(enemy_data); i++) {
 		empty_tile = obj_gridCreator.find_empty_tile_ally(enemy_data[i].grid[0], enemy_data[i].grid[1], 5);
 		var coord =[empty_tile.x, empty_tile.y];

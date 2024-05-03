@@ -55,20 +55,20 @@ if(sub_menu==0){
 if(sub_menu==1){
 	
 	
-	var _pips = make_menu_alternate(credits_x, room_height/2-((array_length(menu_options[1])-1)*(line_spacing)/2), line_spacing, array_length(menu_options[1]), false, actual_credits_x, credits_x);
+	var _pips = make_menu_alternate(credits_x, room_height/2-((array_length(menu_options[1])-1)*(credits_spacing)/2), credits_spacing, array_length(menu_options[1]), false, actual_credits_x, credits_x);
 	
 	for (var i = 0; i < array_length(_pips); ++i){
 		draw_primitive_begin(pr_trianglestrip);
 		if(selector_pos==i){
 			draw_set_color(c_white);
-			draw_vertices(make_diamond(_pips[i][0],_pips[i][1], line_spacing));
+			draw_vertices(make_diamond(_pips[i][0],_pips[i][1], credits_spacing));
 		}
 		draw_primitive_end();
 		draw_primitive_begin(pr_trianglestrip);
 		//draw_set_color(global._tpBorder);
 		//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 10*expandAnim));
 		draw_set_color(diamond_outline);
-		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], line_spacing-10));
+		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], credits_spacing-10));
 		//draw_set_color(global._tpBorder);
 		//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 12));
 		draw_primitive_end();
@@ -76,7 +76,7 @@ if(sub_menu==1){
 	
 		draw_set_color(diamond_fill);
 	
-		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], line_spacing-15));
+		draw_vertices(make_diamond(_pips[i][0],_pips[i][1], credits_spacing-15));
 		//draw_set_color(global._tpBorder);
 		//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 6));
 		//draw_set_color(global._tpBar);
@@ -91,16 +91,16 @@ if(sub_menu==1){
 			draw_set_halign(fa_left);
 		}
 		//draw_text(_pips[i][0]+line_spacing*1.2*power(-1,i+1),_pips[i][1],menu_options[1][i]);
-		draw_set_color(c_white);
+		draw_set_color(c_black);
 		draw_set_alpha(1);
 		//text_outline(_pips[i][0]+line_spacing*1.2*power(-1,i+1),_pips[i][1], menu_options[1][i], 2, c_white, 8, 100000, 1000000);
 		for(var dto_i=45; dto_i<405; dto_i+=360/8)
 		{
 		  //draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);
-		  draw_text_ext(_pips[i][0]+line_spacing*1.2*power(-1,i+1)+round(lengthdir_x(2,dto_i)),_pips[i][1]+round(lengthdir_y(2,dto_i)),menu_options[1][i],8,100000);
+		  draw_text_ext(_pips[i][0]+credits_spacing*1.2*power(-1,i+1)+round(lengthdir_x(2,dto_i)),_pips[i][1]+round(lengthdir_y(2,dto_i)),menu_options[1][i],8,100000);
 		}
-		draw_set_color(c_black);
-		draw_text_ext(_pips[i][0]+line_spacing*1.2*power(-1,i+1),_pips[i][1], menu_options[1][i],8,10000);
+		draw_set_color(c_white);
+		draw_text_ext(_pips[i][0]+credits_spacing*1.2*power(-1,i+1),_pips[i][1], menu_options[1][i],8,10000);
 		
 		#region draw character
 		gpu_set_blendenable(false);
@@ -114,7 +114,7 @@ if(sub_menu==1){
 		//draw_sprite_ext(spr_diamond_base, 0, imgX, imgY, portraitScale, portraitScale, 0, c_white, 1);
 		draw_set_color(c_white);
 		draw_primitive_begin(pr_trianglestrip);
-		draw_vertices(make_diamond(_pips[i][0],_pips[i][1],line_spacing-15));
+		draw_vertices(make_diamond(_pips[i][0],_pips[i][1],credits_spacing-15));
 		draw_primitive_end();
 
 		gpu_set_blendenable(true);
@@ -149,11 +149,11 @@ if(sub_menu==2){
 		draw_sprite_ext(global.players[selector_pos].portrait_full,0,actual_character_select+350, room_height/2,1,1,image_angle,c_white,0.5);
 	}
 	draw_set_font(fnt_archivo);
-	draw_set_color(c_black);
-	draw_set_halign(fa_center);
-	text_outline(actual_character_select+350, room_height/2, global.players[selector_pos].name, 1, c_white, 4, 8, 100000);
-	draw_set_font(fnt_chiaro);
 	draw_set_color(c_white);
+	draw_set_halign(fa_center);
+	text_outline(actual_character_select+350, room_height/2, global.players[selector_pos].name, 1, c_black, 4, 8, 100000);
+	draw_set_font(fnt_chiaro);
+	
 	text_outline(actual_character_select+350, room_height/2+40, global.players[selector_pos].guy, 1, c_black, 4, 8, 100000);
 	var _pips = make_menu_alternate(character_select, room_height/2-((array_length(global.players)-1)*(character_select_spacing-15)/2), character_select_spacing-15, array_length(global.players), false, character_select, actual_character_select);
 	for (var i = 0; i < array_length(_pips); ++i){
@@ -325,9 +325,9 @@ if(sub_menu==2){
 			//draw_text_ext_transformed(actual_skill_x+15, skill_y_start+((j)*220)+50, action.description[0], 40, 600, 0.8, 0.8, image_angle);
 			draw_set_font(fnt_chiaro_small);
 			text_outline(actual_skill_x+15, skill_y_start+((j)*220)+50, action.description[0], 1, c_black, 4, 30, 460);
-			draw_set_color(c_black)
+			draw_set_color(c_white)
 			draw_set_font(fnt_archivo);
-			text_outline(actual_skill_x+15, skill_y_start+((j)*220)+15, action.name[0], 1, c_white, 4, 40, 600);
+			text_outline(actual_skill_x+15, skill_y_start+((j)*220)+15, action.name[0], 1, c_black, 4, 40, 600);
 			
 			
 			var _cost = action.cost[0];

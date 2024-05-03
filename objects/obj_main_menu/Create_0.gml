@@ -42,6 +42,7 @@ transition_in=true;
 initial_credits_x=2000;
 actual_credits_x=2000;
 credits_x=room_width/2;
+credits_spacing=120;
 
 profile_pictures=[spr_nick, spr_emil, spr_will, spr_lu, spr_back];
 
@@ -87,11 +88,11 @@ skill_diamond_size=120;
 
 initial_description_x = 2000;
 actual_description_x=2000;
-description_x_start = 400;
+description_x_start = 450;
 description_y_start = 30;
 
 tip_box_height=75;
-tip_box_width=350;
+tip_box_width=400;
 
 description_box_width=900;
 description_box_height=600;
@@ -117,7 +118,7 @@ tips=[
 	],
 	[
 		"Technique Points",
-		"Technique Points (TP) are required to use skills. TP can be seen in green diamonds next to the character portrait in the bottom right.\n\nYou regain 4 TP every turn."
+		"Technique Points (TP) are required to use skills. TP can be seen in green diamonds next to the character portrait in the bottom right.\n\nYou regain 4 TP every turn.\n\nTP is shared between the party. Make sure you have enough TP for each party member to use the skills you want!"
 	],
 	[
 		"Using Skills",
@@ -271,9 +272,27 @@ tips=[
 		"Frozone: Icicle Crash",
 		"Frozone's (L) skill Icicle Crash, freezes a target within 3 spaces and all adjacent units for 1 turn!\n\nIts first upgrade, Avalanche, allows you to target anywhere on the grid.\n\nIts second upgrade, Absolute Zero, freezes all enemy units for 1 turn!"
 	],
+	[
+		"Oktavia: Summary",
+		"Oktavia is a party member specializing in pushing different units around the grid. While her skills don't cause direct damage, pushing units into each other causes collision damage, allowing her to become a great damage source for your party!\n\nThis also causes enemies' attack ranges to move as well, which can help your allies out of a rough spot.\n\nAdditionally, since her skills don't damage their target, you can push your allies around without any risk!"
+	],
+	[
+		"Oktavia: Phase Shifter",
+		"Oktavia's (J) skill Phase Shifter targets the first target in front of her and pushes them 1 tile in any direction you want! Use (WASD) to aim the push direction, indicated by the red arrow.\n\nIts first upgrade, Long Phase, pushes the target until they collide with a wall or another unit, guaranteeing damage!\n\nIts second upgrade, Forceful Shift, pushes the target while also dealing 1 damage!"
+	],
+	[
+		"Oktavia: Repelling Blast",
+		"Oktavia's (K) skill Repelling Blast affects all enemies in a row in front of her, as well as 1 adjacent row of your choosing. It causes units in these rows to be pushed away from each other, with the row on top being pushed up, and the one below being pushed down.\n\nIts first upgrade, Repelling Shockwave, does the same, but pushes them until they hit a wall or another unit!\n\nIts second upgrade, Compress, targets units in the above and below Oktavia, and pushes them into the row she's currently in."
+	],
+	[
+		"Oktavia: Force Push",
+		"Oktavia's (L) skill Force Push, targets the first unit in front of her in every row, and pushes them to the right 1 tile!\n\nIts first upgrade, Row Shift, targets all units in the same row as her, including herself and units behind her. You can then choose to push all of them up or down!\n\nIts second upgrade, Force Pull, does the same as the original skill, but pushes its targets to the left instead!"
+	],
 
 ]
+#endregion
 
+#region sliding menu
 current_tip = array_length(tips)-1
 _scale=0; _fade=0.5; _whatever=2; //This is not needed, it is simply a preference. We will use these in place of numbers, when we are using arrays.
 total_options=array_length(tips); //Total amount of options
@@ -304,7 +323,7 @@ menu_options=[
 	[
 		"Play",
 		"Tutorial",
-		"Manual",
+		"Tips",
 		"Credits",
 		"Exit"
 	],

@@ -357,13 +357,13 @@ switch(sub_menu){
 					}
 				}
 				if (keyboard_check_pressed(ord("D"))) {
-					option_cur+=10;
+					option_cur+=5;
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					option_cur=option_cur%total_options;
 				
 				}
 				if (keyboard_check_pressed(ord("A"))) {
-					option_cur-=10;
+					option_cur-=5;
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					if(option_cur<0){
 						option_cur=total_options+option_cur;

@@ -7,7 +7,7 @@ if(delay>0){
 if(obj_battleControl.state==BattleState.PlayerUpgrade && !transition_out){
 	
 	obj_gridCreator.x=5000;
-	obj_battleControl.transition_count=80;
+	obj_battleControl.transition_count=120;
 	alpha = lerp(alpha,1,0.05);
 	actual_x=lerp(actual_x,room_width/2,0.05);
 	switch(menu_level){
@@ -168,7 +168,9 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade && !transition_out){
 	
 	if(actual_x<-1500){
 		transition_out=false;
-		
+
+		obj_battleControl.transition_count=80;
+
 		obj_gridCreator.transition_in=true;
 		obj_battleControl.change_state(BattleState.BattleStart);
 	}

@@ -407,8 +407,10 @@ function do_damage(){
 				if (action.damage_type=="cold") {
 					// does damage to affected tiles
 					obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.stall_turns+=2;
-					obj_battleEffect.show_damage(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile, 2, c_blue);
-					obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile, 6);
+					if(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.stall_turns<=0){
+						obj_battleEffect.show_damage(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile, 2, c_blue);
+						obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile, 6);
+					}
 				}
 			}
 			
