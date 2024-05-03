@@ -1206,17 +1206,19 @@ global.actionLibrary = {
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
 							
-							if(skill_range[i]._entity_on_tile.ally){
-								skill_range[i]._entity_on_tile.has_attacked=true;
-								skill_range[i]._entity_on_tile.has_moved=true;
-							}else{
-								skill_range[i]._entity_on_tile.remove_danger_highlights();
-							}
-							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 1, c_blue);
 							if(skill_range[i]._entity_on_tile.stall_turns<=0){
 								skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
-								skill_range[i]._entity_on_tile.stall_turns+=1;
+								
+								if(skill_range[i]._entity_on_tile.ally){
+									skill_range[i]._entity_on_tile.has_attacked=true;
+									skill_range[i]._entity_on_tile.has_moved=true;
+								}else{
+									skill_range[i]._entity_on_tile.remove_danger_highlights();
+								}
 							}
+							skill_range[i]._entity_on_tile.stall_turns+=1;
+							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 1, c_blue);
+							
 							
 						}
 					}
@@ -1256,15 +1258,16 @@ global.actionLibrary = {
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
 							
-							if(skill_range[i]._entity_on_tile.ally){
-								skill_range[i]._entity_on_tile.has_attacked=true;
-								skill_range[i]._entity_on_tile.has_moved=true;
-							}else{
-								skill_range[i]._entity_on_tile.remove_danger_highlights();
-							}
+							
 							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 2, c_blue);
 							if(skill_range[i]._entity_on_tile.stall_turns<=0){
 								skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
+								if(skill_range[i]._entity_on_tile.ally){
+									skill_range[i]._entity_on_tile.has_attacked=true;
+									skill_range[i]._entity_on_tile.has_moved=true;
+								}else{
+									skill_range[i]._entity_on_tile.remove_danger_highlights();
+								}
 							}
 							skill_range[i]._entity_on_tile.stall_turns+=2;
 						}
@@ -1306,15 +1309,16 @@ global.actionLibrary = {
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
 							
-							if(skill_range[i]._entity_on_tile.ally){
-								skill_range[i]._entity_on_tile.has_attacked=true;
-								skill_range[i]._entity_on_tile.has_moved=true;
-							}else{
-								skill_range[i]._entity_on_tile.remove_danger_highlights();
-							}
+							
 							obj_battleEffect.show_damage(skill_range[i]._entity_on_tile, 1, c_blue);
 							if(skill_range[i]._entity_on_tile.stall_turns<=0){
 								skill_range[i]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(skill_range[i]._entity_on_tile, 6);
+								if(skill_range[i]._entity_on_tile.ally){
+									skill_range[i]._entity_on_tile.has_attacked=true;
+									skill_range[i]._entity_on_tile.has_moved=true;
+								}else{
+									skill_range[i]._entity_on_tile.remove_danger_highlights();
+								}
 							}
 							skill_range[i]._entity_on_tile.stall_turns+=1;
 						}

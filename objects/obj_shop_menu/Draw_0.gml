@@ -8,14 +8,14 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	
 	draw_set_font(fnt_archivo);
 	draw_set_halign(fa_center);
-	draw_set_color(c_white);
+	draw_set_color(c_black);
 	for(var dto_i=45; dto_i<405; dto_i+=360/8)
 	{
 		//draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);
 		//draw_text_ext(actual_x-235+round(lengthdir_x(2,dto_i)),y+165+round(lengthdir_y(2,dto_i)),"+",8,100000);
 		draw_text_ext_transformed(actual_x+round(lengthdir_x(2,dto_i)),50+round(lengthdir_y(2,dto_i)),"SHOP",8,100000,1,1,0);
 	}
-	draw_set_color(c_black);
+	draw_set_color(c_white);
 	draw_text(actual_x,50,"SHOP");
 	draw_set_color(c_white);
 	draw_set_font(fnt_chiaro);
@@ -654,9 +654,9 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	draw_text_transformed(75, 20, "G    "+ string(obj_battleControl.gold), 0.8, 0.8, 0);
 	#endregion
 	//reset draw
-	draw_set_color(c_white);
-	draw_set_alpha(1);
 	draw_set_color(c_black);
+	draw_set_alpha(1);
+	
 	text_outline(580,700, "WASD - Move Cursor    Enter - Select    Tab - Back", 1, c_white, 8, 100000, 1000000);
 	draw_set_color(c_white);
 	

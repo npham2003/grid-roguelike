@@ -257,6 +257,13 @@ switch (state) {
 			break;
 		}
 		obj_menu.set_text("WASD - Move Cursor     Enter - Select Unit     Space - End Turn");
+		
+		for (var i = 0; i<array_length(obj_gridCreator.battle_grid_flattened); i++){ // NO MORE GHOSTS
+			if(obj_gridCreator.battle_grid_flattened[i]._x_coord<5){
+				obj_gridCreator.battle_grid_flattened[i]._is_empty=true;
+				obj_gridCreator.battle_grid_flattened[i]._entity_on_tile=pointer_null;
+			}
+		}
 		// checks if all player units have moved
 		for (var i = 0; i < array_length(player_units); i++) {
 			if (!player_units[i].has_attacked) {
