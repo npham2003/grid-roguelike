@@ -92,7 +92,7 @@ switch (state) {
 		// chooses a random encounter. set to a value for debugging
 		//var random_battle = irandom(array_length(global.encounters)-1);
 		//random_battle=4;
-		//battle_progress=11;
+		//battle_progress=4;
 		random_battle=battle_progress;
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
@@ -272,6 +272,10 @@ switch (state) {
 		for (var i = 0; i < array_length(enemy_units); i++) {
 			obj_gridCreator.battle_grid[enemy_units[i].grid_pos[0]][enemy_units[i].grid_pos[1]]._entity_on_tile=enemy_units[i];
 			obj_gridCreator.battle_grid[enemy_units[i].grid_pos[0]][enemy_units[i].grid_pos[1]]._is_empty=false;
+		}
+		for (var i = 0; i < array_length(board_obstacles); i++) {
+			obj_gridCreator.battle_grid[board_obstacles[i].grid_pos[0]][board_obstacles[i].grid_pos[1]]._entity_on_tile=board_obstacles[i];
+			obj_gridCreator.battle_grid[board_obstacles[i].grid_pos[0]][board_obstacles[i].grid_pos[1]]._is_empty=false;
 		}
 		// checks if all player units have moved
 		for (var i = 0; i < array_length(player_units); i++) {
