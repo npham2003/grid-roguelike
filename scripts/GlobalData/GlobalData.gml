@@ -4162,7 +4162,7 @@ global.players = [
 		name: "Warpman",
 		hp: 3,
 		hpMax: 3,
-		playerSpeed: 1,
+		playerSpeed: 2,
 		sprites : { idle: spr_player5, dead: spr_player5_dead, gun: spr_player5_shooting},
 		actions : [global.actionLibrary.baseAttack, global.actionLibrary.teleport_self, global.actionLibrary.teleport_ally,  global.actionLibrary.teleport_enemy, global.actionLibrary.nothing],
 		ally: true,
