@@ -67,7 +67,7 @@
     {"name":"obj_shield_damage_number","order":4,"path":"objects/obj_shield_damage_number/obj_shield_damage_number.yy",},
     {"name":"obj_shop_menu","order":5,"path":"objects/obj_shop_menu/obj_shop_menu.yy",},
     {"name":"obj_textboxTut","order":1,"path":"objects/obj_textboxTut/obj_textboxTut.yy",},
-    {"name":"obj_rebind_menu","order":8,"path":"objects/obj_rebind_menu/obj_rebind_menu.yy",},
+    {"name":"obj_rebind_menu","order":1,"path":"objects/obj_rebind_menu/obj_rebind_menu.yy",},
     {"name":"CharSel","order":1,"path":"rooms/CharSel/CharSel.yy",},
     {"name":"__input_axis_is_directional","order":9,"path":"scripts/__input_axis_is_directional/__input_axis_is_directional.yy",},
     {"name":"__input_binding_get_label","order":10,"path":"scripts/__input_binding_get_label/__input_binding_get_label.yy",},

@@ -9,8 +9,8 @@
   "name":"obj_rebind_menu",
   "overriddenProperties":[],
   "parent":{
-    "name":"UI",
-    "path":"folders/Objects/UI.yy",
+    "name":"Main Menu",
+    "path":"folders/Objects/Main Menu.yy",
   },
   "parentObjectId":null,
   "persistent":false,
