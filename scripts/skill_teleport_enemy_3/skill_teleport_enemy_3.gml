@@ -52,6 +52,24 @@ function skill_teleport_enemy_3(unit){
 	for (var i = 0; i < array_length(skill_range_aux); i++) {
 		skill_range_aux[i]._target_highlight=true;
 	}
+	if(unit.skill_progress==1){
+		if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+			obj_cursor.sprite_index=spr_grid_cursor_invalid;
+		}else{
+			if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally ){
+				obj_cursor.sprite_index=spr_grid_cursor;
+			}else{ 
+				obj_cursor.sprite_index=spr_grid_cursor_invalid;
+			}
+		}
+	}
+	if(unit.skill_progress==2){
+		if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  ){
+			obj_cursor.sprite_index=spr_grid_cursor_invalid;
+		}else{
+			obj_cursor.sprite_index=spr_grid_cursor;
+		}
+	}
 	//show_debug_message(string(unit.skill_progress));
 	if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
 		if(unit.skill_progress==1){

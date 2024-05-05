@@ -6,6 +6,8 @@ selector_pos=[0,0]
 character_select_pos=0;
 skill_select_pos=0;
 
+
+
 new_skill_upgrade=0;
 character_spacing=300;
 upgrade_offset = 0;
@@ -18,15 +20,16 @@ border = 5;
 
 delay=60;
 
+transition_out=false;
 
 descriptor_text = ["Heal 1 character for 1 HP",
 					"Gain 1 extra TP each turn until the next floor",
-					"Each attack does 1 extra damage until the next floor", 
+					"Each attack does 1 extra damage for 3 turns or until the next floor", 
 					"Upgrade a skill on this character",
 					"Upgrade a skill on this character",
 					"Upgrade a skill on this character",];
 menu_level=0;
-cost = [5, 15, 20, 6, 6, 6,];
+cost = [6, 15, 30, 6, 6, 6,];
 selectable = [true, true, true, true, true, true];
 art = []
 
@@ -64,6 +67,7 @@ attack_up = function(){
 	for(i=0;i<array_length(obj_battleControl.player_units);i++){
 		obj_battleControl.player_units[i].attack_bonus+=1;
 	}
+	obj_battleControl.attack_up_turn=obj_battleControl.turn_count;
 	obj_battleControl.gold-=cost[2];
 }
 

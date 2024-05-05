@@ -406,9 +406,12 @@ function do_damage(){
 				obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.damage(strength);
 				if (action.damage_type=="cold") {
 					// does damage to affected tiles
+					
+					if(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.stall_turns<=0){
+						obj_battleEffect.show_damage(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile, 2, c_blue);
+						obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile, 6);
+					}
 					obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.stall_turns+=2;
-					obj_battleEffect.show_damage(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile, 2, c_blue);
-					obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile.freeze_graphic = obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[attack_x][attack_y]._entity_on_tile, 6);
 				}
 			}
 			
@@ -433,8 +436,10 @@ function despawn(){
 	is_dead=true;
 	obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
 	remove_danger_highlights();
-	freeze_graphic.sprite_index=spr_freeze_out;
-	freeze_graphic.image_speed=1;
+	if(freeze_graphic!=pointer_null){
+		freeze_graphic.sprite_index=spr_freeze_out;
+		freeze_graphic.image_speed=1;
+	}
 }
 
 // pushes right

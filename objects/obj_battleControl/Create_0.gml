@@ -31,10 +31,13 @@ obstacle = pointer_null;
 battle_progress=0;
 
 turn_count=0;
+attack_up_turn=0;
 
 music_track = global.floor_music[0][irandom_range(0,array_length(global.floor_music[0])-1)];
 
-current_music = audio_play_sound(music_track, 0, true);
+current_music = audio_play_sound(music_track, 0, true, 0.3);
+
+
 
 #region Spawns
 
@@ -137,7 +140,7 @@ spawn_enemies = function(enemy_data){
 
 // spawns an enemy on the ally side of the board. if target tile is not empty it will find a nearby empty one
 spawn_summon_ally_side = function(enemy_data, _summoner){
-	battle_gold=0;
+	
 	for (var i = 0; i < array_length(enemy_data); i++) {
 		empty_tile = obj_gridCreator.find_empty_tile_ally(enemy_data[i].grid[0], enemy_data[i].grid[1], 5);
 		var coord =[empty_tile.x, empty_tile.y];

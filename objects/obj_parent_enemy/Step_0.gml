@@ -31,7 +31,7 @@ if (is_moving) {
 			battlecontrol.in_animation = false;
 		}
 	}else{
-		show_debug_message("({0}, {1}) but we're supposed to be at ({2}, {3})",x,y,target_grid_pos[0],target_grid_pos[1]);	
+		//show_debug_message("({0}, {1}) but we're supposed to be at ({2}, {3})",x,y,target_grid_pos[0],target_grid_pos[1]);	
 	}
 	
 }
@@ -44,7 +44,7 @@ if(is_dead){
 	}
 	// fade out speed
 	image_alpha-=0.01;
-	show_debug_message(string(image_alpha));
+	//show_debug_message(string(image_alpha));
 	
 }
 

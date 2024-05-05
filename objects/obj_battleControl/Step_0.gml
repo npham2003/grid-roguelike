@@ -46,7 +46,7 @@ switch (state) {
 			music_track = global.floor_music[floor(battle_progress/5)][irandom_range(0,array_length(global.floor_music[floor(battle_progress/5)])-1)];
 			//music_track = global.floor_music[2][0];
 
-			current_music = audio_play_sound(music_track, 0, true, 0.5);
+			current_music = audio_play_sound(music_track, 0, true, 0.3);
 			
 		}
 		for (var i = 0; i < array_length(player_units); i++) {
@@ -92,7 +92,7 @@ switch (state) {
 		// chooses a random encounter. set to a value for debugging
 		//var random_battle = irandom(array_length(global.encounters)-1);
 		//random_battle=4;
-		//battle_progress=1;
+		//battle_progress=4;
 		random_battle=battle_progress;
 		spawn_enemies(global.encounters[random_battle]);
 		//spawn_enemies(global.encounters[3]);
@@ -115,7 +115,7 @@ switch (state) {
 				change_state(BattleState.PlayerPreparing);
 				break;
 			}
-			show_debug_message(string(enemy_order));
+			//show_debug_message(string(enemy_order));
 			unit = enemy_units[enemy_order];
 			
 			// if the enemy is frozen
@@ -124,10 +124,13 @@ switch (state) {
 				obj_battleEffect.show_damage(unit, unit.stall_turns, c_blue);
 				// finishing frozen turns
 				if(unit.stall_turns<=0){
-					unit.freeze_graphic.sprite_index=spr_freeze_out;
+					if(unit.freeze_graphic!=pointer_null){
+						unit.freeze_graphic.sprite_index=spr_freeze_out;
+						
+						unit.freeze_graphic.image_speed=1;
+						unit.freeze_graphic=pointer_null;
+					}
 					audio_play_sound(sfx_defreeze, 0, false, 0.5);
-					unit.freeze_graphic.image_speed=1;
-					unit.freeze_graphic=pointer_null;
 				}
 			}
 			
@@ -181,7 +184,9 @@ switch (state) {
 				}
 				player_units[i].move_buff_recent=false;
 			}
-			
+			if(turn_count-attack_up_turn>3){
+				player_units[i].attack_bonus=0;
+			}
 			// if unit is frozen
 			if(player_units[i].stall_turns>0){
 				player_units[i].stall_turns-=1;
@@ -194,7 +199,7 @@ switch (state) {
 					player_units[i].freeze_graphic.sprite_index=spr_freeze_out;
 					player_units[i].freeze_graphic.image_speed=1;
 					audio_play_sound(sfx_defreeze, 0, false, 0.5);
-					unit.freeze_graphic=pointer_null;
+					player_units[i].freeze_graphic=pointer_null;
 				}
 			}
 			player_units[i].shield=0;
@@ -257,6 +262,21 @@ switch (state) {
 			break;
 		}
 		obj_menu.set_text("WASD - Move Cursor     Enter - Select Unit     Space - End Turn");
+		
+		for (var i = 0; i<array_length(obj_gridCreator.battle_grid_flattened); i++){ // NO MORE GHOSTS
+			
+				obj_gridCreator.battle_grid_flattened[i]._is_empty=true;
+				obj_gridCreator.battle_grid_flattened[i]._entity_on_tile=pointer_null;
+			
+		}
+		for (var i = 0; i < array_length(enemy_units); i++) {
+			obj_gridCreator.battle_grid[enemy_units[i].grid_pos[0]][enemy_units[i].grid_pos[1]]._entity_on_tile=enemy_units[i];
+			obj_gridCreator.battle_grid[enemy_units[i].grid_pos[0]][enemy_units[i].grid_pos[1]]._is_empty=false;
+		}
+		for (var i = 0; i < array_length(board_obstacles); i++) {
+			obj_gridCreator.battle_grid[board_obstacles[i].grid_pos[0]][board_obstacles[i].grid_pos[1]]._entity_on_tile=board_obstacles[i];
+			obj_gridCreator.battle_grid[board_obstacles[i].grid_pos[0]][board_obstacles[i].grid_pos[1]]._is_empty=false;
+		}
 		// checks if all player units have moved
 		for (var i = 0; i < array_length(player_units); i++) {
 			if (!player_units[i].has_attacked) {
@@ -366,7 +386,7 @@ switch (state) {
 						}
 				}
 				else if (key_Tab_pressed) { // changes upgrades for debugging
-					//for(i = 1;i<array_length(unit.upgrades);i++){
+					//for(i = 1;i<array_length(unit.upgrades)-1;i++){
 					//	unit.upgrades[i]+=1;
 					//	unit.upgrades[i]=unit.upgrades[i]%3;
 					//}
@@ -394,6 +414,7 @@ switch (state) {
 
 #region Player Moving
 	case BattleState.PlayerMoving:
+		obj_cursor.sprite_index=spr_grid_cursor;
 		obj_menu.back = true;
 		// error handling but unit should always be a player unit here
 		if(unit!=pointer_null){
@@ -648,7 +669,7 @@ switch (state) {
 
 #region Player Taking Action
 	case BattleState.PlayerTakingAction:
-	
+		obj_cursor.sprite_index=spr_grid_cursor;
 		obj_menu.back = true;
 		
 		show_debug_message(unit.name + ": taking action");
@@ -665,10 +686,12 @@ switch (state) {
 		if (enemy_unit.hp<=0){
 			enemy_unit.despawn();
 			if(enemy_unit.stall_turns>0){
-				unit.freeze_graphic.sprite_index=spr_freeze_out;
+				if(unit.freeze_graphic!=pointer_null){
+					unit.freeze_graphic.sprite_index=spr_freeze_out;			
+					unit.freeze_graphic.image_speed=1;
+					unit.freeze_graphic=pointer_null;
+				}
 				audio_play_sound(sfx_defreeze, 0, false, 0.5);
-				unit.freeze_graphic.image_speed=1;
-				unit.freeze_graphic=pointer_null;
 			}
 			array_delete(enemy_units, enemy_check_death, 1);
 			enemy_check_death-=1;
@@ -684,6 +707,9 @@ switch (state) {
 				change_state(BattleState.BattleEnd);
 			}
 			else {
+				for(i=0;i<array_length(enemy_units);i++){
+					enemy_units[i].recalc_los();
+				}
 				change_state(BattleState.PlayerWaitingAction);
 				
 				unit.is_attacking = false;
@@ -753,6 +779,16 @@ switch (state) {
 		
 		if(in_animation){
 			break;
+		}
+		for (var i = 0; i<array_length(obj_gridCreator.battle_grid_flattened); i++){ // NO MORE GHOSTS
+			
+				obj_gridCreator.battle_grid_flattened[i]._is_empty=true;
+				obj_gridCreator.battle_grid_flattened[i]._entity_on_tile=pointer_null;
+			
+		}
+		for (var i = 0; i < array_length(player_units); i++) {
+			obj_gridCreator.battle_grid[player_units[i].grid_pos[0]][player_units[i].grid_pos[1]]._entity_on_tile=player_units[i];
+			obj_gridCreator.battle_grid[player_units[i].grid_pos[0]][player_units[i].grid_pos[1]]._is_empty=false;
 		}
 		if(array_length(enemy_units)==0){
 			gold+=battle_gold;
@@ -871,11 +907,13 @@ switch (state) {
 				
 				// finishing freeze turns
 				if(obstacle.stall_turns==0){
-					
-					obstacle.freeze_graphic.sprite_index=spr_freeze_out;
-					obstacle.freeze_graphic.image_speed=1;
+					if(obstacle.freeze_graphic!=pointer_null){
+						obstacle.freeze_graphic.sprite_index=spr_freeze_out;
+						obstacle.freeze_graphic.image_speed=1;
+						obstacle.freeze_graphic=pointer_null;
+					}
 					audio_play_sound(sfx_defreeze, 0, false, 0.5);
-					unit.freeze_graphic=pointer_null;
+					
 			
 				}
 			}

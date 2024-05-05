@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":143.33388,
+  "duration":564.7151,
   "name":"bgm_rhythmical_bustle",
   "parent":{
     "name":"Floor 2",

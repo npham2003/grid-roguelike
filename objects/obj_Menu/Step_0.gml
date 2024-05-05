@@ -152,5 +152,5 @@ lineX = lerp(lineX, lineXShift, 0.2);
 lineYL = lerp(lineYL, lineYLShift, 0.2);
 lineYR = lerp(lineYR, lineYRShift, 0.2);
 
-show_debug_message(grayscale_params.g_Intensity);
+//show_debug_message(grayscale_params.g_Intensity);
 #endregion

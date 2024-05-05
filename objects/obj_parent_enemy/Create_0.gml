@@ -320,7 +320,7 @@ function move(new_x, new_y) {
 }
  
 function recalc_los(){
-	if(action.type=="los"){
+	if(action.type=="los" && stall_turns<=0){
 		remove_danger_highlights();
 		show_debug_message("Recalculating {0}", enemy_turn_order);
 		var targeted=obj_gridCreator.highlighted_enemy_target_straight_back(grid_pos[0]-1,grid_pos[1]);
@@ -608,10 +608,11 @@ function despawn(){
 	is_dead=true;
 	obj_gridCreator.remove_entity(grid_pos[0],grid_pos[1]);
 	if(stall_turns>0){
-		
-		freeze_graphic.sprite_index=spr_freeze_out;
-		freeze_graphic.image_speed=1;
-		freeze_graphic=pointer_null;
+		if(freeze_graphic!=pointer_null){
+			freeze_graphic.sprite_index=spr_freeze_out;
+			freeze_graphic.image_speed=1;
+			freeze_graphic=pointer_null;
+		}
 
 	}else{
 		remove_danger_highlights();

@@ -42,6 +42,7 @@ transition_in=true;
 initial_credits_x=2000;
 actual_credits_x=2000;
 credits_x=room_width/2;
+credits_spacing=120;
 
 profile_pictures=[spr_nick, spr_emil, spr_will, spr_lu, spr_back];
 
@@ -197,7 +198,7 @@ tips=[
 	],
 	[
 		"L'Cifure: Beam",
-		"L'Cifure's (J) skill Beam hits all units directly in front of him for 2 damage. Use it whenever enemies line up, or if you need to hit something for more damage than normal!\n\nIts first upgrade, Big Beam, also hits the rows above and below him. Additionally, any targets in the same row as L'Cifure take double damage!\n\nIts second upgrade, Repel Beam, also pushes enemies to the right by one tile. Use it to both damage and reposition enemies!"
+		"L'Cifure's (J) skill Beam hits all units directly in front of him for 2 damage. Use it whenever enemies line up, or if you need to hit something for more damage than normal!\n\nIts first upgrade, Big Beam, also hits the rows above and below him for 1 damage.\n\nIts second upgrade, Repel Beam, also pushes enemies to the right by one tile. Use it to both damage and reposition enemies!"
 	],
 	[
 		"L'Cifure: Charge",
@@ -269,7 +270,7 @@ tips=[
 	],
 	[
 		"Frozone: Icicle Crash",
-		"Frozone's (L) skill Icicle Crash, freezes a target within 3 spaces and all adjacent units for 1 turn!\n\nIts first upgrade, Avalanche, allows you to target anywhere on the grid.\n\nIts second upgrade, Absolute Zero, freezes all enemy units for 1 turn!"
+		"Frozone's (L) skill Icicle Crash, freezes any target on the grid!\n\nIts first upgrade, Avalanche, freezes a target within 3 spaces and all adjacent units for 1 turn.\n\nIts second upgrade, Absolute Zero, freezes all enemy units for 1 turn!"
 	],
 	[
 		"Oktavia: Summary",
@@ -322,7 +323,7 @@ menu_options=[
 	[
 		"Play",
 		"Tutorial",
-		"Manual",
+		"Tips",
 		"Credits",
 		"Exit"
 	],

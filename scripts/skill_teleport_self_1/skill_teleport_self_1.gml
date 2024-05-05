@@ -17,7 +17,7 @@ function skill_teleport_self_1(unit){
 	}
 
 	if(unit.skill_progress==1){
-		skill_range = obj_gridCreator.highlighted_support_circle(unit.grid_pos[0], unit.grid_pos[1], 2);
+		skill_range = obj_gridCreator.highlighted_support_circle_player_side(unit.grid_pos[0], unit.grid_pos[1], 2);
 	}
 				
 	obj_cursor.movable_tiles=skill_range;
@@ -50,10 +50,14 @@ function skill_teleport_self_1(unit){
 	for (var i = 0; i < array_length(skill_range_aux); i++) {
 		skill_range_aux[i]._target_highlight=true;
 	}
-	
+	if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty || (skill_coords[0]==unit.grid_pos[0] && skill_coords[1]==unit.grid_pos[1])){
+		obj_cursor.sprite_index=spr_grid_cursor_invalid;
+	}else{
+		obj_cursor.sprite_index=spr_grid_cursor;
+	}
 	if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
 		if(unit.skill_progress==1){
-			if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
+			if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 				if(skill_coords[0]<5){
 					audio_play_sound(sfx_teleport, 0, false, 1);
 					
