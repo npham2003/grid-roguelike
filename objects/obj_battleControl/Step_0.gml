@@ -261,7 +261,7 @@ switch (state) {
 			change_state(BattleState.BattleEnd);
 			break;
 		}
-		obj_menu.set_text(global.other_controls[0]+global.other_controls[1]+global.other_controls[2]+global.other_controls[3]+"- Move Cursor     "+global.other_controls[4]+" - Select Unit     "+global.other_controls[6]+" - End Turn");
+		obj_menu.set_text(string_upper(global.other_controls[0])+string_upper(global.other_controls[1])+string_upper(global.other_controls[2])+string_upper(global.other_controls[3])+"- Move Cursor     "+string_upper(global.other_controls[4])+" - Select Unit     "+string_upper(global.other_controls[6])+" - End Turn");
 		
 		for (var i = 0; i<array_length(obj_gridCreator.battle_grid_flattened); i++){ // NO MORE GHOSTS
 			
@@ -310,7 +310,7 @@ switch (state) {
 				//obj_menu.tpCost=[0,unit.actions[0].cost[unit.upgrades[0]],unit.actions[1].cost[unit.upgrades[1]],unit.actions[2].cost[unit.upgrades[2]],unit.actions[3].cost[unit.upgrades[3]]];
 				//obj_menu.skill_names=["",unit.actions[0].name[unit.upgrades[0]],unit.actions[1].name[unit.upgrades[1]],unit.actions[2].name[unit.upgrades[2]],unit.actions[3].name[unit.upgrades[3]]];
 				
-				//obj_menu.set_text(""global.other_controls[0]+global.other_controls[1]+global.other_controls[2]+global.other_controls[3]"+" - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
+				//obj_menu.set_text(""string_upper(global.other_controls[0]+string_upper(global.other_controls[1]+string_upper(global.other_controls[2]+string_upper(global.other_controls[3]"+" - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
 				
 				
 				// resets the ewous grid position to current position. needed for when getting moved when its not their turn (push or teleport)
@@ -418,8 +418,8 @@ switch (state) {
 		obj_menu.back = true;
 		// error handling but unit should always be a player unit here
 		if(unit!=pointer_null){
-			//obj_menu.set_text(global.other_controls[0]+global.other_controls[1]+global.other_controls[2]+global.other_controls[3]+" - "Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
-			obj_menu.set_text(global.other_controls[0]+global.other_controls[1]+global.other_controls[2]+global.other_controls[3]+" - Move");
+			//obj_menu.set_text(string_upper(global.other_controls[0]+string_upper(global.other_controls[1]+string_upper(global.other_controls[2]+string_upper(global.other_controls[3]+" - "Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
+			obj_menu.set_text(string_upper(global.other_controls[0])+string_upper(global.other_controls[1])+string_upper(global.other_controls[2])+string_upper(global.other_controls[3])+" - Move");
 			
 			// moving
 			if (wasd_pressed) {
@@ -546,8 +546,8 @@ switch (state) {
 			
 			
 		}else{
-			//obj_menu.set_text(global.other_controls[0]+global.other_controls[1]+global.other_controls[2]+global.other_controls[3]+" - "Aim    Tab - Back");
-			obj_menu.set_text(global.other_controls[0]+global.other_controls[1]+global.other_controls[2]+global.other_controls[3]+" - Aim  ");
+			//obj_menu.set_text(string_upper(global.other_controls[0]+string_upper(global.other_controls[1]+string_upper(global.other_controls[2]+string_upper(global.other_controls[3]+" - "Aim    Tab - Back");
+			obj_menu.set_text(string_upper(global.other_controls[0])+string_upper(global.other_controls[1])+string_upper(global.other_controls[2])+string_upper(global.other_controls[3])+" - Aim  ");
 			obj_menu.set_skill_text(string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
 			obj_menu.confirm = true;
 			
