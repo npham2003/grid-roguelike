@@ -337,7 +337,7 @@ rebind = function(action, _new) {
 	});
 }
 
-for(var i=0;i<array_length(controls_list);i++){
+for(var i=0;i<total_controls;i++){
     controls_draw[i,c_scale]=1; //Set this Options Current Scaling, this will be used for a smooth scaling when switching options
     controls_draw[i,c_fade]=1-(abs(i-option_cur)*fade); //Set this Options Current Fade value
     controls_draw[i,c_whatever]=i*i; //This is just an example on how you can give each option "info" or retrievable data
