@@ -102,11 +102,11 @@ description_box_height=600;
 tips=[
 	[
 		"How to Play (1)",
-		"Use (WASD) to move the cursor around on the grid. Your cursor is a white reticle surrounding a tile.\n\nOnce you move it over one of your own units, the menu at the bottom will open showing your unit's skills.\n\The unit's movement range will be previewed with BLUE highlights.\n\nPress (ENTER) to select them."
+		"Use ("+string_upper(global.other_controls[0])+string_upper(global.other_controls[1])+string_upper(global.other_controls[2])+string_upper(global.other_controls[3])+") to move the cursor around on the grid. Your cursor is a white reticle surrounding a tile.\n\nOnce you move it over one of your own units, the menu at the bottom will open showing your unit's skills.\n\The unit's movement range will be previewed with BLUE highlights.\n\nPress (ENTER) to select them."
 	],
 	[
 		"How to Play (2)",
-		"Once a unit is selected, tiles within their movement range become highlighted by a darker blue. You can now move them using the cursor.\n\nOnce you move them to a desired position, press (Y) to select the Wait skill. Press (ENTER) to confirm using Wait.\n\nYou cannot move to the opposite side of the grid."
+		"Once a unit is selected, tiles within their movement range become highlighted by a darker blue. You can now move them using the cursor.\n\nOnce you move them to a desired position, press ("+string_upper(global.skill_controls[4])+") to select the Wait skill. Press (ENTER) to confirm using Wait.\n\nYou cannot move to the opposite side of the grid."
 	],
 	[
 		"How to Play (3)",
@@ -122,7 +122,7 @@ tips=[
 	],
 	[
 		"Using Skills",
-		"Units can both move and use a skill on the same turn. Skills, as well as how much TP they cost, are displayed in the menu on the bottom. To use a skill, press the associated button to select it. Press either (ENTER) or the skill button again to confirm.\n\nSome skills require you to pick a target or allow you to aim them. Use (WASD) to select the targeted area with your cursor before confirming.\n\nA skill's range will be shown in RED if it does damage, and GREEN if it doesn't. Tiles affected by the skill being aimed at your cursor position blink WHITE."
+		"Units can both move and use a skill on the same turn. Skills, as well as how much TP they cost, are displayed in the menu on the bottom. To use a skill, press the associated button to select it. Press either (ENTER) or the skill button again to confirm.\n\nSome skills require you to pick a target or allow you to aim them. Use ("+string_upper(global.other_controls[0])+string_upper(global.other_controls[1])+string_upper(global.other_controls[2])+string_upper(global.other_controls[3])+") to select the targeted area with your cursor before confirming.\n\nA skill's range will be shown in RED if it does damage, and GREEN if it doesn't. Tiles affected by the skill being aimed at your cursor position blink WHITE."
 	],
 	[
 		"Friendly Fire",
@@ -130,11 +130,11 @@ tips=[
 	],
 	[
 		"Shared Skills",
-		"Although units each have three unique skills, they share the Wait action and the Attack skill. Attack is always used with (H) and Wait is always used with (Y)."
+		"Although units each have three unique skills, they share the Wait action and the Attack skill. Attack is always used with ("+string_upper(global.skill_controls[0])+") and Wait is always used with ("+string_upper(global.skill_controls[4])+")."
 	],
 	[
 		"Using the Attack",
-		"Press (H) while your cursor is on a player unit to use the Attack skill.\n\nAttack hits the first target in any cardinal direction.\n\nBy default, it will aim towards the right. "
+		"Press ("+string_upper(global.skill_controls[0])+") while your cursor is on a player unit to use the Attack skill.\n\nAttack hits the first target in any cardinal direction.\n\nBy default, it will aim towards the right. "
 	],
 	[
 		"Enemy Attacks (1)",
@@ -198,15 +198,15 @@ tips=[
 	],
 	[
 		"L'Cifure: Beam",
-		"L'Cifure's (J) skill Beam hits all units directly in front of him for 2 damage. Use it whenever enemies line up, or if you need to hit something for more damage than normal!\n\nIts first upgrade, Big Beam, also hits the rows above and below him for 1 damage.\n\nIts second upgrade, Repel Beam, also pushes enemies to the right by one tile. Use it to both damage and reposition enemies!"
+		"L'Cifure's ("+string_upper(global.skill_controls[1])+") skill Beam hits all units directly in front of him for 2 damage. Use it whenever enemies line up, or if you need to hit something for more damage than normal!\n\nIts first upgrade, Big Beam, also hits the rows above and below him for 1 damage.\n\nIts second upgrade, Repel Beam, also pushes enemies to the right by one tile. Use it to both damage and reposition enemies!"
 	],
 	[
 		"L'Cifure: Charge",
-		"L'Cifure's (K) skill Charge grants an extra 1 TP for the rest of the party. Its great when you need just a little more power.\n\nIts first upgrade, Chargeback, grants him 3 TP, but also returns him to where he was before moving. Make sure to only use it in a safe spot!\n\nIts second upgrade, Parry, makes L'Cifure immune to all attacks for 1 turn. Use it when you're in a tough spot!"
+		"L'Cifure's ("+string_upper(global.skill_controls[2])+") skill Charge grants an extra 1 TP for the rest of the party. Its great when you need just a little more power.\n\nIts first upgrade, Chargeback, grants him 3 TP, but also returns him to where he was before moving. Make sure to only use it in a safe spot!\n\nIts second upgrade, Parry, makes L'Cifure immune to all attacks for 1 turn. Use it when you're in a tough spot!"
 	],
 	[
 		"L'Cifure: Mortar",
-		"L'Cifure's (L) skill Mortar hits a target within 3 spaces and all adjacent units.\n\nIts first upgrade, Airstrike, allows him to target any space on the grid, regardless of distance!\n\nIts second upgrade, Force Grenade, does double damage to the center target, as well as pushing all adjacent targets away 1 tile!"
+		"L'Cifure's ("+string_upper(global.skill_controls[3])+") skill Mortar hits a target within 3 spaces and all adjacent units.\n\nIts first upgrade, Airstrike, allows him to target any space on the grid, regardless of distance!\n\nIts second upgrade, Force Grenade, does double damage to the center target, as well as pushing all adjacent targets away 1 tile!"
 	],
 	[
 		"Angel: Summary",
@@ -214,15 +214,15 @@ tips=[
 	],
 	[
 		"Angel: Protect",
-		"Angel's (J) skill Protect allows her to prevent an adjacent ally from taking damage from 1 attack. If they're stuck in an enemy attack, or in the way of another unit's area of effect skill, make sure to cast Protect on them.\n\nIts first upgrade, Shove, let's her push an adjacent ally away 1 tile. If you need just a little extra movement, Shove is just for you.\n\nIts second upgrade, Wide Guard, protects both Angel and all adjacent allies for 1 attack!"
+		"Angel's ("+string_upper(global.skill_controls[1])+") skill Protect allows her to prevent an adjacent ally from taking damage from 1 attack. If they're stuck in an enemy attack, or in the way of another unit's area of effect skill, make sure to cast Protect on them.\n\nIts first upgrade, Shove, let's her push an adjacent ally away 1 tile. If you need just a little extra movement, Shove is just for you.\n\nIts second upgrade, Wide Guard, protects both Angel and all adjacent allies for 1 attack!"
 	],
 	[
 		"Angel: Encourage",
-		"Angel's (K) skill Encourage lets 1 adjacent ally do 1 extra damage on all of their attacks for 2 turns.\n\nIts first upgrade, Rallying Cry, does the same thing, but lets her target an ally up to 3 tiles away! Never be prevented from buffing your allies again!\n\nIts second upgrade, Invigorate, allows an adjacent ally to deal 2 extra damage instead! Use it to deal massive damage in a single turn!"
+		"Angel's ("+string_upper(global.skill_controls[2])+") skill Encourage lets 1 adjacent ally do 1 extra damage on all of their attacks for 2 turns.\n\nIts first upgrade, Rallying Cry, does the same thing, but lets her target an ally up to 3 tiles away! Never be prevented from buffing your allies again!\n\nIts second upgrade, Invigorate, allows an adjacent ally to deal 2 extra damage instead! Use it to deal massive damage in a single turn!"
 	],
 	[
 		"Angel: Haste",
-		"Angel's (L) skill Haste allows an adjacent ally to move 1 extra tile for 2 turns!\n\nIts first upgrade, Superspeed, allows them to move up to 2 extra spaces instead!\n\nIts second upgrade, Dance, lets an adjacent ally that has already used their turn act again! Remember that even though they get to move and use a skill, they'll have less TP to make use of."
+		"Angel's ("+string_upper(global.skill_controls[3])+") skill Haste allows an adjacent ally to move 1 extra tile for 2 turns!\n\nIts first upgrade, Superspeed, allows them to move up to 2 extra spaces instead!\n\nIts second upgrade, Dance, lets an adjacent ally that has already used their turn act again! Remember that even though they get to move and use a skill, they'll have less TP to make use of."
 	],
 	[
 		"Warpman: Summary",
@@ -230,15 +230,15 @@ tips=[
 	],
 	[
 		"Warpman: Misty Step",
-		"Warpman's (J) skill Misty Step allows him to teleport to an empty tile up to 2 spaces away! It also costs no TP, making it an excellent movement option.\n\nIts first upgrade, Cartesian Shift, lets him teleport to any space in the same row or column.\n\nIts second upgrade, Dimension Door, lets him move to any empty space on the player side of the grid!"
+		"Warpman's ("+string_upper(global.skill_controls[1])+") skill Misty Step allows him to teleport to an empty tile up to 2 spaces away! It also costs no TP, making it an excellent movement option.\n\nIts first upgrade, Cartesian Shift, lets him teleport to any space in the same row or column.\n\nIts second upgrade, Dimension Door, lets him move to any empty space on the player side of the grid!"
 	],
 	[
 		"Warpman: Warp",
-		"Warpman's (K) skill Warp lets him teleport any adjacent ally to another tile up to 3 spaces away!\n\nIts first upgrade, Swap, lets you swap the positions of 2 allies, regardless of how far away they are.\n\nIts second upgrade, Rescue, teleports an ally up to 3 spaces from their current position to any of Warpman's adjacent tiles! Use it to get out of a pinch."
+		"Warpman's ("+string_upper(global.skill_controls[2])+") skill Warp lets him teleport any adjacent ally to another tile up to 3 spaces away!\n\nIts first upgrade, Swap, lets you swap the positions of 2 allies, regardless of how far away they are.\n\nIts second upgrade, Rescue, teleports an ally up to 3 spaces from their current position to any of Warpman's adjacent tiles! Use it to get out of a pinch."
 	],
 	[
 		"Warpman: Vortex Shift",
-		"Warpman's (L) skill Vortex Shift allows him to teleport any enemy to an empty space up to 3 tiles away! This includes the player side of the grid.\n\nIts first upgrade, Vortex Swap, allows him to swap the positions of any 2 enemies!\n\nIts second upgrade, Vortex Warp, allows him to teleport any enemy to any empty space on the grid."
+		"Warpman's ("+string_upper(global.skill_controls[3])+") skill Vortex Shift allows him to teleport any enemy to an empty space up to 3 tiles away! This includes the player side of the grid.\n\nIts first upgrade, Vortex Swap, allows him to swap the positions of any 2 enemies!\n\nIts second upgrade, Vortex Warp, allows him to teleport any enemy to any empty space on the grid."
 	],
 	[
 		"Bombastic: Summary",
@@ -246,15 +246,15 @@ tips=[
 	],
 	[
 		"Bombastic: Mine",
-		"Bombastic's (J) skill Mine lets her place a mine on the field! This mine does 1 damage to all adjacent units! It lasts 1 turn.\n\nIts first upgrade, Bigger Mine, makes the mine she places affect a 3x3 area instead! This lasts for 2 turns!\n\nIts second upgrade, More Mines, allows her to place 2 mines on a single turn!"
+		"Bombastic's ("+string_upper(global.skill_controls[1])+") skill Mine lets her place a mine on the field! This mine does 1 damage to all adjacent units! It lasts 1 turn.\n\nIts first upgrade, Bigger Mine, makes the mine she places affect a 3x3 area instead! This lasts for 2 turns!\n\nIts second upgrade, More Mines, allows her to place 2 mines on a single turn!"
 	],
 	[
 		"Bombastic: Ice Mine",
-		"Bombastic's (K) skill Ice Mine allows her to place a mine that freezes units in a 3x3 area for 2 turns. The mine lasts 1 turn.\n\nIts first upgrade, Freezer, places an Ice Mine that lasts for 3 turns!\n\nIts second upgrade, Ice Age, places a larger Ice Mine, which in addition to affecting a 5x5 area, also deals 1 damage to affected units!"
+		"Bombastic's ("+string_upper(global.skill_controls[2])+") skill Ice Mine allows her to place a mine that freezes units in a 3x3 area for 2 turns. The mine lasts 1 turn.\n\nIts first upgrade, Freezer, places an Ice Mine that lasts for 3 turns!\n\nIts second upgrade, Ice Age, places a larger Ice Mine, which in addition to affecting a 5x5 area, also deals 1 damage to affected units!"
 	],
 	[
 		"Bombastic: Push Mine",
-		"Warpman's (L) skill Push Mine, places a mine that pushes adjacent units away from it for 1 tile! It lasts for 1 turn.\n\nIts first upgrade, Gravity Mine, affects units up to 2 tiles away in the same row or column, and pulls units in towards it instead of pushing them away! This lasts 3 turns.\n\nIts second upgrade, Super Push Mine, pushes units away from the mine until they collide with a wall or another unit. This mine lasts for 1 turn"
+		"Warpman's ("+string_upper(global.skill_controls[3])+") skill Push Mine, places a mine that pushes adjacent units away from it for 1 tile! It lasts for 1 turn.\n\nIts first upgrade, Gravity Mine, affects units up to 2 tiles away in the same row or column, and pulls units in towards it instead of pushing them away! This lasts 3 turns.\n\nIts second upgrade, Super Push Mine, pushes units away from the mine until they collide with a wall or another unit. This mine lasts for 1 turn"
 	],
 	[
 		"Frozone: Summary",
@@ -262,15 +262,15 @@ tips=[
 	],
 	[
 		"Frozone: Freeze",
-		"Frozone's (J) skill Freeze lets her freeze the first unit in front of her for 1 turn!\n\nIts first upgrade, Deep Freeze, makes the skill freeze for 2 turns!\n\nIts second upgrade, Piercing Freeze, allows her to freeze all units in front of her for 1 turn!"
+		"Frozone's ("+string_upper(global.skill_controls[1])+") skill Freeze lets her freeze the first unit in front of her for 1 turn!\n\nIts first upgrade, Deep Freeze, makes the skill freeze for 2 turns!\n\nIts second upgrade, Piercing Freeze, allows her to freeze all units in front of her for 1 turn!"
 	],
 	[
 		"Frozone: Frostbite",
-		"Frozone's (K) skill Frostbite hits all enemies in a cone in front of her for 1 damage. It also does 1 extra damage to any frozen units. The cone's range is 3 tiles in front of her.\n\nIts first upgrade, Boreal Wind, attacks everything in the cone in addition to everything in front of Frozone on the same row!\n\nIts second upgrade, Sharp Winds, does an extra 2 damage to frozen units!"
+		"Frozone's ("+string_upper(global.skill_controls[2])+") skill Frostbite hits all enemies in a cone in front of her for 1 damage. It also does 1 extra damage to any frozen units. The cone's range is 3 tiles in front of her.\n\nIts first upgrade, Boreal Wind, attacks everything in the cone in addition to everything in front of Frozone on the same row!\n\nIts second upgrade, Sharp Winds, does an extra 2 damage to frozen units!"
 	],
 	[
 		"Frozone: Icicle Crash",
-		"Frozone's (L) skill Icicle Crash, freezes any target on the grid!\n\nIts first upgrade, Avalanche, freezes a target within 3 spaces and all adjacent units for 1 turn.\n\nIts second upgrade, Absolute Zero, freezes all enemy units for 1 turn!"
+		"Frozone's ("+string_upper(global.skill_controls[3])+") skill Icicle Crash, freezes any target on the grid!\n\nIts first upgrade, Avalanche, freezes a target within 3 spaces and all adjacent units for 1 turn.\n\nIts second upgrade, Absolute Zero, freezes all enemy units for 1 turn!"
 	],
 	[
 		"Oktavia: Summary",
@@ -278,15 +278,15 @@ tips=[
 	],
 	[
 		"Oktavia: Phase Shifter",
-		"Oktavia's (J) skill Phase Shifter targets the first target in front of her and pushes them 1 tile in any direction you want! Use (WASD) to aim the push direction, indicated by the red arrow.\n\nIts first upgrade, Long Phase, pushes the target until they collide with a wall or another unit, guaranteeing damage!\n\nIts second upgrade, Forceful Shift, pushes the target while also dealing 1 damage!"
+		"Oktavia's ("+string_upper(global.skill_controls[1])+") skill Phase Shifter targets the first target in front of her and pushes them 1 tile in any direction you want! Use ("+string_upper(global.other_controls[0])+string_upper(global.other_controls[1])+string_upper(global.other_controls[2])+string_upper(global.other_controls[3])+") to aim the push direction, indicated by the red arrow.\n\nIts first upgrade, Long Phase, pushes the target until they collide with a wall or another unit, guaranteeing damage!\n\nIts second upgrade, Forceful Shift, pushes the target while also dealing 1 damage!"
 	],
 	[
 		"Oktavia: Repelling Blast",
-		"Oktavia's (K) skill Repelling Blast affects all enemies in a row in front of her, as well as 1 adjacent row of your choosing. It causes units in these rows to be pushed away from each other, with the row on top being pushed up, and the one below being pushed down.\n\nIts first upgrade, Repelling Shockwave, does the same, but pushes them until they hit a wall or another unit!\n\nIts second upgrade, Compress, targets units in the above and below Oktavia, and pushes them into the row she's currently in."
+		"Oktavia's ("+string_upper(global.skill_controls[2])+") skill Repelling Blast affects all enemies in a row in front of her, as well as 1 adjacent row of your choosing. It causes units in these rows to be pushed away from each other, with the row on top being pushed up, and the one below being pushed down.\n\nIts first upgrade, Repelling Shockwave, does the same, but pushes them until they hit a wall or another unit!\n\nIts second upgrade, Compress, targets units in the above and below Oktavia, and pushes them into the row she's currently in."
 	],
 	[
 		"Oktavia: Force Push",
-		"Oktavia's (L) skill Force Push, targets the first unit in front of her in every row, and pushes them to the right 1 tile!\n\nIts first upgrade, Row Shift, targets all units in the same row as her, including herself and units behind her. You can then choose to push all of them up or down!\n\nIts second upgrade, Force Pull, does the same as the original skill, but pushes its targets to the left instead!"
+		"Oktavia's ("+string_upper(global.skill_controls[3])+") skill Force Push, targets the first unit in front of her in every row, and pushes them to the right 1 tile!\n\nIts first upgrade, Row Shift, targets all units in the same row as her, including herself and units behind her. You can then choose to push all of them up or down!\n\nIts second upgrade, Force Pull, does the same as the original skill, but pushes its targets to the left instead!"
 	],
 
 ]
