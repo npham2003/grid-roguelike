@@ -133,7 +133,6 @@
     {"id":{"name":"obj_shop_menu","path":"objects/obj_shop_menu/obj_shop_menu.yy",},},
     {"id":{"name":"obj_textboxTut","path":"objects/obj_textboxTut/obj_textboxTut.yy",},},
     {"id":{"name":"obj_tile_class","path":"objects/obj_tile_class/obj_tile_class.yy",},},
-    {"id":{"name":"obj_rebind_menu","path":"objects/obj_rebind_menu/obj_rebind_menu.yy",},},
     {"id":{"name":"CharSel","path":"rooms/CharSel/CharSel.yy",},},
     {"id":{"name":"GridTest","path":"rooms/GridTest/GridTest.yy",},},
     {"id":{"name":"MainMenu","path":"rooms/MainMenu/MainMenu.yy",},},

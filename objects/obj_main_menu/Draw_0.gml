@@ -427,6 +427,11 @@ if(sub_menu==3){
 			
 			draw_set_color(diamond_fill);
 			draw_line_width(actual_tips+1, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+1,actual_tips+tip_box_width-1, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+1,2);
+			draw_line_width(actual_tips+tip_box_width-1, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+1,actual_tips+tip_box_width-1, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+tip_box_height-1,2);
+			draw_line_width(actual_tips+1, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+tip_box_height-1,actual_tips+tip_box_width-1, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+tip_box_height-1,2);
+			draw_line_width(actual_tips+1, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+1,actual_tips+1, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+tip_box_height-1,2);
+			
+			draw_set_color(c_black);
 			draw_set_halign(fa_center);
 			draw_set_font(fnt_chiaro);
 			for(var dto_i=45; dto_i<405; dto_i+=360/8)
@@ -479,7 +484,7 @@ if(sub_menu==3){
 if(sub_menu==4){
 	for(var i=0;i<total_controls;i++){
 		//draw_sprite_ext(option_s,i,x,y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*i),controls_draw[i,_scale],controls_draw[i,_scale],0,c_white,controls_draw[i,_fade]);
-			if(option_cur==i){
+			if(controls_cur==i){
 				draw_set_alpha(0.2);
 				draw_set_color(c_white);
 				draw_rectangle_color(actual_tips-3, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i)),actual_tips+tip_box_width+2,y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+tip_box_height-1,c_white,c_white,c_white,c_white,false);
@@ -488,12 +493,12 @@ if(sub_menu==4){
 			
 			
 			draw_set_font(fnt_chiaro);
-			{
+			for(var dto_i=45; dto_i<405; dto_i+=360/8){
 			  //draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);
-			  draw_text_ext_transformed(actual_tips+(tip_box_width/2)+round(lengthdir_x(1,dto_i)),y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+2+round(lengthdir_y(1,dto_i)),tips[i][0],8,10000000,1,1,0);
+			  draw_text_ext_transformed(actual_tips+(tip_box_width/2)+round(lengthdir_x(1,dto_i)),y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+2+round(lengthdir_y(1,dto_i)),controls_list[i][0],8,10000000,1,1,0);
 			}
 			draw_set_color(c_white);
-			draw_text_ext_transformed(actual_tips+(tip_box_width/2),y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+2,tips[i][0],8,10000000,1,1,0);
+			draw_text_ext_transformed(actual_tips+(tip_box_width/2),y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+2,controls_list[i][0],8,10000000,1,1,0);
 			
 			draw_primitive_begin(pr_trianglestrip);
 			draw_vertices(make_diamond(actual_tips,y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i)),(skill_diamond_size)));
@@ -502,32 +507,15 @@ if(sub_menu==4){
 			draw_set_valign(fa_top);
 		
 	}
-	show_debug_message(options[0,_scale]);
+	//show_debug_message(options[0,_scale]);
 	draw_set_alpha(0.1);
 	draw_set_color(c_black);
 	
-	draw_rectangle(actual_description_x,description_y_start,actual_description_x+description_box_width,description_y_start+description_box_height,false);
-	draw_set_alpha(1);
-	draw_set_color(diamond_outline);
-	draw_line_width(actual_description_x-3,description_y_start,actual_description_x+description_box_width+2, description_y_start,5);
-	draw_line_width(actual_description_x+description_box_width, description_y_start,actual_description_x+description_box_width, description_y_start+description_box_height,5);
-	draw_line_width(actual_description_x-3, description_y_start+description_box_height,actual_description_x+description_box_width+2, description_y_start+description_box_height,5);
-	draw_line_width(actual_description_x, description_y_start,actual_description_x, description_y_start+description_box_height,5);
-			
-	draw_set_color(diamond_fill);
-	draw_line_width(actual_description_x+1,description_y_start+1,actual_description_x+description_box_width-1, description_y_start+1,2);
-	draw_line_width(actual_description_x+description_box_width-1, description_y_start+1,actual_description_x+description_box_width-1, description_y_start+description_box_height-1,2);
-	draw_line_width(actual_description_x+1, description_y_start+description_box_height-1,actual_description_x+description_box_width-1, description_y_start+description_box_height-1,2);
-	draw_line_width(actual_description_x+1, description_y_start+1,actual_description_x+1, description_y_start+description_box_height-1,2);
-	//draw_line_width(actual_tips+1, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+1,actual_tips+tip_box_width-1, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+1,2);
-	//draw_line_width(actual_tips+tip_box_width-1, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+1,actual_tips+tip_box_width-1, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+tip_box_height-1,2);
-	//draw_line_width(actual_tips+1, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+tip_box_height-1,actual_tips+tip_box_width-1, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+tip_box_height-1,2);
-	//draw_line_width(actual_tips+1, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+1,actual_tips+1, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+tip_box_height-1,2);
-			
+	
 	draw_set_alpha(1);
 	draw_set_color(c_white);
 	draw_set_font(fnt_chiaro_small);
-	text_outline(actual_description_x+20,description_y_start,tips[option_cur][1],1,c_black,8,30,description_box_width-40);
+	//text_outline(actual_description_x+20,description_y_start,tips[controls_cur][1],1,c_black,8,30,description_box_width-40);
 	//draw_rectangle(actual_description_x,description_y_start,actual_description_x+500,description_y_start+600,false);
 	draw_set_alpha(1);
 }

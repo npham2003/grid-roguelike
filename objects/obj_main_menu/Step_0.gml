@@ -95,8 +95,11 @@ if(transition_in){
 				sub_menu=1;
 				transition_in=true;
 				selector_pos=0;
-				
-				
+			}
+			if(selector_pos==4){
+				sub_menu=4;
+				transition_in=true;
+				selector_pos=0;
 			}
 			
 		}
@@ -154,20 +157,20 @@ if(transition_in){
 switch(sub_menu){
 	case 0:
 			if(transition_in){
-				if (keyboard_check_pressed(ord("S"))) {
+				if (input_check_pressed("down")) {
 					selector_pos+=1;
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					selector_pos=selector_pos%array_length(menu_options[0]);
 				
 				}
-				if (keyboard_check_pressed(ord("W"))) {
+				if (input_check_pressed("up")) {
 					selector_pos-=1;
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					if(selector_pos<0){
 						selector_pos=array_length(menu_options[0])-1;
 					}
 				}
-				if(keyboard_check_pressed(vk_enter)){
+				if(input_check_pressed("confirm")){
 					
 					if(selector_pos==0){
 						audio_play_sound(sfx_menu_next, 0, false, 0.7, 0);
@@ -190,6 +193,10 @@ switch(sub_menu){
 						next_background_color=menu_colors[1];
 					}
 					if(selector_pos==4){
+						audio_play_sound(sfx_menu_next, 0, false, 0.7, 0);
+						next_background_color=menu_colors[1];
+					}
+					if(selector_pos==5){
 						funny_opacity=1;
 						audio_play_sound(sfx_vine_boom, 0, false, 0.7, 0);
 					}else{
@@ -201,20 +208,20 @@ switch(sub_menu){
 			break;
 	case 1:
 			if(transition_in){
-				if (keyboard_check_pressed(ord("S"))) {
+				if (input_check_pressed("down")) {
 					selector_pos+=1;
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					selector_pos=selector_pos%array_length(menu_options[1]);
 				
 				}
-				if (keyboard_check_pressed(ord("W"))) {
+				if (input_check_pressed("up")) {
 					selector_pos-=1;
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					if(selector_pos<0){
 						selector_pos=array_length(menu_options[1])-1;
 					}
 				}
-				if(keyboard_check_pressed(vk_enter)){
+				if(input_check_pressed("confirm")){
 					if(selector_pos==array_length(menu_options[1])-1){
 						transition_in=false;
 						selector_pos=0;
@@ -225,7 +232,7 @@ switch(sub_menu){
 						url_open_ext(website_urls[selector_pos],"_blank");
 					}
 				}
-				if(keyboard_check_pressed(vk_tab)){
+				if(input_check_pressed("back")){
 					transition_in=false;
 					selector_pos=3;
 					next_background_color=menu_colors[0];
@@ -235,20 +242,20 @@ switch(sub_menu){
 			break;
 	case 2:
 			if(transition_in){
-				if (keyboard_check_pressed(ord("S"))) {
+				if (input_check_pressed("down")) {
 					selector_pos+=1;
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					selector_pos=selector_pos%array_length(global.players);
 				
 				}
-				if (keyboard_check_pressed(ord("W"))) {
+				if (input_check_pressed("up")) {
 					selector_pos-=1;
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					if(selector_pos<0){
 						selector_pos=array_length(global.players)-1;
 					}
 				}
-				if(keyboard_check_pressed(vk_enter)){
+				if(input_check_pressed("confirm")){
 					if(!selected[selector_pos]){
 						while(party[curr]!=-1){
 							curr++;
@@ -291,7 +298,7 @@ switch(sub_menu){
 						show_debug_message(party);
 						show_debug_message(curr);
 				}
-				if(keyboard_check_pressed(vk_tab)){
+				if(input_check_pressed("back")){
 					audio_play_sound(sfx_menu_back, 0, false, 0.7, 0);
 					
 					var iter = 2;
@@ -357,33 +364,33 @@ switch(sub_menu){
 	case 3:
 		
 			if(transition_in){
-				if (keyboard_check_pressed(ord("S"))) {
+				if (input_check_pressed("down")) {
 					option_cur+=1;
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					option_cur=option_cur%total_options;
 				
 				}
-				if (keyboard_check_pressed(ord("W"))) {
+				if (input_check_pressed("up")) {
 					option_cur-=1;
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					if(option_cur<0){
 						option_cur=total_options-1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D"))) {
+				if (input_check_pressed("right")) {
 					option_cur+=5;
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					option_cur=option_cur%total_options;
 				
 				}
-				if (keyboard_check_pressed(ord("A"))) {
+				if (input_check_pressed("left")) {
 					option_cur-=5;
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					if(option_cur<0){
 						option_cur=total_options+option_cur;
 					}
 				}
-				if(keyboard_check_pressed(vk_tab)){
+				if(input_check_pressed("back")){
 					transition_in=false;
 					selector_pos=2;
 					next_background_color=menu_colors[0];
@@ -391,7 +398,7 @@ switch(sub_menu){
 					
 					
 				}
-				if(keyboard_check_pressed(vk_enter)){
+				if(input_check_pressed("confirm")){
 					
 						audio_play_sound(sfx_menu_next, 0, false, 0.7, 0);
 						current_tip=option_cur;
@@ -404,7 +411,7 @@ switch(sub_menu){
 			y_draw_begin=(y_draw_offset*-1)*option_cur; //we do -1 because the menu will be drawn downward, doing -1 will then make the images begin to draw up higher
 
 			//Determine the Current option we are selecting/hovering
-			//option_cur=clamp(option_cur+(keyboard_check_pressed(ord("S"))-keyboard_check_pressed(ord("W"))),0,total_options-1);
+			//option_cur=clamp(option_cur+(input_check_pressed("down")-input_check_pressed("up")),0,total_options-1);
 
 			//Scale the options
 			for(i=0;i<total_options;i++){
@@ -425,33 +432,33 @@ switch(sub_menu){
 case 4:
 	
 			if(transition_in){
-				if (keyboard_check_pressed(ord("S"))) {
+				if (input_check_pressed("down")) {
 					controls_cur+=1;
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-					controls_cur=controls_cur%array_length(total_controls);
+					controls_cur=controls_cur%total_controls;
 				
 				}
-				if (keyboard_check_pressed(ord("W"))) {
+				if (input_check_pressed("up")) {
 					controls_cur-=1;
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					if(controls_cur<0){
-						controls_cur=array_length(total_controls)-1;
+						controls_cur=total_controls-1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D"))) {
+				if (input_check_pressed("right")) {
 					controls_cur+=5;
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
-					controls_cur=controls_cur%array_length(total_controls);
+					controls_cur=controls_cur%total_controls;
 				
 				}
-				if (keyboard_check_pressed(ord("A"))) {
+				if (input_check_pressed("left")) {
 					controls_cur-=5;
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					if(controls_cur<0){
-						controls_cur=array_length(total_controls)+controls_cur;
+						controls_cur=total_controls+controls_cur;
 					}
 				}
-				if(keyboard_check_pressed(vk_tab)){
+				if(input_check_pressed("back")){
 					transition_in=false;
 					selector_pos=2;
 					next_background_color=menu_colors[0];
@@ -459,7 +466,7 @@ case 4:
 					
 					
 				}
-				if(keyboard_check_pressed(vk_enter)){
+				if(input_check_pressed("confirm")){
 					
 						audio_play_sound(sfx_menu_next, 0, false, 0.7, 0);
 						current_tip=controls_cur;
@@ -472,10 +479,10 @@ case 4:
 			y_draw_begin=(y_draw_offset*-1)*controls_cur; //we do -1 because the menu will be drawn downward, doing -1 will then make the images begin to draw up higher
 
 			//Determine the Current option we are selecting/hovering
-			//controls_cur=clamp(controls_cur+(keyboard_check_pressed(ord("S"))-keyboard_check_pressed(ord("W"))),0,array_length(total_controls)-1);
+			//controls_cur=clamp(controls_cur+(input_check_pressed("down")-input_check_pressed("up")),0,total_controls-1);
 
 			//Scale the options
-			for(i=0;i<array_length(total_controls);i++){
+			for(i=0;i<total_controls;i++){
 			    var scale_end=scale+(scale_add*(controls_cur==i)); //add additional scale size if this option is the currently selected option
 			    //if controls_draws[i,_scale]!=scale_end{
 			    //    controls_draws[i,_scale]+=(scale_end-controls_draws[i,_scale])*scale_speed;}}
@@ -483,7 +490,7 @@ case 4:
 			}
       
 			//Fade the options
-			for(i=0;i<array_length(total_controls);i++){
+			for(i=0;i<total_controls;i++){
 			    var fade_end=1-(abs(i-controls_cur)*fade); //find the "distance" this option is from current option, use that to determine strength of fade
 			    if (controls_draws[i,_fade]!=fade_end){
 			        controls_draws[i,_fade]+=(fade_end-controls_draws[i,_fade])*fade_speed;}}

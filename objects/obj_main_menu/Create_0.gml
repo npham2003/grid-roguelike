@@ -319,23 +319,24 @@ for(i=0;i<total_options;i++){
 #region controls
 controls_list = [];
 controls_cur=0;
-total_controls = array_length(controls_list);
 c_scale=0; c_fade=0.5; c_whatever=2;
 
 for (var i = 0; i < array_length(global.other_controls); ++i) {
-	array_push(controls_list, global.other_controls[i]);
+	array_push(controls_list, [global.other_controls[i],input_binding_get_verbs(global.other_controls[i],global.other_controls[i])]);
 }
 
 for (var i = 0; i < array_length(global.skill_controls); ++i) {
-	array_push(controls_list, global.skill_controls[i]);
+	array_push(controls_list, [global.skill_controls[i], input_binding_get_verbs(global.other_controls[i])]);
 }
 
+total_controls = array_length(controls_list);
 
 rebind = function(action, _new) {
 	input_binding_scan_start(function(_new) {
 		input_binding_set_safe(action, _new);
 	});
 }
+
 
 for(var i=0;i<total_controls;i++){
     controls_draw[i,c_scale]=1; //Set this Options Current Scaling, this will be used for a smooth scaling when switching options
