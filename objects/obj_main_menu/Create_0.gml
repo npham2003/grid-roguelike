@@ -322,11 +322,12 @@ controls_cur=0;
 c_scale=0; c_fade=0.5; c_whatever=2;
 
 for (var i = 0; i < array_length(global.other_controls); ++i) {
-	array_push(controls_list, [global.other_controls[i],input_binding_get_verbs(global.other_controls[i],global.other_controls[i])]);
+	show_debug_message(string(global.other_controls[i]));
+	array_push(controls_list, [input_binding_get_verbs(global.other_controls[i]), input_binding_get_name(global.other_controls[i])]);
 }
 
 for (var i = 0; i < array_length(global.skill_controls); ++i) {
-	array_push(controls_list, [global.skill_controls[i], input_binding_get_verbs(global.other_controls[i])]);
+	array_push(controls_list, [input_binding_get_verbs(global.skill_controls[i]), input_binding_get_name(global.skill_controls[i])]);
 }
 
 total_controls = array_length(controls_list);

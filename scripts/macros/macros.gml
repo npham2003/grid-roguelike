@@ -5,7 +5,7 @@
 #macro GRIDWIDTH 10
 #macro GRIDHEIGHT 5
 
-
+#region colors
 global._primary = #d1a578;
 global._secondary = #1cc6e0;
 global._aspect_bars = #1a1a1a;
@@ -26,3 +26,27 @@ global._tpBorder = #6ccf48;
 
 global._characterPrimary = #0cac87; //change per party member later
 global._characterSecondary = #386467;
+#endregion
+
+
+global.other_controls = [input_binding_get("up"), input_binding_get("left"), input_binding_get("down"), input_binding_get("right"), input_binding_get("confirm"), input_binding_get("back"), input_binding_get("end_turn")];
+global.skill_controls = [input_binding_get("first"), input_binding_get("second"), input_binding_get("third"), input_binding_get("fourth"), input_binding_get("wait")];
+
+
+global.floor_music=[
+	[
+		bgm_battleOfRuins, 
+		bgm_keves_battle,
+		bgm_clock_tower
+	],
+	[
+		bgm_night_walker,
+		bgm_rhythmical_bustle
+	],
+	[
+		bgm_unfinished_battle,
+		bgm_the_people_and_their_world
+	]
+
+
+]

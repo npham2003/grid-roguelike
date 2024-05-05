@@ -51,18 +51,18 @@ if(sub_menu==0){
 	if(selector_pos==array_length(_pips)-1){
 		draw_set_color(c_white);
 		draw_primitive_begin(pr_trianglestrip);
-		draw_vertices(make_diamond(150, 700, line_spacing+5));
+		draw_vertices(make_diamond(actual_logo_x, 700, line_spacing+5));
 		draw_primitive_end();
 	}
 	
 	draw_set_color(diamond_outline);
 	draw_primitive_begin(pr_trianglestrip);
-	draw_vertices(make_diamond(150, 700, line_spacing));
+	draw_vertices(make_diamond(actual_logo_x, 700, line_spacing));
 	draw_primitive_end();
 	
 	draw_set_color(diamond_fill);
 	draw_primitive_begin(pr_trianglestrip);
-	draw_vertices(make_diamond(150, 700, line_spacing-5));
+	draw_vertices(make_diamond(actual_logo_x, 700, line_spacing-5));
 	draw_primitive_end();
 	
 	draw_set_color(c_black);

@@ -687,7 +687,7 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	draw_set_color(c_white);
 	draw_set_alpha(1);
 	
-	text_outline(580,700, "WASD - Move Cursor    Enter - Select    Tab - Back", 1, c_black, 8, 100000, 1000000);
+	text_outline(580,700, string_upper(input_binding_get_name(global.other_controls[0]))+string_upper(input_binding_get_name(global.other_controls[1]))+string_upper(input_binding_get_name(global.other_controls[2]))+string_upper(input_binding_get_name(global.other_controls[3]))+"- Move Cursor     "+string_upper(input_binding_get_name(global.other_controls[4]))+" - Select Unit     "+string_upper(input_binding_get_name(global.other_controls[6]))+" - End Turn", 1, c_black, 8, 100000, 1000000);
 	draw_set_color(c_white);
 	
 }

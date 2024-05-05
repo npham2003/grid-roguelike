@@ -1,25 +1,3 @@
-global.skill_controls = [input_binding_get_name(input_binding_get("first")), input_binding_get_name(input_binding_get("second")), input_binding_get_name(input_binding_get("third")), input_binding_get_name(input_binding_get("fourth")), input_binding_get_name(input_binding_get("wait"))];
-global.other_controls = [input_binding_get_name(input_binding_get("up")), input_binding_get_name(input_binding_get("left")), input_binding_get_name(input_binding_get("down")), input_binding_get_name(input_binding_get("right")), input_binding_get_name(input_binding_get("confirm")), input_binding_get_name(input_binding_get("back")), input_binding_get_name(input_binding_get("end_turn"))];
-
-global.floor_music=[
-	[
-		bgm_battleOfRuins, 
-		bgm_keves_battle,
-		bgm_clock_tower
-	],
-	[
-		bgm_night_walker,
-		bgm_rhythmical_bustle
-	],
-	[
-		bgm_unfinished_battle,
-		bgm_the_people_and_their_world
-	]
-
-
-]
-
-
 //Action Library
 // _damage+unit.attack_bonus+unit.attack_bonus_temp
 // THIS IS THE DAMAGE FORMULA

@@ -12,20 +12,20 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade && !transition_out){
 	actual_x=lerp(actual_x,room_width/2,0.05);
 	switch(menu_level){
 		case 0:
-			if (keyboard_check_pressed(ord("A"))) {
+			if (input_check_pressed("left")) {
 				selector_pos[0]-=1;
 				fill_alpha = 0;
 				if(selector_pos[0]<0){
 					selector_pos[0]=2;
 				}
 			}
-			if (keyboard_check_pressed(ord("D"))) {
+			if (input_check_pressed("right")) {
 				selector_pos[0]+=1;
 				fill_alpha = 0;
 				selector_pos[0]=selector_pos[0]%3
 				
 			}
-			if (keyboard_check_pressed(ord("S"))) {
+			if (input_check_pressed("down")) {
 				selector_pos[1]+=1;
 				fill_alpha = 0;
 				selector_pos[1]=selector_pos[1]%2
@@ -33,7 +33,7 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade && !transition_out){
 					selector_pos[0]=2;
 				}
 			}
-			if (keyboard_check_pressed(ord("W"))) {
+			if (input_check_pressed("up")) {
 				selector_pos[1]-=1;
 				fill_alpha = 0;
 				selector_pos[1]=selector_pos[1]%2
@@ -41,7 +41,7 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade && !transition_out){
 					selector_pos[1]=1;
 				}
 			}
-			if(keyboard_check_pressed(vk_enter)){
+			if(input_check_pressed("confirm")){
 				if(!selectable[selector_pos[0]+selector_pos[1]*3]){
 					audio_play_sound(sfx_no_tp, 0, false);
 					return;
@@ -77,29 +77,29 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade && !transition_out){
 				//}
 				
 			}
-			if(keyboard_check_pressed(vk_tab)){
+			if(input_check_pressed("back")){
 				selector_pos=[0,0];
 				transition_out=true;
 			}
 			break;
 		case 1:
-			if (keyboard_check_pressed(ord("A"))) {
+			if (input_check_pressed("left")) {
 				character_select_pos-=1;
 				
 				if(character_select_pos<0){
 					character_select_pos=array_length(obj_battleControl.player_units)-1;
 				}
 			}
-			if (keyboard_check_pressed(ord("D"))) {
+			if (input_check_pressed("right")) {
 				character_select_pos+=1;
 				character_select_pos=character_select_pos%array_length(obj_battleControl.player_units);
 				
 			}
-			if(keyboard_check_pressed(vk_tab)){
+			if(input_check_pressed("back")){
 				menu_level=0;
 				character_select_pos=0;
 			}
-			if(keyboard_check_pressed(vk_enter)){
+			if(input_check_pressed("confirm")){
 				if(!selectable[character_select_pos]){
 					audio_play_sound(sfx_no_tp, 0, false);
 					return;
@@ -109,14 +109,14 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade && !transition_out){
 			}
 			break;
 		case 2:
-			if (keyboard_check_pressed(ord("W"))) {
+			if (input_check_pressed("up")) {
 				skill_select_pos-=1;
 				
 				if(skill_select_pos<0){
 					skill_select_pos=2;
 				}
 			}
-			if (keyboard_check_pressed(ord("S"))) {
+			if (input_check_pressed("down")) {
 				skill_select_pos+=1;
 				
 				if(skill_select_pos>2){
@@ -124,34 +124,34 @@ if(obj_battleControl.state==BattleState.PlayerUpgrade && !transition_out){
 				}
 				
 			}
-			if(keyboard_check_pressed(vk_tab)){
+			if(input_check_pressed("back")){
 				menu_level=0;
 				character_select_pos=0;
 			}
-			if(keyboard_check_pressed(vk_enter)){
+			if(input_check_pressed("confirm")){
 				menu_level=3;
 				skill_select_pos+=1;
 				new_skill_upgrade=obj_battleControl.player_units[character_select_pos].upgrades[skill_select_pos];
 			}
 			break;
 		case 3:
-			if(keyboard_check_pressed(vk_tab)){
+			if(input_check_pressed("back")){
 				menu_level=2;
 				skill_select_pos-=1;
 			}
-			if (keyboard_check_pressed(ord("S"))) {
+			if (input_check_pressed("down")) {
 				new_skill_upgrade+=1;
 				if(new_skill_upgrade>2){
 					new_skill_upgrade=0;
 				}
 			}
-			if (keyboard_check_pressed(ord("W"))) {
+			if (input_check_pressed("up")) {
 				new_skill_upgrade-=1;
 				if(new_skill_upgrade<0){
 					new_skill_upgrade=2;
 				}
 			}
-			if(keyboard_check_pressed(vk_enter)){
+			if(input_check_pressed("confirm")){
 				if(!selectable[new_skill_upgrade]){
 					audio_play_sound(sfx_no_tp, 0, false);
 					return;
