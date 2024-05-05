@@ -72,7 +72,7 @@ if (confirm) {
 	draw_primitive_end();
 	draw_set_font(fnt_archivo);
 	draw_set_color(global._characterSecondary);
-	draw_text_ext_transformed(confirmX[0]+50, 625, "Confirm: Enter", 30, confirmY-160, 0.5, 0.5, 0);
+	draw_text_ext_transformed(confirmX[0]+50, 625, "Confirm: "+global.other_controls[4], 30, confirmY-160, 0.5, 0.5, 0);
 	
 	//draw_text_color(550, );
 }
@@ -86,7 +86,7 @@ if (back) {
 	
 	draw_set_font(fnt_chiaro_small);
 	draw_set_color(c_white);
-	draw_text(710, rootY-105, "Back: Tab");
+	draw_text(710, rootY-105, "Back: "+global.other_controls[5]);
 	
 	draw_set_font(fnt_chiaro);
 }
@@ -182,7 +182,7 @@ for (var i = skills; i >= 0; i--) {
 	
 			draw_set_halign(fa_right);
 			draw_set_font(fnt_archivo);
-			draw_text_transformed_colour(menuX[i+1]-expandAnim*25, menuY[i]-30, global.controls[i], 0.6, 0.6, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, waitAlpha);
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25, menuY[i]-30, global.skill_controls[i], 0.6, 0.6, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, waitAlpha);
 			draw_set_halign(fa_right);
 			draw_set_font(fnt_chiaro_small);
 			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+20, menuY[i], skill_names[i+1], 0.7, 0.7, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, waitAlpha);
@@ -191,7 +191,7 @@ for (var i = skills; i >= 0; i--) {
 		}else{
 
 			draw_set_font(fnt_archivo);
-			draw_text_transformed_colour(menuX[i+1]-expandAnim*25, menuY[i]-30, global.controls[i], 0.6, 0.6, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25, menuY[i]-30, global.skill_controls[i], 0.6, 0.6, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
 			draw_set_halign(fa_right);
 			draw_set_font(fnt_chiaro_small);
 			draw_text_transformed_colour(menuX[i+1]-expandAnim*25+20, menuY[i], skill_names[i+1], 0.7, 0.7, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);

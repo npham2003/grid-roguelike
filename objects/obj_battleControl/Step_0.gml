@@ -1,23 +1,23 @@
 // Key press check
-var key_A_pressed = keyboard_check_pressed(ord("A"));
-var key_W_pressed = keyboard_check_pressed(ord("W"));
-var key_S_pressed = keyboard_check_pressed(ord("S"));
-var key_D_pressed = keyboard_check_pressed(ord("D"));
-var key_J_pressed = keyboard_check_pressed(ord("J"));
-var key_K_pressed = keyboard_check_pressed(ord("K"));
-var key_L_pressed = keyboard_check_pressed(ord("L"));
-var key_H_pressed = keyboard_check_pressed(ord("H"));
-var key_Y_pressed = keyboard_check_pressed(ord("Y"));
+//var input_check_pressed("left") = keyboard_check_pressed(ord("A"));
+//var input_check_pressed("up") = keyboard_check_pressed(ord("W"));
+//var input_check_pressed("down") = keyboard_check_pressed(ord("S"));
+//var input_check_pressed("right") = keyboard_check_pressed(ord("D"));
+//var input_check_pressed("second") = keyboard_check_pressed(ord("J"));
+//var input_check_pressed("third") = keyboard_check_pressed(ord("K"));
+//var input_check_pressed("fourth") = keyboard_check_pressed(ord("L"));
+//var input_check_pressed("first") = keyboard_check_pressed(ord("H"));
+//var input_check_pressed("wait") = keyboard_check_pressed(ord("Y"));
 
-var key_Enter_pressed = keyboard_check_pressed(vk_enter);
-var key_Tab_pressed = keyboard_check_pressed(vk_tab);
-var key_Space_pressed = keyboard_check_pressed(vk_space);
+//var input_check_pressed("confirm") = keyboard_check_pressed(vk_enter);
+//var input_check_pressed("back") = keyboard_check_pressed(vk_tab);
+//var input_check_pressed("end_turn") = keyboard_check_pressed(vk_space);
 
-var wasd_pressed = key_A_pressed || key_W_pressed || key_S_pressed || key_D_pressed;
-var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_H_pressed || key_Enter_pressed || key_Y_pressed;
+var wasd_pressed = input_check_pressed("left") || input_check_pressed("up") || input_check_pressed("down") || input_check_pressed("right");
+var jkl_pressed = input_check_pressed("second") || input_check_pressed("third") || input_check_pressed("fourth") || input_check_pressed("first") || input_check_pressed("confirm") || input_check_pressed("wait");
 
 var enough_tp = false;
- 
+
 
 
 if (transition_count > 0) {
@@ -261,7 +261,7 @@ switch (state) {
 			change_state(BattleState.BattleEnd);
 			break;
 		}
-		obj_menu.set_text("WASD - Move Cursor     Enter - Select Unit     Space - End Turn");
+		obj_menu.set_text(global.other_controls[0]+global.other_controls[1]+global.other_controls[2]+global.other_controls[3]+"- Move Cursor     "+global.other_controls[4]+" - Select Unit     "+global.other_controls[6]+" - End Turn");
 		
 		for (var i = 0; i<array_length(obj_gridCreator.battle_grid_flattened); i++){ // NO MORE GHOSTS
 			
@@ -310,7 +310,7 @@ switch (state) {
 				//obj_menu.tpCost=[0,unit.actions[0].cost[unit.upgrades[0]],unit.actions[1].cost[unit.upgrades[1]],unit.actions[2].cost[unit.upgrades[2]],unit.actions[3].cost[unit.upgrades[3]]];
 				//obj_menu.skill_names=["",unit.actions[0].name[unit.upgrades[0]],unit.actions[1].name[unit.upgrades[1]],unit.actions[2].name[unit.upgrades[2]],unit.actions[3].name[unit.upgrades[3]]];
 				
-				//obj_menu.set_text("WASD - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
+				//obj_menu.set_text(""global.other_controls[0]+global.other_controls[1]+global.other_controls[2]+global.other_controls[3]"+" - Move Cursor\nSpace - Select Unit\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - End Turn");
 				
 				
 				// resets the ewous grid position to current position. needed for when getting moved when its not their turn (push or teleport)
@@ -322,7 +322,7 @@ switch (state) {
 				}
 				
 				// select the unit to move it
-				if (key_Enter_pressed) {
+				if (input_check_pressed("confirm")) {
 					if (!unit.has_moved && !unit.has_attacked) {
 						change_state(BattleState.PlayerMoving);
 						obj_gridCreator.remove_entity(unit.grid_pos[0],unit.grid_pos[1]);
@@ -332,7 +332,7 @@ switch (state) {
 				else if (jkl_pressed) { //choosing a skill
 					obj_gridCreator.reset_highlights_cursor();
 					if (!unit.has_attacked) {
-						if (key_H_pressed) {
+						if (input_check_pressed("first")) {
 							if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
 								//obj_menu.set_select(1);
 								unit.skill_used = 0;
@@ -343,7 +343,7 @@ switch (state) {
 							}
 				
 						}
-						else if (key_J_pressed) {
+						else if (input_check_pressed("second")) {
 							if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
 								//obj_menu.set_select(2);
 								unit.skill_used = 1;
@@ -353,7 +353,7 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						else if (key_K_pressed) {
+						else if (input_check_pressed("third")) {
 							if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
 								//obj_menu.set_select(3);
 								unit.skill_used = 2;
@@ -362,7 +362,7 @@ switch (state) {
 							else {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
-						}else if (key_L_pressed) {
+						}else if (input_check_pressed("fourth")) {
 							if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
 								//obj_menu.set_select(4);
 								unit.skill_used = 3;
@@ -385,7 +385,7 @@ switch (state) {
 							}
 						}
 				}
-				else if (key_Tab_pressed) { // changes upgrades for debugging
+				else if (input_check_pressed("back")) { // changes upgrades for debugging
 					//for(i = 1;i<array_length(unit.upgrades)-1;i++){
 					//	unit.upgrades[i]+=1;
 					//	unit.upgrades[i]=unit.upgrades[i]%3;
@@ -401,7 +401,7 @@ switch (state) {
 		}else{
 			obj_menu.close_menu();
 		}
-		if(key_Space_pressed){ //ask end turn
+		if(input_check_pressed("end_turn")){ //ask end turn
 			obj_cursor.movable_tiles=[];
 			obj_menu.ask_end = true;
 			change_state(BattleState.BattlePause);
@@ -418,28 +418,28 @@ switch (state) {
 		obj_menu.back = true;
 		// error handling but unit should always be a player unit here
 		if(unit!=pointer_null){
-			//obj_menu.set_text("WASD - Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
-			obj_menu.set_text("WASD - Move");
+			//obj_menu.set_text(global.other_controls[0]+global.other_controls[1]+global.other_controls[2]+global.other_controls[3]+" - "Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
+			obj_menu.set_text(global.other_controls[0]+global.other_controls[1]+global.other_controls[2]+global.other_controls[3]+" - Move");
 			
 			// moving
 			if (wasd_pressed) {
 				//show_debug_message(unit.name + ": moving");
-				if (key_W_pressed) {
+				if (input_check_pressed("up")) {
 					unit.move_up();
 				}
-				if (key_A_pressed) {
+				if (input_check_pressed("left")) {
 					unit.move_left();
 				}
-				if (key_S_pressed) {
+				if (input_check_pressed("down")) {
 					unit.move_down();
 				}
-				if (key_D_pressed) {
+				if (input_check_pressed("right")) {
 					unit.move_right();
 				}
 			
 				show_debug_message("Move to ({0},{1})", unit.grid_pos[0], unit.grid_pos[1]);
 			}
-			else if (key_Tab_pressed){ // back button
+			else if (input_check_pressed("back")){ // back button
 					obj_menu.select = 0;
 					unit.back_move();
 					change_state(BattleState.PlayerWaitingAction);
@@ -453,7 +453,7 @@ switch (state) {
 				
 				obj_gridCreator.reset_highlights_cursor();
 				if (!unit.has_attacked) {
-					if (key_H_pressed) {
+					if (input_check_pressed("first")) {
 						if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
 							unit.skill_used = 0;
 							enough_tp = true;
@@ -463,7 +463,7 @@ switch (state) {
 						}
 				
 				}
-				else if (key_J_pressed) {
+				else if (input_check_pressed("second")) {
 					if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
 					unit.skill_used = 1;
 					enough_tp = true;
@@ -472,7 +472,7 @@ switch (state) {
 							audio_play_sound(sfx_no_tp, 0, false);
 						}
 				}
-				else if (key_K_pressed) {
+				else if (input_check_pressed("third")) {
 					if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
 					unit.skill_used = 2;
 					enough_tp = true;
@@ -481,14 +481,14 @@ switch (state) {
 							audio_play_sound(sfx_no_tp, 0, false);
 						}
 				}
-				else if (key_L_pressed) {
+				else if (input_check_pressed("fourth")) {
 					if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
 					unit.skill_used = 3;
 					enough_tp = true;
 					}else {
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
-			}else if (key_Y_pressed) {
+			}else if (input_check_pressed("wait")) {
 					if (tp_current >= unit.actions[4].cost[unit.upgrades[4]]) {
 					unit.skill_used = 4;
 					enough_tp = true;
@@ -514,7 +514,7 @@ switch (state) {
 					
 				}
 			}
-			//else if (key_Enter_pressed && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) { //move without using a skill
+			//else if (input_check_pressed("confirm") && obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._is_empty) { //move without using a skill
 			//	unit.confirm_move();
 			//	unit.has_moved = true;
 			//	unit.has_attacked = true;
@@ -546,8 +546,8 @@ switch (state) {
 			
 			
 		}else{
-			//obj_menu.set_text("WASD - Aim    Tab - Back");
-			obj_menu.set_text("WASD - Aim  ");
+			//obj_menu.set_text(global.other_controls[0]+global.other_controls[1]+global.other_controls[2]+global.other_controls[3]+" - "Aim    Tab - Back");
+			obj_menu.set_text(global.other_controls[0]+global.other_controls[1]+global.other_controls[2]+global.other_controls[3]+" - Aim  ");
 			obj_menu.set_skill_text(string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
 			obj_menu.confirm = true;
 			
@@ -579,7 +579,7 @@ switch (state) {
 		}
 		enough_tp=false;
 					if (!unit.has_attacked) { // swap skills while aiming
-						if (key_H_pressed&&unit.skill_used!=0) {
+						if (input_check_pressed("first")&&unit.skill_used!=0) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -593,7 +593,7 @@ switch (state) {
 							}
 				
 						}
-						else if (key_J_pressed&&unit.skill_used!=1) {
+						else if (input_check_pressed("second")&&unit.skill_used!=1) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -606,7 +606,7 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						else if (key_K_pressed&&unit.skill_used!=2) {
+						else if (input_check_pressed("third")&&unit.skill_used!=2) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -618,7 +618,7 @@ switch (state) {
 							else {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
-						}else if (key_L_pressed&&unit.skill_used!=3) {
+						}else if (input_check_pressed("fourth")&&unit.skill_used!=3) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -631,7 +631,7 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						else if (key_Y_pressed&&unit.skill_used!=4) {
+						else if (input_check_pressed("wait")&&unit.skill_used!=4) {
 							if (tp_current >= unit.actions[4].cost[unit.upgrades[4]]) {
 							unit.skill_used = 4;
 							enough_tp = true;
@@ -658,7 +658,7 @@ switch (state) {
 		
 		
 		
-		//if (key_Enter_pressed) {
+		//if (input_check_pressed("confirm")) {
 		//	show_debug_message(unit.name + ": confirm action");
 		//	unit.has_attacked = true;
 		//	change_state(BattleState.PlayerTakingAction);
@@ -975,7 +975,7 @@ switch (state) {
 #endregion
 #region Game paused
 	case BattleState.BattlePause:
-		if(obj_menu.ask_end && key_Space_pressed){ // end the turn
+		if(obj_menu.ask_end && input_check_pressed("end_turn")){ // end the turn
 				board_obstacle_order = 0;
 				obj_menu.ask_end = false;
 				
@@ -989,7 +989,7 @@ switch (state) {
 				change_state(BattleState.PlayerBoardObstacle);
 				obj_menu.ask_end = false;
 			}
-			if(obj_menu.ask_end && key_Tab_pressed) {
+			if(obj_menu.ask_end && input_check_pressed("back")) {
 				obj_menu.ask_end = false;
 				obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
 				change_state(BattleState.PlayerWaitingAction);
