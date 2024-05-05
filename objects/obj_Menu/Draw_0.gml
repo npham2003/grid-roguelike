@@ -82,11 +82,11 @@ if (confirm) {
 if (back) {
 	
 	draw_set_color(global._characterPrimary);
-	draw_rectangle(700, 650, backX, 620, false);
+	draw_rectangle(660, 647, backX, 617, false);
 	
 	draw_set_font(fnt_chiaro_small);
 	draw_set_color(c_white);
-	draw_text(710, rootY-105, "Back: "+string_upper(global.other_controls[5]));
+	draw_text(670, rootY-105, "Back: "+string_upper(global.other_controls[5]));
 	
 	draw_set_font(fnt_chiaro);
 }
@@ -410,7 +410,7 @@ if (ask_end){
 	draw_rectangle_colour(0, 250, room_width, 450, global._aspect_bars, global._aspect_bars, global._aspect_bars, global._aspect_bars, false);
 	draw_set_color(global._primary);
 	draw_set_halign(fa_center);
-	draw_text_transformed(650, 260, "You still have units with actions remaining.\nDo you want to end your turn now?\nConfirm: Space   Back: Tab", 0.8, 0.8, 0);
+	draw_text_transformed(650, 260, "You still have units with actions remaining.\nDo you want to end your turn now?\nConfirm: "+string_upper(global.other_controls[4])+"   Back: "+string_upper(global.other_controls[5]), 0.8, 0.8, 0);
 }
 draw_set_halign(fa_left);
 #endregion
