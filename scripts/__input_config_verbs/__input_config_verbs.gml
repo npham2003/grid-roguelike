@@ -40,28 +40,17 @@ function __input_config_verbs()
             left:  [input_binding_gamepad_axis(gp_axislh, true),  input_binding_gamepad_button(gp_padl)],
             right: [input_binding_gamepad_axis(gp_axislh, false), input_binding_gamepad_button(gp_padr)],
             
-				//XBOX
-            accept:  input_binding_gamepad_button(gp_face1),
-            cancel:  input_binding_gamepad_button(gp_face2),
-            action:  input_binding_gamepad_button(gp_face3),
-            special: input_binding_gamepad_button(gp_face4),
-            
+            confirm: input_binding_gamepad_button(gp_start),
+			back: input_binding_gamepad_button(gp_select),
 			
-        },
-        
-        touch:
-        {
-            up:    input_binding_virtual_button(),
-            down:  input_binding_virtual_button(),
-            left:  input_binding_virtual_button(),
-            right: input_binding_virtual_button(),
-            
-            accept:  input_binding_virtual_button(),
-            cancel:  input_binding_virtual_button(),
-            action:  input_binding_virtual_button(),
-            special: input_binding_virtual_button(),
-            
-            pause: input_binding_virtual_button(),
+			first:  input_binding_gamepad_button(gp_face1),
+            second:  input_binding_gamepad_button(gp_face2),
+            third:  input_binding_gamepad_button(gp_face3),
+            fourth: input_binding_gamepad_button(gp_face4),
+            wait: input_binding_gamepad_button(gp_shoulderrb),
+			
+			end_turn: input_binding_gamepad_button(gp_shoulderlb)
+			
         }
     };
 }
