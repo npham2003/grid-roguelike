@@ -627,6 +627,7 @@
     {"id":{"name":"spr_turret_attack","path":"sprites/spr_turret_attack/spr_turret_attack.yy",},},
     {"id":{"name":"spr_turret_idle","path":"sprites/spr_turret_idle/spr_turret_idle.yy",},},
     {"id":{"name":"spr_will","path":"sprites/spr_will/spr_will.yy",},},
+    {"id":{"name":"spr_input6","path":"sprites/spr_input6/spr_input6.yy",},},
     {"id":{"name":"spr_Wulfric_full","path":"sprites/spr_Wulfric_full/spr_Wulfric_full.yy",},},
     {"id":{"name":"Sprite82","path":"sprites/Sprite82/Sprite82.yy",},},
   ],

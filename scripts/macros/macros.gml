@@ -28,7 +28,8 @@ global._characterPrimary = #0cac87; //change per party member later
 global._characterSecondary = #386467;
 #endregion
 
-
+global.other_controls_names = ["Up", "Left", "Down", "Right", "Confirm", "Back", "End Turn"];
+global.skill_controls_names = ["Attack", "Skill 1", "Skill 2", "Skill 3", "Wait"];
 global.other_controls = [input_binding_get("up"), input_binding_get("left"), input_binding_get("down"), input_binding_get("right"), input_binding_get("confirm"), input_binding_get("back"), input_binding_get("end_turn")];
 global.skill_controls = [input_binding_get("first"), input_binding_get("second"), input_binding_get("third"), input_binding_get("fourth"), input_binding_get("wait")];
 

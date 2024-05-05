@@ -92,12 +92,12 @@ if(transition_in){
 				
 			}
 			if(selector_pos==3){
-				sub_menu=1;
+				sub_menu=4;
 				transition_in=true;
 				selector_pos=0;
 			}
 			if(selector_pos==4){
-				sub_menu=4;
+				sub_menu=1;
 				transition_in=true;
 				selector_pos=0;
 			}

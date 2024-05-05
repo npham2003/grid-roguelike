@@ -475,6 +475,7 @@
     {"name":"spr_temp_Wulfric","order":3,"path":"sprites/spr_temp_Wulfric/spr_temp_Wulfric.yy",},
     {"name":"spr_turret_attack","order":2,"path":"sprites/spr_turret_attack/spr_turret_attack.yy",},
     {"name":"spr_turret_idle","order":3,"path":"sprites/spr_turret_idle/spr_turret_idle.yy",},
+    {"name":"spr_input6","order":5,"path":"sprites/spr_input6/spr_input6.yy",},
     {"name":"spr_Wulfric_full","order":9,"path":"sprites/spr_Wulfric_full/spr_Wulfric_full.yy",},
     {"name":"Sprite82","order":3,"path":"sprites/Sprite82/Sprite82.yy",},
   ],

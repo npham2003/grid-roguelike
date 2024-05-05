@@ -42,9 +42,9 @@ transition_in=true;
 initial_credits_x=2000;
 actual_credits_x=2000;
 credits_x=room_width/2;
-credits_spacing=120;
+credits_spacing=110;
 
-profile_pictures=[spr_nick, spr_emil, spr_will, spr_lu, spr_back];
+profile_pictures=[spr_nick, spr_emil, spr_will, spr_lu, spr_input6, spr_back];
 
 diamond_fill=#ffb20a;
 diamond_outline=#009900;
@@ -322,12 +322,11 @@ controls_cur=0;
 c_scale=0; c_fade=0.5; c_whatever=2;
 
 for (var i = 0; i < array_length(global.other_controls); ++i) {
-	show_debug_message(string(global.other_controls[i]));
-	array_push(controls_list, [input_binding_get_verbs(global.other_controls[i]), input_binding_get_name(global.other_controls[i])]);
+	array_push(controls_list, [global.other_controls_names[i], input_binding_get_name(global.other_controls[i])]);
 }
 
 for (var i = 0; i < array_length(global.skill_controls); ++i) {
-	array_push(controls_list, [input_binding_get_verbs(global.skill_controls[i]), input_binding_get_name(global.skill_controls[i])]);
+	array_push(controls_list, [global.skill_controls_names[i], input_binding_get_name(global.skill_controls[i])]);
 }
 
 total_controls = array_length(controls_list);
@@ -346,15 +345,15 @@ for(var i=0;i<total_controls;i++){
     }
 #endregion
 
-website_urls=["https://twitter.com/AqoursBaelz/", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://wsl7779.itch.io", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"];
+website_urls=["https://twitter.com/AqoursBaelz/", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://wsl7779.itch.io", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://offalynne.github.io/Input/#/6.1/"];
 
 menu_options=[
 	[
 		"Play",
 		"Tutorial",
 		"Tips",
-		"Credits",
 		"Controls",
+		"Credits",
 		"Exit"
 	],
 	[
@@ -362,6 +361,7 @@ menu_options=[
 		"Emil Cheung",
 		"Will Lee",
 		"Lu Pang",
+		"Input6",
 		""
 	],
 	[

@@ -14,7 +14,7 @@ if(sub_menu==0){
 
 	#region party tp
 	var _pips = make_menu(actual_options_x, room_height/2-((array_length(menu_options[0])-1)*(line_spacing+20)/2), line_spacing+20, array_length(menu_options[0]), false);
-	for (var i = 0; i < array_length(_pips)-1; ++i){
+	for (var i = 0; i < array_length(_pips); ++i){
 		draw_primitive_begin(pr_trianglestrip);
 		//draw_set_color(global._tpBorder);
 		//draw_vertices(make_diamond(_pips[i][0],_pips[i][1], 10*expandAnim));
@@ -48,34 +48,33 @@ if(sub_menu==0){
 	#endregion
 
 	
-	if(selector_pos==array_length(_pips)-1){
-		draw_set_color(c_white);
-		draw_primitive_begin(pr_trianglestrip);
-		draw_vertices(make_diamond(actual_logo_x, 700, line_spacing+5));
-		draw_primitive_end();
-	}
+	//if(selector_pos==array_length(_pips)-1){
+	//	draw_set_color(c_white);
+	//	draw_primitive_begin(pr_trianglestrip);
+	//	draw_vertices(make_diamond(actual_logo_x, 700, line_spacing+5));
+	//	draw_primitive_end();
+	//}
 	
-	draw_set_color(diamond_outline);
-	draw_primitive_begin(pr_trianglestrip);
-	draw_vertices(make_diamond(actual_logo_x, 700, line_spacing));
-	draw_primitive_end();
+	//draw_set_color(diamond_outline);
+	//draw_primitive_begin(pr_trianglestrip);
+	//draw_vertices(make_diamond(actual_logo_x, 700, line_spacing));
+	//draw_primitive_end();
 	
-	draw_set_color(diamond_fill);
-	draw_primitive_begin(pr_trianglestrip);
-	draw_vertices(make_diamond(actual_logo_x, 700, line_spacing-5));
-	draw_primitive_end();
+	//draw_set_color(diamond_fill);
+	//draw_primitive_begin(pr_trianglestrip);
+	//draw_vertices(make_diamond(actual_logo_x, 700, line_spacing-5));
+	//draw_primitive_end();
 	
-	draw_set_color(c_black);
-	draw_text_transformed(150,700,menu_options[0][array_length(_pips)-1],0.7,0.7,0);
+	//draw_set_color(c_black);
+	//draw_text_transformed(150,700,menu_options[0][array_length(_pips)-1],0.7,0.7,0);
 	
-	draw_set_color(c_white);
+	//draw_set_color(c_white);
 	//draw_sprite_ext(spr_right_arrow, image_index, actual_options_x+arrow_spacing, room_height/2-((array_length(menu_options[0])-1)*line_spacing/2)+line_spacing*selector_pos-20, 1, 1, image_angle, image_blend, 1);
 	
 	draw_set_valign(fa_top);
 	draw_set_halign(fa_left);
 }
 if(sub_menu==1){
-	
 	
 	var _pips = make_menu_alternate(credits_x, room_height/2-((array_length(menu_options[1])-1)*(credits_spacing)/2), credits_spacing, array_length(menu_options[1]), false, actual_credits_x, credits_x);
 	
@@ -483,13 +482,13 @@ if(sub_menu==3){
 
 if(sub_menu==4){
 	for(var i=0;i<total_controls;i++){
-		//draw_sprite_ext(option_s,i,x,y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*i),controls_draw[i,_scale],controls_draw[i,_scale],0,c_white,controls_draw[i,_fade]);
+		//draw_sprite_ext(option_s,i,x,y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*i),controls_draw[i,c_scale],controls_draw[i,c_scale],0,c_white,controls_draw[i,c_fade]);
 			if(controls_cur==i){
 				draw_set_alpha(0.2);
 				draw_set_color(c_white);
 				draw_rectangle_color(actual_tips-3, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i)),actual_tips+tip_box_width+2,y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+tip_box_height-1,c_white,c_white,c_white,c_white,false);
 			}
-			draw_set_alpha(controls_draw[i,_fade]);
+			draw_set_alpha(controls_draw[i,c_fade]);
 			
 			
 			draw_set_font(fnt_chiaro);
@@ -507,7 +506,7 @@ if(sub_menu==4){
 			draw_set_valign(fa_top);
 		
 	}
-	//show_debug_message(options[0,_scale]);
+	//show_debug_message(options[0,c_scale]);
 	draw_set_alpha(0.1);
 	draw_set_color(c_black);
 	
@@ -515,13 +514,13 @@ if(sub_menu==4){
 	draw_set_alpha(1);
 	draw_set_color(c_white);
 	draw_set_font(fnt_chiaro_small);
-	//text_outline(actual_description_x+20,description_y_start,tips[controls_cur][1],1,c_black,8,30,description_box_width-40);
-	//draw_rectangle(actual_description_x,description_y_start,actual_description_x+500,description_y_start+600,false);
+	text_outline(actual_description_x+20,description_y_start,tips[controls_cur][1],1,c_black,8,30,description_box_width-40);
+	draw_rectangle(actual_description_x,description_y_start,actual_description_x+500,description_y_start+600,false);
 	draw_set_alpha(1);
 }
 draw_set_valign(fa_top);
-draw_set_halign(fa_left);
-draw_set_font(fnt_chiaro);
+draw_set_halign(fa_right);
+draw_set_font(fnt_chiaro_small);
 draw_set_color(c_white);
-text_outline(580,700, string_upper(global.other_controls[0])+string_upper(global.other_controls[1])+string_upper(global.other_controls[2])+string_upper(global.other_controls[3])+"- Move Cursor     "+string_upper(global.other_controls[4])+" - Select Unit     "+string_upper(global.other_controls[6])+" - End Turn", 1, c_black, 8, 100000, 1000000);
+text_outline(1300,700, string_upper(global.other_controls[0])+string_upper(global.other_controls[1])+string_upper(global.other_controls[2])+string_upper(global.other_controls[3])+" - Move Cursor     "+string_upper(global.other_controls[4])+" - Confirm     "+string_upper(global.other_controls[5])+" - Back", 1, c_black, 8, 100000, 1000000);
 draw_set_color(c_white);
