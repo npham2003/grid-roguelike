@@ -46,7 +46,10 @@ if(transition_in){
 	else if(sub_menu==3){
 		actual_tips=lerp(actual_tips,tips_x,0.1);
 		actual_description_x=lerp(actual_description_x,description_x_start,0.1);
-
+	}
+	else if(sub_menu==4){
+		actual_tips=lerp(actual_tips,tips_x,0.1);
+		actual_description_x=lerp(actual_description_x,description_x_start,0.1);
 	}
 }else{
 	if(sub_menu==0){
@@ -95,6 +98,7 @@ if(transition_in){
 				
 				
 			}
+			
 		}
 	}
 	else if(sub_menu==1){
@@ -126,6 +130,16 @@ if(transition_in){
 		}
 	}
 	else if(sub_menu==3){
+		actual_tips=lerp(actual_tips,initial_tips,0.1);
+		actual_description_x=lerp(actual_description_x,initial_description_x,0.1);
+		if(actual_tips<-1900){
+			transition_in=true;
+			sub_menu=0;
+			current_tip=array_length(tips)-1;
+			option_cur=0;
+		}
+	}
+	else if(sub_menu==4){
 		actual_tips=lerp(actual_tips,initial_tips,0.1);
 		actual_description_x=lerp(actual_description_x,initial_description_x,0.1);
 		if(actual_tips<-1900){
@@ -408,6 +422,72 @@ switch(sub_menu){
 			}
 			break;
 
+case 4:
+	
+			if(transition_in){
+				if (keyboard_check_pressed(ord("S"))) {
+					controls_cur+=1;
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+					controls_cur=controls_cur%array_length(total_controls);
+				
+				}
+				if (keyboard_check_pressed(ord("W"))) {
+					controls_cur-=1;
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+					if(controls_cur<0){
+						controls_cur=array_length(total_controls)-1;
+					}
+				}
+				if (keyboard_check_pressed(ord("D"))) {
+					controls_cur+=5;
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+					controls_cur=controls_cur%array_length(total_controls);
+				
+				}
+				if (keyboard_check_pressed(ord("A"))) {
+					controls_cur-=5;
+					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
+					if(controls_cur<0){
+						controls_cur=array_length(total_controls)+controls_cur;
+					}
+				}
+				if(keyboard_check_pressed(vk_tab)){
+					transition_in=false;
+					selector_pos=2;
+					next_background_color=menu_colors[0];
+					audio_play_sound(sfx_menu_back, 0, false, 0.7, 0);
+					
+					
+				}
+				if(keyboard_check_pressed(vk_enter)){
+					
+						audio_play_sound(sfx_menu_next, 0, false, 0.7, 0);
+						current_tip=controls_cur;
+				}
+			//Determine the current y position we are drawing at
+			if (y_draw_cur!=y_draw_begin) {//If the y position to draw is not yet at the begin y position we want, in/de crease the value to get it there
+			    y_draw_cur+=(y_draw_begin-y_draw_cur)*transition_speed;}//This will "smoothing" transition the y position to the begin position
 
+			//Determine the begin y position to draw
+			y_draw_begin=(y_draw_offset*-1)*controls_cur; //we do -1 because the menu will be drawn downward, doing -1 will then make the images begin to draw up higher
+
+			//Determine the Current option we are selecting/hovering
+			//controls_cur=clamp(controls_cur+(keyboard_check_pressed(ord("S"))-keyboard_check_pressed(ord("W"))),0,array_length(total_controls)-1);
+
+			//Scale the options
+			for(i=0;i<array_length(total_controls);i++){
+			    var scale_end=scale+(scale_add*(controls_cur==i)); //add additional scale size if this option is the currently selected option
+			    //if controls_draws[i,_scale]!=scale_end{
+			    //    controls_draws[i,_scale]+=(scale_end-controls_draws[i,_scale])*scale_speed;}}
+				controls_draws[i, _scale]=1;
+			}
+      
+			//Fade the options
+			for(i=0;i<array_length(total_controls);i++){
+			    var fade_end=1-(abs(i-controls_cur)*fade); //find the "distance" this option is from current option, use that to determine strength of fade
+			    if (controls_draws[i,_fade]!=fade_end){
+			        controls_draws[i,_fade]+=(fade_end-controls_draws[i,_fade])*fade_speed;}}
+			}
+			break;
 		
 }

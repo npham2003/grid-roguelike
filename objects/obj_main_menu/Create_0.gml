@@ -316,6 +316,33 @@ for(i=0;i<total_options;i++){
     }
 #endregion
 
+#region controls
+controls_list = [];
+controls_cur=0;
+total_controls = array_length(controls_list);
+c_scale=0; c_fade=0.5; c_whatever=2;
+
+for (var i = 0; i < array_length(global.other_controls); ++i) {
+	array_push(controls_list, global.other_controls[i]);
+}
+
+for (var i = 0; i < array_length(global.skill_controls); ++i) {
+	array_push(controls_list, global.skill_controls[i]);
+}
+
+
+rebind = function(action, _new) {
+	input_binding_scan_start(function(_new) {
+		input_binding_set_safe(action, _new);
+	});
+}
+
+for(var i=0;i<array_length(controls_list);i++){
+    controls_draw[i,c_scale]=1; //Set this Options Current Scaling, this will be used for a smooth scaling when switching options
+    controls_draw[i,c_fade]=1-(abs(i-option_cur)*fade); //Set this Options Current Fade value
+    controls_draw[i,c_whatever]=i*i; //This is just an example on how you can give each option "info" or retrievable data
+    }
+#endregion
 
 website_urls=["https://twitter.com/AqoursBaelz/", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://wsl7779.itch.io", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"];
 
@@ -325,6 +352,7 @@ menu_options=[
 		"Tutorial",
 		"Tips",
 		"Credits",
+		"Controls",
 		"Exit"
 	],
 	[
@@ -333,6 +361,20 @@ menu_options=[
 		"Will Lee",
 		"Lu Pang",
 		""
+	],
+	[
+		"Up",
+		"Down",
+		"Left",
+		"Right",
+		"Confirm",
+		"Back",
+		"Attack",
+		"Skill 1",
+		"Skill 2",
+		"Skill 3",
+		"Wait",
+		"End Turn"
 	]
 ];
 
