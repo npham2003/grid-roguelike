@@ -2085,9 +2085,9 @@ global.actionLibrary = {
 		}
 	},
 	dance: {
-		name: ["Haste", "Superspeed", "Dance"], //probably redundant to have a name but keep it
-		description: [ "Allow an adjacent ally to move an extra tile for 2 turns", "Allow an adjacent ally to move 2 extra tiles for 2 turns", "Allow an adjacent ally to act again"],
-		cost: [4, 5, 3],
+		name: ["Dance", "Haste", "Superspeed"], //probably redundant to have a name but keep it
+		description: [ "Allow an adjacent ally to act again", "Allow an adjacent ally to move an extra tile for 2 turns", "Allow an adjacent ally to move 2 extra tiles for 2 turns"],
+		cost: [2, 4, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
 		//effectSprite: baseAttack,
@@ -2163,21 +2163,23 @@ global.actionLibrary = {
 				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
 					if(unit.skill_progress==1){
 						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
-							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
-								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.move_bonus_temp+=1;
+							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally && obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile!=unit){
+								if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.has_attacked||obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.has_moved){
+									obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.has_attacked=false;
+									obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.has_moved=false;
 								
-								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.move_buff_recent=true;
-								
-								unit.is_attacking = false;
-								skill_range = obj_gridCreator.reset_highlights_support();
-								skill_range_aux = obj_gridCreator.reset_highlights_target();
-								unit.skill_complete = true;
-								unit.skill_init = false;
-								unit.skill_progress=0;
-								
-								obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile,3);
-								audio_play_sound(sfx_charge, 0, false,0.3);
-								show_debug_message(unit.action.name);
+									unit.is_attacking = false;
+									skill_range = obj_gridCreator.reset_highlights_support();
+									skill_range_aux = obj_gridCreator.reset_highlights_target();
+									unit.skill_complete = true;
+									unit.skill_init = false;
+									unit.skill_progress=0;
+									audio_play_sound(sfx_dance, 0, false,0.3);
+									obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile,7);
+									show_debug_message(unit.action.name);
+								}else{
+									audio_play_sound(sfx_no_tp, 0, false);
+								}
 							}else{
 								audio_play_sound(sfx_no_tp, 0, false);
 							}
@@ -2368,23 +2370,21 @@ global.actionLibrary = {
 				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
 					if(unit.skill_progress==1){
 						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
-							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally && obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile!=unit){
-								if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.has_attacked||obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.has_moved){
-									obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.has_attacked=false;
-									obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.has_moved=false;
+							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.move_bonus_temp+=1;
 								
-									unit.is_attacking = false;
-									skill_range = obj_gridCreator.reset_highlights_support();
-									skill_range_aux = obj_gridCreator.reset_highlights_target();
-									unit.skill_complete = true;
-									unit.skill_init = false;
-									unit.skill_progress=0;
-									audio_play_sound(sfx_dance, 0, false,0.3);
-									obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile,7);
-									show_debug_message(unit.action.name);
-								}else{
-									audio_play_sound(sfx_no_tp, 0, false);
-								}
+								obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.move_buff_recent=true;
+								
+								unit.is_attacking = false;
+								skill_range = obj_gridCreator.reset_highlights_support();
+								skill_range_aux = obj_gridCreator.reset_highlights_target();
+								unit.skill_complete = true;
+								unit.skill_init = false;
+								unit.skill_progress=0;
+								
+								obj_battleEffect.hit_animation(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile,3);
+								audio_play_sound(sfx_charge, 0, false,0.3);
+								show_debug_message(unit.action.name);
 							}else{
 								audio_play_sound(sfx_no_tp, 0, false);
 							}
@@ -2407,11 +2407,12 @@ global.actionLibrary = {
 		
 				}
 			},
+			
 		}
 	},	
 	shield: {
 		name: ["Protect", "Shove", "Wide Guard"], //probably redundant to have a name but keep it
-		description: [ "Make an adjacent ally immune to 1 attack this turn", "Push an adjacent ally away from you", "Makes the user and all adjacent allies immune to 1 attack this turn"],
+		description: [ "Make an adjacent ally immune to 1 attack this turn", "Push an adjacent unit away from you", "Makes the user and all adjacent allies immune to 1 attack this turn"],
 		cost: [3, 2, 5],
 		subMenu: 0, //does it show up on screen or is it in a submenu
 		userAnimation: "attack",
@@ -2598,11 +2599,9 @@ global.actionLibrary = {
 					skill_range_aux[i]._target_highlight=true;
 				}
 				if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
-					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+					
 						obj_cursor.sprite_index=spr_grid_cursor;
-					}else{
-						obj_cursor.sprite_index=spr_grid_cursor_invalid;
-					}
+					
 				}else{
 					obj_cursor.sprite_index=spr_grid_cursor_invalid;
 				}
@@ -2610,7 +2609,7 @@ global.actionLibrary = {
 				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
 					if(unit.skill_progress==1){
 						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
-							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
+							
 								switch(unit.skill_option){
 									case 0:
 										obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.push_back(1);
@@ -2636,9 +2635,8 @@ global.actionLibrary = {
 								audio_play_sound(sfx_charge, 0, false,0.3);
 								obj_battleEffect.remove_push_preview();
 								show_debug_message(unit.action.name);
-							}else{
-								audio_play_sound(sfx_no_tp, 0, false);
-							}
+							
+							
 						}else{
 							audio_play_sound(sfx_no_tp, 0, false);
 						}
