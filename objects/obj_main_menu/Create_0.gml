@@ -221,8 +221,8 @@ tips=[
 		"Angel's ("+string_upper(global.skill_controls[2])+") skill Encourage lets 1 adjacent ally do 1 extra damage on all of their attacks for 2 turns.\n\nIts first upgrade, Rallying Cry, does the same thing, but lets her target an ally up to 3 tiles away! Never be prevented from buffing your allies again!\n\nIts second upgrade, Invigorate, allows an adjacent ally to deal 2 extra damage instead! Use it to deal massive damage in a single turn!"
 	],
 	[
-		"Angel: Haste",
-		"Angel's ("+string_upper(global.skill_controls[3])+") skill Haste allows an adjacent ally to move 1 extra tile for 2 turns!\n\nIts first upgrade, Superspeed, allows them to move up to 2 extra spaces instead!\n\nIts second upgrade, Dance, lets an adjacent ally that has already used their turn act again! Remember that even though they get to move and use a skill, they'll have less TP to make use of."
+		"Angel: Dance",
+		"Angel's ("+string_upper(global.skill_controls[3])+") skill Dance, lets an adjacent ally that has already used their turn act again! Remember that even though they get to move and use a skill, they'll have less TP to make use of.\n\nIts first upgrade, Haste, allows an adjacent ally to move 1 extra tile for 2 turns!\n\nIts second upgrade, Superspeed, allows them to move up to 2 extra spaces instead!"
 	],
 	[
 		"Warpman: Summary",
