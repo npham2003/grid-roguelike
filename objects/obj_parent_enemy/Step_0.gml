@@ -19,16 +19,22 @@ if (is_moving) {
 		}
 	}
 	if(abs(x-target_grid_pos[0])<5 && abs(y-target_grid_pos[1])<5) {
-		if(delay==30){
-			attack_ready = true;
-			set_danger_highlights();
-			display_target_highlights();
-		}
-		delay-=1;
-		if(delay<=0){
+		if(hp>0){
+			if(delay==30){
+				attack_ready = true;
+				set_danger_highlights();
+				display_target_highlights();
+			}
+			delay-=1;
+			if(delay<=0){
+				is_moving = false;
+				remove_target_highlights();
+				battlecontrol.in_animation = false;
+			}
+		}else{
 			is_moving = false;
-			remove_target_highlights();
-			battlecontrol.in_animation = false;
+				
+				battlecontrol.in_animation = false;
 		}
 	}else{
 		//show_debug_message("({0}, {1}) but we're supposed to be at ({2}, {3})",x,y,target_grid_pos[0],target_grid_pos[1]);	
