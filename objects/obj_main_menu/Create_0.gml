@@ -347,13 +347,13 @@ for (var i = 0; i < array_length(global.skill_controls); ++i) {
 total_controls = array_length(controls_list);
 current_control = total_controls-1;
 
-rebind = function(_action) {
-	input_binding_scan_start(function(_new) {
-		input_binding_set_safe(_action, _new);
-		rebind_string = string_upper(input_binding_get_name(_new));
-		global.other_controls[i][1] = rebind_string;
-	});
-}
+//rebind = function(_action) {
+//	input_binding_scan_start(function(_new) {
+//		input_binding_set_safe(_action, _new);
+//		rebind_string = string_upper(input_binding_get_name(_new));
+//		//global.other_controls[i][1] = rebind_string;
+//	});
+//}
 
 
 for(var i=0;i<total_controls;i++){
