@@ -23,7 +23,15 @@ global.actionLibrary = {
 					// setup initial target
 					skill_range = obj_gridCreator.highlighted_target_straight_basic(unit.grid_pos[0]+1, unit.grid_pos[1]);
 					unit.skill_init=true;
+					obj_cursor.sprite_index=spr_grid_cursor;
+					
 					show_debug_message("basic init");
+					if(array_length(skill_range)>0 && !unit.skill_complete){ // set cursor to target if it hits anything, if not its on the player unit
+						obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
+					}else{
+						obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
+					}
+					
 				}
 				obj_gridCreator.highlighted_attack_cross_basic(unit.grid_pos[0], unit.grid_pos[1],15);
 				obj_cursor.movable_tiles=skill_range;
@@ -76,7 +84,7 @@ global.actionLibrary = {
 					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
 					skill_range = obj_gridCreator.reset_highlights_attack();
 					unit.skill_init=false;
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					unit.skill_init=false;
@@ -127,7 +135,7 @@ global.actionLibrary = {
 					unit.play_sound = false;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					show_debug_message(unit.action.name);
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -168,7 +176,7 @@ global.actionLibrary = {
 					unit.play_sound = false;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -218,7 +226,7 @@ global.actionLibrary = {
 					obj_battleEffect.remove_push_preview();
 					
 					
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -303,7 +311,7 @@ global.actionLibrary = {
 					unit.skill_complete = true;
 					unit.skill_init = false;
 					show_debug_message(unit.action.name);
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
@@ -372,7 +380,7 @@ global.actionLibrary = {
 					unit.skill_complete = true;
 					unit.skill_init = false;
 					show_debug_message(unit.action.name);
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
@@ -515,7 +523,7 @@ global.actionLibrary = {
 					unit.skill_complete = true;
 					unit.skill_init = false;
 					show_debug_message(unit.action.name);
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
@@ -557,7 +565,7 @@ global.actionLibrary = {
 					unit.skill_complete = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_init = false;
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_init = false;
@@ -585,7 +593,7 @@ global.actionLibrary = {
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_init = false;
 					
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_init = false;
@@ -612,7 +620,7 @@ global.actionLibrary = {
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_init=false;
 		
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					unit.skill_init=false;
@@ -688,7 +696,7 @@ global.actionLibrary = {
 						unit.skill_init = false;
 						show_debug_message(unit.action.name);
 					}
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
@@ -750,7 +758,7 @@ global.actionLibrary = {
 						unit.skill_init = false;
 						show_debug_message(unit.action.name);
 					}
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
@@ -816,7 +824,7 @@ global.actionLibrary = {
 					unit.skill_complete = true;
 					unit.skill_init = false;
 					show_debug_message(unit.action.name);
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
@@ -915,7 +923,7 @@ global.actionLibrary = {
 					obj_battleEffect.remove_push_preview();
 					unit.skill_option = 0;
 		
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -998,7 +1006,7 @@ global.actionLibrary = {
 					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
 					obj_battleEffect.remove_push_preview();
 					unit.skill_init=false;
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -1087,7 +1095,7 @@ global.actionLibrary = {
 					obj_battleEffect.remove_push_preview();
 					unit.skill_init=false;
 					
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -1210,7 +1218,7 @@ global.actionLibrary = {
 					obj_battleEffect.remove_push_preview();
 					
 		
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -1260,7 +1268,7 @@ global.actionLibrary = {
 					obj_battleEffect.remove_push_preview();
 					
 		
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -1311,7 +1319,7 @@ global.actionLibrary = {
 					obj_battleEffect.remove_push_preview();
 					
 		
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -1377,7 +1385,7 @@ global.actionLibrary = {
 					obj_battleEffect.remove_push_preview();
 					
 		
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -1447,7 +1455,7 @@ global.actionLibrary = {
 					obj_battleEffect.remove_push_preview();
 					
 		
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -1503,7 +1511,7 @@ global.actionLibrary = {
 					obj_battleEffect.remove_push_preview();
 					
 		
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -1597,7 +1605,7 @@ global.actionLibrary = {
 					unit.skill_complete = true;
 					unit.skill_init = false;
 					show_debug_message(unit.action.name);
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
@@ -1674,7 +1682,7 @@ global.actionLibrary = {
 					unit.skill_complete = true;
 					unit.skill_init = false;
 					show_debug_message(unit.action.name);
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
@@ -1725,7 +1733,7 @@ global.actionLibrary = {
 					obj_battleEffect.remove_push_preview();
 					
 		
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -1846,7 +1854,7 @@ global.actionLibrary = {
 					
 					
 					
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					
 						unit.is_attacking = false;
 						unit.skill_back = true;
@@ -1948,7 +1956,7 @@ global.actionLibrary = {
 					
 					
 					
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					
 						unit.is_attacking = false;
 						unit.skill_back = true;
@@ -2049,7 +2057,7 @@ global.actionLibrary = {
 					
 					
 					
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					
 						unit.is_attacking = false;
 						unit.skill_back = true;
@@ -2169,7 +2177,7 @@ global.actionLibrary = {
 					
 					
 					
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					
 						unit.is_attacking = false;
 						unit.skill_back = true;
@@ -2271,7 +2279,7 @@ global.actionLibrary = {
 					
 					
 					
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					
 						unit.is_attacking = false;
 						unit.skill_back = true;
@@ -2374,7 +2382,7 @@ global.actionLibrary = {
 					
 					
 					
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					
 						unit.is_attacking = false;
 						unit.skill_back = true;
@@ -2493,7 +2501,7 @@ global.actionLibrary = {
 					
 					
 					
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					
 						unit.is_attacking = false;
 						unit.skill_back = true;
@@ -2623,7 +2631,7 @@ global.actionLibrary = {
 					
 					
 					
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					
 						unit.is_attacking = false;
 						unit.skill_back = true;
@@ -2723,7 +2731,7 @@ global.actionLibrary = {
 					
 					
 					
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					
 						unit.is_attacking = false;
 						unit.skill_back = true;
@@ -2810,7 +2818,7 @@ global.actionLibrary = {
 					}else{
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
@@ -2881,7 +2889,7 @@ global.actionLibrary = {
 					}else{
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					obj_cursor.sprite_index=spr_grid_cursor;
 					unit.is_attacking = false;
 					unit.skill_back = true;
@@ -2981,7 +2989,7 @@ global.actionLibrary = {
 					}else{
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					if(unit.bombs_placed>0){
 						unit.bombs_placed -= 1;
 						unit.bomb_positions=[];
@@ -3073,7 +3081,7 @@ global.actionLibrary = {
 					}else{
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
@@ -3143,7 +3151,7 @@ global.actionLibrary = {
 					}else{
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
@@ -3215,7 +3223,7 @@ global.actionLibrary = {
 					}else{
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.bombs_placed = 0;
 					unit.is_attacking = false;
 					unit.skill_back = true;
@@ -3302,7 +3310,7 @@ global.actionLibrary = {
 					}else{
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
@@ -3372,7 +3380,7 @@ global.actionLibrary = {
 					}else{
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
@@ -3442,7 +3450,7 @@ global.actionLibrary = {
 					}else{
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.bombs_placed = 0;
 					unit.is_attacking = false;
 					unit.skill_back = true;
@@ -3558,7 +3566,7 @@ global.actionLibrary = {
 					unit.play_sound = false;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					show_debug_message(unit.action.name);
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					obj_battleEffect.remove_push_preview();
 					unit.is_attacking = false;
 					unit.skill_back = true;
@@ -3656,7 +3664,7 @@ global.actionLibrary = {
 					unit.play_sound = false;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					show_debug_message(unit.action.name);
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					obj_battleEffect.remove_push_preview();
 					unit.is_attacking = false;
 					unit.skill_back = true;
@@ -3711,7 +3719,7 @@ global.actionLibrary = {
 					unit.play_sound = false;
 					unit.skill_range = obj_gridCreator.reset_highlights_target();
 					show_debug_message(unit.action.name);
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					obj_battleEffect.remove_push_preview();
 					unit.is_attacking = false;
 					unit.skill_back = true;
@@ -3773,7 +3781,7 @@ global.actionLibrary = {
 					obj_battleEffect.remove_push_preview();
 					
 		
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -3843,7 +3851,7 @@ global.actionLibrary = {
 					obj_battleEffect.remove_push_preview();
 					
 		
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -3889,7 +3897,7 @@ global.actionLibrary = {
 					obj_battleEffect.remove_push_preview();
 					
 		
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					skill_range = obj_gridCreator.reset_highlights_target();
@@ -3927,6 +3935,8 @@ global.actionLibrary = {
 					obj_gridCreator.reset_highlights_attack();
 					obj_gridCreator.reset_highlights_target();
 					obj_gridCreator.reset_highlights_support();
+					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
+					obj_cursor.sprite_index=spr_grid_cursor;
 					
 				
 				}
@@ -3942,7 +3952,7 @@ global.actionLibrary = {
 					skill_range = obj_gridCreator.reset_highlights_target();
 					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
 					unit.skill_init=false;
-				}else if(keyboard_check_pressed(vk_tab)){
+				}else if(input_check_pressed("back")){
 					unit.is_attacking = false;
 					unit.skill_back = true;
 					unit.skill_init=false;

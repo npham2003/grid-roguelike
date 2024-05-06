@@ -157,7 +157,7 @@ switch (state) {
 						break;
 						
 						case 2:
-							obj_menuTut.set_text("To move, press ENTER to select our character and use "+string_upper(global.other_controls[0])+", "+string_upper(global.other_controls[1])+", "+string_upper(global.other_controls[2])+", "+string_upper(global.other_controls[3])+" to get out of danger! Then press (" +string_upper(input_binding_get_name(global.skill_controls[4])) + ") to use the Wait action, and (" +string_upper(global.skill_controls[4])+") again or "+string_upper(global.other_controls[4])+ " to confirm.");
+							obj_menuTut.set_text("To move, press (" +string_upper(global.other_controls[4])+") to select our character and use "+string_upper(global.other_controls[0])+", "+string_upper(global.other_controls[1])+", "+string_upper(global.other_controls[2])+", "+string_upper(global.other_controls[3])+" to get out of danger! Then press (" +string_upper(input_binding_get_name(global.skill_controls[4])) + ") to use the Wait action, and (" +string_upper(global.skill_controls[4])+") again or ("+string_upper(global.other_controls[4])+ ") to confirm.");
 							obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
 							if (input_check_pressed("confirm")) {
 							obj_menuTut.open_menu();
@@ -177,7 +177,7 @@ switch (state) {
 						case 3:
 							obj_menuTut.close_menu();
 							obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
-							obj_menuTut.set_text("Skills cost more TP. For example, Beam ("+string_upper(global.skill_controls[1])+") hits all enemies in a line. Press the skill button ("+string_upper(global.skill_controls[1])+") again or "+string_upper(global.other_controls[4])+" to fire.");
+							obj_menuTut.set_text("Skills cost more TP. For example, Beam ("+string_upper(global.skill_controls[1])+") hits all enemies in a line. Press the skill button ("+string_upper(global.skill_controls[1])+") again or ("+string_upper(global.other_controls[4])+") to fire.");
 							if (input_check_pressed("confirm")) {
 								dialogueLine += 1;
 						}
@@ -185,7 +185,7 @@ switch (state) {
 						case 4:
 							obj_menuTut.close_menu();
 							obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
-							obj_menuTut.set_text("If you need more TP, Charge ("+string_upper(global.skill_controls[2])+") allows you to gain 1 TP. Press the skill button ("+string_upper(global.skill_controls[2])+") again or "+string_upper(global.other_controls[4])+" to confirm.");
+							obj_menuTut.set_text("If you need more TP, Charge ("+string_upper(global.skill_controls[2])+") allows you to gain 1 TP. Press the skill button ("+string_upper(global.skill_controls[2])+") again or ("+string_upper(global.other_controls[4])+") to confirm.");
 							if (input_check_pressed("confirm")) {
 								dialogueLine += 1;
 						}
@@ -193,7 +193,7 @@ switch (state) {
 						
 						case 5:
 							obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
-							obj_menuTut.set_text("If you want to go back, press "+string_upper(input_binding_get_name(global.other_controls[5])));
+							obj_menuTut.set_text("If you want to go back, press ("+string_upper(input_binding_get_name(global.other_controls[5]))+")");
 							if (input_check_pressed("confirm")) {
 							obj_menuTut.open_menu();
 							skillTaught = true;
@@ -431,10 +431,10 @@ switch (state) {
 			break;
 		}
 		if (!teachingSkills) {
-			obj_menuTut.set_text(arrow_key_controls[0]+arrow_key_controls[1]+arrow_key_controls[2]+arrow_key_controls[3]+"- Move Cursor     "+string_upper(input_binding_get_name(global.other_controls[4]))+" - Select Unit");
+			obj_menuTut.set_text(arrow_key_controls[0]+arrow_key_controls[1]+arrow_key_controls[2]+arrow_key_controls[3]+" - Move Cursor     "+string_upper(input_binding_get_name(global.other_controls[4]))+" - Select Unit");
 		}
 		else {
-				obj_menuTut.set_text(arrow_key_controls[0]+arrow_key_controls[1]+arrow_key_controls[2]+arrow_key_controls[3]+"- Move Cursor     "+string_upper(input_binding_get_name(global.other_controls[4]))+" - Select Unit     "+string_upper(input_binding_get_name(global.other_controls[6]))+" - End Turn");
+				obj_menuTut.set_text(arrow_key_controls[0]+arrow_key_controls[1]+arrow_key_controls[2]+arrow_key_controls[3]+" - Move Cursor     "+string_upper(input_binding_get_name(global.other_controls[4]))+" - Select Unit     "+string_upper(input_binding_get_name(global.other_controls[6]))+" - End Turn");
 		}
 		
 		// checks if all player units have moved

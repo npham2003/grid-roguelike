@@ -24,25 +24,25 @@ function skill_teleport_ally_1(unit){
 				
 	obj_cursor.movable_tiles=skill_range;
 	obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-	if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+	if (input_check_pressed("left") && skill_coords[0] > 0) {
 		if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 			audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 			skill_coords[0] -= 1;
 		}
 	}
-	if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+	if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
 		if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 			audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 			skill_coords[0] += 1;
 		}
 	}
-	if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+	if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 		if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 			audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 			skill_coords[1] += 1;
 		}
 	}
-	if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+	if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 		if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 			audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 			skill_coords[1] -= 1;
@@ -72,7 +72,7 @@ function skill_teleport_ally_1(unit){
 		}
 	}
 	//show_debug_message(string(unit.skill_progress));
-	if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
+	if (input_check_pressed("skill2") || input_check_pressed("confirm")) {
 		if(unit.skill_progress==1){
 			if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 				if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally && obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.id!=unit.id){
@@ -115,7 +115,7 @@ function skill_teleport_ally_1(unit){
 					
 					
 					
-	}else if(keyboard_check_pressed(vk_tab)){
+	}else if(input_check_pressed("back")){
 		if(unit.skill_progress==2){
 			unit.skill_progress=1;
 			skill_range_aux[1]._target_highlight=false;

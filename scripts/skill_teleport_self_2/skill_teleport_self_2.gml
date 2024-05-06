@@ -22,25 +22,25 @@ function skill_teleport_self_2(unit){
 				
 	obj_cursor.movable_tiles=skill_range;
 	obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-	if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+	if (input_check_pressed("left") && skill_coords[0] > 0) {
 		if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 			audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 			skill_coords[0] -= 1;
 		}
 	}
-	if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+	if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
 		if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 			audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 			skill_coords[0] += 1;
 		}
 	}
-	if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+	if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 		if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 			audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 			skill_coords[1] += 1;
 		}
 	}
-	if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+	if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 		if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 			audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 			skill_coords[1] -= 1;
@@ -55,7 +55,7 @@ function skill_teleport_self_2(unit){
 	}else{
 		obj_cursor.sprite_index=spr_grid_cursor;
 	}
-	if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
+	if (input_check_pressed("skill1") || input_check_pressed("confirm")) {
 		if(unit.skill_progress==1){
 			if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 				if(skill_coords[0]<5){
@@ -85,7 +85,7 @@ function skill_teleport_self_2(unit){
 				audio_play_sound(sfx_no_tp, 0, false);
 			}
 		}
-	}else if(keyboard_check_pressed(vk_tab)){
+	}else if(input_check_pressed("back")){
 		if (unit.skill_progress == 1){
 			unit.is_attacking = false;
 			unit.skill_back = true;

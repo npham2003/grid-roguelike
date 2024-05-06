@@ -278,7 +278,7 @@ switch (state) {
 			change_state(BattleState.BattleEnd);
 			break;
 		}
-		obj_menu.set_text(arrow_key_controls[0]+arrow_key_controls[1]+arrow_key_controls[2]+arrow_key_controls[3]+"- Move Cursor     "+string_upper(input_binding_get_name(global.other_controls[4]))+" - Select Unit     "+string_upper(input_binding_get_name(global.other_controls[6]))+" - End Turn");
+		obj_menu.set_text(arrow_key_controls[0]+arrow_key_controls[1]+arrow_key_controls[2]+arrow_key_controls[3]+" - Move Cursor     "+string_upper(input_binding_get_name(global.other_controls[4]))+" - Select Unit     "+string_upper(input_binding_get_name(global.other_controls[6]))+" - End Turn");
 		
 		for (var i = 0; i<array_length(obj_gridCreator.battle_grid_flattened); i++){ // NO MORE GHOSTS
 			
@@ -436,7 +436,7 @@ switch (state) {
 		// error handling but unit should always be a player unit here
 		if(unit!=pointer_null){
 			//obj_menu.set_text(string_upper(input_binding_get_name(global.other_controls[0]+string_upper(input_binding_get_name(global.other_controls[1]+string_upper(input_binding_get_name(global.other_controls[2]+string_upper(input_binding_get_name(global.other_controls[3]+" - "Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
-			obj_menu.set_text(arrow_key_controls[0]+arrow_key_controls[1]+arrow_key_controls[2]+arrow_key_controls[3]+string_char_at(string_upper(input_binding_get_name(global.other_controls[3])),0)+" - Move");
+			obj_menu.set_text(arrow_key_controls[0]+arrow_key_controls[1]+arrow_key_controls[2]+arrow_key_controls[3]+" - Move");
 			
 			// moving
 			if (wasd_pressed) {
