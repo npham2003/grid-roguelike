@@ -23,10 +23,10 @@ function __input_config_verbs()
             confirm:  input_binding_key(vk_enter),
             back:  input_binding_key(vk_backspace),
 			
-            first:  input_binding_key("H"),
-            second: input_binding_key("J"),
-			third: input_binding_key("K"),
-			fourth: input_binding_key("L"),
+            attack:  input_binding_key("H"),
+            skill1: input_binding_key("J"),
+			skill2: input_binding_key("K"),
+			skill3: input_binding_key("L"),
             wait: input_binding_key("Y"),
 			
 			end_turn: input_binding_key(vk_space)

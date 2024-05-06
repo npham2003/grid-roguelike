@@ -497,15 +497,14 @@ if(sub_menu==4){
 					show_debug_message("in confirm");
 					rebind_string = "Waiting for input";
 					input_binding_scan_start(function(_new) {
-						input_binding_set_safe(string_lower(controls_list[controls_cur][0]), _new);
+						input_binding_set_safe(string_lower(string_trim(controls_list[controls_cur][0])), _new);
 						rebind_string = string_upper(input_binding_get_name(_new));
 					});
 					//rebind(controls_list[controls_cur][0]);
-					if (rebind_string != "Waiting for input") {
-						global.other_controls[i][1] = rebind_string;
-						show_debug_message("rebound to: "+rebind_string);
-					}
+					//.other_controls[i][1] = rebind_string;
+					show_debug_message("verb: "+controls_list[controls_cur][0]);
 				}
+				update_names();
 				show_debug_message("out of confirm");
 			}
 			

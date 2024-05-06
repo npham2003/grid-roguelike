@@ -347,6 +347,21 @@ for (var i = 0; i < array_length(global.skill_controls); ++i) {
 total_controls = array_length(controls_list);
 current_control = total_controls-1;
 
+update_names = function() {
+	for (var i = 0; i < total_controls; ++i) {
+		show_debug_message("i: " + string(i));
+		if (i < array_length(global.other_controls)){
+			show_debug_message("other: " + input_binding_get_name(global.other_controls[i]));
+			controls_list[i][1] = input_binding_get_name(global.other_controls[i]);
+		}
+		else {
+			show_debug_message("skill: " + input_binding_get_name(global.skill_controls[i-array_length(global.other_controls)]));
+			controls_list[i-array_length(global.other_controls)][1] = input_binding_get_name(global.skill_controls[i-array_length(global.other_controls)]);
+		}
+	}
+}
+
+
 //rebind = function(_action) {
 //	input_binding_scan_start(function(_new) {
 //		input_binding_set_safe(_action, _new);

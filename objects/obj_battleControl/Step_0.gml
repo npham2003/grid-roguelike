@@ -3,10 +3,10 @@
 //var input_check_pressed("up") = keyboard_check_pressed(ord("W"));
 //var input_check_pressed("down") = keyboard_check_pressed(ord("S"));
 //var input_check_pressed("right") = keyboard_check_pressed(ord("D"));
-//var input_check_pressed("second") = keyboard_check_pressed(ord("J"));
-//var input_check_pressed("third") = keyboard_check_pressed(ord("K"));
-//var input_check_pressed("fourth") = keyboard_check_pressed(ord("L"));
-//var input_check_pressed("first") = keyboard_check_pressed(ord("H"));
+//var input_check_pressed("skill1") = keyboard_check_pressed(ord("J"));
+//var input_check_pressed("skill2") = keyboard_check_pressed(ord("K"));
+//var input_check_pressed("skill3") = keyboard_check_pressed(ord("L"));
+//var input_check_pressed("attack") = keyboard_check_pressed(ord("H"));
 //var input_check_pressed("wait") = keyboard_check_pressed(ord("Y"));
 
 //var input_check_pressed("confirm") = keyboard_check_pressed(vk_enter);
@@ -14,7 +14,7 @@
 //var input_check_pressed("end_turn") = keyboard_check_pressed(vk_space);
 
 var wasd_pressed = input_check_pressed("left") || input_check_pressed("up") || input_check_pressed("down") || input_check_pressed("right");
-var jkl_pressed = input_check_pressed("second") || input_check_pressed("third") || input_check_pressed("fourth") || input_check_pressed("first") || input_check_pressed("confirm") || input_check_pressed("wait");
+var jkl_pressed = input_check_pressed("skill1") || input_check_pressed("skill2") || input_check_pressed("skill3") || input_check_pressed("attack") || input_check_pressed("confirm") || input_check_pressed("wait");
 
 var enough_tp = false;
 
@@ -332,7 +332,7 @@ switch (state) {
 				else if (jkl_pressed) { //choosing a skill
 					obj_gridCreator.reset_highlights_cursor();
 					if (!unit.has_attacked) {
-						if (input_check_pressed("first")) {
+						if (input_check_pressed("attack")) {
 							if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
 								//obj_menu.set_select(1);
 								unit.skill_used = 0;
@@ -343,7 +343,7 @@ switch (state) {
 							}
 				
 						}
-						else if (input_check_pressed("second")) {
+						else if (input_check_pressed("skill1")) {
 							if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
 								//obj_menu.set_select(2);
 								unit.skill_used = 1;
@@ -353,7 +353,7 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						else if (input_check_pressed("third")) {
+						else if (input_check_pressed("skill2")) {
 							if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
 								//obj_menu.set_select(3);
 								unit.skill_used = 2;
@@ -362,7 +362,7 @@ switch (state) {
 							else {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
-						}else if (input_check_pressed("fourth")) {
+						}else if (input_check_pressed("skill3")) {
 							if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
 								//obj_menu.set_select(4);
 								unit.skill_used = 3;
@@ -453,7 +453,7 @@ switch (state) {
 				
 				obj_gridCreator.reset_highlights_cursor();
 				if (!unit.has_attacked) {
-					if (input_check_pressed("first")) {
+					if (input_check_pressed("attack")) {
 						if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
 							unit.skill_used = 0;
 							enough_tp = true;
@@ -463,7 +463,7 @@ switch (state) {
 						}
 				
 				}
-				else if (input_check_pressed("second")) {
+				else if (input_check_pressed("skill1")) {
 					if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
 					unit.skill_used = 1;
 					enough_tp = true;
@@ -472,7 +472,7 @@ switch (state) {
 							audio_play_sound(sfx_no_tp, 0, false);
 						}
 				}
-				else if (input_check_pressed("third")) {
+				else if (input_check_pressed("skill2")) {
 					if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
 					unit.skill_used = 2;
 					enough_tp = true;
@@ -481,7 +481,7 @@ switch (state) {
 							audio_play_sound(sfx_no_tp, 0, false);
 						}
 				}
-				else if (input_check_pressed("fourth")) {
+				else if (input_check_pressed("skill3")) {
 					if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
 					unit.skill_used = 3;
 					enough_tp = true;
@@ -579,7 +579,7 @@ switch (state) {
 		}
 		enough_tp=false;
 					if (!unit.has_attacked) { // swap skills while aiming
-						if (input_check_pressed("first")&&unit.skill_used!=0) {
+						if (input_check_pressed("attack")&&unit.skill_used!=0) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -593,7 +593,7 @@ switch (state) {
 							}
 				
 						}
-						else if (input_check_pressed("second")&&unit.skill_used!=1) {
+						else if (input_check_pressed("skill1")&&unit.skill_used!=1) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -606,7 +606,7 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						else if (input_check_pressed("third")&&unit.skill_used!=2) {
+						else if (input_check_pressed("skill2")&&unit.skill_used!=2) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -618,7 +618,7 @@ switch (state) {
 							else {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
-						}else if (input_check_pressed("fourth")&&unit.skill_used!=3) {
+						}else if (input_check_pressed("skill3")&&unit.skill_used!=3) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
