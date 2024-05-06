@@ -21,5 +21,5 @@
   "sampleRate":44100,
   "soundFile":"bgm_gather_under_night.mp3",
   "type":0,
-  "volume":1.0,
+  "volume":0.5,
 }

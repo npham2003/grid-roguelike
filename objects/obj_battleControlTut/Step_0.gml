@@ -15,7 +15,7 @@
 
 var wasd_pressed = input_check_pressed("left") || input_check_pressed("up") || input_check_pressed("down") || input_check_pressed("right");
 
-var jkl_pressed = input_check_pressed("second") || input_check_pressed("third") || input_check_pressed("fourth") || input_check_pressed("first") || input_check_pressed("confirm") || input_check_pressed("wait");
+var jkl_pressed = input_check_pressed("skill1") || input_check_pressed("skill2") || input_check_pressed("skill3") || input_check_pressed("attack") || input_check_pressed("confirm") || input_check_pressed("wait");
 
 var enough_tp = false;
 
@@ -235,11 +235,11 @@ switch (state) {
 							obj_menuTut.set_text("Note, you can aim attack in all 4 directions. There also IS FRIENDLY FIRE, so careful where you aim!");
 							obj_menuTut.enter_text("PRESS ENTER");
 							if (input_check_pressed("confirm")) {
-							enemy_order = 0;
+								enemy_order = 0;
+								basicTaught = false;
+								obj_menuTut.set_text("");
+								obj_menuTut.enter_text("");
 							obj_menuTut.open_menu();
-							basicTaught = false;
-							obj_menuTut.enter_text("");
-							obj_menuTut.enter_text("");
 							change_state(BattleState.PlayerPreparing);
 							}
 						break;
@@ -479,7 +479,7 @@ switch (state) {
 				else if (teachingBasic == true && jkl_pressed) { //choosing a skill
 					obj_gridCreator.reset_highlights_cursor();
 					if (!unit.has_attacked) {
-						if (input_check_pressed("first") && (teachingBasic == true || teachingSkills == true)) {
+						if (input_check_pressed("attack") && (teachingBasic == true || teachingSkills == true)) {
 							if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
 								//obj_menuTut.set_select(1);
 								unit.skill_used = 0;
@@ -490,7 +490,7 @@ switch (state) {
 							}
 				
 						}
-						else if (input_check_pressed("second") && teachingSkills == true) {
+						else if (input_check_pressed("skill1") && teachingSkills == true) {
 							if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
 								//obj_menuTut.set_select(2);
 								unit.skill_used = 1;
@@ -500,7 +500,7 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						else if (input_check_pressed("third") && teachingSkills == true) {
+						else if (input_check_pressed("skill2") && teachingSkills == true) {
 							if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
 								//obj_menuTut.set_select(3);
 								unit.skill_used = 2;
@@ -510,7 +510,7 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						else if (input_check_pressed("fourth") && teachingSkills == true) {
+						else if (input_check_pressed("skill3") && teachingSkills == true) {
 							if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
 								//obj_menuTut.set_select(4);
 								unit.skill_used = 3;
@@ -597,7 +597,7 @@ switch (state) {
 				
 				obj_gridCreator.reset_highlights_cursor();
 				if (!unit.has_attacked) {
-					if (input_check_pressed("first") && (teachingBasic == true || teachingSkills == true)) {
+					if (input_check_pressed("attack") && (teachingBasic == true || teachingSkills == true)) {
 						if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
 							unit.skill_used = 0;
 							enough_tp = true;
@@ -607,7 +607,7 @@ switch (state) {
 						}
 				
 				}
-				else if (input_check_pressed("second") && teachingSkills == true) {
+				else if (input_check_pressed("skill1") && teachingSkills == true) {
 					if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
 					unit.skill_used = 1;
 					enough_tp = true;
@@ -616,7 +616,7 @@ switch (state) {
 							audio_play_sound(sfx_no_tp, 0, false);
 						}
 				}
-				else if (input_check_pressed("third") && teachingSkills == true) {
+				else if (input_check_pressed("skill2") && teachingSkills == true) {
 					if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
 					unit.skill_used = 2;
 					enough_tp = true;
@@ -625,7 +625,7 @@ switch (state) {
 							audio_play_sound(sfx_no_tp, 0, false);
 						}
 				}
-				else if (input_check_pressed("fourth") && teachingSkills == true) {
+				else if (input_check_pressed("skill3") && teachingSkills == true) {
 					if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
 					unit.skill_used = 3;
 					enough_tp = true;
@@ -718,7 +718,7 @@ switch (state) {
 		}
 		enough_tp=false;
 					if (!unit.has_attacked) { // swap skills while aiming
-						if (input_check_pressed("first")&&unit.skill_used!=0&&teachingBasic == true&&teachingSkills == false) {
+						if (input_check_pressed("attack")&&unit.skill_used!=0&&teachingBasic == true&&teachingSkills == false) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -732,7 +732,7 @@ switch (state) {
 							}
 				
 						}
-						else if (input_check_pressed("second")&&unit.skill_used!=1&&teachingSkills == true) {
+						else if (input_check_pressed("skill1")&&unit.skill_used!=1&&teachingSkills == true) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -745,7 +745,7 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						else if (input_check_pressed("third")&&unit.skill_used!=2&&teachingSkills == true) {
+						else if (input_check_pressed("skill2")&&unit.skill_used!=2&&teachingSkills == true) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -758,7 +758,7 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						else if (input_check_pressed("fourth")&&unit.skill_used!=3&&teachingSkills == true) {
+						else if (input_check_pressed("skill3")&&unit.skill_used!=3&&teachingSkills == true) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -1027,15 +1027,38 @@ switch (state) {
 					}
 		}
 		else if (teachingSkills == true && teachingMortar == true) {
-			obj_menuTut.enter_text("PRESS ENTER");
-			obj_menuTut.close_menu();
-					obj_menuTut.set_text("Now that you know how to fight, please enjoy our game!");
-					if (input_check_pressed("confirm")) {
-						obj_menuTut.set_text("");
-						obj_menuTut.enter_text("");
+			switch (dialogueLine)
+					{						
+						case 0:
+							obj_menuTut.close_menu();
+							obj_menuTut.enter_text("PRESS ENTER");
+							obj_menuTut.set_text("Now that you know how to fight, please enjoy our game!");
+							if (input_check_pressed("confirm")) {
+								dialogueLine += 1;
+							}
+						break;
 						
-						audio_stop_sound(current_music);
-						room_goto(0);
+						case 1:
+							obj_menuTut.enter_text("PRESS ENTER");
+							obj_menuTut.set_text("For more detailed information, check out the 'Tips' page in the main menu.");
+							if (input_check_pressed("confirm")) {
+								obj_menuTut.set_text("");
+								obj_menuTut.enter_text("");
+							audio_stop_sound(current_music);
+							room_goto(0);
+							}
+						break;
+						
+						default:
+							obj_menuTut.enter_text("PRESS ENTER");
+							obj_menuTut.set_text("Now that you know how to fight, please enjoy our game!");
+							if (input_check_pressed("confirm")) {
+								obj_menuTut.set_text("");
+								obj_menuTut.enter_text("");
+							audio_stop_sound(current_music);
+							room_goto(0);
+							}
+						break;
 					}
 		}
 	
