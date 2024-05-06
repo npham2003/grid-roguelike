@@ -351,6 +351,7 @@ rebind = function(action) {
 	input_binding_scan_start(function(_new) {
 		input_binding_set_safe(action, _new);
 		rebind_string = string_upper(input_binding_get_name(_new));
+		global.other_controls[i][1] = rebind_string;
 	});
 }
 
