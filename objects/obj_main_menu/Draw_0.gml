@@ -495,7 +495,12 @@ if(sub_menu==4){
 				
 				if (input_check_released("confirm")) {
 					rebind_string = "Waiting for input";
-					rebind(controls_list[controls_cur][0]);
+					input_binding_scan_start(function(_new) {
+						input_binding_set_safe(controls_list[controls_cur][0], _new);
+						rebind_string = string_upper(input_binding_get_name(_new));
+						global.other_controls[i][1] = rebind_string;
+					});
+					//rebind(controls_list[controls_cur][0]);
 				}
 			}
 			
