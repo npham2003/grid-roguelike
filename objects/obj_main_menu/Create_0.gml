@@ -349,16 +349,23 @@ current_control = total_controls-1;
 
 update_names = function() {
 	for (var i = 0; i < total_controls; ++i) {
-		show_debug_message("i: " + string(i));
+		//show_debug_message("i: " + string(i));
 		if (i < array_length(global.other_controls)){
-			show_debug_message("other: " + input_binding_get_name(global.other_controls[i]));
+			//show_debug_message("other: " + input_binding_get_name(global.other_controls[i]));
 			controls_list[i][1] = input_binding_get_name(global.other_controls[i]);
+			//show_debug_message("wasd");
+			//show_debug_message(input_binding_get_name(global.other_controls[i]));
 		}
 		else {
-			show_debug_message("skill: " + input_binding_get_name(global.skill_controls[i-array_length(global.other_controls)]));
-			controls_list[i-array_length(global.other_controls)][1] = input_binding_get_name(global.skill_controls[i-array_length(global.other_controls)]);
+			//show_debug_message("skill: " + input_binding_get_name(global.skill_controls[i-array_length(global.other_controls)]));
+			controls_list[i][1] = input_binding_get_name(global.skill_controls[i-array_length(global.other_controls)]);
+			//show_debug_message("skills");
+			//show_debug_message(input_binding_get_name(global.skill_controls[i-array_length(global.other_controls)]));
 		}
+		//show_debug_message(controls_list);
 	}
+	//show_debug_message("Update name");
+	//show_debug_message(controls_list);
 }
 
 

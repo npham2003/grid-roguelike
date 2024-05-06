@@ -545,6 +545,8 @@ if(sub_menu==4){
 	text_outline(room_width/2,rebind_y_start,"CONTROLS",1,c_black,8,30,description_box_width-40);
 	//draw_rectangle(actual_rebind_x,description_y_start,actual_rebind_x+500,description_y_start+600,false);
 	draw_set_alpha(1);
+	//show_debug_message("Draw");
+	//show_debug_message(controls_list);
 }
 
 draw_set_valign(fa_top);
