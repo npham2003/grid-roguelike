@@ -484,7 +484,6 @@ if(sub_menu==3){
 if(sub_menu==4){
 	for(var i=0;i<total_controls;i++){
 		//draw_sprite_ext(option_s,i,x,y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*i),controls_draw[i,c_scale],controls_draw[i,c_scale],0,c_white,controls_draw[i,c_fade]);
-		rebind_string = controls_list[i][1];
 		draw_set_halign(fa_center);
 		
 			if(controls_cur==i){
@@ -492,16 +491,22 @@ if(sub_menu==4){
 				draw_set_color(c_white);
 				draw_rectangle_color(actual_controls-3, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i)),actual_controls+control_box_width+2,y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+control_box_height-1,c_white,c_white,c_white,c_white,false);
 				draw_rectangle_color(actual_controls-3+control_box_width+control_box_space, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i)),actual_controls+(control_box_width*2+2)+control_box_space,y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+control_box_height-1,c_white,c_white,c_white,c_white,false);
+				show_debug_message("before in confirm");
 				
-				if (input_check_released("confirm")) {
+				if (input_check_released("confirm") && rebind_string != "Waiting for input") {
+					show_debug_message("in confirm");
 					rebind_string = "Waiting for input";
 					input_binding_scan_start(function(_new) {
 						input_binding_set_safe(string_lower(controls_list[controls_cur][0]), _new);
 						rebind_string = string_upper(input_binding_get_name(_new));
 					});
 					//rebind(controls_list[controls_cur][0]);
-					global.other_controls[i][1] = rebind_string;
+					if (rebind_string != "Waiting for input") {
+						global.other_controls[i][1] = rebind_string;
+						show_debug_message("rebound to: "+rebind_string);
+					}
 				}
+				show_debug_message("out of confirm");
 			}
 			
 			draw_set_alpha(controls_draw[i,c_fade]);
@@ -519,12 +524,12 @@ if(sub_menu==4){
 			for(var dto_i=45; dto_i<405; dto_i+=360/8){
 				//draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);
 				draw_text_ext_transformed(actual_controls+(control_box_width/2)+round(lengthdir_x(1,dto_i)),y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+round(lengthdir_y(1,dto_i)),controls_list[i][0],8,10000000,1,1,0);
-				draw_text(actual_controls-3+(control_box_width*1.5)+control_box_space+round(lengthdir_x(1,dto_i)), y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+round(lengthdir_y(1,dto_i)), rebind_string);
+				draw_text(actual_controls-3+(control_box_width*1.5)+control_box_space+round(lengthdir_x(1,dto_i)), y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+round(lengthdir_y(1,dto_i)), controls_list[i][1]);
 			}
 			
 			draw_set_color(c_white);
 			draw_text_ext_transformed(actual_controls+(control_box_width/2),y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i)),controls_list[i][0],8,10000000,1,1,0);
-			draw_text(actual_controls-3+(control_box_width*1.5)+control_box_space, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i)), rebind_string);
+			draw_text(actual_controls-3+(control_box_width*1.5)+control_box_space, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i)), controls_list[i][1]);
 			
 			draw_set_halign(fa_left);
 			draw_set_valign(fa_top);
