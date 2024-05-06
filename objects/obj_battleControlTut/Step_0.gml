@@ -213,7 +213,7 @@ switch (state) {
 				} else if (teachingMortar == true) {
 					obj_menuTut.close_menu();
 					obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
-					obj_menuTut.set_text("When selecting the mortar skill ("+string_upper(global.skill_controls[3])+"), use WASD to aim the mortar shell. Press the skill button ("+string_upper(global.skill_controls[3])+") again or "+string_upper(global.other_controls[4])+" to fire.");
+					obj_menuTut.set_text("When selecting the mortar skill ("+string_upper(global.skill_controls[3])+"), use" + string_upper(global.other_controls[0])+", "+string_upper(global.other_controls[1])+", "+string_upper(global.other_controls[2])+", "+string_upper(global.other_controls[3])+ "to aim the mortar shell. Press the skill button ("+string_upper(global.skill_controls[3])+") again or "+string_upper(global.other_controls[4])+" to fire.");
 					if (input_check_pressed("confirm")) {
 						obj_menuTut.open_menu();
 						enemy_order = 0;
