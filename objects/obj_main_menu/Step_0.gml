@@ -490,11 +490,18 @@ case 4:
 			}
       
 			//Fade the options
+			//for(i=0;i<total_controls;i++){
+			//    var fade_end=1-(abs(i-controls_cur)*fade); //find the "distance" this option is from current option, use that to determine strength of fade
+			//    if (controls_draws[i,_fade]!=fade_end){
+			//        controls_draws[i,_fade]+=(fade_end-controls_draws[i,_fade])*fade_speed;}}
+			//}
 			for(i=0;i<total_controls;i++){
-			    var fade_end=1-(abs(i-controls_cur)*fade); //find the "distance" this option is from current option, use that to determine strength of fade
-			    if (controls_draws[i,_fade]!=fade_end){
-			        controls_draws[i,_fade]+=(fade_end-controls_draws[i,_fade])*fade_speed;}}
+			    var fade_end=1-(abs(i-controls_cur)*0.2); //find the "distance" this option is from current option, use that to determine strength of fade
+			    if controls_draw[i,_fade]!=fade_end{
+			        controls_draw[i,_fade]+=(fade_end-controls_draw[i,_fade])*fade_speed;}}
 			}
+			
+			
 			break;
 		
 }
