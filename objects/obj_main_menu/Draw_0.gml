@@ -493,10 +493,9 @@ if(sub_menu==4){
 				draw_rectangle_color(actual_controls-3, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i)),actual_controls+control_box_width+2,y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+control_box_height-1,c_white,c_white,c_white,c_white,false);
 				draw_rectangle_color(actual_controls-3+control_box_width+control_box_space, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i)),actual_controls+(control_box_width*2+2)+control_box_space,y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+control_box_height-1,c_white,c_white,c_white,c_white,false);
 				
-				if (input_check_pressed("confirm")) {
+				if (input_check_released("confirm")) {
 					rebind_string = "Waiting for input";
-					global.other_controls[i][1] = rebind_string;
-					rebind(controls_list[controls_cur]);
+					rebind(controls_list[controls_cur][0]);
 				}
 			}
 			
