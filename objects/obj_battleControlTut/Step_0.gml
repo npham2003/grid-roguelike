@@ -1,20 +1,21 @@
 // Key press check
-var key_A_pressed = keyboard_check_pressed(ord("A"));
-var key_W_pressed = keyboard_check_pressed(ord("W"));
-var key_S_pressed = keyboard_check_pressed(ord("S"));
-var key_D_pressed = keyboard_check_pressed(ord("D"));
-var key_J_pressed = keyboard_check_pressed(ord("J"));
-var key_K_pressed = keyboard_check_pressed(ord("K"));
-var key_L_pressed = keyboard_check_pressed(ord("L"));
-var key_H_pressed = keyboard_check_pressed(ord("H"));
-var key_Y_pressed = keyboard_check_pressed(ord("Y"));
+//var key_A_pressed = keyboard_check_pressed(ord("A"));
+//var key_W_pressed = keyboard_check_pressed(ord("W"));
+//var key_S_pressed = keyboard_check_pressed(ord("S"));
+//var key_D_pressed = keyboard_check_pressed(ord("D"));
+//var key_J_pressed = keyboard_check_pressed(ord("J"));
+//var key_K_pressed = keyboard_check_pressed(ord("K"));
+//var key_L_pressed = keyboard_check_pressed(ord("L"));
+//var key_H_pressed = keyboard_check_pressed(ord("H"));
+//var key_Y_pressed = keyboard_check_pressed(ord("Y"));
 
-var key_Enter_pressed = keyboard_check_pressed(vk_enter);
-var key_Tab_pressed = keyboard_check_pressed(vk_tab);
-var key_Space_pressed = keyboard_check_pressed(vk_space);
+//var key_Enter_pressed = keyboard_check_pressed(vk_enter);
+//var key_Tab_pressed = keyboard_check_pressed(vk_tab);
+//var key_Space_pressed = keyboard_check_pressed(vk_space);
 
-var wasd_pressed = key_A_pressed || key_W_pressed || key_S_pressed || key_D_pressed;
-var jkl_pressed = key_J_pressed || key_K_pressed || key_L_pressed || key_H_pressed || key_Enter_pressed || key_Y_pressed;
+var wasd_pressed = input_check_pressed("left") || input_check_pressed("up") || input_check_pressed("down") || input_check_pressed("right");
+
+var jkl_pressed = input_check_pressed("second") || input_check_pressed("third") || input_check_pressed("fourth") || input_check_pressed("first") || input_check_pressed("confirm") || input_check_pressed("wait");
 
 var enough_tp = false;
 
@@ -118,11 +119,11 @@ switch (state) {
 				if (teachingDamage) {
 					switch (dialogueLine)
 					{
-						case 0:
+						case 0: // +string_upper(input_binding_get_name(global.other_controls[4]))
 							obj_menuTut.close_menu();
 							obj_menuTut.enter_text("PRESS ENTER");
 							obj_menuTut.set_text("Welcome to the tutorial! Let's learn how the game works.");
-							if (key_Enter_pressed) {
+							if (input_check_pressed("confirm")) {
 								dialogueLine += 1;
 						}
 						break;
@@ -130,15 +131,15 @@ switch (state) {
 						case 1:
 							obj_menuTut.enter_text("PRESS ENTER");
 							obj_menuTut.set_text("Attacks are shown by exclamation marks on the ground. The redder they are, the more dangerous! You can see how much damage you will take via the blinking HP diamonds above your head.");
-							if (key_Enter_pressed) {
+							if (input_check_pressed("confirm")) {
 								dialogueLine += 1;
 							}
 						break;
 						
 						case 2:
-							obj_menuTut.set_text("To move, press ENTER to select our character and use WASD to get out of danger! Then press Y to use the Wait action, and ENTER again to confirm.");
+							obj_menuTut.set_text("To move, press ENTER to select our character and use "+string_upper(global.other_controls[0])+string_upper(global.other_controls[1])+string_upper(global.other_controls[2])+string_upper(global.other_controls[3])+" to get out of danger! Then press " +string_upper(input_binding_get_name(global.skill_controls[4])) + " to use the Wait action, and ENTER again to confirm.");
 							obj_menuTut.enter_text("PRESS ENTER");
-							if (key_Enter_pressed) {
+							if (input_check_pressed("confirm")) {
 							obj_menuTut.open_menu();
 							dialogueLine = 0;
 							enemy_order = 0;
@@ -153,27 +154,27 @@ switch (state) {
 					obj_menuTut.close_menu();
 					switch (dialogueLine)
 					{
-						case 2:
-							obj_menuTut.close_menu();
-							obj_menuTut.enter_text("PRESS ENTER");
-							obj_menuTut.set_text("Skills cost more TP. For example, Beam (J) hits all enemies in a line. Press the skill button (J) again to fire.");
-							if (key_Enter_pressed) {
-								dialogueLine += 1;
-						}
-						break;
 						case 3:
 							obj_menuTut.close_menu();
 							obj_menuTut.enter_text("PRESS ENTER");
-							obj_menuTut.set_text("If you need more TP, Charge (K) allows you to gain 1 TP. Press the skill button (K) again to confirm.");
-							if (key_Enter_pressed) {
+							obj_menuTut.set_text("Skills cost more TP. For example, Beam ("+string_upper(global.skill_controls[1])+") hits all enemies in a line. Press the skill button ("+string_upper(global.skill_controls[1])+") again to fire.");
+							if (input_check_pressed("confirm")) {
+								dialogueLine += 1;
+						}
+						break;
+						case 4:
+							obj_menuTut.close_menu();
+							obj_menuTut.enter_text("PRESS ENTER");
+							obj_menuTut.set_text("If you need more TP, Charge ("+string_upper(global.skill_controls[2])+") allows you to gain 1 TP. Press the skill button ("+string_upper(global.skill_controls[2])+") again to confirm.");
+							if (input_check_pressed("confirm")) {
 								dialogueLine += 1;
 						}
 						break;
 						
-						case 4:
+						case 5:
 							obj_menuTut.enter_text("PRESS ENTER");
-							obj_menuTut.set_text("If you want to go back, press Tab.");
-							if (key_Enter_pressed) {
+							obj_menuTut.set_text("If you want to go back, press "+string_upper(input_binding_get_name(global.other_controls[5])));
+							if (input_check_pressed("confirm")) {
 							obj_menuTut.open_menu();
 							skillTaught = true;
 							dialogueLine = 0;
@@ -192,8 +193,8 @@ switch (state) {
 				} else if (teachingMortar == true) {
 					obj_menuTut.close_menu();
 					obj_menuTut.enter_text("PRESS ENTER");
-					obj_menuTut.set_text("When selecting the mortar skill (L), use WASD to aim the mortar shell. Press the skill button (L) again to fire.");
-					if (key_Enter_pressed) {
+					obj_menuTut.set_text("When selecting the mortar skill ("+string_upper(global.skill_controls[3])+"), use WASD to aim the mortar shell. Press the skill button ("+string_upper(global.skill_controls[3])+") again to fire.");
+					if (input_check_pressed("confirm")) {
 						obj_menuTut.open_menu();
 						enemy_order = 0;
 						obj_menuTut.set_text("");
@@ -207,7 +208,7 @@ switch (state) {
 							obj_menuTut.close_menu();
 							obj_menuTut.enter_text("PRESS ENTER");
 							obj_menuTut.set_text("Enough running. It's time to fire back.");
-							if (key_Enter_pressed) {
+							if (input_check_pressed("confirm")) {
 								dialogueLine += 1;
 						}
 						break;
@@ -215,16 +216,25 @@ switch (state) {
 						case 1:
 							obj_menuTut.enter_text("PRESS ENTER");
 							obj_menuTut.set_text("<-- Attacks consume Technique Points (TP), shown by the squares to the left. You gain 4 TP every turn");
-							if (key_Enter_pressed) {
+							if (input_check_pressed("confirm")) {
 								dialogueLine += 1;
 							}
 						break;
 						
 						case 2:
 							obj_menuTut.close_menu();
-							obj_menuTut.set_text("Use your basic attack (H) to retaliate against the bats. Then press H again to confirm.");
+							obj_menuTut.set_text("Use your basic attack ("+string_upper(global.skill_controls[0])+") to retaliate against the bats. Then press "+string_upper(global.skill_controls[0])+" again to confirm.");
 							obj_menuTut.enter_text("PRESS ENTER");
-							if (key_Enter_pressed) {
+							if (input_check_pressed("confirm")) {
+								dialogueLine += 1;
+							}
+						break;
+						
+						case 3:
+							obj_menuTut.close_menu();
+							obj_menuTut.set_text("Note, you can aim attack in all 4 directions. There also IS FRIENDLY FIRE, so careful where you aim!");
+							obj_menuTut.enter_text("PRESS ENTER");
+							if (input_check_pressed("confirm")) {
 							enemy_order = 0;
 							obj_menuTut.open_menu();
 							basicTaught = false;
@@ -240,7 +250,7 @@ switch (state) {
 				}
 				break;
 			}
-			show_debug_message(string(enemy_order));
+			//show_debug_message(string(enemy_order));
 			unit = enemy_units[enemy_order];
 			
 			// if the enemy is frozen
@@ -249,9 +259,12 @@ switch (state) {
 				obj_battleEffect.show_damage(unit, unit.stall_turns, c_blue);
 				// finishing frozen turns
 				if(unit.stall_turns<=0){
-					unit.freeze_graphic.sprite_index=spr_freeze_out;
+					if(unit.freeze_graphic!=pointer_null){
+						unit.freeze_graphic.sprite_index=spr_freeze_out;
+						unit.freeze_graphic.image_speed=1;
+						unit.freeze_graphic=pointer_null;
+					}
 					audio_play_sound(sfx_defreeze, 0, false, 0.5);
-					unit.freeze_graphic.image_speed=1;
 				}
 			}
 			
@@ -315,7 +328,7 @@ switch (state) {
 					player_units[i].freeze_graphic.sprite_index=spr_freeze_out;
 					player_units[i].freeze_graphic.image_speed=1;
 					audio_play_sound(sfx_defreeze, 0, false, 0.5);
-					unit.freeze_graphic=pointer_null;
+					player_units[i].freeze_graphic=pointer_null;
 				}
 			}
 			player_units[i].shield=0;
@@ -358,7 +371,7 @@ switch (state) {
 		//show_debug_message("CURRENT TP: " + string(tp_current));
 		
 		if (teachingDamage) {
-					if (key_Enter_pressed) {
+					if (input_check_pressed("confirm")) {
 						obj_menuTut.set_text("");
 						obj_menuTut.enter_text("");
 						change_state(BattleState.PlayerWaitingAction);
@@ -398,10 +411,10 @@ switch (state) {
 			break;
 		}
 		if (!teachingSkills) {
-			obj_menuTut.set_text("WASD - Move Cursor     Enter - Select Unit");
+			obj_menuTut.set_text(string_upper(input_binding_get_name(global.other_controls[0]))+string_upper(input_binding_get_name(global.other_controls[1]))+string_upper(input_binding_get_name(global.other_controls[2]))+string_upper(input_binding_get_name(global.other_controls[3]))+"- Move Cursor     "+string_upper(input_binding_get_name(global.other_controls[4]))+" - Select Unit");
 		}
 		else {
-			obj_menuTut.set_text("WASD - Move Cursor     Enter - Select Unit     Space - End Turn");
+				obj_menuTut.set_text(string_upper(input_binding_get_name(global.other_controls[0]))+string_upper(input_binding_get_name(global.other_controls[1]))+string_upper(input_binding_get_name(global.other_controls[2]))+string_upper(input_binding_get_name(global.other_controls[3]))+"- Move Cursor     "+string_upper(input_binding_get_name(global.other_controls[4]))+" - Select Unit     "+string_upper(input_binding_get_name(global.other_controls[6]))+" - End Turn");
 		}
 		
 		// checks if all player units have moved
@@ -456,7 +469,7 @@ switch (state) {
 				}
 				
 				// select the unit to move it
-				if (key_Enter_pressed) {
+				if (input_check_pressed("confirm")) {
 					if (!unit.has_moved && !unit.has_attacked) {
 						change_state(BattleState.PlayerMoving);
 						obj_gridCreator.remove_entity(unit.grid_pos[0],unit.grid_pos[1]);
@@ -466,7 +479,7 @@ switch (state) {
 				else if (teachingBasic == true && jkl_pressed) { //choosing a skill
 					obj_gridCreator.reset_highlights_cursor();
 					if (!unit.has_attacked) {
-						if (key_H_pressed && (teachingBasic == true || teachingSkills == true)) {
+						if (input_check_pressed("first") && (teachingBasic == true || teachingSkills == true)) {
 							if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
 								//obj_menuTut.set_select(1);
 								unit.skill_used = 0;
@@ -477,7 +490,7 @@ switch (state) {
 							}
 				
 						}
-						else if (key_J_pressed && teachingSkills == true) {
+						else if (input_check_pressed("second") && teachingSkills == true) {
 							if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
 								//obj_menuTut.set_select(2);
 								unit.skill_used = 1;
@@ -487,7 +500,7 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						else if (key_K_pressed && teachingSkills == true) {
+						else if (input_check_pressed("third") && teachingSkills == true) {
 							if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
 								//obj_menuTut.set_select(3);
 								unit.skill_used = 2;
@@ -497,7 +510,7 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						else if (key_L_pressed && teachingSkills == true) {
+						else if (input_check_pressed("fourth") && teachingSkills == true) {
 							if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
 								//obj_menuTut.set_select(4);
 								unit.skill_used = 3;
@@ -534,22 +547,19 @@ switch (state) {
 		}else{
 			obj_menuTut.close_menu();
 		}
-		if(teachingSkills && key_Space_pressed){ //ask end turn
+		if(teachingSkills && input_check_pressed("end_turn")){ //ask end turn
 			obj_cursor.movable_tiles=[];
 			
 			obj_menuTut.ask_end = true;
 
 			change_state(BattleState.BattlePause);
 		}
-		if(obj_menuTut.ask_end && key_Tab_pressed) {
-			obj_menuTut.ask_end = false;
-			obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
-		}
 		break;
 #endregion
 
 #region Player Moving
 	case BattleState.PlayerMoving:
+		obj_cursor.sprite_index=spr_grid_cursor;
 		obj_menuTut.back = true;
 		// error handling but unit should always be a player unit here
 		if(unit!=pointer_null){
@@ -557,26 +567,26 @@ switch (state) {
 			//if (teachingDamage) {
 			//	obj_menuTut.set_text("WASD - Move");
 			//}
-			obj_menuTut.set_text("WASD - Move");
+			obj_menuTut.set_text(string_upper(input_binding_get_name(global.other_controls[0]))+string_upper(input_binding_get_name(global.other_controls[1]))+string_upper(input_binding_get_name(global.other_controls[2]))+string_upper(input_binding_get_name(global.other_controls[3]))+" - Move");
 			// moving
 			if (wasd_pressed) {
 				//show_debug_message(unit.name + ": moving");
-				if (key_W_pressed) {
+				if (input_check_pressed("up")) {
 					unit.move_up();
 				}
-				if (key_A_pressed) {
+				if (input_check_pressed("left")) {
 					unit.move_left();
 				}
-				if (key_S_pressed) {
+				if (input_check_pressed("down")) {
 					unit.move_down();
 				}
-				if (key_D_pressed) {
+				if (input_check_pressed("right")) {
 					unit.move_right();
 				}
 			
 				show_debug_message("Move to ({0},{1})", unit.grid_pos[0], unit.grid_pos[1]);
 			}
-			else if (key_Tab_pressed){ // back button
+			else if (input_check_pressed("back")){ // back button
 					obj_menuTut.select = 0;
 					unit.back_move();
 					change_state(BattleState.PlayerWaitingAction);
@@ -587,7 +597,7 @@ switch (state) {
 				
 				obj_gridCreator.reset_highlights_cursor();
 				if (!unit.has_attacked) {
-					if (key_H_pressed && (teachingBasic == true || teachingSkills == true)) {
+					if (input_check_pressed("first") && (teachingBasic == true || teachingSkills == true)) {
 						if (tp_current >= unit.actions[0].cost[unit.upgrades[0]]) {
 							unit.skill_used = 0;
 							enough_tp = true;
@@ -597,7 +607,7 @@ switch (state) {
 						}
 				
 				}
-				else if (key_J_pressed && teachingSkills == true) {
+				else if (input_check_pressed("second") && teachingSkills == true) {
 					if (tp_current >= unit.actions[1].cost[unit.upgrades[1]]) {
 					unit.skill_used = 1;
 					enough_tp = true;
@@ -606,16 +616,16 @@ switch (state) {
 							audio_play_sound(sfx_no_tp, 0, false);
 						}
 				}
-				//else if (key_K_pressed && teachingSkills == true) {
-				//	if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
-				//	unit.skill_used = 2;
-				//	enough_tp = true;
-				//	}
-				//	else {
-				//			audio_play_sound(sfx_no_tp, 0, false);
-				//		}
-				//}
-				else if (key_L_pressed && teachingSkills == true) {
+				else if (input_check_pressed("third") && teachingSkills == true) {
+					if (tp_current >= unit.actions[2].cost[unit.upgrades[2]]) {
+					unit.skill_used = 2;
+					enough_tp = true;
+					}
+					else {
+							audio_play_sound(sfx_no_tp, 0, false);
+						}
+				}
+				else if (input_check_pressed("fourth") && teachingSkills == true) {
 					if (tp_current >= unit.actions[3].cost[unit.upgrades[3]]) {
 					unit.skill_used = 3;
 					enough_tp = true;
@@ -623,7 +633,7 @@ switch (state) {
 						audio_play_sound(sfx_no_tp, 0, false);
 					}
 			}
-				else if (key_Y_pressed) {
+				else if (input_check_pressed("wait")) {
 					if (tp_current >= unit.actions[4].cost[unit.upgrades[4]]) {
 					unit.skill_used = 4;
 					enough_tp = true;
@@ -708,7 +718,7 @@ switch (state) {
 		}
 		enough_tp=false;
 					if (!unit.has_attacked) { // swap skills while aiming
-						if (key_H_pressed&&unit.skill_used!=0&&teachingBasic == true&&teachingSkills == false) {
+						if (input_check_pressed("first")&&unit.skill_used!=0&&teachingBasic == true&&teachingSkills == false) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -722,7 +732,7 @@ switch (state) {
 							}
 				
 						}
-						else if (key_J_pressed&&unit.skill_used!=1&&teachingSkills == true) {
+						else if (input_check_pressed("second")&&unit.skill_used!=1&&teachingSkills == true) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -735,7 +745,7 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						else if (key_K_pressed&&unit.skill_used!=2&&teachingSkills == true) {
+						else if (input_check_pressed("third")&&unit.skill_used!=2&&teachingSkills == true) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -748,7 +758,7 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						else if (key_L_pressed&&unit.skill_used!=3&&teachingSkills == true) {
+						else if (input_check_pressed("fourth")&&unit.skill_used!=3&&teachingSkills == true) {
 							obj_gridCreator.reset_highlights_cursor();
 							obj_gridCreator.reset_highlights_attack();
 							obj_gridCreator.reset_highlights_target();
@@ -761,7 +771,7 @@ switch (state) {
 									audio_play_sound(sfx_no_tp, 0, false);
 								}
 						}
-						else if (key_Y_pressed&&unit.skill_used!=4) {
+						else if (input_check_pressed("back")&&unit.skill_used!=4) {
 
 							if (tp_current >= unit.actions[4].cost[unit.upgrades[4]]) {
 
@@ -925,6 +935,25 @@ switch (state) {
 		if(in_animation){
 			break;
 		}
+		for (var i = 0; i<array_length(obj_gridCreator.battle_grid_flattened); i++){ // NO MORE GHOSTS
+
+			
+
+				obj_gridCreator.battle_grid_flattened[i]._is_empty=true;
+
+				obj_gridCreator.battle_grid_flattened[i]._entity_on_tile=pointer_null;
+
+			
+
+		}
+
+		for (var i = 0; i < array_length(player_units); i++) {
+
+			obj_gridCreator.battle_grid[player_units[i].grid_pos[0]][player_units[i].grid_pos[1]]._entity_on_tile=player_units[i];
+
+			obj_gridCreator.battle_grid[player_units[i].grid_pos[0]][player_units[i].grid_pos[1]]._is_empty=false;
+
+		}
 		if(array_length(enemy_units)==0){
 			gold+=battle_gold;
 
@@ -976,7 +1005,7 @@ switch (state) {
 					obj_menuTut.close_menu();
 					obj_menuTut.enter_text("PRESS ENTER");
 					obj_menuTut.set_text("Well done, now let's explore how to use skills.");
-					if (key_Enter_pressed) {
+					if (input_check_pressed("confirm")) {
 						obj_menuTut.open_menu();
 						enemy_order = 0;
 						obj_menuTut.set_text("");
@@ -989,7 +1018,7 @@ switch (state) {
 			obj_menuTut.close_menu();
 			obj_menuTut.enter_text("PRESS ENTER");
 					obj_menuTut.set_text("Well done, let's try a using a different skill.");
-					if (key_Enter_pressed) {
+					if (input_check_pressed("confirm")) {
 						obj_menuTut.open_menu();
 						teachingMortar = true;
 						obj_menuTut.set_text("");
@@ -1001,7 +1030,7 @@ switch (state) {
 			obj_menuTut.enter_text("PRESS ENTER");
 			obj_menuTut.close_menu();
 					obj_menuTut.set_text("Now that you know how to fight, please enjoy our game!");
-					if (key_Enter_pressed) {
+					if (input_check_pressed("confirm")) {
 						obj_menuTut.set_text("");
 						obj_menuTut.enter_text("");
 						
@@ -1068,6 +1097,10 @@ switch (state) {
 		
 			obstacle = board_obstacles[board_obstacle_order];
 			
+			obj_menu.set_turn_banner(false);
+
+			obj_draw_bg.colorSwitch = true;
+			
 			// attacks
 			if(obstacle.stall_turns==0){
 				obstacle.attack(false);
@@ -1080,10 +1113,16 @@ switch (state) {
 				// finishing freeze turns
 				if(obstacle.stall_turns==0){
 					
-					obstacle.freeze_graphic.sprite_index=spr_freeze_out;
-					obstacle.freeze_graphic.image_speed=1;
+					if(obstacle.freeze_graphic!=pointer_null){
+
+						obstacle.freeze_graphic.sprite_index=spr_freeze_out;
+
+						obstacle.freeze_graphic.image_speed=1;
+
+						obstacle.freeze_graphic=pointer_null;
+
+					}
 					audio_play_sound(sfx_defreeze, 0, false, 0.5);
-					unit.freeze_graphic=pointer_null;
 			
 				}
 			}
@@ -1120,7 +1159,7 @@ switch (state) {
 
 #region Game paused
 	case BattleState.BattlePause:
-		if(obj_menuTut.ask_end && key_Space_pressed){ // end the turn
+		if(obj_menuTut.ask_end && input_check_pressed("end_turn")){ // end the turn
 				board_obstacle_order = 0;
 				obj_menuTut.ask_end = false;
 				
@@ -1134,7 +1173,7 @@ switch (state) {
 				change_state(BattleState.PlayerBoardObstacle);
 				obj_menuTut.ask_end = false;
 			}
-			if(obj_menuTut.ask_end && key_Tab_pressed) {
+			if(obj_menuTut.ask_end && input_check_pressed("back")) {
 				obj_menuTut.ask_end = false;
 				obj_cursor.movable_tiles=obj_gridCreator.battle_grid_flattened;
 				change_state(BattleState.PlayerWaitingAction);

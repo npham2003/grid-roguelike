@@ -45,7 +45,7 @@ if (confirm) {
 	draw_set_font(fnt_archivo);
 	
 	draw_set_color(global._characterSecondary);
-	draw_text_ext_transformed(confirmX[0]+50, 625, "Confirm: Enter", 30, confirmY-160, 0.5, 0.5, 0);
+	draw_text_ext_transformed(confirmX[0]+50, 625, "Confirm: "+string_upper(input_binding_get_name(global.other_controls[4])), 30, confirmY-160, 0.5, 0.5, 0);
 	
 	//draw_text_color(550, );
 }
@@ -67,7 +67,7 @@ if (back) {
 
 	draw_set_color(c_white);
 
-	draw_text(710, rootY-105, "Back: Tab");
+	draw_text(670, rootY-105, "Back: "+string_upper(input_binding_get_name(global.other_controls[5])));
 
 	
 
@@ -201,7 +201,7 @@ for (var i = skills; i >= 0; i--) {
 
 			draw_set_font(fnt_archivo);
 			
-			draw_text_transformed_colour(menuX[i+1]-expandAnim*25, menuY[i]-30, global.controls[i], 0.6, 0.6, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, waitAlpha);
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25, menuY[i]-30, string_upper(input_binding_get_name(global.skill_controls[i])), 0.6, 0.6, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, waitAlpha);
 
 			draw_set_halign(fa_right);
 
@@ -217,7 +217,7 @@ for (var i = skills; i >= 0; i--) {
 
 			draw_set_font(fnt_archivo);
 
-			draw_text_transformed_colour(menuX[i+1]-expandAnim*25, menuY[i]-30, global.controls[i], 0.6, 0.6, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
+			draw_text_transformed_colour(menuX[i+1]-expandAnim*25, menuY[i]-30, string_upper(input_binding_get_name(global.skill_controls[i])), 0.6, 0.6, 0, global._characterSecondary, global._characterSecondary, global._characterSecondary, global._characterSecondary, expandAnim);
 
 			draw_set_halign(fa_right);
 
@@ -246,7 +246,9 @@ draw_set_font(fnt_archivo);
 	//draw_healthbar(menuX[0]-70, menuY[0]+3, menuX[0], menuY[0]-3, pc, global._primary, global._characterSecondary, global._characterSecondary, 0, true, true)
 		draw_text_transformed(menuX[0]-expandAnim*100, menuY[0]-expandAnim*15, player_unit.name, 0.4, 0.4, 0);
 
-		draw_set_font(fnt_chiaro);
+	draw_set_font(fnt_chiaro);
+
+	//draw_text_transformed(menuX[0]+50, menuY[0]-35, "HP: " + string(obj_player.hp), 0.8, 0.8, 0);
 #endregion
 
 #region hp
@@ -452,7 +454,7 @@ if (ask_end){
 	draw_rectangle_colour(0, 250, room_width, 450, global._aspect_bars, global._aspect_bars, global._aspect_bars, global._aspect_bars, false);
 	draw_set_color(global._primary);
 	draw_set_halign(fa_center);
-	draw_text_transformed(650, 260, "You still have units with actions remaining.\nDo you want to end your turn now?\nConfirm: Space   Back: Tab", 0.8, 0.8, 0);
+	draw_text_transformed(650, 260, "You still have units with actions remaining.\nDo you want to end your turn now?\nConfirm: "+string_upper(input_binding_get_name(global.other_controls[4]))+"   Back: "+string_upper(input_binding_get_name(global.other_controls[5])), 0.8, 0.8, 0);
 }
 draw_set_halign(fa_left);
 #endregion
