@@ -1348,13 +1348,14 @@ global.actionLibrary = {
 				
 				unit.action = unit.actions[unit.skill_used];
 				skill_range = obj_gridCreator.highlighted_target_cone(unit.grid_pos[0], unit.grid_pos[1], 3);
+				
 				obj_cursor.movable_tiles=skill_range;
 				if(!unit.skill_init){
 					unit.skill_init=true;
 					//audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 				}
 				if(array_length(skill_range)>0 && !unit.skill_complete){
-					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
+					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
 				}
 				
 				var _damage = unit.action.damage;
@@ -1399,12 +1400,13 @@ global.actionLibrary = {
 				unit.action = unit.actions[unit.skill_used];
 				skill_range = array_concat(obj_gridCreator.highlighted_target_cone(unit.grid_pos[0], unit.grid_pos[1], 3),obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+3, unit.grid_pos[1]));
 				obj_cursor.movable_tiles=skill_range;
+				obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
 				if(!unit.skill_init){
 					unit.skill_init=true;
 					//audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 				}
 				if(array_length(skill_range)>0 && !unit.skill_complete){
-					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
+					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
 				}
 				
 				var _damage = unit.action.damage;
@@ -1470,12 +1472,13 @@ global.actionLibrary = {
 				unit.action = unit.actions[unit.skill_used];
 				skill_range = obj_gridCreator.highlighted_target_cone(unit.grid_pos[0], unit.grid_pos[1], 2);
 				obj_cursor.movable_tiles=skill_range;
+				obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
 				if(!unit.skill_init){
 					unit.skill_init=true;
 					//audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 				}
 				if(array_length(skill_range)>0 && !unit.skill_complete){
-					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
+					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
 				}
 				
 				var _damage = unit.action.damage;
