@@ -21,5 +21,5 @@
   "sampleRate":44100,
   "soundFile":"bgm_the_people_and_their_world.mp3",
   "type":0,
-  "volume":1.0,
+  "volume":0.1,
 }
