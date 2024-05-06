@@ -453,7 +453,7 @@ if (ask_end){
 	draw_rectangle_colour(0, 250, room_width, 450, global._aspect_bars, global._aspect_bars, global._aspect_bars, global._aspect_bars, false);
 	draw_set_color(global._primary);
 	draw_set_halign(fa_center);
-	draw_text_transformed(650, 260, "You still have units with actions remaining.\nDo you want to end your turn now?\nConfirm: "+string_upper(input_binding_get_name(global.other_controls[4]))+"   Back: "+string_upper(input_binding_get_name(global.other_controls[5])), 0.8, 0.8, 0);
+	draw_text_transformed(650, 260, "You still have units with actions remaining.\nDo you want to end your turn now?\nConfirm: "+string_upper(input_binding_get_name(global.other_controls[6]))+"   Back: "+string_upper(input_binding_get_name(global.other_controls[5])), 0.8, 0.8, 0);
 }
 draw_set_halign(fa_left);
 #endregion
