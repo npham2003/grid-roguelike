@@ -34,33 +34,33 @@ global.actionLibrary = {
 					obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
 				}
 				
-				if (keyboard_check_pressed(ord("A"))) { // aiming
+				if (input_check_pressed("left")) { // aiming
 					obj_gridCreator.reset_highlights_target();
 					skill_range = obj_gridCreator.highlighted_target_straight_back_basic(unit.grid_pos[0]-1, unit.grid_pos[1]);
 					
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 
 				}
-				if (keyboard_check_pressed(ord("D")) ) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") ) { // a bunch of this is hardcoded atm
 					obj_gridCreator.reset_highlights_target();
 					skill_range = obj_gridCreator.highlighted_target_straight_basic(unit.grid_pos[0]+1, unit.grid_pos[1]);
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 
 				}
-				if (keyboard_check_pressed(ord("S")) ) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") ) { // a bunch of this is hardcoded atm
 					obj_gridCreator.reset_highlights_target();
 					skill_range = obj_gridCreator.highlighted_target_straight_down_basic(unit.grid_pos[0], unit.grid_pos[1]+1);
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 
 				}
-				if (keyboard_check_pressed(ord("W"))) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up")) { // a bunch of this is hardcoded atm
 					obj_gridCreator.reset_highlights_target();
 					skill_range = obj_gridCreator.highlighted_target_straight_up_basic(unit.grid_pos[0], unit.grid_pos[1]-1);
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 
 				}
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(ord("H")) || keyboard_check_pressed(vk_enter)) { // use the skill
+				if (input_check_pressed("attack") || input_check_pressed("confirm")) { // use the skill
 					audio_play_sound(sfx_base_laser, 0, false);
 					for (var i = 0; i < array_length(skill_range); i++) { // do damage
 						if (!skill_range[i]._is_empty) {
@@ -112,7 +112,7 @@ global.actionLibrary = {
 				skill_range = obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]);
 				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
 				
-				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) { // use the skill
+				if (input_check_pressed("skill1") || input_check_pressed("confirm")) { // use the skill
 					audio_play_sound(sfx_blast, 0, false);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
@@ -146,7 +146,7 @@ global.actionLibrary = {
 				skill_range = array_concat(obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]),obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]+1),obj_gridCreator.highlighted_target_line_pierce(unit.grid_pos[0]+1, unit.grid_pos[1]-1));
 
 				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
-				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill1") || input_check_pressed("confirm")) {
 					audio_play_sound(sfx_blast, 0, false);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						
@@ -196,7 +196,7 @@ global.actionLibrary = {
 				
 				
 				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
-				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) { // use skill
+				if (input_check_pressed("skill1") || input_check_pressed("confirm")) { // use skill
 					audio_play_sound(sfx_blast, 0, false);
 					for (var i = array_length(skill_range)-1; i >= 0; i--) {
 						
@@ -261,31 +261,31 @@ global.actionLibrary = {
 				skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill3") || input_check_pressed("confirm")) {
 					audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 					obj_battleEffect.hit_animation_coordinates(skill_coords[0],skill_coords[1],1);
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
@@ -331,31 +331,31 @@ global.actionLibrary = {
 				show_debug_message(string(skill_range));
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz-1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz-1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill3") || input_check_pressed("confirm")) {
 					audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 					obj_battleEffect.hit_animation_coordinates(skill_coords[0],skill_coords[1],1);
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
@@ -424,26 +424,26 @@ global.actionLibrary = {
 					}
 				}
 				
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz-1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz-1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert-1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert-1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -484,7 +484,7 @@ global.actionLibrary = {
 						}
 					}
 				}
-				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill3") || input_check_pressed("confirm")) {
 					audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 					obj_battleEffect.hit_animation_coordinates(skill_coords[0],skill_coords[1],1);
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
@@ -549,7 +549,7 @@ global.actionLibrary = {
 				obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._target_highlight=true;
 				obj_cursor.movable_tiles=skill_range;
 	
-				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill2") || input_check_pressed("confirm")) {
 					obj_battleEffect.hit_animation(unit,3);
 					audio_play_sound(sfx_charge, 0, false,0.3);
 					
@@ -576,7 +576,7 @@ global.actionLibrary = {
 				obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._target_highlight=true;
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(unit.grid_pos[0],unit.grid_pos[1]);
-				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill2") || input_check_pressed("confirm")) {
 					obj_battleEffect.hit_animation(unit,3);
 					audio_play_sound(sfx_charge, 0, false,0.3);
 					
@@ -604,7 +604,7 @@ global.actionLibrary = {
 				obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]._target_highlight=true;
 				obj_cursor.movable_tiles=skill_range;
 	
-				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill2") || input_check_pressed("confirm")) {
 					obj_battleEffect.hit_animation(unit,4);
 					audio_play_sound(sfx_shield, 0, false,0.3);
 					unit.shield+=9999;
@@ -652,31 +652,31 @@ global.actionLibrary = {
 				skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz - 1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz - 1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill1") || input_check_pressed("confirm")) {
 					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
@@ -714,31 +714,31 @@ global.actionLibrary = {
 				skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],2);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill1") || input_check_pressed("confirm")) {
 					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
@@ -776,31 +776,31 @@ global.actionLibrary = {
 				skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill1") || input_check_pressed("confirm")) {
 					audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
 						if (!skill_range_aux[i]._is_empty) {
@@ -855,7 +855,7 @@ global.actionLibrary = {
 				if(array_length(skill_range)>0 && !unit.skill_complete){
 					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
 				}
-				if (keyboard_check_pressed(ord("A"))) {
+				if (input_check_pressed("left")) {
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 1;
 					obj_battleEffect.remove_push_preview();
@@ -863,7 +863,7 @@ global.actionLibrary = {
 						obj_battleEffect.push_preview(skill_range[0],1);
 					}
 				}
-				else if (keyboard_check_pressed(ord("D"))) { // a bunch of this is hardcoded atm
+				else if (input_check_pressed("right")) { // a bunch of this is hardcoded atm
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 0;
 					obj_battleEffect.remove_push_preview();
@@ -871,7 +871,7 @@ global.actionLibrary = {
 						obj_battleEffect.push_preview(skill_range[0],0);
 					}
 				}
-				else if (keyboard_check_pressed(ord("S"))) { // a bunch of this is hardcoded atm
+				else if (input_check_pressed("down")) { // a bunch of this is hardcoded atm
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 2;
 					obj_battleEffect.remove_push_preview();
@@ -879,7 +879,7 @@ global.actionLibrary = {
 						obj_battleEffect.push_preview(skill_range[0],2);
 					}
 				}
-				else if (keyboard_check_pressed(ord("W"))) { // a bunch of this is hardcoded atm
+				else if (input_check_pressed("up")) { // a bunch of this is hardcoded atm
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 3;
 					obj_battleEffect.remove_push_preview();
@@ -888,7 +888,7 @@ global.actionLibrary = {
 					}
 				}
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill1") || input_check_pressed("confirm")) {
 					audio_play_sound(sfx_push, 0, false, 0.3);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
@@ -940,7 +940,7 @@ global.actionLibrary = {
 				if(array_length(skill_range)>0 && !unit.skill_complete){
 					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
 				}
-				if (keyboard_check_pressed(ord("A"))) {
+				if (input_check_pressed("left")) {
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 1;
 					obj_battleEffect.remove_push_preview();
@@ -948,7 +948,7 @@ global.actionLibrary = {
 						obj_battleEffect.push_preview(skill_range[0],1);
 					}
 				}
-				else if (keyboard_check_pressed(ord("D"))) { // a bunch of this is hardcoded atm
+				else if (input_check_pressed("right")) { // a bunch of this is hardcoded atm
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 0;
 					obj_battleEffect.remove_push_preview();
@@ -956,7 +956,7 @@ global.actionLibrary = {
 						obj_battleEffect.push_preview(skill_range[0],0);
 					}
 				}
-				else if (keyboard_check_pressed(ord("S"))) { // a bunch of this is hardcoded atm
+				else if (input_check_pressed("down")) { // a bunch of this is hardcoded atm
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 2;
 					obj_battleEffect.remove_push_preview();
@@ -964,7 +964,7 @@ global.actionLibrary = {
 						obj_battleEffect.push_preview(skill_range[0],2);
 					}
 				}
-				else if (keyboard_check_pressed(ord("W"))) { // a bunch of this is hardcoded atm
+				else if (input_check_pressed("up")) { // a bunch of this is hardcoded atm
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 3;
 					obj_battleEffect.remove_push_preview();
@@ -973,7 +973,7 @@ global.actionLibrary = {
 					}
 				}
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill1") || input_check_pressed("confirm")) {
 					audio_play_sound(sfx_base_laser, 0, false);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
@@ -1024,7 +1024,7 @@ global.actionLibrary = {
 				if(array_length(skill_range)>0 && !unit.skill_complete){
 					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
 				}
-				if (keyboard_check_pressed(ord("A"))) {
+				if (input_check_pressed("left")) {
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 1;
 					obj_battleEffect.remove_push_preview();
@@ -1032,7 +1032,7 @@ global.actionLibrary = {
 						obj_battleEffect.push_preview(skill_range[0],1);
 					}
 				}
-				else if (keyboard_check_pressed(ord("D"))) { // a bunch of this is hardcoded atm
+				else if (input_check_pressed("right")) { // a bunch of this is hardcoded atm
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 0;
 					obj_battleEffect.remove_push_preview();
@@ -1040,7 +1040,7 @@ global.actionLibrary = {
 						obj_battleEffect.push_preview(skill_range[0],0);
 					}
 				}
-				else if (keyboard_check_pressed(ord("S"))) { // a bunch of this is hardcoded atm
+				else if (input_check_pressed("down")) { // a bunch of this is hardcoded atm
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 2;
 					obj_battleEffect.remove_push_preview();
@@ -1048,7 +1048,7 @@ global.actionLibrary = {
 						obj_battleEffect.push_preview(skill_range[0],2);
 					}
 				}
-				else if (keyboard_check_pressed(ord("W"))) { // a bunch of this is hardcoded atm
+				else if (input_check_pressed("up")) { // a bunch of this is hardcoded atm
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					unit.skill_option = 3;
 					obj_battleEffect.remove_push_preview();
@@ -1057,7 +1057,7 @@ global.actionLibrary = {
 					}
 				}
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill1") || input_check_pressed("confirm")) {
 					audio_play_sound(sfx_push, 0, false, 0.3);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						
@@ -1181,7 +1181,7 @@ global.actionLibrary = {
 				}
 				
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill1") || input_check_pressed("confirm")) {
 					audio_play_sound(sfx_freeze, 0, false, 0.5);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
@@ -1233,7 +1233,7 @@ global.actionLibrary = {
 				}
 				
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill1") || input_check_pressed("confirm")) {
 					//audio_play_sound(sfx_freeze, 0, false, 0.5);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
@@ -1284,7 +1284,7 @@ global.actionLibrary = {
 				}
 				
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill1") || input_check_pressed("confirm")) {
 					//audio_play_sound(sfx_freeze, 0, false, 0.5);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
@@ -1350,7 +1350,7 @@ global.actionLibrary = {
 				}
 				
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill2") || input_check_pressed("confirm")) {
 					audio_play_sound(sfx_frostbite, 0, false, 0.5);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
@@ -1400,7 +1400,7 @@ global.actionLibrary = {
 				}
 				
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill2") || input_check_pressed("confirm")) {
 					audio_play_sound(sfx_frostbite, 0, false, 0.5);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
@@ -1471,7 +1471,7 @@ global.actionLibrary = {
 				}
 				
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill2") || input_check_pressed("confirm")) {
 					audio_play_sound(sfx_frostbite, 0, false, 0.5);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
@@ -1547,31 +1547,31 @@ global.actionLibrary = {
 				show_debug_message(string(skill_range));
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz-1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz-1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill3") || input_check_pressed("confirm")) {
 					audio_play_sound(sfx_freeze, 0, false, 0.5);
 					
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
@@ -1623,31 +1623,31 @@ global.actionLibrary = {
 				skill_range_aux = obj_gridCreator.highlighted_target_circle(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill3") || input_check_pressed("confirm")) {
 					
 					audio_play_sound(sfx_freeze, 0, false, 0.5);
 					for (var i = 0; i < array_length(skill_range_aux); i++) {
@@ -1698,7 +1698,7 @@ global.actionLibrary = {
 				}
 				
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill3") || input_check_pressed("confirm")) {
 					audio_play_sound(sfx_freeze, 0, false, 0.5);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
@@ -1775,25 +1775,25 @@ global.actionLibrary = {
 				
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -1813,7 +1813,7 @@ global.actionLibrary = {
 					obj_cursor.sprite_index=spr_grid_cursor_invalid;
 				}
 				//show_debug_message(string(unit.skill_progress));
-				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill2") || input_check_pressed("confirm")) {
 					if(unit.skill_progress==1){
 						show_debug_message(unit.grid_pos);
 						show_debug_message(skill_coords);
@@ -1882,25 +1882,25 @@ global.actionLibrary = {
 				
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -1920,7 +1920,7 @@ global.actionLibrary = {
 					obj_cursor.sprite_index=spr_grid_cursor_invalid;
 				}
 				//show_debug_message(string(unit.skill_progress));
-				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill2") || input_check_pressed("confirm")) {
 					if(unit.skill_progress==1){
 						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
@@ -1984,25 +1984,25 @@ global.actionLibrary = {
 				
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -2023,7 +2023,7 @@ global.actionLibrary = {
 					obj_cursor.sprite_index=spr_grid_cursor_invalid;
 				}
 				//show_debug_message(string(unit.skill_progress));
-				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill2") || input_check_pressed("confirm")) {
 					if(unit.skill_progress==1){
 						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
@@ -2100,25 +2100,25 @@ global.actionLibrary = {
 				
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -2138,7 +2138,7 @@ global.actionLibrary = {
 					obj_cursor.sprite_index=spr_grid_cursor_invalid;
 				}
 				//show_debug_message(string(unit.skill_progress));
-				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill3") || input_check_pressed("confirm")) {
 					if(unit.skill_progress==1){
 						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally && obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile!=unit){
@@ -2205,25 +2205,25 @@ global.actionLibrary = {
 				
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -2243,7 +2243,7 @@ global.actionLibrary = {
 					obj_cursor.sprite_index=spr_grid_cursor_invalid;
 				}
 				//show_debug_message(string(unit.skill_progress));
-				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill3") || input_check_pressed("confirm")) {
 					if(unit.skill_progress==1){
 						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
@@ -2307,25 +2307,25 @@ global.actionLibrary = {
 				
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -2345,7 +2345,7 @@ global.actionLibrary = {
 					obj_cursor.sprite_index=spr_grid_cursor_invalid;
 				}
 				//show_debug_message(string(unit.skill_progress));
-				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill3") || input_check_pressed("confirm")) {
 					if(unit.skill_progress==1){
 						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
@@ -2426,25 +2426,25 @@ global.actionLibrary = {
 				
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -2464,7 +2464,7 @@ global.actionLibrary = {
 					obj_cursor.sprite_index=spr_grid_cursor_invalid;
 				}
 				//show_debug_message(string(unit.skill_progress));
-				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill1") || input_check_pressed("confirm")) {
 					if(unit.skill_progress==1){
 						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 							if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._entity_on_tile.ally){
@@ -2529,25 +2529,25 @@ global.actionLibrary = {
 				
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -2584,7 +2584,7 @@ global.actionLibrary = {
 					obj_cursor.sprite_index=spr_grid_cursor_invalid;
 				}
 				//show_debug_message(string(unit.skill_progress));
-				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill1") || input_check_pressed("confirm")) {
 					if(unit.skill_progress==1){
 						if(!obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty){
 							
@@ -2660,25 +2660,25 @@ global.actionLibrary = {
 				
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -2698,7 +2698,7 @@ global.actionLibrary = {
 					obj_cursor.sprite_index=spr_grid_cursor_invalid;
 				}
 				//show_debug_message(string(unit.skill_progress));
-				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill1") || input_check_pressed("confirm")) {
 					if(unit.skill_progress==1){
 						for(i=0;i<array_length(skill_range_aux);i++){
 							if(!skill_range_aux[i]._is_empty){
@@ -2766,25 +2766,25 @@ global.actionLibrary = {
 				skill_range_aux = obj_gridCreator.highlighted_target_cross(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz - 1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz - 1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -2795,7 +2795,7 @@ global.actionLibrary = {
 				}else{
 					obj_cursor.sprite_index=spr_grid_cursor;
 				}
-				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill1") || input_check_pressed("confirm")) {
 					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
@@ -2837,25 +2837,25 @@ global.actionLibrary = {
 				skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -2866,7 +2866,7 @@ global.actionLibrary = {
 				}else{
 					obj_cursor.sprite_index=spr_grid_cursor;
 				}
-				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill1") || input_check_pressed("confirm")) {
 					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty  && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
@@ -2914,25 +2914,25 @@ global.actionLibrary = {
 				}
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz - 1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz - 1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -2952,7 +2952,7 @@ global.actionLibrary = {
 					
 					obj_cursor.sprite_index=spr_grid_cursor_invalid;
 				}
-				if (keyboard_check_pressed(ord("J")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill1") || input_check_pressed("confirm")) {
 					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1]) && !array_any(unit.bomb_positions, function (_val, _ind){
 						return _val[0]==skill_coords[0] &&  _val[1]==skill_coords[1]
 					})){
@@ -3029,25 +3029,25 @@ global.actionLibrary = {
 				skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz - 1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz - 1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -3058,7 +3058,7 @@ global.actionLibrary = {
 				}else{
 					obj_cursor.sprite_index=spr_grid_cursor;
 				}
-				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill2") || input_check_pressed("confirm")) {
 					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
@@ -3099,25 +3099,25 @@ global.actionLibrary = {
 				skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -3128,7 +3128,7 @@ global.actionLibrary = {
 				}else{
 					obj_cursor.sprite_index=spr_grid_cursor;
 				}
-				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill2") || input_check_pressed("confirm")) {
 					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
@@ -3171,25 +3171,25 @@ global.actionLibrary = {
 				skill_range_aux = obj_gridCreator.highlighted_target_square(skill_coords[0], skill_coords[1],2);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz - 1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz - 1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -3200,7 +3200,7 @@ global.actionLibrary = {
 				}else{
 					obj_cursor.sprite_index=spr_grid_cursor;
 				}
-				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill2") || input_check_pressed("confirm")) {
 					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
@@ -3258,25 +3258,25 @@ global.actionLibrary = {
 				skill_range_aux = obj_gridCreator.highlighted_target_cross(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz - 1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz - 1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -3287,7 +3287,7 @@ global.actionLibrary = {
 				}else{
 					obj_cursor.sprite_index=spr_grid_cursor;
 				}
-				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill3") || input_check_pressed("confirm")) {
 					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
@@ -3328,25 +3328,25 @@ global.actionLibrary = {
 				skill_range_aux = obj_gridCreator.highlighted_target_cross(skill_coords[0], skill_coords[1],2);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -3357,7 +3357,7 @@ global.actionLibrary = {
 				}else{
 					obj_cursor.sprite_index=spr_grid_cursor;
 				}
-				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill3") || input_check_pressed("confirm")) {
 					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
@@ -3399,25 +3399,25 @@ global.actionLibrary = {
 				skill_range_aux = obj_gridCreator.highlighted_target_cross(skill_coords[0], skill_coords[1],1);
 				obj_cursor.movable_tiles=skill_range;
 				obj_cursor.reset_cursor(skill_coords[0],skill_coords[1]);
-				if (keyboard_check_pressed(ord("A")) && skill_coords[0] > 0) {
+				if (input_check_pressed("left") && skill_coords[0] > 0) {
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]-1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] -= 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("D")) && skill_coords[0] < obj_gridCreator.gridHoriz - 1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("right") && skill_coords[0] < obj_gridCreator.gridHoriz - 1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]+1][skill_coords[1]])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[0] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("S")) && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("down") && skill_coords[1] < obj_gridCreator.gridVert -1) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]+1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] += 1;
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_coords[1] > 0) { // a bunch of this is hardcoded atm
 					if(array_contains(skill_range,obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]-1])){
 						audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 						skill_coords[1] -= 1;
@@ -3428,7 +3428,7 @@ global.actionLibrary = {
 				}else{
 					obj_cursor.sprite_index=spr_grid_cursor;
 				}
-				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill3") || input_check_pressed("confirm")) {
 					if(obj_gridCreator.battle_grid[skill_coords[0]][skill_coords[1]]._is_empty && (skill_coords[0]!=unit.grid_pos[0] || skill_coords[1]!=unit.grid_pos[1])){
 						audio_play_sound(sfx_blast, 0, false, 1, 0, 0.7);
 						
@@ -3498,7 +3498,7 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				
 				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
-				if (keyboard_check_pressed(ord("S")) && skill_type==-1) {
+				if (input_check_pressed("down") && skill_type==-1) {
 					skill_type=1;
 					obj_battleEffect.remove_push_preview();
 					obj_gridCreator.reset_highlights_target();
@@ -3516,7 +3516,7 @@ global.actionLibrary = {
 						}
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_type==1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_type==1) { // a bunch of this is hardcoded atm
 					skill_type=-1;
 					obj_battleEffect.remove_push_preview();
 					obj_gridCreator.reset_highlights_target();
@@ -3533,7 +3533,7 @@ global.actionLibrary = {
 						}
 					}
 				}
-				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) { // use the skill
+				if (input_check_pressed("skill2") || input_check_pressed("confirm")) { // use the skill
 					audio_play_sound(sfx_blast, 0, false);
 					obj_battleEffect.remove_push_preview();
 					for (var i = 0; i < array_length(skill_range); i++) {
@@ -3596,7 +3596,7 @@ global.actionLibrary = {
 				var _damage = unit.action.damage;
 				
 				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
-				if (keyboard_check_pressed(ord("S")) && skill_type==-1) {
+				if (input_check_pressed("down") && skill_type==-1) {
 					skill_type=1;
 					obj_battleEffect.remove_push_preview();
 					obj_gridCreator.reset_highlights_target();
@@ -3614,7 +3614,7 @@ global.actionLibrary = {
 						}
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_type==1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_type==1) { // a bunch of this is hardcoded atm
 					skill_type=-1;
 					obj_battleEffect.remove_push_preview();
 					obj_gridCreator.reset_highlights_target();
@@ -3631,7 +3631,7 @@ global.actionLibrary = {
 						}
 					}
 				}
-				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) { // use the skill
+				if (input_check_pressed("skill2") || input_check_pressed("confirm")) { // use the skill
 					audio_play_sound(sfx_blast, 0, false);
 					obj_battleEffect.remove_push_preview();
 					for (var i = 0; i < array_length(skill_range); i++) {
@@ -3692,7 +3692,7 @@ global.actionLibrary = {
 				
 				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
 				
-				if (keyboard_check_pressed(ord("K")) || keyboard_check_pressed(vk_enter)) { // use the skill
+				if (input_check_pressed("skill2") || input_check_pressed("confirm")) { // use the skill
 					audio_play_sound(sfx_blast, 0, false);
 					obj_battleEffect.remove_push_preview();
 					for (var i = 0; i < array_length(skill_range); i++) {
@@ -3758,7 +3758,7 @@ global.actionLibrary = {
 				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
 				
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill3") || input_check_pressed("confirm")) {
 					audio_play_sound(sfx_push, 0, false, 0.3);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
@@ -3801,7 +3801,7 @@ global.actionLibrary = {
 					obj_cursor.reset_cursor(skill_range[0]._x_coord,skill_range[0]._y_coord);
 				}
 				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
-				if (keyboard_check_pressed(ord("S")) && skill_type==-1) {
+				if (input_check_pressed("down") && skill_type==-1) {
 					skill_type=1;
 					obj_battleEffect.remove_push_preview();
 					
@@ -3813,7 +3813,7 @@ global.actionLibrary = {
 						
 					}
 				}
-				if (keyboard_check_pressed(ord("W")) && skill_type==1) { // a bunch of this is hardcoded atm
+				if (input_check_pressed("up") && skill_type==1) { // a bunch of this is hardcoded atm
 					skill_type=-1;
 					obj_battleEffect.remove_push_preview();
 					
@@ -3824,7 +3824,7 @@ global.actionLibrary = {
 					}
 				}
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill3") || input_check_pressed("confirm")) {
 					audio_play_sound(sfx_push, 0, false, 0.3);
 					for (var i = array_length(skill_range)-1; i >=0; i--) {
 						if (!skill_range[i]._is_empty) {
@@ -3874,7 +3874,7 @@ global.actionLibrary = {
 				obj_cursor.movable_tiles=[obj_gridCreator.battle_grid[unit.grid_pos[0]][unit.grid_pos[1]]];
 				
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(ord("L")) || keyboard_check_pressed(vk_enter)) {
+				if (input_check_pressed("skill3") || input_check_pressed("confirm")) {
 					audio_play_sound(sfx_push, 0, false, 0.3);
 					for (var i = 0; i < array_length(skill_range); i++) {
 						if (!skill_range[i]._is_empty) {
@@ -3934,7 +3934,7 @@ global.actionLibrary = {
 				obj_cursor.movable_tiles=[];
 				
 				var _damage = unit.action.damage;
-				if (keyboard_check_pressed(ord("Y")) || keyboard_check_pressed(vk_enter)) { // use the skill
+				if (input_check_pressed("wait") || input_check_pressed("confirm")) { // use the skill
 					audio_play_sound(sfx_click, 0, false, 1, 0, 0.7);
 					
 					unit.is_attacking = false;
