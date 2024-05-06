@@ -11,14 +11,31 @@
 
 //var input_check_pressed("confirm") = keyboard_check_pressed(vk_enter);
 //var input_check_pressed("back") = keyboard_check_pressed(vk_tab);
-//var input_check_pressed("end_turn") = keyboard_check_pressed(vk_space);
+//var input_check_pressed("endturn") = keyboard_check_pressed(vk_space);
 
 var wasd_pressed = input_check_pressed("left") || input_check_pressed("up") || input_check_pressed("down") || input_check_pressed("right");
 var jkl_pressed = input_check_pressed("skill1") || input_check_pressed("skill2") || input_check_pressed("skill3") || input_check_pressed("attack") || input_check_pressed("confirm") || input_check_pressed("wait");
 
 var enough_tp = false;
 
-
+var arrow_key_controls=[
+	string_upper(input_binding_get_name(global.other_controls[0])),
+	string_upper(input_binding_get_name(global.other_controls[1])),
+	string_upper(input_binding_get_name(global.other_controls[2])),
+	string_upper(input_binding_get_name(global.other_controls[3]))
+]
+if(arrow_key_controls[0]=="ARROW UP"){
+	arrow_key_controls[0]="U";
+}
+if(arrow_key_controls[1]=="ARROW LEFT"){
+	arrow_key_controls[1]="L";
+}
+if(arrow_key_controls[2]=="ARROW DOWN"){
+	arrow_key_controls[2]="D";
+}
+if(arrow_key_controls[3]=="ARROW RIGHT"){
+	arrow_key_controls[3]="R";
+}
 
 if (transition_count > 0) {
 	transition_count-=1;
@@ -261,7 +278,7 @@ switch (state) {
 			change_state(BattleState.BattleEnd);
 			break;
 		}
-		obj_menu.set_text(string_upper(input_binding_get_name(global.other_controls[0]))+string_upper(input_binding_get_name(global.other_controls[1]))+string_upper(input_binding_get_name(global.other_controls[2]))+string_upper(input_binding_get_name(global.other_controls[3]))+"- Move Cursor     "+string_upper(input_binding_get_name(global.other_controls[4]))+" - Select Unit     "+string_upper(input_binding_get_name(global.other_controls[6]))+" - End Turn");
+		obj_menu.set_text(arrow_key_controls[0]+arrow_key_controls[1]+arrow_key_controls[2]+arrow_key_controls[3]+"- Move Cursor     "+string_upper(input_binding_get_name(global.other_controls[4]))+" - Select Unit     "+string_upper(input_binding_get_name(global.other_controls[6]))+" - End Turn");
 		
 		for (var i = 0; i<array_length(obj_gridCreator.battle_grid_flattened); i++){ // NO MORE GHOSTS
 			
@@ -401,7 +418,7 @@ switch (state) {
 		}else{
 			obj_menu.close_menu();
 		}
-		if(input_check_pressed("end_turn")){ //ask end turn
+		if(input_check_pressed("endturn")){ //ask end turn
 			obj_cursor.movable_tiles=[];
 			obj_menu.ask_end = true;
 			change_state(BattleState.BattlePause);
@@ -419,7 +436,7 @@ switch (state) {
 		// error handling but unit should always be a player unit here
 		if(unit!=pointer_null){
 			//obj_menu.set_text(string_upper(input_binding_get_name(global.other_controls[0]+string_upper(input_binding_get_name(global.other_controls[1]+string_upper(input_binding_get_name(global.other_controls[2]+string_upper(input_binding_get_name(global.other_controls[3]+" - "Move\nJ - "+unit.actions[0].name+"\nK - "+unit.actions[1].name+"\nL - "+unit.actions[2].name+"\n; - "+unit.actions[3].name+"\nEnter - Do Nothing\nTab - Back");
-			obj_menu.set_text(string_upper(input_binding_get_name(global.other_controls[0]))+string_upper(input_binding_get_name(global.other_controls[1]))+string_upper(input_binding_get_name(global.other_controls[2]))+string_upper(input_binding_get_name(global.other_controls[3]))+" - Move");
+			obj_menu.set_text(arrow_key_controls[0]+arrow_key_controls[1]+arrow_key_controls[2]+arrow_key_controls[3]+string_char_at(string_upper(input_binding_get_name(global.other_controls[3])),0)+" - Move");
 			
 			// moving
 			if (wasd_pressed) {
@@ -547,7 +564,7 @@ switch (state) {
 			
 		}else{
 			//obj_menu.set_text(string_upper(input_binding_get_name(global.other_controls[0]+string_upper(input_binding_get_name(global.other_controls[1]+string_upper(input_binding_get_name(global.other_controls[2]+string_upper(input_binding_get_name(global.other_controls[3]+" - "Aim    Tab - Back");
-			obj_menu.set_text(string_upper(input_binding_get_name(global.other_controls[0]))+string_upper(input_binding_get_name(global.other_controls[1]))+string_upper(input_binding_get_name(global.other_controls[2]))+string_upper(input_binding_get_name(global.other_controls[3]))+" - Aim  ");
+			obj_menu.set_text(arrow_key_controls[0]+arrow_key_controls[1]+arrow_key_controls[2]+arrow_key_controls[3]+" - Aim  ");
 			obj_menu.set_skill_text(string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
 			obj_menu.confirm = true;
 			
@@ -959,7 +976,7 @@ switch (state) {
 		obj_menu.win = 1;
 		if (input_check_pressed("confirm")) {
 			audio_stop_sound(current_music)
-			room_goto(0);
+			room_goto(1);
 		}
 		break;
 #endregion
@@ -968,14 +985,14 @@ switch (state) {
 		obj_menu.win = 2;
 		if (input_check_pressed("confirm")) {
 			audio_stop_sound(current_music)
-			room_goto(0);
+			room_goto(1);
 		}
 		break;
 		
 #endregion
 #region Game paused
 	case BattleState.BattlePause:
-		if(obj_menu.ask_end && input_check_pressed("end_turn")){ // end the turn
+		if(obj_menu.ask_end && input_check_pressed("endturn")){ // end the turn
 				board_obstacle_order = 0;
 				obj_menu.ask_end = false;
 				

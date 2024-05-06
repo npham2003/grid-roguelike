@@ -29,7 +29,7 @@ function __input_config_verbs()
 			skill3: input_binding_key("L"),
             wait: input_binding_key("Y"),
 			
-			end_turn: input_binding_key(vk_space)
+			endturn: input_binding_key(vk_space)
 			
         },
         

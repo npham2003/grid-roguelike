@@ -82,7 +82,7 @@ if (confirm) {
 if (back) {
 	
 	draw_set_color(global._characterPrimary);
-	draw_rectangle(660, 647, backX, 617, false);
+	draw_rectangle(665, 647, backX, 617, false);
 	
 	draw_set_font(fnt_chiaro_small);
 	draw_set_color(c_white);

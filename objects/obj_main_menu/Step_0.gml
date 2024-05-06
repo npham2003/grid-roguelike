@@ -79,7 +79,7 @@ if(transition_in){
 				
 			}
 			if(selector_pos==1){
-				room_goto(1);
+				room_goto(2);
 				
 				audio_stop_sound(bgm_xenoblade_x_title);
 				
@@ -89,6 +89,7 @@ if(transition_in){
 				sub_menu=3;
 				transition_in=true;
 				selector_pos=0;
+				refresh_tips();
 				
 			}
 			if(selector_pos==3){
@@ -122,7 +123,7 @@ if(transition_in){
 			audio_stop_sound(bgm_gather_under_night);
 			if(curr>=2){
 				audio_stop_sound(bgm_xenoblade_x_title);
-				room_goto(3);
+				room_goto(4);
 			}else{
 				sub_menu=0;
 				transition_in=true;
@@ -460,7 +461,7 @@ case 4:
 				}
 				if(input_check_pressed("back")){
 					transition_in=false;
-					selector_pos=2;
+					selector_pos=3;
 					next_background_color=menu_colors[0];
 					audio_play_sound(sfx_menu_back, 0, false, 0.7, 0);
 					
