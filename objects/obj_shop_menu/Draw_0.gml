@@ -5,11 +5,7 @@ if(delay>0){
 
 if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	layer_set_visible(lay_id, true);
-	
-	
-	
-	
-	
+
 
 	// background and border
 	if(menu_level<=1){ //if this is not the skill select screen

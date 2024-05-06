@@ -48,8 +48,8 @@ if(transition_in){
 		actual_description_x=lerp(actual_description_x,description_x_start,0.1);
 	}
 	else if(sub_menu==4){
-		actual_tips=lerp(actual_tips,tips_x,0.1);
-		actual_description_x=lerp(actual_description_x,description_x_start,0.1);
+		actual_controls=lerp(actual_controls,controls_x,0.1);
+		actual_rebind_x=lerp(actual_rebind_x,rebind_x_start,0.1);
 	}
 }else{
 	if(sub_menu==0){
@@ -109,7 +109,7 @@ if(transition_in){
 		if(actual_credits_x>1900){
 			sub_menu=0;
 			transition_in=true;
-			selector_pos=3;
+			selector_pos=4;
 		}
 		
 		
@@ -143,13 +143,13 @@ if(transition_in){
 		}
 	}
 	else if(sub_menu==4){
-		actual_tips=lerp(actual_tips,initial_tips,0.1);
-		actual_description_x=lerp(actual_description_x,initial_description_x,0.1);
-		if(actual_tips<-1900){
+		actual_controls=lerp(actual_controls,initial_controls,0.1);
+		actual_rebind_x=lerp(actual_rebind_x,initial_rebind_x,0.1);
+		if(actual_controls<-1900){
 			transition_in=true;
 			sub_menu=0;
-			current_tip=array_length(tips)-1;
-			option_cur=0;
+			current_control=array_length(tips)-1;
+			controls_cur=0;
 		}
 	}
 }
@@ -190,7 +190,7 @@ switch(sub_menu){
 					}
 					if(selector_pos==3){
 						audio_play_sound(sfx_menu_next, 0, false, 0.7, 0);
-						next_background_color=menu_colors[1];
+						next_background_color=menu_colors[3];
 					}
 					if(selector_pos==4){
 						audio_play_sound(sfx_menu_next, 0, false, 0.7, 0);

@@ -293,7 +293,7 @@ tips=[
 #endregion
 
 #region sliding menu
-current_tip = array_length(tips)-1
+current_tip = array_length(tips)-1;
 _scale=0; _fade=0.5; _whatever=2; //This is not needed, it is simply a preference. We will use these in place of numbers, when we are using arrays.
 total_options=array_length(tips); //Total amount of options
 option_cur=0; //Current/Selected option we want to look at
@@ -320,6 +320,21 @@ for(i=0;i<total_options;i++){
 controls_list = [];
 controls_cur=0;
 c_scale=0; c_fade=0.5; c_whatever=2;
+rebind_string = "";
+
+initial_controls = -2000;
+actual_controls = -2000;
+control_diamond_size=120;
+
+control_box_height=75;
+control_box_width=400;
+control_box_space = 50;
+controls_x = (room_width/2) - control_box_width - (control_box_space/2);
+
+initial_rebind_x = 2000;
+actual_rebind_x=2000;
+rebind_x_start = 450;
+rebind_y_start = 30;
 
 for (var i = 0; i < array_length(global.other_controls); ++i) {
 	array_push(controls_list, [global.other_controls_names[i], input_binding_get_name(global.other_controls[i])]);
@@ -330,10 +345,12 @@ for (var i = 0; i < array_length(global.skill_controls); ++i) {
 }
 
 total_controls = array_length(controls_list);
+current_control = total_controls-1;
 
-rebind = function(action, _new) {
+rebind = function(action) {
 	input_binding_scan_start(function(_new) {
 		input_binding_set_safe(action, _new);
+		rebind_string = string_upper(input_binding_get_name(_new));
 	});
 }
 
@@ -497,6 +514,14 @@ draw_lines = function(vertices, _width, _color){
 	}
 }
 
+drawRectangle = function(x1,y1,x2,y2,color,width) {
+	draw_set_color(color);
+	draw_rectangle(x1,y1,x2,y2,true);
+
+	for (var i = 0; i < width; ++i) {
+		draw_rectangle(x1-i,y1-i,x2+i,y2+i,true);
+	}
+}
 text_outline = function(){
 	//x,y: Coordinates to draw
 	//str: String to draw
