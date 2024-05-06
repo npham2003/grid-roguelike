@@ -3,6 +3,25 @@ if(delay>0){
 	return;
 }
 
+var arrow_key_controls=[
+	string_upper(input_binding_get_name(global.other_controls[0])),
+	string_upper(input_binding_get_name(global.other_controls[1])),
+	string_upper(input_binding_get_name(global.other_controls[2])),
+	string_upper(input_binding_get_name(global.other_controls[3]))
+]
+if(arrow_key_controls[0]=="ARROW UP"){
+	arrow_key_controls[0]="U";
+}
+if(arrow_key_controls[1]=="ARROW LEFT"){
+	arrow_key_controls[1]="L";
+}
+if(arrow_key_controls[2]=="ARROW DOWN"){
+	arrow_key_controls[2]="D";
+}
+if(arrow_key_controls[3]=="ARROW RIGHT"){
+	arrow_key_controls[3]="R";
+}
+
 if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	layer_set_visible(lay_id, true);
 
@@ -683,8 +702,31 @@ if (obj_battleControl.state == BattleState.PlayerUpgrade) {
 	draw_set_color(c_white);
 	draw_set_alpha(1);
 	
-	text_outline(580,700, string_upper(input_binding_get_name(global.other_controls[0]))+string_upper(input_binding_get_name(global.other_controls[1]))+string_upper(input_binding_get_name(global.other_controls[2]))+string_upper(input_binding_get_name(global.other_controls[3]))+"- Move Cursor     "+string_upper(input_binding_get_name(global.other_controls[4]))+" - Select Unit     "+string_upper(input_binding_get_name(global.other_controls[6]))+" - End Turn", 1, c_black, 8, 100000, 1000000);
+	draw_set_valign(fa_top);
+	draw_set_halign(fa_right);
+	draw_set_font(fnt_chiaro_small);
 	draw_set_color(c_white);
+	var arrow_key_controls=[
+		string_upper(input_binding_get_name(global.other_controls[0])),
+		string_upper(input_binding_get_name(global.other_controls[1])),
+		string_upper(input_binding_get_name(global.other_controls[2])),
+		string_upper(input_binding_get_name(global.other_controls[3]))
+	]
+	if(arrow_key_controls[0]=="ARROW UP"){
+		arrow_key_controls[0]="U";
+	}
+	if(arrow_key_controls[1]=="ARROW LEFT"){
+		arrow_key_controls[1]="L";
+	}
+	if(arrow_key_controls[2]=="ARROW DOWN"){
+		arrow_key_controls[2]="D";
+	}
+	if(arrow_key_controls[3]=="ARROW RIGHT"){
+		arrow_key_controls[3]="R";
+	}
+	text_outline(1300,700, arrow_key_controls[0]+arrow_key_controls[1]+arrow_key_controls[2]+arrow_key_controls[3]+" - Move Cursor     "+string_upper(global.other_controls[4])+" - Confirm     "+string_upper(global.other_controls[5])+" - Back", 1, c_black, 8, 100000, 1000000);
+	draw_set_color(c_white);
+	draw_set_halign(fa_left);
 	
 }
 else {

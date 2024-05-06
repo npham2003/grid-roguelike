@@ -59,7 +59,7 @@ if (back) {
 
 	draw_set_color(global._characterPrimary);
 
-	draw_rectangle(700, 650, backX, 620, false);
+	draw_rectangle(665, 647, backX, 617, false);
 
 	
 
@@ -68,7 +68,6 @@ if (back) {
 	draw_set_color(c_white);
 
 	draw_text(670, rootY-105, "Back: "+string_upper(input_binding_get_name(global.other_controls[5])));
-
 	
 
 	draw_set_font(fnt_chiaro);

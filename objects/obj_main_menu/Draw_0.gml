@@ -496,13 +496,18 @@ if(sub_menu==4){
 				if (input_check_released("confirm") && rebind_string != "Waiting for input") {
 					show_debug_message("in confirm");
 					rebind_string = "Waiting for input";
+					rebinding=true;
 					input_binding_scan_start(function(_new) {
-						input_binding_set_safe(string_lower(string_trim(controls_list[controls_cur][0])), _new);
+						input_binding_set_safe(string_replace_all(string_lower(string_trim(controls_list[controls_cur][0]))," ",""), _new);
+						
 						rebind_string = string_upper(input_binding_get_name(_new));
+						rebinding=false;
+						
 					});
 					//rebind(controls_list[controls_cur][0]);
 					//.other_controls[i][1] = rebind_string;
 					show_debug_message("verb: "+controls_list[controls_cur][0]);
+					
 				}
 				update_names();
 				show_debug_message("out of confirm");
@@ -515,23 +520,41 @@ if(sub_menu==4){
 			drawRectangle(actual_controls-3+control_box_width+control_box_space, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i)),actual_controls+(control_box_width*2+2)+control_box_space,y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+control_box_height-1, diamond_outline, 5);
 			drawRectangle(actual_controls-1+control_box_width+control_box_space, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i)),actual_controls+(control_box_width*2+2)+control_box_space,y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+control_box_height-1, diamond_fill, 2);
 			
-		
-			draw_set_color(c_black);
-			draw_set_font(fnt_chiaro);
+			if(!rebinding || i!=controls_cur){
+				draw_set_color(c_black);
+				draw_set_font(fnt_chiaro);
 			
 			
-			for(var dto_i=45; dto_i<405; dto_i+=360/8){
-				//draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);
-				draw_text_ext_transformed(actual_controls+(control_box_width/2)+round(lengthdir_x(1,dto_i)),y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+round(lengthdir_y(1,dto_i)),controls_list[i][0],8,10000000,1,1,0);
-				draw_text(actual_controls-3+(control_box_width*1.5)+control_box_space+round(lengthdir_x(1,dto_i)), y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+round(lengthdir_y(1,dto_i)), controls_list[i][1]);
+				for(var dto_i=45; dto_i<405; dto_i+=360/8){
+					//draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);
+					draw_text_ext_transformed(actual_controls+(control_box_width/2)+round(lengthdir_x(1,dto_i)),y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+round(lengthdir_y(1,dto_i)),controls_list[i][0],8,10000000,1,1,0);
+					draw_text(actual_controls-3+(control_box_width*1.5)+control_box_space+round(lengthdir_x(1,dto_i)), y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+round(lengthdir_y(1,dto_i)), controls_list[i][1]);
+				}
+			
+				draw_set_color(c_white);
+				draw_text_ext_transformed(actual_controls+(control_box_width/2),y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i)),controls_list[i][0],8,10000000,1,1,0);
+				draw_text(actual_controls-3+(control_box_width*1.5)+control_box_space, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i)), controls_list[i][1]);
+			
+			
+				draw_set_halign(fa_left);
+				draw_set_valign(fa_top);
+			}else{
+				draw_set_color(c_black);
+				draw_set_font(fnt_chiaro);
+				for(var dto_i=45; dto_i<405; dto_i+=360/8){
+					//draw_text_ext(argument0+lengthdir_x(argument3,dto_i),argument1+lengthdir_y(argument3,dto_i),argument2,argument6,argument7);
+					draw_text_ext_transformed(actual_controls+(control_box_width/2)+round(lengthdir_x(1,dto_i)),y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+round(lengthdir_y(1,dto_i)),controls_list[i][0],8,10000000,1,1,0);
+					draw_text(actual_controls-3+(control_box_width*1.5)+control_box_space+round(lengthdir_x(1,dto_i)), y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i))+round(lengthdir_y(1,dto_i)), rebind_string);
+				}
+			
+				draw_set_color(c_white);
+				draw_text_ext_transformed(actual_controls+(control_box_width/2),y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i)),controls_list[i][0],8,10000000,1,1,0);
+				draw_text(actual_controls-3+(control_box_width*1.5)+control_box_space, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i)), rebind_string);
+			
+			
+				draw_set_halign(fa_left);
+				draw_set_valign(fa_top);
 			}
-			
-			draw_set_color(c_white);
-			draw_text_ext_transformed(actual_controls+(control_box_width/2),y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i)),controls_list[i][0],8,10000000,1,1,0);
-			draw_text(actual_controls-3+(control_box_width*1.5)+control_box_space, y+((y_draw_cur)+(y_draw_offset+y_draw_spacing)*(i)), controls_list[i][1]);
-			
-			draw_set_halign(fa_left);
-			draw_set_valign(fa_top);
 		
 	}
 	//show_debug_message(options[0,c_scale]);
@@ -553,5 +576,23 @@ draw_set_valign(fa_top);
 draw_set_halign(fa_right);
 draw_set_font(fnt_chiaro_small);
 draw_set_color(c_white);
-text_outline(1300,700, string_upper(global.other_controls[0])+string_upper(global.other_controls[1])+string_upper(global.other_controls[2])+string_upper(global.other_controls[3])+" - Move Cursor     "+string_upper(global.other_controls[4])+" - Confirm     "+string_upper(global.other_controls[5])+" - Back", 1, c_black, 8, 100000, 1000000);
+var arrow_key_controls=[
+	string_upper(input_binding_get_name(global.other_controls[0])),
+	string_upper(input_binding_get_name(global.other_controls[1])),
+	string_upper(input_binding_get_name(global.other_controls[2])),
+	string_upper(input_binding_get_name(global.other_controls[3]))
+]
+if(arrow_key_controls[0]=="ARROW UP"){
+	arrow_key_controls[0]="U";
+}
+if(arrow_key_controls[1]=="ARROW LEFT"){
+	arrow_key_controls[1]="L";
+}
+if(arrow_key_controls[2]=="ARROW DOWN"){
+	arrow_key_controls[2]="D";
+}
+if(arrow_key_controls[3]=="ARROW RIGHT"){
+	arrow_key_controls[3]="R";
+}
+text_outline(1300,700, arrow_key_controls[0]+arrow_key_controls[1]+arrow_key_controls[2]+arrow_key_controls[3]+" - Move Cursor     "+string_upper(global.other_controls[4])+" - Confirm     "+string_upper(global.other_controls[5])+" - Back", 1, c_black, 8, 100000, 1000000);
 draw_set_color(c_white);

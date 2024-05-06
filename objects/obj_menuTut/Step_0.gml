@@ -145,14 +145,14 @@ confirmX[1] = lerp(confirmX[1], confirmShiftX[1], 0.2);
 if(back){
 
 	//backShift = 820;
-
-	backShift = 580+string_width("Back: "+string_upper(global.other_controls[5]));
+	draw_set_font(fnt_chiaro_small);
+	backShift =  665+10+string_width("Back: "+string_upper(global.other_controls[5]));
 
 
 
 }else{
 
-	backShift=660;
+	backShift=665;
 
 }
 

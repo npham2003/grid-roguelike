@@ -13,11 +13,31 @@
 //var key_Tab_pressed = keyboard_check_pressed(vk_tab);
 //var key_Space_pressed = keyboard_check_pressed(vk_space);
 
+
 var wasd_pressed = input_check_pressed("left") || input_check_pressed("up") || input_check_pressed("down") || input_check_pressed("right");
 
 var jkl_pressed = input_check_pressed("skill1") || input_check_pressed("skill2") || input_check_pressed("skill3") || input_check_pressed("attack") || input_check_pressed("confirm") || input_check_pressed("wait");
 
 var enough_tp = false;
+
+var arrow_key_controls=[
+	string_upper(input_binding_get_name(global.other_controls[0])),
+	string_upper(input_binding_get_name(global.other_controls[1])),
+	string_upper(input_binding_get_name(global.other_controls[2])),
+	string_upper(input_binding_get_name(global.other_controls[3]))
+]
+if(arrow_key_controls[0]=="ARROW UP"){
+	arrow_key_controls[0]="U";
+}
+if(arrow_key_controls[1]=="ARROW LEFT"){
+	arrow_key_controls[1]="L";
+}
+if(arrow_key_controls[2]=="ARROW DOWN"){
+	arrow_key_controls[2]="D";
+}
+if(arrow_key_controls[3]=="ARROW RIGHT"){
+	arrow_key_controls[3]="R";
+}
 
 if (transition_count > 0) {
 	transition_count-=1;
@@ -104,7 +124,7 @@ switch (state) {
 			if (enemy_order >= array_length(enemy_units))
 			{
 				//if (teachingDamage) { tried addinga textbox
-				//	obj_menuTut.enter_text("PRESS ENTER");
+				//	obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
 				//	var _textbox = instance_create_layer(50, 200, "UI", obj_textboxTut);
 				//	_textbox.tutorial_text("Well shit, I'm getting assaulted by these bats and I can't do anything about it. At least I can see where they're going to hit via these EXCLAMATION MARKS, and so I can dodge accordingly!");
 				//	if (key_Enter_pressed) {
@@ -121,7 +141,7 @@ switch (state) {
 					{
 						case 0: // +string_upper(input_binding_get_name(global.other_controls[4]))
 							obj_menuTut.close_menu();
-							obj_menuTut.enter_text("PRESS ENTER");
+							obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
 							obj_menuTut.set_text("Welcome to the tutorial! Let's learn how the game works.");
 							if (input_check_pressed("confirm")) {
 								dialogueLine += 1;
@@ -129,7 +149,7 @@ switch (state) {
 						break;
 						
 						case 1:
-							obj_menuTut.enter_text("PRESS ENTER");
+							obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
 							obj_menuTut.set_text("Attacks are shown by exclamation marks on the ground. The redder they are, the more dangerous! You can see how much damage you will take via the blinking HP diamonds above your head.");
 							if (input_check_pressed("confirm")) {
 								dialogueLine += 1;
@@ -137,8 +157,8 @@ switch (state) {
 						break;
 						
 						case 2:
-							obj_menuTut.set_text("To move, press ENTER to select our character and use "+string_upper(global.other_controls[0])+string_upper(global.other_controls[1])+string_upper(global.other_controls[2])+string_upper(global.other_controls[3])+" to get out of danger! Then press " +string_upper(input_binding_get_name(global.skill_controls[4])) + " to use the Wait action, and ENTER again to confirm.");
-							obj_menuTut.enter_text("PRESS ENTER");
+							obj_menuTut.set_text("To move, press ENTER to select our character and use "+string_upper(global.other_controls[0])+", "+string_upper(global.other_controls[1])+", "+string_upper(global.other_controls[2])+", "+string_upper(global.other_controls[3])+" to get out of danger! Then press (" +string_upper(input_binding_get_name(global.skill_controls[4])) + ") to use the Wait action, and (" +string_upper(global.skill_controls[4])+") again or "+string_upper(global.other_controls[4])+ " to confirm.");
+							obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
 							if (input_check_pressed("confirm")) {
 							obj_menuTut.open_menu();
 							dialogueLine = 0;
@@ -156,23 +176,23 @@ switch (state) {
 					{
 						case 3:
 							obj_menuTut.close_menu();
-							obj_menuTut.enter_text("PRESS ENTER");
-							obj_menuTut.set_text("Skills cost more TP. For example, Beam ("+string_upper(global.skill_controls[1])+") hits all enemies in a line. Press the skill button ("+string_upper(global.skill_controls[1])+") again to fire.");
+							obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
+							obj_menuTut.set_text("Skills cost more TP. For example, Beam ("+string_upper(global.skill_controls[1])+") hits all enemies in a line. Press the skill button ("+string_upper(global.skill_controls[1])+") again or "+string_upper(global.other_controls[4])+" to fire.");
 							if (input_check_pressed("confirm")) {
 								dialogueLine += 1;
 						}
 						break;
 						case 4:
 							obj_menuTut.close_menu();
-							obj_menuTut.enter_text("PRESS ENTER");
-							obj_menuTut.set_text("If you need more TP, Charge ("+string_upper(global.skill_controls[2])+") allows you to gain 1 TP. Press the skill button ("+string_upper(global.skill_controls[2])+") again to confirm.");
+							obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
+							obj_menuTut.set_text("If you need more TP, Charge ("+string_upper(global.skill_controls[2])+") allows you to gain 1 TP. Press the skill button ("+string_upper(global.skill_controls[2])+") again or "+string_upper(global.other_controls[4])+" to confirm.");
 							if (input_check_pressed("confirm")) {
 								dialogueLine += 1;
 						}
 						break;
 						
 						case 5:
-							obj_menuTut.enter_text("PRESS ENTER");
+							obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
 							obj_menuTut.set_text("If you want to go back, press "+string_upper(input_binding_get_name(global.other_controls[5])));
 							if (input_check_pressed("confirm")) {
 							obj_menuTut.open_menu();
@@ -192,8 +212,8 @@ switch (state) {
 				} 
 				} else if (teachingMortar == true) {
 					obj_menuTut.close_menu();
-					obj_menuTut.enter_text("PRESS ENTER");
-					obj_menuTut.set_text("When selecting the mortar skill ("+string_upper(global.skill_controls[3])+"), use WASD to aim the mortar shell. Press the skill button ("+string_upper(global.skill_controls[3])+") again to fire.");
+					obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
+					obj_menuTut.set_text("When selecting the mortar skill ("+string_upper(global.skill_controls[3])+"), use WASD to aim the mortar shell. Press the skill button ("+string_upper(global.skill_controls[3])+") again or "+string_upper(global.other_controls[4])+" to fire.");
 					if (input_check_pressed("confirm")) {
 						obj_menuTut.open_menu();
 						enemy_order = 0;
@@ -206,7 +226,7 @@ switch (state) {
 					{
 						case 0:
 							obj_menuTut.close_menu();
-							obj_menuTut.enter_text("PRESS ENTER");
+							obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
 							obj_menuTut.set_text("Enough running. It's time to fire back.");
 							if (input_check_pressed("confirm")) {
 								dialogueLine += 1;
@@ -214,7 +234,7 @@ switch (state) {
 						break;
 						
 						case 1:
-							obj_menuTut.enter_text("PRESS ENTER");
+							obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
 							obj_menuTut.set_text("<-- Attacks consume Technique Points (TP), shown by the squares to the left. You gain 4 TP every turn");
 							if (input_check_pressed("confirm")) {
 								dialogueLine += 1;
@@ -223,8 +243,8 @@ switch (state) {
 						
 						case 2:
 							obj_menuTut.close_menu();
-							obj_menuTut.set_text("Use your basic attack ("+string_upper(global.skill_controls[0])+") to retaliate against the bats. Then press "+string_upper(global.skill_controls[0])+" again to confirm.");
-							obj_menuTut.enter_text("PRESS ENTER");
+							obj_menuTut.set_text("Use your basic attack ("+string_upper(global.skill_controls[0])+") to retaliate against the bats. Then press ("+string_upper(global.skill_controls[0])+") again or "+string_upper(global.other_controls[4])+" to confirm.");
+							obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
 							if (input_check_pressed("confirm")) {
 								dialogueLine += 1;
 							}
@@ -233,7 +253,7 @@ switch (state) {
 						case 3:
 							obj_menuTut.close_menu();
 							obj_menuTut.set_text("Note, you can aim attack in all 4 directions. There also IS FRIENDLY FIRE, so careful where you aim!");
-							obj_menuTut.enter_text("PRESS ENTER");
+							obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
 							if (input_check_pressed("confirm")) {
 								enemy_order = 0;
 								basicTaught = false;
@@ -411,10 +431,10 @@ switch (state) {
 			break;
 		}
 		if (!teachingSkills) {
-			obj_menuTut.set_text(string_upper(input_binding_get_name(global.other_controls[0]))+string_upper(input_binding_get_name(global.other_controls[1]))+string_upper(input_binding_get_name(global.other_controls[2]))+string_upper(input_binding_get_name(global.other_controls[3]))+"- Move Cursor     "+string_upper(input_binding_get_name(global.other_controls[4]))+" - Select Unit");
+			obj_menuTut.set_text(arrow_key_controls[0]+arrow_key_controls[1]+arrow_key_controls[2]+arrow_key_controls[3]+"- Move Cursor     "+string_upper(input_binding_get_name(global.other_controls[4]))+" - Select Unit");
 		}
 		else {
-				obj_menuTut.set_text(string_upper(input_binding_get_name(global.other_controls[0]))+string_upper(input_binding_get_name(global.other_controls[1]))+string_upper(input_binding_get_name(global.other_controls[2]))+string_upper(input_binding_get_name(global.other_controls[3]))+"- Move Cursor     "+string_upper(input_binding_get_name(global.other_controls[4]))+" - Select Unit     "+string_upper(input_binding_get_name(global.other_controls[6]))+" - End Turn");
+				obj_menuTut.set_text(arrow_key_controls[0]+arrow_key_controls[1]+arrow_key_controls[2]+arrow_key_controls[3]+"- Move Cursor     "+string_upper(input_binding_get_name(global.other_controls[4]))+" - Select Unit     "+string_upper(input_binding_get_name(global.other_controls[6]))+" - End Turn");
 		}
 		
 		// checks if all player units have moved
@@ -547,7 +567,7 @@ switch (state) {
 		}else{
 			obj_menuTut.close_menu();
 		}
-		if(teachingSkills && input_check_pressed("end_turn")){ //ask end turn
+		if(teachingSkills && input_check_pressed("endturn")){ //ask end turn
 			obj_cursor.movable_tiles=[];
 			
 			obj_menuTut.ask_end = true;
@@ -567,7 +587,7 @@ switch (state) {
 			//if (teachingDamage) {
 			//	obj_menuTut.set_text("WASD - Move");
 			//}
-			obj_menuTut.set_text(string_upper(input_binding_get_name(global.other_controls[0]))+string_upper(input_binding_get_name(global.other_controls[1]))+string_upper(input_binding_get_name(global.other_controls[2]))+string_upper(input_binding_get_name(global.other_controls[3]))+" - Move");
+			obj_menuTut.set_text(arrow_key_controls[0]+arrow_key_controls[1]+arrow_key_controls[2]+arrow_key_controls[3]+" - Move");
 			// moving
 			if (wasd_pressed) {
 				//show_debug_message(unit.name + ": moving");
@@ -684,11 +704,11 @@ switch (state) {
 			
 		}else{
 			if (teachingDamage) {
-				obj_menuTut.set_text("WASD - Aim");
+				obj_menuTut.set_text(arrow_key_controls[0]+arrow_key_controls[1]+arrow_key_controls[2]+arrow_key_controls[3]+" - Aim");
 				change_state(BattleState.PlayerTakingAction);
 			}
 			else {
-				obj_menuTut.set_text("WASD - Aim");
+				obj_menuTut.set_text(arrow_key_controls[0]+arrow_key_controls[1]+arrow_key_controls[2]+arrow_key_controls[3]+" - Aim");
 				obj_menuTut.set_skill_text(string(unit.actions[unit.skill_used].description[unit.upgrades[unit.skill_used]]));
 			}
 			obj_menuTut.confirm = true;
@@ -1003,7 +1023,7 @@ switch (state) {
 		obj_menuTut.back = false;
 		if (teachingBasic == true && teachingSkills == false) {
 					obj_menuTut.close_menu();
-					obj_menuTut.enter_text("PRESS ENTER");
+					obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
 					obj_menuTut.set_text("Well done, now let's explore how to use skills.");
 					if (input_check_pressed("confirm")) {
 						obj_menuTut.open_menu();
@@ -1016,7 +1036,7 @@ switch (state) {
 		}
 		else if (teachingSkills && !teachingMortar) {
 			obj_menuTut.close_menu();
-			obj_menuTut.enter_text("PRESS ENTER");
+			obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
 					obj_menuTut.set_text("Well done, let's try a using a different skill.");
 					if (input_check_pressed("confirm")) {
 						obj_menuTut.open_menu();
@@ -1031,7 +1051,7 @@ switch (state) {
 					{						
 						case 0:
 							obj_menuTut.close_menu();
-							obj_menuTut.enter_text("PRESS ENTER");
+							obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
 							obj_menuTut.set_text("Now that you know how to fight, please enjoy our game!");
 							if (input_check_pressed("confirm")) {
 								dialogueLine += 1;
@@ -1039,24 +1059,24 @@ switch (state) {
 						break;
 						
 						case 1:
-							obj_menuTut.enter_text("PRESS ENTER");
+							obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
 							obj_menuTut.set_text("For more detailed information, check out the 'Tips' page in the main menu.");
 							if (input_check_pressed("confirm")) {
 								obj_menuTut.set_text("");
 								obj_menuTut.enter_text("");
 							audio_stop_sound(current_music);
-							room_goto(0);
+							room_goto(1);
 							}
 						break;
 						
 						default:
-							obj_menuTut.enter_text("PRESS ENTER");
+							obj_menuTut.enter_text("PRESS "+string_upper(global.other_controls[4]));
 							obj_menuTut.set_text("Now that you know how to fight, please enjoy our game!");
 							if (input_check_pressed("confirm")) {
 								obj_menuTut.set_text("");
 								obj_menuTut.enter_text("");
 							audio_stop_sound(current_music);
-							room_goto(0);
+							room_goto(1);
 							}
 						break;
 					}
@@ -1182,7 +1202,7 @@ switch (state) {
 
 #region Game paused
 	case BattleState.BattlePause:
-		if(obj_menuTut.ask_end && input_check_pressed("end_turn")){ // end the turn
+		if(obj_menuTut.ask_end && input_check_pressed("endturn")){ // end the turn
 				board_obstacle_order = 0;
 				obj_menuTut.ask_end = false;
 				
